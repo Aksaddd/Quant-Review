@@ -43,6 +43,7 @@ interface ProgressContextValue {
   /* Flashcard (SM-2) progress */
   sm2Cards: Record<string, SM2Card>;
   reviewCard: (cardId: string, grade: ReviewGrade) => void;
+  markCardsDue: (cardIds: string[]) => void;
   dueCards: SM2Card[];
 
   /* Aggregates */
@@ -103,6 +104,22 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     [sm2Cards]
   );
 
+  /* ── Mark cards as due (override nextReview to today) ─────────────────── */
+  const markCardsDue = useCallback((cardIds: string[]) => {
+    const today = new Date().toISOString().split('T')[0];
+    setSm2Cards((prev) => {
+      const updated = { ...prev };
+      cardIds.forEach((id) => {
+        if (updated[id]) {
+          const card = { ...updated[id], nextReview: today };
+          updated[id] = card;
+          upsertSM2Card(card);
+        }
+      });
+      return updated;
+    });
+  }, []);
+
   /* ── Derived values ────────────────────────────────────────────────────── */
   const dueCards = useMemo(
     () => getDueCards(Object.values(sm2Cards)),
@@ -149,6 +166,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       getProblemStatus,
       sm2Cards,
       reviewCard,
+      markCardsDue,
       dueCards,
       totalSolved,
       totalProblems: chapter2Problems.length,
@@ -161,6 +179,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       getProblemStatus,
       sm2Cards,
       reviewCard,
+      markCardsDue,
       dueCards,
       totalSolved,
       sectionStats,
