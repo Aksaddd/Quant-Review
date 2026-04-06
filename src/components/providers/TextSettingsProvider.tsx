@@ -36,7 +36,7 @@ interface TextSettingsContextValue {
   cssVars: React.CSSProperties;
 }
 
-const TextSettingsContext = createContext<TextSettingsContextValue | null>(null);
+export const TextSettingsContext = createContext<TextSettingsContextValue | null>(null);
 
 /* ── Provider ────────────────────────────────────────────────────────────── */
 export function TextSettingsProvider({

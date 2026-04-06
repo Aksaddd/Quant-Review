@@ -53,7 +53,7 @@ interface ProgressContextValue {
 }
 
 /* ── Context ─────────────────────────────────────────────────────────────── */
-const ProgressContext = createContext<ProgressContextValue | null>(null);
+export const ProgressContext = createContext<ProgressContextValue | null>(null);
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [problemProgress, setProblemProgress] = useState<Record<string, ProblemProgress>>({});
