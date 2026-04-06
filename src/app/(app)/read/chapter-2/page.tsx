@@ -19,15 +19,15 @@ export default function Chapter2Page() {
   }));
 
   return (
-    <div className="bg-[#f7f8fa] min-h-screen">
+    <div className="reading-page min-h-screen">
       {/* Sticky header — KA breadcrumb style */}
-      <div className="sticky top-0 z-30 bg-white border-b border-[#e4e6ea]">
+      <div className="sticky top-0 z-30 reading-card border-b" style={{ borderColor: 'var(--rt-card-border)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-xs text-[#9299a5] font-medium min-w-0">
-            <span className="text-[#626975] font-semibold truncate">Quant Finance Interview Prep</span>
+          <div className="flex items-center gap-1.5 text-xs font-medium min-w-0" style={{ color: 'var(--rt-text-muted)' }}>
+            <span className="font-semibold truncate" style={{ color: 'var(--rt-text-secondary)' }}>Quant Finance Interview Prep</span>
             <span>/</span>
-            <span className="text-[#21242c] font-semibold truncate">Chapter 2: Brain Teasers</span>
+            <span className="font-semibold truncate" style={{ color: 'var(--rt-text)' }}>Chapter 2: Brain Teasers</span>
           </div>
 
           {/* Progress + settings */}
@@ -50,7 +50,7 @@ export default function Chapter2Page() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Chapter title */}
-        <div className="bg-white border border-[#e4e6ea] rounded-lg p-6 mb-6">
+        <div className="reading-card border rounded-lg p-6 mb-6">
           <p className="text-xs font-bold text-[var(--ka-blue)] uppercase tracking-widest mb-1">
             Chapter 2
           </p>
@@ -92,7 +92,7 @@ export default function Chapter2Page() {
                   <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-widest">
                     §{sec.id}
                   </span>
-                  <h2 className="text-xl font-extrabold text-[#21242c]">{sec.title}</h2>
+                  <h2 className="text-xl font-extrabold" style={{ color: 'var(--rt-text)' }}>{sec.title}</h2>
                 </div>
               </div>
 

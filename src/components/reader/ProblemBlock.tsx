@@ -39,11 +39,11 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
     <div
       ref={ref}
       id={problem.id}
-      className={`bg-white border rounded-lg overflow-hidden scroll-mt-16 transition-colors
-        ${status === 'solved' ? 'border-[#a8d5b5]' : 'border-[#e4e6ea]'}`}
+      className={`reading-card border rounded-lg overflow-hidden scroll-mt-16 transition-colors
+        ${status === 'solved' ? 'border-[#a8d5b5]' : ''}`}
     >
       {/* Problem header */}
-      <div className={`px-5 pt-4 pb-3 border-b ${status === 'solved' ? 'border-[#a8d5b5] bg-[#f6fef9]' : 'border-[#e4e6ea] bg-white'}`}>
+      <div className={`reading-card-header px-5 pt-4 pb-3 border-b ${status === 'solved' ? 'border-[#a8d5b5] !bg-[#f6fef9]' : ''}`}>
         <div className="flex items-start gap-3">
           {/* Number */}
           <span

@@ -59,10 +59,10 @@ export default function SolutionReveal({
           Show solution
         </button>
       ) : (
-        <div className="rounded-lg border border-[#e4e6ea] overflow-hidden animate-fade-up">
+        <div className="reading-card border rounded-lg overflow-hidden animate-fade-up">
           {/* Solution header */}
-          <div className="flex items-center justify-between px-4 py-2.5 bg-[#f7f8fa] border-b border-[#e4e6ea]">
-            <span className="text-xs font-bold text-[#626975] uppercase tracking-wider">Solution</span>
+          <div className="reading-card-header flex items-center justify-between px-4 py-2.5 border-b">
+            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--rt-text-secondary)' }}>Solution</span>
             <button
               onClick={() => setShowSolution(false)}
               className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
@@ -72,7 +72,7 @@ export default function SolutionReveal({
           </div>
 
           {/* Solution body */}
-          <div className="p-4 bg-white">
+          <div className="reading-card p-4">
             <div className="prose-reading text-[#21242c]">
               <MarkdownRenderer content={solution} />
             </div>
@@ -86,7 +86,7 @@ export default function SolutionReveal({
           </div>
 
           {/* Footer */}
-          <div className="px-4 py-3 bg-[#f7f8fa] border-t border-[#e4e6ea] flex items-center justify-between gap-3">
+          <div className="reading-card-header px-4 py-3 border-t flex items-center justify-between gap-3">
             {/* Reset button — always visible */}
             <button
               onClick={handleReset}

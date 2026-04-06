@@ -366,6 +366,85 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   READING THEMES
+───────────────────────────────────────────────────────────────────────────── */
+
+/* Light (default) */
+:root,
+[data-reading-theme="light"] {
+  --rt-page-bg:        #f7f8fa;
+  --rt-card-bg:        #ffffff;
+  --rt-card-border:    #e4e6ea;
+  --rt-card-header-bg: #f7f8fa;
+  --rt-text:           #21242c;
+  --rt-text-secondary: #626975;
+  --rt-text-muted:     #9299a5;
+  --rt-divider:        #e4e6ea;
+  --rt-code-bg:        #f0f1f3;
+}
+
+[data-reading-theme="sepia"] {
+  --rt-page-bg:        #f5ead0;
+  --rt-card-bg:        #fdf6e3;
+  --rt-card-border:    #d4c5a9;
+  --rt-card-header-bg: #ede0c4;
+  --rt-text:           #3d2b1f;
+  --rt-text-secondary: #5c4438;
+  --rt-text-muted:     #8b7355;
+  --rt-divider:        #d4c5a9;
+  --rt-code-bg:        #e8d8b8;
+}
+
+[data-reading-theme="dark"] {
+  --rt-page-bg:        #1a1b23;
+  --rt-card-bg:        #22242f;
+  --rt-card-border:    #2e3040;
+  --rt-card-header-bg: #1e2028;
+  --rt-text:           #e2e8f0;
+  --rt-text-secondary: #a0aec0;
+  --rt-text-muted:     #718096;
+  --rt-divider:        #2e3040;
+  --rt-code-bg:        #2a2d3a;
+}
+
+/* Utility classes */
+.reading-page {
+  background-color: var(--rt-page-bg);
+  color: var(--rt-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reading-card {
+  background-color: var(--rt-card-bg) !important;
+  border-color: var(--rt-card-border) !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.reading-card-header {
+  background-color: var(--rt-card-header-bg) !important;
+  border-color: var(--rt-card-border) !important;
+}
+
+/* All text inside reading content inherits the theme colour */
+.reading-content {
+  color: var(--rt-text);
+}
+.reading-content h1,
+.reading-content h2,
+.reading-content h3,
+.reading-content h4 {
+  color: var(--rt-text) !important;
+}
+.reading-content p,
+.reading-content li {
+  color: var(--rt-text) !important;
+}
+.reading-content code {
+  background-color: var(--rt-code-bg) !important;
+  color: var(--rt-text) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    KATEX
 ───────────────────────────────────────────────────────────────────────────── */
 .katex { font-size: 1.9em !important; color: inherit; }
