@@ -26,7 +26,7 @@ $$= x(N{-}x) + \\frac{x(x{-}1)}{2} + \\frac{(N{-}x)(N{-}x{-}1)}{2} = \\frac{N(N{
 Result is **independent of x** — the split order doesn't matter. ✓
 
 **For n = 1000:**
-$$f(1000) = \\frac{1000 \\times 999}{2} = \mathbf{499{,}500}$$`,
+$$f(1000) = \\frac{1000 \\times 999}{2} = \\mathbf{499{,}500}$$`,
 };
 
 export default fc;

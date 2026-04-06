@@ -24,7 +24,7 @@ $$v_p(n!) = \\sum_{k=1}^{\\infty} \\left\\lfloor \\frac{n}{p^k} \\right\\rfloor 
 where $s_p(n)$ = digit sum of n in base p.
 
 **For n = 100, p = 5:**
-$$\\lfloor 100/5 \\rfloor + \\lfloor 100/25 \\rfloor + \\lfloor 100/125 \\rfloor = 20 + 4 + 0 = \mathbf{24}$$`,
+$$\\lfloor 100/5 \\rfloor + \\lfloor 100/25 \\rfloor + \\lfloor 100/125 \\rfloor = 20 + 4 + 0 = \\mathbf{24}$$`,
 };
 
 export default fc;

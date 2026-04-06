@@ -16,11 +16,11 @@ const fc: Flashcard = {
 **Design a guaranteed strategy.**`,
 
   back: `**Strategy:** Prisoner i guesses:
-$$g_i = \\left(i - \\sum_{j \\neq i} x_j\\right) \bmod 7$$
+$$g_i = \\left(i - \\sum_{j \\neq i} x_j\\right) \\bmod 7$$
 
-**Why it works:** The true sum $S = \\sum x_k \bmod 7$ equals some $r \\in \{0,\\ldots,6\}$.
+**Why it works:** The true sum $S = \\sum x_k \\bmod 7$ equals some $r \\in \{0,\\ldots,6\}$.
 
-Prisoner r's guess: $(r - (S - x_r)) \bmod 7 = (r - S + x_r) \bmod 7 = x_r$ ✓
+Prisoner r's guess: $(r - (S - x_r)) \\bmod 7 = (r - S + x_r) \\bmod 7 = x_r$ ✓
 
 **Proof by contradiction:** If all 7 guess wrong, prisoner r also guessed wrong — but we just showed prisoner r is always correct. Contradiction. ∎
 
