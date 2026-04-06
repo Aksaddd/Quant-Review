@@ -23,17 +23,17 @@ Divide the 1×1 unit square into a **5×5 grid** of 25 smaller squares, each wit
 **Step 2: Apply Generalized Pigeon Hole.**
 
 51 ants in 25 sub-squares:
-$$\\\lceil 51 / 25 \\\rceil = \\\lceil 2.04 \\\rceil = 3$$
+$$\\lceil 51 / 25 \\rceil = \\lceil 2.04 \\rceil = 3$$
 
 At least **one sub-square contains 3 or more ants**.
 
 **Step 3: Show the circle fits.**
 
 A sub-square of side 1/5 has diagonal:
-$$d = \\\sqrt{2} \\\times \\\frac{1}{5} = \\\frac{\\\sqrt{2}}{5} \\\approx 0.2828$$
+$$d = \\sqrt{2} \\times \\frac{1}{5} = \\frac{\\sqrt{2}}{5} \\approx 0.2828$$
 
 A circle centered at the center of a 1/5 × 1/5 square with radius r covers the entire square if:
-$$r \\\geq \\\frac{d}{2} = \\\frac{\\\sqrt{2}}{10} \\\approx 0.1414$$
+$$r \\geq \\frac{d}{2} = \\frac{\\sqrt{2}}{10} \\approx 0.1414$$
 
 Our circle has radius **1/7 ≈ 0.1429 > 0.1414**. ✓
 
