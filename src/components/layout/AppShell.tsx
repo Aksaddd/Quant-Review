@@ -13,7 +13,7 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
   return (
     <ProgressProvider>
       <TextSettingsProvider>
-        <div className="flex min-h-screen bg-[var(--surface-0)]">
+        <div className="flex h-screen overflow-hidden bg-[var(--surface-0)]">
           {/* Desktop sidebar */}
           <Sidebar />
 
@@ -22,7 +22,7 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
             {/* Mobile top bar */}
             <AppTopBar title={pageTitle} />
 
-            <main className="flex-1 overflow-y-auto pb-20 lg:pb-6">
+            <main className="flex-1 overflow-y-auto pb-20 lg:pb-6 h-full">
               {children}
             </main>
           </div>
