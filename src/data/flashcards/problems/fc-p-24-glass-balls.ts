@@ -21,7 +21,7 @@ If ball 1 breaks after k drops, ball 2 has at most N−k remaining drops to scan
 
 **Coverage:** N + (N−1) + … + 1 = N(N+1)/2 floors must ≥ 100.
 
-$$N(N+1)/2 \geq 100 \implies N = 14 \quad (14 \times 15/2 = 105)$$
+$$N(N+1)/2 \\geq 100 \\implies N = 14 \quad (14 \\times 15/2 = 105)$$
 
 **Start ball 1 at:** floor 14 → 27 → 39 → 50 → 60 → 69 → …
 

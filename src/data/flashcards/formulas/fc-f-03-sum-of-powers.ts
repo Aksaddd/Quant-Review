@@ -15,11 +15,11 @@ State the closed-form formulas for:
 2. Sum of first N squares
 3. Sum of first N cubes`,
 
-  back: `$$\sum_{k=1}^{N} k = \frac{N(N+1)}{2}$$
+  back: `$$\\sum_{k=1}^{N} k = \\frac{N(N+1)}{2}$$
 
-$$\sum_{k=1}^{N} k^2 = \frac{N(N+1)(2N+1)}{6}$$
+$$\\sum_{k=1}^{N} k^2 = \\frac{N(N+1)(2N+1)}{6}$$
 
-$$\sum_{k=1}^{N} k^3 = \left[\frac{N(N+1)}{2}\right]^2$$
+$$\\sum_{k=1}^{N} k^3 = \\left[\\frac{N(N+1)}{2}\\right]^2$$
 
 **Memory trick:** Sum of cubes = (sum of integers)²
 

@@ -16,10 +16,10 @@ What summation formulas must you know cold for quant interviews?`,
 
 | Formula | Expression |
 |---------|-----------|
-| Sum of first N integers | $\frac{N(N+1)}{2}$ |
-| Sum of first N squares | $\frac{N(N+1)(2N+1)}{6}$ |
-| Sum of first N cubes | $\left[\frac{N(N+1)}{2}\right]^2$ |
-| Triangular number T(N) | $\frac{N(N+1)}{2}$ |
+| Sum of first N integers | $\\frac{N(N+1)}{2}$ |
+| Sum of first N squares | $\\frac{N(N+1)(2N+1)}{6}$ |
+| Sum of first N cubes | $\\left[\\frac{N(N+1)}{2}\\right]^2$ |
+| Triangular number T(N) | $\\frac{N(N+1)}{2}$ |
 
 **Applied in problems:**
 - **Clock Pieces:** 1+…+12 = 78, target = 26

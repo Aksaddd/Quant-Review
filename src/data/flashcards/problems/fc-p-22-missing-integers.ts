@@ -17,12 +17,12 @@ You have 98 distinct integers from {1, 2, …, 100}. Two are missing.
 
   back: `**Set up two equations, solve for two unknowns (x and y):**
 
-**Sum:** $x + y = 5050 - \sum z_i$ → gives **S**
+**Sum:** $x + y = 5050 - \\sum z_i$ → gives **S**
 
-**Sum of squares:** $x^2 + y^2 = 338350 - \sum z_i^2$ → gives **Q**
+**Sum of squares:** $x^2 + y^2 = 338350 - \\sum z_i^2$ → gives **Q**
 
 **Solve:**
-$$xy = \frac{S^2 - Q}{2}$$
+$$xy = \\frac{S^2 - Q}{2}$$
 
 x and y are roots of: $t^2 - St + xy = 0$
 

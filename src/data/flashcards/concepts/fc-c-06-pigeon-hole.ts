@@ -17,7 +17,7 @@ If n+1 or more pigeons occupy n holes, at least one hole contains ≥ 2 pigeons.
 
 **Generalized:**
 If mn+1 or more pigeons occupy n holes, at least one hole contains ≥ m+1 pigeons.
-$$\text{At least one hole has} \geq \left\lceil \frac{\text{pigeons}}{\text{holes}} \right\rceil \text{ pigeons}$$
+$$\\text{At least one hole has} \\geq \\left\\lceil \\frac{\\text{pigeons}}{\\text{holes}} \\right\\rceil \\text{ pigeons}$$
 
 **Applications in Chapter 2:**
 
