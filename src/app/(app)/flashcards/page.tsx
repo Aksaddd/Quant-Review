@@ -65,7 +65,7 @@ export default function FlashcardsPage() {
   }, [sessionCards, sessionIndex, ratingDisabled, reviewCard, recordActivity]);
 
   // ── Session active ────────────────────────────────────────────────────────
-  if (sessionCards && !sessionComplete) {
+  if (sessionCards && sessionCards.length > 0 && !sessionComplete) {
     const cardMeta = sessionCards[sessionIndex];
     const card = flashcardsById[cardMeta.id];
 
@@ -210,7 +210,7 @@ export default function FlashcardsPage() {
             </button>
             {dueCards.length > 0 && (
               <button
-                onClick={() => startSession(dueCards.map((c) => flashcardsById[c.id]).filter(Boolean))}
+                onClick={() => startSession(dueCards.map((c) => flashcardsById[c.cardId]).filter(Boolean))}
                 className="flex-1 py-2.5 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
               >
                 Review due ({dueCards.length})
@@ -236,7 +236,7 @@ export default function FlashcardsPage() {
         <div className="flex gap-2 shrink-0">
           {dueCards.length > 0 && (
             <button
-              onClick={() => startSession(dueCards.map((c) => flashcardsById[c.id]).filter(Boolean))}
+              onClick={() => startSession(dueCards.map((c) => flashcardsById[c.cardId]).filter(Boolean))}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
             >
               <Brain size={15} /> Review due ({dueCards.length})
