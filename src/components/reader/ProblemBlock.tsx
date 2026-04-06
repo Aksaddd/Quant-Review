@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { useProgress } from '@/hooks/useProgress';
 import { DifficultyBadge } from '@/components/ui/Badge';
 import MarkdownRenderer from './MarkdownRenderer';
@@ -14,9 +15,29 @@ interface ProblemBlockProps {
 export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
   const { getProblemStatus, setProblemStatus } = useProgress();
   const status = getProblemStatus(problem.id);
+  const ref = useRef<HTMLDivElement>(null);
+
+  /* Auto-mark as 'attempted' when the problem scrolls into view */
+  useEffect(() => {
+    if (status !== 'unseen') return;
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setProblemStatus(problem.id, 'attempted');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [status, problem.id, setProblemStatus]);
 
   return (
     <div
+      ref={ref}
       id={problem.id}
       className={`bg-white border rounded-lg overflow-hidden scroll-mt-16 transition-colors
         ${status === 'solved' ? 'border-[#a8d5b5]' : 'border-[#e4e6ea]'}`}
