@@ -414,7 +414,7 @@ body {
 }
 
 .sidebar-link.active {
-  @apply text-white bg-white/8;
+  @apply text-white bg-white/5;
   background: rgba(245, 158, 11, 0.12);
   color: #fbbf24;
 }
