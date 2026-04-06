@@ -197,6 +197,10 @@ export default function SignupPage() {
               Sign in
             </Link>
           </p>
+
+          <p className="text-center text-[10px] text-[var(--text-muted)] mt-3 opacity-60">
+            If running locally, accounts cannot be created. Your progress is saved in the browser.
+          </p>
         </div>
       </div>
     </div>
