@@ -17,7 +17,7 @@ const fc: Flashcard = {
 
 **Legendre's formula** — count multiples of powers of 5:
 
-$$\\lfloor 100/5 \\rfloor + \\lfloor 100/25 \\rfloor + \\lfloor 100/125 \\rfloor + \\cdots$$
+$$\\\lfloor 100/5 \\\rfloor + \\\lfloor 100/25 \\\rfloor + \\\lfloor 100/125 \\\rfloor + \\\\cdots$$
 $$= 20 + 4 + 0 = \\mathbf{24}$$
 
 **Answer: 24 trailing zeros.**

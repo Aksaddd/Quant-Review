@@ -21,12 +21,12 @@ Split 1000 coins into two piles, record the product. Keep splitting until all pi
 
 Splitting N coins into x and (N−x):
 $$f(N) = x(N{-}x) + f(x) + f(N{-}x)$$
-$$= x(N{-}x) + \frac{x(x{-}1)}{2} + \frac{(N{-}x)(N{-}x{-}1)}{2} = \frac{N(N{-}1)}{2}$$
+$$= x(N{-}x) + \\frac{x(x{-}1)}{2} + \\frac{(N{-}x)(N{-}x{-}1)}{2} = \\frac{N(N{-}1)}{2}$$
 
 Result is **independent of x** — the split order doesn't matter. ✓
 
 **For n = 1000:**
-$$f(1000) = \frac{1000 \times 999}{2} = \mathbf{499{,}500}$$`,
+$$f(1000) = \\frac{1000 \\times 999}{2} = \mathbf{499{,}500}$$`,
 };
 
 export default fc;

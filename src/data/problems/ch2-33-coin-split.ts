@@ -28,19 +28,19 @@ const coinSplit: Problem = {
 **Inductive step:** Assume f(k) = k(k−1)/2 for all k < N. Consider a pile of N coins split into x and (N−x):
 
 $$f(N) = x(N-x) + f(x) + f(N-x)$$
-$$= x(N-x) + \\frac{x(x-1)}{2} + \\frac{(N-x)(N-x-1)}{2}$$
+$$= x(N-x) + \\\frac{x(x-1)}{2} + \\\frac{(N-x)(N-x-1)}{2}$$
 
 Expanding:
-$$= xN - x^2 + \\frac{x^2 - x}{2} + \\frac{(N-x)^2 - (N-x)}{2}$$
-$$= xN - x^2 + \\frac{x^2 - x + N^2 - 2Nx + x^2 - N + x}{2}$$
-$$= \\frac{N^2 - N}{2} = \\frac{N(N-1)}{2} \\checkmark$$
+$$= xN - x^2 + \\\frac{x^2 - x}{2} + \\\frac{(N-x)^2 - (N-x)}{2}$$
+$$= xN - x^2 + \\\frac{x^2 - x + N^2 - 2Nx + x^2 - N + x}{2}$$
+$$= \\\frac{N^2 - N}{2} = \\\frac{N(N-1)}{2} \\checkmark$$
 
 The result is **independent of x** — the split choice doesn't matter. ∎
 
 ---
 
 **For n = 1000:**
-$$f(1000) = \\frac{1000 \\times 999}{2} = \\boxed{499{,}500}$$`,
+$$f(1000) = \\\frac{1000 \\\times 999}{2} = \\boxed{499{,}500}$$`,
 
   hints: [
     'Try small cases: what is the sum for n=2, 3, 4? Do you see a pattern?',

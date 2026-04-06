@@ -21,7 +21,7 @@ Take coins in **powers of 3**: 1 from bag 1, 3 from bag 2, 9 from bag 3, 27 from
 
 **Total:** 121 coins. Expected (all 10g): **1210g**
 
-Each bag's deviation dᵢ ∈ {−1, 0, +1}. Total deviation = $\sum c_i \cdot d_i$ encodes all 5 bag types in **base 3**.
+Each bag's deviation dᵢ ∈ {−1, 0, +1}. Total deviation = $\\sum c_i \\cdot d_i$ encodes all 5 bag types in **base 3**.
 
 3⁵ = 243 combinations → all produce distinct weights by PHP. One weighing uniquely decodes all 5.`,
 };

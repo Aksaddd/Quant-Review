@@ -11,7 +11,7 @@ const fc: Flashcard = {
 
   front: `**Infinite Sequence**
 
-$$x^{x^{x^{x^{\\cdots}}}} = 2$$
+$$x^{x^{x^{x^{\\\\cdots}}}} = 2$$
 
 **What is x?**`,
 
@@ -19,13 +19,13 @@ $$x^{x^{x^{x^{\\cdots}}}} = 2$$
 
 The exponent on the first x **is the entire tower**, which equals 2:
 
-$$x^2 = 2 \implies x = \sqrt{2}$$
+$$x^2 = 2 \implies x = \\sqrt{2}$$
 
-**Convergence check:** The tower $x^{x^{x^{\cdots}}}$ converges for $1 < x \leq e^{1/e} \approx 1.4447$.
+**Convergence check:** The tower $x^{x^{x^{\\\cdots}}}$ converges for $1 < x \\leq e^{1/e} \\approx 1.4447$.
 
-Since $\sqrt{2} \approx 1.414 < e^{1/e}$, it converges. ✓
+Since $\\sqrt{2} \\approx 1.414 < e^{1/e}$, it converges. ✓
 
-**Answer: $x = \sqrt{2}$**`,
+**Answer: $x = \\sqrt{2}$**`,
 };
 
 export default fc;

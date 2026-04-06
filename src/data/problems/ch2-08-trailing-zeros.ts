@@ -27,7 +27,7 @@ Multiples of 125 = 5³ would contribute yet another, but **125 > 100**, so there
 **Total factors of 5 = 20 + 4 = 24**
 
 **General formula (Legendre's formula):**
-$$\\lfloor n/5 \\rfloor + \\lfloor n/25 \\rfloor + \\lfloor n/125 \\rfloor + \\cdots$$
+$$\\\lfloor n/5 \\\rfloor + \\\lfloor n/25 \\\rfloor + \\\lfloor n/125 \\\rfloor + \\\\cdots$$
 
 For n = 100: 20 + 4 + 0 = **24**
 

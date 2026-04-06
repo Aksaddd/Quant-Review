@@ -13,14 +13,14 @@ const fc: Flashcard = {
 What is the nth triangular number? How is it used in the two-glass-ball problem?`,
 
   back: `**Triangular number:**
-$$T(n) = 1 + 2 + \cdots + n = \frac{n(n+1)}{2}$$
+$$T(n) = 1 + 2 + \\\cdots + n = \\frac{n(n+1)}{2}$$
 
 **Glass Balls application:**
 
 With N max drops, ball 1 jumps N, then N−1, then N−2, … covering:
-$$T(N) = \frac{N(N+1)}{2} \text{ floors}$$
+$$T(N) = \\frac{N(N+1)}{2} \\text{ floors}$$
 
-To cover 100 floors: $T(N) \geq 100$
+To cover 100 floors: $T(N) \\geq 100$
 
 | N | T(N) |
 |---|------|

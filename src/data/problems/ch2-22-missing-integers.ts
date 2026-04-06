@@ -22,14 +22,14 @@ Let z₁, z₂, …, z₉₈ be the given integers.
 ---
 
 **Equation 1 — Sum:**
-$$x + y = \\frac{100 \\times 101}{2} - \\sum z_i = 5050 - \\sum z_i$$
+$$x + y = \\\frac{100 \\\times 101}{2} - \\\sum z_i = 5050 - \\\sum z_i$$
 
 Compute the right side. Call it **S** = x + y.
 
 ---
 
 **Equation 2 — Sum of squares:**
-$$x^2 + y^2 = \\frac{100 \\times 101 \\times 201}{6} - \\sum z_i^2 = 338350 - \\sum z_i^2$$
+$$x^2 + y^2 = \\\frac{100 \\\times 101 \\\times 201}{6} - \\\sum z_i^2 = 338350 - \\\sum z_i^2$$
 
 Compute the right side. Call it **Q** = x² + y².
 
