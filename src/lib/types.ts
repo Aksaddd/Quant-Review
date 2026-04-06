@@ -86,7 +86,7 @@ export const DEFAULT_TEXT_SETTINGS: TextSettings = {
   fontFamily: 'inter',
   lineHeight: 1.8,
   letterSpacing: 0.01,
-  theme: 'dark',
+  theme: 'light',
 };
 
 // ── Aggregate stats ───────────────────────────
