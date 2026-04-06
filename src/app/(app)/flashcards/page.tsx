@@ -74,12 +74,12 @@ export default function FlashcardsPage() {
     return [...rev, ...nw];
   }, [reviewDue, newCardsQueue]);
 
-  const startSession = useCallback((cardList: Flashcard[], newIds: Set<string> = new Set(), mode: SessionMode = 'review') => {
+  const startSession = useCallback((cardList: Flashcard[], newIds: Set<string> = new Set(), mode: SessionMode = 'review', startIndex = 0) => {
     if (cardList.length === 0) return;
     setSessionMode(mode);
     setSessionCards(cardList);
     setSessionNewIds(newIds);
-    setSessionIndex(0);
+    setSessionIndex(Math.min(startIndex, cardList.length - 1));
     setSessionReviewed(0);
     setSessionNewLearned(0);
     setSessionComplete(false);
@@ -530,7 +530,7 @@ export default function FlashcardsPage() {
                         </div>
                         {/* Cards in section */}
                         <div className="space-y-1">
-                          {secCards.map((card) => {
+                          {secCards.map((card, cardIdx) => {
                             const sm2   = sm2Cards[card.id];
                             const state = sm2 ? resolveState(sm2) : 'new';
                             const due   = sm2 ? isDue(sm2) : false;
@@ -540,7 +540,7 @@ export default function FlashcardsPage() {
                             return (
                               <button
                                 key={card.id}
-                                onClick={() => startSession([card])}
+                                onClick={() => startSession(secCards, new Set(), 'browse', cardIdx)}
                                 className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
                               >
                                 <span
