@@ -501,74 +501,87 @@ export default function FlashcardsPage() {
             <p className="text-xs font-semibold text-[#9299a5] uppercase tracking-wider mb-3">
               {cards.length} card{cards.length !== 1 ? 's' : ''}
             </p>
-            {cards.length === 0 ? (
-              <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
-                <Brain size={28} className="text-[#9299a5] mx-auto mb-2" />
-                <p className="text-sm text-[#626975]">No cards match this filter.</p>
-              </div>
-            ) : (
-              <div className="space-y-5">
-                {ALL_SECTIONS
-                  .map((sec) => {
-                    const secCards = cards.filter((c) => c.section === sec.id);
-                    if (secCards.length === 0) return null;
-                    return (
-                      <div key={sec.id}>
-                        {/* Section header */}
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
-                            <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
-                            <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
-                          </div>
-                          <button
-                            onClick={() => startSession(secCards, new Set(), 'browse')}
-                            className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
-                          >
-                            <Sparkles size={10} /> Study section
-                          </button>
-                        </div>
-                        {/* Cards in section */}
-                        <div className="space-y-1">
-                          {secCards.map((card, cardIdx) => {
-                            const sm2   = sm2Cards[card.id];
-                            const state = sm2 ? resolveState(sm2) : 'new';
-                            const due   = sm2 ? isDue(sm2) : false;
-                            const isNew = state === 'new';
-                            const title = cardTitle(card);
+            {(() => {
+              // Build ordered card list grouped by section for consistent indexing
+              const orderedCards = ALL_SECTIONS.flatMap((sec) =>
+                cards.filter((c) => c.section === sec.id)
+              );
 
-                            return (
-                              <button
-                                key={card.id}
-                                onClick={() => startSession(secCards, new Set(), 'browse', cardIdx)}
-                                className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
-                              >
-                                <span
-                                  className="w-2 h-2 rounded-full shrink-0"
-                                  style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
-                                  title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
-                                />
-                                <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
-                                <TypeBadge type={card.type} />
-                                <AddToSetButton
-                                  cardId={card.id}
-                                  sets={sets}
-                                  isCardInSet={isCardInSet}
-                                  onAddToSet={addCardToSet}
-                                  onRemoveFromSet={removeCardFromSet}
-                                  onCreateSet={createSet}
-                                />
-                                <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
-                              </button>
-                            );
-                          })}
+              if (orderedCards.length === 0) return (
+                <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
+                  <Brain size={28} className="text-[#9299a5] mx-auto mb-2" />
+                  <p className="text-sm text-[#626975]">No cards match this filter.</p>
+                </div>
+              );
+
+              let runningIdx = 0;
+              return (
+                <div className="space-y-5">
+                  {ALL_SECTIONS
+                    .map((sec) => {
+                      const secCards = orderedCards.filter((c) => c.section === sec.id);
+                      if (secCards.length === 0) return null;
+                      const sectionStartIdx = runningIdx;
+                      runningIdx += secCards.length;
+                      return (
+                        <div key={sec.id}>
+                          {/* Section header */}
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                              <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
+                              <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
+                            </div>
+                            <button
+                              onClick={() => startSession(orderedCards, new Set(), 'browse', sectionStartIdx)}
+                              className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
+                            >
+                              <Sparkles size={10} /> Study section
+                            </button>
+                          </div>
+                          {/* Cards in section */}
+                          <div className="space-y-1">
+                            {secCards.map((card, localIdx) => {
+                              const globalIdx = sectionStartIdx + localIdx;
+                              const sm2   = sm2Cards[card.id];
+                              const state = sm2 ? resolveState(sm2) : 'new';
+                              const due   = sm2 ? isDue(sm2) : false;
+                              const isNew = state === 'new';
+                              const title = cardTitle(card);
+
+                              return (
+                                <button
+                                  key={card.id}
+                                  onClick={() => startSession(orderedCards, new Set(), 'browse', globalIdx)}
+                                  className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
+                                >
+                                  <span
+                                    className="w-2 h-2 rounded-full shrink-0"
+                                    style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
+                                    title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
+                                  />
+                                  <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
+                                  <TypeBadge type={card.type} />
+                                  <AddToSetButton
+                                    cardId={card.id}
+                                    sets={sets}
+                                    isCardInSet={isCardInSet}
+                                    onAddToSet={addCardToSet}
+                                    onRemoveFromSet={removeCardFromSet}
+                                    onCreateSet={createSet}
+                                  />
+                                  <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
-                  .filter(Boolean)}
-              </div>
-            )}
+                      );
+                    })
+                    .filter(Boolean)}
+                </div>
+              );
+            })()}
           </div>
         </>
       )}
