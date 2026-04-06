@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
-import { ArrowRight, Sparkles, BookOpen, Brain, Trophy } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Sparkles, BookOpen, Brain, Trophy, Eye, EyeOff } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 export default function Hero() {
@@ -40,7 +43,7 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up [animation-delay:180ms]">
-          <Link href="/auth/signup">
+          <Link href="/dashboard">
             <Button size="lg" iconRight={<ArrowRight size={18} />}>
               Start Studying — It's Free
             </Button>
@@ -78,6 +81,8 @@ export default function Hero() {
 }
 
 function PreviewCard() {
+  const [revealed, setRevealed] = useState(false);
+
   return (
     <div className="
       rounded-2xl border border-[var(--surface-border-strong)]
@@ -117,18 +122,47 @@ function PreviewCard() {
           have?
         </p>
 
-        {/* Hidden solution button */}
-        <button className="
-          w-full py-2.5 rounded-xl
-          border border-dashed border-[var(--surface-border-strong)]
-          text-xs text-[var(--text-muted)] font-medium
-          hover:border-brand-500/40 hover:text-brand-400 hover:bg-brand-500/5
-          transition-all duration-200
-          flex items-center justify-center gap-2
-        ">
-          <span>👁</span>
-          Reveal Solution
-        </button>
+        {/* Reveal / solution */}
+        {!revealed ? (
+          <button
+            onClick={() => setRevealed(true)}
+            className="
+              w-full py-2.5 rounded-xl
+              border border-dashed border-[var(--surface-border-strong)]
+              text-xs text-[var(--text-muted)] font-medium
+              hover:border-brand-500/40 hover:text-brand-400 hover:bg-brand-500/5
+              transition-all duration-200
+              flex items-center justify-center gap-2
+            "
+          >
+            <Eye size={13} />
+            Reveal Solution
+          </button>
+        ) : (
+          <div className="rounded-xl border border-[var(--surface-border)] overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 bg-[var(--surface-3)] border-b border-[var(--surface-border)]">
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Solution</span>
+              <button
+                onClick={() => setRevealed(false)}
+                className="flex items-center gap-1 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
+              >
+                <EyeOff size={11} /> Hide
+              </button>
+            </div>
+            <div className="px-4 py-3 bg-[var(--surface-2)]">
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                A trailing zero is created by a factor of <strong className="text-[var(--text-primary)]">10 = 2 × 5</strong>.
+                Since factors of 2 are plentiful, count the factors of 5 in 100!
+              </p>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-2">
+                ⌊100/5⌋ + ⌊100/25⌋ = 20 + 4 = <strong className="text-[var(--text-primary)]">24</strong>
+              </p>
+              <div className="mt-3 px-3 py-2 rounded-lg bg-[var(--success-bg)] border border-[var(--success)]/20">
+                <p className="text-xs font-bold text-[var(--success)]">Answer: 24 trailing zeros</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -32,9 +32,9 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link href="/auth/signup">
+          <Link href="/dashboard">
             <Button size="lg" iconRight={<ArrowRight size={18} />}>
-              Create Free Account
+              Start Studying Free
             </Button>
           </Link>
           <Link href="/read/chapter-2">
