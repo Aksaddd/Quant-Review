@@ -1,17 +1,36 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Brain, Check, RotateCcw, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronLeft, Lightbulb, CheckCircle2, XCircle, RotateCcw, Brain, Sparkles, ChevronRight } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { useFlashcards, type FlashcardFilter } from '@/hooks/useFlashcards';
 import { useStreak } from '@/hooks/useStreak';
-import { allFlashcards, flashcardsById } from '@/data/flashcards';
-import FlashcardCard from '@/components/flashcards/FlashcardCard';
-import RatingButtons from '@/components/flashcards/RatingButtons';
-import DeckProgress from '@/components/flashcards/DeckProgress';
+import { flashcardsById } from '@/data/flashcards';
+import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import FilterBar from '@/components/flashcards/FilterBar';
-import Button from '@/components/ui/Button';
-import type { ReviewGrade } from '@/lib/types';
+import DeckProgress from '@/components/flashcards/DeckProgress';
+import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
+import { problemsById } from '@/data/problems';
+import type { ReviewGrade, Flashcard } from '@/lib/types';
+
+/* ── KA-style rating — simplified to 2 choices ─────────────────────────── */
+const RATINGS: { grade: ReviewGrade; label: string; icon: typeof CheckCircle2; style: string; desc: string }[] = [
+  {
+    grade: 5,
+    label: "Got it!",
+    icon: CheckCircle2,
+    style: 'bg-[#e6f4ea] border-[#1fab54] text-[#1fab54] hover:bg-[#1fab54] hover:text-white',
+    desc: 'I knew this well',
+  },
+  {
+    grade: 2,
+    label: "Keep practicing",
+    icon: RotateCcw,
+    style: 'bg-[#fef9e7] border-[#f5a623] text-[#f5a623] hover:bg-[#f5a623] hover:text-white',
+    desc: 'I need more review',
+  },
+];
 
 export default function FlashcardsPage() {
   const { reviewCard, dueCards, masteredCount, sm2Cards } = useProgress();
@@ -21,118 +40,211 @@ export default function FlashcardsPage() {
   const { cards, stats } = useFlashcards(filter);
 
   // Session state
-  const [sessionCards, setSessionCards] = useState<typeof cards | null>(null);
+  const [sessionCards, setSessionCards] = useState<Flashcard[] | null>(null);
   const [sessionIndex, setSessionIndex] = useState(0);
   const [sessionReviewed, setSessionReviewed] = useState(0);
   const [sessionComplete, setSessionComplete] = useState(false);
-  const [flipped, setFlipped] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [lastGrade, setLastGrade] = useState<'good' | 'hard' | null>(null);
   const [ratingDisabled, setRatingDisabled] = useState(false);
 
-  const startSession = useCallback(() => {
-    setSessionCards([...cards]);
+  const startSession = useCallback((cardList: Flashcard[]) => {
+    setSessionCards(cardList);
     setSessionIndex(0);
     setSessionReviewed(0);
     setSessionComplete(false);
-    setFlipped(false);
-  }, [cards]);
+    setShowAnswer(false);
+    setLastGrade(null);
+  }, []);
 
-  const handleRate = useCallback(
-    (grade: ReviewGrade) => {
-      if (!sessionCards || ratingDisabled) return;
+  const handleRate = useCallback((grade: ReviewGrade) => {
+    if (!sessionCards || ratingDisabled) return;
+    setRatingDisabled(true);
 
-      setRatingDisabled(true);
-      const card = sessionCards[sessionIndex];
-      reviewCard(card.id, grade);
-      recordActivity();
+    const card = sessionCards[sessionIndex];
+    reviewCard(card.id, grade);
+    recordActivity();
 
+    const isGood = grade >= 4;
+    setLastGrade(isGood ? 'good' : 'hard');
+
+    setTimeout(() => {
       const nextIndex = sessionIndex + 1;
-      const newReviewed = sessionReviewed + 1;
-      setSessionReviewed(newReviewed);
-
+      setSessionReviewed((r) => r + 1);
       if (nextIndex >= sessionCards.length) {
         setSessionComplete(true);
       } else {
         setSessionIndex(nextIndex);
-        setFlipped(false);
-        setTimeout(() => setRatingDisabled(false), 100);
+        setShowAnswer(false);
+        setLastGrade(null);
+        setRatingDisabled(false);
       }
-    },
-    [sessionCards, sessionIndex, sessionReviewed, ratingDisabled, reviewCard, recordActivity]
-  );
+    }, 600);
+  }, [sessionCards, sessionIndex, ratingDisabled, reviewCard, recordActivity]);
 
-  const resetSession = useCallback(() => {
-    setSessionCards(null);
-    setSessionComplete(false);
-    setFlipped(false);
-  }, []);
-
-  // ── Session active ───────────────────────────────────────────
+  // ── Session active ────────────────────────────────────────────────────────
   if (sessionCards && !sessionComplete) {
-    const currentCard = flashcardsById[sessionCards[sessionIndex].id];
+    const cardMeta = sessionCards[sessionIndex];
+    const card = flashcardsById[cardMeta.id];
+
+    // Resolve content
+    const problem = card.type === 'problem' && card.problemId ? problemsById[card.problemId] : null;
+    const frontContent = problem ? problem.setup : card.front;
+    const backContent = problem
+      ? problem.solution + (problem.finalAnswer ? `\n\n**Answer:** ${problem.finalAnswer}` : '')
+      : card.back;
+    const cardTitle = problem ? problem.title : null;
 
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-        {/* Top bar */}
-        <div className="flex items-center justify-between">
+      <div className="min-h-screen bg-[#f7f8fa] flex flex-col">
+        {/* Exercise top bar */}
+        <div className="bg-white border-b border-[#e4e6ea] px-4 sm:px-6 py-3 flex items-center gap-4">
           <button
-            onClick={resetSession}
-            className="text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors flex items-center gap-1.5"
+            onClick={() => setSessionCards(null)}
+            className="flex items-center gap-1.5 text-sm text-[#626975] hover:text-[#21242c] transition-colors"
           >
-            ← Back to deck
+            <ChevronLeft size={16} /> Back
           </button>
-          <span className="text-xs text-[var(--text-muted)]">
+          <div className="flex-1">
+            <DeckProgress
+              current={sessionIndex + 1}
+              total={sessionCards.length}
+              reviewed={sessionReviewed}
+            />
+          </div>
+          <span className="text-xs text-[#9299a5] font-medium whitespace-nowrap">
             {sessionIndex + 1} / {sessionCards.length}
           </span>
         </div>
 
-        {/* Progress */}
-        <DeckProgress
-          current={sessionIndex + 1}
-          total={sessionCards.length}
-          reviewed={sessionReviewed}
-        />
+        {/* Main exercise area */}
+        <div className="flex-1 flex flex-col items-center px-4 sm:px-6 py-8 max-w-3xl mx-auto w-full">
 
-        {/* Card */}
-        <FlashcardCard
-          card={currentCard}
-          onFlip={() => setFlipped(true)}
-        />
+          {/* Card type + difficulty */}
+          <div className="flex items-center gap-2 mb-5 self-start">
+            <TypeBadge type={card.type} />
+            <DifficultyBadge difficulty={card.difficulty} />
+            <span className="text-xs text-[#9299a5] font-mono">§{card.section}</span>
+          </div>
 
-        {/* Rating buttons — only shown after flip */}
-        <div className={`transition-all duration-300 ${flipped ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
-          <RatingButtons onRate={handleRate} disabled={ratingDisabled} />
+          {/* Question card */}
+          <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6 mb-4">
+            {cardTitle && (
+              <h2 className="text-lg font-bold text-[#21242c] mb-4 pb-3 border-b border-[#e4e6ea]">
+                {cardTitle}
+              </h2>
+            )}
+            <div className="prose-reading text-[#21242c]">
+              <MarkdownRenderer content={frontContent} />
+            </div>
+          </div>
+
+          {/* Answer reveal */}
+          {!showAnswer && !lastGrade && (
+            <button
+              onClick={() => setShowAnswer(true)}
+              className="w-full py-3 rounded-lg border-2 border-[var(--ka-blue)] text-[var(--ka-blue)] font-semibold text-sm
+                hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150 mb-4"
+            >
+              Show answer
+            </button>
+          )}
+
+          {/* Answer content */}
+          {showAnswer && !lastGrade && (
+            <div className="w-full animate-fade-up space-y-4">
+              <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6">
+                <p className="text-xs font-bold text-[#626975] uppercase tracking-wider mb-4 pb-3 border-b border-[#e4e6ea]">
+                  Answer
+                </p>
+                <div className="prose-reading text-[#21242c]">
+                  <MarkdownRenderer content={backContent} />
+                </div>
+              </div>
+
+              {/* KA-style rating */}
+              <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
+                <p className="text-sm font-semibold text-[#21242c] mb-4 text-center">
+                  How well did you know this?
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {RATINGS.map(({ grade, label, icon: Icon, style, desc }) => (
+                    <button
+                      key={grade}
+                      disabled={ratingDisabled}
+                      onClick={() => handleRate(grade as ReviewGrade)}
+                      className={`flex flex-col items-center gap-1.5 py-4 px-3 rounded-lg border-2 font-semibold
+                        transition-all duration-150 active:scale-95 disabled:opacity-50 ${style}`}
+                    >
+                      <Icon size={22} />
+                      <span className="text-sm">{label}</span>
+                      <span className="text-[11px] opacity-75 font-normal">{desc}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Post-rating feedback */}
+          {lastGrade && (
+            <div
+              className={`w-full rounded-lg p-4 border-t-4 animate-fade-up flex items-center gap-4
+                ${lastGrade === 'good' ? 'exercise-correct' : 'exercise-incorrect'}`}
+            >
+              {lastGrade === 'good' ? (
+                <>
+                  <CheckCircle2 size={28} className="text-[#1fab54] shrink-0 animate-check-pop" />
+                  <div>
+                    <p className="font-bold text-[#0d652d] text-sm">Nice work!</p>
+                    <p className="text-xs text-[#1fab54]">This card is scheduled further out.</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <RotateCcw size={28} className="text-[#f5a623] shrink-0" />
+                  <div>
+                    <p className="font-bold text-[#7a4e00] text-sm">Keep practicing!</p>
+                    <p className="text-xs text-[#f5a623]">This card will come back sooner.</p>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
-
-        {!flipped && (
-          <p className="text-center text-xs text-[var(--text-muted)]">
-            Click the card to reveal the answer, then rate how well you remembered.
-          </p>
-        )}
       </div>
     );
   }
 
-  // ── Session complete ─────────────────────────────────────────
+  // ── Session complete ──────────────────────────────────────────────────────
   if (sessionComplete) {
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6">
-        <div className="text-center py-12 space-y-4">
-          <div className="w-16 h-16 rounded-full bg-[var(--success-bg)] border border-[var(--success)]/25 flex items-center justify-center mx-auto mb-2">
-            <Check size={28} className="text-[var(--success)]" />
+      <div className="min-h-screen bg-[#f7f8fa] flex items-center justify-center px-4">
+        <div className="bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-8 max-w-md w-full text-center">
+          <div className="w-16 h-16 rounded-full bg-[#e6f4ea] border border-[#a8d5b5] flex items-center justify-center mx-auto mb-4">
+            <CheckCircle2 size={32} className="text-[#1fab54] animate-check-pop" />
           </div>
-          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">Session complete!</h2>
-          <p className="text-[var(--text-muted)] text-sm">
-            You reviewed <strong className="text-[var(--text-primary)]">{sessionReviewed}</strong> card{sessionReviewed !== 1 ? 's' : ''}.
-            {' '}{dueCards.length > 0 ? `${dueCards.length} more due.` : 'All caught up!'}
+          <h2 className="text-xl font-extrabold text-[#21242c] mb-1">Session complete!</h2>
+          <p className="text-sm text-[#626975] mb-6">
+            You reviewed <strong className="text-[#21242c]">{sessionReviewed}</strong> card{sessionReviewed !== 1 ? 's' : ''}.
+            {dueCards.length > 0
+              ? ` ${dueCards.length} more still due.`
+              : ' All caught up!'}
           </p>
-          <div className="flex gap-3 justify-center mt-4">
-            <Button variant="secondary" onClick={resetSession} iconRight={<RotateCcw size={14} />}>
-              Back to Deck
-            </Button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setSessionCards(null)}
+              className="flex-1 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:text-[#21242c] transition-colors"
+            >
+              Back to deck
+            </button>
             {dueCards.length > 0 && (
-              <Button onClick={() => { setSessionCards(dueCards.map(c => flashcardsById[c.id])); setSessionIndex(0); setSessionReviewed(0); setSessionComplete(false); setFlipped(false); }}>
-                Review Due ({dueCards.length})
-              </Button>
+              <button
+                onClick={() => startSession(dueCards.map((c) => flashcardsById[c.id]).filter(Boolean))}
+                className="flex-1 py-2.5 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
+              >
+                Review due ({dueCards.length})
+              </button>
             )}
           </div>
         </div>
@@ -140,102 +252,98 @@ export default function FlashcardsPage() {
     );
   }
 
-  // ── Deck browser ─────────────────────────────────────────────
+  // ── Deck browser ──────────────────────────────────────────────────────────
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[var(--text-primary)]">Flashcards</h1>
-          <p className="text-sm text-[var(--text-muted)] mt-0.5">
+          <h1 className="text-2xl font-extrabold text-[#21242c]">Practice</h1>
+          <p className="text-sm text-[#626975] mt-0.5">
             {stats.total} cards · {stats.due} due · {stats.mastered} mastered
           </p>
         </div>
-
         <div className="flex gap-2 shrink-0">
           {dueCards.length > 0 && (
-            <Button
-              size="sm"
-              onClick={() => { setFilter({ ...filter, dueOnly: true }); startSession(); }}
-              iconRight={<Brain size={14} />}
+            <button
+              onClick={() => startSession(dueCards.map((c) => flashcardsById[c.id]).filter(Boolean))}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
             >
-              Review Due ({dueCards.length})
-            </Button>
+              <Brain size={15} /> Review due ({dueCards.length})
+            </button>
           )}
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={startSession}
-            iconRight={<Sparkles size={14} />}
+          <button
+            onClick={() => startSession([...cards])}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#c8ccd4] text-sm font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors"
           >
-            Study All
-          </Button>
+            <Sparkles size={15} /> Study all
+          </button>
         </div>
       </div>
 
       {/* Filter bar */}
-      <FilterBar
-        filter={filter}
-        onChange={setFilter}
-        dueCount={stats.due}
-        totalCount={stats.total}
-      />
+      <FilterBar filter={filter} onChange={setFilter} dueCount={stats.due} totalCount={stats.total} />
 
-      {/* Stats overview */}
+      {/* Type breakdown */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: 'Problems', count: stats.byType.problem, color: 'text-brand-400' },
-          { label: 'Concepts', count: stats.byType.concept, color: 'text-purple-400' },
-          { label: 'Formulas', count: stats.byType.formula, color: 'text-blue-400' },
-          { label: 'Principles', count: stats.byType.principle, color: 'text-emerald-400' },
-        ].map(({ label, count, color }) => (
-          <div key={label} className="bg-[var(--surface-2)] border border-[var(--surface-border)] rounded-xl p-3">
-            <p className={`text-xl font-bold ${color}`}>{count}</p>
-            <p className="text-xs text-[var(--text-muted)] mt-0.5">{label}</p>
+          { label: 'Problems',   count: stats.byType.problem,   color: '#1865f2', bg: '#e8f0fe' },
+          { label: 'Concepts',   count: stats.byType.concept,   color: '#9059ff', bg: '#f3effe' },
+          { label: 'Formulas',   count: stats.byType.formula,   color: '#1fab54', bg: '#e6f4ea' },
+          { label: 'Principles', count: stats.byType.principle, color: '#f5a623', bg: '#fef9e7' },
+        ].map(({ label, count, color, bg }) => (
+          <div key={label} className="bg-white border border-[#e4e6ea] rounded-lg p-4">
+            <p className="text-2xl font-extrabold" style={{ color }}>{count}</p>
+            <p className="text-xs text-[#9299a5] font-medium mt-0.5">{label}</p>
           </div>
         ))}
       </div>
 
-      {/* Card grid preview */}
+      {/* Card list */}
       <div>
-        <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider mb-3">
-          {cards.length} card{cards.length !== 1 ? 's' : ''} in current selection
+        <p className="text-xs font-semibold text-[#9299a5] uppercase tracking-wider mb-3">
+          {cards.length} card{cards.length !== 1 ? 's' : ''} in selection
         </p>
 
         {cards.length === 0 ? (
-          <div className="text-center py-12 bg-[var(--surface-2)] border border-[var(--surface-border)] rounded-2xl">
-            <Brain size={28} className="text-[var(--text-muted)] mx-auto mb-2" />
-            <p className="text-sm text-[var(--text-secondary)]">No cards match this filter.</p>
+          <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
+            <Brain size={28} className="text-[#9299a5] mx-auto mb-2" />
+            <p className="text-sm text-[#626975]">No cards match this filter.</p>
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {cards.slice(0, 12).map((card) => {
+          <div className="space-y-1">
+            {cards.slice(0, 20).map((card) => {
               const sm2 = sm2Cards[card.id];
-              const isDue = sm2 && new Date(sm2.dueDate) <= new Date();
+              const isDue = sm2 && new Date(sm2.dueDate ?? sm2.nextReview) <= new Date();
+              const problem = card.type === 'problem' && card.problemId ? problemsById[card.problemId] : null;
+              const title = problem ? problem.title : card.front.replace(/\*\*/g, '').split('\n')[0];
+
               return (
                 <button
                   key={card.id}
-                  onClick={() => { setSessionCards([card]); setSessionIndex(0); setSessionReviewed(0); setSessionComplete(false); setFlipped(false); }}
-                  className="text-left p-4 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] border border-[var(--surface-border)] hover:border-[var(--surface-border-strong)] rounded-xl transition-all duration-150"
+                  onClick={() => startSession([card])}
+                  className="w-full flex items-center gap-4 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[10px] font-mono text-[var(--text-muted)]">§{card.section}</span>
-                    {isDue && (
-                      <span className="ml-auto w-2 h-2 rounded-full bg-brand-400 shrink-0" title="Due for review" />
-                    )}
+                  {isDue && (
+                    <span className="w-2 h-2 rounded-full bg-[var(--ka-blue)] shrink-0" />
+                  )}
+                  {!isDue && (
+                    <span className="w-2 h-2 rounded-full bg-[#e4e6ea] shrink-0" />
+                  )}
+                  <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[10px] text-[#9299a5] font-mono">§{card.section}</span>
+                    <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors" />
                   </div>
-                  <p className="text-sm font-medium text-[var(--text-primary)] line-clamp-2 leading-snug">
-                    {card.front.replace(/\*\*/g, '').split('\n')[0]}
-                  </p>
                 </button>
               );
             })}
           </div>
         )}
 
-        {cards.length > 12 && (
-          <p className="text-center text-xs text-[var(--text-muted)] mt-3">
-            Showing 12 of {cards.length}. Start a session to study all.
+        {cards.length > 20 && (
+          <p className="text-center text-xs text-[#9299a5] mt-3">
+            Showing 20 of {cards.length} — start a session to practice all.
           </p>
         )}
       </div>

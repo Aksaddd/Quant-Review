@@ -18,55 +18,56 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
   return (
     <div
       id={problem.id}
-      className={`rounded-2xl border transition-colors duration-300 overflow-hidden
-        ${status === 'solved'
-          ? 'border-[var(--success)]/30 bg-[var(--surface-2)]'
-          : 'border-[var(--surface-border)] bg-[var(--surface-2)]'
-        }`}
+      className={`bg-white border rounded-lg overflow-hidden scroll-mt-16 transition-colors
+        ${status === 'solved' ? 'border-[#a8d5b5]' : 'border-[#e4e6ea]'}`}
     >
-      {/* Header */}
-      <div className="flex items-start gap-3 px-5 pt-5 pb-3">
-        {/* Number badge */}
-        <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 mt-0.5
-          ${status === 'solved'
-            ? 'bg-[var(--success)]/15 text-[var(--success)] border border-[var(--success)]/25'
-            : 'bg-[var(--surface-3)] text-[var(--text-muted)] border border-[var(--surface-border)]'
-          }`}>
-          {index}
-        </span>
+      {/* Problem header */}
+      <div className={`px-5 pt-4 pb-3 border-b ${status === 'solved' ? 'border-[#a8d5b5] bg-[#f6fef9]' : 'border-[#e4e6ea] bg-white'}`}>
+        <div className="flex items-start gap-3">
+          {/* Number */}
+          <span
+            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5
+              ${status === 'solved'
+                ? 'bg-[#1fab54] text-white'
+                : 'bg-[#f0f1f3] text-[#9299a5] border border-[#e4e6ea]'
+              }`}
+          >
+            {index}
+          </span>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="text-[10px] font-medium text-[var(--text-muted)]">§{problem.section}</span>
-            <DifficultyBadge difficulty={problem.difficulty} />
-            {status === 'solved' && (
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[var(--success)]/15 text-[var(--success)] border border-[var(--success)]/25">
-                Solved
-              </span>
-            )}
-            {status === 'attempted' && (
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[var(--warning-bg)] text-[var(--warning)] border border-[var(--warning)]/25">
-                Attempted
-              </span>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">§{problem.section}</span>
+              <DifficultyBadge difficulty={problem.difficulty} />
+              {status === 'solved' && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e6f4ea] text-[#1fab54] border border-[#a8d5b5]">
+                  ✓ Solved
+                </span>
+              )}
+              {status === 'attempted' && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#fef9e7] text-[#f5a623] border border-[#fdd8a0]">
+                  In progress
+                </span>
+              )}
+            </div>
+            <h3 className="text-base font-bold text-[#21242c]">{problem.title}</h3>
+            {problem.keyTechnique && (
+              <p className="text-xs text-[#9299a5] mt-0.5">
+                <span className="font-semibold text-[#626975]">Technique:</span> {problem.keyTechnique}
+              </p>
             )}
           </div>
-          <h3 className="text-base font-bold text-[var(--text-primary)]">{problem.title}</h3>
-          {problem.keyTechnique && (
-            <p className="text-xs text-[var(--text-muted)] mt-0.5">
-              <span className="font-medium text-[var(--text-secondary)]">Key technique:</span> {problem.keyTechnique}
-            </p>
-          )}
         </div>
       </div>
 
       {/* Problem setup */}
-      <div className="px-5 pb-2">
-        <div className="reading-content">
+      <div className="px-5 py-4">
+        <div className="prose-reading text-[#21242c]">
           <MarkdownRenderer content={problem.setup} />
         </div>
       </div>
 
-      {/* Solution reveal */}
+      {/* Solution */}
       <div className="px-5 pb-5">
         <SolutionReveal
           solution={problem.solution}

@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Eye, EyeOff, CheckCircle2 } from 'lucide-react';
-import Button from '@/components/ui/Button';
+import { CheckCircle2, ChevronDown } from 'lucide-react';
 import MarkdownRenderer from './MarkdownRenderer';
 import HintStep from './HintStep';
 
@@ -12,7 +11,7 @@ interface SolutionRevealProps {
   hints: string[];
   onSolved?: () => void;
   onAttempted?: () => void;
-  currentStatus: 'unseen' | 'attempted' | 'solved';
+  currentStatus: 'unseen' | 'attempted' | 'solved' | 'reading';
 }
 
 export default function SolutionReveal({
@@ -31,10 +30,10 @@ export default function SolutionReveal({
   };
 
   return (
-    <div className="mt-5 space-y-4">
-      {/* Hint accordion */}
+    <div className="space-y-3 mt-1">
+      {/* Hints */}
       {hints.length > 0 && (
-        <div className="p-4 rounded-2xl bg-[var(--surface-3)] border border-[var(--surface-border)]">
+        <div className="p-4 rounded-lg bg-[#fef9e7] border border-[#fdd8a0]">
           <HintStep hints={hints} />
         </div>
       )}
@@ -43,59 +42,57 @@ export default function SolutionReveal({
       {!showSolution ? (
         <button
           onClick={handleReveal}
-          className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl
-            border-2 border-dashed border-[var(--surface-border-strong)]
-            text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-secondary)]
-            hover:border-brand-500/40 hover:bg-brand-500/5
-            transition-all duration-200"
+          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg
+            border border-[var(--ka-blue)] text-[var(--ka-blue)] text-sm font-semibold
+            hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150"
         >
-          <Eye size={15} />
-          Reveal Solution
+          <ChevronDown size={15} />
+          Show solution
         </button>
       ) : (
-        <div className="rounded-2xl border border-[var(--surface-border-strong)] overflow-hidden animate-fade-up">
-          <div className="flex items-center justify-between px-4 py-3 bg-[var(--surface-3)] border-b border-[var(--surface-border)]">
-            <div className="flex items-center gap-2">
-              <Eye size={14} className="text-brand-400" />
-              <span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Solution</span>
-            </div>
+        <div className="rounded-lg border border-[#e4e6ea] overflow-hidden animate-fade-up">
+          {/* Solution header */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-[#f7f8fa] border-b border-[#e4e6ea]">
+            <span className="text-xs font-bold text-[#626975] uppercase tracking-wider">Solution</span>
             <button
               onClick={() => setShowSolution(false)}
-              className="text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
+              className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
             >
-              <EyeOff size={14} />
+              Hide
             </button>
           </div>
 
-          <div className="p-4 bg-[var(--surface-2)]">
-            <MarkdownRenderer content={solution} />
+          {/* Solution body */}
+          <div className="p-4 bg-white">
+            <div className="prose-reading text-[#21242c]">
+              <MarkdownRenderer content={solution} />
+            </div>
 
             {finalAnswer && (
-              <div className="mt-4 p-3 rounded-xl bg-[var(--success-bg)] border border-[var(--success)]/20">
-                <p className="text-xs font-semibold text-[var(--success)] uppercase tracking-wider mb-1">Answer</p>
-                <p className="text-sm font-medium text-[var(--text-primary)]">{finalAnswer}</p>
+              <div className="mt-4 p-3 rounded-lg bg-[#e6f4ea] border border-[#a8d5b5]">
+                <p className="text-[10px] font-bold text-[#1fab54] uppercase tracking-wider mb-1">Final Answer</p>
+                <p className="text-sm font-semibold text-[#0d652d]">{finalAnswer}</p>
               </div>
             )}
           </div>
 
-          {/* Mark solved button */}
+          {/* Mark solved footer */}
           {currentStatus !== 'solved' && (
-            <div className="px-4 py-3 bg-[var(--surface-3)] border-t border-[var(--surface-border)] flex justify-end">
-              <Button
-                size="sm"
-                variant="success"
-                iconRight={<CheckCircle2 size={14} />}
+            <div className="px-4 py-3 bg-[#f7f8fa] border-t border-[#e4e6ea] flex justify-end">
+              <button
                 onClick={onSolved}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1fab54] text-white text-sm font-semibold hover:bg-[#17944a] transition-colors"
               >
-                Mark as Solved
-              </Button>
+                <CheckCircle2 size={15} />
+                Mark as solved
+              </button>
             </div>
           )}
 
           {currentStatus === 'solved' && (
-            <div className="px-4 py-3 bg-[var(--success-bg)] border-t border-[var(--success)]/20 flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-[var(--success)]" />
-              <span className="text-xs font-medium text-[var(--success)]">Marked as solved</span>
+            <div className="px-4 py-2.5 bg-[#e6f4ea] border-t border-[#a8d5b5] flex items-center gap-2">
+              <CheckCircle2 size={14} className="text-[#1fab54]" />
+              <span className="text-xs font-semibold text-[#1fab54]">Marked as solved</span>
             </div>
           )}
         </div>
