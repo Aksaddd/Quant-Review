@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { RotateCw } from 'lucide-react';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
+import { problemsById } from '@/data/problems';
 import type { Flashcard } from '@/lib/types';
 
 interface FlashcardCardProps {
@@ -13,6 +14,18 @@ interface FlashcardCardProps {
 
 export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
   const [flipped, setFlipped] = useState(false);
+
+  // For problem cards, derive the problem ID and pull full book text
+  const problem =
+    card.type === 'problem' && card.problemId
+      ? problemsById[card.problemId]
+      : null;
+
+  const frontContent = problem ? problem.setup : card.front;
+  const backContent = problem
+    ? problem.solution + (problem.finalAnswer ? `\n\n**Answer:** ${problem.finalAnswer}` : '')
+    : card.back;
+  const title = problem ? problem.title : null;
 
   const handleFlip = useCallback(() => {
     setFlipped((f) => {
@@ -39,9 +52,13 @@ export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
             <span className="ml-auto text-xs text-[var(--text-muted)] font-mono">§{card.section}</span>
           </div>
 
+          {title && (
+            <p className="text-base font-bold text-[var(--text-primary)] mb-3">{title}</p>
+          )}
+
           <div className="flex-1 flex flex-col justify-center">
             <div className="prose-reading text-[var(--text-primary)]">
-              <MarkdownRenderer content={card.front} />
+              <MarkdownRenderer content={frontContent} />
             </div>
           </div>
 
@@ -56,12 +73,18 @@ export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
           <div className="flex items-center gap-2 mb-5">
             <TypeBadge type={card.type} />
             <DifficultyBadge difficulty={card.difficulty} />
-            <span className="ml-auto text-[10px] font-semibold text-brand-400 uppercase tracking-wider">Answer</span>
+            <span className="ml-auto text-[10px] font-semibold text-brand-400 uppercase tracking-wider">
+              {problem ? 'Solution' : 'Answer'}
+            </span>
           </div>
+
+          {title && (
+            <p className="text-base font-bold text-[var(--text-primary)] mb-3">{title}</p>
+          )}
 
           <div className="flex-1">
             <div className="prose-reading text-[var(--text-primary)]">
-              <MarkdownRenderer content={card.back} />
+              <MarkdownRenderer content={backContent} />
             </div>
           </div>
 
