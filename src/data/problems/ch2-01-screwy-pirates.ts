@@ -38,13 +38,16 @@ Assume all pirates are perfectly rational with the following priorities (in orde
 ---
 
 **Final Answer:**
+
 | Pirate | Coins |
 |--------|-------|
 | 5 (proposer) | **98** |
 | 4 | 0 |
 | 3 | 1 |
 | 2 | 0 |
-| 1 | 1 |`,
+| 1 | 1 |
+
+`,
 
   hints: [
     'Start with the simplest case: 2 pirates. Who has the power?',

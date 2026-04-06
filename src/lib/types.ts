@@ -6,7 +6,7 @@ export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export type ProblemStatus = 'unseen' | 'reading' | 'solved';
 
-export type FlashcardType = 'problem' | 'concept' | 'formula';
+export type FlashcardType = 'problem' | 'concept' | 'formula' | 'principle';
 
 // ── Problem ──────────────────────────────────
 
@@ -88,8 +88,21 @@ export const DEFAULT_TEXT_SETTINGS: TextSettings = {
   fontFamily: 'inter',
   lineHeight: 1.8,
   letterSpacing: 0.01,
-  theme: 'dark',
+  theme: 'light',
 };
+
+// ── Chapter 1 Principle ───────────────────────
+
+export interface Principle {
+  id: string;
+  chapter: number;
+  section: string;
+  sectionTitle: string;
+  number: number;         // 1–5
+  title: string;
+  content: string;        // full markdown content
+  keyTakeaway: string;    // one-sentence summary
+}
 
 // ── Aggregate stats ───────────────────────────
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CheckCircle2, Circle, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle2, Circle, ChevronDown, ChevronRight, List } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { SECTIONS } from '@/data/problems';
 import type { Problem } from '@/lib/types';
@@ -15,23 +15,18 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // Track active problem via IntersectionObserver
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-
     problems.forEach((p) => {
       const el = document.getElementById(p.id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveId(p.id);
-        },
+        ([entry]) => { if (entry.isIntersecting) setActiveId(p.id); },
         { threshold: 0.15, rootMargin: '-60px 0px -60% 0px' }
       );
       obs.observe(el);
       observers.push(obs);
     });
-
     return () => observers.forEach((o) => o.disconnect());
   }, [problems]);
 
@@ -40,28 +35,31 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
     problems: problems.filter((p) => p.section === sec.id),
   }));
 
+  const totalSolved = problems.filter((p) => getProblemStatus(p.id) === 'solved').length;
+
   return (
-    <div className="bg-[var(--surface-2)] border border-[var(--surface-border)] rounded-2xl overflow-hidden">
-      {/* Toggle header */}
+    <div className="bg-white border border-[#e4e6ea] rounded-lg overflow-hidden">
       <button
-        className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-3)] transition-colors"
+        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#21242c] hover:bg-[#f7f8fa] transition-colors"
         onClick={() => setOpen(!open)}
       >
-        <span>Table of Contents</span>
-        {open ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+        <List size={15} className="text-[#626975]" />
+        <span className="flex-1 text-left">Table of Contents</span>
+        <span className="text-xs text-[#9299a5] font-normal">{totalSolved}/{problems.length} solved</span>
+        {open ? <ChevronDown size={14} className="text-[#9299a5]" /> : <ChevronRight size={14} className="text-[#9299a5]" />}
       </button>
 
       {open && (
-        <div className="border-t border-[var(--surface-border)] max-h-[60vh] overflow-y-auto">
+        <div className="border-t border-[#e4e6ea] max-h-[60vh] overflow-y-auto">
           {grouped.map((sec) => (
             <div key={sec.id}>
-              <div className="px-4 py-2 bg-[var(--surface-3)] sticky top-0 z-10">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+              <div className="px-4 py-2 bg-[#f7f8fa] sticky top-0 z-10 border-b border-[#e4e6ea]">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#9299a5]">
                   §{sec.id} · {sec.title}
                 </p>
               </div>
               <ul>
-                {sec.problems.map((p, i) => {
+                {sec.problems.map((p) => {
                   const status = getProblemStatus(p.id);
                   const isActive = activeId === p.id;
                   return (
@@ -70,15 +68,15 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
                         href={`#${p.id}`}
                         className={`flex items-center gap-3 px-4 py-2 text-sm transition-colors
                           ${isActive
-                            ? 'bg-brand-500/10 text-brand-300'
-                            : 'text-[var(--text-secondary)] hover:bg-[var(--surface-3)] hover:text-[var(--text-primary)]'
+                            ? 'bg-[var(--ka-blue-light)] text-[var(--ka-blue)] font-semibold'
+                            : 'text-[#626975] hover:bg-[#f7f8fa] hover:text-[#21242c]'
                           }`}
                         onClick={() => setOpen(false)}
                       >
                         {status === 'solved' ? (
-                          <CheckCircle2 size={13} className="text-[var(--success)] shrink-0" />
+                          <CheckCircle2 size={13} className="text-[#1fab54] shrink-0" />
                         ) : (
-                          <Circle size={13} className="text-[var(--text-muted)] shrink-0" />
+                          <Circle size={13} className="text-[#c8ccd4] shrink-0" />
                         )}
                         <span className="truncate">{p.title}</span>
                       </a>

@@ -1,108 +1,71 @@
 'use client';
 
-import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
+import { Loader2 } from 'lucide-react';
+import React from 'react';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
-type Size    = 'xs' | 'sm' | 'md' | 'lg';
+type Size = 'xs' | 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   size?: Size;
   loading?: boolean;
-  icon?: React.ReactNode;
+  iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   fullWidth?: boolean;
 }
 
-const variantStyles: Record<Variant, string> = {
-  primary: [
-    'bg-brand-500 text-black font-semibold',
-    'hover:bg-brand-400 active:bg-brand-600',
-    'shadow-[0_0_20px_rgba(245,158,11,0.3)]',
-    'hover:shadow-[0_0_28px_rgba(245,158,11,0.45)]',
-    'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none',
-  ].join(' '),
-
-  secondary: [
-    'bg-[var(--surface-3)] text-[var(--text-primary)] font-medium',
-    'border border-[var(--surface-border-strong)]',
-    'hover:bg-[var(--surface-4)] hover:border-[var(--brand-500)]/40',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ].join(' '),
-
-  ghost: [
-    'bg-transparent text-[var(--text-secondary)] font-medium',
-    'hover:bg-white/5 hover:text-[var(--text-primary)]',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ].join(' '),
-
-  danger: [
-    'bg-[var(--error-bg)] text-[var(--error)] font-medium',
-    'border border-[var(--error)]/20',
-    'hover:bg-[var(--error)]/20 hover:border-[var(--error)]/40',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ].join(' '),
-
-  success: [
-    'bg-[var(--success-bg)] text-[var(--success)] font-medium',
-    'border border-[var(--success)]/20',
-    'hover:bg-[var(--success)]/20 hover:border-[var(--success)]/40',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ].join(' '),
+const VARIANTS: Record<Variant, string> = {
+  primary:   'bg-[#1865f2] text-white hover:bg-[#0d4fd1] border border-[#1865f2]',
+  secondary: 'bg-white text-[#21242c] hover:bg-[#f0f1f3] border border-[#c8ccd4]',
+  ghost:     'bg-transparent text-[#626975] hover:bg-[#f0f1f3] border border-transparent',
+  danger:    'bg-[#d92916] text-white hover:bg-[#b82012] border border-[#d92916]',
+  success:   'bg-[#1fab54] text-white hover:bg-[#17944a] border border-[#1fab54]',
 };
 
-const sizeStyles: Record<Size, string> = {
-  xs: 'h-7  px-2.5 text-xs  rounded-lg  gap-1.5',
-  sm: 'h-8  px-3   text-sm  rounded-xl  gap-2',
-  md: 'h-10 px-4   text-sm  rounded-xl  gap-2',
-  lg: 'h-12 px-6   text-base rounded-2xl gap-2.5',
+const SIZES: Record<Size, string> = {
+  xs: 'h-6  px-2   text-[11px] gap-1   rounded',
+  sm: 'h-8  px-3   text-xs     gap-1.5 rounded-md',
+  md: 'h-9  px-4   text-sm     gap-2   rounded-lg',
+  lg: 'h-11 px-5   text-sm     gap-2   rounded-lg',
 };
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant = 'primary',
-      size = 'md',
-      loading = false,
-      icon,
-      iconRight,
-      fullWidth = false,
-      className,
-      children,
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <button
-        ref={ref}
-        disabled={disabled || loading}
-        className={clsx(
-          'inline-flex items-center justify-center whitespace-nowrap',
-          'transition-all duration-150 cursor-pointer select-none',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-0)]',
-          variantStyles[variant],
-          sizeStyles[size],
-          fullWidth && 'w-full',
-          className
-        )}
-        {...props}
-      >
-        {loading ? (
-          <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-        ) : (
-          icon && <span className="shrink-0 flex items-center">{icon}</span>
-        )}
-        {children && <span>{children}</span>}
-        {!loading && iconRight && (
-          <span className="shrink-0 flex items-center">{iconRight}</span>
-        )}
-      </button>
-    );
-  }
-);
-
-Button.displayName = 'Button';
-export default Button;
+export default function Button({
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  iconLeft,
+  iconRight,
+  fullWidth = false,
+  disabled,
+  children,
+  className,
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      disabled={disabled || loading}
+      className={clsx(
+        'inline-flex items-center justify-center font-semibold transition-all duration-150',
+        'disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1865f2] focus-visible:ring-offset-1',
+        VARIANTS[variant],
+        SIZES[size],
+        fullWidth && 'w-full',
+        className,
+      )}
+      {...props}
+    >
+      {loading ? (
+        <Loader2 size={14} className="animate-spin" />
+      ) : (
+        <>
+          {iconLeft}
+          {children}
+          {iconRight}
+        </>
+      )}
+    </button>
+  );
+}

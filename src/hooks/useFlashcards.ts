@@ -37,10 +37,10 @@ export function useFlashcards(filter: FlashcardFilter = {}) {
     due: dueCards.length,
     mastered: Object.values(sm2Cards).filter(isMastered).length,
     byType: {
-      problem: flashcardsByType.problem?.length ?? 0,
-      concept: flashcardsByType.concept?.length ?? 0,
-      formula: flashcardsByType.formula?.length ?? 0,
-      principle: flashcardsByType.principle?.length ?? 0,
+      problem:   flashcardsByType.problem.length,
+      concept:   flashcardsByType.concept.length,
+      formula:   flashcardsByType.formula.length,
+      principle: flashcardsByType.principle.length,
     },
   }), [sm2Cards, dueCards]);
 

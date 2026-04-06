@@ -27,7 +27,9 @@ Bag: 20 blue, 14 red. Each turn: remove 2 balls, replace with 1 (same color → 
 | Start | Red parity | Last ball |
 |-------|-----------|-----------|
 | 14 red (even) | Stays even → can't end at 1 (odd) | **Blue** |
-| 13 red (odd) | Stays odd → can end at 1 | **Red** |`,
+| 13 red (odd) | Stays odd → can end at 1 | **Red** |
+
+`,
 };
 
 export default fc;

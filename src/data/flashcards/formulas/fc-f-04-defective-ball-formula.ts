@@ -31,7 +31,9 @@ Each defective ball maps to TWO outcomes (heavy or light) → available slots = 
 | 1 | 3 | 0 |
 | 2 | 9 | 3 |
 | **3** | **27** | **12 ✓** |
-| 4 | 81 | 39 |`,
+| 4 | 81 | 39 |
+
+`,
 };
 
 export default fc;

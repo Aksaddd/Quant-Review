@@ -25,29 +25,29 @@ Each prisoner must **simultaneously write down** their guess for their own hat c
 **Each prisoner i's strategy:**
 
 Prisoner i guesses the color $g_i$ such that:
-$$g_i + \\sum_{j \\neq i} x_j \\equiv i \\pmod{7}$$
+$$g_i + \\\sum_{j \\\neq i} x_j \\\equiv i \\\\pmod{7}$$
 
 where $x_j$ is the hat color code of prisoner j (which prisoner i can see).
 
-In other words: prisoner i guesses $g_i = (i - \\sum_{j \\neq i} x_j) \\bmod 7$.
+In other words: prisoner i guesses $g_i = (i - \\\sum_{j \\\neq i} x_j) \\bmod 7$.
 
 ---
 
 **Proof that this works (by contradiction):**
 
 Let the true hat codes be $x_0, x_1, \\ldots, x_6$. Define:
-$$S = \\sum_{k=0}^{6} x_k \\pmod{7}$$
+$$S = \\\sum_{k=0}^{6} x_k \\\\pmod{7}$$
 
 S must equal some value $r \\in \\{0, 1, 2, 3, 4, 5, 6\\}$.
 
-Prisoner $r$ guesses: $g_r = (r - \\sum_{j \\neq r} x_j) \\bmod 7$
+Prisoner $r$ guesses: $g_r = (r - \\\sum_{j \\\neq r} x_j) \\bmod 7$
 
 We need to show $g_r = x_r$:
-$$g_r = r - \\sum_{j \\neq r} x_j = r - (S - x_r) \\equiv r - S + x_r \\pmod 7$$
+$$g_r = r - \\\sum_{j \\\neq r} x_j = r - (S - x_r) \\\equiv r - S + x_r \\\\pmod 7$$
 
-Since $S \\equiv r$: $g_r \\equiv r - r + x_r = x_r \\pmod 7$ ✓
+Since $S \\\equiv r$: $g_r \\\equiv r - r + x_r = x_r \\\\pmod 7$ ✓
 
-**Assume for contradiction** that all 7 guesses are wrong: $g_i \\neq x_i$ for all i.
+**Assume for contradiction** that all 7 guesses are wrong: $g_i \\\neq x_i$ for all i.
 
 Then in particular, prisoner $r$ (whose guess is exactly $x_r$) also guessed wrong — a contradiction. ∎
 
@@ -55,7 +55,7 @@ Then in particular, prisoner $r$ (whose guess is exactly $x_r$) also guessed wro
 
 ---
 
-**Final Answer:** Prisoner i guesses $(i − \\sum_{j≠i} x_j) \\bmod 7$. Prisoner r (where r = total sum mod 7) always guesses correctly. All 7 go free.`,
+**Final Answer:** Prisoner i guesses $(i − \\\sum_{j≠i} x_j) \\bmod 7$. Prisoner r (where r = total sum mod 7) always guesses correctly. All 7 go free.`,
 
   hints: [
     'Assign numbers 0–6 to colors and 0–6 to prisoners. Think about modular arithmetic.',

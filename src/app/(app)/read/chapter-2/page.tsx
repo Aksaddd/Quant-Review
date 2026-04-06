@@ -6,100 +6,118 @@ import { chapter2Problems, SECTIONS } from '@/data/problems';
 import ProblemBlock from '@/components/reader/ProblemBlock';
 import TableOfContents from '@/components/reader/TableOfContents';
 import TextControls from '@/components/reader/TextControls';
-import { ProgressBar } from '@/components/ui/Progress';
 
 export default function Chapter2Page() {
   const { cssVars } = useTextSettings();
   const { totalSolved, totalProblems } = useProgress();
   const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
 
-  // Group problems by section
   const grouped = SECTIONS.map((sec) => ({
     ...sec,
     problems: chapter2Problems.filter((p) => p.section === sec.id),
   }));
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-      {/* Sticky top bar */}
-      <div className="sticky top-0 z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2 mb-4
-        bg-[var(--surface-0)]/90 backdrop-blur-sm border-b border-[var(--surface-border)]
-        flex items-center gap-3">
-        <div className="flex-1">
-          <p className="text-xs font-medium text-[var(--text-muted)] mb-1">
-            Chapter 2 — Brain Teasers · {totalSolved}/{totalProblems} solved
-          </p>
-          <ProgressBar value={pct} size="sm" />
-        </div>
-        <TextControls />
-      </div>
+    <div className="bg-[#f7f8fa] min-h-screen">
+      {/* Sticky header — KA breadcrumb style */}
+      <div className="sticky top-0 z-30 bg-white border-b border-[#e4e6ea]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-1.5 text-xs text-[#9299a5] font-medium min-w-0">
+            <span className="text-[#626975] font-semibold truncate">Quant Finance Interview Prep</span>
+            <span>/</span>
+            <span className="text-[#21242c] font-semibold truncate">Chapter 2: Brain Teasers</span>
+          </div>
 
-      {/* Chapter header */}
-      <div className="mb-8">
-        <p className="text-xs font-medium text-brand-400 uppercase tracking-widest mb-1">
-          A Practical Guide to Quantitative Finance Interviews
-        </p>
-        <h1 className="text-3xl font-extrabold text-[var(--text-primary)] mb-2">
-          Chapter 2: Brain Teasers
-        </h1>
-        <p className="text-[var(--text-secondary)] text-sm leading-relaxed max-w-2xl">
-          Brain teasers are a staple of quant interviews. This chapter covers nine categories of
-          techniques — from problem simplification to proof by contradiction — each illustrated
-          with problems sourced from real finance interviews.
-        </p>
-      </div>
-
-      {/* Table of contents */}
-      <div className="mb-8">
-        <TableOfContents problems={chapter2Problems} />
-      </div>
-
-      {/* Reading content — apply text CSS vars here */}
-      <div className="reading-content space-y-16" style={cssVars}>
-        {grouped.map((sec) => (
-          <section
-            key={sec.id}
-            id={`section-${sec.id}`}
-            className="scroll-mt-20"
-          >
-            {/* Section header */}
-            <div className="mb-6 pb-4 border-b border-[var(--surface-border)]">
-              <div className="flex items-baseline gap-3">
-                <span className="text-xs font-bold text-brand-400 uppercase tracking-widest">
-                  §{sec.id}
-                </span>
-                <h2 className="text-xl font-extrabold text-[var(--text-primary)]">
-                  {sec.title}
-                </h2>
+          {/* Progress + settings */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="w-28 h-1.5 bg-[#e4e6ea] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[var(--ka-blue)] rounded-full transition-all duration-500"
+                  style={{ width: `${pct}%` }}
+                />
               </div>
+              <span className="text-xs font-semibold text-[var(--ka-blue)] whitespace-nowrap">
+                {totalSolved}/{totalProblems}
+              </span>
             </div>
-
-            {/* Problems */}
-            <div className="space-y-6">
-              {sec.problems.map((problem, i) => {
-                const globalIndex = chapter2Problems.indexOf(problem) + 1;
-                return (
-                  <ProblemBlock
-                    key={problem.id}
-                    problem={problem}
-                    index={globalIndex}
-                  />
-                );
-              })}
-            </div>
-          </section>
-        ))}
+            <TextControls />
+          </div>
+        </div>
       </div>
 
-      {/* End of chapter */}
-      <div className="mt-16 py-10 text-center border-t border-[var(--surface-border)]">
-        <p className="text-2xl mb-2">🎉</p>
-        <p className="text-sm font-semibold text-[var(--text-primary)]">End of Chapter 2</p>
-        <p className="text-xs text-[var(--text-muted)] mt-1">
-          {totalSolved === totalProblems
-            ? `All ${totalProblems} problems solved. Excellent work!`
-            : `${totalProblems - totalSolved} problems remaining. Keep going!`}
-        </p>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        {/* Chapter title */}
+        <div className="bg-white border border-[#e4e6ea] rounded-lg p-6 mb-6">
+          <p className="text-xs font-bold text-[var(--ka-blue)] uppercase tracking-widest mb-1">
+            Chapter 2
+          </p>
+          <h1 className="text-2xl font-extrabold text-[#21242c] mb-2">Brain Teasers</h1>
+          <p className="text-sm text-[#626975] leading-relaxed max-w-2xl">
+            Brain teasers are a staple of quantitative finance interviews. This chapter covers nine
+            categories of problem-solving techniques — from simplification and logic reasoning to
+            modular arithmetic and proof by contradiction — each illustrated with problems from
+            real finance interviews.
+          </p>
+
+          {/* Section pills */}
+          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#e4e6ea]">
+            {SECTIONS.map((sec) => (
+              <a
+                key={sec.id}
+                href={`#section-${sec.id}`}
+                className="px-2.5 py-1 rounded-full bg-[#f0f1f3] text-[#626975] text-xs font-medium
+                  hover:bg-[var(--ka-blue-light)] hover:text-[var(--ka-blue)] transition-colors"
+              >
+                §{sec.id} {sec.title}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Table of contents */}
+        <div className="mb-6">
+          <TableOfContents problems={chapter2Problems} />
+        </div>
+
+        {/* Reading content */}
+        <div className="reading-content space-y-12" style={cssVars}>
+          {grouped.map((sec) => (
+            <section key={sec.id} id={`section-${sec.id}`} className="scroll-mt-16">
+              {/* Section header — KA unit header style */}
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b-2 border-[var(--ka-blue)]">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-widest">
+                    §{sec.id}
+                  </span>
+                  <h2 className="text-xl font-extrabold text-[#21242c]">{sec.title}</h2>
+                </div>
+              </div>
+
+              {/* Problems */}
+              <div className="space-y-4">
+                {sec.problems.map((problem) => {
+                  const globalIndex = chapter2Problems.indexOf(problem) + 1;
+                  return (
+                    <ProblemBlock key={problem.id} problem={problem} index={globalIndex} />
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {/* End of chapter */}
+        <div className="mt-12 py-8 text-center bg-white border border-[#e4e6ea] rounded-lg">
+          <p className="text-3xl mb-2">🎓</p>
+          <p className="text-lg font-bold text-[#21242c]">End of Chapter 2</p>
+          <p className="text-sm text-[#626975] mt-1">
+            {totalSolved === totalProblems
+              ? `All ${totalProblems} problems solved. Outstanding!`
+              : `${totalProblems - totalSolved} problems remaining. Keep going!`}
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -27,7 +27,9 @@ const fc: Flashcard = {
 | On + Hot | Switch **1** |
 | Off + Hot | Switch **2** (was on, now off) |
 | On + Cold | Switch **3** (just turned on) |
-| Off + Cold | Switch **4** (never on) |`,
+| Off + Cold | Switch **4** (never on) |
+
+`,
 };
 
 export default fc;

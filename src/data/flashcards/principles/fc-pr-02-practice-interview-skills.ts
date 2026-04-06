@@ -2,7 +2,7 @@ import { Flashcard } from '@/lib/types';
 
 const fc: Flashcard = {
   id: 'fc-pr-02-practice-interview-skills',
-  type: 'concept',
+  type: 'principle',
   chapter: 1,
   section: '1.2',
   difficulty: 'easy',

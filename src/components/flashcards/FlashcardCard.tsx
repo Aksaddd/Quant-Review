@@ -4,16 +4,28 @@ import { useState, useCallback } from 'react';
 import { RotateCw } from 'lucide-react';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
+import { problemsById } from '@/data/problems';
 import type { Flashcard } from '@/lib/types';
 
 interface FlashcardCardProps {
   card: Flashcard;
-  /** Called when user flips the card (for activity tracking) */
   onFlip?: () => void;
 }
 
 export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
   const [flipped, setFlipped] = useState(false);
+
+  // For problem cards, derive the problem ID and pull full book text
+  const problem =
+    card.type === 'problem' && card.problemId
+      ? problemsById[card.problemId]
+      : null;
+
+  const frontContent = problem ? problem.setup : card.front;
+  const backContent = problem
+    ? problem.solution + (problem.finalAnswer ? `\n\n**Answer:** ${problem.finalAnswer}` : '')
+    : card.back;
+  const title = problem ? problem.title : null;
 
   const handleFlip = useCallback(() => {
     setFlipped((f) => {
@@ -24,61 +36,64 @@ export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
 
   return (
     <div
-      className="flashcard-scene w-full cursor-pointer select-none"
-      style={{ minHeight: 320 }}
+      className="w-full cursor-pointer select-none"
       onClick={handleFlip}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' || e.key === ' ' ? handleFlip() : undefined}
+      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') ? handleFlip() : undefined}
       aria-label={flipped ? 'Flip to front' : 'Flip to see answer'}
     >
-      <div className={`flashcard-inner ${flipped ? 'flipped' : ''}`}>
-        {/* Front */}
-        <div className="flashcard-face flashcard-front bg-[var(--surface-2)] border border-[var(--surface-border-strong)] rounded-2xl p-6 flex flex-col">
-          {/* Meta row */}
-          <div className="flex items-center gap-2 mb-4">
+      {!flipped ? (
+        /* ── Front ─────────────────────────────────────────────────────── */
+        <div className="bg-[var(--surface-2)] border border-[var(--surface-border-strong)] rounded-2xl p-6 flex flex-col min-h-[280px] transition-all duration-200 hover:border-brand-500/30">
+          <div className="flex items-center gap-2 mb-5">
             <TypeBadge type={card.type} />
             <DifficultyBadge difficulty={card.difficulty} />
             <span className="ml-auto text-xs text-[var(--text-muted)] font-mono">§{card.section}</span>
           </div>
 
-          {/* Content */}
+          {title && (
+            <p className="text-base font-bold text-[var(--text-primary)] mb-3">{title}</p>
+          )}
+
           <div className="flex-1 flex flex-col justify-center">
             <div className="prose-reading text-[var(--text-primary)]">
-              <MarkdownRenderer content={card.front} />
+              <MarkdownRenderer content={frontContent} />
             </div>
           </div>
 
-          {/* Flip hint */}
-          <div className="flex items-center justify-center gap-1.5 mt-5 pt-4 border-t border-[var(--surface-border)]">
+          <div className="flex items-center justify-center gap-1.5 mt-6 pt-4 border-t border-[var(--surface-border)]">
             <RotateCw size={12} className="text-[var(--text-muted)]" />
             <span className="text-[11px] text-[var(--text-muted)]">Click to reveal answer</span>
           </div>
         </div>
-
-        {/* Back */}
-        <div className="flashcard-face flashcard-back bg-[var(--surface-2)] border border-brand-500/30 rounded-2xl p-6 flex flex-col">
-          {/* Meta row */}
-          <div className="flex items-center gap-2 mb-4">
+      ) : (
+        /* ── Back ──────────────────────────────────────────────────────── */
+        <div className="bg-[var(--surface-2)] border border-brand-500/40 rounded-2xl p-6 flex flex-col min-h-[280px] transition-all duration-200 shadow-[0_0_24px_rgba(245,158,11,0.06)]">
+          <div className="flex items-center gap-2 mb-5">
             <TypeBadge type={card.type} />
             <DifficultyBadge difficulty={card.difficulty} />
-            <span className="ml-auto text-[10px] font-semibold text-brand-400 uppercase tracking-wider">Answer</span>
+            <span className="ml-auto text-[10px] font-semibold text-brand-400 uppercase tracking-wider">
+              {problem ? 'Solution' : 'Answer'}
+            </span>
           </div>
 
-          {/* Content */}
-          <div className="flex-1 overflow-y-auto">
+          {title && (
+            <p className="text-base font-bold text-[var(--text-primary)] mb-3">{title}</p>
+          )}
+
+          <div className="flex-1">
             <div className="prose-reading text-[var(--text-primary)]">
-              <MarkdownRenderer content={card.back} />
+              <MarkdownRenderer content={backContent} />
             </div>
           </div>
 
-          {/* Flip hint */}
-          <div className="flex items-center justify-center gap-1.5 mt-5 pt-4 border-t border-[var(--surface-border)]">
+          <div className="flex items-center justify-center gap-1.5 mt-6 pt-4 border-t border-[var(--surface-border)]">
             <RotateCw size={12} className="text-[var(--text-muted)]" />
             <span className="text-[11px] text-[var(--text-muted)]">Click to flip back</span>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

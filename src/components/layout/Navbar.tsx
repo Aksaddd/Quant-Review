@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Menu, X, Bell } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { clsx } from 'clsx';
 import Button from '@/components/ui/Button';
@@ -10,31 +10,24 @@ import { useProgress } from '@/components/providers/ProgressProvider';
 
 const NAV_LINKS = [
   { href: '/dashboard',      label: 'Dashboard' },
+  { href: '/read/chapter-1', label: 'Chapter 1' },
   { href: '/read/chapter-2', label: 'Chapter 2' },
-  { href: '/flashcards',     label: 'Flashcards' },
+  { href: '/flashcards',     label: 'Practice'  },
 ];
 
-/* ── Top nav for landing + auth pages (no sidebar) ──────────────────────── */
+/* ── Landing / auth navbar ─────────────────────────────────────────────────── */
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="
-      sticky top-0 z-40
-      border-b border-[var(--surface-border)]
-      bg-[var(--surface-0)]/80 backdrop-blur-xl
-    ">
+    <header className="sticky top-0 z-40 bg-white border-b border-[#e4e6ea]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="
-            w-7 h-7 rounded-lg flex items-center justify-center
-            bg-brand-500/10 border border-brand-500/20
-            group-hover:bg-brand-500/20 transition-colors
-          ">
-            <Sparkles size={14} className="text-brand-400" />
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-lg bg-[var(--ka-blue)] flex items-center justify-center">
+            <span className="text-white font-bold text-sm">Q</span>
           </div>
-          <span className="font-bold text-sm text-[var(--text-primary)] tracking-tight hidden sm:block">
+          <span className="font-bold text-[15px] text-[#21242c] hidden sm:block">
             Quant Review
           </span>
         </Link>
@@ -45,11 +38,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className="
-                px-3 py-1.5 rounded-lg text-sm text-[var(--text-secondary)]
-                hover:text-[var(--text-primary)] hover:bg-white/5
-                transition-colors
-              "
+              className="px-3 py-1.5 rounded-md text-sm text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors font-medium"
             >
               {label}
             </Link>
@@ -62,11 +51,10 @@ export default function Navbar() {
             <Button variant="ghost" size="sm">Sign in</Button>
           </Link>
           <Link href="/auth/signup" className="hidden sm:block">
-            <Button size="sm">Get Started</Button>
+            <Button size="sm">Get started</Button>
           </Link>
-          {/* Mobile menu toggle */}
           <button
-            className="md:hidden p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5 transition-colors"
+            className="md:hidden p-2 rounded-md text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -77,23 +65,24 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-[var(--surface-border)] bg-[var(--surface-1)] px-4 py-3 animate-fade-up">
+        <div className="md:hidden border-t border-[#e4e6ea] bg-white px-4 py-3 animate-fade-up">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setMobileOpen(false)}
-              className="block px-3 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5 transition-colors"
+              className="flex items-center justify-between px-3 py-3 rounded-lg text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors text-sm font-medium"
             >
               {label}
+              <ChevronRight size={14} />
             </Link>
           ))}
-          <div className="flex gap-2 mt-3 pt-3 border-t border-[var(--surface-border)]">
+          <div className="flex gap-2 mt-3 pt-3 border-t border-[#e4e6ea]">
             <Link href="/auth/login" className="flex-1">
               <Button variant="secondary" size="sm" fullWidth>Sign in</Button>
             </Link>
             <Link href="/auth/signup" className="flex-1">
-              <Button size="sm" fullWidth>Get Started</Button>
+              <Button size="sm" fullWidth>Get started</Button>
             </Link>
           </div>
         </div>
@@ -102,36 +91,44 @@ export default function Navbar() {
   );
 }
 
-/* ── Top bar inside the app shell (with sidebar) ────────────────────────── */
+/* ── Top bar inside app shell (mobile only) ─────────────────────────────── */
 export function AppTopBar({ title }: { title?: string }) {
   const { dueCards } = useProgress();
+  const pathname = usePathname();
+
+  // Build breadcrumb label
+  const crumb =
+    pathname.startsWith('/read/chapter-2') ? 'Chapter 2' :
+    pathname.startsWith('/flashcards')     ? 'Practice'  :
+    pathname.startsWith('/dashboard')      ? 'Dashboard' :
+    title ?? '';
 
   return (
-    <header className="
-      lg:hidden sticky top-0 z-30
-      border-b border-[var(--surface-border)]
-      bg-[var(--surface-0)]/90 backdrop-blur-xl
-      px-4 h-13 flex items-center justify-between
-    ">
-      <Link href="/" className="flex items-center gap-2">
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-brand-500/10 border border-brand-500/20">
-          <Sparkles size={14} className="text-brand-400" />
-        </div>
-        {title && (
-          <span className="text-sm font-semibold text-[var(--text-primary)] ml-1">{title}</span>
-        )}
-      </Link>
+    <header className="lg:hidden sticky top-0 z-30 bg-white border-b border-[#e4e6ea] px-4 h-14 flex items-center justify-between">
+      {/* Logo + breadcrumb */}
       <div className="flex items-center gap-2">
-        {dueCards.length > 0 && (
-          <Link
-            href="/flashcards"
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-500/15 text-brand-400 text-xs font-semibold"
-          >
-            <Bell size={11} />
-            {dueCards.length} due
-          </Link>
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-[var(--ka-blue)] flex items-center justify-center">
+            <span className="text-white font-bold text-xs">Q</span>
+          </div>
+        </Link>
+        {crumb && (
+          <>
+            <span className="text-[#e4e6ea]">/</span>
+            <span className="text-sm font-semibold text-[#21242c]">{crumb}</span>
+          </>
         )}
       </div>
+
+      {/* Due badge */}
+      {dueCards.length > 0 && (
+        <Link
+          href="/flashcards"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--ka-blue-light)] text-[var(--ka-blue)] text-xs font-semibold"
+        >
+          {dueCards.length} due
+        </Link>
+      )}
     </header>
   );
 }

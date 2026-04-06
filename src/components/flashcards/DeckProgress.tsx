@@ -1,7 +1,5 @@
 'use client';
 
-import { ProgressBar } from '@/components/ui/Progress';
-
 interface DeckProgressProps {
   current: number;
   total: number;
@@ -13,15 +11,16 @@ export default function DeckProgress({ current, total, reviewed }: DeckProgressP
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-medium text-[var(--text-muted)]">
-          {current} of {total} cards
-        </span>
-        <span className="text-xs font-medium text-[var(--text-secondary)]">
-          {reviewed} reviewed · {pct}%
-        </span>
+      <div className="h-2 bg-[#e4e6ea] rounded-full overflow-hidden">
+        <div
+          className="h-full bg-[var(--ka-blue)] rounded-full transition-all duration-500"
+          style={{ width: `${pct}%` }}
+        />
       </div>
-      <ProgressBar value={pct} size="sm" />
+      <div className="flex items-center justify-between mt-1">
+        <span className="text-[10px] text-[#9299a5]">{reviewed} reviewed</span>
+        <span className="text-[10px] font-semibold text-[var(--ka-blue)]">{pct}%</span>
+      </div>
     </div>
   );
 }

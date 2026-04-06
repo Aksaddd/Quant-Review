@@ -27,7 +27,7 @@ If ball 1 breaks at step k, ball 2 scans linearly from the last safe floor (usin
 **Coverage:** N + (N−1) + (N−2) + … + 1 = **N(N+1)/2** floors.
 
 For 100 floors:
-$$N(N+1)/2 \\geq 100 \\implies N \\geq 14 \\quad (14 \\times 15 / 2 = 105 \\geq 100)$$
+$$N(N+1)/2 \\\geq 100 \\implies N \\\geq 14 \\quad (14 \\\times 15 / 2 = 105 \\\geq 100)$$
 
 ---
 

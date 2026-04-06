@@ -19,6 +19,7 @@ const counterfeitCoinsII: Problem = {
 **Strategy: Use powers of 3 as sampling weights.**
 
 Take coins from each bag as follows:
+
 | Bag | Coins taken | Power of 3 |
 |-----|-------------|------------|
 | 1   | 1 coin      | 3⁰ = 1     |
