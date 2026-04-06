@@ -355,7 +355,7 @@ export default function FlashcardsPage() {
           </p>
           <div className="flex gap-3">
             <button
-              onClick={() => setSessionCards(null)}
+              onClick={() => { setSessionCards(null); setSessionComplete(false); }}
               className="flex-1 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] transition-colors"
             >
               Back to deck
