@@ -10,6 +10,7 @@ import DueCardsBanner from '@/components/dashboard/DueCardsBanner';
 import SectionGrid from '@/components/dashboard/SectionGrid';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import QuickActions from '@/components/dashboard/QuickActions';
+import FlashcardGradeHistory from '@/components/dashboard/FlashcardGradeHistory';
 
 export default function DashboardPage() {
   const { totalSolved, totalProblems, masteredCount, dueCards, sectionStats, getProblemStatus, problemProgress } = useProgress();
@@ -58,6 +59,9 @@ export default function DashboardPage() {
 
       {/* Recent activity */}
       {recentItems.length > 0 && <RecentActivity items={recentItems} />}
+
+      {/* Flashcard rating history */}
+      <FlashcardGradeHistory />
     </div>
   );
 }

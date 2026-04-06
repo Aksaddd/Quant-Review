@@ -60,6 +60,7 @@ export function applySM2(card: SM2Card, grade: ReviewGrade): SM2Card {
     easinessFactor,
     nextReview,
     lastReviewed: formatISO(new Date(), { representation: 'date' }),
+    lastGrade: grade,
   };
 }
 

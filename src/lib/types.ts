@@ -48,6 +48,7 @@ export interface SM2Card {
   easinessFactor: number;// default 2.5
   nextReview: string;    // ISO date string
   lastReviewed?: string; // ISO date string
+  lastGrade?: ReviewGrade; // most recent rating given by the user
 }
 
 // SM-2 quality grades (0–5 scale)
