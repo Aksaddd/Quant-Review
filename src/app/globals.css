@@ -368,9 +368,9 @@ body {
 /* ─────────────────────────────────────────────────────────────────────────────
    KATEX
 ───────────────────────────────────────────────────────────────────────────── */
-.katex { font-size: 1em !important; color: inherit; }
-.katex-display { margin: 1.2em 0 !important; overflow-x: auto; }
-.katex-display > .katex { text-align: left !important; }
+.katex { font-size: 1.25em !important; color: inherit; }
+.katex-display { margin: 1.4em 0 !important; overflow-x: auto; }
+.katex-display > .katex { font-size: 1.5em !important; text-align: left !important; }
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SIDEBAR LINKS — KA style
