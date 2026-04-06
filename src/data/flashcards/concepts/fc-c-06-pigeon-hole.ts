@@ -26,7 +26,9 @@ $$\text{At least one hole has} \geq \left\lceil \frac{\text{pigeons}}{\text{hole
 | Matching Socks | 4 socks | 3 colors | ≥2 same color |
 | Handshakes | 26 people | 25 counts | ≥2 same count |
 | Ants on Square | 51 ants | 25 sub-squares | ≥3 ants in one cell |
-| Counterfeit Coins II | 243 combinations | 243 weights | all distinct (proves uniqueness) |`,
+| Counterfeit Coins II | 243 combinations | 243 weights | all distinct (proves uniqueness) |
+
+`,
 };
 
 export default fc;

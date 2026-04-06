@@ -43,7 +43,9 @@ All three are contiguous arcs on the clock face. ✓
 |-------|---------|-----|
 | 1 | 12, 1, 2, 11 | 26 |
 | 2 | 3, 4, 9, 10 | 26 |
-| 3 | 5, 6, 7, 8 | 26 |`,
+| 3 | 5, 6, 7, 8 | 26 |
+
+`,
 
   hints: [
     'What is the total sum of numbers 1–12? Divide by 3 to get the target per piece.',

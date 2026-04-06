@@ -32,7 +32,9 @@ Pirates prioritize: (1) stay alive, (2) maximize gold, (3) fewer pirates on the 
 | 4 | 0 |
 | 3 | 1 |
 | 2 | 0 |
-| 1 | 1 |`,
+| 1 | 1 |
+
+`,
 };
 
 export default fc;
