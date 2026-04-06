@@ -4,15 +4,18 @@ import { useState, useCallback, useMemo } from 'react';
 import {
   ChevronLeft, CheckCircle2, RotateCcw, Brain, Sparkles,
   ChevronRight, CalendarClock, Star, BookOpen, LayoutList,
+  FolderOpen, Trash2, Pencil,
 } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { useFlashcards, type FlashcardFilter } from '@/hooks/useFlashcards';
 import { useStreak } from '@/hooks/useStreak';
+import { useCustomSets } from '@/hooks/useCustomSets';
 import { flashcardsById, allFlashcards } from '@/data/flashcards';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import FilterBar from '@/components/flashcards/FilterBar';
 import DeckProgress from '@/components/flashcards/DeckProgress';
 import RatingButtons from '@/components/flashcards/RatingButtons';
+import AddToSetButton from '@/components/flashcards/AddToSetButton';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
 import { problemsById, SECTIONS } from '@/data/problems';
 import type { ReviewGrade, Flashcard } from '@/lib/types';
@@ -27,7 +30,7 @@ function cardTitle(card: Flashcard): string {
   return card.front.replace(/\*\*/g, '').split('\n')[0].slice(0, 72);
 }
 
-type BrowseTab = 'all' | 'sections';
+type BrowseTab = 'all' | 'sections' | 'sets';
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function FlashcardsPage() {
@@ -36,6 +39,7 @@ export default function FlashcardsPage() {
     newIntroducedToday, newCardsPerDay, masteredCount, sm2Cards,
   } = useProgress();
   const { recordActivity } = useStreak();
+  const { sets, createSet, renameSet, deleteSet, addCardToSet, removeCardFromSet, isCardInSet } = useCustomSets();
 
   const [filter, setFilter]       = useState<FlashcardFilter>({ type: 'all', dueOnly: false });
   const [browseTab, setBrowseTab] = useState<BrowseTab>('all');
@@ -151,6 +155,15 @@ export default function FlashcardsPage() {
             )}
             <TypeBadge type={card.type} />
             <DifficultyBadge difficulty={card.difficulty} />
+            <AddToSetButton
+              cardId={card.id}
+              sets={sets}
+              isCardInSet={isCardInSet}
+              onAddToSet={addCardToSet}
+              onRemoveFromSet={removeCardFromSet}
+              onCreateSet={createSet}
+              align="left"
+            />
           </div>
 
           {/* Question */}
@@ -361,6 +374,16 @@ export default function FlashcardsPage() {
         >
           <BookOpen size={12} /> By section
         </button>
+        <button
+          onClick={() => setBrowseTab('sets')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
+            browseTab === 'sets'
+              ? 'bg-white text-[#21242c] shadow-sm'
+              : 'text-[#626975] hover:text-[#21242c]'
+          }`}
+        >
+          <FolderOpen size={12} /> My sets{sets.length > 0 ? ` (${sets.length})` : ''}
+        </button>
       </div>
 
       {/* ── All cards view ─────────────────────────────────────────────────── */}
@@ -416,6 +439,14 @@ export default function FlashcardsPage() {
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#f0f1f3] text-[#626975] shrink-0">
                         §{card.section} {SECTION_MAP[card.section] ? `· ${SECTION_MAP[card.section]}` : ''}
                       </span>
+                      <AddToSetButton
+                        cardId={card.id}
+                        sets={sets}
+                        isCardInSet={isCardInSet}
+                        onAddToSet={addCardToSet}
+                        onRemoveFromSet={removeCardFromSet}
+                        onCreateSet={createSet}
+                      />
                       <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
                     </button>
                   );
@@ -483,6 +514,233 @@ export default function FlashcardsPage() {
                     {reviewed}/{secCards.length} reviewed
                   </span>
                 </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── My sets view ───────────────────────────────────────────────── */}
+      {browseTab === 'sets' && (
+        <MySetsView
+          sets={sets}
+          createSet={createSet}
+          renameSet={renameSet}
+          deleteSet={deleteSet}
+          removeCardFromSet={removeCardFromSet}
+          sm2Cards={sm2Cards}
+          onStudy={startSession}
+        />
+      )}
+    </div>
+  );
+}
+
+/* ── My Sets sub-component ─────────────────────────────────────────────── */
+
+function MySetsView({
+  sets, createSet, renameSet, deleteSet, removeCardFromSet, sm2Cards, onStudy,
+}: {
+  sets: ReturnType<typeof import('@/hooks/useCustomSets').useCustomSets>['sets'];
+  createSet: (title: string) => string;
+  renameSet: (id: string, title: string) => void;
+  deleteSet: (id: string) => void;
+  removeCardFromSet: (setId: string, cardId: string) => void;
+  sm2Cards: Record<string, import('@/lib/types').SM2Card>;
+  onStudy: (cards: Flashcard[]) => void;
+}) {
+  const [newSetTitle, setNewSetTitle] = useState('');
+  const [renamingId, setRenamingId] = useState<string | null>(null);
+  const [renameTitle, setRenameTitle] = useState('');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+
+  function handleCreate() {
+    if (!newSetTitle.trim()) return;
+    createSet(newSetTitle.trim());
+    setNewSetTitle('');
+  }
+
+  function handleRename(id: string) {
+    if (!renameTitle.trim()) return;
+    renameSet(id, renameTitle.trim());
+    setRenamingId(null);
+    setRenameTitle('');
+  }
+
+  function handleStudySet(set: typeof sets[number]) {
+    const setCards = set.cardIds
+      .map((id) => flashcardsById[id])
+      .filter(Boolean) as Flashcard[];
+    if (setCards.length > 0) onStudy(setCards);
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Create new set */}
+      <div className="flex gap-2">
+        <input
+          value={newSetTitle}
+          onChange={(e) => setNewSetTitle(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); }}
+          placeholder="New set name..."
+          className="flex-1 text-sm border border-[#c8ccd4] rounded-lg px-3 py-2 outline-none focus:border-[var(--ka-blue)] bg-white"
+        />
+        <button
+          onClick={handleCreate}
+          disabled={!newSetTitle.trim()}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <FolderOpen size={13} /> Create
+        </button>
+      </div>
+
+      {sets.length === 0 ? (
+        <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
+          <FolderOpen size={28} className="text-[#9299a5] mx-auto mb-2" />
+          <p className="text-sm text-[#626975]">No custom sets yet.</p>
+          <p className="text-xs text-[#9299a5] mt-1">Create a set above, then add cards from the &quot;All cards&quot; tab.</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {sets.map((set) => {
+            const setCards = set.cardIds.map((id) => flashcardsById[id]).filter(Boolean) as Flashcard[];
+            const reviewedCount = setCards.filter((c) => sm2Cards[c.id] && resolveState(sm2Cards[c.id]) === 'review').length;
+            const masteredInSet = setCards.filter((c) => sm2Cards[c.id] && isMastered(sm2Cards[c.id])).length;
+            const dueInSet = setCards.filter((c) => sm2Cards[c.id] && isDue(sm2Cards[c.id])).length;
+            const isExpanded = expandedId === set.id;
+
+            return (
+              <div key={set.id} className="bg-white border border-[#e4e6ea] rounded-lg overflow-hidden">
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      {renamingId === set.id ? (
+                        <div className="flex gap-1.5 items-center">
+                          <input
+                            value={renameTitle}
+                            onChange={(e) => setRenameTitle(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') handleRename(set.id);
+                              if (e.key === 'Escape') { setRenamingId(null); setRenameTitle(''); }
+                            }}
+                            autoFocus
+                            className="flex-1 text-sm border border-[#c8ccd4] rounded px-2 py-1 outline-none focus:border-[var(--ka-blue)]"
+                          />
+                          <button onClick={() => handleRename(set.id)} className="text-xs text-[var(--ka-blue)] font-semibold">Save</button>
+                          <button onClick={() => { setRenamingId(null); setRenameTitle(''); }} className="text-xs text-[#9299a5]">Cancel</button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => setExpandedId(isExpanded ? null : set.id)}
+                            className="text-sm font-bold text-[#21242c] hover:text-[var(--ka-blue)] transition-colors truncate"
+                          >
+                            {set.title}
+                          </button>
+                          {dueInSet > 0 && (
+                            <span className="flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#e8f0fe] text-[#1865f2]">
+                              <CalendarClock size={8} /> {dueInSet} due
+                            </span>
+                          )}
+                        </div>
+                      )}
+                      <p className="text-xs text-[#9299a5] mt-0.5">
+                        {setCards.length} card{setCards.length !== 1 ? 's' : ''} · {masteredInSet} mastered · {reviewedCount} reviewed
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        onClick={() => { setRenamingId(set.id); setRenameTitle(set.title); }}
+                        className="p-1.5 rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-[#626975] hover:border-[#c8ccd4] transition-colors"
+                        title="Rename set"
+                      >
+                        <Pencil size={11} />
+                      </button>
+                      {confirmDeleteId === set.id ? (
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => { deleteSet(set.id); setConfirmDeleteId(null); }}
+                            className="text-[10px] font-semibold text-red-600 hover:text-red-700 px-1.5 py-1 rounded border border-red-200 bg-red-50"
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            onClick={() => setConfirmDeleteId(null)}
+                            className="text-[10px] text-[#9299a5] px-1.5 py-1"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setConfirmDeleteId(set.id)}
+                          className="p-1.5 rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-red-500 hover:border-red-200 transition-colors"
+                          title="Delete set"
+                        >
+                          <Trash2 size={11} />
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleStudySet(set)}
+                        disabled={setCards.length === 0}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      >
+                        <Sparkles size={11} /> Study
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Progress bar */}
+                  {setCards.length > 0 && (
+                    <div className="flex items-center gap-2 mt-3">
+                      <div className="flex-1 h-1.5 bg-[#e4e6ea] rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{
+                            width: `${Math.round((reviewedCount / setCards.length) * 100)}%`,
+                            backgroundColor: reviewedCount === setCards.length ? '#1fab54' : '#1865f2',
+                          }}
+                        />
+                      </div>
+                      <span className="text-[10px] font-semibold text-[#9299a5] shrink-0">
+                        {reviewedCount}/{setCards.length} reviewed
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Expanded card list */}
+                {isExpanded && setCards.length > 0 && (
+                  <div className="border-t border-[#e4e6ea]">
+                    {setCards.map((card) => (
+                      <div key={card.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#f7f8fa] transition-colors">
+                        <span
+                          className="w-2 h-2 rounded-full shrink-0"
+                          style={{
+                            backgroundColor: sm2Cards[card.id] && isDue(sm2Cards[card.id]) ? '#1865f2'
+                              : !sm2Cards[card.id] || resolveState(sm2Cards[card.id]) === 'new' ? '#f5a623'
+                              : '#e4e6ea',
+                          }}
+                        />
+                        <p className="flex-1 text-xs text-[#21242c] truncate">{cardTitle(card)}</p>
+                        <TypeBadge type={card.type} />
+                        <button
+                          onClick={() => removeCardFromSet(set.id, card.id)}
+                          className="text-[#9299a5] hover:text-red-500 transition-colors p-1"
+                          title="Remove from set"
+                        >
+                          <Trash2 size={10} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {isExpanded && setCards.length === 0 && (
+                  <div className="border-t border-[#e4e6ea] px-4 py-4 text-center">
+                    <p className="text-xs text-[#9299a5]">No cards in this set. Add cards from the &quot;All cards&quot; tab.</p>
+                  </div>
+                )}
               </div>
             );
           })}
