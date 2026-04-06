@@ -544,17 +544,19 @@ export default function FlashcardsPage() {
         >
           <FolderOpen size={12} /> My sets{sets.length > 0 ? ` (${sets.length})` : ''}
         </button>
-        <button
-          onClick={() => setBrowseTab('shuffle')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-            browseTab === 'shuffle'
-              ? 'bg-white text-[#21242c] shadow-sm'
-              : 'text-[#626975] hover:text-[#21242c]'
-          }`}
-        >
-          <Shuffle size={12} /> Shuffle
-        </button>
       </div>
+
+      {/* Shuffle button — standalone */}
+      <button
+        onClick={() => setBrowseTab('shuffle')}
+        className={`w-full flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
+          browseTab === 'shuffle'
+            ? 'bg-[#9059ff] text-white shadow-md shadow-[#9059ff]/25'
+            : 'bg-[#f3effe] text-[#9059ff] border-2 border-[#9059ff]/20 hover:border-[#9059ff]/40 hover:bg-[#ece5ff]'
+        }`}
+      >
+        <Shuffle size={18} /> Shuffle &amp; Study
+      </button>
 
       {/* ── All cards view ─────────────────────────────────────────────────── */}
       {browseTab === 'all' && (
