@@ -38,6 +38,7 @@ export default function FlashcardsPage() {
     setSessionComplete(false);
     setShowAnswer(false);
     setLastGrade(null);
+    setRatingDisabled(false);
   }, []);
 
   const handleRate = useCallback((grade: ReviewGrade) => {
