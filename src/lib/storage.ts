@@ -3,7 +3,7 @@
 // Used as fallback when Supabase is not configured (guest / demo mode).
 // All data is JSON-serialised under namespaced keys.
 // ─────────────────────────────────────────────
-import { SM2Card, ProblemProgress, TextSettings, DEFAULT_TEXT_SETTINGS } from './types';
+import { SM2Card, ProblemProgress, TextSettings, DEFAULT_TEXT_SETTINGS, CustomSet } from './types';
 
 const KEYS = {
   sm2:       'qr:sm2',
@@ -86,4 +86,14 @@ export function loadStudySettings(): StudySettings {
 
 export function saveStudySettings(s: StudySettings): void {
   save('qr:study', s);
+}
+
+// ── Custom flashcard sets ────────────────────
+
+export function loadCustomSets(): CustomSet[] {
+  return load<CustomSet[]>('qr:sets', []);
+}
+
+export function saveCustomSets(sets: CustomSet[]): void {
+  save('qr:sets', sets);
 }
