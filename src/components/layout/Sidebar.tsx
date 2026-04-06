@@ -154,30 +154,23 @@ export default function Sidebar() {
 
               return (
                 <div key={sec.id}>
-                  {/* Section row */}
-                  <div className="flex items-center gap-1 rounded-lg hover:bg-[#f0f1f3] transition-colors group">
-                    <Link
-                      href={`/read/chapter-2#section-${sec.id}`}
-                      className="flex items-center gap-2.5 flex-1 px-3 py-2"
-                    >
-                      <span className={clsx('w-2.5 h-2.5 rounded-full shrink-0 transition-colors', MASTERY_COLORS[level])} />
-                      <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors">
-                        {sec.title}
-                      </span>
-                      {level === 3 && <CheckCircle2 size={13} className="text-[#1fab54] shrink-0" />}
-                    </Link>
-                    {/* Expand toggle */}
-                    <button
-                      onClick={() => toggleSection(sec.id)}
-                      className="px-2 py-2 text-[#9299a5] hover:text-[#21242c] transition-colors shrink-0"
-                      aria-label={isOpen ? 'Collapse' : 'Expand'}
-                    >
-                      {isOpen
-                        ? <ChevronDown size={12} />
-                        : <ChevronRight size={12} />
-                      }
-                    </button>
-                  </div>
+                  {/* Section row — clicking anywhere expands problems */}
+                  <Link
+                    href={`/read/chapter-2#section-${sec.id}`}
+                    onClick={() => toggleSection(sec.id)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                  >
+                    <span className={clsx('w-2.5 h-2.5 rounded-full shrink-0 transition-colors', MASTERY_COLORS[level])} />
+                    <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors">
+                      {sec.title}
+                    </span>
+                    {level === 3
+                      ? <CheckCircle2 size={13} className="text-[#1fab54] shrink-0" />
+                      : isOpen
+                        ? <ChevronDown size={12} className="text-[#9299a5] shrink-0" />
+                        : <ChevronRight size={12} className="text-[#9299a5] shrink-0" />
+                    }
+                  </Link>
 
                   {/* Problem links */}
                   {isOpen && (
