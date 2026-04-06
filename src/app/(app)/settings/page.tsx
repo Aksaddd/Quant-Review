@@ -67,7 +67,7 @@ export default function SettingsPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [markedDone, setMarkedDone] = useState(false);
 
-  const dueIds = useMemo(() => new Set(dueCards.map((c) => c.cardId)), [dueCards]);
+  const dueIds = useMemo(() => new Set(reviewDue.map((c) => c.cardId)), [reviewDue]);
 
   const filteredCards = useMemo(() => {
     return Object.values(sm2Cards).filter((sm2) => {
