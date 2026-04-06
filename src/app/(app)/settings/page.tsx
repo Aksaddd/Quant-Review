@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Trash2, AlertTriangle, CalendarClock, CheckSquare, Square, Check } from 'lucide-react';
+import { Trash2, AlertTriangle, CalendarClock, CheckSquare, Square, Check, Star } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { flashcardsById } from '@/data/flashcards';
 import { problemsById } from '@/data/problems';
@@ -52,7 +52,7 @@ function cardTitle(cardId: string): string {
 }
 
 export default function SettingsPage() {
-  const { sm2Cards, markCardsDue, dueCards } = useProgress();
+  const { sm2Cards, markCardsDue, reviewDue, newCardsQueue, newCardsPerDay, setNewCardsPerDay, newIntroducedToday } = useProgress();
 
   // ── Reset state ──────────────────────────────────────────────────────────
   const [confirming, setConfirming] = useState<ResetTarget | null>(null);
@@ -110,6 +110,32 @@ export default function SettingsPage() {
         <p className="text-sm text-[#626975]">Manage your progress, review queue, and data.</p>
       </div>
 
+      {/* ── Study Settings ────────────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-2 mb-1">
+          <Star size={16} className="text-[#f5a623]" />
+          <h2 className="text-base font-bold text-[#21242c]">Daily New Cards</h2>
+        </div>
+        <p className="text-sm text-[#626975] mb-4">
+          How many new cards to introduce each day. Today: <strong className="text-[#21242c]">{newIntroducedToday}</strong> introduced, <strong className="text-[#21242c]">{newCardsQueue.length}</strong> remaining.
+        </p>
+        <div className="flex gap-2 flex-wrap mb-8">
+          {[5, 10, 15, 20].map((n) => (
+            <button
+              key={n}
+              onClick={() => setNewCardsPerDay(n)}
+              className="px-4 py-2 rounded-lg border text-sm font-semibold transition-colors"
+              style={newCardsPerDay === n
+                ? { backgroundColor: '#1865f2', borderColor: '#1865f2', color: '#fff' }
+                : { backgroundColor: '#fff', borderColor: '#e4e6ea', color: '#626975' }
+              }
+            >
+              {n} / day
+            </button>
+          ))}
+        </div>
+      </section>
+
       {/* ── Due Queue Manager ─────────────────────────────────────────────── */}
       <section>
         <div className="flex items-center gap-2 mb-1">
@@ -117,8 +143,7 @@ export default function SettingsPage() {
           <h2 className="text-base font-bold text-[#21242c]">Review Queue</h2>
         </div>
         <p className="text-sm text-[#626975] mb-4">
-          Select cards by mastery level and schedule them for your next session.
-          Currently <strong className="text-[#21242c]">{dueCards.length}</strong> card{dueCards.length !== 1 ? 's' : ''} due.
+          Manually reschedule cards. Currently <strong className="text-[#21242c]">{reviewDue.length}</strong> review{reviewDue.length !== 1 ? 's' : ''} due.
         </p>
 
         {/* Filter tabs */}

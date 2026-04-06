@@ -28,7 +28,7 @@ const MASTERY_COLORS = ['bg-[#e4e6ea]', 'bg-[#a3c4f3]', 'bg-[#1865f2]', 'bg-[#1f
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { sectionStats, totalSolved, totalProblems, dueCards, getProblemStatus } = useProgress();
+  const { sectionStats, totalSolved, totalProblems, reviewDue, newCardsQueue, getProblemStatus } = useProgress();
   const [chapOpen, setChapOpen] = useState(true);
   const [ch1Open, setCh1Open] = useState(false);
   // Track which sections are expanded to show individual problems
@@ -71,9 +71,9 @@ export default function Sidebar() {
             >
               <Icon size={16} className="shrink-0" />
               <span className="flex-1">{label}</span>
-              {label === 'Flashcards' && dueCards.length > 0 && (
+              {label === 'Flashcards' && (reviewDue.length + newCardsQueue.length) > 0 && (
                 <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[var(--ka-blue)] text-white">
-                  {dueCards.length}
+                  {reviewDue.length + newCardsQueue.length}
                 </span>
               )}
             </Link>

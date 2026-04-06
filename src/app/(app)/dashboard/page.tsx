@@ -13,7 +13,7 @@ import QuickActions from '@/components/dashboard/QuickActions';
 import FlashcardGradeHistory from '@/components/dashboard/FlashcardGradeHistory';
 
 export default function DashboardPage() {
-  const { totalSolved, totalProblems, masteredCount, dueCards, sectionStats, getProblemStatus, problemProgress } = useProgress();
+  const { totalSolved, totalProblems, masteredCount, reviewDue, newCardsQueue, sectionStats, getProblemStatus, problemProgress } = useProgress();
   const { streak } = useStreak();
 
   const recentItems = useMemo(() => {
@@ -39,7 +39,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Due cards / streak banner */}
-      <DueCardsBanner dueCount={dueCards.length} streak={streak} />
+      <DueCardsBanner dueCount={reviewDue.length} newCount={newCardsQueue.length} streak={streak} />
 
       {/* Quick actions */}
       <QuickActions />
@@ -50,7 +50,7 @@ export default function DashboardPage() {
         totalProblems={totalProblems}
         masteredCount={masteredCount}
         totalFlashcards={allFlashcards.length}
-        dueCount={dueCards.length}
+        dueCount={reviewDue.length}
         streak={streak}
       />
 

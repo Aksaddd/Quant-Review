@@ -41,14 +41,20 @@ export interface Flashcard {
 
 // ── SM-2 progress ────────────────────────────
 
+// 'new'    = never introduced to the user (not in the SRS queue)
+// 'review' = has been seen at least once, follows SM-2 schedule
+export type CardState = 'new' | 'review';
+
 export interface SM2Card {
   cardId: string;
-  repetitions: number;   // times reviewed successfully (>=3)
-  interval: number;      // days until next review
-  easinessFactor: number;// default 2.5
-  nextReview: string;    // ISO date string
-  lastReviewed?: string; // ISO date string
-  lastGrade?: ReviewGrade; // most recent rating given by the user
+  state: CardState;        // default 'new' for unseen cards
+  repetitions: number;     // times reviewed successfully
+  interval: number;        // days until next review
+  easinessFactor: number;  // default 2.5
+  nextReview: string;      // ISO date string — '9999-12-31' for new cards
+  lastReviewed?: string;   // ISO date string
+  firstReviewed?: string;  // ISO date — set when card first graduates from 'new'
+  lastGrade?: ReviewGrade;
 }
 
 // SM-2 quality grades (0–5 scale)

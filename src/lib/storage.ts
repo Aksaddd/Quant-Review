@@ -69,3 +69,21 @@ export function loadTextSettings(): TextSettings {
 export function saveTextSettings(s: TextSettings): void {
   save(KEYS.settings, s);
 }
+
+// ── Study settings ───────────────────────────
+
+export interface StudySettings {
+  newCardsPerDay: number;
+}
+
+export const DEFAULT_STUDY_SETTINGS: StudySettings = {
+  newCardsPerDay: 10,
+};
+
+export function loadStudySettings(): StudySettings {
+  return load<StudySettings>('qr:study', DEFAULT_STUDY_SETTINGS);
+}
+
+export function saveStudySettings(s: StudySettings): void {
+  save('qr:study', s);
+}

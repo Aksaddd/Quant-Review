@@ -13,8 +13,17 @@ import {
   upsertProblemProgress,
   loadSM2Cards,
   upsertSM2Card,
+  loadStudySettings,
+  saveStudySettings,
 } from '@/lib/storage';
-import { createSM2Card, applySM2, getDueCards, isMastered } from '@/lib/sm2';
+import {
+  createSM2Card,
+  applySM2,
+  getReviewDue,
+  getNewCards,
+  isMastered,
+  resolveState,
+} from '@/lib/sm2';
 import type {
   ProblemProgress,
   ProblemStatus,
@@ -22,7 +31,7 @@ import type {
   ReviewGrade,
 } from '@/lib/types';
 import { chapter2Problems, SECTIONS } from '@/data/problems';
-import { allFlashcards } from '@/data/flashcards';
+import { allFlashcards, flashcardsById } from '@/data/flashcards';
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 interface SectionStat {
@@ -40,10 +49,19 @@ interface ProgressContextValue {
   setProblemStatus: (problemId: string, status: ProblemStatus) => void;
   getProblemStatus: (problemId: string) => ProblemStatus;
 
-  /* Flashcard (SM-2) progress */
+  /* Flashcard SM-2 state */
   sm2Cards: Record<string, SM2Card>;
   reviewCard: (cardId: string, grade: ReviewGrade) => void;
   markCardsDue: (cardIds: string[]) => void;
+
+  /* Session model */
+  reviewDue: SM2Card[];          // review-state cards past their date
+  newCardsQueue: SM2Card[];      // new cards available for today's session
+  newIntroducedToday: number;    // new cards already seen today
+  newCardsPerDay: number;        // daily new-card limit
+  setNewCardsPerDay: (n: number) => void;
+
+  /** @deprecated use reviewDue */
   dueCards: SM2Card[];
 
   /* Aggregates */
@@ -57,19 +75,33 @@ interface ProgressContextValue {
 export const ProgressContext = createContext<ProgressContextValue | null>(null);
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const [problemProgress, setProblemProgress] = useState<Record<string, ProblemProgress>>({});
+  const [problemProgress, setProblemProgressState] = useState<Record<string, ProblemProgress>>({});
   const [sm2Cards, setSm2Cards] = useState<Record<string, SM2Card>>({});
+  const [newCardsPerDay, setNewCardsPerDayState] = useState(10);
 
   /* Hydrate from localStorage on mount */
   useEffect(() => {
-    setProblemProgress(loadProblemProgress());
+    setProblemProgressState(loadProblemProgress());
+
     const stored = loadSM2Cards();
-    /* Ensure every flashcard has an SM-2 record */
-    const merged: Record<string, SM2Card> = { ...stored };
+    // Ensure every flashcard has an SM-2 record; normalise legacy cards
+    const merged: Record<string, SM2Card> = {};
     allFlashcards.forEach((fc) => {
-      if (!merged[fc.id]) merged[fc.id] = createSM2Card(fc.id);
+      const existing = stored[fc.id];
+      if (existing) {
+        // Backwards-compat: add state field if missing
+        merged[fc.id] = {
+          ...existing,
+          state: existing.state ?? (existing.repetitions > 0 ? 'review' : 'new'),
+        };
+      } else {
+        merged[fc.id] = createSM2Card(fc.id);
+      }
     });
     setSm2Cards(merged);
+
+    const study = loadStudySettings();
+    setNewCardsPerDayState(study.newCardsPerDay);
   }, []);
 
   /* ── Problem status ────────────────────────────────────────────────────── */
@@ -81,7 +113,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         lastVisited: new Date().toISOString(),
       };
       upsertProblemProgress(updated);
-      setProblemProgress((prev) => ({ ...prev, [problemId]: updated }));
+      setProblemProgressState((prev) => ({ ...prev, [problemId]: updated }));
     },
     []
   );
@@ -95,9 +127,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   /* ── SM-2 review ───────────────────────────────────────────────────────── */
   const reviewCard = useCallback(
     (cardId: string, grade: ReviewGrade) => {
-      const existing =
-        sm2Cards[cardId] ?? createSM2Card(cardId);
-      const updated = applySM2(existing, grade);
+      const existing = sm2Cards[cardId] ?? createSM2Card(cardId);
+      const updated  = applySM2(existing, grade);
       upsertSM2Card(updated);
       setSm2Cards((prev) => ({ ...prev, [cardId]: updated }));
     },
@@ -111,7 +142,10 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       const updated = { ...prev };
       cardIds.forEach((id) => {
         if (updated[id]) {
-          const card = { ...updated[id], nextReview: today };
+          // Only affects review-state cards; new cards stay new until first session
+          const card = resolveState(updated[id]) === 'review'
+            ? { ...updated[id], nextReview: today }
+            : updated[id];
           updated[id] = card;
           upsertSM2Card(card);
         }
@@ -120,41 +154,54 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  /* ── Derived values ────────────────────────────────────────────────────── */
-  const dueCards = useMemo(
-    () => getDueCards(Object.values(sm2Cards)),
-    [sm2Cards]
+  /* ── Settings ──────────────────────────────────────────────────────────── */
+  const setNewCardsPerDay = useCallback((n: number) => {
+    setNewCardsPerDayState(n);
+    saveStudySettings({ newCardsPerDay: n });
+  }, []);
+
+  /* ── Session model ─────────────────────────────────────────────────────── */
+  const today = new Date().toISOString().split('T')[0];
+  const allSm2 = useMemo(() => Object.values(sm2Cards), [sm2Cards]);
+
+  // Cards due for review (already in rotation)
+  const reviewDue = useMemo(() => getReviewDue(allSm2), [allSm2]);
+
+  // How many new cards were introduced today
+  const newIntroducedToday = useMemo(
+    () => allSm2.filter((c) => c.firstReviewed === today).length,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allSm2, today]
   );
 
+  // New cards available for today (up to the daily limit)
+  const newCardsQueue = useMemo(() => {
+    const remaining = Math.max(0, newCardsPerDay - newIntroducedToday);
+    return getNewCards(allSm2).slice(0, remaining);
+  }, [allSm2, newCardsPerDay, newIntroducedToday]);
+
+  /* ── Aggregates ────────────────────────────────────────────────────────── */
   const totalSolved = useMemo(
-    () =>
-      Object.values(problemProgress).filter((p) => p.status === 'solved').length,
+    () => Object.values(problemProgress).filter((p) => p.status === 'solved').length,
     [problemProgress]
   );
 
   const masteredCount = useMemo(
-    () => Object.values(sm2Cards).filter(isMastered).length,
-    [sm2Cards]
+    () => allSm2.filter(isMastered).length,
+    [allSm2]
   );
 
   const sectionStats = useMemo<SectionStat[]>(() => {
     return SECTIONS.map(({ id, title }) => {
       const problems = chapter2Problems.filter((p) => p.section === id);
       const cards    = allFlashcards.filter((fc) => fc.section === id);
-
       return {
-        section:      id,
-        sectionTitle: title,
-        total:        problems.length,
-        solved:       problems.filter(
-          (p) => getProblemStatus(p.id) === 'solved'
-        ).length,
-        cardsReviewed: cards.filter(
-          (fc) => (sm2Cards[fc.id]?.repetitions ?? 0) > 0
-        ).length,
-        cardsMastered: cards.filter((fc) =>
-          isMastered(sm2Cards[fc.id] ?? createSM2Card(fc.id))
-        ).length,
+        section:       id,
+        sectionTitle:  title,
+        total:         problems.length,
+        solved:        problems.filter((p) => getProblemStatus(p.id) === 'solved').length,
+        cardsReviewed: cards.filter((fc) => (sm2Cards[fc.id]?.repetitions ?? 0) > 0).length,
+        cardsMastered: cards.filter((fc) => isMastered(sm2Cards[fc.id] ?? createSM2Card(fc.id))).length,
       };
     });
   }, [problemProgress, sm2Cards, getProblemStatus]);
@@ -167,23 +214,22 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       sm2Cards,
       reviewCard,
       markCardsDue,
-      dueCards,
+      reviewDue,
+      newCardsQueue,
+      newIntroducedToday,
+      newCardsPerDay,
+      setNewCardsPerDay,
+      dueCards: reviewDue, // backwards compat
       totalSolved,
       totalProblems: chapter2Problems.length,
       sectionStats,
       masteredCount,
     }),
     [
-      problemProgress,
-      setProblemStatus,
-      getProblemStatus,
-      sm2Cards,
-      reviewCard,
-      markCardsDue,
-      dueCards,
-      totalSolved,
-      sectionStats,
-      masteredCount,
+      problemProgress, setProblemStatus, getProblemStatus,
+      sm2Cards, reviewCard, markCardsDue,
+      reviewDue, newCardsQueue, newIntroducedToday, newCardsPerDay, setNewCardsPerDay,
+      totalSolved, sectionStats, masteredCount,
     ]
   );
 
