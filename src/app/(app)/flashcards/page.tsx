@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   ChevronLeft, CheckCircle2, RotateCcw, Brain, Sparkles,
   ChevronRight, CalendarClock, Star, BookOpen, LayoutList,
-  FolderOpen, Trash2, Pencil, List, X,
+  FolderOpen, Trash2, Pencil, List, X, Shuffle, Eye, EyeOff,
 } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { useFlashcards, type FlashcardFilter } from '@/hooks/useFlashcards';
@@ -39,7 +39,7 @@ function cardTitle(card: Flashcard): string {
   return card.front.replace(/\*\*/g, '').split('\n')[0].slice(0, 72);
 }
 
-type BrowseTab = 'all' | 'sections' | 'sets';
+type BrowseTab = 'all' | 'sections' | 'sets' | 'shuffle';
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function FlashcardsPage() {
@@ -534,6 +534,16 @@ export default function FlashcardsPage() {
         >
           <FolderOpen size={12} /> My sets{sets.length > 0 ? ` (${sets.length})` : ''}
         </button>
+        <button
+          onClick={() => setBrowseTab('shuffle')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
+            browseTab === 'shuffle'
+              ? 'bg-white text-[#21242c] shadow-sm'
+              : 'text-[#626975] hover:text-[#21242c]'
+          }`}
+        >
+          <Shuffle size={12} /> Shuffle
+        </button>
       </div>
 
       {/* ── All cards view ─────────────────────────────────────────────────── */}
@@ -718,6 +728,182 @@ export default function FlashcardsPage() {
           sm2Cards={sm2Cards}
           onStudy={(cards) => startSession(cards, new Set(), 'browse')}
         />
+      )}
+
+      {/* ── Shuffle view ───────────────────────────────────────────────── */}
+      {browseTab === 'shuffle' && (
+        <ShuffleView
+          allCards={cards}
+          sm2Cards={sm2Cards}
+          onStudy={(c) => startSession(c, new Set(), 'browse')}
+        />
+      )}
+    </div>
+  );
+}
+
+/* ── Shuffle helper ─────────────────────────────────────────────────────── */
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ── Shuffle View sub-component ────────────────────────────────────────── */
+
+function ShuffleView({
+  allCards, sm2Cards, onStudy,
+}: {
+  allCards: Flashcard[];
+  sm2Cards: Record<string, import('@/lib/types').SM2Card>;
+  onStudy: (cards: Flashcard[]) => void;
+}) {
+  const [omitted, setOmitted] = useState<Set<string>>(new Set());
+  const [shuffled, setShuffled] = useState<Flashcard[]>(() => shuffleArray(allCards));
+
+  // Re-shuffle when allCards change (e.g. filter change)
+  useEffect(() => {
+    setShuffled(shuffleArray(allCards));
+    setOmitted(new Set());
+  }, [allCards]);
+
+  const activeCards = useMemo(
+    () => shuffled.filter((c) => !omitted.has(c.id)),
+    [shuffled, omitted]
+  );
+
+  function reshuffle() {
+    setShuffled(shuffleArray(allCards));
+  }
+
+  function toggleOmit(cardId: string) {
+    setOmitted((prev) => {
+      const next = new Set(prev);
+      if (next.has(cardId)) next.delete(cardId);
+      else next.add(cardId);
+      return next;
+    });
+  }
+
+  function omitAll() { setOmitted(new Set(allCards.map((c) => c.id))); }
+  function includeAll() { setOmitted(new Set()); }
+
+  return (
+    <div className="space-y-4">
+      {/* Controls */}
+      <div className="bg-white border border-[#e4e6ea] rounded-lg p-4">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <p className="text-sm font-bold text-[#21242c]">
+              {activeCards.length} card{activeCards.length !== 1 ? 's' : ''} ready
+            </p>
+            <p className="text-xs text-[#9299a5]">
+              {omitted.size > 0 ? `${omitted.size} omitted · ` : ''}Shuffled from {allCards.length} total
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={reshuffle}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors"
+            >
+              <Shuffle size={12} /> Reshuffle
+            </button>
+            <button
+              onClick={() => onStudy(activeCards)}
+              disabled={activeCards.length === 0}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <Brain size={13} /> Study ({activeCards.length})
+            </button>
+          </div>
+        </div>
+
+        {/* Bulk actions */}
+        {allCards.length > 0 && (
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-[#e4e6ea]">
+            <button
+              onClick={includeAll}
+              disabled={omitted.size === 0}
+              className="text-[10px] font-semibold text-[var(--ka-blue)] hover:underline disabled:opacity-40 disabled:no-underline disabled:cursor-not-allowed"
+            >
+              Include all
+            </button>
+            <span className="text-[#e4e6ea]">|</span>
+            <button
+              onClick={omitAll}
+              disabled={omitted.size === allCards.length}
+              className="text-[10px] font-semibold text-[#626975] hover:underline disabled:opacity-40 disabled:no-underline disabled:cursor-not-allowed"
+            >
+              Omit all
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Card list (shuffled order) */}
+      {shuffled.length === 0 ? (
+        <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
+          <Shuffle size={28} className="text-[#9299a5] mx-auto mb-2" />
+          <p className="text-sm text-[#626975]">No cards match the current filter.</p>
+          <p className="text-xs text-[#9299a5] mt-1">Try changing the filter above.</p>
+        </div>
+      ) : (
+        <div className="space-y-1">
+          {shuffled.map((card, idx) => {
+            const isOmitted = omitted.has(card.id);
+            const sm2 = sm2Cards[card.id];
+            const state = sm2 ? resolveState(sm2) : 'new';
+            const due = sm2 ? isDue(sm2) : false;
+            const isNew = state === 'new';
+            const title = cardTitle(card);
+
+            return (
+              <div
+                key={card.id}
+                className={`w-full flex items-center gap-3 px-4 py-3 bg-white border rounded-lg transition-all duration-150 ${
+                  isOmitted
+                    ? 'border-[#e4e6ea] opacity-40'
+                    : 'border-[#e4e6ea] hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)]'
+                }`}
+              >
+                {/* Omit/include toggle */}
+                <button
+                  onClick={() => toggleOmit(card.id)}
+                  className={`shrink-0 transition-colors ${
+                    isOmitted
+                      ? 'text-[#9299a5] hover:text-[var(--ka-blue)]'
+                      : 'text-[var(--ka-blue)] hover:text-[#9299a5]'
+                  }`}
+                  title={isOmitted ? 'Include this card' : 'Omit this card'}
+                >
+                  {isOmitted ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+
+                <span
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: isOmitted ? '#e4e6ea' : due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
+                />
+
+                <span className="text-[10px] font-semibold text-[#9299a5] shrink-0 w-5 text-center">
+                  {idx + 1}
+                </span>
+
+                <p className={`flex-1 text-sm font-medium truncate ${isOmitted ? 'text-[#9299a5] line-through' : 'text-[#21242c]'}`}>
+                  {title}
+                </p>
+
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#f0f1f3] text-[#626975] shrink-0">
+                  §{card.section}
+                </span>
+                <TypeBadge type={card.type} />
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );
