@@ -4,7 +4,7 @@
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
-export type ProblemStatus = 'unseen' | 'reading' | 'solved';
+export type ProblemStatus = 'unseen' | 'attempted' | 'solved';
 
 export type FlashcardType = 'problem' | 'concept' | 'formula' | 'principle';
 

@@ -6,6 +6,7 @@ import { chapter2Problems, SECTIONS } from '@/data/problems';
 import ProblemBlock from '@/components/reader/ProblemBlock';
 import TableOfContents from '@/components/reader/TableOfContents';
 import TextControls from '@/components/reader/TextControls';
+import ReaderProgressPanel from '@/components/reader/ReaderProgressPanel';
 
 export default function Chapter2Page() {
   const { cssVars } = useTextSettings();
@@ -107,6 +108,9 @@ export default function Chapter2Page() {
             </section>
           ))}
         </div>
+
+        {/* Floating progress panel */}
+        <ReaderProgressPanel />
 
         {/* End of chapter */}
         <div className="mt-12 py-8 text-center bg-white border border-[#e4e6ea] rounded-lg">

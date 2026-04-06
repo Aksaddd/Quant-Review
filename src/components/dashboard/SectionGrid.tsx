@@ -95,15 +95,38 @@ export default function SectionGrid({ sections }: SectionGridProps) {
                 </p>
               </div>
 
-              {/* Right */}
-              {complete ? (
-                <CheckCircle2 size={20} className="text-[#1fab54] shrink-0" />
-              ) : (
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-sm font-bold" style={{ color }}>{pct}%</span>
-                  <ChevronRight size={15} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors" />
-                </div>
-              )}
+              {/* Right — flashcard mastery dots + chevron */}
+              <div className="flex items-center gap-3 shrink-0">
+                {sec.total > 0 && (
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 4 }).map((_, i) => {
+                        const filled = sec.cardsMastered > 0
+                          ? Math.round((sec.cardsMastered / Math.max(sec.cardsReviewed, 1)) * 4)
+                          : 0;
+                        return (
+                          <span
+                            key={i}
+                            className="w-2 h-2 rounded-full"
+                            style={{ backgroundColor: i < filled ? '#1fab54' : '#e4e6ea' }}
+                          />
+                        );
+                      })}
+                    </div>
+                    <span className="text-[9px] text-[#9299a5]">
+                      {sec.cardsMastered}/{sec.cardsReviewed > 0 ? sec.cardsReviewed : '?'} mastered
+                    </span>
+                  </div>
+                )}
+                {complete ? (
+                  <CheckCircle2 size={20} className="text-[#1fab54]" />
+                ) : (
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm font-bold" style={{ color }}>{pct}%</span>
+                    <ChevronRight size={15} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors" />
+                  </div>
+                )}
+              </div>
             </Link>
           );
         })}
