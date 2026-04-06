@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   ChevronLeft, CheckCircle2, RotateCcw, Brain, Sparkles,
   ChevronRight, CalendarClock, Star, BookOpen, LayoutList,
-  FolderOpen, Trash2, Pencil,
+  FolderOpen, Trash2, Pencil, List, X,
 } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { useFlashcards, type FlashcardFilter } from '@/hooks/useFlashcards';
@@ -66,6 +66,7 @@ export default function FlashcardsPage() {
   const [showAnswer, setShowAnswer]                 = useState(false);
   const [lastGrade, setLastGrade]                   = useState<ReviewGrade | null>(null);
   const [ratingDisabled, setRatingDisabled]         = useState(false);
+  const [spineOpen, setSpineOpen]                   = useState(true);
 
   // Today's session (review due + new queue)
   const todaySessionFlashcards = useMemo(() => {
@@ -152,6 +153,15 @@ export default function FlashcardsPage() {
       ? problem.solution + (problem.finalAnswer ? `\n\n**Answer:** ${problem.finalAnswer}` : '')
       : card.back;
 
+    // Group session cards by section for the spine
+    const spineSections = ALL_SECTIONS
+      .map((sec) => {
+        const entries: { card: Flashcard; globalIdx: number }[] = [];
+        sessionCards.forEach((c, i) => { if (c.section === sec.id) entries.push({ card: c, globalIdx: i }); });
+        return entries.length > 0 ? { ...sec, entries } : null;
+      })
+      .filter(Boolean) as { id: string; title: string; entries: { card: Flashcard; globalIdx: number }[] }[];
+
     return (
       <div className="min-h-screen bg-[#f7f8fa] flex flex-col">
         {/* Top bar */}
@@ -162,6 +172,15 @@ export default function FlashcardsPage() {
           >
             <ChevronLeft size={16} /> Back
           </button>
+          {sessionMode === 'browse' && (
+            <button
+              onClick={() => setSpineOpen((v) => !v)}
+              className="flex items-center gap-1.5 text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
+              title={spineOpen ? 'Hide card list' : 'Show card list'}
+            >
+              <List size={16} />
+            </button>
+          )}
           <div className="flex-1">
             <DeckProgress current={sessionIndex + 1} total={sessionCards.length} reviewed={sessionReviewed} />
           </div>
@@ -170,154 +189,193 @@ export default function FlashcardsPage() {
           </span>
         </div>
 
-        <div className="flex-1 flex flex-col items-center px-4 sm:px-6 py-8 max-w-3xl mx-auto w-full">
-
-          {/* Section + status pills */}
-          <div className="flex flex-wrap items-center gap-2 mb-5 self-start">
-            {/* Section — most prominent */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
-              <BookOpen size={12} className="text-[#9299a5]" />
-              <span className="text-[11px] font-bold text-[#626975]">§{card.section}</span>
-              <span className="text-[#c8ccd4]">·</span>
-              <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
-            </div>
-            {/* New / Review status */}
-            {isNewCard ? (
-              <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#fef9e7] text-[#f5a623] border border-[#fdd8a0]">
-                <Star size={9} /> NEW
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#e8f0fe] text-[#1865f2] border border-[#a8c4f8]">
-                <CalendarClock size={9} /> REVIEW
-              </span>
-            )}
-            <TypeBadge type={card.type} />
-            <DifficultyBadge difficulty={card.difficulty} />
-            <AddToSetButton
-              cardId={card.id}
-              sets={sets}
-              isCardInSet={isCardInSet}
-              onAddToSet={addCardToSet}
-              onRemoveFromSet={removeCardFromSet}
-              onCreateSet={createSet}
-              align="left"
-            />
-          </div>
-
-          {/* Question */}
-          <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6 mb-4">
-            {problem && (
-              <h2 className="text-lg font-bold text-[#21242c] mb-4 pb-3 border-b border-[#e4e6ea]">
-                {problem.title}
-              </h2>
-            )}
-            <div className="prose-reading text-[#21242c]">
-              <MarkdownRenderer content={front} />
-            </div>
-          </div>
-
-          {!showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
-            <button
-              onClick={() => setShowAnswer(true)}
-              className="w-full py-3 rounded-lg border-2 border-[var(--ka-blue)] text-[var(--ka-blue)] font-semibold text-sm hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150 mb-4"
-            >
-              Show answer{sessionMode === 'browse' ? ' (Space)' : ''}
-            </button>
-          )}
-
-          {showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
-            <div className="w-full animate-fade-up space-y-4">
-              <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#e4e6ea]">
-                  <p className="text-xs font-bold text-[#626975] uppercase tracking-wider">
-                    Answer
-                  </p>
-                  {sessionMode === 'browse' && (
-                    <button
-                      onClick={() => setShowAnswer(false)}
-                      className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
-                    >
-                      Hide answer
-                    </button>
-                  )}
-                </div>
-                <div className="prose-reading text-[#21242c]">
-                  <MarkdownRenderer content={back} />
-                </div>
-              </div>
-              {!lastGrade && (
-                <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
-                  <RatingButtons onRate={handleRate} disabled={ratingDisabled} />
-                </div>
-              )}
-            </div>
-          )}
-
-          {lastGrade && (
-            <div className={`w-full rounded-lg p-4 border-t-4 animate-fade-up flex items-center gap-4 ${
-              lastGrade === 'easy' || lastGrade === 'good' ? 'exercise-correct' : 'exercise-incorrect'
-            }`}>
-              {lastGrade === 'easy' || lastGrade === 'good' ? (
-                <>
-                  <CheckCircle2 size={28} className="text-[#1fab54] shrink-0 animate-check-pop" />
-                  <div>
-                    <p className="font-bold text-[#0d652d] text-sm">{lastGrade === 'easy' ? 'Excellent!' : 'Nice work!'}</p>
-                    <p className="text-xs text-[#1fab54]">{isNewCard ? 'Added to your review rotation.' : 'Interval extended.'}</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <RotateCcw size={28} className="text-[#f5a623] shrink-0" />
-                  <div>
-                    <p className="font-bold text-[#7a4e00] text-sm">Keep practicing!</p>
-                    <p className="text-xs text-[#9299a5]">Card will come back soon.</p>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* Browse-mode navigation */}
-          {sessionMode === 'browse' && (
-            <div className="w-full mt-6 space-y-3">
-              <div className="flex items-center justify-between gap-3">
-                <button
-                  onClick={() => navigateTo(sessionIndex - 1)}
-                  disabled={sessionIndex === 0}
-                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                >
-                  <ChevronLeft size={15} /> Previous
+        <div className="flex-1 flex overflow-hidden">
+          {/* ── Spine sidebar ──────────────────────────────────────────── */}
+          {sessionMode === 'browse' && spineOpen && (
+            <div className="w-64 shrink-0 bg-white border-r border-[#e4e6ea] overflow-y-auto hidden sm:block">
+              <div className="p-3 border-b border-[#e4e6ea] flex items-center justify-between">
+                <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">Card list</span>
+                <button onClick={() => setSpineOpen(false)} className="text-[#9299a5] hover:text-[#626975] transition-colors">
+                  <X size={13} />
                 </button>
-
-                {sessionCards.length <= 15 && (
-                  <div className="flex gap-1.5 flex-wrap justify-center">
-                    {sessionCards.map((_, i) => (
+              </div>
+              {spineSections.map((sec) => (
+                <div key={sec.id}>
+                  <div className="px-3 pt-3 pb-1 flex items-center gap-1.5">
+                    <span className="text-[9px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                    <span className="text-[9px] font-semibold text-[#626975] truncate">{sec.title}</span>
+                  </div>
+                  {sec.entries.map(({ card: sc, globalIdx }) => {
+                    const isCurrent = globalIdx === sessionIndex;
+                    const scSm2 = sm2Cards[sc.id];
+                    const scState = scSm2 ? resolveState(scSm2) : 'new';
+                    const scDue = scSm2 ? isDue(scSm2) : false;
+                    return (
                       <button
-                        key={i}
-                        onClick={() => navigateTo(i)}
-                        className={`rounded-full transition-all duration-200 ${
-                          i === sessionIndex
-                            ? 'w-2.5 h-2.5 bg-[var(--ka-blue)]'
-                            : 'w-2 h-2 bg-[#e4e6ea] hover:bg-[#c8ccd4]'
+                        key={sc.id}
+                        ref={isCurrent ? (el) => { el?.scrollIntoView({ block: 'nearest' }); } : undefined}
+                        onClick={() => navigateTo(globalIdx)}
+                        className={`w-full text-left px-3 py-1.5 flex items-center gap-2 transition-colors ${
+                          isCurrent
+                            ? 'bg-[var(--ka-blue-light,#e8f0fe)] border-l-2 border-[var(--ka-blue)]'
+                            : 'hover:bg-[#f7f8fa] border-l-2 border-transparent'
                         }`}
-                      />
-                    ))}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            backgroundColor: scDue ? '#1865f2' : scState === 'new' ? '#f5a623' : '#e4e6ea',
+                          }}
+                        />
+                        <span className={`text-[11px] truncate ${isCurrent ? 'font-bold text-[#21242c]' : 'text-[#626975]'}`}>
+                          {cardTitle(sc)}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── Main content ───────────────────────────────────────────── */}
+          <div className="flex-1 flex flex-col items-center px-4 sm:px-6 py-8 max-w-3xl mx-auto w-full overflow-y-auto">
+
+            {/* Section + status pills */}
+            <div className="flex flex-wrap items-center gap-2 mb-5 self-start">
+              {/* Section — most prominent */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
+                <BookOpen size={12} className="text-[#9299a5]" />
+                <span className="text-[11px] font-bold text-[#626975]">§{card.section}</span>
+                <span className="text-[#c8ccd4]">·</span>
+                <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
+              </div>
+              {/* New / Review status */}
+              {isNewCard ? (
+                <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#fef9e7] text-[#f5a623] border border-[#fdd8a0]">
+                  <Star size={9} /> NEW
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#e8f0fe] text-[#1865f2] border border-[#a8c4f8]">
+                  <CalendarClock size={9} /> REVIEW
+                </span>
+              )}
+              <TypeBadge type={card.type} />
+              <DifficultyBadge difficulty={card.difficulty} />
+              <AddToSetButton
+                cardId={card.id}
+                sets={sets}
+                isCardInSet={isCardInSet}
+                onAddToSet={addCardToSet}
+                onRemoveFromSet={removeCardFromSet}
+                onCreateSet={createSet}
+                align="left"
+              />
+            </div>
+
+            {/* Question */}
+            <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6 mb-4">
+              {problem && (
+                <h2 className="text-lg font-bold text-[#21242c] mb-4 pb-3 border-b border-[#e4e6ea]">
+                  {problem.title}
+                </h2>
+              )}
+              <div className="prose-reading text-[#21242c]">
+                <MarkdownRenderer content={front} />
+              </div>
+            </div>
+
+            {!showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
+              <button
+                onClick={() => setShowAnswer(true)}
+                className="w-full py-3 rounded-lg border-2 border-[var(--ka-blue)] text-[var(--ka-blue)] font-semibold text-sm hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150 mb-4"
+              >
+                Show answer{sessionMode === 'browse' ? ' (Space)' : ''}
+              </button>
+            )}
+
+            {showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
+              <div className="w-full animate-fade-up space-y-4">
+                <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6">
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#e4e6ea]">
+                    <p className="text-xs font-bold text-[#626975] uppercase tracking-wider">
+                      Answer
+                    </p>
+                    {sessionMode === 'browse' && (
+                      <button
+                        onClick={() => setShowAnswer(false)}
+                        className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                      >
+                        Hide answer
+                      </button>
+                    )}
+                  </div>
+                  <div className="prose-reading text-[#21242c]">
+                    <MarkdownRenderer content={back} />
+                  </div>
+                </div>
+                {!lastGrade && (
+                  <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
+                    <RatingButtons onRate={handleRate} disabled={ratingDisabled} />
                   </div>
                 )}
-
-                <button
-                  onClick={() => navigateTo(sessionIndex + 1)}
-                  disabled={sessionIndex === sessionCards.length - 1}
-                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                >
-                  Next <ChevronRight size={15} />
-                </button>
               </div>
-              <p className="text-[10px] text-[#c8ccd4] text-center">
-                ← → to navigate · Space to flip
-              </p>
-            </div>
-          )}
+            )}
+
+            {lastGrade && (
+              <div className={`w-full rounded-lg p-4 border-t-4 animate-fade-up flex items-center gap-4 ${
+                lastGrade === 'easy' || lastGrade === 'good' ? 'exercise-correct' : 'exercise-incorrect'
+              }`}>
+                {lastGrade === 'easy' || lastGrade === 'good' ? (
+                  <>
+                    <CheckCircle2 size={28} className="text-[#1fab54] shrink-0 animate-check-pop" />
+                    <div>
+                      <p className="font-bold text-[#0d652d] text-sm">{lastGrade === 'easy' ? 'Excellent!' : 'Nice work!'}</p>
+                      <p className="text-xs text-[#1fab54]">{isNewCard ? 'Added to your review rotation.' : 'Interval extended.'}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <RotateCcw size={28} className="text-[#f5a623] shrink-0" />
+                    <div>
+                      <p className="font-bold text-[#7a4e00] text-sm">Keep practicing!</p>
+                      <p className="text-xs text-[#9299a5]">Card will come back soon.</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Browse-mode navigation */}
+            {sessionMode === 'browse' && (
+              <div className="w-full mt-6 space-y-3">
+                <div className="flex items-center justify-between gap-3">
+                  <button
+                    onClick={() => navigateTo(sessionIndex - 1)}
+                    disabled={sessionIndex === 0}
+                    className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronLeft size={15} /> Previous
+                  </button>
+
+                  <span className="text-xs text-[#9299a5] font-medium">
+                    {sessionIndex + 1} of {sessionCards.length}
+                  </span>
+
+                  <button
+                    onClick={() => navigateTo(sessionIndex + 1)}
+                    disabled={sessionIndex === sessionCards.length - 1}
+                    className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Next <ChevronRight size={15} />
+                  </button>
+                </div>
+                <p className="text-[10px] text-[#c8ccd4] text-center">
+                  ← → to navigate · Space to flip
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -501,74 +559,87 @@ export default function FlashcardsPage() {
             <p className="text-xs font-semibold text-[#9299a5] uppercase tracking-wider mb-3">
               {cards.length} card{cards.length !== 1 ? 's' : ''}
             </p>
-            {cards.length === 0 ? (
-              <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
-                <Brain size={28} className="text-[#9299a5] mx-auto mb-2" />
-                <p className="text-sm text-[#626975]">No cards match this filter.</p>
-              </div>
-            ) : (
-              <div className="space-y-5">
-                {ALL_SECTIONS
-                  .map((sec) => {
-                    const secCards = cards.filter((c) => c.section === sec.id);
-                    if (secCards.length === 0) return null;
-                    return (
-                      <div key={sec.id}>
-                        {/* Section header */}
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
-                            <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
-                            <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
-                          </div>
-                          <button
-                            onClick={() => startSession(secCards, new Set(), 'browse')}
-                            className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
-                          >
-                            <Sparkles size={10} /> Study section
-                          </button>
-                        </div>
-                        {/* Cards in section */}
-                        <div className="space-y-1">
-                          {secCards.map((card, cardIdx) => {
-                            const sm2   = sm2Cards[card.id];
-                            const state = sm2 ? resolveState(sm2) : 'new';
-                            const due   = sm2 ? isDue(sm2) : false;
-                            const isNew = state === 'new';
-                            const title = cardTitle(card);
+            {(() => {
+              // Build ordered card list grouped by section for consistent indexing
+              const orderedCards = ALL_SECTIONS.flatMap((sec) =>
+                cards.filter((c) => c.section === sec.id)
+              );
 
-                            return (
-                              <button
-                                key={card.id}
-                                onClick={() => startSession(secCards, new Set(), 'browse', cardIdx)}
-                                className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
-                              >
-                                <span
-                                  className="w-2 h-2 rounded-full shrink-0"
-                                  style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
-                                  title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
-                                />
-                                <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
-                                <TypeBadge type={card.type} />
-                                <AddToSetButton
-                                  cardId={card.id}
-                                  sets={sets}
-                                  isCardInSet={isCardInSet}
-                                  onAddToSet={addCardToSet}
-                                  onRemoveFromSet={removeCardFromSet}
-                                  onCreateSet={createSet}
-                                />
-                                <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
-                              </button>
-                            );
-                          })}
+              if (orderedCards.length === 0) return (
+                <div className="text-center py-12 bg-white border border-[#e4e6ea] rounded-lg">
+                  <Brain size={28} className="text-[#9299a5] mx-auto mb-2" />
+                  <p className="text-sm text-[#626975]">No cards match this filter.</p>
+                </div>
+              );
+
+              let runningIdx = 0;
+              return (
+                <div className="space-y-5">
+                  {ALL_SECTIONS
+                    .map((sec) => {
+                      const secCards = orderedCards.filter((c) => c.section === sec.id);
+                      if (secCards.length === 0) return null;
+                      const sectionStartIdx = runningIdx;
+                      runningIdx += secCards.length;
+                      return (
+                        <div key={sec.id}>
+                          {/* Section header */}
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                              <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
+                              <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
+                            </div>
+                            <button
+                              onClick={() => startSession(orderedCards, new Set(), 'browse', sectionStartIdx)}
+                              className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
+                            >
+                              <Sparkles size={10} /> Study section
+                            </button>
+                          </div>
+                          {/* Cards in section */}
+                          <div className="space-y-1">
+                            {secCards.map((card, localIdx) => {
+                              const globalIdx = sectionStartIdx + localIdx;
+                              const sm2   = sm2Cards[card.id];
+                              const state = sm2 ? resolveState(sm2) : 'new';
+                              const due   = sm2 ? isDue(sm2) : false;
+                              const isNew = state === 'new';
+                              const title = cardTitle(card);
+
+                              return (
+                                <div
+                                  key={card.id}
+                                  onClick={() => startSession(orderedCards, new Set(), 'browse', globalIdx)}
+                                  className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group cursor-pointer"
+                                >
+                                  <span
+                                    className="w-2 h-2 rounded-full shrink-0"
+                                    style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
+                                    title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
+                                  />
+                                  <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
+                                  <TypeBadge type={card.type} />
+                                  <AddToSetButton
+                                    cardId={card.id}
+                                    sets={sets}
+                                    isCardInSet={isCardInSet}
+                                    onAddToSet={addCardToSet}
+                                    onRemoveFromSet={removeCardFromSet}
+                                    onCreateSet={createSet}
+                                  />
+                                  <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
-                  .filter(Boolean)}
-              </div>
-            )}
+                      );
+                    })
+                    .filter(Boolean)}
+                </div>
+              );
+            })()}
           </div>
         </>
       )}
