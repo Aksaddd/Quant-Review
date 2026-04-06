@@ -50,15 +50,17 @@ export interface SM2Card {
   lastReviewed?: string; // ISO date string
 }
 
-// SM-2 quality grades shown to the user
-export type ReviewGrade = 'again' | 'hard' | 'good' | 'easy';
+// SM-2 quality grades (0–5 scale)
+// 0-2 = failed recall (card resets), 3-5 = successful recall
+export type ReviewGrade = 'blackout' | 'again' | 'hard' | 'good' | 'easy';
 
 // Map user-visible grades to SM-2 quality scores (0–5)
 export const GRADE_QUALITY: Record<ReviewGrade, number> = {
-  again: 1,
-  hard:  3,
-  good:  4,
-  easy:  5,
+  blackout: 0,  // Complete blank — no memory at all
+  again:    1,  // Wrong answer, but recognised it after seeing solution
+  hard:     2,  // Got it, but with major difficulty / needed hints
+  good:     4,  // Got it after some thought
+  easy:     5,  // Instant, confident recall
 };
 
 // ── User progress ────────────────────────────
