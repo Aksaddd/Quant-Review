@@ -192,7 +192,7 @@ export default function FlashcardsPage() {
         <div className="flex-1 flex overflow-hidden">
           {/* ── Spine sidebar ──────────────────────────────────────────── */}
           {sessionMode === 'browse' && spineOpen && (
-            <div className="w-64 shrink-0 bg-white border-r border-[#e4e6ea] overflow-y-auto hidden sm:block">
+            <div data-spine className="w-64 shrink-0 bg-white border-r border-[#e4e6ea] overflow-y-auto hidden sm:block">
               <div className="p-3 border-b border-[#e4e6ea] flex items-center justify-between">
                 <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">Card list</span>
                 <button onClick={() => setSpineOpen(false)} className="text-[#9299a5] hover:text-[#626975] transition-colors">
@@ -213,7 +213,17 @@ export default function FlashcardsPage() {
                     return (
                       <button
                         key={sc.id}
-                        ref={isCurrent ? (el) => { el?.scrollIntoView({ block: 'nearest' }); } : undefined}
+                        ref={isCurrent ? (el) => {
+                          if (!el) return;
+                          const container = el.closest('[data-spine]');
+                          if (!container) return;
+                          const elTop = el.offsetTop;
+                          const elH = el.offsetHeight;
+                          const cTop = container.scrollTop;
+                          const cH = container.clientHeight;
+                          if (elTop < cTop) container.scrollTop = elTop;
+                          else if (elTop + elH > cTop + cH) container.scrollTop = elTop + elH - cH;
+                        } : undefined}
                         onClick={() => navigateTo(globalIdx)}
                         className={`w-full text-left px-3 py-1.5 flex items-center gap-2 transition-colors ${
                           isCurrent
