@@ -26,9 +26,10 @@ export default function TextControls() {
       <button
         onClick={() => setOpen(true)}
         title="Reading settings"
-        className="p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--surface-3)] transition-colors"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] bg-white text-[#626975] text-xs font-semibold hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors"
       >
-        <Settings2 size={16} />
+        <Settings2 size={13} />
+        Reading
       </button>
 
       {/* Panel */}
