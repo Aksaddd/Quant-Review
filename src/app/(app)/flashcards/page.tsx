@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   ChevronLeft, CheckCircle2, RotateCcw, Brain, Sparkles,
   ChevronRight, CalendarClock, Star, BookOpen, LayoutList,
@@ -55,6 +55,8 @@ export default function FlashcardsPage() {
   const { cards, stats }          = useFlashcards(filter);
 
   // Session state
+  type SessionMode = 'review' | 'browse';
+  const [sessionMode, setSessionMode]               = useState<SessionMode>('review');
   const [sessionCards, setSessionCards]             = useState<Flashcard[] | null>(null);
   const [sessionNewIds, setSessionNewIds]           = useState<Set<string>>(new Set());
   const [sessionIndex, setSessionIndex]             = useState(0);
@@ -72,8 +74,9 @@ export default function FlashcardsPage() {
     return [...rev, ...nw];
   }, [reviewDue, newCardsQueue]);
 
-  const startSession = useCallback((cardList: Flashcard[], newIds: Set<string> = new Set()) => {
+  const startSession = useCallback((cardList: Flashcard[], newIds: Set<string> = new Set(), mode: SessionMode = 'review') => {
     if (cardList.length === 0) return;
+    setSessionMode(mode);
     setSessionCards(cardList);
     setSessionNewIds(newIds);
     setSessionIndex(0);
@@ -98,19 +101,45 @@ export default function FlashcardsPage() {
     recordActivity();
     setLastGrade(grade);
     setTimeout(() => {
-      const next = sessionIndex + 1;
       setSessionReviewed((r) => r + 1);
       if (wasNew) setSessionNewLearned((n) => n + 1);
-      if (next >= sessionCards.length) {
-        setSessionComplete(true);
-      } else {
-        setSessionIndex(next);
-        setShowAnswer(false);
-        setLastGrade(null);
+      if (sessionMode === 'browse') {
+        // Stay on current card — user navigates freely
         setRatingDisabled(false);
+      } else {
+        const next = sessionIndex + 1;
+        if (next >= sessionCards.length) {
+          setSessionComplete(true);
+        } else {
+          setSessionIndex(next);
+          setShowAnswer(false);
+          setLastGrade(null);
+          setRatingDisabled(false);
+        }
       }
     }, 600);
-  }, [sessionCards, sessionIndex, sessionNewIds, ratingDisabled, reviewCard, recordActivity]);
+  }, [sessionCards, sessionIndex, sessionNewIds, sessionMode, ratingDisabled, reviewCard, recordActivity]);
+
+  const navigateTo = useCallback((index: number) => {
+    if (!sessionCards || index < 0 || index >= sessionCards.length) return;
+    setSessionIndex(index);
+    setShowAnswer(false);
+    setLastGrade(null);
+    setRatingDisabled(false);
+  }, [sessionCards]);
+
+  // Keyboard navigation for browse mode
+  useEffect(() => {
+    if (sessionMode !== 'browse' || !sessionCards || sessionComplete) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateTo(sessionIndex - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); navigateTo(sessionIndex + 1); }
+      if (e.key === ' ') { e.preventDefault(); setShowAnswer((v) => !v); }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [sessionMode, sessionCards, sessionComplete, sessionIndex, navigateTo]);
 
   // ── Session active ───────────────────────────────────────────────────────
   if (sessionCards && sessionCards.length > 0 && !sessionComplete) {
@@ -187,28 +216,40 @@ export default function FlashcardsPage() {
             </div>
           </div>
 
-          {!showAnswer && !lastGrade && (
+          {!showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
             <button
               onClick={() => setShowAnswer(true)}
               className="w-full py-3 rounded-lg border-2 border-[var(--ka-blue)] text-[var(--ka-blue)] font-semibold text-sm hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150 mb-4"
             >
-              Show answer
+              Show answer{sessionMode === 'browse' ? ' (Space)' : ''}
             </button>
           )}
 
-          {showAnswer && !lastGrade && (
+          {showAnswer && (sessionMode === 'review' ? !lastGrade : true) && (
             <div className="w-full animate-fade-up space-y-4">
               <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6">
-                <p className="text-xs font-bold text-[#626975] uppercase tracking-wider mb-4 pb-3 border-b border-[#e4e6ea]">
-                  Answer
-                </p>
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#e4e6ea]">
+                  <p className="text-xs font-bold text-[#626975] uppercase tracking-wider">
+                    Answer
+                  </p>
+                  {sessionMode === 'browse' && (
+                    <button
+                      onClick={() => setShowAnswer(false)}
+                      className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                    >
+                      Hide answer
+                    </button>
+                  )}
+                </div>
                 <div className="prose-reading text-[#21242c]">
                   <MarkdownRenderer content={back} />
                 </div>
               </div>
-              <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
-                <RatingButtons onRate={handleRate} disabled={ratingDisabled} />
-              </div>
+              {!lastGrade && (
+                <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
+                  <RatingButtons onRate={handleRate} disabled={ratingDisabled} />
+                </div>
+              )}
             </div>
           )}
 
@@ -233,6 +274,48 @@ export default function FlashcardsPage() {
                   </div>
                 </>
               )}
+            </div>
+          )}
+
+          {/* Browse-mode navigation */}
+          {sessionMode === 'browse' && (
+            <div className="w-full mt-6 space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <button
+                  onClick={() => navigateTo(sessionIndex - 1)}
+                  disabled={sessionIndex === 0}
+                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft size={15} /> Previous
+                </button>
+
+                {sessionCards.length <= 15 && (
+                  <div className="flex gap-1.5 flex-wrap justify-center">
+                    {sessionCards.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => navigateTo(i)}
+                        className={`rounded-full transition-all duration-200 ${
+                          i === sessionIndex
+                            ? 'w-2.5 h-2.5 bg-[var(--ka-blue)]'
+                            : 'w-2 h-2 bg-[#e4e6ea] hover:bg-[#c8ccd4]'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => navigateTo(sessionIndex + 1)}
+                  disabled={sessionIndex === sessionCards.length - 1}
+                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next <ChevronRight size={15} />
+                </button>
+              </div>
+              <p className="text-[10px] text-[#c8ccd4] text-center">
+                ← → to navigate · Space to flip
+              </p>
             </div>
           )}
         </div>
@@ -306,7 +389,7 @@ export default function FlashcardsPage() {
           </p>
         </div>
         <button
-          onClick={() => startSession([...allFlashcards])}
+          onClick={() => startSession([...allFlashcards], new Set(), 'browse')}
           className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#c8ccd4] text-sm font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
         >
           <Sparkles size={14} /> Study all {allFlashcards.length}
@@ -439,7 +522,7 @@ export default function FlashcardsPage() {
                             <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
                           </div>
                           <button
-                            onClick={() => startSession(secCards)}
+                            onClick={() => startSession(secCards, new Set(), 'browse')}
                             className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
                           >
                             <Sparkles size={10} /> Study section
@@ -525,7 +608,7 @@ export default function FlashcardsPage() {
                     </p>
                   </div>
                   <button
-                    onClick={() => startSession(secCards)}
+                    onClick={() => startSession(secCards, new Set(), 'browse')}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
                   >
                     <Sparkles size={11} /> Study §{sec.id}
@@ -562,7 +645,7 @@ export default function FlashcardsPage() {
           deleteSet={deleteSet}
           removeCardFromSet={removeCardFromSet}
           sm2Cards={sm2Cards}
-          onStudy={startSession}
+          onStudy={(cards) => startSession(cards, new Set(), 'browse')}
         />
       )}
     </div>
