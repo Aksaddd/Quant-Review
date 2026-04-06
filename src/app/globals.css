@@ -444,6 +444,63 @@ body {
   color: var(--rt-text) !important;
 }
 
+/* Dark & sepia themes: force all text in reading-page and reading-card to theme colour */
+[data-reading-theme="dark"] .reading-page,
+[data-reading-theme="dark"] .reading-card,
+[data-reading-theme="sepia"] .reading-page,
+[data-reading-theme="sepia"] .reading-card {
+  color: var(--rt-text);
+}
+
+[data-reading-theme="dark"] .reading-page h1,
+[data-reading-theme="dark"] .reading-page h2,
+[data-reading-theme="dark"] .reading-page h3,
+[data-reading-theme="dark"] .reading-page h4,
+[data-reading-theme="dark"] .reading-page p,
+[data-reading-theme="dark"] .reading-page span,
+[data-reading-theme="dark"] .reading-page strong,
+[data-reading-theme="dark"] .reading-page em,
+[data-reading-theme="dark"] .reading-page li,
+[data-reading-theme="dark"] .reading-page label,
+[data-reading-theme="dark"] .reading-card h1,
+[data-reading-theme="dark"] .reading-card h2,
+[data-reading-theme="dark"] .reading-card h3,
+[data-reading-theme="dark"] .reading-card h4,
+[data-reading-theme="dark"] .reading-card p,
+[data-reading-theme="dark"] .reading-card span,
+[data-reading-theme="dark"] .reading-card strong,
+[data-reading-theme="dark"] .reading-card em,
+[data-reading-theme="dark"] .reading-card li,
+[data-reading-theme="dark"] .reading-card label,
+[data-reading-theme="sepia"] .reading-page h1,
+[data-reading-theme="sepia"] .reading-page h2,
+[data-reading-theme="sepia"] .reading-page h3,
+[data-reading-theme="sepia"] .reading-page h4,
+[data-reading-theme="sepia"] .reading-page p,
+[data-reading-theme="sepia"] .reading-page span,
+[data-reading-theme="sepia"] .reading-page strong,
+[data-reading-theme="sepia"] .reading-page em,
+[data-reading-theme="sepia"] .reading-page li,
+[data-reading-theme="sepia"] .reading-page label,
+[data-reading-theme="sepia"] .reading-card h1,
+[data-reading-theme="sepia"] .reading-card h2,
+[data-reading-theme="sepia"] .reading-card h3,
+[data-reading-theme="sepia"] .reading-card h4,
+[data-reading-theme="sepia"] .reading-card p,
+[data-reading-theme="sepia"] .reading-card span,
+[data-reading-theme="sepia"] .reading-card strong,
+[data-reading-theme="sepia"] .reading-card em,
+[data-reading-theme="sepia"] .reading-card li,
+[data-reading-theme="sepia"] .reading-card label {
+  color: var(--rt-text) !important;
+}
+
+[data-reading-theme="dark"] .reading-card code,
+[data-reading-theme="sepia"] .reading-card code {
+  background-color: var(--rt-code-bg) !important;
+  color: var(--rt-text) !important;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    KATEX
 ───────────────────────────────────────────────────────────────────────────── */
