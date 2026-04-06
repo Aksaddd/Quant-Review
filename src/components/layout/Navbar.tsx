@@ -47,10 +47,10 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          <Link href="/auth/login">
+          <Link href="/login">
             <Button variant="ghost" size="sm">Sign in</Button>
           </Link>
-          <Link href="/auth/signup" className="hidden sm:block">
+          <Link href="/signup" className="hidden sm:block">
             <Button size="sm">Get started</Button>
           </Link>
           <button
@@ -78,10 +78,10 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="flex gap-2 mt-3 pt-3 border-t border-[#e4e6ea]">
-            <Link href="/auth/login" className="flex-1">
+            <Link href="/login" className="flex-1">
               <Button variant="secondary" size="sm" fullWidth>Sign in</Button>
             </Link>
-            <Link href="/auth/signup" className="flex-1">
+            <Link href="/signup" className="flex-1">
               <Button size="sm" fullWidth>Get started</Button>
             </Link>
           </div>

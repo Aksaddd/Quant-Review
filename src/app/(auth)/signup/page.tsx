@@ -193,7 +193,7 @@ export default function SignupPage() {
 
           <p className="text-center text-xs text-[var(--text-muted)] mt-5">
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-brand-400 font-medium hover:text-brand-300 transition-colors">
+            <Link href="/login" className="text-brand-400 font-medium hover:text-brand-300 transition-colors">
               Sign in
             </Link>
           </p>
