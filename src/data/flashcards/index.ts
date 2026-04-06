@@ -97,9 +97,10 @@ export const flashcardsBySection: Record<string, Flashcard[]> = allFlashcards.re
 
 /** Cards grouped by type */
 export const flashcardsByType = {
-  problem:  allFlashcards.filter((fc) => fc.type === 'problem'),
-  concept:  allFlashcards.filter((fc) => fc.type === 'concept'),
-  formula:  allFlashcards.filter((fc) => fc.type === 'formula'),
+  problem:   allFlashcards.filter((fc) => fc.type === 'problem'),
+  concept:   allFlashcards.filter((fc) => fc.type === 'concept'),
+  formula:   allFlashcards.filter((fc) => fc.type === 'formula'),
+  principle: allFlashcards.filter((fc) => fc.type === 'principle'),
 } as const;
 
 /** Cards grouped by difficulty */
