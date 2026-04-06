@@ -608,10 +608,10 @@ export default function FlashcardsPage() {
                               const title = cardTitle(card);
 
                               return (
-                                <button
+                                <div
                                   key={card.id}
                                   onClick={() => startSession(orderedCards, new Set(), 'browse', globalIdx)}
-                                  className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
+                                  className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group cursor-pointer"
                                 >
                                   <span
                                     className="w-2 h-2 rounded-full shrink-0"
@@ -629,7 +629,7 @@ export default function FlashcardsPage() {
                                     onCreateSet={createSet}
                                   />
                                   <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
-                                </button>
+                                </div>
                               );
                             })}
                           </div>
