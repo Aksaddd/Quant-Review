@@ -16,9 +16,9 @@ Define modular arithmetic and explain its key properties. How is it used to prov
 
 **Key properties:**
 - $(x_1 + x_2) \bmod y = ((x_1 \bmod y) + (x_2 \bmod y)) \bmod y$
-- If $x_1 \equiv x_2 \pmod{y}$, then $(x_1 - x_2) \bmod y = 0$
-- $10 \equiv 1 \pmod{9}$ → digit sum rule
-- $10 \equiv -1 \pmod{11}$ → alternating digit sum rule
+- If $x_1 \\equiv x_2 \pmod{y}$, then $(x_1 - x_2) \bmod y = 0$
+- $10 \\equiv 1 \pmod{9}$ → digit sum rule
+- $10 \\equiv -1 \pmod{11}$ → alternating digit sum rule
 
 **As an invariant (proving impossibility):**
 Find a quantity mod n that is **preserved** by every operation. If the target state has a different residue → impossible.
