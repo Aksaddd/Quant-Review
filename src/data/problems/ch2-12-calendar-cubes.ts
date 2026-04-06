@@ -27,6 +27,7 @@ So far, each cube uses 3 faces: {0, 1, 2}. Each has 3 remaining faces — 6 tota
 **Key insight:** **6 and 9 are visually identical when flipped upside down.** No date requires both 6 and 9 on the *same cube simultaneously*. So one face can serve double duty as **6/9**.
 
 **Final assignment:**
+
 | Cube | Faces |
 |------|-------|
 | Cube 1 | 0, 1, 2, 3, 4, 5 |

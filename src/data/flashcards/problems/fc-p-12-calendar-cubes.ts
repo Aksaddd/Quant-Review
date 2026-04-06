@@ -24,6 +24,7 @@ Design **two dice (6 faces each)** using single digits so every day 01–31 can 
 **Key insight:** 6 flipped upside down = **9**. They never appear on the same date simultaneously.
 
 **Solution:**
+
 | Die | Faces |
 |-----|-------|
 | Die 1 | 0, 1, 2, 3, 4, 5 |

@@ -34,6 +34,7 @@ The rules:
 → **Sheep is safe.**
 
 **Pattern:**
+
 | # Tigers | Outcome |
 |----------|---------|
 | Odd | Sheep is **eaten** |

@@ -38,6 +38,7 @@ Assume all pirates are perfectly rational with the following priorities (in orde
 ---
 
 **Final Answer:**
+
 | Pirate | Coins |
 |--------|-------|
 | 5 (proposer) | **98** |

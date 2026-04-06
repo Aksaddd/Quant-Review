@@ -38,6 +38,7 @@ All three are contiguous arcs on the clock face. ✓
 ---
 
 **Final Answer:**
+
 | Piece | Numbers | Sum |
 |-------|---------|-----|
 | 1 | 12, 1, 2, 11 | 26 |
