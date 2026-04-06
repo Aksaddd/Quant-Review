@@ -96,9 +96,9 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
           hints={problem.hints}
           currentStatus={status}
           onSolved={() => setProblemStatus(problem.id, 'solved')}
-          onAttempted={() => {
-            if (status === 'unseen') setProblemStatus(problem.id, 'attempted');
-          }}
+          onAttempted={() => { if (status === 'unseen') setProblemStatus(problem.id, 'attempted'); }}
+          onUndoSolved={() => setProblemStatus(problem.id, 'attempted')}
+          onReset={() => setProblemStatus(problem.id, 'unseen')}
         />
       </div>
     </div>
