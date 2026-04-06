@@ -111,6 +111,16 @@ export interface Principle {
   keyTakeaway: string;    // one-sentence summary
 }
 
+// ── Custom flashcard sets ─────────────────────
+
+export interface CustomSet {
+  id: string;
+  title: string;
+  cardIds: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ── Aggregate stats ───────────────────────────
 
 export interface SectionStats {
