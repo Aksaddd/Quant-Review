@@ -2,7 +2,7 @@ import { Flashcard } from '@/lib/types';
 
 const fc: Flashcard = {
   id: 'fc-pr-03-listen-carefully',
-  type: 'concept',
+  type: 'principle',
   chapter: 1,
   section: '1.3',
   difficulty: 'easy',

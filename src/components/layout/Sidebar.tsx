@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, BookOpen, Layers, Settings, ChevronDown, ChevronRight, CheckCircle2
+  LayoutDashboard, BookOpen, Layers, Settings, ChevronDown, ChevronRight, CheckCircle2, Lock
 } from 'lucide-react';
 import { useState } from 'react';
 import { clsx } from 'clsx';
@@ -34,6 +34,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { sectionStats, totalSolved, totalProblems, dueCards } = useProgress();
   const [chapOpen, setChapOpen] = useState(true);
+  const [ch1Open, setCh1Open] = useState(false);
 
   const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
   const isReading = pathname.startsWith('/read');
@@ -84,6 +85,36 @@ export default function Sidebar() {
 
       {/* Course section — accordion */}
       <div className="flex-1 overflow-y-auto px-3">
+        {/* Chapter 1 */}
+        <button
+          onClick={() => setCh1Open(!ch1Open)}
+          className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"
+        >
+          <BookOpen size={13} />
+          <span className="flex-1 text-left">Chapter 1 · Principles</span>
+          {ch1Open ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+        </button>
+
+        {ch1Open && (
+          <div className="mb-2 space-y-0.5">
+            {['Broad Knowledge Base', 'Practice Skills', 'Listen Carefully', 'Speak Your Mind', 'Reasonable Assumptions'].map((title, i) => (
+              <Link
+                key={i}
+                href={`/read/chapter-1#ch1-0${i + 1}-${['broad-knowledge','practice-skills','listen-carefully','speak-your-mind','reasonable-assumptions'][i]}`}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+              >
+                <span className="w-4 h-4 rounded-full bg-[var(--ka-blue)] text-white flex items-center justify-center text-[9px] font-bold shrink-0">
+                  {i + 1}
+                </span>
+                <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
+                  {title}
+                </span>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Chapter 2 */}
         <button
           onClick={() => setChapOpen(!chapOpen)}
           className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"

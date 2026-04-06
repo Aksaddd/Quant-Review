@@ -10,6 +10,7 @@ import { useProgress } from '@/components/providers/ProgressProvider';
 
 const NAV_LINKS = [
   { href: '/dashboard',      label: 'Dashboard' },
+  { href: '/read/chapter-1', label: 'Chapter 1' },
   { href: '/read/chapter-2', label: 'Chapter 2' },
   { href: '/flashcards',     label: 'Practice'  },
 ];

@@ -2,7 +2,7 @@ import { Flashcard } from '@/lib/types';
 
 const fc: Flashcard = {
   id: 'fc-pr-04-speak-your-mind',
-  type: 'concept',
+  type: 'principle',
   chapter: 1,
   section: '1.4',
   difficulty: 'easy',
