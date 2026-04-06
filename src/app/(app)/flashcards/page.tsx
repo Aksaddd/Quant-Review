@@ -22,7 +22,16 @@ import type { ReviewGrade, Flashcard } from '@/lib/types';
 import { resolveState, isMastered, isDue } from '@/lib/sm2';
 
 /* ── Helpers ─────────────────────────────────────────────────────────────── */
-const SECTION_MAP = Object.fromEntries(SECTIONS.map((s) => [s.id, s.title]));
+const CH1_SECTIONS = [
+  { id: '1.1', title: 'Build a Broad Knowledge Base' },
+  { id: '1.2', title: 'Practice Interview Skills' },
+  { id: '1.3', title: 'Listen Carefully' },
+  { id: '1.4', title: 'Speak Your Mind' },
+  { id: '1.5', title: 'Make Reasonable Assumptions' },
+] as const;
+
+const ALL_SECTIONS = [...CH1_SECTIONS, ...SECTIONS];
+const SECTION_MAP = Object.fromEntries(ALL_SECTIONS.map((s) => [s.id, s.title]));
 
 function cardTitle(card: Flashcard): string {
   const problem = card.type === 'problem' && card.problemId ? problemsById[card.problemId] : null;
@@ -415,42 +424,66 @@ export default function FlashcardsPage() {
                 <p className="text-sm text-[#626975]">No cards match this filter.</p>
               </div>
             ) : (
-              <div className="space-y-1">
-                {cards.map((card) => {
-                  const sm2   = sm2Cards[card.id];
-                  const state = sm2 ? resolveState(sm2) : 'new';
-                  const due   = sm2 ? isDue(sm2) : false;
-                  const isNew = state === 'new';
-                  const title = cardTitle(card);
+              <div className="space-y-5">
+                {ALL_SECTIONS
+                  .map((sec) => {
+                    const secCards = cards.filter((c) => c.section === sec.id);
+                    if (secCards.length === 0) return null;
+                    return (
+                      <div key={sec.id}>
+                        {/* Section header */}
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                            <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
+                            <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
+                          </div>
+                          <button
+                            onClick={() => startSession(secCards)}
+                            className="flex items-center gap-1 text-[10px] font-semibold text-[#626975] hover:text-[var(--ka-blue)] transition-colors"
+                          >
+                            <Sparkles size={10} /> Study section
+                          </button>
+                        </div>
+                        {/* Cards in section */}
+                        <div className="space-y-1">
+                          {secCards.map((card) => {
+                            const sm2   = sm2Cards[card.id];
+                            const state = sm2 ? resolveState(sm2) : 'new';
+                            const due   = sm2 ? isDue(sm2) : false;
+                            const isNew = state === 'new';
+                            const title = cardTitle(card);
 
-                  return (
-                    <button
-                      key={card.id}
-                      onClick={() => startSession([card])}
-                      className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
-                    >
-                      <span
-                        className="w-2 h-2 rounded-full shrink-0"
-                        style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
-                        title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
-                      />
-                      <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
-                      {/* Section label — prominently shown */}
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#f0f1f3] text-[#626975] shrink-0">
-                        §{card.section} {SECTION_MAP[card.section] ? `· ${SECTION_MAP[card.section]}` : ''}
-                      </span>
-                      <AddToSetButton
-                        cardId={card.id}
-                        sets={sets}
-                        isCardInSet={isCardInSet}
-                        onAddToSet={addCardToSet}
-                        onRemoveFromSet={removeCardFromSet}
-                        onCreateSet={createSet}
-                      />
-                      <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
-                    </button>
-                  );
-                })}
+                            return (
+                              <button
+                                key={card.id}
+                                onClick={() => startSession([card])}
+                                className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group"
+                              >
+                                <span
+                                  className="w-2 h-2 rounded-full shrink-0"
+                                  style={{ backgroundColor: due ? '#1865f2' : isNew ? '#f5a623' : '#e4e6ea' }}
+                                  title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
+                                />
+                                <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
+                                <TypeBadge type={card.type} />
+                                <AddToSetButton
+                                  cardId={card.id}
+                                  sets={sets}
+                                  isCardInSet={isCardInSet}
+                                  onAddToSet={addCardToSet}
+                                  onRemoveFromSet={removeCardFromSet}
+                                  onCreateSet={createSet}
+                                />
+                                <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })
+                  .filter(Boolean)}
               </div>
             )}
           </div>
