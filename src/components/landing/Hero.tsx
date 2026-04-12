@@ -49,7 +49,7 @@ export default function Hero() {
             </Button>
           </Link>
           <Link href="/read/chapter-2">
-            <Button variant="secondary" size="lg" icon={<BookOpen size={17} />}>
+            <Button variant="secondary" size="lg" iconLeft={<BookOpen size={17} />}>
               Browse Chapter 2
             </Button>
           </Link>

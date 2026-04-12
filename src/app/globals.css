@@ -80,6 +80,14 @@
   --shadow-lg: 0 8px 24px rgba(33,36,44,0.12), 0 4px 8px rgba(33,36,44,0.06);
   --shadow-brand: 0 0 0 3px rgba(24, 101, 242, 0.2);
 
+  /* Fonts — system stack (no Google Fonts fetch required) */
+  --font-inter: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-lora:  'Iowan Old Style', 'Palatino Linotype', Palatino,
+                'Book Antiqua', Georgia, 'Times New Roman', Times, serif;
+  --font-mono:  ui-monospace, 'SF Mono', Menlo, Monaco, Consolas,
+                'Liberation Mono', 'Courier New', monospace;
+
   /* Reading mode */
   --reading-bg:             #ffffff;
   --reading-text:           #21242c;

@@ -1,29 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Lora, JetBrains_Mono } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 /* ── Fonts ──────────────────────────────────────────────────────────────── */
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const lora = Lora({
-  subsets: ['latin'],
-  variable: '--font-lora',
-  display: 'swap',
-  style: ['normal', 'italic'],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
-
-/* ── Metadata ────────────────────────────────────────────────────────────── */
+/* System font stack — zero network fetch, works offline / on restricted
+   networks (school, corporate, VPN). macOS renders with SF Pro / SF Mono
+   automatically. The CSS variables --font-inter / --font-lora / --font-mono
+   are declared in globals.css so the existing Tailwind + component styles
+   keep working unchanged. */
 export const metadata: Metadata = {
   title: {
     default: 'Quant Review — Master the Interview',
@@ -64,7 +48,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${lora.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body className="bg-[var(--surface-0)] text-[var(--text-primary)] antialiased">

@@ -25,7 +25,7 @@ export function useFlashcards(filter: FlashcardFilter = {}) {
       cards = cards.filter((c) => c.difficulty === filter.difficulty);
     }
     if (filter.dueOnly) {
-      const dueIds = new Set(dueCards.map((c) => c.id));
+      const dueIds = new Set(dueCards.map((c) => c.cardId));
       cards = cards.filter((c) => dueIds.has(c.id));
     }
 
