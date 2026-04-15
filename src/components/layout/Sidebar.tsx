@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { clsx } from 'clsx';
 import { useProgress } from '@/components/providers/ProgressProvider';
 import { SECTIONS, problemsBySection } from '@/data/problems';
+import { textbookChapters } from '@/data/chapters';
 
 const TOP_NAV = [
   { href: '/dashboard',  label: 'Dashboard', icon: LayoutDashboard },
@@ -31,6 +32,8 @@ export default function Sidebar() {
   const { sectionStats, totalSolved, totalProblems, reviewDue, newCardsQueue, getProblemStatus } = useProgress();
   const [chapOpen, setChapOpen] = useState(true);
   const [ch1Open, setCh1Open] = useState(false);
+  // Track which textbook chapter accordions (3–7) are expanded
+  const [openChapters, setOpenChapters] = useState<Record<number, boolean>>({});
   // Track which sections are expanded to show individual problems
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
@@ -38,6 +41,10 @@ export default function Sidebar() {
 
   function toggleSection(id: string) {
     setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
+  }
+
+  function toggleChapter(num: number) {
+    setOpenChapters((prev) => ({ ...prev, [num]: !prev[num] }));
   }
 
   return (
@@ -216,6 +223,49 @@ export default function Sidebar() {
             </div>
           </div>
         )}
+
+        {/* Chapters 3–7 — textbook-style chapters */}
+        {textbookChapters.map((chap) => {
+          const isOpen = !!openChapters[chap.number];
+          return (
+            <div key={chap.id}>
+              <button
+                onClick={() => toggleChapter(chap.number)}
+                className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"
+              >
+                <BookOpen size={13} />
+                <span className="flex-1 text-left truncate">
+                  Chapter {chap.number} · {chap.title.length > 22 ? chap.title.slice(0, 22) + '…' : chap.title}
+                </span>
+                {isOpen ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+              </button>
+
+              {isOpen && (
+                <div className="mb-2 space-y-0.5">
+                  {chap.sections.map((sec) => (
+                    <Link
+                      key={sec.id}
+                      href={`/read/chapter-${chap.number}#section-${sec.id}`}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                    >
+                      <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
+                        §{sec.id}
+                      </span>
+                      <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
+                        {sec.title}
+                      </span>
+                      {sec.problemCount > 0 && (
+                        <span className="text-[10px] font-semibold text-[#9299a5] shrink-0">
+                          {sec.problemCount}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Bottom — settings */}

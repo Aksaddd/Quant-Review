@@ -8,6 +8,7 @@ import { chapter2Problems } from '@/data/problems';
 import StatsOverview from '@/components/dashboard/StatsOverview';
 import DueCardsBanner from '@/components/dashboard/DueCardsBanner';
 import SectionGrid from '@/components/dashboard/SectionGrid';
+import ChapterList from '@/components/dashboard/ChapterList';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import QuickActions from '@/components/dashboard/QuickActions';
 import FlashcardGradeHistory from '@/components/dashboard/FlashcardGradeHistory';
@@ -56,6 +57,9 @@ export default function DashboardPage() {
 
       {/* Course units */}
       <SectionGrid sections={sectionStats} />
+
+      {/* Textbook reference chapters 3–7 */}
+      <ChapterList />
 
       {/* Recent activity */}
       {recentItems.length > 0 && <RecentActivity items={recentItems} />}
