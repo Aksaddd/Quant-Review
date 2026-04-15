@@ -21,6 +21,18 @@ Probability theory is the foundation of every aspect of quantitative finance and
 
 ---
 
+## Table of Contents
+
+- [4.1 Basic Probability Definitions and Set Operations](#41-basic-probability-definitions-and-set-operations)
+- [4.2 Combinatorial Analysis](#42-combinatorial-analysis)
+- [4.3 Conditional Probability and Bayes' Formula](#43-conditional-probability-and-bayes-formula)
+- [4.4 Discrete and Continuous Distributions](#44-discrete-and-continuous-distributions)
+- [4.5 Expected Value, Variance, and Covariance](#45-expected-value-variance-and-covariance)
+- [4.6 Order Statistics](#46-order-statistics)
+- [4.7 The Law of Large Numbers and the Central Limit Theorem](#47-the-law-of-large-numbers-and-the-central-limit-theorem)
+
+---
+
 ## 4.1 Basic Probability Definitions and Set Operations {#41}
 
 First let's begin with some basic definitions and notations used in probability. These definitions and notations may seem dry without examples—which we will present momentarily—yet they are crucial to our understanding of probability theory. In addition, it will lay a solid ground for us to systematically approach probability problems. Outcome (co): the outcome of an experiment or trial. Sample space/Probability space (Omega): the set of all possible outcomes of an experiment. 1 As I have emphasized in Chapter 3, this book does not teach probability or any other math topics due to the space limit—it is not my goal to do so, either. The book gives a summary of the frequently-tested knowledge and shows how it can be applied to a wide range of real interview problems. The knowledge used in this chapter is covered by most introductory probability books. It is always helpful to pick up one or two classic probability books in case you want to refresh your memory on some of the topics. My personal favorites are First Course in Probability by Sheldon Ross and Introduction to Probability by Dimitri P. Bertsekas and John N. Tsitsiklis.
@@ -33,7 +45,7 @@ First let's begin with some basic definitions and notations used in probability.
 
 **A union B:** outcomes in A or B (or both).
 
-**A intersect B (or AB):**ntersection A n B (or ,42?) is the set of outcomes in both A and B. Ac: The complement ofA, which is the event "not A". Mutually Exclusive: A intersect B = empty set. For mutually exclusive events: P(union E_i) = sum P(E_i). Random variable: A function that maps each outcome (co) in the sample space (Q) into the set of real numbers. Let's use the rolling of a six-sided dice to explain these definitions and notations. A roll of a dice has 6 possible outcomes (mapped to a random variable): 1, 2, 3, 4, 5, or 6. So the sample space Omega is {1,2,3,4,5,6} and the probability of each outcome is 1/6 (assuming a fair dice). We can define an event A representing the event that the outcome is an odd number A = {1, 3, 5}, then the complement of A is Ac = {2, 4, 6}. Clearly P(A)= P(l) + P(3) + P(5) = l/2. Let B be the event that the outcome is larger than 3: B = {4, 5, 6}. Then the union is A u B = {1, 3, 4, 5, 6} and the intersection is AnB = {5}. One popular random variable called indicator variable (a binary dummy variable) for event A is defined as the following: `I_A = 1` if outcome in {1,3,5}, `I_A = 0` otherwise (A^c occurs). The [0, if x￡{1, 3, 5} expected value of IA is E[IA ] = P{A). Now, time for some examples.
+**A intersect B (or AB):**ntersection A n B (or ,42?) is the set of outcomes in both A and B. Ac: The complement ofA, which is the event "not A". Mutually Exclusive: A intersect B = empty set. For mutually exclusive events: P(union E_i) = sum P(E_i). Random variable: A function that maps each outcome (co) in the sample space (Q) into the set of real numbers. Let's use the rolling of a six-sided dice to explain these definitions and notations. A roll of a dice has 6 possible outcomes (mapped to a random variable): 1, 2, 3, 4, 5, or 6. So the sample space Omega is {1,2,3,4,5,6} and the probability of each outcome is 1/6 (assuming a fair dice). We can define an event A representing the event that the outcome is an odd number A = {1, 3, 5}, then the complement of A is Ac = {2, 4, 6}. Clearly P(A)= P(l) + P(3) + P(5) = 1/2. Let B be the event that the outcome is larger than 3: B = {4, 5, 6}. Then the union is A u B = {1, 3, 4, 5, 6} and the intersection is AnB = {5}. One popular random variable called indicator variable (a binary dummy variable) for event A is defined as the following: `I_A = 1` if outcome in {1,3,5}, `I_A = 0` otherwise (A^c occurs). The [0, if x∉{1, 3, 5} expected value of IA is E[IA ] = P{A). Now, time for some examples.
 
 Coin toss game Two gamblers are playing a coin toss game. Gambler A has (n +1) fair coins; B has n fair coins. What is the probability that A will have more heads than B if both flip all their coins?2
 
@@ -42,16 +54,16 @@ Coin toss game Two gamblers are playing a coin toss game. Gambler A has (n +1) f
 > Outcomes, events, event probabilities, and surely our reasoning capabilities! The one extra coin
 > makes A different from B. If we remove a coin from A, A and B will become symmetric. Not
 > surprisingly, the symmetry will give us a lot of nice properties. So let's remove the last coin of A
-> and compare the number of heads in A9s first n coins with i?'s n coins. There are three possible
-> outcomes: ￡,:A9s n coins have more heads than B'sn coins; E2::A9s n coins have equal number of heads
-> as B9s n coins; E3::A9s n coins have fewer heads than 2?'s n coins. By symmetry, the probability
+> and compare the number of heads in A's first n coins with i?'s n coins. There are three possible
+> outcomes: ∫,:A's n coins have more heads than B'sn coins; E2::A's n coins have equal number of heads
+> as B's n coins; E3::A's n coins have fewer heads than 2?'s n coins. By symmetry, the probability
 > that A has more heads is equal to the probability that B has more heads. So we have P(E]) = P(E3).
 > Let's denoteP(E]) = P(E3) = xand P(E2) = y. Since ^ P{a>) = 1, we have 2x + y = 1. For event Ex, A
-> will always have more heads coeQ. than B no matter what A9s {n + \)th coin's side is; for event E3,
-> A will have no more heads than B no matter what A9s (n + \)th coin's side is. For event E2, A9s (n +
+> will always have more heads coeQ. than B no matter what A's {n + \)th coin's side is; for event E3,
+> A will have no more heads than B no matter what A's (n + \)th coin's side is. For event E2, A's (n +
 > l)th coin does make a difference. If it's a head, which happens with probability 0.5, it will make A
 > have more heads than B. So the (n + \)th coin increases the probability that A has more heads than B
-> by 0.5;; and the total probability that A has more heads is jc + 0.5>> = x +0.5(1-2jc) = 0.5 when A
+> by 0.5y and the total probability that A has more heads is x + 0.5y = x +0.5(1-2x) = 0.5 when A
 > has (? +1) coins. Card game A casino offers a simple card game. There are 52 cards in a deck with 4
 > cards for each jack queen king ace value 2, 3, 4, 5,6, 7,8, 9,10, J, 0, K, A. Each time the cards
 > are thoroughly shuffled (so each card has equal probability of being selected). You pick up a card
@@ -92,7 +104,7 @@ E]: Seat #1 is taken before #100; E2: Seat #100 is taken before #1. If any passe
 > remaining N-l points from 2 to N are in the clockwise semicircle starting at point 1 (That is, if
 > point
 
-is at 12:00, points 2 to N are all between 12:00 and 6:00) is \I2N~X . Similarly the probability that a clockwise semicircle starting at any point /, where ie{29-~9N} contains all the other TV -1 points is also 1/2""1. Claim: the events that all the other TV -1 points are in the clockwise semicircle starting at point i, i = l929-"9N are mutually exclusive. In other words, if we, starting at point i and proceeding clockwise along the circle, sequentially encounters points i + l, i + 2,???, N91, ???,/-1 in half a circle, then starting at any other point j9 we cannot encounter all Hint: Consider the events that starting from a pointw, you can reach all the rest of the points on the circle clockwise, n e {!,-??, N) in a semicircle. Are these events mutually exclusive?
+is at 12:∞, points 2 to N are all between 12:∞ and 6:∞) is 1/2^(N−1) . Similarly the probability that a clockwise semicircle starting at any point /, where ie{29-~9N} contains all the other TV -1 points is also 1/2""1. Claim: the events that all the other TV -1 points are in the clockwise semicircle starting at point i, i = 1,2,...,N are mutually exclusive. In other words, if we, starting at point i and proceeding clockwise along the circle, sequentially encounters points i + l, i + 2,???, N'1, ???,/-1 in half a circle, then starting at any other point j, we cannot encounter all Hint: Consider the events that starting from a pointw, you can reach all the rest of the points on the circle clockwise, n e {!,-??, N) in a semicircle. Are these events mutually exclusive?
 
 other points within a clockwise semicircle. Figure 4.1 clearly demonstrates this conclusion. If starting at point i and proceeding clockwise along the circle, we sequentially encounter points / +1, / + 2, ? ? ?, N, 1, ? ? ?, i -1 within half a circle, the clockwise arc between i -1 and i must be no less than half a circle. If we start at any other point, in order to reach all other points clockwise, the clockwise arc between i -1 and i are always included. So we cannot reach all points within a clockwise semicircle starting from any other points. Hence, all these events are mutually exclusive and we have f N f N (jEi \ = Y,P(Ei)^p\ \JE' \ = Nxl/2N-]=N/2N-] V/=i J /=i V/=i J The same argument can be extended to any arcs that have a length less than half a circle. If the ratio of the arc length to the circumference of the circle is x (x < 1 / 2), then the probability of all TV points fitting into the arc is NxxN~]. Figure 4.1 N points fall in a clockwise semicircle starting from /
 
@@ -102,7 +114,7 @@ Many problems in probability theory can be solved by simply counting the number 
 
 ? nx possible first entries, ? n2 possible second entries for each first entry, ? n3 possible third entries for each combination of first and second entries, etc. Then there are a total of nx ? n2 ? ? -nk possible outcomes. Permutation: A rearrangement of objects into distinct sequence (i.e., order matters). Property: There are different permutations of n objects, of which n} are nx\n2\...nr! alike, n2 are alike, ? ? ?, nr are alike. **Combination:** C(n,r) = n! / [(n-r)! * r!]
 
-**Binomial theorem:** `(x + y)^n = sum_{k=0}^{n} C(n,k) * x^k * y^(n-k)` Inclusion-Exclusion: P(E1 union E2) = P(E1) + P(E2) - P(E1 intersect E2)(Ei)-P(ElE2)-P(ElE2)-P(E2E2) + P(ElE2Ei) and more generally, P(E,uE2(J...(jEN) = fdP(Ei)-YdP(EiEi2) + - + (-lY+] J P(E.Ei2...Eir) + - i=\ ix<i2 ix<i2<...ir + (-l)N+'P(ElE2-EN) where ￡P(￡,.Eh ?■■Ei) has ;,</2<.../r (N>i \r J terms. Poker hands Poker is a card game in which each player gets a hand of 5 cards. There are 52 cards in a deck. Each card has a value and belongs to a suit. There are
+**Binomial theorem:** `(x + y)^n = sum_{k=0}^{n} C(n,k) * x^k * y^(n-k)` Inclusion-Exclusion: P(E1 union E2) = P(E1) + P(E2) - P(E1 intersect E2)(Ei)-P(ElE2)-P(ElE2)-P(E2E2) + P(ElE2Ei) and more generally, P(E,uE2(J...(jEN) = fdP(Ei)-YdP(EiEi2) + - + (-lY+] J P(E.Ei2...Eir) + - i=\ ix<i2 ix<i2<...ir + (-l)N+'P(ElE2-EN) where ∫P(∫,.Eh ?■■Ei) has ;,</2<.../r (N>i \r J terms. Poker hands Poker is a card game in which each player gets a hand of 5 cards. There are 52 cards in a deck. Each card has a value and belongs to a suit. There are
 
 values, jack queen king ace spade club heart diamond 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, and four suits, *,*,*, ? .
 
@@ -143,7 +155,7 @@ What are the probabilities of getting hands with four-of-a-kind (four of the fiv
 > one lock. The locksmith can give more than one key to each pirate. What is the smallest number of
 > locks needed? And how many keys must each pirate carry?7 This problem is a good example of the
 > application of combinatorial analysis in information sharing and cryptography. A general version of
-> the problem was explained in a 1979 paper "How to Share a Secret" by Adi Shamir. Let's randomly
+> the problem was explained in a 197, paper "How to Share a Secret" by Adi Shamir. Let's randomly
 > select 5 pirates from the 11-member group; there must be a lock that none of them has the key to.
 > Yet any of the other 6 pirates must have the key to this lock since any 6 pirates can open all
 > locks. In other words, we must have a "special" lock to which none of the 5 selected pirates has a
@@ -204,15 +216,15 @@ into envelopes without realizing that the letters are personalized. What is the 
 > one letter has the correct envelope and 1-P \<jEi is the probability that all letters have the wrong
 > envelopes. P\ \jEi can be calculated using the Inclusion-Exclusion Principle:
 
-It's obvious thatP(￡,)= -, Vi = 1,—,5. So ￡/>(￡,) = 1.
+It's obvious thatP(∫,)= -, Vi = 1,—,5. So ∫/>(∫,) = 1.
 
 ,=i P(Ei E.t) is the event that both letter /, and letter i2 have the correct envelope. The probability that /, has the correct envelope is 1/5; Conditioned on that /, has the correct envelope, the probability that i2 has the correct envelope is 1/4 (there are only 4
 
-C5-2V envelopes left). So />(￡,.E,) = - x ■ - v }'
+C5-2V envelopes left). So />(∫,.E,) = - x ■ - v }'
 
 5-1 5! There are , 2 5^ 5! 2!(5-2)! members of P{EjEi) in ^P{EtEh), so we have 'l<'2 (5-2)! 5!
 
-x- — Yp(e,e,) = fa '' - 5! 2!(5-2)! 2! Similarly we have Y,P{EiE,Eh) =^, J) ^WW = 7r and P(E,E2-E5)=5] 3? rr> . ?^' ;, <;2<;3<;4
+x- — Yp(e,e,) = fa '' - 5! 2!(5-2)! 2! Similarly we have Y,P{EiE,Eh) =^, J) ^WW = π and P(E,E2-E5)=5] 3? rr> . ?^' ;, <;2<;3<;4
 
 Hint: The complement is that at least one letter is mailed to the correct firm.
 
@@ -220,7 +232,7 @@ D 5r t
 
 1 ^^ ' 2! 3! 4! 5!
 
-/=i (5 ^ ii So the probability that all 5 letters are mailed to the wrong firms is \-P\ l^j￡; = — ? V ;=i )
+/=i (5 ^ ii So the probability that all 5 letters are mailed to the wrong firms is \-P\ l^j∫; = — ? V ;=i )
 
 Birthday problem How many people do we need in a class to make the probability that two people have the same birthday more than 1/2? (For simplicity, assume 365 days a year.)
 
@@ -256,9 +268,9 @@ a-v2)-=zf;H-v2)*= ± f-W- ± f-W *-0^ ' k=2j\0<j<"^ ' k=2j+\,0<j<?l* . . n ( ft 
 
 Many financial transactions are responses to probability adjustments based on new—and most likely incomplete—information. Conditional probability surely is one of the most popular test subjects in quantitative interviews. So in this section, we focus on basic conditional probability definitions and theorems. Conditional probabilityP(A\B): If P(B)>0, then P{A\B) = P(^ is the fraction of B outcomes that are also A outcomes. Multiplication Rule: `P(E1*...*En) = P(E1)*P(E2|E1)*...*P(En|E1,...,E_{n-1})`
 
-1' Hint: The last two digits of X only depend on the last two digits of jc.
+1' Hint: The last two digits of X only depend on the last two digits of x.
 
-**Law of Total Probability:** `P(E) = sum_i P(E|F_i)*P(F_i)` for mutually exclusive {F_i} partitioning Omega. Independent events: P(EF) = P(E)P(F) => P(EFC) = P(E)P(FC). Independence is a symmetric relation: X is independent of Y <=> Y is independent of X. P(E\F,)P(F.) **Bayes' Formula:** `P(F_j|E) = P(E|F_j)*P(F_j) / sum_i P(E|F_i)*P(F_i)`, where {F_1,...,F_n} partition Omega. As the following examples will demonstrate, not all conditional probability problems have intuitive solutions. Many demand logical analysis instead. Boys and girls Part A. A company is holding a dinner for working mothers with at least one son. Ms. Jackson, a mother with two children, is invited. What is the probability that both children are boys?
+**Law of Total Probability:** `P(E) = sum_i P(E|F_i)*P(F_i)` for mutually exclusive {F_i} partitioning Omega. Independent events: P(EF) = P(E)P(F) ⟹ P(EFC) = P(E)P(FC). Independence is a symmetric relation: X is independent of Y <⟹ Y is independent of X. P(E\F,)P(F.) **Bayes' Formula:** `P(F_j|E) = P(E|F_j)*P(F_j) / sum_i P(E|F_i)*P(F_i)`, where {F_1,...,F_n} partition Omega. As the following examples will demonstrate, not all conditional probability problems have intuitive solutions. Many demand logical analysis instead. Boys and girls Part A. A company is holding a dinner for working mothers with at least one son. Ms. Jackson, a mother with two children, is invited. What is the probability that both children are boys?
 
 > **Solution:**
 > The sample space of two children is given by n = {(ft,6),(ft,g),(g,ft),(g,g)} (e.g., (g,6) means the
@@ -286,8 +298,7 @@ P(B) P({(b9bUb9g)9(g,b)}) 3/4 3* Part B. Your new colleague, Ms. Parker is known
 > only need to look at the key information: 50% and independence. Every new-born child has equal
 > probability of being a boy or a girl regardless of the gender of any other children. So the fraction
 > of girls born is always 50% and the fractions of girls in the society will stay stable at 50%.
-> Unfair coin You are given 1000 coins. Among them, 1 coin has heads on both sides. The other 999
-> coins are fair coins. You randomly choose a coin and toss it 10 times. Each time, the coin turns up
+> Unfair coin You are given 1000 coins. Among them, 1 coin has heads on both sides. The other 99, > coins are fair coins. You randomly choose a coin and toss it 10 times. Each time, the coin turns up
 > heads. What is the probability that the coin you choose is the unfair one? This is a classic
 > conditional probability question that uses Bayes' theorem. Let A be the event that the chosen coin
 > is the unfair one, then Ac is the event that the chosen coin is a fair one. Let B be the event that
@@ -430,14 +441,14 @@ Coin toss game Two players, A and B, alternatively toss a fair coin (A tosses th
 
 > **Solution:**
 > Let P{A) be the probability that A wins; then the probability that B wins is P(B) = l-P(A). Let's
-> condition P(A) on A9s first toss, which has 1/2 probability of H (heads) and 1/2 probability of
-> T(tails). P(A) = l/2P(A | H) + \I2P{A | T) If A's first toss is T, then B essentially becomes the
+> condition P(A) on A's first toss, which has 1/2 probability of H (heads) and 1/2 probability of
+> T(tails). P(A) = l/2P(A | H) + (1/2)P{A | T) If A's first toss is T, then B essentially becomes the
 > first to toss (An H is required for the HT subsequence). So we have P{A \ T) = P{B) = 1 - P(A). If
-> A9s first toss ends in //, let's further condition on fi's first toss. B has 1/2 probability of
+> A's first toss ends in //, let's further condition on fi's first toss. B has 1/2 probability of
 > getting T, in that case A loses. For the 1/2 probability that B gets //, B essentially 17 Hint:
 > condition on the result of /Ts first toss and use symmetry.
 
-becomes the first one to toss an H. In that case, A has (l-P(A\H)) probability of winning. So P{A \H) = l/2xO + l/2(l-P(A \H)) => P(A\H) = 1/3 Combining all the available information, we have P(A) = l/2xl/3 + l/2(l-P(A))=>P(A) = 4/9. Sanity check: we can see that P(A) < 1 / 2, which is reasonable since A cannot win in his first toss, yet B has 1/4 probability to win in her first toss. Russian roulette series Let's play a traditional version of Russian roulette. A single bullet is put into a 6- chamber revolver. The barrel is randomly spun so that each chamber is equally likely to be under the hammer. Two players take turns to pull the trigger—with the gun unfortunately pointing at one's own head—without further spinning until the gun goes off and the person who gets killed loses. If you, one of the players, can choose to go first or second, how will you choose? And what is your probability of loss?
+becomes the first one to toss an H. In that case, A has (l-P(A\H)) probability of winning. So P{A \H) = l/2xO + 1/2(l-P(A \H)) ⟹ P(A\H) = 1/3 Combining all the available information, we have P(A) = l/2xl/3 + 1/2(l-P(A))=>P(A) = 4/9. Sanity check: we can see that P(A) < 1 / 2, which is reasonable since A cannot win in his first toss, yet B has 1/4 probability to win in her first toss. Russian roulette series Let's play a traditional version of Russian roulette. A single bullet is put into a 6- chamber revolver. The barrel is randomly spun so that each chamber is equally likely to be under the hammer. Two players take turns to pull the trigger—with the gun unfortunately pointing at one's own head—without further spinning until the gun goes off and the person who gets killed loses. If you, one of the players, can choose to go first or second, how will you choose? And what is your probability of loss?
 
 > **Solution:**
 > Many people have the wrong impression that the first person has higher probability of loss. After
@@ -482,7 +493,7 @@ X
 
 X
 
-" The logic becomes clearer if we use a conditional probability approach. Let's begin with any one of the four aces; it has probability 52/52 = 1 of belonging to a pile. The second ace can be any of the remaining 51 cards, among which 39 belong to a pile different from the first ace. So the probability that the second ace is not in the pile of the first ace is 39/51. Now there are 50 cards left, among which 26 belong to the other two piles. So the conditional probability that the third ace is in one of the other 2 piles given the first two aces are already in different piles is 26/50. Similarly, the conditional probability that the fourth ace is in the pile different from the first three aces given that the first three aces are in different piles is 13/49. So the probability that each pile has an ace is t
+" The logic becomes clearer if we use a conditional probability approach. Let's begin with any one of the four aces; it has probability 52/52 = 1 of belonging to a pile. The second ace can be any of the remaining 51 cards, among which 3, belong to a pile different from the first ace. So the probability that the second ace is not in the pile of the first ace is 39/51. Now there are 50 cards left, among which 26 belong to the other two piles. So the conditional probability that the third ace is in one of the other 2 piles given the first two aces are already in different piles is 26/50. Similarly, the conditional probability that the fourth ace is in the pile different from the first three aces given that the first three aces are in different piles is 13/49. So the probability that each pile has an ace is t
 
 lx — x — x— .
 
@@ -497,21 +508,21 @@ Gambler's ruin problem A gambler starts with an initial fortune of i dollars. On
 > starting from P2, we can successively evaluate P. as an expression of P}:
 
 `P_i = p*P_{i+1} + q*P_{i-1}`, giving `P_{i+1} - P_i = (q/p)*(P_i - P_{i-1})` ```
-P_i = [1 - (q/p)^i] / [1 - (q/p)^N]   if p != 1/2
+P_i = [1 - (q/p)^i] / [1 - (q/p)^N]   if p ≠ 1/2
 P_i = i/N                               if p = 1/2
 ``` Basketball scores A basketball player is taking 100 free throws. She scores one point if the ball passes through the hoop and zero point if she misses. She has scored on her first throw and missed on her second. For each of the following throw the probability of her scoring is the fraction of throws she has made so far. For example, if she has scored 23 points after the 40th throw, the probability that she will score in the 41th throw is 23/40. After 100 throws (including the first and the second), what is the probability that she scores exactly 50 baskets?18
 
 > **Solution:**
 > Let (n,k), \<k<n, be the event that the player scores k baskets after n throws and Pnk = P((n,k)).
 > The solution is surprisingly simple if we use an induction approach starting with n = 3. The third
-> throw has 1/2 probability of scoring. So we have P3l=l/2 and Pi2=\/2. For the case when ? = 4, let's
+> throw has 1/2 probability of scoring. So we have P3l=1/2 and Pi2=\/2. For the case when ? = 4, let's
 > apply the law of total probability Hint: Again, do not let the number 100 scares you. Start with
 > smallest n, solve the problem; try to find a pattern by increasing ?; and prove the pattern using
 > induction.
 
-P4jl=/>((4,l)|(3,l))xP31+/>((4,l)|(3,2))xP32=|xI + 0xI = I P4,2 = />((4,2)|(3,l))xP31+/>((4,2)|(3,2))xP32 =1x1 +1x1 = 1 P43 = P((4,3)\(3,l))xPi]+P((4,3)\(3,2))><PX2=0><^ +^ = ^ The results indicate that Pnk = , V￡= 1,2, ?■?,?-1, and give the hint that the law of n-\ total probability can be used in the induction step. Induction step: given that Pnk = , V￡= l, 2, ■■■,?-1, we need to prove ?-l P?+]Jc=- ——7 = —, V￡= l, 2,---, n. To show it, simply apply the law of total
+P4jl=/>((4,l)|(3,l))xP31+/>((4,l)|(3,2))xP32=|xI + 0xI = I P4,2 = />((4,2)|(3,l))xP31+/>((4,2)|(3,2))xP32 =1x1 +1x1 = 1 P43 = P((4,3)\(3,l))xPi]+P((4,3)\(3,2))><PX2=0><^ +^ = ^ The results indicate that Pnk = , V∫= 1,2, ?■?,?-1, and give the hint that the law of n-\ total probability can be used in the induction step. Induction step: given that Pnk = , V∫= l, 2, ■■■,?-1, we need to prove ?-l P?+]Jc=- ——7 = —, V∫= l, 2,---, n. To show it, simply apply the law of total
 
-__1 probability: Pn^k=P{miss\{n,k))Pnk + P(score\(n,k-\))Pnk_, V n)n-\ n n-\ n k-\ The equation is also applicable to the Pn+], and Pn+] w, although in these cases = 0 n k and 1- V nj Hence, Pm,0 = 1/99 = 0, respectively. So we have Pnk= , V￡= l,2,---,?-l and \/n>2. n-\ Cars on road If the probability of observing at least one car on a highway during any 20-minute time interval is 609/625, then what is the probability of observing at least one car during any 5-minute time interval? Assume that the probability of seeing a car at any moment is uniform (constant) for the entire 20 minutes.
+__1 probability: Pn^k=P{miss\{n,k))Pnk + P(score\(n,k-\))Pnk_, V n)n-\ n n-\ n k-\ The equation is also applicable to the Pn+], and Pn+] w, although in these cases = 0 n k and 1- V nj Hence, Pm,0 = 1/9, = 0, respectively. So we have Pnk= , V∫= l,2,---,?-l and \/n>2. n-\ Cars on road If the probability of observing at least one car on a highway during any 20-minute time interval is 609/625, then what is the probability of observing at least one car during any 5-minute time interval? Assume that the probability of seeing a car at any moment is uniform (constant) for the entire 20 minutes.
 
 > **Solution:**
 > We can break down the 20-minute interval into a sequence of 4 non- overlapping 5-minute intervals.
@@ -521,13 +532,13 @@ __1 probability: Pn^k=P{miss\{n,k))Pnk + P(score\(n,k-\))Pnk_, V n)n-\ n n-\ n k
 
 The probability that we do not observe any car in all four of such independent 5-minute intervals is (1 - p)4 = 1 -609/625 = 16/625, which gives p = 3/5. ## 4.4 Discrete and Continuous Distributions {#44}
 
-In this section, we review a variety of distribution functions for random variables that are widely used in quantitative modeling. Although it may not be necessary to memorize the properties of these distributions, having an intuitive understanding of the distributions and having the ability to quickly derive important properties are valuable skills in practice. As usual, let's begin with the theories: Common function of random variables Table 4.1 summarizes how the basic properties of discrete and continuous random variables are defined or calculated. These are the basics you should commit to memory. Random variable (X) Cumulative distribution function/cdf Probability mass function /pmf Probability density function /pdf Expected value/ E[X] Expected value of g(X)/E[g(X)] Variance ofXlvar(X) Standard deviation ofXIstd{X) Discrete F{a) = P{X < a} pmf: p(x) = P{X = x} x:pix)>0 2 s(x)pix) x:pix)>0 Continuous19 Fia)=[oafix)dx pdf: fix) = ±- Fix) ax P xf(x)dx J-00 r gix)fix)dx J-00 E[iX-E[X])2] = E[X2]-iE[X]f JvariX) Table 4.1 Basic properties of discrete and continuous random variables Discrete random variables Table 4.2 includes some of the most widely-used discrete distributions. Discrete uniform random variable represents the occurrence of a value between number a and b when all values in the set {a, a + l,-~, b} have equal probability. Binomial random variable represents the number of successes in a sequence of n experiments when each trial is I9 For continuous random variables, P(X = x) = 0, Vjc e (-00,00), so P{X < x} = P{X < x).
+In this section, we review a variety of distribution functions for random variables that are widely used in quantitative modeling. Although it may not be necessary to memorize the properties of these distributions, having an intuitive understanding of the distributions and having the ability to quickly derive important properties are valuable skills in practice. As usual, let's begin with the theories: Common function of random variables Table 4.1 summarizes how the basic properties of discrete and continuous random variables are defined or calculated. These are the basics you should commit to memory. Random variable (X) Cumulative distribution function/cdf Probability mass function /pmf Probability density function /pdf Expected value/ E[X] Expected value of g(X)/E[g(X)] Variance ofXlvar(X) Standard deviation ofXIstd{X) Discrete F{a) = P{X < a} pmf: p(x) = P{X = x} x:pix)>0 2 s(x)pix) x:pix)>0 Continuous1, Fia)=[oafix)dx pdf: fix) = ±- Fix) ax P xf(x)dx J-∞ r gix)fix)dx J-∞ E[iX-E[X])2] = E[X2]-iE[X]f JvariX) Table 4.1 Basic properties of discrete and continuous random variables Discrete random variables Table 4.2 includes some of the most widely-used discrete distributions. Discrete uniform random variable represents the occurrence of a value between number a and b when all values in the set {a, a + l,-~, b} have equal probability. Binomial random variable represents the number of successes in a sequence of n experiments when each trial is I, For continuous random variables, P(X = x) = 0, for all x ∈ (−∞,∞), so P{X < x} = P{X < x).
 
 independently a success with probability p. Poisson random variable represents the number of events occurring in a fixed period of time with the expected number of occurrences Xt when events occur with a known average rate X and are independent of the time since the last event. Geometric random variable represents the trial number (n) to get the first success when each trial is independently a success with probability p. Negative Binomial random variable represents the trial number to get to the r-th success when each trial is independently a success with probability/?. Name Probability mass function (pmf) E[X] var(^) Uniform P(x) =
 
 b-a + l , x = a,a + \,-,b b + a (b-a + l)2-I
 
-Binomial (ri\ yXj P(x) = \ \px(l-p)"-x, jc = 0,1,-,#i np np{\-p) Poisson P(x) = - -x,(xty x = 0,\,-
+Binomial: `P(x) = C(n,x)·pˣ·(1−p)^(n−x)`, x = 0,1,...,n | E[X] = np | Var(X) = np(1−p) Poisson: `P(x) = e^(−λ)·λˣ/x!`, x = 0,1,... | E[X] = λ | Var(X) = λ
 
 At At Geometric p(x)=(\-Py-lp,x=i,2, p \-p Negative Binomial P(x) = \ x-i\ r-\ P'Q-PY x = r,r + L r P r{\-p) Table 4.2 Probability mass function, expected value and variance of discrete random variables Continuous random variables Table 4.3 includes some of the commonly encountered continuous distributions. Uniform distribution describes a random variable uniformly distributed over the interval [a,b]. Because of the central limit theorem, normal distribution/Gaussian distribution is by far the most popular continuous distribution. Exponential distribution models the arrival time of an event if it has a constant arrival rate k. Gamma distribution with parameters (a, k) often arises, in practice, as the distribution of the amount of time one has to wait until a total of n events occur. Beta distributions are used to model events 20 Here we use the product of arrival rate k and time t to define the parameter (expected value) since it is the definition used in many Poisson process studies.
 
@@ -535,10 +546,10 @@ that are constrained within a defined interval. By adjusting the shape parameter
 
 b-a , a<x<b b + a (b-af
 
--U-fY Normal V2fl7T e 2<T , x e (-00, oo) Exponential Ae , x>0 MX MX2 -Xx Gamma Xe-AX(Xx)' —, x>0, r(a) =￡>>""' alX alX2 Beta T(a +^-x"-\l-xf-\0<x<l a ap T{a)T{P) a + p (a + p + \){a + py Table 4.3 Probability density function, expected value random variables and variance of continuous Meeting probability Two bankers each arrive at the station at some random time between 5:00 am and 6:00 am (arrival time for either banker is uniformly distributed). They stay exactly five minutes and then leave. What is the probability they will meet on a given day?
+-U-fY Normal V2fl7T e 2<T , x e (-∞, ∞) Exponential Ae , x>0 MX MX2 -Xx Gamma Xe-AX(Xx)' —, x>0, r(a) =∫>>""' alX alX2 Beta T(a +^-x"-\l-xf-\0<x<l a ap T{a)T{P) a + p (a + p + \){a + py Table 4.3 Probability density function, expected value random variables and variance of continuous Meeting probability Two bankers each arrive at the station at some random time between 5:∞ am and 6:∞ am (arrival time for either banker is uniformly distributed). They stay exactly five minutes and then leave. What is the probability they will meet on a given day?
 
 > **Solution:**
-> Assume banker^ arrives Xminutes after 5:00 am and B arrives 7minutes after 5:00 am. Xand Y are
+> Assume banker^ arrives Xminutes after 5:∞ am and B arrives 7minutes after 5:∞ am. Xand Y are
 > independent uniform distribution between 0 and 60. Since both only stay exactly five minutes, as
 > shown in Figure 4.4, A and B meet if and only if \X-Y\<5. So the probability that A and B will meet
 > is simply the area of the shadowed region divided by the area of the square (the rest of the region
@@ -552,7 +563,7 @@ Figure 4.4 Distributions of Banker As and Banker B's arrival times Probability o
 > Without loss of generality, let's assume that the length of the stick is 1. Let's also label the
 > point of the first cut as x and the second cut asjy .
 
-If x < y, then the three segments are x, y-x and 1-y. The conditions to form a triangle are mmYmm X v y-x Try x + (y-x)>l-y^>y>l/2 x + (l-y)>y-x^>y<l/2 + x (y - x) + (1 - y) > x => x < 1 / 2 The feasible area is shown in Figure 4.5. The case for x < y is the left gray triangle. Using symmetry, we can see that the case for x > y is the right gray triangle. 1/2 X Figure 4.5 Distribution of cuts X
+If x < y, then the three segments are x, y-x and 1-y. The conditions to form a triangle are mmYmm X v y-x Try x + (y-x)>l-y^>y>1/2 x + (l-y)>y-x^>y<1/2 + x (y - x) + (1 - y) > x ⟹ x < 1 / 2 The feasible area is shown in Figure 4.5. The case for x < y is the left gray triangle. Using symmetry, we can see that the case for x > y is the right gray triangle. 1/2 X Figure 4.5 Distribution of cuts X
 
 andY 22 Hint: Let the first cut point be x, the second one bey, use the figure to show the distribution ofx andy.
 
@@ -585,15 +596,15 @@ This is another example that your intuition may misguide you. You may be wonderi
 > variance, the skewness and the kurtosis. So you probably have remembered that the answers are 0, 1,
 > 0 (no skewness), and 3, respectively.
 
-_ 2 /9 Standard normal distribution has pdf f(x) = —j^e x . Using simple symmetry we yj27T have E[xn]= ￡xw-t=^2/2dx = 0 when n is odd. For n = 2, integration by parts are often used. To solve E[Xn] for any integer n, an approach using moment generating functions may be a better choice. Moment generating functions are defined as ^Vx/?(x), // x is discrete X ￡etxf(x)dx, if x is continuous Sequentially taking derivative of M(t), we get one frequently-used property of M(t): M(t) = E[etx] = M'(/) = — E[etx ] = E[XetX ] => M '(0) = E[X], dt M\t) = — E[XetX] = E[X2e'x]^M"(0) = E[X2], dt 25 The residual life is explained in Chapter 3 of "Discrete Stochastic Process" by Robert G. Gallager.
+_ 2 /9 Standard normal distribution has pdf f(x) = —j^e x . Using simple symmetry we yj2π have E[xn]= ∫xw-t=^2/2dx = 0 when n is odd. For n = 2, integration by parts are often used. To solve E[Xn] for any integer n, an approach using moment generating functions may be a better choice. Moment generating functions are defined as ^Vx/?(x), // x is discrete X ∫etxf(x)dx, if x is continuous Sequentially taking derivative of M(t), we get one frequently-used property of M(t): M(t) = E[etx] = M'(/) = — E[etx ] = E[XetX ] ⟹ M '(0) = E[X], dt M\t) = — E[XetX] = E[X2e'x]^M"(0) = E[X2], dt 25 The residual life is explained in Chapter 3 of "Discrete Stochastic Process" by Robert G. Gallager.
 
-and M"(0) = E[X"], V? > 1 in general. We can use this property to solve ^'[A'"] for X ~ Af(0,1). For standard normal distribution M(t) = E[e'x] = f etx ^=e*2'2dx = /12 f° -^=e(x-'fl2dx = /12. (-=e-{x-')2/2 is the pdf of normal distribution X ~ N(t, 1), so ￡/(*>￡: = 1). Taking derivatives, we have M'(/) = te'2'2 =>M'(0) = 0, M"(/) = e'2'2 + tV12 => M"(0) = e° = 1, M3(0 = ///2 + It/12 + tV12 = 3te'2'2 +13/12 => M3(0) = 0, and M\t) = 3e'2'2 + It2/12 + 3t2/12 + 3tV'2 =>M4(0) = 3e° = 3.
+and M"(0) = E[X"], V? > 1 in general. We can use this property to solve ^'[A'"] for X ~ Af(0,1). For standard normal distribution M(t) = E[e'x] = f etx ^=e*2'2dx = /12 f° -^=e(x-'fl2dx = /12. (-=e-{x-')2/2 is the pdf of normal distribution X ~ N(t, 1), so ∫/(*>∫: = 1). Taking derivatives, we have M'(/) = te'2'2 ⟹M'(0) = 0, M"(/) = e'2'2 + tV12 ⟹ M"(0) = e° = 1, M3(0 = ///2 + It/12 + tV12 = 3te'2'2 +13/12 ⟹ M3(0) = 0, and M\t) = 3e'2'2 + It2/12 + 3t2/12 + 3tV'2 ⟹M4(0) = 3e° = 3.
 
 ## 4.5 Expected Value, Variance, and Covariance {#45}
 
 Expected value, variance and covariance are indispensable in estimating returns and risks of any investments. Naturally, they are a popular test subject in interviews as well. The basic knowledge includes the following: If E[x,] is finite for all i = l, ???,?, then E[Xl+ — + X?] = E[Xl] + — + E[Xn].The relationship holds whether the xt 's are independent of each other or not. IfXand yare independent, then E[g(X)h(Y)] = E[g(x)]E[h(Y)]. Covariance: Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]. Cov(X,Y) Correlation: p(X,Y) = ^Var{X)Var{Y) MX and Y are independent, Cov{X, Y) = 0 and p{X, Y) = 0.26 General rules of variance and covariance: n m n m Covi^X,,ZW = Y^aJbjCoviX^ Yj) i=\ j=\ i=\ j=\ Varfcx^YVariXt +lYZ Cov{XnXj) The reverse is not true. p(X, Y) = 0 only means A'and Y are uncorrelated; they may well be dependent.
 
-Conditional expectation and variance For discrete distribution: E[g{X) \ Y = y] = ^g(x)pX{Y(x \ y) = ^g(x)p(X = x \ Y = y) X X For continuous distribution: E[g(X) \ Y = y] = T g(x)fx{Y (x \ y)dx Law of total expectation: f YaElx I Y = yMY = y\ for discrete Y y fE[X | Y = y]fY(y)dy, for continuous Y oo E[X] = E[E[X | 7]] = Connecting noodles You have 100 noodles in your soup bowl. Being blindfolded, you are told to take two ends of some noodles (each end on any noodle has the same probability of being chosen) in your bowl and connect them. You continue until there are no free ends. The number of loops formed by the noodles this way is stochastic. Calculate the expected number of circles.
+Conditional expectation and variance For discrete distribution: E[g{X) \ Y = y] = ^g(x)pX{Y(x \ y) = ^g(x)p(X = x \ Y = y) X X For continuous distribution: E[g(X) \ Y = y] = T g(x)fx{Y (x \ y)dx Law of total expectation: f YaElx I Y = yMY = y\ for discrete Y y fE[X | Y = y]fY(y)dy, for continuous Y ∞ E[X] = E[E[X | 7]] = Connecting noodles You have 100 noodles in your soup bowl. Being blindfolded, you are told to take two ends of some noodles (each end on any noodle has the same probability of being chosen) in your bowl and connect them. You continue until there are no free ends. The number of loops formed by the noodles this way is stochastic. Calculate the expected number of circles.
 
 > **Solution:**
 > Again do not be frightened by the large number 100. If you have no clue how to start, let's begin
@@ -601,9 +612,9 @@ Conditional expectation and variance For discrete distribution: E[g{X) \ Y = y] 
 > noodle), so Zs[/(1)] = 1. How about 2 noodles? Now you (4^\ 4x3 have 4 ends (2x2) and you can
 > connect any two of them. There are = = 6 \2)
 
-combinations. Among them, 2 combinations will connect both ends of the same noodle together and yield 1 circle and 1 noodle. The other 4 choices will yield a single noodle. So the expected number of circles is E[f(2)] = 216 x (1 + ￡[/(!)])+ 4 / 6 x E[f(l)] = 1 / 3 + ￡[/(!)]= 1/3 + 1. We now move on to 3 noodles with (6} 6x5 v2y = 15 choices. Among them, 3 choices
+combinations. Among them, 2 combinations will connect both ends of the same noodle together and yield 1 circle and 1 noodle. The other 4 choices will yield a single noodle. So the expected number of circles is E[f(2)] = 216 x (1 + E[/(!)])+ 4 / 6 x E[f(l)] = 1 / 3 + E[/(!)]= 1/3 + 1. We now move on to 3 noodles with (6} 6x5 v2y = 15 choices. Among them, 3 choices
 
-will yield 1 circle and 2 noodles; the other 12 choices will yield 2 noodles only, so E[fO)] = 3/15 x(l + ^[/(2)]) +12/15 x￡[/(2)]= 1/5 + E[f(2)] = 1/5 + 1/3 + 1. See the pattern? For any n noodles, we will have E[f(n)] = l + l/3 + l/5 + --- + ll{2n-1), which can be easily proved by induction. Plug 100 in, we will have the answer.
+will yield 1 circle and 2 noodles; the other 12 choices will yield 2 noodles only, so E[fO)] = 3/15 x(l + ^[/(2)]) +12/15 xE[/(2)]= 1/5 + E[f(2)] = 1/5 + 1/3 + 1. See the pattern? For any n noodles, we will have E[f(n)] = l + l/3 + l/5 + --- + ll{2n-1), which can be easily proved by induction. Plug 100 in, we will have the answer.
 
 Actually after the 2-noodle case, you probably have found the key to this question. If (ln\ you start with n noodles, among \ = n(2n-\) possible combinations, we have V 2 J Yi
 
@@ -612,7 +623,7 @@ Actually after the 2-noodle case, you probably have found the key to this questi
 > **Solution:**
 > Suppose that we short h shares of B, the variance of the portfolio return is var(r, - hrB) = a\ -
 > 2phaAaB + h2a2B The best hedge ratio should minimize var(rA-hrB). Take the first order partial
-> derivative with respect to h and set it to zero: = -2paAaB + 2ha2B - 0 => h = p—^. dh <jb To confirm
+> derivative with respect to h and set it to zero: = -2paAaB + 2ha2B - 0 ⟹ h = p—^. dh <jb To confirm
 > it's the minimum, we can also check the second-order partial derivative: — = 2a2B>0. So Indeed when
 > h = p^L, the hedge portfolio has the minimum dh aB variance. Dice game Suppose that you roll a dice.
 > For each roll, you are paid the face value. If a roll gives 4, 5 or 6, you can roll the dice again.
@@ -622,7 +633,7 @@ Actually after the 2-noodle case, you probably have found the key to this questi
 > chance to get Ye {1,2,3}, in which case the expected value is the expected face value 2, so E[X | Y
 > e {1,2,3}] = 2; you have
 
-1/2 chance to get Ye {4,5, 6}, in which case you get expected face value 5 and extra throw(s). The extra throw(s) essentially means you start the game again and have an extra expected value E[X]. So we have E[X | Y e (4,5,6)] = 5 + E[X]. Apply the law of total expectation, we have E[X] = E[E[X\ Y]] = ±x2 + ±x(5 + E[X]) => E[X] = 7.27 Card game What is the expected number of cards that need to be turned over in a regular 52-card deck in order to see the first ace?
+1/2 chance to get Ye {4,5, 6}, in which case you get expected face value 5 and extra throw(s). The extra throw(s) essentially means you start the game again and have an extra expected value E[X]. So we have E[X | Y e (4,5,6)] = 5 + E[X]. Apply the law of total expectation, we have E[X] = E[E[X\ Y]] = ±x2 + ±x(5 + E[X]) ⟹ E[X] = 7.27 Card game What is the expected number of cards that need to be turned over in a regular 52-card deck in order to see the first ace?
 
 > **Solution:**
 > There are 4 aces and 48 other cards. Let's label them as card 1,2,- -,48. Let f 1, if card i is
@@ -631,7 +642,7 @@ Actually after the 2-noodle case, you probably have found the key to this questi
 
 X = l + ^X.9 so we have E[X] = 1 + ^E[X.]. As shown in the following sequence, ;=1 /=! each card i is equally likely to be in one of the five regions separated by 4 aces: 1A2A3A4A5 So the probability that card i appears before all 4 aces is 1/5, and we have E[X{] = 1/5.
 
-Therefore, E[X] = 1 + ^￡[X;] = 1 + 48/5 = 10.6. This is just a special case for random ordering of m ordinary cards and n special cards. m Yyi The expected position of the first special card is 1 + J]E[X.] = 1 + . Sum of random variables Assume that X]9 X29 ???, and Xn are independent and identically-distributed (IID) random variables with uniform distribution between 0 and 1. What is the probability \+x2 that S =X,+X, + — + Xm <1?28 27 You will also see that the problem can be solved using Wald's equality in Chapter 5. 28 Hint: start with the simplest case where n =1, 2, and 3. Try to find a general formula and prove it using induction.
+Therefore, E[X] = 1 + ^E[X;] = 1 + 48/5 = 10.6. This is just a special case for random ordering of m ordinary cards and n special cards. m Yyi The expected position of the first special card is 1 + J]E[X.] = 1 + . Sum of random variables Assume that X]9 X2, ???, and Xn are independent and identically-distributed (IID) random variables with uniform distribution between 0 and 1. What is the probability \+x2 that S =X,+X, + — + Xm <1?28 27 You will also see that the problem can be solved using Wald's equality in Chapter 5. 28 Hint: start with the simplest case where n =1, 2, and 3. Try to find a general formula and prove it using induction.
 
 > **Solution:**
 > This problem is a rather difficult one. The general principle to start with the simplest cases and
@@ -639,14 +650,14 @@ Therefore, E[X] = 1 + ^￡[X;] = 1 + 48/5 = 10.6. This is just a special case fo
 > final answer. When n = 1, P(S^ < 1) is 1. As shown in Figure 4.6, when n = 2, the probability that
 > X}+X2<1 is just the area under Xx +X2 <1 within the square with side length 1 (a triangle). So P(S2
 > < 1) = 1/2. When n = 3, the probability becomes the tetrahedron ABCD under the plane Xx + X2 + X3 <
-> 1 within the cube with side length 1. The volume of tetrahedron ABCD is 1/6.29 So P(S3 <l) = l/6.
+> 1 within the cube with side length 1. The volume of tetrahedron ABCD is 1/6.2, So P(S3 <l) = l/6.
 > Now we can guess that the solution is \ln\. To prove it, let's again resort to induction. Assume
 > P(Sn <1) = l/n\. We need to prove that P(Sn+l<\) = l/(n + l)\. n = 2 Figure 4.6 Probability that Sn
 > ^ 1 when n = 2 or n= 3. n = 3 Here we can use probability by conditioning. Condition on the value of
 > Xn+l, we have P(Sn+]<\)= lf(Xn+])P(Sn<l-Xn+l)dXn+], where f(XH+l) is the probability density
 > function of Xn+X, so / (Xn+l) = 1. But how do we calculate P(Sn < 1 - Xn+]) ? The cases of n = 2 and
 > n - 3 have provided us with some clue. For Sn < 1 - Xn+^ instead of Sn < 1, we essentially need to
-> shrink every dimension of the ^-dimensional simplex30 from 1 to 29 You can derive it by integration:
+> shrink every dimension of the ^-dimensional simplex30 from 1 to 2, You can derive it by integration:
 > T A(z)dz = f 1 /2z2dz = 1 /6> where A(z) is the cross-sectional area. 30 An rt-Simplex is the
 > ^-dimensional analog of a triangle.
 
@@ -669,7 +680,7 @@ how many coupons (boxes) on average are needed to make such a complete set?
 types?31
 
 > **Solution:**
-> For part A, let Xi9 i = 1,2, ? ? ?, TV, be the number of additional coupons needed to obtain the
+> For part A, let Xi, i = 1,2, ? ? ?, TV, be the number of additional coupons needed to obtain the
 > /-th type after (i -1) distinct types have been collected. So the total number N of coupons needed
 > is X = X] + X2 + ? ? ? + XN = ^JXi . For any i, i -1 distinct types of coupons have already been
 > collected. It follows that a new coupon will be of a different type with probability \-(i-\)lN =
@@ -681,7 +692,7 @@ types?31
 > to collect N all distinct types is E[X] = J\E[X.]- F°r Part B, which is the expected probability (P)
 > that the /-th coupon type is not in the n coupons?
 
-For part 2?, let Y be the number of distinct types of coupons in the set of n coupons. We introduce indicator random variables l{., i = 1, 2, ? ? ?, N , where 17. = 1, if at least one coupon of the i-th type is in the set of n coupons [ I; = 0, otherwise So we have Y = 7, +12 + ? ? ? + IN = ]T 7 /=i N-l For each collected coupon, the probability that it is not the i-th coupon type is . TV Since all n coupons are independent, the probability that none of the n coupons is the i-th coupon type is P(/; = 0) = and we have ￡[/.]= P{Ii = 1) = 1 ￡&]= ￡￡[!;] = N-N\ N J ...... ^ N N-V
+For part 2?, let Y be the number of distinct types of coupons in the set of n coupons. We introduce indicator random variables l{., i = 1, 2, ? ? ?, N , where 17. = 1, if at least one coupon of the i-th type is in the set of n coupons [ I; = 0, otherwise So we have Y = 7, +12 + ? ? ? + IN = ]T 7 /=i N-l For each collected coupon, the probability that it is not the i-th coupon type is . TV Since all n coupons are independent, the probability that none of the n coupons is the i-th coupon type is P(/; = 0) = and we have E[/.]= P{Ii = 1) = 1 ∫&]= ∫E[!;] = N-N\ N J ...... ^ N N-V
 
 ;=1 A^ Joint default probability If there is a 50% probability that bond A will default next year and a 30% probability that bond B will default. What is the range of probability that at least one bond defaults and what is the range of their correlation?
 
@@ -692,22 +703,22 @@ For part 2?, let Y be the number of distinct types of coupons in the set of n co
 > only applies if P{A) +P{B)<\). For the minimum, we can assume whenever A defaults, B also defaults.
 > So the minimum probability that at least one bond defaults is 50%. To calculate the corresponding
 > correlation, let IA and IB be the indicator for the event that bond A/B defaults next year and pAB
-> be their correlation. Then we have ￡[/J= 0.5, ￡[/,] = 0.3, var(/,) = pA x(1 -pA) = 0.25, var(/,) =
+> be their correlation. Then we have E[/J= 0.5, E[/,] = 0.3, var(/,) = pA x(1 -pA) = 0.25, var(/,) =
 > 0.21. 32 A similar question: if you randomly put 18 balls into 10 boxes, what is the expected number
 > of empty boxes?
 
-P(A or B defaults) = E[IA] + E[IB]-E[IAIB] = E[IA] + E[IB]-(E[IA]E[IB]-cow(IA,IB)) = 0.5 + 03-(0.5x0.3-pABc7A<7B) = O.65-j021/2pAB For the maximum probability, we have 0.65- V0.21 /2pAB = 0.8 => pAB = -V3/7 . For the minimum probability, we have 0.65-y[02l 12pAB = 0.5 => pAB = JiTl . In this problem, do not start with P(A or B defaults)=0.65-y/0.2l/2pAB and try to set pAB=±l to calculate the maximum and minimum probability since the correlation cannot be ±1. The range of correlation is restricted to
+P(A or B defaults) = E[IA] + E[IB]-E[IAIB] = E[IA] + E[IB]-(E[IA]E[IB]-cow(IA,IB)) = 0.5 + 03-(0.5x0.3-pABc7A<7B) = O.65-j021/2pAB For the maximum probability, we have 0.65- V0.21 /2pAB = 0.8 ⟹ pAB = -√3/7 . For the minimum probability, we have 0.65-y[02l 12pAB = 0.5 ⟹ pAB = JiTl . In this problem, do not start with P(A or B defaults)=0.65-y/0.2l/2pAB and try to set pAB=±l to calculate the maximum and minimum probability since the correlation cannot be ±1. The range of correlation is restricted to
 
 ## 4.6 Order Statistics {#46}
 
-Let X be a random variable with cumulative distribution function Fx (x). We can derive the distribution function for the minimum Yn = min(^T,, X2,? ? ?, Xn) and for the maximum Zn = max(Xt, X2, ? ? ?, Xn) of n IID random variables with cdf Fx (x) as P(Yn >x) = (P(X>x))"^\-FYn(x) = (l-Fx(x))" => fYa(x) = nfx(*)(1 -Fx(x))""1 P(Zn <x) = (P(X < x))" => FZn (x) = (Fx (x))" =* fZm (x) = nfx (x)(Fx (x))""' Expected value of max and min Let Xx,X2,--,Xn be IID random variables with uniform distribution between 0 and 1. What are the cumulative distribution function, the probability density function and expected value of Zn =max(X\,X2,--,Xn)? What are the cumulative distribution function, the probability density function and expected value of Yn = min(X,, X2, ? ? ?, Xn) ?
+Let X be a random variable with cumulative distribution function Fx (x). We can derive the distribution function for the minimum Yn = min(^T,, X2,? ? ?, Xn) and for the maximum Zn = max(Xt, X2, ? ? ?, Xn) of n IID random variables with cdf Fx (x) as P(Yn >x) = (P(X>x))"^\-FYn(x) = (l-Fx(x))" ⟹ fYa(x) = nfx(*)(1 -Fx(x))""1 P(Zn <x) = (P(X < x))" ⟹ FZn (x) = (Fx (x))" =* fZm (x) = nfx (x)(Fx (x))""' Expected value of max and min Let Xx,X2,--,Xn be IID random variables with uniform distribution between 0 and 1. What are the cumulative distribution function, the probability density function and expected value of Zn =max(X\,X2,--,Xn)? What are the cumulative distribution function, the probability density function and expected value of Yn = min(X,, X2, ? ? ?, Xn) ?
 
 > **Solution:**
 > This is a direct test of textbook knowledge. For uniform distribution on [0,1], Fx(x) = x and fx(x)
 > = \. Applying Fx(x) and fx(x)to Z? =max(X?X2,--,^?) we have P(Z? <x) = (P(X < x))" ^ FZn (x) = (Fx
-> (x)T = x" => fz. (x) = nfx (xXFx (x)r] = nx-x
+> (x)T = x" ⟹ fz. (x) = nfx (xXFx (x)r] = nx-x
 
-and E[Zn] = fxfz (x)dx = fnxndx = ~^-[xn+] T = ^-. Jo ? Jo n + lL Jo n + \ Applying Fx{x) and fx(x)io Yn =mm(X],X2,-,Xn) we have P(Yn>x) = (P(X>x)y^FY(x) = \-(l-Fx(x)y=\-(l-xy => /r. (*) = nfx (x)(l - /V (x))-1 = n(l - x)-1 and E[YJ= (nx(l-xy]dx= (,,(i-^/-'A = [/]'-^[^']' =-- JO JO LJO^ + JLJO^ + I Correlation of max and min Let X] and X2 be IID random variables with uniform distribution between 0 and 1, Y = min(X],X2) and Z = max(X],X2). What is the probability of Y>y given that Z <z for any y,z e [0,1] ? What is the correlation of Y and Z?
+and E[Zn] = fxfz (x)dx = fnxndx = ~^-[xn+] T = ^-. Jo ? Jo n + lL Jo n + \ Applying Fx{x) and fx(x)io Yn =mm(X],X2,-,Xn) we have P(Yn>x) = (P(X>x)y^FY(x) = \-(l-Fx(x)y=\-(l-xy ⟹ /r. (*) = nfx (x)(l - /V (x))-1 = n(l - x)-1 and E[YJ= (nx(l-xy]dx= (,,(i-^/-'A = [/]'-^[^']' =-- JO JO LJO^ + JLJO^ + I Correlation of max and min Let X] and X2 be IID random variables with uniform distribution between 0 and 1, Y = min(X],X2) and Z = max(X],X2). What is the probability of Y>y given that Z <z for any y,z e [0,1] ? What is the correlation of Y and Z?
 
 > **Solution:**
 > This problem is another demonstration that a figure is worth a thousand words. As shown in Figure
@@ -725,7 +736,7 @@ i y z
 
 x, Figure 4.7 Distribution of Xi, X2, their maximum and minimum.
 
-Using previous problem's conclusions, we have E[Y] = =—, E[Z] = = —. From the pdfs of Y and Z, fY (x) = n(l-x)n~] = 2(1- jc) and fz(z) = nzn~x = 2z9 we can also get E[Yn2 ] = j[ 2(1 - y)y2dy = - - - = - and ￡[Z?2 ] = j[ 2z3<fe = -, which give us the
+Using previous problem's conclusions, we have E[Y] = =—, E[Z] = = —. From the pdfs of Y and Z, fY (x) = n(l-x)n~] = 2(1- jc) and fz(z) = nzn~x = 2z, we can also get E[Yn2 ] = j[ 2(1 - y)y2dy = - - - = - and E[Z?2 ] = j[ 2z3<fe = -, which give us the
 
 , ^ /^\2 variances: var(Y) = E[Y2]-E[Yf =--[-] =— and var(Z) =Ml J_33 18'
 
