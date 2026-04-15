@@ -111,6 +111,35 @@ export interface Principle {
   keyTakeaway: string;    // one-sentence summary
 }
 
+// ── Chapters 3–7 (textbook-style) ─────────────
+
+/**
+ * A section within a textbook-style chapter (e.g. "3.1 Limits and Derivatives").
+ * Content is stored as markdown and rendered via <MarkdownRenderer/>.
+ */
+export interface ChapterSection {
+  id: string;            // "3.1"
+  title: string;         // "Limits and Derivatives"
+  content: string;       // full markdown for this section
+  problemCount: number;  // number of embedded "**Problem —**" blocks
+}
+
+/**
+ * A textbook-style chapter (3–7). Unlike chapters 1–2 (pure principles /
+ * pure problem sets), chapters 3–7 blend expository prose with embedded
+ * worked problems. We store the full markdown and a list of sections so the
+ * reader can render the prose and build a table of contents.
+ */
+export interface Chapter {
+  id: string;                // "chapter-3"
+  number: number;            // 3
+  title: string;             // "Calculus and Linear Algebra"
+  pageRange: string;         // "33–58"
+  overview: string;          // short markdown blurb shown at the top
+  sections: ChapterSection[];
+  tags: string[];
+}
+
 // ── Custom flashcard sets ─────────────────────
 
 export interface CustomSet {
