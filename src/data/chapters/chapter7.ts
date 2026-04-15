@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_07_algorithms_numerical_methods.md — edit the .md then re-run scripts/gen-chapters.js */
+/** Auto-generated from chapter_07_algorithms_numerical_methods.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter7: Chapter = {
   id: 'chapter-7',
   number: 7,
@@ -13,9 +13,8 @@ const chapter7: Chapter = {
       id: "7.1",
       title: "Algorithms",
       problemCount: 12,
-      content: `## 7.1 Algorithms
-
-### Complexity Notation Reference
+      blocks: [
+        { kind: 'prose', markdown: `### Complexity Notation Reference
 
 **Asymptotic analysis** studies running time \`T(n)\` (number of primitive operations) as \`n → ∞\`, ignoring machine-dependent constants.
 
@@ -27,11 +26,8 @@ const chapter7: Chapter = {
 
 **Two key running time concepts:**
 - **Worst-case W(n):** Upper bound on running time for any n inputs
-- **Average-case A(n):** Expected running time for randomly selected n inputs
-
----
-
-### Master Theorem
+- **Average-case A(n):** Expected running time for randomly selected n inputs` },
+        { kind: 'prose', markdown: `### Master Theorem
 
 For divide-and-conquer recurrences of the form \`T(n) = a·T(n/b) + f(n)\` where \`a ≥ 1\`, \`b > 1\`, \`f(n) > 0\`:
 
@@ -44,17 +40,20 @@ For divide-and-conquer recurrences of the form \`T(n) = a·T(n/b) + f(n)\` where
 **Example — Binary Search:** Find element in sorted array of n elements.
 - Each step compares to middle element and halves the search space
 - \`a = 1\`, \`b = 2\`, \`f(n) = 1 = Θ(n^(log₂1) · log⁰ n) = Θ(1)\`
-- By case 2: **\`T(n) = Θ(log n)\`**
-
----
-
-### Number Swap
-
-**Question:** Swap two integers \`i\` and \`j\` without additional storage space.
-
-**Solution:**
-
-**Arithmetic approach:**
+- By case 2: **\`T(n) = Θ(log n)\`**` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-01-algorithms-problem-1",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 1",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Swap two integers \`i\` and \`j\` without additional storage space.`,
+            solution: `**Arithmetic approach:**
 \`\`\`cpp
 void swap(int &i, int &j) {
     i = i + j;  // store sum
@@ -70,17 +69,23 @@ void swap(int &i, int &j) {
     j = j ^ i;  // j = i ^ (j ^ i) = original i
     i = i ^ j;  // i = (i ^ j) ^ i = original j
 }
-\`\`\`
-
----
-
-### Unique Elements
-
-**Question:** Given a sorted array, extract the unique elements. E.g., \`[1,1,3,3,3,5,5,5,9,9,9,9]\` → \`[1,3,5,9]\`.
-
-**Solution:**
-
-In a sorted array, a new unique element \`a[i]\` satisfies \`a[i] ≠ a[i-1]\`. Use this property to build the output array in one pass:
+\`\`\``,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-02-algorithms-problem-2",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 2",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Given a sorted array, extract the unique elements. E.g., \`[1,1,3,3,3,5,5,5,9,9,9,9]\` → \`[1,3,5,9]\`.`,
+            solution: `In a sorted array, a new unique element \`a[i]\` satisfies \`a[i] ≠ a[i-1]\`. Use this property to build the output array in one pass:
 
 \`\`\`cpp
 template <class T>
@@ -98,17 +103,23 @@ vector<T> unique(T a[], int n) {
 
 > **Note:** C++ STL provides \`std::unique\` and \`std::unique_copy\` for this operation.
 
-**Complexity:** O(n) time, O(k) space where k = number of unique elements.
-
----
-
-### Horner's Algorithm
-
-**Question:** Compute \`y = A₀ + A₁x + A₂x² + A₃x³ + ... + Aₙxⁿ\` efficiently.
-
-**Solution:**
-
-**Naive approach:** Compute each term separately → O(n²) multiplications.
+**Complexity:** O(n) time, O(k) space where k = number of unique elements.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-03-algorithms-problem-3",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 3",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Compute \`y = A₀ + A₁x + A₂x² + A₃x³ + ... + Aₙxⁿ\` efficiently.`,
+            solution: `**Naive approach:** Compute each term separately → O(n²) multiplications.
 
 **Horner's algorithm:** Rewrite as nested form:
 \`\`\`
@@ -117,17 +128,23 @@ y = A₀ + x(A₁ + x(A₂ + x(... + x(Aₙ₋₁ + x·Aₙ)...)))
 
 Sequential computation: \`Bₙ = Aₙ\`, \`Bₙ₋₁ = Bₙ·x + Aₙ₋₁\`, ..., \`B₀ = B₁·x + A₀\`, \`y = B₀\`.
 
-**Complexity:** O(n) multiplications — optimal for polynomial evaluation.
-
----
-
-### Moving Average
-
-**Question:** Given array A of length m, compute the w-element moving average array B efficiently.
-
-**Solution:**
-
-Reuse the previously computed sum: subtract the element that leaves the window, add the new element entering it.
+**Complexity:** O(n) multiplications — optimal for polynomial evaluation.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-04-algorithms-problem-4",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 4",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Given array A of length m, compute the w-element moving average array B efficiently.`,
+            solution: `Reuse the previously computed sum: subtract the element that leaves the window, add the new element entering it.
 
 \`\`\`
 S = A[1] + A[2] + ... + A[w];  B[w] = S/w;
@@ -137,17 +154,23 @@ for (i = w+1 to m) {
 }
 \`\`\`
 
-**Complexity:** O(m) — each element is added and subtracted exactly once, vs. O(m·w) naive.
-
----
-
-### Sorting Algorithms
-
-**Question:** Explain three sorting algorithms and analyze their complexity.
-
-**Solution:**
-
-#### Insertion Sort
+**Complexity:** O(m) — each element is added and subtracted exactly once, vs. O(m·w) naive.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-05-algorithms-problem-5",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 5",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Explain three sorting algorithms and analyze their complexity.`,
+            solution: `#### Insertion Sort
 
 **Strategy:** Incremental — maintain a sorted subarray and insert each new element into its correct position.
 
@@ -159,11 +182,11 @@ for (i = w+1 to m) {
 | Average A(n) | Θ(n²) |
 | Worst-case W(n) | Θ(n²) |
 
-**Best for:** Small arrays or nearly-sorted data.
-
----
-
-#### Merge Sort
+**Best for:** Small arrays or nearly-sorted data.`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `#### Merge Sort
 
 **Strategy:** Divide-and-conquer — split array into two halves, recursively sort each, merge.
 
@@ -184,11 +207,8 @@ Applying Master Theorem: \`a = 2\`, \`b = 2\`, \`f(n) = Θ(n) = Θ(n^(log₂2) �
 | | Complexity |
 |-|-----------|
 | Average A(n) | Θ(n log n) |
-| Worst-case W(n) | Θ(n log n) |
-
----
-
-#### Quicksort
+| Worst-case W(n) | Θ(n log n) |` },
+        { kind: 'prose', markdown: `#### Quicksort
 
 **Strategy:** Choose a pivot A[i], partition remaining elements into two subarrays (smaller left, larger right), recurse on both.
 
@@ -215,19 +235,20 @@ A(n) = Σ_{q=2}^{n} Σ_{p=1}^{q-1} 2/(q-p+1) = Θ(n log n)
 | Average A(n) | Θ(n log n) |
 | Worst-case W(n) | Θ(n²) |
 
-**Practice:** Often faster than merge sort in practice due to smaller constant factors and cache efficiency, despite identical average-case asymptotic complexity.
-
----
-
-### Random Permutation
-
-#### Part A — Shuffling a Deck of Cards
-
-**Question:** Generate a uniformly random permutation of 52 cards using a uniform random number generator.
-
-**Solution:**
-
-**Method 1 — Sort by random keys:** Assign each card a random number, sort by those numbers. All n! orderings are equally likely. Complexity: Θ(n log n).
+**Practice:** Often faster than merge sort in practice due to smaller constant factors and cache efficiency, despite identical average-case asymptotic complexity.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-06-algorithms-problem-6",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 6",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Generate a uniformly random permutation of 52 cards using a uniform random number generator.`,
+            solution: `**Method 1 — Sort by random keys:** Assign each card a random number, sort by those numbers. All n! orderings are equally likely. Complexity: Θ(n log n).
 
 **Method 2 — Knuth Shuffle** (for large n):
 \`\`\`
@@ -239,17 +260,23 @@ where \`Random(i, n)\` draws uniformly from \`{i, i+1, ..., n}\`.
 
 **Complexity:** Θ(n)
 
-**Correctness:** In step i, each of the n-i+1 remaining cards has equal probability of being chosen as position i. By induction, each ordered sequence has probability 1/n!.
-
----
-
-#### Part B — Reservoir Sampling (Unknown File Length)
-
-**Question:** From a file of unknown length read sequentially, choose one character uniformly at random.
-
-**Solution:**
-
-**Reservoir sampling (k=1 case):**
+**Correctness:** In step i, each of the n-i+1 remaining cards has equal probability of being chosen as position i. By induction, each ordered sequence has probability 1/n!.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-07-algorithms-problem-7",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 7",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `From a file of unknown length read sequentially, choose one character uniformly at random.`,
+            solution: `**Reservoir sampling (k=1 case):**
 
 After reading n characters, keep the current pick with probability \`n/(n+1)\` and replace it with the (n+1)-th character with probability \`1/(n+1)\`.
 
@@ -259,19 +286,23 @@ After reading n characters, keep the current pick with probability \`n/(n+1)\` a
 - Base: After character 1, it's selected with probability 1 = 1/1 ✓
 - Step: If each of the first n has probability 1/n, after reading character (n+1):
   - Current pick is replaced with prob 1/(n+1) → each of first n has prob \`(1/n) × (n/(n+1)) = 1/(n+1)\`
-  - New character selected with prob \`1/(n+1)\` ✓
-
----
-
-### Search Algorithms
-
-#### Part A — Find Min and Max with ≤ 3n/2 Comparisons
-
-**Question:** Find both the minimum and maximum of n numbers using at most 3n/2 comparisons.
-
-**Solution:**
-
-A naive approach uses n-1 comparisons for min and n-1 for max → total ≈ 2n comparisons.
+  - New character selected with prob \`1/(n+1)\` ✓`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-08-algorithms-problem-8",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 8",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Find both the minimum and maximum of n numbers using at most 3n/2 comparisons.`,
+            solution: `A naive approach uses n-1 comparisons for min and n-1 for max → total ≈ 2n comparisons.
 
 **Optimal approach:**
 1. Pair up elements: n/2 comparisons → put smaller in group A, larger in group B
@@ -280,34 +311,46 @@ A naive approach uses n-1 comparisons for min and n-1 for max → total ≈ 2n c
 
 **Total:** n/2 + (n/2 - 1) + (n/2 - 1) = **3n/2 - 2 ≤ 3n/2 comparisons** ✓
 
-*(Slight adjustment needed for odd n, but bound 3n/2 still holds)*
-
----
-
-#### Part B — Find First Nonzero in Unknown-Length Array
-
-**Question:** An array has zeros from the start up to some position, then all nonzeros. Array size is unknown. Find the first nonzero element.
-
-**Solution:**
-
-**Exponential search + binary search:**
+*(Slight adjustment needed for odd n, but bound 3n/2 still holds)*`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-09-algorithms-problem-9",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 9",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `An array has zeros from the start up to some position, then all nonzeros. Array size is unknown. Find the first nonzero element.`,
+            solution: `**Exponential search + binary search:**
 
 1. Check positions 1, 2, 4, 8, ..., 2^i until the 2^i-th element is nonzero
 2. Once found at position 2^i, binary search in \`[2^(i-1)+1, 2^i]\`
 
 Each stage halves the search range. If first nonzero is at position n:
 
-**Complexity:** Θ(log n)
-
----
-
-#### Part C — Search in a Sorted 2D Grid
-
-**Question:** Grid where each row increases left-to-right and each column increases top-to-bottom. Find a target value x. What is the complexity?
-
-**Solution:**
-
-**Algorithm:** Start at top-right corner (A[1,n]), move left or down:
+**Complexity:** Θ(log n)`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-10-algorithms-problem-10",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 10",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Grid where each row increases left-to-right and each column increases top-to-bottom. Find a target value x. What is the complexity?`,
+            solution: `**Algorithm:** Start at top-right corner (A[1,n]), move left or down:
 
 1. Start at position (i, j) = (1, n) — top-right corner
 2. If \`A[i,j] == x\`: found
@@ -317,13 +360,22 @@ Each stage halves the search range. If first nonzero is at position n:
 
 **Correctness:** Each step eliminates either an entire row or an entire column.
 
-**Complexity:** At most 2n steps (traverse at most n rows + n columns)  → **O(n)**
-
----
-
-### Fibonacci Numbers
-
-**Question:** The recursive C++ implementation takes 100 seconds for Fibonacci(n). How long for Fibonacci(n+1)? Is it efficient? How would you improve it?
+**Complexity:** At most 2n steps (traverse at most n rows + n columns)  → **O(n)**`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-11-algorithms-problem-11",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 11",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `The recursive C++ implementation takes 100 seconds for Fibonacci(n). How long for Fibonacci(n+1)? Is it efficient? How would you improve it?
 
 \`\`\`cpp
 int Fibonacci(int n) {
@@ -331,11 +383,8 @@ int Fibonacci(int n) {
     else if (n == 1) return 1;
     else return Fibonacci(n-1) + Fibonacci(n-2);
 }
-\`\`\`
-
-**Solution:**
-
-**Closed-form (Binet's formula):**
+\`\`\``,
+            solution: `**Closed-form (Binet's formula):**
 \`\`\`
 Fₙ = (φⁿ - ψⁿ) / √5
 \`\`\`
@@ -353,11 +402,12 @@ T(n+1) / T(n) ≈ φ ≈ 1.618
 
 **Answer: ~162 seconds**
 
-**Complexity:** O(φⁿ) — exponential — extremely inefficient due to massive redundant recomputation.
-
----
-
-**Efficient approaches:**
+**Complexity:** O(φⁿ) — exponential — extremely inefficient due to massive redundant recomputation.`,
+            hints: [],
+            finalAnswer: "~162 seconds",
+          },
+        },
+        { kind: 'prose', markdown: `**Efficient approaches:**
 
 **Linear O(n) — iterative:**
 \`\`\`
@@ -374,17 +424,20 @@ Using the matrix identity:
 
 Compute matrix power using divide-and-conquer: \`Aⁿ = A^(n/2) × A^(n/2)\` (if n even).
 
-Each matrix multiplication is O(1) for 2×2. Applying Master Theorem: \`T(n) = T(n/2) + Θ(1)\` → **Θ(log n)**.
-
----
-
-### Maximum Contiguous Subarray
-
-**Question:** Given array A of length n (positive and negative values), find the maximum sum of any contiguous subarray A[i..j]. This directly models max drawup/drawdown in trading.
-
-**Solution:**
-
-**O(n²) naive approach:**
+Each matrix multiplication is O(1) for 2×2. Applying Master Theorem: \`T(n) = T(n/2) + Θ(1)\` → **Θ(log n)**.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-1-12-algorithms-problem-12",
+            chapter: 7,
+            section: "7.1",
+            sectionTitle: "Algorithms",
+            title: "Algorithms Problem 12",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Given array A of length n (positive and negative values), find the maximum sum of any contiguous subarray A[i..j]. This directly models max drawup/drawdown in trading.`,
+            solution: `**O(n²) naive approach:**
 \`\`\`
 V(i,i) = A[i];  V(i,j) = V(i,j-1) + A[j] for j > i
 Track maximum V(i,j) and the indices i, j.
@@ -425,26 +478,32 @@ double maxSubarray(double A[], int len, int &i, int &j) {
 → Maximum subarray: \`[4.0, -3.0, 2.0, 6.0]\`, sum = **9**, indices i=3, j=6.
 
 ---`,
+            hints: [],
+          },
+        },
+      ],
     },
     {
       id: "7.2",
       title: "The Power of Two",
       problemCount: 4,
-      content: `## 7.2 The Power of Two
+      blocks: [
+        { kind: 'prose', markdown: `> "There are only 10 kinds of people in the world — those who know binary, and those who don't."
 
-> "There are only 10 kinds of people in the world — those who know binary, and those who don't."
-
-Computers use the binary (base-2) number system where each bit is 0 or 1. Binary representations yield interesting properties frequently tested in quant interviews.
-
----
-
-### Power of 2
-
-**Question:** Determine whether an integer is a power of 2.
-
-**Solution:**
-
-Any integer \`x = 2ⁿ\` has exactly one bit set to 1 in binary. For example: \`8 = 2³ = 00001000₂\`.
+Computers use the binary (base-2) number system where each bit is 0 or 1. Binary representations yield interesting properties frequently tested in quant interviews.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-2-01-the-power-of-two-problem-1",
+            chapter: 7,
+            section: "7.2",
+            sectionTitle: "The Power of Two",
+            title: "The Power of Two Problem 1",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Determine whether an integer is a power of 2.`,
+            solution: `Any integer \`x = 2ⁿ\` has exactly one bit set to 1 in binary. For example: \`8 = 2³ = 00001000₂\`.
 
 The number \`2ⁿ - 1\` has all n lower bits set to 1. For example: \`7 = 00000111₂\`.
 
@@ -457,17 +516,23 @@ bool isPowerOf2(int x) {
 }
 \`\`\`
 
-**Complexity:** O(1)
-
----
-
-### Multiplication by 7
-
-**Question:** Fast way to multiply an integer by 7 without using the \`*\` operator.
-
-**Solution:**
-
-Use bit-shift and subtraction:
+**Complexity:** O(1)`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-2-02-the-power-of-two-problem-2",
+            chapter: 7,
+            section: "7.2",
+            sectionTitle: "The Power of Two",
+            title: "The Power of Two Problem 2",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Fast way to multiply an integer by 7 without using the \`*\` operator.`,
+            solution: `Use bit-shift and subtraction:
 \`\`\`
 x * 7 = x * 8 - x = (x << 3) - x
 \`\`\`
@@ -479,17 +544,23 @@ int multiplyBy7(int x) {
 }
 \`\`\`
 
-> **Note:** This can overflow if \`x << 3\` exceeds the integer range.
-
----
-
-### Probability Simulation
-
-**Question:** Given a fair coin, design a game with winning probability p (0 < p < 1).
-
-**Solution:**
-
-Express \`p\` in binary: \`p = 0.p₁p₂p₃...pₙ = p₁·2⁻¹ + p₂·2⁻² + ... + pₙ·2⁻ⁿ\`, where \`pᵢ ∈ {0, 1}\`.
+> **Note:** This can overflow if \`x << 3\` exceeds the integer range.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-2-03-the-power-of-two-problem-3",
+            chapter: 7,
+            section: "7.2",
+            sectionTitle: "The Power of Two",
+            title: "The Power of Two Problem 3",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `Given a fair coin, design a game with winning probability p (0 < p < 1).`,
+            solution: `Express \`p\` in binary: \`p = 0.p₁p₂p₃...pₙ = p₁·2⁻¹ + p₂·2⁻² + ... + pₙ·2⁻ⁿ\`, where \`pᵢ ∈ {0, 1}\`.
 
 **Algorithm:**
 1. Toss coin; let \`sᵢ ∈ {0,1}\` be the result of the i-th toss (1=heads, 0=tails)
@@ -502,17 +573,23 @@ Express \`p\` in binary: \`p = 0.p₁p₂p₃...pₙ = p₁·2⁻¹ + p₂·2⁻
 
 **Example (p = 1/4 = 0.01₂):**
 - Toss sequence \`00\` → WIN (probability 1/4) ✓
-- Toss sequences \`01\`, \`10\`, \`11\` → LOSE (probability 3/4) ✓
-
----
-
-### Poisonous Wine
-
-**Question:** 1000 bottles of wine, one poisoned. Poison kills in exactly 18 hours, no symptoms until death. You have 10 mice and 20 hours. Find the poisoned bottle.
-
-**Solution:**
-
-**Key insight:** 10 binary bits can encode \`2¹⁰ = 1024\` values, covering all 1000 bottles.
+- Toss sequences \`01\`, \`10\`, \`11\` → LOSE (probability 3/4) ✓`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-2-04-the-power-of-two-problem-4",
+            chapter: 7,
+            section: "7.2",
+            sectionTitle: "The Power of Two",
+            title: "The Power of Two Problem 4",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `1000 bottles of wine, one poisoned. Poison kills in exactly 18 hours, no symptoms until death. You have 10 mice and 20 hours. Find the poisoned bottle.`,
+            solution: `**Key insight:** 10 binary bits can encode \`2¹⁰ = 1024\` values, covering all 1000 bottles.
 
 **Algorithm:**
 1. Label each bottle 1 to 1000 with its 10-bit binary representation
@@ -531,18 +608,18 @@ Poisoned bottle: #352
 **Why it works:** Each bottle "writes" its binary label across the mice. The mice collectively perform a binary search in a single parallel test.
 
 ---`,
+            hints: [],
+          },
+        },
+      ],
     },
     {
       id: "7.3",
       title: "Numerical Methods",
       problemCount: 1,
-      content: `## 7.3 Numerical Methods
-
-The prices of many financial instruments lack closed-form analytical solutions. Numerical methods — primarily Monte Carlo simulation and finite difference methods — fill this gap.
-
----
-
-### Monte Carlo Simulation
+      blocks: [
+        { kind: 'prose', markdown: `The prices of many financial instruments lack closed-form analytical solutions. Numerical methods — primarily Monte Carlo simulation and finite difference methods — fill this gap.` },
+        { kind: 'prose', markdown: `### Monte Carlo Simulation
 
 Monte Carlo simulation iteratively evaluates a deterministic model using random inputs. For derivative pricing:
 1. Simulate many price paths under risk-neutral measure
@@ -551,11 +628,8 @@ Monte Carlo simulation iteratively evaluates a deterministic model using random 
 
 **Validity:** Law of Large Numbers ensures convergence.
 
-**Limitation:** Cannot be directly applied to American options or derivatives with early exercise features (must use finite difference or lattice methods instead).
-
----
-
-#### Part A — Pricing a European Call via Monte Carlo
+**Limitation:** Cannot be directly applied to American options or derivatives with early exercise features (must use finite difference or lattice methods instead).` },
+        { kind: 'prose', markdown: `#### Part A — Pricing a European Call via Monte Carlo
 
 **Solution:**
 
@@ -574,11 +648,8 @@ Simulate M paths → obtain terminal prices \`S_T^(k)\` for k = 1, ..., M.
 C = e^(-r(T-t)) · (1/M) · Σ max(S_T^(k) - K, 0)
 \`\`\`
 
-> **Note:** For European options, N = 1 suffices. For path-dependent options, use large N.
-
----
-
-#### Part B — Generating N(μ, σ²) from Uniform Random Variables
+> **Note:** For European options, N = 1 suffices. For path-dependent options, use large N.` },
+        { kind: 'prose', markdown: `#### Part B — Generating N(μ, σ²) from Uniform Random Variables
 
 **Solution:**
 
@@ -598,11 +669,8 @@ For the standard normal, F⁻¹ has no closed form, so use the **acceptance-reje
   1. Draw \`y ~ Exponential(1)\` and \`v ~ Uniform(0,1)\`
   2. If \`v ≤ f(y)/(M·g(y))\`: accept \`x = y\`; else repeat
 
-**Step 2: Scale to N(μ, σ²):** Return \`μ + σ·x\`
-
----
-
-#### Part C — Variance Reduction Techniques
+**Step 2: Scale to N(μ, σ²):** Return \`μ + σ·x\`` },
+        { kind: 'prose', markdown: `#### Part C — Variance Reduction Techniques
 
 **Goal:** Reduce the variance \`Var(Ȳ) = σ²/M\` to achieve the same accuracy with fewer simulations.
 
@@ -612,27 +680,18 @@ For each path \`(ε₁, ..., εₙ)\`, also compute the payoff with \`(-ε₁, .
 
 \`\`\`
 Ȳ_antithetic = [Y(ε₁,...,εₙ) + Y(-ε₁,...,-εₙ)] / 2
-\`\`\`
+\`\`\`` },
+        { kind: 'prose', markdown: `**2. Moment Matching**
 
----
-
-**2. Moment Matching**
-
-Draw a large sample of random variables. Rescale/shift so that the sample's moments (mean, variance) exactly match the target population moments before using them in simulation.
-
----
-
-**3. Control Variate**
+Draw a large sample of random variables. Rescale/shift so that the sample's moments (mean, variance) exactly match the target population moments before using them in simulation.` },
+        { kind: 'prose', markdown: `**3. Control Variate**
 
 If pricing derivative X and derivative Y has a known analytical solution:
 - Simulate both X and Y using the same random sequences → estimates X̂ and Ŷ
 - Corrected estimate: \`X* = X̂ + (Y - Ŷ)\`
 
-The error \`(Y - Ŷ)\` "corrects" the estimation error in X̂, reducing variance when X and Y are correlated.
-
----
-
-**4. Importance Sampling**
+The error \`(Y - Ŷ)\` "corrects" the estimation error in X̂, reducing variance when X and Y are correlated.` },
+        { kind: 'prose', markdown: `**4. Importance Sampling**
 
 Instead of drawing from distribution f(x), draw from distribution g(x) and reweight:
 
@@ -640,17 +699,11 @@ Instead of drawing from distribution f(x), draw from distribution g(x) and rewei
 E_f[h(X)] = E_g[h(X)·f(X)/g(X)]
 \`\`\`
 
-**Application:** For deep OTM options under f, most paths give payoff 0 (high variance). Choose g with fatter tails so more paths have positive payoffs. The weight \`f(x)/g(x)\` keeps the estimator unbiased while reducing variance.
+**Application:** For deep OTM options under f, most paths give payoff 0 (high variance). Choose g with fatter tails so more paths have positive payoffs. The weight \`f(x)/g(x)\` keeps the estimator unbiased while reducing variance.` },
+        { kind: 'prose', markdown: `**5. Low-Discrepancy Sequences (Quasi-Monte Carlo)**
 
----
-
-**5. Low-Discrepancy Sequences (Quasi-Monte Carlo)**
-
-Replace random samples with deterministic sequences that fill the space more uniformly (e.g., Sobol sequences, Halton sequences). Can improve convergence rate from \`1/√M\` (random MC) to approximately \`1/M\`.
-
----
-
-#### Part D — Estimating Delta and Gamma via Monte Carlo
+Replace random samples with deterministic sequences that fill the space more uniformly (e.g., Sobol sequences, Halton sequences). Can improve convergence rate from \`1/√M\` (random MC) to approximately \`1/M\`.` },
+        { kind: 'prose', markdown: `#### Part D — Estimating Delta and Gamma via Monte Carlo
 
 **Solution:**
 
@@ -662,11 +715,8 @@ Estimated Delta:  Δ ≈ [f(S + δS) - f(S - δS)] / (2·δS)
 Estimated Gamma:  Γ ≈ [f(S + δS) - 2f(S) + f(S - δS)] / (δS)²
 \`\`\`
 
-> **Note:** Using the same random sequences for all three prices is critical for variance reduction. This approach may not work well if the payoff function is discontinuous (e.g., binary options near expiry).
-
----
-
-#### Part E — Estimating π via Monte Carlo
+> **Note:** Using the same random sequences for all three prices is critical for variance reduction. This approach may not work well if the payoff function is discontinuous (e.g., binary options near expiry).` },
+        { kind: 'prose', markdown: `#### Part E — Estimating π via Monte Carlo
 
 **Solution:**
 
@@ -689,27 +739,18 @@ for i = 1 to M:
 π ≈ 4 × count / M
 \`\`\`
 
-**Practical performance:** 1,000 simulations × 1,000,000 points each (Matlab): average estimate of π ≈ 3.1416, std dev ≈ 0.0015 (< 1 minute on a laptop).
+**Practical performance:** 1,000 simulations × 1,000,000 points each (Matlab): average estimate of π ≈ 3.1416, std dev ≈ 0.0015 (< 1 minute on a laptop).` },
+        { kind: 'prose', markdown: `### Finite Difference Method
 
----
-
-### Finite Difference Method
-
-The finite difference method numerically solves the BSM PDE by discretizing both time and the underlying price into a grid. Different derivatives share the same heat equation structure — they differ only in boundary conditions.
-
----
-
-#### Part A — Finite Difference Methods Explained
+The finite difference method numerically solves the BSM PDE by discretizing both time and the underlying price into a grid. Different derivatives share the same heat equation structure — they differ only in boundary conditions.` },
+        { kind: 'prose', markdown: `#### Part A — Finite Difference Methods Explained
 
 **Setup:** Convert BSM PDE to heat equation \`∂u/∂τ = ½σ²·∂²u/∂x²\`. Build a grid:
 - Time: \`τₙ = n·Δτ\` for n = 0, 1, ..., N; Δτ = T/N
 - Space: \`xⱼ = x₀ + j·Δx\` for j = 0, 1, ..., J
 
-**Three methods:**
-
----
-
-**1. Explicit (Forward) Difference Method**
+**Three methods:**` },
+        { kind: 'prose', markdown: `**1. Explicit (Forward) Difference Method**
 
 Uses forward difference in time, central difference in space:
 
@@ -725,11 +766,8 @@ uⱼⁿ⁺¹ = α·uⱼ₋₁ⁿ + (1 - 2α)·uⱼⁿ + α·uⱼ₊₁ⁿ
 where \`α = Δτ/(Δx)²\`
 
 **Advantage:** Explicit formula — easy to compute.
-**Disadvantage:** Conditionally stable (requires \`Δτ/(Δx)² ≤ 1/2\`).
-
----
-
-**2. Implicit (Backward) Difference Method**
+**Disadvantage:** Conditionally stable (requires \`Δτ/(Δx)² ≤ 1/2\`).` },
+        { kind: 'prose', markdown: `**2. Implicit (Backward) Difference Method**
 
 Uses backward difference in time, central difference in space:
 
@@ -740,11 +778,8 @@ Uses backward difference in time, central difference in space:
 At each time step, solve a **tridiagonal linear system**.
 
 **Advantage:** Unconditionally stable and convergent — no restriction on Δτ.
-**Disadvantage:** More computational work per step (requires solving a linear system).
-
----
-
-**3. Crank-Nicolson Method**
+**Disadvantage:** More computational work per step (requires solving a linear system).` },
+        { kind: 'prose', markdown: `**3. Crank-Nicolson Method**
 
 Average of explicit and implicit methods; uses central difference at time \`(τₙ + τₙ₊₁)/2\`:
 
@@ -755,17 +790,20 @@ Average of explicit and implicit methods; uses central difference at time \`(τ�
 **Advantages:**
 - Unconditionally stable
 - Second-order accurate in both time and space (superior to explicit and implicit methods)
-- Most commonly used in practice
-
----
-
-#### Part B — Too Many Time Steps vs. Too Many Space Steps?
-
-**Question:** For the explicit finite difference method applied to a parabolic PDE, is it worse to have too many time steps or too many space steps?
-
-**Solution:**
-
-The explicit method is stable only when:
+- Most commonly used in practice` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch7-7-3-01-numerical-methods-problem-1",
+            chapter: 7,
+            section: "7.3",
+            sectionTitle: "Numerical Methods",
+            title: "Numerical Methods Problem 1",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["algorithms","dp","bit-manipulation","numerical-methods","monte-carlo"],
+            setup: `For the explicit finite difference method applied to a parabolic PDE, is it worse to have too many time steps or too many space steps?`,
+            solution: `The explicit method is stable only when:
 \`\`\`
 α = Δτ/(Δx)² ≤ 1/2
 \`\`\`
@@ -781,11 +819,13 @@ For the implicit and Crank-Nicolson methods, this is not an issue — they are *
 |--------|-----------|---------|
 | Explicit | Conditional: \`Δτ/(Δx)² ≤ 1/2\` | O(Δτ, (Δx)²) |
 | Implicit | Unconditional | O(Δτ, (Δx)²) |
-| Crank-Nicolson | Unconditional | O((Δτ)², (Δx)²) |
-
----
-
-*End of Chapter 7*`,
+| Crank-Nicolson | Unconditional | O((Δτ)², (Δx)²) |`,
+            hints: [],
+            finalAnswer: "Too many space steps is worse",
+          },
+        },
+        { kind: 'prose', markdown: `*End of Chapter 7*` },
+      ],
     },
   ],
 };

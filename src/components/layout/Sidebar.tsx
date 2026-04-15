@@ -227,6 +227,8 @@ export default function Sidebar() {
         {/* Chapters 3–7 — textbook-style chapters */}
         {textbookChapters.map((chap) => {
           const isOpen = !!openChapters[chap.number];
+          const shortTitle =
+            chap.title.length > 22 ? chap.title.slice(0, 22) + '…' : chap.title;
           return (
             <div key={chap.id}>
               <button
@@ -235,32 +237,71 @@ export default function Sidebar() {
               >
                 <BookOpen size={13} />
                 <span className="flex-1 text-left truncate">
-                  Chapter {chap.number} · {chap.title.length > 22 ? chap.title.slice(0, 22) + '…' : chap.title}
+                  Chapter {chap.number} · {shortTitle}
                 </span>
                 {isOpen ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
               </button>
 
               {isOpen && (
                 <div className="mb-2 space-y-0.5">
-                  {chap.sections.map((sec) => (
-                    <Link
-                      key={sec.id}
-                      href={`/read/chapter-${chap.number}#section-${sec.id}`}
-                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
-                    >
-                      <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
-                        §{sec.id}
-                      </span>
-                      <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
-                        {sec.title}
-                      </span>
-                      {sec.problemCount > 0 && (
-                        <span className="text-[10px] font-semibold text-[#9299a5] shrink-0">
-                          {sec.problemCount}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
+                  {chap.sections.map((sec) => {
+                    const secKey = `ch${chap.number}-${sec.id}`;
+                    const secOpen = !!openSections[secKey];
+                    const sectionProblems = sec.blocks
+                      .filter((b) => b.kind === 'problem')
+                      .map((b: any) => b.problem);
+                    return (
+                      <div key={sec.id}>
+                        <Link
+                          href={`/read/chapter-${chap.number}#section-${sec.id}`}
+                          onClick={() => toggleSection(secKey)}
+                          className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                        >
+                          <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
+                            §{sec.id}
+                          </span>
+                          <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
+                            {sec.title}
+                          </span>
+                          {sec.problemCount > 0 &&
+                            (secOpen ? (
+                              <ChevronDown size={12} className="text-[#9299a5] shrink-0" />
+                            ) : (
+                              <ChevronRight size={12} className="text-[#9299a5] shrink-0" />
+                            ))}
+                        </Link>
+
+                        {secOpen && sectionProblems.length > 0 && (
+                          <div className="ml-5 mb-1 border-l border-[#e4e6ea] space-y-0.5">
+                            {sectionProblems.map((p) => {
+                              const status = getProblemStatus(p.id);
+                              return (
+                                <Link
+                                  key={p.id}
+                                  href={`/read/chapter-${chap.number}#${p.id}`}
+                                  className="flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-r-lg hover:bg-[#f0f1f3] transition-colors group"
+                                >
+                                  {status === 'solved' ? (
+                                    <CheckCircle2
+                                      size={11}
+                                      className="text-[#1fab54] shrink-0"
+                                    />
+                                  ) : status === 'attempted' ? (
+                                    <span className="w-2 h-2 rounded-full bg-[#f5a623] shrink-0" />
+                                  ) : (
+                                    <span className="w-2 h-2 rounded-full bg-[#e4e6ea] shrink-0" />
+                                  )}
+                                  <span className="text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate leading-snug">
+                                    {p.title}
+                                  </span>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>

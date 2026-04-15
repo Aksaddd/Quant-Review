@@ -32,6 +32,10 @@ import type {
 } from '@/lib/types';
 import { chapter2Problems, SECTIONS } from '@/data/problems';
 import { allFlashcards, flashcardsById } from '@/data/flashcards';
+import { textbookProblems, textbookChapters } from '@/data/chapters';
+
+/** All problems tracked across chapters 2–7 for progress aggregation. */
+const ALL_TRACKED_PROBLEMS = [...chapter2Problems, ...textbookProblems];
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 interface SectionStat {
@@ -221,7 +225,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       setNewCardsPerDay,
       dueCards: reviewDue, // backwards compat
       totalSolved,
-      totalProblems: chapter2Problems.length,
+      totalProblems: ALL_TRACKED_PROBLEMS.length,
       sectionStats,
       masteredCount,
     }),

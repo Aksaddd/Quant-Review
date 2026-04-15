@@ -114,21 +114,29 @@ export interface Principle {
 // ── Chapters 3–7 (textbook-style) ─────────────
 
 /**
- * A section within a textbook-style chapter (e.g. "3.1 Limits and Derivatives").
- * Content is stored as markdown and rendered via <MarkdownRenderer/>.
+ * A section within a textbook-style chapter (e.g. "3.1 Limits and Derivatives")
+ * is an ordered list of content blocks. Each block is either expository prose
+ * (rendered as markdown) or a structured worked problem (rendered with the
+ * same <ProblemBlock/> + <SolutionReveal/> used in chapter 2).
+ *
+ * This mirrors the fidelity of chapter 2's interactive problem UX while
+ * retaining the textbook prose that introduces each technique.
  */
+export type ChapterContentBlock =
+  | { kind: 'prose'; markdown: string }
+  | { kind: 'problem'; problem: Problem };
+
 export interface ChapterSection {
   id: string;            // "3.1"
   title: string;         // "Limits and Derivatives"
-  content: string;       // full markdown for this section
-  problemCount: number;  // number of embedded "**Problem —**" blocks
+  problemCount: number;  // number of structured problems in this section
+  blocks: ChapterContentBlock[];
 }
 
 /**
  * A textbook-style chapter (3–7). Unlike chapters 1–2 (pure principles /
  * pure problem sets), chapters 3–7 blend expository prose with embedded
- * worked problems. We store the full markdown and a list of sections so the
- * reader can render the prose and build a table of contents.
+ * worked problems. Each section contains interleaved prose + problem blocks.
  */
 export interface Chapter {
   id: string;                // "chapter-3"

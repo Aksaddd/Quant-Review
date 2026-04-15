@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_03_calculus_linear_algebra.md — edit the .md then re-run scripts/gen-chapters.js */
+/** Auto-generated from chapter_03_calculus_linear_algebra.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter3: Chapter = {
   id: 'chapter-3',
   number: 3,
@@ -13,9 +13,8 @@ const chapter3: Chapter = {
       id: "3.1",
       title: "Limits and Derivatives",
       problemCount: 3,
-      content: `## 3.1 Limits and Derivatives
-
-### Basics of Derivatives
+      blocks: [
+        { kind: 'prose', markdown: `### Basics of Derivatives
 
 **Derivative definition:**
 \`\`\`
@@ -40,11 +39,8 @@ dy/dx = (dy/du) · (du/dx)
 **Generalized power rule:**
 \`\`\`
 d(yⁿ)/dx = n·yⁿ⁻¹ · (dy/dx)    for all n ≠ 0
-\`\`\`
-
----
-
-**Useful limits and equations:**
+\`\`\`` },
+        { kind: 'prose', markdown: `**Useful limits and equations:**
 
 | Formula | Notes |
 |---------|-------|
@@ -64,19 +60,20 @@ d/dx(ln u) = (1/u) · du/dx
 d/dx(sin x) = cos x
 d/dx(cos x) = -sin x
 d/dx(tan x) = sec²x
-\`\`\`
-
----
-
-**Problem — Derivative of \`y = (ln x)^(ln x)\`**
-
-**Question:** What is the derivative of \`y = (ln x)^(ln x)\`?
-
-> **Hint:** For functions of the form \`y = f(x)^(g(x))\`, take the natural log of both sides and differentiate, using \`d(ln y)/dx = (1/y)·(dy/dx)\`.
-
-**Solution:**
-
-Take \`ln\` of both sides:
+\`\`\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-1-01-derivative-of-y-ln-x-ln-x",
+            chapter: 3,
+            section: "3.1",
+            sectionTitle: "Limits and Derivatives",
+            title: "Derivative of `y = (ln x)^(ln x)`",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `What is the derivative of \`y = (ln x)^(ln x)\`?`,
+            solution: `Take \`ln\` of both sides:
 \`\`\`
 ln y = ln[(ln x)^(ln x)] = ln(x) · ln(ln x)
 \`\`\`
@@ -100,11 +97,11 @@ Substituting back:
 Therefore:
 \`\`\`
 dy/dx = y · [ln(ln x) + 1] / x = (ln x)^(ln x) · [ln(ln x) + 1] / x
-\`\`\`
-
----
-
-### Maximum and Minimum
+\`\`\``,
+            hints: [`For functions of the form \`y = f(x)^(g(x))\`, take the natural log of both sides and differentiate, using \`d(ln y)/dx = (1/y)·(dy/dx)\`.`],
+          },
+        },
+        { kind: 'prose', markdown: `### Maximum and Minimum
 
 \`f'(x)\` is the slope of the tangent line to \`y = f(x)\` and the instantaneous rate of change of \`y\` with respect to \`x\`.
 
@@ -115,17 +112,20 @@ dy/dx = y · [ln(ln x) + 1] / x = (ln x)^(ln x) · [ln(ln x) + 1] / x
 
 **Second derivative test:** Suppose \`f''(x)\` is continuous near \`c\`:
 - If \`f'(c) = 0\` and \`f''(c) > 0\`: local **minimum** at \`c\`
-- If \`f'(c) = 0\` and \`f''(c) < 0\`: local **maximum** at \`c\`
-
----
-
-**Problem — eᵠ vs. πe**
-
-**Question:** Without numerical calculation, which is larger: \`eᵠ\` or \`πe\`?
-
-**Solution (Calculus approach):**
-
-Taking natural logs of both sides, the question reduces to: is \`π·ln e = π\` larger or smaller than \`e·ln π\`? Equivalently, is \`π/ln π > e/ln e\`? Equivalently, is \`ln(e)/e > ln(π)/π\`, i.e., does \`f(x) = ln(x)/x\` satisfy \`f(e) > f(π)\`?
+- If \`f'(c) = 0\` and \`f''(c) < 0\`: local **maximum** at \`c\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-1-02-e-vs-e",
+            chapter: 3,
+            section: "3.1",
+            sectionTitle: "Limits and Derivatives",
+            title: "eᵠ vs. πe",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Without numerical calculation, which is larger: \`eᵠ\` or \`πe\`?`,
+            solution: `Taking natural logs of both sides, the question reduces to: is \`π·ln e = π\` larger or smaller than \`e·ln π\`? Equivalently, is \`π/ln π > e/ln e\`? Equivalently, is \`ln(e)/e > ln(π)/π\`, i.e., does \`f(x) = ln(x)/x\` satisfy \`f(e) > f(π)\`?
 
 Taking the derivative:
 \`\`\`
@@ -145,11 +145,12 @@ ln(π)/π < ln(e)/e = 1/e  →  e·ln(π) < π  →  ln(πe) < ln(eᵠ)  →  π
 Since \`eˣ > 1 + x\` for all \`x > 0\` (from the Taylor series), let \`x = π/e - 1 > 0\`:
 \`\`\`
 e^(π/e - 1) > π/e  →  e^(π/e) > π  →  eᵠ > πe  ✓
-\`\`\`
-
----
-
-### L'Hospital's Rule
+\`\`\``,
+            hints: [],
+            finalAnswer: "`eᵠ > πe`",
+          },
+        },
+        { kind: 'prose', markdown: `### L'Hospital's Rule
 
 If \`f(x)\` and \`g(x)\` are differentiable at \`x → a\`, \`g'(a) ≠ 0\`, and either:
 - \`lim f(a) = 0\` and \`lim g(a) = 0\`, or
@@ -160,17 +161,20 @@ then:
 lim[x→a] f(x)/g(x) = lim[x→a] f'(x)/g'(x)
 \`\`\`
 
-L'Hospital's rule converts an indeterminate form (\`0/0\` or \`∞/∞\`) into a determinate one.
-
----
-
-**Problem — Two limits**
-
-**Question:** What is the limit of \`eˣ/x²\` as \`x → ∞\`, and what is the limit of \`x²·ln x\` as \`x → 0⁺\`?
-
-**Solution:**
-
-**Limit 1:** \`lim(x→∞) eˣ/x²\`
+L'Hospital's rule converts an indeterminate form (\`0/0\` or \`∞/∞\`) into a determinate one.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-1-03-two-limits",
+            chapter: 3,
+            section: "3.1",
+            sectionTitle: "Limits and Derivatives",
+            title: "Two limits",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `What is the limit of \`eˣ/x²\` as \`x → ∞\`, and what is the limit of \`x²·ln x\` as \`x → 0⁺\`?`,
+            solution: `**Limit 1:** \`lim(x→∞) eˣ/x²\`
 
 Both \`eˣ → ∞\` and \`x² → ∞\`, so apply L'Hospital's rule:
 \`\`\`
@@ -190,14 +194,18 @@ lim x²·ln x = lim ln(x)/(1/x²) = lim (1/x)/(-2/x³) = lim (-x²/2) = 0
 **Therefore: \`lim(x→0⁺) x²·ln x = 0\`.**
 
 ---`,
+            hints: [],
+            finalAnswer: "`lim(x→∞) eˣ/x² = ∞`",
+          },
+        },
+      ],
     },
     {
       id: "3.2",
       title: "Integration",
-      problemCount: 5,
-      content: `## 3.2 Integration
-
-### Basics of Integration
+      problemCount: 3,
+      blocks: [
+        { kind: 'prose', markdown: `### Basics of Integration
 
 If \`F'(x) = f(x)\`, then \`F(x)\` is an **antiderivative** of \`f(x)\`. The **Fundamental Theorem of Calculus**:
 \`\`\`
@@ -224,11 +232,8 @@ d/dx [∫ₐˣ f(t)dt] = f(x),    F(a) = yₐ,    F(x) = yₐ + ∫ₐˣ f(t)dt
 **Integration by parts:**
 \`\`\`
 ∫ u dv = uv - ∫ v du
-\`\`\`
-
----
-
-**Problem A — ∫ ln(x) dx**
+\`\`\`` },
+        { kind: 'prose', markdown: `**Problem A — ∫ ln(x) dx**
 
 **Solution:** Apply integration by parts with \`u = ln x\` and \`dv = dx\`, so \`du = (1/x)dx\` and \`v = x\`:
 \`\`\`
@@ -240,11 +245,8 @@ Therefore:
 ∫ ln x dx = x ln x - ∫ dx = x ln x - x + c
 \`\`\`
 
-**Result: \`∫ ln x dx = x ln x - x + c\`**
-
----
-
-**Problem B — ∫₀^(π/6) sec(x) dx**
+**Result: \`∫ ln x dx = x ln x - x + c\`**` },
+        { kind: 'prose', markdown: `**Problem B — ∫₀^(π/6) sec(x) dx**
 
 **Solution:** We need \`∫ sec x dx\`. Start from trig derivatives. We only need to remember:
 \`\`\`
@@ -285,19 +287,20 @@ sec(0) + tan(0) = 1 + 0 = 1
 **Result:**
 \`\`\`
 ∫₀^(π/6) sec x dx = ln(√3) - ln(1) = ln(√3)
-\`\`\`
-
----
-
-### Applications of Integration
-
-**Problem A — Volume of intersecting cylinders**
-
-**Question:** Two cylinders each with radius 1 intersect at right angles and their centers also intersect. What is the volume of the intersection?
-
-**Solution:**
-
-This is an application of integration for volume calculation. Orient the cylinders so their axes lie along the x-axis and y-axis respectively:
+\`\`\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-2-01-volume-of-intersecting-cylinders",
+            chapter: 3,
+            section: "3.2",
+            sectionTitle: "Integration",
+            title: "Volume of intersecting cylinders",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Two cylinders each with radius 1 intersect at right angles and their centers also intersect. What is the volume of the intersection?`,
+            solution: `This is an application of integration for volume calculation. Orient the cylinders so their axes lie along the x-axis and y-axis respectively:
 \`\`\`
 Cylinder 1 (axis along x): y² + z² ≤ 1
 Cylinder 2 (axis along y): x² + z² ≤ 1
@@ -333,17 +336,24 @@ A_circle / A_square = π(1-z²) / 4(1-z²) = π/4    for all z
 Since this ratio is constant for every z-slice:
 \`\`\`
 V_sphere / V_intersection = π/4  →  V_intersection = (4/π) × V_sphere = (4/π) × (4π/3) = 16/3  ✓
-\`\`\`
-
----
-
-**Problem B — Snow plow problem**
-
-**Question:** Snow began falling at a constant rate some time before noon. At noon, a snow plow began clearing a road, removing a constant volume of snow per unit time. At 1 pm it had moved 2 miles; at 2 pm, 3 miles. When did the snow begin to fall?
-
-**Solution:**
-
-Let \`t = 0\` denote noon and let \`T\` be the number of hours before noon when snow began falling. Define:
+\`\`\``,
+            hints: [],
+            finalAnswer: "`V = 16/3`",
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-2-02-snow-plow-problem",
+            chapter: 3,
+            section: "3.2",
+            sectionTitle: "Integration",
+            title: "Snow plow problem",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Snow began falling at a constant rate some time before noon. At noon, a snow plow began clearing a road, removing a constant volume of snow per unit time. At 1 pm it had moved 2 miles; at 2 pm, 3 miles. When did the snow begin to fall?`,
+            solution: `Let \`t = 0\` denote noon and let \`T\` be the number of hours before noon when snow began falling. Define:
 - \`c₁\` = volume of snow the plow removes per hour (constant)
 - \`c₂\` = rate of cross-sectional area increase per hour (constant snowfall rate)
 - \`A(t) = c₂(t + T)\` = cross-sectional area of snow at time \`t\` after noon
@@ -392,21 +402,23 @@ T = 1/k = 2/(1 + √5) = (√5 - 1)/2 ≈ 0.618 hours ≈ 37 minutes
 
 **The snow began to fall approximately (√5−1)/2 hours ≈ 37 minutes before noon.**
 
-> This problem tests analytical skills, integration knowledge, and algebra. The key steps are: (1) correctly modeling the plow speed, (2) setting up the distance integrals, and (3) solving the resulting transcendental equation.
-
----
-
-### Expected Value Using Integration
-
-Integration is used extensively in probability to compute conditional and unconditional expectations. A key example:
-
-**Problem — E[X | X > 0] for a standard normal**
-
-**Question:** If \`X ~ N(0, 1)\`, what is \`E[X | X > 0]\`?
-
-**Solution:**
-
-The standard normal pdf is \`f(x) = (1/√(2π)) e^(-x²/2)\`. The conditional expectation is:
+> This problem tests analytical skills, integration knowledge, and algebra. The key steps are: (1) correctly modeling the plow speed, (2) setting up the distance integrals, and (3) solving the resulting transcendental equation.`,
+            hints: [],
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-2-03-e-x-x-0-for-a-standard-normal",
+            chapter: 3,
+            section: "3.2",
+            sectionTitle: "Integration",
+            title: "E[X | X > 0] for a standard normal",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `If \`X ~ N(0, 1)\`, what is \`E[X | X > 0]\`?`,
+            solution: `The standard normal pdf is \`f(x) = (1/√(2π)) e^(-x²/2)\`. The conditional expectation is:
 \`\`\`
 E[X | X > 0] = ∫₀^∞ x · f(x) dx  /  P(X > 0)
 \`\`\`
@@ -426,14 +438,18 @@ E[X | X > 0] = (1/√(2π)) / (1/2) = 2/√(2π) = √(2/π) ≈ 0.7979
 **Result: \`E[X | X > 0] = √(2/π)\`**
 
 ---`,
+            hints: [],
+            finalAnswer: "`E[X | X > 0] = √(2/π)`",
+          },
+        },
+      ],
     },
     {
       id: "3.3",
       title: "Partial Derivatives and Multiple Integrals",
-      problemCount: 1,
-      content: `## 3.3 Partial Derivatives and Multiple Integrals
-
-**Partial derivative** of \`w = f(x, y)\` with respect to \`x\`:
+      problemCount: 0,
+      blocks: [
+        { kind: 'prose', markdown: `**Partial derivative** of \`w = f(x, y)\` with respect to \`x\`:
 \`\`\`
 ∂f/∂x (x₀, y₀) = lim(Δx→0) [f(x₀ + Δx, y₀) - f(x₀, y₀)] / Δx
 \`\`\`
@@ -456,11 +472,8 @@ The Cartesian coordinates \`(x, y)\` map to polar coordinates via \`x = r cosθ\
 ∬_R f(x, y) dx dy = ∬ f(r cosθ, r sinθ) · r dr dθ
 \`\`\`
 
-The extra factor of \`r\` (the Jacobian) is essential.
-
----
-
-**Problem — Compute \`∫₋∞^∞ e^(-x²/2) dx\`**
+The extra factor of \`r\` (the Jacobian) is essential.` },
+        { kind: 'prose', markdown: `**Problem — Compute \`∫₋∞^∞ e^(-x²/2) dx\`**
 
 **Solution:**
 
@@ -483,15 +496,15 @@ Evaluate using the substitution \`u = -r²/2\`, \`du = -r dr\`:
 
 Therefore: \`I² = 2π · 1 = 2π\`, so **\`I = ∫₋∞^∞ e^(-x²/2) dx = √(2π)\`**.
 
----`,
+---` },
+      ],
     },
     {
       id: "3.4",
       title: "Important Calculus Methods",
-      problemCount: 5,
-      content: `## 3.4 Important Calculus Methods
-
-### Taylor's Series
+      problemCount: 3,
+      blocks: [
+        { kind: 'prose', markdown: `### Taylor's Series
 
 **One-dimensional Taylor's series** expands \`f(x)\` around a point \`x = x₀\`:
 \`\`\`
@@ -517,11 +530,8 @@ cos x = Σ (-1)ⁿ x^(2n)/(2n)!      = 1 - x²/2! + x⁴/4! - x⁶/6! + ...
 Rₙ(x) = f⁽ⁿ⁺¹⁾(x̄) / (n+1)! · (x - x₀)^(n+1)    for some x̄ between x₀ and x
 \`\`\`
 
-If \`M = max|f⁽ⁿ⁺¹⁾(x)|\` over \`[x₀, x]\`, then \`|Rₙ(x)| ≤ M · |x - x₀|^(n+1) / (n+1)!\`
-
----
-
-**Problem A — What is i^i?**
+If \`M = max|f⁽ⁿ⁺¹⁾(x)|\` over \`[x₀, x]\`, then \`|Rₙ(x)| ≤ M · |x - x₀|^(n+1) / (n+1)!\`` },
+        { kind: 'prose', markdown: `**Problem A — What is i^i?**
 
 **Solution:**
 
@@ -547,17 +557,20 @@ Since \`e^(iπ/2) = i\`, we have \`ln i = iπ/2\`. Therefore:
 i^i = e^(i · ln i) = e^(i · iπ/2) = e^(i²π/2) = e^(-π/2) ≈ 0.2079
 \`\`\`
 
-**Result: \`i^i = e^(-π/2)\`** — a real number.
-
----
-
-**Problem B — Bernoulli's Inequality**
-
-**Question:** Prove that \`(1 + x)ⁿ > 1 + nx\` for all \`x > -1\` and all integers \`n ≥ 2\`.
-
-**Solution 1 — Taylor's series:**
-
-Let \`f(x) = (1 + x)ⁿ\`. Note that \`1 + nx\` is the first two terms of the Taylor series of \`f(x)\` around \`x₀ = 0\`.
+**Result: \`i^i = e^(-π/2)\`** — a real number.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-4-01-bernoulli-s-inequality",
+            chapter: 3,
+            section: "3.4",
+            sectionTitle: "Important Calculus Methods",
+            title: "Bernoulli's Inequality",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Prove that \`(1 + x)ⁿ > 1 + nx\` for all \`x > -1\` and all integers \`n ≥ 2\`.`,
+            solution: `Let \`f(x) = (1 + x)ⁿ\`. Note that \`1 + nx\` is the first two terms of the Taylor series of \`f(x)\` around \`x₀ = 0\`.
 
 Applying the Taylor series with \`x₀ = 0\`:
 \`\`\`
@@ -583,11 +596,11 @@ Therefore the remainder term is positive, and \`f(x) = (1+x)ⁿ > 1 + nx\`. ✓
              > 1 + (k+1)x    [since kx² ≥ 0]
 \`\`\`
 
-By induction, the inequality holds for all integers \`n ≥ 2\`. ✓
-
----
-
-### Newton's Method
+By induction, the inequality holds for all integers \`n ≥ 2\`. ✓`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `### Newton's Method
 
 Newton's method (also known as the Newton-Raphson method) is an iterative process for solving \`f(x) = 0\`. Starting from an initial guess \`x₀\`:
 \`\`\`
@@ -601,11 +614,8 @@ x_{n+1} = xₙ - f(xₙ) / f'(xₙ)
 |x_{n+1} - x*| / |xₙ - x*|² < C < 1    where x* is the true root
 \`\`\`
 
-This means errors decrease roughly as the square at each step. Convergence is NOT guaranteed if \`x₀\` is far from the root or if \`f(x)\` is not differentiable near the root.
-
----
-
-**Problem A — Approximate √37 to three digits**
+This means errors decrease roughly as the square at each step. Convergence is NOT guaranteed if \`x₀\` is far from the root or if \`f(x)\` is not differentiable near the root.` },
+        { kind: 'prose', markdown: `**Problem A — Approximate √37 to three digits**
 
 **Solution:** Let \`f(x) = x² - 37\`. We want to solve \`f(x) = 0\`. A natural initial guess is \`x₀ = 6\` (since \`6² = 36 ≈ 37\`).
 
@@ -626,17 +636,20 @@ Verify: \`6.083² ≈ 37.003\` ✓
 (6 + y)² = 37  →  12y + y² = 1  →  y ≈ 1/12 = 0.083    (ignoring the y² term)
 \`\`\`
 
-**Result: √37 ≈ 6.083**
-
----
-
-**Problem B — Root-finding algorithms**
-
-**Question:** Describe some root-finding algorithms for \`f(x) = 0\` (differentiable \`f(x)\`).
-
-**Solution:**
-
-Besides Newton's method, two important alternatives are the bisection method and the secant method.
+**Result: √37 ≈ 6.083**` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-4-02-root-finding-algorithms",
+            chapter: 3,
+            section: "3.4",
+            sectionTitle: "Important Calculus Methods",
+            title: "Root-finding algorithms",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Describe some root-finding algorithms for \`f(x) = 0\` (differentiable \`f(x)\`).`,
+            solution: `Besides Newton's method, two important alternatives are the bisection method and the secant method.
 
 **Bisection method:**
 
@@ -662,11 +675,11 @@ This replaces the exact derivative \`f'(xₙ)\` in Newton's method with a finite
 |--------|-----------------|-------------------|-------------|
 | Newton | Quadratic (~2) | Yes | No |
 | Secant | Superlinear (~1.618) | No | No |
-| Bisection | Linear (<1) | No | Yes (given bracket) |
-
----
-
-### Lagrange Multipliers
+| Bisection | Linear (<1) | No | Yes (given bracket) |`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `### Lagrange Multipliers
 
 The method of Lagrange multipliers finds local maxima/minima of a multivariate function subject to equality constraints.
 
@@ -675,17 +688,20 @@ For function \`f(x₁, ..., xₙ)\` with gradient \`∇f(x)\` and \`k\` constrai
 ∇f(x) + λ₁∇g₁(x) + λ₂∇g₂(x) + ... + λₖ∇gₖ(x) = 0
 \`\`\`
 
-where \`λ₁, ..., λₖ\` are called the **Lagrange multipliers**.
-
----
-
-**Problem — Distance from origin to a plane**
-
-**Question:** What is the distance from the origin to the plane \`2x + 3y + 4z = 12\`?
-
-**Solution:**
-
-Minimizing distance \`D\` is equivalent to minimizing \`D² = f(x, y, z) = x² + y² + z²\` subject to \`g(x, y, z) = 2x + 3y + 4z - 12 = 0\`.
+where \`λ₁, ..., λₖ\` are called the **Lagrange multipliers**.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-4-03-distance-from-origin-to-a-plane",
+            chapter: 3,
+            section: "3.4",
+            sectionTitle: "Important Calculus Methods",
+            title: "Distance from origin to a plane",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `What is the distance from the origin to the plane \`2x + 3y + 4z = 12\`?`,
+            solution: `Minimizing distance \`D\` is equivalent to minimizing \`D² = f(x, y, z) = x² + y² + z²\` subject to \`g(x, y, z) = 2x + 3y + 4z - 12 = 0\`.
 
 Applying Lagrange conditions \`∇f + λ∇g = 0\`:
 \`\`\`
@@ -722,29 +738,38 @@ D = |d| / √(a² + b² + c²)
 Applying: \`D = 12/√(4 + 9 + 16) = 12/√29\` ✓
 
 ---`,
+            hints: [],
+            finalAnswer: "`D = 12/√29`",
+          },
+        },
+      ],
     },
     {
       id: "3.5",
       title: "Ordinary Differential Equations",
       problemCount: 5,
-      content: `## 3.5 Ordinary Differential Equations
-
-Four ODE patterns commonly tested in quantitative interviews:
+      blocks: [
+        { kind: 'prose', markdown: `Four ODE patterns commonly tested in quantitative interviews:
 
 ### Separable Differential Equations
 
 A **separable ODE** has the form \`dy/dx = g(x)·h(y)\`. Separating variables:
 \`\`\`
 dy/h(y) = g(x)dx    →    ∫ dy/h(y) = ∫ g(x)dx
-\`\`\`
-
----
-
-**Problem A — Separable ODE with initial condition**
-
-**Question:** Solve \`y' + 6xy = 0\`, \`y(0) = 1\`.
-
-**Solution:** Separate variables with \`g(x) = -6x\` and \`h(y) = y\`:
+\`\`\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-5-01-separable-ode-with-initial-condition",
+            chapter: 3,
+            section: "3.5",
+            sectionTitle: "Ordinary Differential Equations",
+            title: "Separable ODE with initial condition",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Solve \`y' + 6xy = 0\`, \`y(0) = 1\`.`,
+            solution: `Separate variables with \`g(x) = -6x\` and \`h(y) = y\`:
 \`\`\`
 dy/y = -6x dx
 ∫ dy/y = ∫ -6x dx    →    ln y = -3x² + c    →    y = Ae^(-3x²)
@@ -752,17 +777,24 @@ dy/y = -6x dx
 
 Applying \`y(0) = 1\`: \`A = 1\`.
 
-**Result: \`y = e^(-3x²)\`**
-
----
-
-**Problem B — Change of variable**
-
-**Question:** Solve \`y' = (x - y)/(x + y)\`.
-
-> **Hint:** Introduce the substitution \`z = x + y\`.
-
-**Solution:** The equation is not separable in its original form. Let \`z = x + y\`, so \`y = z - x\` and \`y' = z' - 1\`. Substituting:
+**Result: \`y = e^(-3x²)\`**`,
+            hints: [],
+            finalAnswer: "`y = e^(-3x²)`",
+          },
+        },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-5-02-change-of-variable",
+            chapter: 3,
+            section: "3.5",
+            sectionTitle: "Ordinary Differential Equations",
+            title: "Change of variable",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Solve \`y' = (x - y)/(x + y)\`.`,
+            solution: `The equation is not separable in its original form. Let \`z = x + y\`, so \`y = z - x\` and \`y' = z' - 1\`. Substituting:
 \`\`\`
 z' - 1 = (x - (z - x)) / z = (2x - z) / z
 z' = 1 + (2x - z)/z = (z + 2x - z)/z = 2x/z
@@ -783,11 +815,12 @@ Substituting back \`z = x + y\`:
 Verification: Differentiating \`y² + 2xy - x² = C\` implicitly:
 \`\`\`
 2y·y' + 2y + 2x·y' - 2x = 0  →  y'(y + x) = x - y  →  y' = (x - y)/(x + y)  ✓
-\`\`\`
-
----
-
-### First-Order Linear Differential Equations
+\`\`\``,
+            hints: [`Introduce the substitution \`z = x + y\`.`],
+            finalAnswer: "`y² + 2xy - x² = C`",
+          },
+        },
+        { kind: 'prose', markdown: `### First-Order Linear Differential Equations
 
 A **first-order linear ODE** has the form:
 \`\`\`
@@ -802,15 +835,20 @@ I(x) = e^(∫ P(x) dx)
 Multiplying through: \`(I(x)y)' = I(x)Q(x)\`. Integrating:
 \`\`\`
 y = [∫ I(x)Q(x) dx] / I(x)
-\`\`\`
-
----
-
-**Problem — First-order linear ODE**
-
-**Question:** Solve \`y' + y/x = 1/x²\`, \`y(1) = 1\`, where \`x > 0\`.
-
-**Solution:** Here \`P(x) = 1/x\` and \`Q(x) = 1/x²\`.
+\`\`\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-5-03-first-order-linear-ode",
+            chapter: 3,
+            section: "3.5",
+            sectionTitle: "Ordinary Differential Equations",
+            title: "First-order linear ODE",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Solve \`y' + y/x = 1/x²\`, \`y(1) = 1\`, where \`x > 0\`.`,
+            solution: `Here \`P(x) = 1/x\` and \`Q(x) = 1/x²\`.
 
 Integrating factor: \`I(x) = e^(∫ 1/x dx) = e^(ln x) = x\`
 
@@ -821,11 +859,12 @@ xy = ∫ (1/x) dx = ln x + c    →    y = (ln x + c)/x
 
 Applying \`y(1) = 1\`: \`c/1 = 1\` → \`c = 1\`.
 
-**Result: \`y = (ln x + 1)/x\`**
-
----
-
-### Homogeneous Linear Equations
+**Result: \`y = (ln x + 1)/x\`**`,
+            hints: [],
+            finalAnswer: "`y = (ln x + 1)/x`",
+          },
+        },
+        { kind: 'prose', markdown: `### Homogeneous Linear Equations
 
 A **homogeneous second-order linear ODE** has the form:
 \`\`\`
@@ -842,15 +881,20 @@ If \`y₁\` and \`y₂\` are linearly independent solutions, then \`y(x) = c₁y
 | Real, repeated | \`r₁ = r₂ = r\` | \`y = c₁e^(rx) + c₂xe^(rx)\` |
 | Complex | \`r = α ± βi\` | \`y = e^(αx)[c₁cos(βx) + c₂sin(βx)]\` |
 
-> **Quadratic formula:** \`r = (-b ± √(b²-4ac)) / (2a)\`. You should memorize this or derive it by completing the square: \`(r + b/2a)² = (b²-4ac)/(4a²)\`.
-
----
-
-**Problem — Complex roots ODE**
-
-**Question:** What is the solution of \`y'' + y' + y = 0\`?
-
-**Solution:** Here \`a = b = c = 1\`. The characteristic equation is \`r² + r + 1 = 0\`.
+> **Quadratic formula:** \`r = (-b ± √(b²-4ac)) / (2a)\`. You should memorize this or derive it by completing the square: \`(r + b/2a)² = (b²-4ac)/(4a²)\`.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-5-04-complex-roots-ode",
+            chapter: 3,
+            section: "3.5",
+            sectionTitle: "Ordinary Differential Equations",
+            title: "Complex roots ODE",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `What is the solution of \`y'' + y' + y = 0\`?`,
+            solution: `Here \`a = b = c = 1\`. The characteristic equation is \`r² + r + 1 = 0\`.
 
 Discriminant: \`b² - 4ac = 1 - 4 = -3 < 0\` → complex roots.
 \`\`\`
@@ -860,11 +904,11 @@ r = (-1 ± √(-3)) / 2 = -1/2 ± (√3/2)i
 So \`α = -1/2\` and \`β = √3/2\`. The general solution is:
 \`\`\`
 y = e^(-x/2) [c₁cos(√3x/2) + c₂sin(√3x/2)]
-\`\`\`
-
----
-
-### Nonhomogeneous Linear Equations
+\`\`\``,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `### Nonhomogeneous Linear Equations
 
 A **nonhomogeneous second-order linear ODE** has the form:
 \`\`\`
@@ -878,17 +922,20 @@ y(x) = yₕ(x) + yₚ(x)
 
 where \`yₕ(x)\` is the general solution of the homogeneous equation \`ay'' + by' + cy = 0\`.
 
-> **Key insight:** When \`d(x)\` is a simple polynomial, the particular solution is often a polynomial of the same degree.
-
----
-
-**Problem — Two nonhomogeneous ODEs**
-
-**Question:** Find the solutions of \`y'' + y' + y = 1\` and \`y'' + y' + y = x\`.
-
-**Solution:**
-
-From the previous problem, both ODEs share the same homogeneous solution (since \`a = b = c = 1\`, \`b² - 4ac = -3 < 0\`):
+> **Key insight:** When \`d(x)\` is a simple polynomial, the particular solution is often a polynomial of the same degree.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-5-05-two-nonhomogeneous-odes",
+            chapter: 3,
+            section: "3.5",
+            sectionTitle: "Ordinary Differential Equations",
+            title: "Two nonhomogeneous ODEs",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `Find the solutions of \`y'' + y' + y = 1\` and \`y'' + y' + y = x\`.`,
+            solution: `From the previous problem, both ODEs share the same homogeneous solution (since \`a = b = c = 1\`, \`b² - 4ac = -3 < 0\`):
 \`\`\`
 yₕ(x) = e^(-x/2)[c₁cos(√3x/2) + c₂sin(√3x/2)]
 \`\`\`
@@ -916,14 +963,17 @@ Verify: \`0 + 1 + (x - 1) = x\` ✓
 **General solution: \`y = e^(-x/2)[c₁cos(√3x/2) + c₂sin(√3x/2)] + (x - 1)\`**
 
 ---`,
+            hints: [],
+          },
+        },
+      ],
     },
     {
       id: "3.6",
       title: "Linear Algebra",
       problemCount: 5,
-      content: `## 3.6 Linear Algebra
-
-Linear algebra is used extensively in applied quantitative finance through statistics, optimization, Monte Carlo simulation, signal processing, and more.
+      blocks: [
+        { kind: 'prose', markdown: `Linear algebra is used extensively in applied quantitative finance through statistics, optimization, Monte Carlo simulation, signal processing, and more.
 
 ### Vectors
 
@@ -944,17 +994,20 @@ xᵀy = Σᵢ xᵢyᵢ
 cos θ = xᵀy / (||x|| · ||y||)
 \`\`\`
 
-Vectors \`x\` and \`y\` are **orthogonal** if \`xᵀy = 0\`. The **correlation coefficient** of two random variables can be interpreted as the cosine of the angle between them in Euclidean space: \`ρ = cos θ\`.
-
----
-
-**Problem — Maximum and minimum correlation (vector approach)**
-
-**Question:** There are 3 random variables \`x\`, \`y\`, \`z\`. The correlation between \`x\` and \`y\` is 0.8, and between \`x\` and \`z\` is 0.8. What are the maximum and minimum correlations between \`y\` and \`z\`?
-
-**Solution (geometric):**
-
-Treat \`x\`, \`y\`, \`z\` as unit vectors. Let \`θ\` be the angle between \`x\` and \`y\`, so \`cos θ = ρ_xy = 0.8\`. The angle between \`x\` and \`z\` is also \`θ\`.
+Vectors \`x\` and \`y\` are **orthogonal** if \`xᵀy = 0\`. The **correlation coefficient** of two random variables can be interpreted as the cosine of the angle between them in Euclidean space: \`ρ = cos θ\`.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-6-01-maximum-and-minimum-correlation-vector-approach",
+            chapter: 3,
+            section: "3.6",
+            sectionTitle: "Linear Algebra",
+            title: "Maximum and minimum correlation (vector approach)",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `There are 3 random variables \`x\`, \`y\`, \`z\`. The correlation between \`x\` and \`y\` is 0.8, and between \`x\` and \`z\` is 0.8. What are the maximum and minimum correlations between \`y\` and \`z\`?`,
+            solution: `Treat \`x\`, \`y\`, \`z\` as unit vectors. Let \`θ\` be the angle between \`x\` and \`y\`, so \`cos θ = ρ_xy = 0.8\`. The angle between \`x\` and \`z\` is also \`θ\`.
 
 - **Maximum \`ρ_yz\`:** When \`y\` and \`z\` point in the same direction, the angle between them is 0, so \`ρ_yz = 1\`.
 
@@ -969,11 +1022,12 @@ cos(2θ) = 2cos²θ - 1 = 2(0.8)² - 1 = 2(0.64) - 1 = 0.28
 y · z = (0.8)(0.8) + (0.6)(-0.6) = 0.64 - 0.36 = 0.28  ✓
 \`\`\`
 
-**Result: Maximum correlation = 1, Minimum correlation = 0.28.**
-
----
-
-### QR Decomposition and Linear Least Squares
+**Result: Maximum correlation = 1, Minimum correlation = 0.28.**`,
+            hints: [],
+            finalAnswer: "Maximum correlation = 1, Minimum correlation = 0.28",
+          },
+        },
+        { kind: 'prose', markdown: `### QR Decomposition and Linear Least Squares
 
 **QR decomposition:** For each nonsingular \`n × n\` matrix \`A\`, there exists a unique pair of an orthogonal matrix \`Q\` (satisfying \`Q⁻¹ = Qᵀ\`) and an upper-triangular matrix \`R\` with positive diagonal elements such that \`A = QR\`.
 
@@ -982,17 +1036,20 @@ To solve the linear system \`Ax = b\`:
 QRx = b  →  Rx = Qᵀb
 \`\`\`
 
-Since \`R\` is upper-triangular, solve for \`xₙ\` first (from the last equation \`Rₙₙxₙ = (Qᵀb)ₙ\`), then recursively solve for \`xᵢ\` for \`i = n-1, n-2, ..., 1\` (**back substitution**).
-
----
-
-**Problem — Linear least squares regression**
-
-**Question:** If your programming language has no built-in least squares function, how would you design an algorithm?
-
-**Solution:**
-
-A linear regression with \`n\` observations and \`p\` regressors (including intercept):
+Since \`R\` is upper-triangular, solve for \`xₙ\` first (from the last equation \`Rₙₙxₙ = (Qᵀb)ₙ\`), then recursively solve for \`xᵢ\` for \`i = n-1, n-2, ..., 1\` (**back substitution**).` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-6-02-linear-least-squares-regression",
+            chapter: 3,
+            section: "3.6",
+            sectionTitle: "Linear Algebra",
+            title: "Linear least squares regression",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `If your programming language has no built-in least squares function, how would you design an algorithm?`,
+            solution: `A linear regression with \`n\` observations and \`p\` regressors (including intercept):
 \`\`\`
 yᵢ = β₀xᵢ₀ + β₁xᵢ₁ + ... + β_{p-1}xᵢ,p-1 + εᵢ    (where xᵢ₀ = 1 ∀i)
 \`\`\`
@@ -1023,11 +1080,11 @@ This is the **normal equation**. Let \`A = XᵀX\` (a \`p×p\` symmetric matrix)
 4. No perfect multicollinearity: \`ρ(xᵢ, xⱼ) ≠ ±1\` for \`i ≠ j\`
 5. Exogeneity: \`ε\` and \`xᵢ\` are independent
 
-When these assumptions hold, OLS is the **Best Linear Unbiased Estimator (BLUE)**. Violations require remedies from econometrics.
-
----
-
-### Determinant, Eigenvalue, and Eigenvector
+When these assumptions hold, OLS is the **Best Linear Unbiased Estimator (BLUE)**. Violations require remedies from econometrics.`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `### Determinant, Eigenvalue, and Eigenvector
 
 **Determinant:** For an \`n×n\` matrix \`A = {Aᵢⱼ}\`:
 \`\`\`
@@ -1068,17 +1125,20 @@ Every nonzero \`x\` satisfying this is an **eigenvector** of \`A\` associated wi
 **Diagonalization:** If \`A\` has \`n\` linearly independent eigenvectors (guaranteed when all \`n\` eigenvalues are real and distinct), then with \`X = [x₁ | x₂ | ... | xₙ]\` (eigenvector matrix) and \`D = diag(λ₁, ..., λₙ)\`:
 \`\`\`
 X⁻¹AX = D    →    A = XDX⁻¹    →    Aᵏ = XDᵏX⁻¹
-\`\`\`
-
----
-
-**Problem — Eigenvalues and eigenvectors of a 2×2 matrix**
-
-**Question:** For \`A = [[2, 1], [1, 2]]\`, find the eigenvalues and eigenvectors.
-
-**Solution (three approaches):**
-
-**Approach A — Direct definition:**
+\`\`\`` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-6-03-eigenvalues-and-eigenvectors-of-a-2-2-matrix",
+            chapter: 3,
+            section: "3.6",
+            sectionTitle: "Linear Algebra",
+            title: "Eigenvalues and eigenvectors of a 2×2 matrix",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `For \`A = [[2, 1], [1, 2]]\`, find the eigenvalues and eigenvectors.`,
+            solution: `**Approach A — Direct definition:**
 
 Let \`Ax = λx\` with eigenvector \`x = [x₁, x₂]ᵀ\`:
 \`\`\`
@@ -1104,11 +1164,11 @@ det(A - λI) = (2 - λ)² - 1 = λ² - 4λ + 3 = (λ-1)(λ-3) = 0
 det(A) = 2×2 - 1×1 = 3 = λ₁λ₂
 trace(A) = 2 + 2 = 4 = λ₁ + λ₂
 \`\`\`
-Solving: \`λ₁ = 1\`, \`λ₂ = 3\` ✓
-
----
-
-### Positive Semidefinite and Positive Definite Matrices
+Solving: \`λ₁ = 1\`, \`λ₂ = 3\` ✓`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `### Positive Semidefinite and Positive Definite Matrices
 
 When \`A\` is a **symmetric** \`n×n\` matrix (as in covariance and correlation matrices), all eigenvalues are real. Eigenvectors corresponding to distinct eigenvalues are orthogonal.
 
@@ -1122,17 +1182,20 @@ When \`A\` is a **symmetric** \`n×n\` matrix (as in covariance and correlation 
 2. All eigenvalues of \`A\` are positive
 3. All leading submatrices \`Aₖ\` (\`K = 1, ..., n\`) have positive determinants
 
-Covariance/correlation matrices must be PSD. If there is no perfect linear dependence among variables, they must be PD.
-
----
-
-**Problem — Correlation bounds (PSD approach)**
-
-**Question:** With \`ρ_xy = ρ_xz = 0.8\`, what are the maximum and minimum values of \`ρ_yz\`?
-
-**Solution:**
-
-The correlation matrix for \`(x, y, z)\` is:
+Covariance/correlation matrices must be PSD. If there is no perfect linear dependence among variables, they must be PD.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-6-04-correlation-bounds-psd-approach",
+            chapter: 3,
+            section: "3.6",
+            sectionTitle: "Linear Algebra",
+            title: "Correlation bounds (PSD approach)",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `With \`ρ_xy = ρ_xz = 0.8\`, what are the maximum and minimum values of \`ρ_yz\`?`,
+            solution: `The correlation matrix for \`(x, y, z)\` is:
 \`\`\`
 P = | 1    0.8   0.8 |
     | 0.8  1     p   |
@@ -1157,11 +1220,12 @@ p² - 1.28p + 0.28 ≤ 0
 
 **Result: Maximum \`ρ_yz = 1\`, Minimum \`ρ_yz = 0.28\`**
 
-> Both methods (vector geometry and PSD condition) give the same answer. The vector method uses \`cos(2θ) = 2cos²θ - 1 = 2(0.64) - 1 = 0.28\` and is more intuitive; the PSD method is more algebraic.
-
----
-
-### LU Decomposition and Cholesky Decomposition
+> Both methods (vector geometry and PSD condition) give the same answer. The vector method uses \`cos(2θ) = 2cos²θ - 1 = 2(0.64) - 1 = 0.28\` and is more intuitive; the PSD method is more algebraic.`,
+            hints: [],
+            finalAnswer: "Maximum `ρ_yz = 1`, Minimum `ρ_yz = 0.28`",
+          },
+        },
+        { kind: 'prose', markdown: `### LU Decomposition and Cholesky Decomposition
 
 **LU decomposition:** For a nonsingular \`n×n\` matrix \`A\`, express as the product of a lower and upper triangular matrix:
 \`\`\`
@@ -1177,17 +1241,20 @@ Applications:
 A = RᵀR
 \`\`\`
 
-where \`R\` is a unique upper-triangular matrix with positive diagonal entries. This is an LU decomposition with \`L = Rᵀ\`, exploiting symmetry for efficiency.
-
----
-
-**Problem — Generating correlated normal random variables**
-
-**Question:** How do you generate two \`N(0,1)\` random variables with correlation \`ρ\`, given a standard normal random number generator?
-
-**Solution:**
-
-Let \`z₁\`, \`z₂\` be independent \`N(0,1)\` random variables. Generate:
+where \`R\` is a unique upper-triangular matrix with positive diagonal entries. This is an LU decomposition with \`L = Rᵀ\`, exploiting symmetry for efficiency.` },
+        {
+          kind: 'problem',
+          problem: {
+            id: "ch3-3-6-05-generating-correlated-normal-random-variables",
+            chapter: 3,
+            section: "3.6",
+            sectionTitle: "Linear Algebra",
+            title: "Generating correlated normal random variables",
+            difficulty: "medium",
+            keyTechnique: "",
+            tags: ["calculus","linear-algebra","derivatives","integration","ode","matrices"],
+            setup: `How do you generate two \`N(0,1)\` random variables with correlation \`ρ\`, given a standard normal random number generator?`,
+            solution: `Let \`z₁\`, \`z₂\` be independent \`N(0,1)\` random variables. Generate:
 \`\`\`
 x₁ = z₁
 x₂ = ρz₁ + √(1 - ρ²) z₂
@@ -1200,11 +1267,11 @@ Var(x₂) = ρ²·Var(z₁) + (1 - ρ²)·Var(z₂) = ρ² + (1 - ρ²) = 1  ✓
 Cov(x₁, x₂) = Cov(z₁, ρz₁ + √(1-ρ²)z₂) = ρ·Var(z₁) + 0 = ρ  ✓
 \`\`\`
 
-This is a basic application of Cholesky decomposition. The Cholesky factor of the 2×2 correlation matrix \`[[1, ρ], [ρ, 1]]\` is \`R = [[1, 0], [ρ, √(1-ρ²)]]\`, and \`x = Rᵀz\` produces the correlated pair.
-
----
-
-**Generalization to n dimensions:**
+This is a basic application of Cholesky decomposition. The Cholesky factor of the 2×2 correlation matrix \`[[1, ρ], [ρ, 1]]\` is \`R = [[1, 0], [ρ, √(1-ρ²)]]\`, and \`x = Rᵀz\` produces the correlated pair.`,
+            hints: [],
+          },
+        },
+        { kind: 'prose', markdown: `**Generalization to n dimensions:**
 
 For an \`n\`-dimensional multivariate normal \`X = [X₁, ..., Xₙ]ᵀ ~ N(μ, Σ)\` with mean vector \`μ\` and positive definite covariance matrix \`Σ\`:
 
@@ -1219,11 +1286,9 @@ For a positive definite covariance matrix \`Σ\`: \`V = U\`, so \`Σ = UDUᵀ\`,
 Σ = UD^(1/2)(UD^(1/2))ᵀ    →    X = μ + (UD^(1/2))Z
 \`\`\`
 
-> For the multivariate normal, the probability density function is: \`f(x) = (1/((2π)^(n/2)·√det(Σ))) · exp(-½(x-μ)ᵀΣ⁻¹(x-μ))\`
-
----
-
-*End of Chapter 3*`,
+> For the multivariate normal, the probability density function is: \`f(x) = (1/((2π)^(n/2)·√det(Σ))) · exp(-½(x-μ)ᵀΣ⁻¹(x-μ))\`` },
+        { kind: 'prose', markdown: `*End of Chapter 3*` },
+      ],
     },
   ],
 };
