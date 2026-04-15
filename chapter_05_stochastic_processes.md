@@ -225,7 +225,7 @@ If both players are rational and player 1 announces their sequence first, player
 | Player 1 | Player 2's best response | P(Player 2 wins) |
 |----------|-------------------------|-----------------|
 | HHH | THH | **7/8** |
-| THH | TTH | **3/4** (or HTH: 1/2)  |
+| THH | TTH | **2/3** |
 | HTH | HHT | **2/3** |
 | HHT | THH | **3/4** |
 | TTH | HTT | **3/4** |
@@ -483,7 +483,7 @@ Working backwards from the terminal conditions produces all payoffs and bets:
 | (3,1) | 75 | 25 |
 | (2,2) | 0 | 50 |
 | (1,3) | −75 | 25 |
-| (0,0) | −31.25 | 31.25 |
+| (0,0) | 0 | 31.25 |
 
 > **Connection to options pricing:** This is structurally identical to pricing a European binary option using a binomial tree. The bet size at each state is the delta of a dynamic hedge.
 
