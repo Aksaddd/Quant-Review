@@ -88,6 +88,8 @@ export interface TextSettings {
   lineHeight: number;     // 1.4–2.4
   letterSpacing: number;  // 0–0.1 em
   theme: 'dark' | 'sepia' | 'light';
+  /** Multiplier applied to math display blocks + inline KaTeX (0.9–1.4). */
+  mathScale: number;
 }
 
 export const DEFAULT_TEXT_SETTINGS: TextSettings = {
@@ -96,6 +98,7 @@ export const DEFAULT_TEXT_SETTINGS: TextSettings = {
   lineHeight: 1.8,
   letterSpacing: 0.01,
   theme: 'light',
+  mathScale: 1.1,
 };
 
 // ── Chapter 1 Principle ───────────────────────

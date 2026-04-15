@@ -23,6 +23,7 @@ export const FONT_FAMILIES: { value: FontFamily; label: string; css: string }[] 
 export const FONT_SIZE_RANGE  = { min: 13, max: 24, step: 1 };
 export const LINE_HEIGHT_RANGE = { min: 1.3, max: 2.4, step: 0.1 };
 export const LETTER_SPACING_RANGE = { min: -0.02, max: 0.08, step: 0.01 };
+export const MATH_SCALE_RANGE  = { min: 0.9, max: 1.4, step: 0.05 };
 
 /* ── Context type ────────────────────────────────────────────────────────── */
 interface TextSettingsContextValue {
@@ -32,6 +33,7 @@ interface TextSettingsContextValue {
   setLineHeight: (v: number) => void;
   setLetterSpacing: (v: number) => void;
   setTheme: (v: TextSettings['theme']) => void;
+  setMathScale: (v: number) => void;
   reset: () => void;
   cssVars: React.CSSProperties;
 }
@@ -46,9 +48,10 @@ export function TextSettingsProvider({
 }) {
   const [settings, setSettings] = useState<TextSettings>(DEFAULT_TEXT_SETTINGS);
 
-  /* Hydrate on mount */
+  /* Hydrate on mount — backfill missing fields for users on older saved settings */
   useEffect(() => {
-    setSettings(loadTextSettings());
+    const loaded = loadTextSettings();
+    setSettings({ ...DEFAULT_TEXT_SETTINGS, ...loaded });
   }, []);
 
   /* Persist on change */
@@ -72,6 +75,10 @@ export function TextSettingsProvider({
       '--reading-letter-spacing',
       `${settings.letterSpacing}em`
     );
+    document.documentElement.style.setProperty(
+      '--math-scale',
+      `${settings.mathScale}`
+    );
   }, [settings]);
 
   const update = useCallback(
@@ -85,6 +92,7 @@ export function TextSettingsProvider({
   const setLineHeight    = useCallback((v: number) => update({ lineHeight: v }), [update]);
   const setLetterSpacing = useCallback((v: number) => update({ letterSpacing: v }), [update]);
   const setTheme         = useCallback((v: TextSettings['theme']) => update({ theme: v }), [update]);
+  const setMathScale     = useCallback((v: number) => update({ mathScale: v }), [update]);
   const reset            = useCallback(() => setSettings(DEFAULT_TEXT_SETTINGS), []);
 
   /* CSS vars object for inline style application */
@@ -94,6 +102,7 @@ export function TextSettingsProvider({
       '--reading-font-size':       `${settings.fontSize}px`,
       '--reading-line-height':     `${settings.lineHeight}`,
       '--reading-letter-spacing':  `${settings.letterSpacing}em`,
+      '--math-scale':              `${settings.mathScale}`,
       fontFamily:      fontEntry?.css ?? FONT_FAMILIES[0].css,
       fontSize:        `${settings.fontSize}px`,
       lineHeight:      `${settings.lineHeight}`,
@@ -109,10 +118,11 @@ export function TextSettingsProvider({
       setLineHeight,
       setLetterSpacing,
       setTheme,
+      setMathScale,
       reset,
       cssVars,
     }),
-    [settings, setFontSize, setFontFamily, setLineHeight, setLetterSpacing, setTheme, reset, cssVars]
+    [settings, setFontSize, setFontFamily, setLineHeight, setLetterSpacing, setTheme, setMathScale, reset, cssVars]
   );
 
   return (
