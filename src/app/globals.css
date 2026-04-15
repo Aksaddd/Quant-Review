@@ -85,8 +85,16 @@
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-lora:  'Iowan Old Style', 'Palatino Linotype', Palatino,
                 'Book Antiqua', Georgia, 'Times New Roman', Times, serif;
-  --font-mono:  ui-monospace, 'SF Mono', Menlo, Monaco, Consolas,
-                'Liberation Mono', 'Courier New', monospace;
+  /* Math-optimized monospace stack. Prefers fonts with strong Unicode
+     coverage for mathematical operators (∑∫≤≥∈≠≈∞√∂∇→⇒⊕⊗), subscripts,
+     and Greek letters. Falls back gracefully through system monospace. */
+  --font-mono:  'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Fira Mono',
+                'SF Mono', 'Roboto Mono', 'Source Code Pro', ui-monospace,
+                Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* User-adjustable math scale (1.00 = default). The Reading Settings
+     drawer exposes this as a slider. */
+  --math-scale: 1.05;
 
   /* Reading mode */
   --reading-bg:             #ffffff;
@@ -195,32 +203,124 @@ body {
 
 .prose-reading em { color: var(--text-secondary); }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   INLINE CODE / INLINE MATH
+   Chapters 3–7 use inline code spans to carry short math expressions
+   (e.g. `x ∈ [0, 1]`). These must be clearly readable alongside prose, so
+   size is close to body text (0.95em, not 0.88em) and the font is the
+   math-optimized monospace stack with tabular figures and slashed zero.
+───────────────────────────────────────────────────────────────────────────── */
 .prose-reading code {
-  background: #f0f1f3;
+  background: var(--rt-code-bg, #f0f1f3);
   border: 1px solid var(--surface-border);
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  font-size: 0.88em;
-  font-family: var(--font-mono), monospace;
-  color: #d4226e;
+  padding: 0.15em 0.42em;
+  border-radius: 5px;
+  font-size: 0.95em;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: "tnum", "zero", "ss01";
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0;
+  color: #a83059;
+  white-space: nowrap;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   DISPLAY MATH (fenced code blocks)
+   The book's source markdown uses ``` … ``` fences to delimit multi-line
+   mathematical expressions. These blocks are treated as "display math":
+   larger than prose, left-aligned, with a blue accent border, generous
+   padding, and a font tuned for mathematical symbols.
+
+   The size scales with --math-scale (adjustable via Reading Settings) and
+   --reading-font-size (the global reading size slider), so power users can
+   crank it up without touching the rest of the UI.
+───────────────────────────────────────────────────────────────────────────── */
 .prose-reading pre {
-  background: #f7f8fa;
+  position: relative;
+  background: var(--rt-code-bg, #f7f8fa);
   border: 1px solid var(--surface-border);
-  padding: 1rem 1.25rem;
-  border-radius: var(--radius-md);
+  border-left: 3px solid var(--ka-blue);
+  padding: 1.15rem 1.4rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   overflow-x: auto;
-  margin: 1.2em 0;
+  margin: 1.6em 0;
+  box-shadow: inset 0 0 0 1px rgba(33, 36, 44, 0.02);
 }
 
-.prose-reading pre code { background: none; border: none; padding: 0; color: var(--text-primary); }
+.prose-reading pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--rt-text, var(--text-primary));
+  /* Compound scaling: base body size × math-scale × 1.02 for display math.
+     At default 17px body × 1.05 math-scale ≈ 18.2px display math. */
+  font-size: calc(1em * var(--math-scale, 1.05));
+  font-family: var(--font-mono);
+  font-weight: 450;
+  font-feature-settings: "tnum", "zero", "ss01", "ss02", "calt" 0;
+  font-variant-numeric: tabular-nums slashed-zero;
+  line-height: 1.75;
+  letter-spacing: 0;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* Subtle scrollbar for wide expressions (never shrink-to-fit) */
+.prose-reading pre::-webkit-scrollbar        { height: 6px; }
+.prose-reading pre::-webkit-scrollbar-track  { background: transparent; }
+.prose-reading pre::-webkit-scrollbar-thumb  { background: var(--surface-border-strong); border-radius: 3px; }
+
+/* Math-detected fenced blocks get an extra typographic polish: slightly
+   bolder accent border, "MATH" eyebrow tag, and a touch more padding so
+   formulas breathe. The `.math-display` class is auto-applied by
+   MarkdownRenderer when math symbols are detected in the block text. */
+.prose-reading pre.math-display {
+  border-left-width: 4px;
+  padding: 1.4rem 1.6rem;
+  margin: 1.8em 0;
+}
+.prose-reading pre.math-display::before {
+  content: "MATH";
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-family: var(--font-inter);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ka-blue);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.prose-reading pre.math-display code {
+  /* Slightly larger than non-math code blocks for maximum legibility */
+  font-size: calc(1.04em * var(--math-scale, 1.05));
+  font-weight: 450;
+}
+[data-reading-theme="dark"] .prose-reading pre.math-display::before {
+  color: #5a9eff;
+  opacity: 0.55;
+}
+
+/* Dark / sepia theme treatments for display math */
+[data-reading-theme="dark"] .prose-reading pre {
+  background: rgba(24, 101, 242, 0.06);
+  border-left-color: #4a90ff;
+}
+[data-reading-theme="sepia"] .prose-reading pre {
+  background: #efe2c4;
+  border-left-color: #a0763a;
+}
+[data-reading-theme="sepia"] .prose-reading code {
+  color: #8a3a52;
+}
 
 .prose-reading table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.2em 0;
-  font-size: 0.9em;
+  margin: 1.4em 0;
+  font-size: 0.98em;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -229,18 +329,25 @@ body {
 .prose-reading th {
   background: #f0f1f3;
   color: var(--text-secondary);
-  padding: 0.6em 0.85em;
+  padding: 0.7em 1em;
   text-align: left;
   font-weight: 600;
-  font-size: 0.8em;
+  font-size: 0.82em;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 1px solid var(--surface-border);
 }
 
 .prose-reading td {
-  padding: 0.6em 0.85em;
+  padding: 0.75em 1em;
   border-bottom: 1px solid var(--surface-border);
+  line-height: 1.65;
+}
+
+/* Math inside tables should use the math mono font too */
+.prose-reading td code,
+.prose-reading th code {
+  font-size: 0.96em;
 }
 
 .prose-reading tr:last-child td { border-bottom: none; }
@@ -510,11 +617,24 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   KATEX
+   KATEX — rendered LaTeX math ($...$ and $$...$$)
+   Per KaTeX author guidance (katex.org/docs/font.html), inline math should
+   be ~1.1× body text (not 2×) so it harmonizes with surrounding prose.
+   Display math (block) is slightly larger and always horizontally scrollable.
 ───────────────────────────────────────────────────────────────────────────── */
-.katex { font-size: 1.9em !important; color: inherit; }
-.katex-display { margin: 1.8em 0 !important; overflow-x: auto; }
-.katex-display > .katex { font-size: 2.6em !important; text-align: left !important; }
+.katex { font-size: calc(1.12em * var(--math-scale, 1.05)) !important; color: inherit; }
+.katex-display {
+  margin: 1.6em 0 !important;
+  padding: 0.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: left !important;
+}
+.katex-display > .katex {
+  font-size: calc(1.32em * var(--math-scale, 1.05)) !important;
+  text-align: left !important;
+  display: inline-block !important;
+}
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SIDEBAR LINKS — KA style

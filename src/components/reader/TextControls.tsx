@@ -8,6 +8,7 @@ import {
   FONT_SIZE_RANGE,
   LINE_HEIGHT_RANGE,
   LETTER_SPACING_RANGE,
+  MATH_SCALE_RANGE,
 } from '@/components/providers/TextSettingsProvider';
 
 const THEMES = [
@@ -17,7 +18,7 @@ const THEMES = [
 ];
 
 export default function TextControls() {
-  const { settings, setFontSize, setFontFamily, setLineHeight, setLetterSpacing, setTheme, reset } = useTextSettings();
+  const { settings, setFontSize, setFontFamily, setLineHeight, setLetterSpacing, setTheme, setMathScale, reset } = useTextSettings();
   const [open, setOpen] = useState(false);
 
   return (
@@ -140,6 +141,31 @@ export default function TextControls() {
                 display={`${settings.letterSpacing.toFixed(2)}em`}
                 onChange={setLetterSpacing}
               />
+
+              {/* Math size — multiplier on display math + KaTeX */}
+              <div>
+                <Slider
+                  label="Math Size"
+                  value={settings.mathScale}
+                  min={MATH_SCALE_RANGE.min}
+                  max={MATH_SCALE_RANGE.max}
+                  step={MATH_SCALE_RANGE.step}
+                  display={`${Math.round(settings.mathScale * 100)}%`}
+                  onChange={setMathScale}
+                />
+                {/* Live preview swatch */}
+                <div
+                  className="mt-2 px-3 py-2 rounded-lg border border-[var(--surface-border)] bg-[var(--surface-3)]"
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: `calc(0.95em * ${settings.mathScale})`,
+                    fontVariantNumeric: 'tabular-nums slashed-zero',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  P(E₁) = (1 − 3/51) / 2 = 8/17
+                </div>
+              </div>
             </div>
           </div>
         </>

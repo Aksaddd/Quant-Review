@@ -11,6 +11,30 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
+/**
+ * Heuristic: does this code block contain mathematical notation?
+ * If so, we apply the math-display treatment (.math-display class) which
+ * styles via globals.css — larger font, accent border, math-tuned typography.
+ *
+ * The book's source uses fenced ``` blocks for both code and math; we detect
+ * math by looking for unicode operators, Greek letters, or formula-like
+ * symbols common to the textbook chapters.
+ */
+const MATH_SIGNAL = /[∑∫√≤≥≠≈∞∂∇∈∉⊂⊆⊕⊗→⇒↔π·×÷±√^∏ΣΘΩαβγδεζηθλμνξρσφψωΔ]|\^[0-9]|_\{|\\frac|\\sqrt|≪|≫|⌈|⌉|⌊|⌋|⊥|∥|∀|∃|∝|≡|≅|→|↦|⟶|ₑ|ₓ|ᵢ|ⁿ|⁻¹|₀|₁|₂|₃|ₙ|⁺|⁻/;
+
+function isMathBlock(node: any): boolean {
+  // Walk the children and concatenate text content
+  const text = extractText(node);
+  return MATH_SIGNAL.test(text);
+}
+
+function extractText(node: any): string {
+  if (typeof node === 'string') return node;
+  if (Array.isArray(node)) return node.map(extractText).join('');
+  if (node?.props?.children) return extractText(node.props.children);
+  return '';
+}
+
 export default function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
   return (
     <div className={`prose-reading ${className}`}>
@@ -18,43 +42,37 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
         remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[rehypeKatex]}
         components={{
-          // Tables
+          // Tables — prose-reading css handles internal styling
           table: ({ children }) => (
             <div className="overflow-x-auto my-4">
-              <table className="w-full text-sm border-collapse">{children}</table>
+              <table>{children}</table>
             </div>
           ),
-          th: ({ children }) => (
-            <th className="px-3 py-2 text-left font-semibold border border-[var(--surface-border-strong)] bg-[var(--surface-3)]">
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td className="px-3 py-2 border border-[var(--surface-border)] align-top">
-              {children}
-            </td>
-          ),
-          // Inline code
-          code: ({ inline, children, ...props }: any) =>
-            inline ? (
-              <code className="px-1.5 py-0.5 rounded-md bg-[var(--surface-3)] font-mono text-[0.85em] text-brand-300">
+          // Inline code — let .prose-reading code handle styling
+          code: ({ inline, className: codeClassName, children, ...props }: any) => {
+            if (inline) {
+              return <code {...props}>{children}</code>;
+            }
+            // Block code: pass through; <pre> wrapper handles container styling
+            return (
+              <code className={codeClassName} {...props}>
                 {children}
               </code>
-            ) : (
-              <code {...props}>{children}</code>
-            ),
-          // Block code
-          pre: ({ children }) => (
-            <pre className="p-4 rounded-xl bg-[var(--surface-3)] border border-[var(--surface-border)] overflow-x-auto font-mono text-sm">
-              {children}
-            </pre>
-          ),
-          // Blockquote
-          blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-brand-500/50 pl-4 my-3 text-[var(--text-secondary)] italic">
-              {children}
-            </blockquote>
-          ),
+            );
+          },
+          // Block code wrapper — auto-detect math content for richer styling
+          pre: ({ children, ...props }: any) => {
+            const looksLikeMath = isMathBlock(children);
+            return (
+              <pre
+                {...props}
+                className={looksLikeMath ? 'math-display' : ''}
+                data-math={looksLikeMath ? 'true' : 'false'}
+              >
+                {children}
+              </pre>
+            );
+          },
         }}
       >
         {content}
