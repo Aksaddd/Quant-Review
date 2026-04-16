@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_05_stochastic_processes.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/chapters/chapter-05-stochastic-processes.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter5: Chapter = {
   id: 'chapter-5',
   number: 5,

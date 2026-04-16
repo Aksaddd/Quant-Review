@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_07_algorithms_numerical_methods.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/chapters/chapter-07-algorithms-numerical-methods.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter7: Chapter = {
   id: 'chapter-7',
   number: 7,

@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_06_finance.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/chapters/chapter-06-finance.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter6: Chapter = {
   id: 'chapter-6',
   number: 6,
