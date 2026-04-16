@@ -11,6 +11,7 @@
 ```
 /
 ├── README.md                          ← You are here (metadata + build instructions)
+├── .env.local.example                 ← Environment variable template (API keys, DB config)
 ├── content/
 │   ├── A Practical Guide To Quantitative Finance Interviews
 │   │   Book by Xinfeng Zhou (chapters)/   ← Quant interview chapter source markdown
@@ -22,7 +23,7 @@
 │   │   ├── chapter-06-finance.md
 │   │   └── chapter-07-algorithms-numerical-methods.md
 │   ├── Agent Roles/                   ← Team composition & role definitions
-│   │   ├── Team Overview              ← CTO strategic doc — phased hiring plan
+│   │   ├── 00_team_overview.md        ← CTO strategic doc — phased hiring plan
 │   │   ├── 01_lead_fullstack_engineer.md
 │   │   ├── 02_ai_ml_engineer.md
 │   │   ├── 03_curriculum_lead.md
@@ -30,9 +31,10 @@
 │   │   ├── 05_frontend_engineer.md
 │   │   ├── 06_data_analytics_engineer.md
 │   │   ├── 07_quant_content_author.md
-│   │   └── 08_growth_community_manager.md
+│   │   ├── 08_growth_community_manager.md
+│   │   └── ai_ml_cost_analysis.md     ← LLM provider cost analysis & optimization
 │   └── Research/                      ← Learning science research
-│       ├── Books/                     ← Source books on learning science
+│       ├── Books/                     ← Six-book cognitive science synthesis sources
 │       │   ├── building-a-second-brain.md
 │       │   ├── how-we-learn.md
 │       │   ├── make-it-stick.md
@@ -40,17 +42,55 @@
 │       │   ├── reality-is-broken.md
 │       │   └── uncommon-sense-teaching.md
 │       └── Synthesis/                 ← Research synthesis & analysis
-│           └── quant-review-book-synthesis.md
+│           ├── quant-review-book-synthesis.md
+│           ├── primary-research-sources.md       ← ~82 peer-reviewed sources
+│           └── gamification-design-research.md   ← Gamification research synthesis
 ├── scripts/
 │   └── gen-chapters.js                ← Parses chapter markdown → TypeScript data
 ├── src/
 │   ├── app/                           ← Next.js app router (pages & layouts)
-│   ├── components/                    ← React components (reader, flashcards, dashboard)
+│   │   └── api/ai/                    ← AI/ML API routes
+│   │       ├── adaptive/              ← Adaptive difficulty engine
+│   │       ├── evaluate-approach/     ← Generate-before-reveal evaluation
+│   │       ├── health/                ← AI service health check
+│   │       ├── interleaved/           ← Cross-chapter interleaved practice
+│   │       ├── socratic/              ← Socratic interview simulation
+│   │       ├── technique-atlas/       ← Technique classification & atlas
+│   │       └── weakness-profile/      ← Personalized weakness analysis
+│   ├── components/                    ← React components
+│   │   ├── flashcards/                ← Flashcard UI + MistakeTaxonomy
+│   │   ├── gamification/              ← FieroOverlay, SessionNudge, XPBar, XPToast
+│   │   ├── layout/                    ← AppShell, FocusModeToggle, PageTransition
+│   │   └── reader/                    ← ProblemBlock, CollapsibleSolution, ScratchpadGate
 │   ├── data/                          ← Structured TypeScript data (problems, flashcards)
 │   ├── hooks/                         ← Custom React hooks
-│   └── lib/                           ← Utilities and services
+│   │   ├── useErrorTracking.ts        ← Mistake taxonomy tracking
+│   │   ├── useInterleaved.ts          ← Interleaved practice session management
+│   │   ├── useProblemSR.ts            ← SM-2 spaced repetition for problems
+│   │   └── useTimerTracking.ts        ← Time-to-solution tracking
+│   ├── lib/
+│   │   └── ai/                        ← AI/ML core library
+│   │       ├── claude.ts              ← Claude API client
+│   │       ├── gemini.ts              ← Gemini API client
+│   │       ├── llm-router.ts          ← Provider-agnostic LLM router
+│   │       ├── sm2-problems.ts        ← SM-2 algorithm extended to problems
+│   │       ├── interleave.ts          ← Interleaving engine
+│   │       ├── adaptive-difficulty.ts ← Adaptive difficulty calibration
+│   │       ├── socratic.ts            ← Socratic simulation layer
+│   │       ├── technique-atlas.ts     ← Technique classification system
+│   │       ├── weakness-profile.ts    ← Weakness profile generation
+│   │       ├── embeddings.ts          ← Vector embeddings for semantic search
+│   │       ├── generate-before-reveal.ts ← Generation effect implementation
+│   │       ├── prompts.ts             ← LLM prompt templates
+│   │       ├── types.ts               ← Shared AI/ML type definitions
+│   │       └── index.ts               ← Module exports
+│   └── stores/                        ← Zustand state stores
+│       ├── useSessionStore.ts         ← Session state (focus mode, timing)
+│       └── useXPStore.ts              ← XP, leveling, and gamification state
 └── supabase/
-    └── schema.sql                     ← Database schema
+    ├── schema.sql                     ← Base database schema
+    └── migrations/
+        └── 001_ai_ml_infrastructure.sql ← AI/ML tables, events, and indexes
 ```
 
 ---
@@ -143,38 +183,60 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 
 ## Claude Code Instructions — Building the Ed-Tech Platform
 
-### Tech Stack Recommendation
+### Tech Stack
 
 ```
-Frontend:   React + TypeScript + Tailwind CSS + Framer Motion
-Backend:    FastAPI (Python) or Next.js API routes
-Database:   Supabase (PostgreSQL) with pgvector for semantic search
-Hosting:    Vercel (frontend) + Render/Fly (backend)
+Frontend:   React 18+ / Next.js (App Router) + TypeScript + Tailwind CSS + Framer Motion
+State:      Zustand (client) + React Query / TanStack Query (server)
+AI/ML:      Claude API (Anthropic) + Gemini API (Google) via provider-agnostic router
+Database:   Supabase (PostgreSQL + pgvector + Auth + Realtime)
+Math:       KaTeX / MathJax (LaTeX formula rendering)
+Animations: Framer Motion + Lottie React
+Hosting:    Vercel (frontend) + Render/Railway (backend)
 ```
 
-### Core Features to Implement
+### Core Features
 
 #### 1. Reader Mode
 - Display each problem **word for word** from the markdown source
-- Syntax highlighting for mathematical expressions (use KaTeX or MathJax)
-- Collapsible **Solution** sections (hidden by default, reveal on click)
+- Syntax highlighting for mathematical expressions (KaTeX/MathJax)
+- **Collapsible step-by-step solutions** — each step is one working-memory load (CLT-informed)
+- **Focus mode** — zero sidebar, zero notification badges, distraction-free reading
 - Sidebar table of contents with scroll spy
 
-#### 2. Practice Mode
+#### 2. Practice Mode (Generate-Before-Reveal)
 - Present the problem **without the solution**
-- User types or selects their answer approach
-- Reveal solution step-by-step with "Next hint" progression
-- Track which problems have been attempted / solved
+- **Scratchpad gate** — student must submit their approach before solution is revealed (generation effect)
+- AI evaluates the student's approach and provides feedback
+- Progressive hint ladder with **hint consumption logging**
+- **Time-to-solution tracking** per problem
 
-#### 3. Review Mode (Spaced Repetition)
-- Cards based on each problem (SM-2 algorithm recommended)
-- "I got it" / "Needs review" buttons
-- Track mastery per section and per problem type
+#### 3. Review Mode (SM-2 Extended to Problems)
+- SM-2 spaced repetition applied to **problems, not just flashcards**
+- Solved problems resurface on expanding schedules (1d → 6d → 3wk → 2mo)
+- **Mistake taxonomy** on incorrect answers: conceptual error, calculation error, formula recall failure, misread problem
+- **Cross-chapter interleaved practice** — mixed problem types across chapters
+- **Adaptive difficulty** using time-to-solution + error taxonomy signals
 
-#### 4. Progress Dashboard
+#### 4. Gamification Layer
+- **XP and leveling system** — XP for attempts, bonus for hint-free solves, extra for spaced review
+- **Fiero moment animations** — visceral celebration after hard-problem breakthroughs
+- **"Fun Failure" feedback** — show closeness, correct technique, reframe failure as progress
+- **Session nudges** — cognitive science-informed break reminders after 45–60 minutes
+- **XP toast notifications** — real-time feedback on progress
+
+#### 5. AI-Powered Features
+- **Socratic interview simulation** — AI interviewer mode for mock quant interviews
+- **Technique Atlas** — cross-cutting index linking all problems by underlying technique
+- **Weakness profile generation** — personalized gap analysis from error + timing data
+- **Adaptive difficulty engine** — calibrates problem difficulty to maintain flow state
+- **Provider-agnostic LLM router** — Claude (complex reasoning) + Gemini (routine tasks) with 95% cost optimization
+
+#### 6. Progress Dashboard
 - Completion percentage per chapter/section
 - Problem difficulty distribution
-- Weak areas flagged by section
+- Weak areas flagged by section and technique
+- SM-2 interval accuracy trends
 
 ### Markdown Parsing Notes
 
@@ -228,17 +290,41 @@ And render with **KaTeX** for clean display.
 
 ## Research
 
-The `content/Research/` directory contains learning science books and a synthesis document that inform the platform's instructional design:
+The `content/Research/` directory contains the cognitive science foundation for the platform's design decisions, organized in three layers:
 
-| Resource | Author | Focus |
-|----------|--------|-------|
-| quant-review-book-synthesis.md | — | Cross-book synthesis mapped to platform features |
-| Building a Second Brain | Tiago Forte | Digital note-taking and knowledge organization |
-| How We Learn | Stanislas Dehaene | Neuroscience of learning |
-| Make It Stick | Brown, Roediger, McDaniel | Science of successful learning and memory |
-| Moonwalking with Einstein | Joshua Foer | Memory techniques and mnemonics |
-| Reality Is Broken | Jane McGonigal | Gamification and engagement |
-| Uncommon Sense Teaching | Oakley et al. | Practical teaching methods based on brain science |
+### Six-Book Synthesis (Popular Science Layer)
+
+| Book | Author | Focus |
+|------|--------|-------|
+| *Make It Stick* | Brown, Roediger, McDaniel | Science of successful learning and memory |
+| *How We Learn* | Stanislas Dehaene | Neuroscience of learning (four pillars) |
+| *Moonwalking with Einstein* | Joshua Foer | Memory techniques and mnemonics |
+| *Reality Is Broken* | Jane McGonigal | Gamification and intrinsic motivation |
+| *Building a Second Brain* | Tiago Forte | Digital note-taking and knowledge organization |
+| *Uncommon Sense Teaching* | Oakley, Sejnowski, McConville | Practical teaching methods based on brain science |
+
+### Synthesis Documents
+
+| Document | Description |
+|----------|-------------|
+| `quant-review-book-synthesis.md` | Cross-book synthesis — convergence map, 8 feature recommendations mapped to platform |
+| `primary-research-sources.md` | ~82 peer-reviewed sources across 11 categories tracing synthesis claims to primary literature |
+| `gamification-design-research.md` | Deep-dive on gamification research — SDT, flow theory, fiero mechanics, XP system design |
+
+### Primary Research Coverage (82 Sources)
+
+| Category | Sources | Key Finding |
+|----------|---------|-------------|
+| Spaced Repetition | 13 | SM-2 through FSRS; optimal gap = 10–20% of retention interval |
+| Retrieval Practice | 8 | g = 0.50 vs restudying (Rowland 2014 meta-analysis) |
+| Interleaving | 8 | 215% improvement in delayed test scores (Rohrer & Taylor 2007) |
+| Cognitive Load Theory | 8 | Working memory holds ~4 items (Cowan 2001) |
+| Sleep & Memory | 5 | 2.7x insight probability after sleep (Wagner et al. 2004) |
+| Memory Techniques | 7 | Method of loci: g = 0.65 (Twomey & Kroneisen 2021) |
+| Gamification | 12 | Cognitive g = .49, game fiction > surface PBL (Sailer & Homner 2020) |
+| Adaptive Learning | 8 | ITS d = 0.76, nearly matching human tutoring (VanLehn 2011) |
+| Metacognition | 4 | Only practice testing + distributed practice rated "high utility" (Dunlosky 2013) |
+| EdTech Effectiveness | 4 | Adaptive supplements > replacements (Escueta et al. 2020) |
 
 ---
 
@@ -277,6 +363,18 @@ The `content/Agent Roles/` directory defines the full team required to build Qua
 
 ---
 
+## Environment Setup
+
+Copy the environment template and fill in your API keys:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Required environment variables include Supabase credentials, Anthropic (Claude) API key, and Google (Gemini) API key. See `.env.local.example` for the full list.
+
+---
+
 ## Generating Chapter Data
 
 After editing any chapter markdown file in `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
@@ -289,4 +387,14 @@ This parses chapters 3–7 and outputs structured TypeScript to `src/data/chapte
 
 ---
 
-*This README was generated from PDF extraction of the source book. Content is structured for programmatic consumption by an ed-tech platform.*
+## Database Migrations
+
+The Supabase schema includes:
+- `schema.sql` — Base tables (users, flashcards, problems, progress)
+- `migrations/001_ai_ml_infrastructure.sql` — AI/ML event tables, error taxonomy, hint logging, weakness profiles, technique atlas, and pgvector indexes
+
+Run migrations through the Supabase CLI or dashboard.
+
+---
+
+*This README reflects the Main-Testing-1 integration branch, which includes all agent contributions merged from the foundation sprint.*
