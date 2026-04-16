@@ -12,6 +12,8 @@ import ChapterList from '@/components/dashboard/ChapterList';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import QuickActions from '@/components/dashboard/QuickActions';
 import FlashcardGradeHistory from '@/components/dashboard/FlashcardGradeHistory';
+import XPBar from '@/components/gamification/XPBar';
+import PageTransition from '@/components/layout/PageTransition';
 
 export default function DashboardPage() {
   const { totalSolved, totalProblems, masteredCount, reviewDue, newCardsQueue, sectionStats, getProblemStatus, problemProgress } = useProgress();
@@ -28,6 +30,7 @@ export default function DashboardPage() {
   }, [problemProgress, getProblemStatus]);
 
   return (
+    <PageTransition>
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       {/* Page header */}
       <div>
@@ -38,6 +41,9 @@ export default function DashboardPage() {
           A Practical Guide to Quantitative Finance Interviews · Chapter 2
         </p>
       </div>
+
+      {/* XP / Level progress */}
+      <XPBar />
 
       {/* Due cards / streak banner */}
       <DueCardsBanner dueCount={reviewDue.length} newCount={newCardsQueue.length} streak={streak} />
@@ -67,5 +73,6 @@ export default function DashboardPage() {
       {/* Flashcard rating history */}
       <FlashcardGradeHistory />
     </div>
+    </PageTransition>
   );
 }

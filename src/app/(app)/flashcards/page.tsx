@@ -10,11 +10,13 @@ import { useProgress } from '@/hooks/useProgress';
 import { useFlashcards, type FlashcardFilter } from '@/hooks/useFlashcards';
 import { useStreak } from '@/hooks/useStreak';
 import { useCustomSets } from '@/hooks/useCustomSets';
+import { useXPStore, XP_REWARDS } from '@/stores/useXPStore';
 import { flashcardsById, allFlashcards } from '@/data/flashcards';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import FilterBar from '@/components/flashcards/FilterBar';
 import DeckProgress from '@/components/flashcards/DeckProgress';
 import RatingButtons from '@/components/flashcards/RatingButtons';
+import MistakeTaxonomy from '@/components/flashcards/MistakeTaxonomy';
 import AddToSetButton from '@/components/flashcards/AddToSetButton';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
 import { problemsById, SECTIONS } from '@/data/problems';
@@ -48,6 +50,7 @@ export default function FlashcardsPage() {
     newIntroducedToday, newCardsPerDay, masteredCount, sm2Cards,
   } = useProgress();
   const { recordActivity } = useStreak();
+  const awardXP = useXPStore((s) => s.awardXP);
   const { sets, createSet, renameSet, deleteSet, addCardToSet, removeCardFromSet, isCardInSet } = useCustomSets();
 
   const [filter, setFilter]       = useState<FlashcardFilter>({ type: 'all', dueOnly: false });
@@ -67,6 +70,7 @@ export default function FlashcardsPage() {
   const [lastGrade, setLastGrade]                   = useState<ReviewGrade | null>(null);
   const [ratingDisabled, setRatingDisabled]         = useState(false);
   const [spineOpen, setSpineOpen]                   = useState(true);
+  const [showMistakeTaxonomy, setShowMistakeTaxonomy] = useState(false);
 
   // Today's session (review due + new queue)
   const todaySessionFlashcards = useMemo(() => {
@@ -101,11 +105,22 @@ export default function FlashcardsPage() {
     reviewCard(card.id, grade);
     recordActivity();
     setLastGrade(grade);
+
+    // Award XP for flashcard review
+    if (grade === 'good' || grade === 'easy') {
+      awardXP('flashcard_review', XP_REWARDS.flashcardReview, card.front.slice(0, 40));
+    }
+
+    // Show mistake taxonomy for failed recalls
+    const isFailed = grade === 'blackout' || grade === 'again';
+    if (isFailed) {
+      setShowMistakeTaxonomy(true);
+    }
+
     setTimeout(() => {
       setSessionReviewed((r) => r + 1);
       if (wasNew) setSessionNewLearned((n) => n + 1);
       if (sessionMode === 'browse') {
-        // Stay on current card — user navigates freely
         setRatingDisabled(false);
       } else {
         const next = sessionIndex + 1;
@@ -116,10 +131,11 @@ export default function FlashcardsPage() {
           setShowAnswer(false);
           setLastGrade(null);
           setRatingDisabled(false);
+          setShowMistakeTaxonomy(false);
         }
       }
-    }, 600);
-  }, [sessionCards, sessionIndex, sessionNewIds, sessionMode, ratingDisabled, reviewCard, recordActivity]);
+    }, isFailed ? 1500 : 600); // longer delay when showing mistake taxonomy
+  }, [sessionCards, sessionIndex, sessionNewIds, sessionMode, ratingDisabled, reviewCard, recordActivity, awardXP]);
 
   const navigateTo = useCallback((index: number) => {
     if (!sessionCards || index < 0 || index >= sessionCards.length) return;
@@ -333,25 +349,34 @@ export default function FlashcardsPage() {
             )}
 
             {lastGrade && (
-              <div className={`w-full rounded-lg p-4 border-t-4 animate-fade-up flex items-center gap-4 ${
-                lastGrade === 'easy' || lastGrade === 'good' ? 'exercise-correct' : 'exercise-incorrect'
-              }`}>
-                {lastGrade === 'easy' || lastGrade === 'good' ? (
-                  <>
-                    <CheckCircle2 size={28} className="text-[#1fab54] shrink-0 animate-check-pop" />
-                    <div>
-                      <p className="font-bold text-[#0d652d] text-sm">{lastGrade === 'easy' ? 'Excellent!' : 'Nice work!'}</p>
-                      <p className="text-xs text-[#1fab54]">{isNewCard ? 'Added to your review rotation.' : 'Interval extended.'}</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <RotateCcw size={28} className="text-[#f5a623] shrink-0" />
-                    <div>
-                      <p className="font-bold text-[#7a4e00] text-sm">Keep practicing!</p>
-                      <p className="text-xs text-[#9299a5]">Card will come back soon.</p>
-                    </div>
-                  </>
+              <div className="w-full space-y-3">
+                <div className={`rounded-lg p-4 border-t-4 animate-fade-up flex items-center gap-4 ${
+                  lastGrade === 'easy' || lastGrade === 'good' ? 'exercise-correct' : 'exercise-incorrect'
+                }`}>
+                  {lastGrade === 'easy' || lastGrade === 'good' ? (
+                    <>
+                      <CheckCircle2 size={28} className="text-[#1fab54] shrink-0 animate-check-pop" />
+                      <div>
+                        <p className="font-bold text-[#0d652d] text-sm">{lastGrade === 'easy' ? 'Excellent!' : 'Nice work!'}</p>
+                        <p className="text-xs text-[#1fab54]">{isNewCard ? 'Added to your review rotation.' : 'Interval extended.'}</p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <RotateCcw size={28} className="text-[#f5a623] shrink-0" />
+                      <div>
+                        <p className="font-bold text-[#7a4e00] text-sm">Keep practicing!</p>
+                        <p className="text-xs text-[#9299a5]">Card will come back soon.</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Mistake taxonomy — shown for failed recalls */}
+                {showMistakeTaxonomy && (lastGrade === 'blackout' || lastGrade === 'again') && (
+                  <MistakeTaxonomy
+                    onSelect={() => setShowMistakeTaxonomy(false)}
+                  />
                 )}
               </div>
             )}
@@ -399,7 +424,7 @@ export default function FlashcardsPage() {
           <div className="w-16 h-16 rounded-full bg-[#e6f4ea] border border-[#a8d5b5] flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 size={32} className="text-[#1fab54] animate-check-pop" />
           </div>
-          <h2 className="text-xl font-extrabold text-[#21242c] mb-1">Session complete!</h2>
+          <h2 className="text-xl font-extrabold text-[#21242c] mb-1">Session complete! +{XP_REWARDS.sessionComplete} XP</h2>
           <div className="flex items-center justify-center gap-6 my-4 py-4 border-y border-[#e4e6ea]">
             <div className="text-center">
               <p className="text-2xl font-extrabold text-[#1865f2]">{sessionReviewed - sessionNewLearned}</p>

@@ -1,15 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { CheckCircle2, ChevronDown, RotateCcw, Undo2 } from 'lucide-react';
-import MarkdownRenderer from './MarkdownRenderer';
 import HintStep from './HintStep';
+import ScratchpadGate from './ScratchpadGate';
+import CollapsibleSolution from './CollapsibleSolution';
 
 interface SolutionRevealProps {
   solution: string;
   finalAnswer?: string;
   hints: string[];
-  onSolved?: () => void;
+  onSolved?: (hintsUsed: number) => void;
   onAttempted?: () => void;
   onUndoSolved?: () => void;
   onReset?: () => void;
@@ -27,100 +28,115 @@ export default function SolutionReveal({
   currentStatus,
 }: SolutionRevealProps) {
   const [showSolution, setShowSolution] = useState(false);
+  const [scratchpadSubmitted, setScratchpadSubmitted] = useState(false);
+  const hintsRevealedRef = useRef(0);
+
+  const handleScratchpadSubmit = (approach: string) => {
+    setScratchpadSubmitted(true);
+    if (currentStatus === 'unseen') onAttempted?.();
+  };
 
   const handleReveal = () => {
     setShowSolution(true);
-    if (currentStatus === 'unseen') onAttempted?.();
+    if (currentStatus === 'unseen' && !scratchpadSubmitted) onAttempted?.();
   };
 
   const handleReset = () => {
     setShowSolution(false);
+    setScratchpadSubmitted(false);
+    hintsRevealedRef.current = 0;
     onReset?.();
+  };
+
+  const handleHintRevealed = (count: number) => {
+    hintsRevealedRef.current = count;
   };
 
   return (
     <div className="space-y-3 mt-1">
-      {/* Hints */}
-      {hints.length > 0 && (
+      {/* Generate Before Reveal: scratchpad gate */}
+      {currentStatus !== 'solved' && (
+        <ScratchpadGate
+          onSubmit={handleScratchpadSubmit}
+          submitted={scratchpadSubmitted}
+        />
+      )}
+
+      {/* Hints — only visible after scratchpad submission (or if already solved) */}
+      {(scratchpadSubmitted || currentStatus === 'solved') && hints.length > 0 && (
         <div className="p-4 rounded-lg bg-[#fef9e7] border border-[#fdd8a0]">
-          <HintStep hints={hints} />
+          <HintStep hints={hints} onRevealCount={handleHintRevealed} />
         </div>
       )}
 
-      {/* Solution toggle */}
-      {!showSolution ? (
-        <button
-          onClick={handleReveal}
-          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg
-            border border-[var(--ka-blue)] text-[var(--ka-blue)] text-sm font-semibold
-            hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150"
-        >
-          <ChevronDown size={15} />
-          Show solution
-        </button>
-      ) : (
-        <div className="reading-card border rounded-lg overflow-hidden animate-fade-up">
-          {/* Solution header */}
-          <div className="reading-card-header flex items-center justify-between px-4 py-2.5 border-b">
-            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--rt-text-secondary)' }}>Solution</span>
+      {/* Solution toggle — only available after scratchpad submission */}
+      {(scratchpadSubmitted || currentStatus === 'solved') && (
+        <>
+          {!showSolution ? (
             <button
-              onClick={() => setShowSolution(false)}
-              className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+              onClick={handleReveal}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg
+                border border-[var(--ka-blue)] text-[var(--ka-blue)] text-sm font-semibold
+                hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150"
             >
-              Hide
+              <ChevronDown size={15} />
+              Show solution
             </button>
-          </div>
-
-          {/* Solution body */}
-          <div className="reading-card p-4">
-            <div className="prose-reading text-[#21242c]">
-              <MarkdownRenderer content={solution} />
-            </div>
-
-            {finalAnswer && (
-              <div className="mt-4 p-3 rounded-lg bg-[#e6f4ea] border border-[#a8d5b5]">
-                <p className="text-[10px] font-bold text-[#1fab54] uppercase tracking-wider mb-1">Final Answer</p>
-                <p className="text-sm font-semibold text-[#0d652d]">{finalAnswer}</p>
-              </div>
-            )}
-          </div>
-
-          {/* Footer */}
-          <div className="reading-card-header px-4 py-3 border-t flex items-center justify-between gap-3">
-            {/* Reset button — always visible */}
-            <button
-              onClick={handleReset}
-              className="flex items-center gap-1.5 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
-            >
-              <RotateCcw size={12} />
-              Reset
-            </button>
-
-            {currentStatus !== 'solved' ? (
-              <button
-                onClick={onSolved}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1fab54] text-white text-sm font-semibold hover:bg-[#17944a] transition-colors"
-              >
-                <CheckCircle2 size={15} />
-                Mark as solved
-              </button>
-            ) : (
-              <div className="flex items-center gap-3">
+          ) : (
+            <div className="reading-card border rounded-lg overflow-hidden animate-fade-up">
+              {/* Solution header */}
+              <div className="reading-card-header flex items-center justify-between px-4 py-2.5 border-b">
+                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--rt-text-secondary)' }}>Solution</span>
                 <button
-                  onClick={onUndoSolved}
+                  onClick={() => setShowSolution(false)}
+                  className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                >
+                  Hide
+                </button>
+              </div>
+
+              {/* Collapsible step-by-step solution body */}
+              <div className="reading-card p-4">
+                <CollapsibleSolution solution={solution} finalAnswer={finalAnswer} />
+              </div>
+
+              {/* Footer */}
+              <div className="reading-card-header px-4 py-3 border-t flex items-center justify-between gap-3">
+                <button
+                  onClick={handleReset}
                   className="flex items-center gap-1.5 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
                 >
-                  <Undo2 size={12} />
-                  Undo solved
+                  <RotateCcw size={12} />
+                  Reset
                 </button>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-[#1fab54]" />
-                  <span className="text-xs font-semibold text-[#1fab54]">Solved</span>
-                </div>
+
+                {currentStatus !== 'solved' ? (
+                  <button
+                    onClick={() => onSolved?.(hintsRevealedRef.current)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1fab54] text-white text-sm font-semibold hover:bg-[#17944a] transition-colors"
+                  >
+                    <CheckCircle2 size={15} />
+                    Mark as solved
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={onUndoSolved}
+                      className="flex items-center gap-1.5 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                    >
+                      <Undo2 size={12} />
+                      Undo solved
+                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle2 size={14} className="text-[#1fab54]" />
+                      <span className="text-xs font-semibold text-[#1fab54]">Solved</span>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
