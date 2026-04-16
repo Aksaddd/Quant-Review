@@ -555,15 +555,45 @@ For the Frontend Engineer handoff:
 
 ---
 
-## Open Questions for Review
+## Open Questions — Resolved
 
-1. **Hint tracking granularity:** The current `HintStep` component tracks hints revealed during a session, but this state isn't persisted or passed to `SolutionReveal.onSolved`. The Frontend Engineer will need to thread hint count through to the XP award function. Confirm this is acceptable scope.
+### 1. Hint Tracking Granularity — RESOLVED
 
-2. **Spaced review detection:** How do we determine if a problem solve is a "spaced review" (returning to a previously solved problem)? Proposal: if `ProblemProgress.status === 'solved'` AND the problem was last solved >24 hours ago, treat the new solve as spaced review. Requires adding `lastSolvedAt` to `ProblemProgress`.
+**Decision:** Yes — thread hint count through to the XP award function, using **event sourcing** at medium granularity.
 
-3. **Mixed Practice mode:** The Interleaving Bonus (1.25× multiplier) requires a "Mixed Practice" session mode that doesn't exist yet. This is a separate feature — flag for the Curriculum Lead to spec the problem selection algorithm.
+**Research basis:** Baker, Corbett, & Koedinger (2004) established that medium granularity (hint count, hint level, whether bottom-out was reached) is the evidence-backed sweet spot. Binary "used/didn't" loses the distinction between a student who took one contextual nudge vs one who clicked through to the answer. Millisecond-level tracking is overkill for our use case.
 
-4. **Level title localization:** Are finance titles (Intern → MD) the right tone? Alternative: academic titles (Student → Professor) or quant-specific (Trainee → Quant). Aksad to decide.
+**Architecture:**
 
-5. **XP reset / prestige system:** Should Level 25 students be able to "prestige" (reset to Level 1 with a prestige badge)? Deferred — not needed for v1.
+- Add an `InteractionTrackingContext` (Context + `useReducer`) at the `ProblemBlock` level
+- `HintStep` dispatches `{ type: 'HINT_REVEALED', hintIndex, timestamp }` events
+- `SolutionReveal` reads derived state: `{ hintsRevealed: number, totalHints: number, reachedBottomOut: boolean }`
+- On "Mark as solved," pass `hintsRevealed` and `totalHints` to `awardProblemXP()`
+- Raw interaction events are logged to an append-only `interaction_events` table (event sourcing) for future analysis
+
+**Critical framing rule** (Roll et al. 2014, Karabenick 2003): Our XP system gives a **bonus** for hint-free solves, never a **penalty** for using hints. This is already correct in the spec. The UI should never display "Hints used: 3" — instead show "Solved independently" for hint-free solves. Research shows hint-count displays create avoidance in the 25-30% of students who need help most.
+
+**Scope for Frontend Engineer:** Medium — requires threading state through `HintStep` → `SolutionReveal` → `onSolved` callback, plus a new `InteractionTrackingContext`. Estimated 2-3 hours of wiring.
+
+### 2. Spaced Review Detection — PENDING
+
+**Proposal:** If `ProblemProgress.status === 'solved'` AND the problem was last solved >24 hours ago, treat the new solve as spaced review. Requires adding `lastSolvedAt` to `ProblemProgress`.
+
+**Status:** Awaiting review.
+
+### 3. Mixed Practice Mode — PENDING
+
+**Proposal:** The Interleaving Bonus (1.25× multiplier) requires a "Mixed Practice" session mode that doesn't exist yet. This is a separate feature — flag for the Curriculum Lead to spec the problem selection algorithm.
+
+**Status:** Awaiting review.
+
+### 4. Level Title Localization — PENDING
+
+**Options:** Finance titles (Intern → MD), academic titles (Student → Professor), or quant-specific (Trainee → Quant).
+
+**Status:** Awaiting review.
+
+### 5. XP Reset / Prestige System — RESOLVED
+
+**Decision:** Deferred — not needed for v1. Revisit if users reach Level 25 at meaningful volume.
 
