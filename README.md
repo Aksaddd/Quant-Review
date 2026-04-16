@@ -12,7 +12,8 @@
 /
 ├── README.md                          ← You are here (metadata + build instructions)
 ├── content/
-│   ├── chapters/                      ← Quant interview chapter source markdown
+│   ├── A Practical Guide To Quantitative Finance Interviews
+│   │   Book by Xinfeng Zhou (chapters)/   ← Quant interview chapter source markdown
 │   │   ├── chapter-01-general-principles.md
 │   │   ├── chapter-02-brain-teasers.md
 │   │   ├── chapter-03-calculus-linear-algebra.md
@@ -20,7 +21,8 @@
 │   │   ├── chapter-05-stochastic-processes.md
 │   │   ├── chapter-06-finance.md
 │   │   └── chapter-07-algorithms-numerical-methods.md
-│   └── books/                         ← Learning science supplementary books
+│   └── Research/                      ← Learning science books & research synthesis
+│       ├── quant-review-book-synthesis.md
 │       ├── building-a-second-brain.md
 │       ├── how-we-learn.md
 │       ├── make-it-stick.md
@@ -212,12 +214,13 @@ And render with **KaTeX** for clean display.
 
 ---
 
-## Supplementary Books
+## Research
 
-The `content/Research/` directory contains learning science books that inform the platform's instructional design:
+The `content/Research/` directory contains learning science books and a synthesis document that inform the platform's instructional design:
 
-| Book | Author | Focus |
-|------|--------|-------|
+| Resource | Author | Focus |
+|----------|--------|-------|
+| quant-review-book-synthesis.md | — | Cross-book synthesis mapped to platform features |
 | Building a Second Brain | Tiago Forte | Digital note-taking and knowledge organization |
 | How We Learn | Stanislas Dehaene | Neuroscience of learning |
 | Make It Stick | Brown, Roediger, McDaniel | Science of successful learning and memory |
