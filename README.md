@@ -21,14 +21,16 @@
 │   │   ├── chapter-05-stochastic-processes.md
 │   │   ├── chapter-06-finance.md
 │   │   └── chapter-07-algorithms-numerical-methods.md
-│   └── Research/                      ← Learning science books & research synthesis
-│       ├── quant-review-book-synthesis.md
-│       ├── building-a-second-brain.md
-│       ├── how-we-learn.md
-│       ├── make-it-stick.md
-│       ├── moonwalking-with-einstein.md
-│       ├── reality-is-broken.md
-│       └── uncommon-sense-teaching.md
+│   └── Research/                      ← Learning science research
+│       ├── Books/                     ← Source books on learning science
+│       │   ├── building-a-second-brain.md
+│       │   ├── how-we-learn.md
+│       │   ├── make-it-stick.md
+│       │   ├── moonwalking-with-einstein.md
+│       │   ├── reality-is-broken.md
+│       │   └── uncommon-sense-teaching.md
+│       └── Synthesis/                 ← Research synthesis & analysis
+│           └── quant-review-book-synthesis.md
 ├── scripts/
 │   └── gen-chapters.js                ← Parses chapter markdown → TypeScript data
 ├── src/
