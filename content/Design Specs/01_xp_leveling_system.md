@@ -575,11 +575,56 @@ For the Frontend Engineer handoff:
 
 **Scope for Frontend Engineer:** Medium — requires threading state through `HintStep` → `SolutionReveal` → `onSolved` callback, plus a new `InteractionTrackingContext`. Estimated 2-3 hours of wiring.
 
-### 2. Spaced Review Detection — PENDING
+### 2. Spaced Review Detection — RESOLVED
 
-**Proposal:** If `ProblemProgress.status === 'solved'` AND the problem was last solved >24 hours ago, treat the new solve as spaced review. Requires adding `lastSolvedAt` to `ProblemProgress`.
+**Decision:** Fixed 24-hour threshold. `isSpacedReview = (status === 'solved') AND (hoursSinceLastSolve >= 24)`. Flat 1.5× multiplier (no scaling with gap length).
 
-**Status:** Awaiting review.
+**Research basis:**
+- Cepeda et al. (2008, n=1,354): optimal spacing gap for 1-week retention is 1-3 days. 24 hours is the validated floor.
+- Ebbinghaus forgetting curve: 70-80% of material forgotten within 24 hours — the 24-hour mark is the sweet spot of desirable difficulty.
+- Bjork & Bjork (1992) New Theory of Disuse: the lower the retrieval strength at successful retrieval, the greater the gain in storage strength. After 24+ hours, retrieval strength has meaningfully dropped for multi-step problems.
+- Sleep consolidation boundary (Dehaene Pillar 4): sub-24-hour re-solves haven't crossed the critical biological threshold for memory consolidation.
+- Platform consensus: Anki, FSRS, SuperMemo, and Duolingo all treat sub-day repetitions as "learning phase," not spaced review.
+
+**Why NOT scale XP with gap length:** Longer gaps produce more learning per retrieval (Bjork), but scaling XP with gap length incentivizes *procrastination* ("wait longer for more XP"). The SM-2 algorithm already handles optimal scheduling — the XP multiplier rewards showing up on schedule, not gaming the timing.
+
+**The 2-hour edge case:** A student who solves a problem, closes the app, and returns 2 hours later earns base XP for the re-solve but NOT the 1.5× spaced review multiplier. No sleep consolidation has occurred. The solution path is still in episodic memory. Duolingo's HLR model computes retrievability as ~1.0 at 2 hours. This is not genuine retrieval practice.
+
+**Data model extension:** Add to `ProblemProgress`:
+
+```typescript
+export interface ProblemProgress {
+  problemId: string;
+  status: ProblemStatus;
+  lastVisited?: string;      // existing
+  lastSolvedAt?: string;     // NEW — ISO timestamp of most recent solve
+  solveCount?: number;       // NEW — total times solved (enables re-solve tracking)
+  firstSolvedAt?: string;    // NEW — ISO timestamp of first solve
+}
+```
+
+**Detection function:**
+
+```typescript
+function isSpacedReview(progress: ProblemProgress): boolean {
+  if (!progress.lastSolvedAt) return false;
+  if (progress.status !== 'solved') return false;
+  const hoursSinceLastSolve =
+    (Date.now() - new Date(progress.lastSolvedAt).getTime()) / (1000 * 60 * 60);
+  return hoursSinceLastSolve >= 24;
+}
+```
+
+**Schema extension:**
+
+```sql
+alter table public.problem_progress
+  add column if not exists last_solved_at timestamptz,
+  add column if not exists solve_count integer not null default 0,
+  add column if not exists first_solved_at timestamptz;
+```
+
+**Scope for Frontend Engineer:** Low — add 3 fields to `ProblemProgress`, update `setProblemStatus` in `ProgressProvider` to stamp `lastSolvedAt` and increment `solveCount` when status becomes 'solved', and pass `isSpacedReview()` result into `awardProblemXP()`. Estimated 1-2 hours.
 
 ### 3. Mixed Practice Mode — PENDING
 
