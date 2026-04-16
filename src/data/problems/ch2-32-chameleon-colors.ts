@@ -23,7 +23,7 @@ When **two chameleons of different colors meet**, both instantly change to the *
 
   solution: `**Answer: No.**
 
-**Approach: Find a modular invariant.**
+### Finding the Modular Invariant
 
 Label the colors with residues: Red = 0, Green = 1, Blue = 2 (mod 3).
 
@@ -36,6 +36,8 @@ In terms of mod 3 residues of the **counts**:
 - Starting: Red = 13 ≡ 1, Green = 15 ≡ 0, Blue = 17 ≡ 2 (mod 3)
 - The three residues form the set **{0, 1, 2}** — all different.
 
+### Why the Target State Is Unreachable
+
 For all chameleons to be the same color, we'd need one count = 45 and the other two = 0:
 - (45, 0, 0) → residues (0, 0, 0)
 
@@ -45,9 +47,9 @@ But we need to check: can the residue set **{0, 1, 2}** ever reach **{0, 0, 0}**
 
 Since {0, 0, 0} ≠ {0, 1, 2}, the all-same state is **unreachable**.
 
----
+### Final Answer
 
-**Final Answer: No.** The modular invariant (residues of counts are always {0,1,2} mod 3) is preserved under every meeting, and the target state (0,0,0) violates it.`,
+**No.** The modular invariant (residues of counts are always {0,1,2} mod 3) is preserved under every meeting, and the target state (0,0,0) violates it.`,
 
   hints: [
     'Try small cases: can (1, 0, 2) chameleons reach (3, 0, 0)?',

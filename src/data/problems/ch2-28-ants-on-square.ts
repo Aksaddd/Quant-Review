@@ -16,18 +16,18 @@ Can you always place a **circle of radius 1/7** somewhere on the square to cover
 
   solution: `**Yes. Proof using the Generalized Pigeon Hole Principle:**
 
-**Step 1: Divide the square into regions.**
+### Step 1: Divide the Square Into Regions
 
 Divide the 1×1 unit square into a **5×5 grid** of 25 smaller squares, each with side length **1/5**.
 
-**Step 2: Apply Generalized Pigeon Hole.**
+### Step 2: Apply Generalized Pigeon Hole
 
 51 ants in 25 sub-squares:
 $$\\lceil 51 / 25 \\rceil = \\lceil 2.04 \\rceil = 3$$
 
 At least **one sub-square contains 3 or more ants**.
 
-**Step 3: Show the circle fits.**
+### Step 3: Show the Circle Fits
 
 A sub-square of side 1/5 has diagonal:
 $$d = \\sqrt{2} \\times \\frac{1}{5} = \\frac{\\sqrt{2}}{5} \\approx 0.2828$$
@@ -39,9 +39,9 @@ Our circle has radius **1/7 ≈ 0.1429 > 0.1414**. ✓
 
 So the circle of radius 1/7 centered on any such sub-square covers all ants within it.
 
----
+### Final Answer
 
-**Final Answer: Yes.** By Pigeon Hole, some 1/5 × 1/5 sub-square has ≥ 3 ants, and a circle of radius 1/7 is large enough to cover any such sub-square.`,
+**Yes.** By Pigeon Hole, some 1/5 × 1/5 sub-square has ≥ 3 ants, and a circle of radius 1/7 is large enough to cover any such sub-square.`,
 
   hints: [
     'Divide the square into 25 smaller regions. How many ants must be in at least one region?',

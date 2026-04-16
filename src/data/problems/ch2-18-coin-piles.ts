@@ -18,9 +18,11 @@ You **cannot feel** which side is up. You may move and flip coins freely.
 
 **Separate the coins into two piles such that both piles have the same number of heads-up coins.**`,
 
-  solution: `**Strategy: Take any 20 coins, flip them all, and make that Pile 1. The remaining 980 coins are Pile 2.**
+  solution: `### Strategy
 
-**Proof:**
+Take any 20 coins, flip them all, and make that Pile 1. The remaining 980 coins are Pile 2.
+
+### Proof
 
 Let **m** = number of heads-up coins among the 20 you picked.
 
@@ -36,9 +38,9 @@ Let **m** = number of heads-up coins among the 20 you picked.
 
 This works even though you're blindfolded and don't know m. The algebra takes care of it symmetrically.
 
----
+### Final Answer
 
-**Final Answer:** Take any 20 coins, flip all of them — this pile will always have the same number of heads as the other pile.`,
+Take any 20 coins, flip all of them — this pile will always have the same number of heads as the other pile.`,
 
   hints: [
     'You can\'t determine which coins are heads up. Can you design a strategy that works for ANY value of m?',

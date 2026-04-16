@@ -14,17 +14,17 @@ const lightSwitches: Problem = {
 
 **How many times must you enter the room to determine which switch controls the bulb?**`,
 
-  solution: `**Answer: Once.**
+  solution: `### Key Insight
 
-**Key insight:** A light bulb has **two independent binary properties**:
+**Answer: Once.**
+
+A light bulb has **two independent binary properties**:
 1. **On or off** (current state)
 2. **Hot or cold** (recent history — was it on?)
 
 These two properties together encode **4 distinct states**, which is exactly what you need to identify 4 switches.
 
----
-
-**Strategy:**
+### Strategy
 
 1. Turn on **Switch 1** and **Switch 2**. Wait several minutes.
 2. Turn **off Switch 2** (leave Switch 1 on). Turn on **Switch 3**.
@@ -37,9 +37,9 @@ These two properties together encode **4 distinct states**, which is exactly wha
 | **On + Cold** | Switch 3 (just turned on, not warm yet) |
 | **Off + Cold** | Switch 4 (never turned on) |
 
----
+### Final Answer
 
-**Final Answer: 1 entry.** Use the bulb's thermal property as a second information channel alongside its on/off state.`,
+**1 entry.** Use the bulb's thermal property as a second information channel alongside its on/off state.`,
 
   hints: [
     'With just on/off, you can distinguish 2 states. But you have 4 switches. What else can a light bulb tell you?',

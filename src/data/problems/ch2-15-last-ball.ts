@@ -22,9 +22,11 @@ The process continues until **1 ball remains**.
 1. **What color is the last ball?**
 2. **What if we started with 20 blue and 13 red?**`,
 
-  solution: `**Key insight: Track the parity of red balls — it is an invariant.**
+  solution: `### Key Insight: Parity Invariant
 
-**Analyze how each operation changes the red ball count (R):**
+Track the parity of red balls — it is an invariant.
+
+Analyze how each operation changes the red ball count (R):
 
 | Operation | Change in R |
 |-----------|-------------|
@@ -34,7 +36,7 @@ The process continues until **1 ball remains**.
 
 **R can only stay the same or decrease by 2.** This means the **parity of R is invariant** — it never changes.
 
----
+### Applying the Invariant
 
 **Case 1: Start with 14 red (even)**
 - R stays even throughout.
@@ -46,9 +48,8 @@ The process continues until **1 ball remains**.
 - The last ball must be red (R = 1 is odd — consistent).
 - **Last ball: RED.**
 
----
+### Final Answer
 
-**Final Answer:**
 - 20 blue + 14 red → last ball is **BLUE**
 - 20 blue + 13 red → last ball is **RED**`,
 

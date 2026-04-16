@@ -16,15 +16,13 @@ The clock is numbered 1 through 12 (standard clock face, numbers are consecutive
 
 **What numbers are on each piece?**`,
 
-  solution: `**Step 1: Find the target sum per piece.**
+  solution: `### Finding the Target Sum
 
 Total sum of 1 + 2 + … + 12 = 12 × 13 / 2 = **78**
 
 Each of the 3 pieces must sum to: 78 / 3 = **26**
 
----
-
-**Step 2: Find contiguous groupings that sum to 26.**
+### Finding Contiguous Groupings
 
 Since the numbers are arranged in a circle (1–12 consecutively), each piece must be a **contiguous arc**.
 
@@ -35,9 +33,7 @@ Testing groupings:
 
 All three are contiguous arcs on the clock face. ✓
 
----
-
-**Final Answer:**
+### Final Answer
 
 | Piece | Numbers | Sum |
 |-------|---------|-----|

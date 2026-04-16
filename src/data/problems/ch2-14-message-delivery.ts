@@ -19,7 +19,9 @@ const messageDelivery: Problem = {
 
 **How do you securely deliver the document?**`,
 
-  solution: `**Strategy: Double-lock exchange (no shared key needed)**
+  solution: `### Strategy: Double-Lock Exchange
+
+No shared key needed.
 
 **Step 1:** You place the document in the box, lock it with **your padlock**, and send it to your colleague.
 
@@ -29,15 +31,15 @@ const messageDelivery: Problem = {
 
 **Step 4:** Your colleague receives the box locked only with **their own padlock**, opens it, and retrieves the document.
 
----
+### Why It Works
 
-**Why it works:** At no point does the document travel without a lock. The messenger can never access the document because it is always secured by at least one lock they cannot open.
+At no point does the document travel without a lock. The messenger can never access the document because it is always secured by at least one lock they cannot open.
 
 This is the physical analog of the **Shamir three-pass protocol** in cryptography.
 
----
+### Final Answer
 
-**Final Answer:** Three trips: you lock it → colleague adds lock → you remove your lock → colleague opens theirs.`,
+Three trips: you lock it → colleague adds lock → you remove your lock → colleague opens theirs.`,
 
   hints: [
     'You can\'t send the key with the box — it would be stolen. What if you didn\'t need to send the key at all?',

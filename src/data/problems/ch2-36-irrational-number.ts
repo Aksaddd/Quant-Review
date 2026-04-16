@@ -12,11 +12,13 @@ const irrationalNumber: Problem = {
 
   setup: `**Prove that √2 is irrational.**`,
 
-  solution: `**Proof by contradiction:**
+  solution: `### Setting Up the Contradiction
 
 **Assume** √2 is rational. Then it can be written as:
 $$\\sqrt{2} = \\frac{m}{n}$$
 where m and n are integers with **no common factors** (the fraction is in lowest terms, gcd(m, n) = 1).
+
+### Deriving the Contradiction
 
 **Step 1:** Square both sides:
 $$2 = \\frac{m^2}{n^2} \\implies m^2 = 2n^2$$
@@ -34,9 +36,9 @@ This **contradicts** our assumption that gcd(m, n) = 1.
 
 Therefore, √2 cannot be rational — it is **irrational**. ∎
 
----
+### Final Answer
 
-**Final Answer:** √2 is irrational. The proof by contradiction shows that assuming m/n in lowest terms leads to both m and n being even — a contradiction.`,
+√2 is irrational. The proof by contradiction shows that assuming m/n in lowest terms leads to both m and n being even — a contradiction.`,
 
   hints: [
     'Assume √2 = m/n in lowest terms. Square both sides.',

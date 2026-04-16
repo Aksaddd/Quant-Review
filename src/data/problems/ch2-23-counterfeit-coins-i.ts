@@ -18,11 +18,13 @@ You have a **digital scale** (reads exact weight).
 
 **Identify the counterfeit bag in exactly one weighing. Also determine whether the counterfeits are heavier or lighter.**`,
 
-  solution: `**Strategy: Take a different number of coins from each bag.**
+  solution: `### Strategy: Weighted Sampling
+
+Take a different number of coins from each bag.
 
 Take **1 coin from bag 1, 2 coins from bag 2, …, 10 coins from bag 10** → **55 coins total**.
 
----
+### Computing the Answer
 
 **If all coins were genuine:** expected weight = 55 × 10 = **550 grams**
 
@@ -35,15 +37,13 @@ Since j is unique for each bag (1 through 10), the deviation **uniquely identifi
 - Weight = 550 + j → bag j has **heavier** coins (11g)
 - Weight = 550 − j → bag j has **lighter** coins (9g)
 
----
-
 **Example:** If scale reads 546 → deviation = −4 → **bag 4** has **9-gram** counterfeits.
 
 **Algorithm complexity: O(n)** — trivially extends to n bags by taking 1, 2, …, n coins.
 
----
+### Final Answer
 
-**Final Answer:** Take k coins from bag k (k = 1 to 10). Weigh all 55. Deviation from 550 identifies bag and direction.`,
+Take k coins from bag k (k = 1 to 10). Weigh all 55. Deviation from 550 identifies bag and direction.`,
 
   hints: [
     'With one weighing, you need to encode which bag is fake AND whether it\'s heavy or light.',
