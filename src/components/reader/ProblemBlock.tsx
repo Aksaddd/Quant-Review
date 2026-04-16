@@ -133,6 +133,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
           hints={problem.hints}
           currentStatus={status}
           problemId={problem.id}
+          problemSetup={problem.setup}
           savedCanvasSnapshot={savedSnapshot}
           onCanvasSubmit={handleCanvasSubmit}
           onSolved={handleSolved}

@@ -16,6 +16,7 @@ interface SolutionRevealProps {
   onReset?: () => void;
   currentStatus: 'unseen' | 'attempted' | 'solved' | 'reading';
   problemId: string;
+  problemSetup?: string;
   savedCanvasSnapshot?: CanvasSnapshot | null;
   onCanvasSubmit?: (snapshot: CanvasSnapshot) => void;
 }
@@ -30,6 +31,7 @@ export default function SolutionReveal({
   onReset,
   currentStatus,
   problemId,
+  problemSetup,
   savedCanvasSnapshot,
   onCanvasSubmit,
 }: SolutionRevealProps) {
@@ -68,6 +70,7 @@ export default function SolutionReveal({
           submitted={scratchpadSubmitted}
           savedSnapshot={savedCanvasSnapshot}
           problemId={problemId}
+          problemSetup={problemSetup}
         />
       )}
 

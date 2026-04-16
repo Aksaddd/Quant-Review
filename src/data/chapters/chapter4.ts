@@ -101,10 +101,32 @@ P(win) = (1/13) × (4/51) × (0+1+2+...+12) = (4/51) × 78/13 = 312/663 = 8/17 �
             keyTechnique: "",
             tags: ["probability","combinatorics","bayes","distributions","expectation","variance"],
             setup: `100 passengers board a plane with assigned seats 1–100. The first passenger is drunk and picks a random seat. Each subsequent sober passenger takes their own seat if available, or picks randomly otherwise. What is the probability that passenger 100 gets seat #100?`,
-            solution: `Focus only on seats #1 and #100. At every decision point (including every "redirected" passenger), both of these seats are equally likely to be chosen next before the other. By symmetry, exactly one of them is eventually occupied before the other — each with probability 1/2.
+            solution: `**Warm up with small cases.**
 
-- If seat #1 is filled before #100: all subsequent passengers (including #100) get their correct seats ✓
-- If seat #100 is filled first: passenger 100 cannot get their seat ✗
+*n = 2.* The drunk picks seat 1 or 2 uniformly. Passenger 2 gets their seat only if the drunk picks seat 1 → **P = 1/2**.
+
+*n = 3.* The drunk picks 1, 2, or 3 with probability 1/3 each.
+- Picks **1**: everyone sits correctly. Passenger 3 ✓
+- Picks **3**: passenger 3 is out. ✗
+- Picks **2**: passenger 2 is displaced and picks from {1, 3} uniformly — this is identical to the *n = 2* subproblem over seats {1, 3}, giving 1/2.
+
+Total = 1/3 · 1 + 1/3 · 0 + 1/3 · 1/2 = **1/2**.
+
+The answer is 1/2 and doesn't depend on n. Here's why.
+
+**Key insight: only seats #1 and #100 decide the outcome.**
+
+Follow the chain of displacements. The drunk grabs some seat. If that seat belongs to passenger k, then passenger k (now displaced) picks randomly, possibly displacing someone else, and so on. The chain has three possible endings:
+
+- A displaced passenger picks **seat #1**. Seat #1's owner (the drunk) has already sat, so no one else is disturbed. Every remaining passenger, including passenger 100, finds their seat free. ✓
+- A displaced passenger picks **seat #100**. Passenger 100 arrives to find their seat taken. ✗
+- A displaced passenger picks some seat *k* (1 < k < 100). The chain continues — not yet resolved.
+
+So the question reduces to: **when the chain finally resolves, is it seat #1 or seat #100 that gets picked?**
+
+**Symmetry finishes it.**
+
+Until the chain resolves, seats #1 and #100 are both still free — the chain hasn't ended, by definition. Every time a displaced passenger picks, they pick *uniformly* from the remaining free seats, which always contains both #1 and #100. The process has no way to tell them apart, so whichever of {#1, #100} gets picked first is equally likely to be either.
 
 **P(passenger 100 gets seat #100) = 1/2**`,
             hints: [],

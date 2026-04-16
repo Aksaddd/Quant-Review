@@ -11,6 +11,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const Excalidraw = dynamic(
   async () => {
@@ -31,6 +32,7 @@ interface ApproachCanvasProps {
   submitted: boolean;
   savedSnapshot?: CanvasSnapshot | null;
   problemId: string;
+  problemSetup?: string;
 }
 
 export default function ApproachCanvas({
@@ -38,6 +40,7 @@ export default function ApproachCanvas({
   submitted,
   savedSnapshot,
   problemId,
+  problemSetup,
 }: ApproachCanvasProps) {
   const [expanded, setExpanded] = useState(!submitted);
   const [fullscreen, setFullscreen] = useState(false);
@@ -125,15 +128,18 @@ export default function ApproachCanvas({
           fullscreen ? 'fixed inset-4 z-50 border-solid border-[#1865f2] shadow-2xl' : ''
         }`}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#f4f7fe]">
-          <div className="flex items-center gap-2">
-            <PenLine size={14} className="text-[#1865f2]" />
-            <span className="text-xs font-bold text-[#1865f2] uppercase tracking-wider">
-              Your approach first
-            </span>
+        {/* Header — problem statement */}
+        <div className="flex items-start justify-between gap-3 px-4 py-3 bg-[#f4f7fe] border-b border-[#1865f2]/10">
+          <div className="flex-1 min-w-0 prose-reading text-sm text-[#21242c]">
+            {problemSetup ? (
+              <MarkdownRenderer content={problemSetup} />
+            ) : (
+              <span className="text-xs font-bold text-[#1865f2] uppercase tracking-wider">
+                Your approach first
+              </span>
+            )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleClear}
               className="flex items-center gap-1 px-2 py-1 rounded text-xs text-[#9299a5] hover:text-[#e53e3e] hover:bg-red-50 transition-colors"
@@ -150,13 +156,6 @@ export default function ApproachCanvas({
             </button>
           </div>
         </div>
-
-        {/* Instructions */}
-        <p className="text-xs text-[#626975] px-4 py-2 leading-relaxed bg-[#f4f7fe]">
-          Sketch your approach — draw diagrams, write equations, map out your
-          thinking. Your work is saved and will reappear when this problem
-          comes back for review.
-        </p>
 
         {/* Canvas */}
         <div className={`${canvasHeight} w-full`}>
