@@ -49,7 +49,7 @@ export default function FlashcardCard({ card, onFlip }: FlashcardCardProps) {
           <div className="flex items-center gap-2 mb-5">
             <TypeBadge type={card.type} />
             <DifficultyBadge difficulty={card.difficulty} />
-            <span className="ml-auto text-xs text-[var(--text-muted)] font-mono">§{card.section}</span>
+            <span className="ml-auto text-xs text-[var(--text-muted)] font-mono">{card.section}</span>
           </div>
 
           {title && (

@@ -79,7 +79,7 @@ export default function SectionGrid({ sections }: SectionGridProps) {
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <p className="text-[11px] font-medium text-[#9299a5]">§{sec.section}</p>
+                  <p className="text-[11px] font-medium text-[#9299a5]">{sec.section}</p>
                   <span
                     className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
                     style={{ backgroundColor: color + '20', color }}

@@ -55,7 +55,7 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
             <div key={sec.id}>
               <div className="px-4 py-2 bg-[#f7f8fa] sticky top-0 z-10 border-b border-[#e4e6ea]">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#9299a5]">
-                  §{sec.id} · {sec.title}
+                  {sec.id} · {sec.title}
                 </p>
               </div>
               <ul>

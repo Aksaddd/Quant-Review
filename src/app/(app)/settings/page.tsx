@@ -240,7 +240,7 @@ export default function SettingsPage() {
                           {GRADE_META[grade].label}
                         </span>
                       )}
-                      <span className="text-[10px] font-mono text-[#9299a5]">§{section}</span>
+                      <span className="text-[10px] font-mono text-[#9299a5]">{section}</span>
                     </div>
                   </button>
                 );

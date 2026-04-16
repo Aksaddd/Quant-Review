@@ -223,7 +223,7 @@ export default function FlashcardsPage() {
               {spineSections.map((sec) => (
                 <div key={sec.id}>
                   <div className="px-3 pt-3 pb-1 flex items-center gap-1.5">
-                    <span className="text-[9px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                    <span className="text-[9px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">{sec.id}</span>
                     <span className="text-[9px] font-semibold text-[#626975] truncate">{sec.title}</span>
                   </div>
                   {sec.entries.map(({ card: sc, globalIdx }) => {
@@ -277,7 +277,7 @@ export default function FlashcardsPage() {
               {/* Section — most prominent */}
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
                 <BookOpen size={12} className="text-[#9299a5]" />
-                <span className="text-[11px] font-bold text-[#626975]">§{card.section}</span>
+                <span className="text-[11px] font-bold text-[#626975]">{card.section}</span>
                 <span className="text-[#c8ccd4]">·</span>
                 <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
               </div>
@@ -638,7 +638,7 @@ export default function FlashcardsPage() {
                           {/* Section header */}
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                              <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">{sec.id}</span>
                               <h3 className="text-xs font-bold text-[#21242c]">{sec.title}</h3>
                               <span className="text-[10px] text-[#9299a5]">({secCards.length})</span>
                             </div>
@@ -671,6 +671,7 @@ export default function FlashcardsPage() {
                                     title={due ? 'Due for review' : isNew ? 'New card' : 'Scheduled'}
                                   />
                                   <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
+                                  <DifficultyBadge difficulty={card.difficulty} />
                                   <TypeBadge type={card.type} />
                                   <AddToSetButton
                                     cardId={card.id}
@@ -714,7 +715,7 @@ export default function FlashcardsPage() {
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">§{sec.id}</span>
+                      <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">{sec.id}</span>
                       {dueCount > 0 && (
                         <span className="flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#e8f0fe] text-[#1865f2]">
                           <CalendarClock size={8} /> {dueCount} due
@@ -735,7 +736,7 @@ export default function FlashcardsPage() {
                     onClick={() => startSession(secCards, new Set(), 'browse')}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
                   >
-                    <Sparkles size={11} /> Study §{sec.id}
+                    <Sparkles size={11} /> Study {sec.id}
                   </button>
                 </div>
 
@@ -940,8 +941,9 @@ function ShuffleView({
                 </p>
 
                 <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#f0f1f3] text-[#626975] shrink-0">
-                  §{card.section}
+                  {card.section}
                 </span>
+                <DifficultyBadge difficulty={card.difficulty} />
                 <TypeBadge type={card.type} />
               </div>
             );
@@ -1140,6 +1142,7 @@ function MySetsView({
                           }}
                         />
                         <p className="flex-1 text-xs text-[#21242c] truncate">{cardTitle(card)}</p>
+                        <DifficultyBadge difficulty={card.difficulty} />
                         <TypeBadge type={card.type} />
                         <button
                           onClick={() => removeCardFromSet(set.id, card.id)}
