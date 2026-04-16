@@ -44,6 +44,29 @@ export type {
 
 export { GRADE_QUALITY_MAP } from './types';
 
+// ── LLM Router (Provider-Agnostic) ──────────────
+export {
+  routedComplete,
+  routedCompleteJSON,
+  routedChat,
+  getModelForFeature,
+  estimateCost,
+  DEFAULT_PROVIDER,
+  FEATURE_TIERS,
+} from './llm-router';
+export type { LLMProvider, LLMResponse, TaskTier } from './llm-router';
+
+// ── Gemini API Service ──────────────────────────
+export {
+  geminiComplete,
+  geminiCompleteJSON,
+  geminiChat,
+  geminiHealthCheck,
+  GEMINI_MODEL_LITE,
+  GEMINI_MODEL_FLASH,
+} from './gemini';
+export type { GeminiResponse } from './gemini';
+
 // ── Claude API Service ──────────────────────────
 export {
   complete,

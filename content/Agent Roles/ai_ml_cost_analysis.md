@@ -1,5 +1,6 @@
 # AI/ML Cost Analysis & Model Selection Strategy
 > **AI/ML Engineer** · Phase 1 Foundation · April 2026 · CONFIDENTIAL
+> **Revision 2** — Updated with full Gemini model assessment
 
 ---
 
@@ -238,6 +239,207 @@ Could we use Gemini 2.5 Flash Lite ($0.10/$0.40) instead of Haiku ($1.00/$5.00) 
 
 ---
 
+## 9. Deep Dive: Google Gemini Model Lineup (Revision 2)
+
+### Complete Gemini Portfolio (April 2026)
+
+Google offers **four generations** of models with dramatically different price/performance points:
+
+| Model | Input/MTok | Output/MTok | Context | Speed | Arena Elo | Generation |
+|-------|----------:|------------:|--------:|------:|----------:|:----------:|
+| **Gemini 3.1 Flash Lite** | $0.25 | $1.50 | 1M | 381 t/s | 1,432 | Latest |
+| **Gemini 3 Flash** | $0.50 | $3.00 | 1M | ~200 t/s | — | Current |
+| **Gemini 2.5 Flash Lite** | $0.10 | $0.40 | 1M | ~250 t/s | — | Stable |
+| **Gemini 2.5 Flash** | $0.30 | $2.50 | 1M | ~200 t/s | — | Stable |
+| **Gemini 2.5 Pro** | $1.25 | $10.00 | 1M | ~100 t/s | — | Stable |
+| **Gemini 3.1 Pro** | $1.875 | $15.00 | 1M | ~80 t/s | — | Latest |
+
+**For reference — current Claude stack:**
+
+| Model | Input/MTok | Output/MTok | Context |
+|-------|----------:|------------:|--------:|
+| Claude Haiku 4.5 | $1.00 | $5.00 | 200K |
+| Claude Sonnet 4.6 | $3.00 | $15.00 | 1M |
+
+### Free Tier (Development & Testing)
+
+Google offers a **free tier** — no credit card required:
+
+| Model | RPM | Requests/Day | Tokens/Min |
+|-------|----:|-------------:|-----------:|
+| Gemini 2.5 Flash | 10 | 250 | 250K |
+| Gemini 2.5 Flash Lite | 15 | 1,000 | 250K |
+| Gemini 2.5 Pro | 5 | 100 | 250K |
+
+This is significant: **we can develop and test the entire AI pipeline at zero cost** using the free tier. Claude has no free API tier.
+
+### SDK Compatibility
+
+Google provides `@google/genai` (npm), a TypeScript/JavaScript SDK that works with Next.js API routes — same architecture as our current `@anthropic-ai/sdk` integration.
+
+```
+npm i @google/genai
+```
+
+---
+
+### Head-to-Head: Gemini vs Claude for Each Feature
+
+#### Feature 1: Approach Evaluation (Generate-Before-Reveal)
+
+Task: Compare student text against official solution, return structured JSON.
+
+| Dimension | Gemini 2.5 Flash Lite | Claude Haiku 4.5 | Winner |
+|-----------|:--------------------:|:----------------:|:------:|
+| Input cost | $0.10/MTok | $1.00/MTok | **Gemini (10x)** |
+| Output cost | $0.40/MTok | $5.00/MTok | **Gemini (12.5x)** |
+| JSON reliability | Good (schema mode available) | Strong | Haiku slightly |
+| Math understanding | Adequate for comparison | Strong | Haiku slightly |
+| **Est. cost/call** | **$0.0007** | **$0.0073** | **Gemini (10x)** |
+
+**Verdict: Gemini 2.5 Flash Lite wins.** This is a structured comparison task — it doesn't need deep reasoning. The 10x cost advantage is decisive. Use `response_mime_type: "application/json"` with a response schema to enforce valid JSON.
+
+#### Feature 2: Hint Generation
+
+Task: Generate 1–2 sentence hint, constrained output.
+
+| Dimension | Gemini 2.5 Flash Lite | Claude Haiku 4.5 | Winner |
+|-----------|:--------------------:|:----------------:|:------:|
+| Input cost | $0.10 | $1.00 | **Gemini (10x)** |
+| Output cost | $0.40 | $5.00 | **Gemini (12.5x)** |
+| Quality | Adequate | Strong | Haiku slightly |
+| **Est. cost/call** | **$0.0005** | **$0.0052** | **Gemini (10x)** |
+
+**Verdict: Gemini 2.5 Flash Lite wins.** Trivial task. Any model handles 2-sentence constrained output.
+
+#### Feature 3: Socratic Interview (Multi-Turn)
+
+Task: Maintain persona, reason about math, strategic hint management across 10+ turns.
+
+| Dimension | Gemini 2.5 Flash | Claude Sonnet 4.6 | Winner |
+|-----------|:----------------:|:-----------------:|:------:|
+| Input cost | $0.30/MTok | $3.00/MTok | **Gemini (10x)** |
+| Output cost | $2.50/MTok | $15.00/MTok | **Gemini (6x)** |
+| Multi-turn coherence | Good with thinking budget | Excellent | Sonnet |
+| Math reasoning | Strong (AIME 86.7%) | Excellent (89%) | Close |
+| Persona consistency | Adequate | Strong | Sonnet |
+| **Est. cost/session (10 turns)** | **$0.0055** | **$0.051** | **Gemini (9x)** |
+
+**Verdict: Gemini 2.5 Flash is viable.** This was the one feature we reserved for Sonnet. Gemini 2.5 Flash with a thinking budget can handle Socratic questioning at 9x lower cost. The quality gap is real but may be acceptable for an MVP — and Gemini's 1M context window means conversation history never gets truncated.
+
+**Risk:** Persona consistency is Gemini's weakest point here. Recommendation: **test with Gemini 2.5 Flash first, fall back to Sonnet if user ratings drop below 4.0/5.**
+
+#### Feature 4: Socratic Scoring
+
+Task: Analyze transcript, produce rubric scores as JSON.
+
+| Dimension | Gemini 2.5 Flash Lite | Claude Haiku 4.5 | Winner |
+|-----------|:--------------------:|:----------------:|:------:|
+| Cost/call | ~$0.001 | ~$0.013 | **Gemini (13x)** |
+| Quality | Good | Strong | Haiku slightly |
+
+**Verdict: Gemini 2.5 Flash Lite wins.** Structured evaluation of existing text.
+
+#### Feature 5: Technique Classification (Batch)
+
+Task: Multi-label classification with taxonomy mapping, one-time batch job.
+
+| Dimension | Gemini 2.5 Flash Lite | Claude Haiku 4.5 | Winner |
+|-----------|:--------------------:|:----------------:|:------:|
+| Cost for all 200 problems | ~$0.003 | ~$0.15 | **Gemini (50x)** |
+| Classification quality | Good | Strong | Haiku slightly |
+
+**Verdict: Gemini 2.5 Flash Lite wins.** One-time batch job. Even if quality is slightly lower, we can review and correct the 200 classifications manually.
+
+#### Feature 6: Weakness Analysis
+
+Task: Analyze performance data, produce structured insights.
+
+| Dimension | Gemini 2.5 Flash Lite | Claude Haiku 4.5 | Winner |
+|-----------|:--------------------:|:----------------:|:------:|
+| Cost/call | ~$0.001 | ~$0.012 | **Gemini (12x)** |
+| Quality | Good | Strong | Haiku slightly |
+
+**Verdict: Gemini 2.5 Flash Lite wins.** Data summarization task.
+
+#### Feature 7: Embeddings
+
+Already using Google text-embedding-005 ($0.00625/MTok). No change needed.
+
+---
+
+### Revised Cost Projection: All-Gemini Stack
+
+| Feature | Model | Est. Cost/Call | Calls/Session | Session Cost |
+|---------|-------|:-------------:|:-------------:|-----------:|
+| Approach Eval | Gemini 2.5 Flash Lite | $0.0007 | 5 | $0.0035 |
+| Hint Generation | Gemini 2.5 Flash Lite | $0.0005 | 4 | $0.0020 |
+| Socratic (10 turns) | Gemini 2.5 Flash | $0.0055 | 1 | $0.0055 |
+| Socratic Scoring | Gemini 2.5 Flash Lite | $0.0010 | 1 | $0.0010 |
+| Weakness Analysis | Gemini 2.5 Flash Lite | $0.0010 | 0.2 | $0.0002 |
+| **Session Total** | | | | **$0.012** |
+
+### Strategy Comparison: All Costs Per User Per Month (20 Sessions)
+
+| Strategy | Session Cost | Monthly | Annual | vs. All-Sonnet |
+|----------|:----------:|:------:|:------:|:--------------:|
+| All Sonnet (original) | $0.22 | $4.40 | $52.80 | — |
+| Haiku + Sonnet (Rev 1) | $0.052 | $1.04 | $12.48 | **-76%** |
+| **All Gemini (Rev 2)** | **$0.012** | **$0.24** | **$2.88** | **-95%** |
+
+### At Scale — All Gemini
+
+| Users | Sessions/mo | Monthly Cost | Annual Cost |
+|------:|:----------:|:------------:|:-----------:|
+| 100 | 2,000 | **$24** | **$288** |
+| 1,000 | 20,000 | **$240** | **$2,880** |
+| 10,000 | 200,000 | **$2,400** | **$28,800** |
+
+At 10,000 users: **$2,400/month** on Gemini vs **$10,400/month** on Haiku+Sonnet vs **$44,000/month** on all-Sonnet.
+
+---
+
+### Known Gemini Risks & Mitigations
+
+| Risk | Severity | Mitigation |
+|------|:--------:|------------|
+| **Flash Lite JSON reliability** — documented issues with backtick-wrapped JSON on some inputs | Medium | Use `response_mime_type: "application/json"` + response schema (enforces valid JSON server-side). Add client-side JSON cleanup as fallback. |
+| **Silent truncation** — no error when response hits token limit | Medium | Set explicit `maxOutputTokens` below limit. Validate response completeness client-side. |
+| **Free tier privacy** — prompts may be used to improve Google products | Low | Use paid tier for production. Free tier only for development. |
+| **Gemini 2.5 Flash deprecation** — scheduled shutdown June 2026 | High | Build provider-agnostic abstraction layer. Plan migration to Gemini 3 Flash ($0.50/$3.00) before June. |
+| **Multi-turn persona drift** — Gemini less consistent than Claude in sustained personas | Medium | For Socratic interviews: implement a model-selection fallback. Start with Gemini 2.5 Flash; if user satisfaction < 4.0/5, route to Claude Sonnet. |
+
+---
+
+### 10. Revised Recommendation: Dual-Provider Architecture
+
+Instead of picking one provider, build a **provider-agnostic service layer** that routes to the cheapest capable model:
+
+```
+Feature                  → Primary Model            → Fallback
+────────────────────────────────────────────────────────────────
+Approach Evaluation      → Gemini 2.5 Flash Lite    → Haiku 4.5
+Hint Generation          → Gemini 2.5 Flash Lite    → Haiku 4.5
+Socratic Interview       → Gemini 2.5 Flash         → Sonnet 4.6
+Socratic Scoring         → Gemini 2.5 Flash Lite    → Haiku 4.5
+Technique Classification → Gemini 2.5 Flash Lite    → Haiku 4.5
+Weakness Analysis        → Gemini 2.5 Flash Lite    → Haiku 4.5
+Embeddings               → Google text-embedding-005 (no fallback needed)
+```
+
+**Why dual-provider and not all-Gemini?**
+- Claude remains the safety net for quality-critical features
+- If Gemini has an outage or deprecation, we failover instantly
+- The abstraction layer costs us a few hours of engineering once, saves us permanently
+
+**Development strategy:**
+1. Build on Gemini free tier (zero cost during development)
+2. Launch MVP on Gemini paid tier ($0.24/user/month)
+3. Monitor quality metrics — fall back to Claude per-feature if needed
+4. Migrate from Gemini 2.5 Flash → 3 Flash before June 2026 deprecation
+
+---
+
 ## Sources
 
 - [Anthropic Claude API Pricing](https://www.finout.io/blog/anthropic-api-pricing)
@@ -246,8 +448,17 @@ Could we use Gemini 2.5 Flash Lite ($0.10/$0.40) instead of Haiku ($1.00/$5.00) 
 - [OpenAI API Pricing](https://www.finout.io/blog/openai-pricing-in-2026)
 - [GPT-4o-mini Pricing](https://pricepertoken.com/pricing-page/model/openai-gpt-4o-mini)
 - [OpenAI Embeddings Pricing](https://costgoat.com/pricing/openai-embeddings)
-- [Gemini API Pricing 2026](https://www.metacto.com/blogs/the-true-cost-of-google-gemini-a-guide-to-api-pricing-and-integration)
+- [Gemini API Pricing 2026 Complete Guide](https://www.metacto.com/blogs/the-true-cost-of-google-gemini-a-guide-to-api-pricing-and-integration)
 - [Gemini 2.5 Flash Lite Pricing](https://pricepertoken.com/pricing-page/model/google-gemini-2.5-flash-lite)
+- [Gemini 3.1 Flash Lite — Google Blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/)
+- [Gemini 3.1 Flash Lite vs 2.5 Flash Benchmarks](https://www.buildfastwithai.com/blogs/gemini-3-1-flash-lite-vs-2-5-flash-speed-cost-benchmarks-2026)
+- [Gemini 3 Flash vs 2.5 Flash](https://www.aifreeapi.com/en/posts/gemini-3-flash-vs-gemini-2-5-flash)
+- [Gemini Free Tier Limits 2026](https://tokenmix.ai/blog/gemini-api-free-tier-limits)
+- [Gemini Flash Lite Structured Output Issues](https://discuss.ai.google.dev/t/gemini-2-5-flash-lite-produces-incorrect-structured-output/102367)
+- [Gemini Developer Guide 2026 — Production Pitfalls](https://www.shareuhack.com/en/posts/gemini-2-5-flash-developer-guide-2026)
+- [Haiku 4.5 vs Gemini 2.5 Flash Comparison](https://blog.galaxy.ai/compare/claude-haiku-4-5-vs-gemini-2-5-flash)
+- [Sonnet 4.6 vs Gemini 2.5 Pro Benchmarks](https://benchlm.ai/compare/claude-sonnet-4-6-vs-gemini-2-5-pro)
 - [Claude Opus vs Sonnet vs Haiku Benchmarks](https://tech-insider.org/claude-opus-vs-sonnet-vs-haiku-2026/)
 - [Haiku 4.5 vs GPT-4o-mini Comparison](https://blog.galaxy.ai/compare/claude-haiku-4-5-vs-gpt-4o-mini)
 - [Multi-Model Routing Strategy](https://www.morphllm.com/anthropic-api-pricing)
+- [Google Gen AI JS SDK](https://github.com/googleapis/js-genai)
