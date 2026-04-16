@@ -6,9 +6,10 @@ import MarkdownRenderer from './MarkdownRenderer';
 
 interface HintStepProps {
   hints: string[];
+  onRevealCount?: (count: number) => void;
 }
 
-export default function HintStep({ hints }: HintStepProps) {
+export default function HintStep({ hints, onRevealCount }: HintStepProps) {
   const [revealed, setRevealed] = useState(0);
 
   if (hints.length === 0) return null;
@@ -36,7 +37,13 @@ export default function HintStep({ hints }: HintStepProps) {
       <div className="flex items-center gap-4 mt-2">
         {revealed < hints.length && (
           <button
-            onClick={() => setRevealed((r) => r + 1)}
+            onClick={() => {
+              setRevealed((r) => {
+                const next = r + 1;
+                onRevealCount?.(next);
+                return next;
+              });
+            }}
             className="flex items-center gap-1.5 text-xs font-semibold text-[#f5a623] hover:underline"
           >
             <ChevronDown size={13} />

@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useProgress } from '@/hooks/useProgress';
+import { useXPStore, XP_REWARDS } from '@/stores/useXPStore';
 import { DifficultyBadge } from '@/components/ui/Badge';
 import MarkdownRenderer from './MarkdownRenderer';
 import SolutionReveal from './SolutionReveal';
@@ -14,6 +15,8 @@ interface ProblemBlockProps {
 
 export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
   const { getProblemStatus, setProblemStatus } = useProgress();
+  const awardXP = useXPStore((s) => s.awardXP);
+  const triggerFiero = useXPStore((s) => s.triggerFiero);
   const status = getProblemStatus(problem.id);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,6 +37,25 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [status, problem.id, setProblemStatus]);
+
+  const handleSolved = useCallback((hintsUsed: number) => {
+    setProblemStatus(problem.id, 'solved');
+
+    // Award XP based on difficulty and hint usage
+    const isHard = problem.difficulty === 'hard';
+    const noHints = hintsUsed === 0;
+
+    if (isHard && noHints) {
+      awardXP('problem_solved', XP_REWARDS.hintFreeHardSolve, `${problem.title} — no hints!`);
+      triggerFiero(); // Fiero moment!
+    } else if (noHints) {
+      awardXP('problem_solved', XP_REWARDS.problemSolvedNoHint, `${problem.title} — no hints`);
+    } else if (isHard) {
+      awardXP('problem_solved', XP_REWARDS.problemSolvedHard, problem.title);
+    } else {
+      awardXP('problem_solved', XP_REWARDS.problemSolved, problem.title);
+    }
+  }, [problem, setProblemStatus, awardXP, triggerFiero]);
 
   return (
     <div
@@ -95,7 +117,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
           finalAnswer={problem.finalAnswer}
           hints={problem.hints}
           currentStatus={status}
-          onSolved={() => setProblemStatus(problem.id, 'solved')}
+          onSolved={handleSolved}
           onAttempted={() => { if (status === 'unseen') setProblemStatus(problem.id, 'attempted'); }}
           onUndoSolved={() => setProblemStatus(problem.id, 'attempted')}
           onReset={() => setProblemStatus(problem.id, 'unseen')}
