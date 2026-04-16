@@ -21,6 +21,16 @@
 │   │   ├── chapter-05-stochastic-processes.md
 │   │   ├── chapter-06-finance.md
 │   │   └── chapter-07-algorithms-numerical-methods.md
+│   ├── Agent Roles/                   ← Team composition & role definitions
+│   │   ├── Team Overview              ← CTO strategic doc — phased hiring plan
+│   │   ├── 01_lead_fullstack_engineer.md
+│   │   ├── 02_ai_ml_engineer.md
+│   │   ├── 03_curriculum_lead.md
+│   │   ├── 04_gamification_ux_designer.md
+│   │   ├── 05_frontend_engineer.md
+│   │   ├── 06_data_analytics_engineer.md
+│   │   ├── 07_quant_content_author.md
+│   │   └── 08_growth_community_manager.md
 │   └── Research/                      ← Learning science research
 │       ├── Books/                     ← Source books on learning science
 │       │   ├── building-a-second-brain.md
@@ -229,6 +239,41 @@ The `content/Research/` directory contains learning science books and a synthesi
 | Moonwalking with Einstein | Joshua Foer | Memory techniques and mnemonics |
 | Reality Is Broken | Jane McGonigal | Gamification and engagement |
 | Uncommon Sense Teaching | Oakley et al. | Practical teaching methods based on brain science |
+
+---
+
+## Team Composition & Agent Roles
+
+The `content/Agent Roles/` directory defines the full team required to build Quant Review into a cognitive science-driven learning engine. Every role is grounded in the six-book research synthesis. See `Team Overview` for the CTO strategic document including the phased hiring plan.
+
+### Five Highest-Impact Features (from Synthesis)
+
+| # | Feature |
+|---|---------|
+| 1 | SM-2 extended to problems |
+| 2 | Cross-chapter interleaved practice |
+| 3 | Time and error tracking |
+| 4 | Gamification layer with fiero moments |
+| 5 | Prerequisite gating |
+
+### Team Roles
+
+| Role | Dept | Difficulty | Phase | Primary Mandate |
+|------|------|------------|-------|-----------------|
+| Lead Full-Stack Engineer | Engineering | High | 1 — Foundation | Architectural owner of the entire platform |
+| AI / ML Engineer | Engineering | High | 1 — Foundation | LLMs, adaptive intelligence, ingestion pipeline |
+| Cognitive Science & Curriculum Lead | Product / Content | High | 1 — Foundation | Bridges learning science and product |
+| Gamification & UX Designer | Product / Design | Medium | 2 — Experience | Emotional and motivational layer |
+| Frontend Engineer | Engineering | Medium | 2 — Experience | Design system, all user-facing components |
+| Data / Analytics Engineer | Engineering / Growth | Medium | 2 — Experience | Data infrastructure for adaptive platform |
+| Quant Content Author | Content | Low | 3 — Scale | Authors, reviews, and tags all quant problems |
+| Growth & Community Manager | Growth | Low | 3 — Scale | Distribution, community, social connectivity |
+
+### Phased Hiring Plan
+
+- **Phase 1 — Foundation (Months 1–3):** Lead Full-Stack, AI/ML, Curriculum Lead
+- **Phase 2 — Experience Layer (Months 3–6):** Gamification & UX, Frontend, Data/Analytics
+- **Phase 3 — Scale (Months 6+):** Quant Content Authors, Growth & Community Manager
 
 ---
 
