@@ -173,7 +173,7 @@ create table if not exists public.content_embeddings (
   content_id     text not null,      -- problem_id, flashcard_id, or section_id
   chunk_index    integer not null default 0,  -- for multi-chunk content
   content_text   text not null,               -- raw text that was embedded
-  embedding      vector(1536),                -- text-embedding-3-small dimension
+  embedding      vector(768),                -- Google text-embedding-005 (768d) or OpenAI 3-small (set EMBEDDING_DIMENSIONS=1536)
   metadata       jsonb default '{}',          -- chapter, section, tags, difficulty, etc.
   created_at     timestamptz not null default now(),
 
@@ -206,7 +206,7 @@ create table if not exists public.techniques (
   name           text not null,                -- e.g. "Bayes' Theorem"
   description    text,                         -- what this technique is
   category       text,                         -- e.g. "probability", "combinatorics", "algebra"
-  embedding      vector(1536),                 -- for semantic technique search
+  embedding      vector(768),                 -- for semantic technique search
   created_at     timestamptz not null default now()
 );
 
@@ -365,7 +365,7 @@ create or replace trigger set_weakness_profiles_updated_at
 -- ═══════════════════════════════════════════════════════════════════════════
 
 create or replace function public.match_embeddings(
-  query_embedding vector(1536),
+  query_embedding vector(768),
   match_count     integer default 10,
   match_threshold real default 0.7,
   filter_type     text default null

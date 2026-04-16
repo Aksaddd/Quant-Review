@@ -11,7 +11,13 @@ import Anthropic from '@anthropic-ai/sdk';
 
 // ── Configuration ───────────────────────────────
 
-const CLAUDE_MODEL = process.env.CLAUDE_MODEL ?? 'claude-sonnet-4-20250514';
+// Model tiers — route to cheapest viable model per task.
+// Haiku: $1/$5 MTok — structured JSON, classification, evaluation
+// Sonnet: $3/$15 MTok — multi-turn reasoning, persona consistency
+// Opus: $5/$25 MTok — reserved for deep reasoning (not used at launch)
+const CLAUDE_MODEL_HAIKU  = process.env.CLAUDE_MODEL_HAIKU  ?? 'claude-haiku-4-5-20251001';
+const CLAUDE_MODEL_SONNET = process.env.CLAUDE_MODEL_SONNET ?? 'claude-sonnet-4-6-20260416';
+const CLAUDE_MODEL        = process.env.CLAUDE_MODEL        ?? CLAUDE_MODEL_HAIKU; // default to cheapest
 const MAX_RETRIES  = 3;
 
 let _client: Anthropic | null = null;
@@ -41,6 +47,8 @@ export interface ClaudeResponse {
   model: string;
   inputTokens: number;
   outputTokens: number;
+  cacheReadTokens?: number;
+  cacheWriteTokens?: number;
   latencyMs: number;
 }
 
@@ -55,6 +63,10 @@ export interface ClaudeStreamCallbacks {
 /**
  * Send a single message to Claude and get a complete response.
  * Used for: approach evaluation, weakness profiling, technique classification.
+ *
+ * Prompt caching: system prompts are automatically cached (90% discount on
+ * cache hits). The system prompt is marked with cache_control so repeated
+ * calls with the same system prompt pay only 10% of input cost.
  */
 export async function complete(
   systemPrompt: string,
@@ -63,16 +75,25 @@ export async function complete(
     model?: string;
     maxTokens?: number;
     temperature?: number;
+    enableCaching?: boolean;
   } = {}
 ): Promise<ClaudeResponse> {
   const client = getClient();
   const start  = Date.now();
+  const useCache = options.enableCaching !== false; // default ON
+
+  // Build system prompt with caching. The cache_control block tells Anthropic
+  // to cache this system prompt for 5 minutes — subsequent calls with the
+  // same system prompt hit the cache at 90% discount.
+  const systemContent = useCache
+    ? [{ type: 'text' as const, text: systemPrompt, cache_control: { type: 'ephemeral' as const } }]
+    : systemPrompt;
 
   const response = await client.messages.create({
     model:      options.model ?? CLAUDE_MODEL,
     max_tokens: options.maxTokens ?? 2048,
     temperature: options.temperature ?? 0.3,
-    system:     systemPrompt,
+    system:     systemContent,
     messages:   messages.map((m) => ({
       role:    m.role,
       content: m.content,
@@ -82,11 +103,16 @@ export async function complete(
   const latencyMs = Date.now() - start;
   const textBlock = response.content.find((b) => b.type === 'text');
 
+  // Extract cache metrics from usage (available when prompt caching is active)
+  const usage = response.usage as unknown as Record<string, number>;
+
   return {
-    content:      textBlock?.text ?? '',
-    model:        response.model,
-    inputTokens:  response.usage.input_tokens,
-    outputTokens: response.usage.output_tokens,
+    content:          textBlock?.text ?? '',
+    model:            response.model,
+    inputTokens:      usage.input_tokens,
+    outputTokens:     usage.output_tokens,
+    cacheReadTokens:  usage.cache_read_input_tokens ?? 0,
+    cacheWriteTokens: usage.cache_creation_input_tokens ?? 0,
     latencyMs,
   };
 }
@@ -213,4 +239,4 @@ export async function healthCheck(): Promise<{
   }
 }
 
-export { CLAUDE_MODEL };
+export { CLAUDE_MODEL, CLAUDE_MODEL_HAIKU, CLAUDE_MODEL_SONNET };

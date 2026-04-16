@@ -52,6 +52,8 @@ export {
   parseJSON,
   healthCheck,
   CLAUDE_MODEL,
+  CLAUDE_MODEL_HAIKU,
+  CLAUDE_MODEL_SONNET,
 } from './claude';
 export type { ClaudeMessage, ClaudeResponse, ClaudeStreamCallbacks } from './claude';
 

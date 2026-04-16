@@ -11,11 +11,20 @@ import type { ContentType, ContentEmbedding, SimilarityResult } from './types';
 
 // ── Configuration ───────────────────────────────
 
-const EMBEDDING_MODEL      = process.env.EMBEDDING_MODEL ?? 'text-embedding-3-small';
-const EMBEDDING_DIMENSIONS = parseInt(process.env.EMBEDDING_DIMENSIONS ?? '1536', 10);
-const OPENAI_API_KEY       = () => process.env.OPENAI_API_KEY ?? '';
+// Default: Google text-embedding-005 — $0.00625/MTok, 768 dims, ~64% MTEB
+// 3.2x cheaper than OpenAI text-embedding-3-small ($0.02/MTok, 1536 dims)
+// Fallback: set EMBEDDING_PROVIDER=openai in .env.local to use OpenAI instead
+const EMBEDDING_PROVIDER   = process.env.EMBEDDING_PROVIDER ?? 'google';
+const EMBEDDING_MODEL      = process.env.EMBEDDING_MODEL
+  ?? (EMBEDDING_PROVIDER === 'google' ? 'text-embedding-005' : 'text-embedding-3-small');
+const EMBEDDING_DIMENSIONS = parseInt(
+  process.env.EMBEDDING_DIMENSIONS ?? (EMBEDDING_PROVIDER === 'google' ? '768' : '1536'),
+  10
+);
+const GOOGLE_API_KEY = () => process.env.GOOGLE_API_KEY ?? '';
+const OPENAI_API_KEY = () => process.env.OPENAI_API_KEY ?? '';
 
-// Max tokens per embedding request (text-embedding-3-small: 8191)
+// Max tokens per embedding request
 const MAX_CHUNK_TOKENS = 8000;
 
 // ── Types ───────────────────────────────────────
@@ -25,14 +34,75 @@ interface OpenAIEmbeddingResponse {
   usage: { prompt_tokens: number; total_tokens: number };
 }
 
+interface GoogleEmbeddingResponse {
+  embeddings: Array<{ values: number[] }>;
+}
+
 // ── Core Functions ──────────────────────────────
 
 /**
  * Generate embeddings for one or more text strings.
- * Uses OpenAI's text-embedding-3-small for cost efficiency.
- * Batches automatically (API supports up to 2048 inputs).
+ * Routes to Google text-embedding-005 (default) or OpenAI based on config.
  */
 export async function generateEmbeddings(
+  texts: string[]
+): Promise<{ embeddings: number[][]; tokensUsed: number }> {
+  if (EMBEDDING_PROVIDER === 'google') {
+    return generateEmbeddingsGoogle(texts);
+  }
+  return generateEmbeddingsOpenAI(texts);
+}
+
+/**
+ * Google text-embedding-005 — $0.00625/MTok, 768 dims
+ */
+async function generateEmbeddingsGoogle(
+  texts: string[]
+): Promise<{ embeddings: number[][]; tokensUsed: number }> {
+  const apiKey = GOOGLE_API_KEY();
+  if (!apiKey) {
+    throw new Error('GOOGLE_API_KEY is not set. Add it to .env.local for embeddings.');
+  }
+
+  // Google Embedding API batches up to 100 texts per request
+  const allEmbeddings: number[][] = [];
+  let totalTokens = 0;
+
+  for (let i = 0; i < texts.length; i += 100) {
+    const batch = texts.slice(i, i + 100);
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${EMBEDDING_MODEL}:batchEmbedContents?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requests: batch.map((text) => ({
+            model: `models/${EMBEDDING_MODEL}`,
+            content: { parts: [{ text }] },
+          })),
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Google Embeddings API error (${response.status}): ${errorBody}`);
+    }
+
+    const result = (await response.json()) as GoogleEmbeddingResponse;
+    allEmbeddings.push(...result.embeddings.map((e) => e.values));
+    // Google doesn't return token counts; estimate ~1 token per 4 chars
+    totalTokens += batch.reduce((sum, t) => sum + Math.ceil(t.length / 4), 0);
+  }
+
+  return { embeddings: allEmbeddings, tokensUsed: totalTokens };
+}
+
+/**
+ * OpenAI text-embedding-3-small — $0.02/MTok, 1536 dims (fallback)
+ */
+async function generateEmbeddingsOpenAI(
   texts: string[]
 ): Promise<{ embeddings: number[][]; tokensUsed: number }> {
   const apiKey = OPENAI_API_KEY();
@@ -59,8 +129,6 @@ export async function generateEmbeddings(
   }
 
   const result = (await response.json()) as OpenAIEmbeddingResponse;
-
-  // Sort by index to maintain input order
   const sorted = result.data.sort((a, b) => a.index - b.index);
 
   return {

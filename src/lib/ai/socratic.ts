@@ -11,8 +11,12 @@
 
 import type { Problem } from '../types';
 import type { SocraticMessage, SocraticScore, SocraticSession } from './types';
-import { complete, stream, completeJSON, type ClaudeMessage, type ClaudeStreamCallbacks } from './claude';
+import { complete, stream, completeJSON, CLAUDE_MODEL_SONNET, type ClaudeMessage, type ClaudeStreamCallbacks } from './claude';
 import { renderPrompt, SOCRATIC_INTERVIEWER } from './prompts';
+
+// Socratic interviews are the ONE feature that requires Sonnet-level intelligence.
+// Multi-turn persona consistency + mathematical reasoning + strategic hint management.
+const SOCRATIC_MODEL = CLAUDE_MODEL_SONNET;
 
 // ── Constants ───────────────────────────────────
 
@@ -35,7 +39,7 @@ export async function startSession(
   const response = await complete(
     systemPrompt,
     [{ role: 'user', content: 'I\'m ready for the interview. Please present the problem.' }],
-    { temperature: 0.5, maxTokens: 512 }
+    { model: SOCRATIC_MODEL, temperature: 0.5, maxTokens: 512 }
   );
 
   const now = new Date().toISOString();
@@ -104,7 +108,7 @@ export async function sendMessage(
   const response = await complete(
     systemPrompt,
     claudeMessages,
-    { temperature: 0.5, maxTokens: 512 }
+    { model: SOCRATIC_MODEL, temperature: 0.5, maxTokens: 512 }
   );
 
   // Detect if a hint was given (heuristic: look for hint-like language)
@@ -162,6 +166,7 @@ export async function streamMessage(
   const claudeMessages = messagesToClaude(updatedMessages);
 
   await stream(systemPrompt, claudeMessages, callbacks, {
+    model:       SOCRATIC_MODEL,
     temperature: 0.5,
     maxTokens:   512,
   });
