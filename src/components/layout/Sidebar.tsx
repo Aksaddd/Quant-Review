@@ -258,7 +258,7 @@ export default function Sidebar() {
                           className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
                         >
                           <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
-                            §{sec.id}
+                            {sec.id}
                           </span>
                           <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
                             {sec.title}

@@ -67,7 +67,7 @@ export default function FlashcardGradeHistory() {
               <p className="flex-1 text-sm text-[#21242c] truncate">{title}</p>
 
               {/* Section */}
-              <span className="text-[10px] font-mono text-[#9299a5] shrink-0">§{card.section}</span>
+              <span className="text-[10px] font-mono text-[#9299a5] shrink-0">{card.section}</span>
             </div>
           );
         })}

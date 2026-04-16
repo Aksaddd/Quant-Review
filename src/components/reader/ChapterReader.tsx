@@ -129,7 +129,7 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
                 className="px-2.5 py-1 rounded-full bg-[#f0f1f3] text-[#626975] text-xs font-medium
                   hover:bg-[var(--ka-blue-light)] hover:text-[var(--ka-blue)] transition-colors"
               >
-                §{sec.id} {sec.title}
+                {sec.id} {sec.title}
               </a>
             ))}
           </div>
@@ -163,7 +163,7 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
                   <div key={sec.id}>
                     <div className="px-4 py-2 bg-[#f7f8fa] sticky top-0 z-10 border-b border-[#e4e6ea]">
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[#9299a5]">
-                        §{sec.id} · {sec.title}
+                        {sec.id} · {sec.title}
                       </p>
                     </div>
                     {sectionProblems.length === 0 ? (
@@ -219,7 +219,7 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
               <div className="flex items-center gap-3 mb-5 pb-3 border-b-2 border-[var(--ka-blue)]">
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-widest">
-                    §{sec.id}
+                    {sec.id}
                   </span>
                   <h2 className="text-xl font-extrabold" style={{ color: 'var(--rt-text)' }}>
                     {sec.title}

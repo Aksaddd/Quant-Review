@@ -60,7 +60,7 @@ export default function ReaderProgressPanel() {
                 href={`#section-${sec.section}`}
                 className="flex items-center gap-2 py-1 group"
               >
-                <span className="text-[11px] font-medium text-[#9299a5] w-8 shrink-0">§{sec.section}</span>
+                <span className="text-[11px] font-medium text-[#9299a5] w-8 shrink-0">{sec.section}</span>
                 <div className="flex-1 h-1.5 bg-[#e4e6ea] rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-500"

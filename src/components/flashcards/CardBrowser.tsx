@@ -90,7 +90,7 @@ export default function CardBrowser({
         <div className="flex flex-wrap items-center gap-2 mb-5 self-start">
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
             <BookOpen size={12} className="text-[#9299a5]" />
-            <span className="text-[11px] font-bold text-[#626975]">§{card.section}</span>
+            <span className="text-[11px] font-bold text-[#626975]">{card.section}</span>
             <span className="text-[#c8ccd4]">·</span>
             <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
           </div>
