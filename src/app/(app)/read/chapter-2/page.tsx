@@ -22,7 +22,7 @@ export default function Chapter2Page() {
     <div className="reading-page min-h-screen">
       {/* Sticky header — KA breadcrumb style */}
       <div className="sticky top-0 z-30 reading-card border-b" style={{ borderColor: 'var(--rt-card-border)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
           {/* Breadcrumb */}
           <div className="flex items-center gap-1.5 text-xs font-medium min-w-0" style={{ color: 'var(--rt-text-muted)' }}>
             <span className="font-semibold truncate" style={{ color: 'var(--rt-text-secondary)' }}>Quant Finance Interview Prep</span>
@@ -48,7 +48,7 @@ export default function Chapter2Page() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Chapter title */}
         <div className="reading-card border rounded-lg p-6 mb-6">
           <p className="text-xs font-bold text-[var(--ka-blue)] uppercase tracking-widest mb-1">

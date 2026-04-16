@@ -14,7 +14,7 @@ export default function Chapter1Page() {
     <div className="bg-[#f7f8fa] min-h-screen">
       {/* Sticky breadcrumb bar */}
       <div className="sticky top-0 z-30 bg-white border-b border-[#e4e6ea]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
           <div className="flex items-center gap-1.5 text-xs text-[#9299a5] font-medium min-w-0">
             <span className="text-[#626975] font-semibold truncate">Quant Finance Interview Prep</span>
             <span>/</span>
@@ -24,7 +24,7 @@ export default function Chapter1Page() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Chapter header */}
         <div className="bg-white border border-[#e4e6ea] rounded-lg p-6 mb-6">
           <p className="text-xs font-bold text-[var(--ka-blue)] uppercase tracking-widest mb-1">Chapter 1</p>
