@@ -547,6 +547,84 @@ And render with **KaTeX** for clean display.
 
 ---
 
+## Roadmap — What's Built vs. What's Next
+
+A snapshot of where the platform stands today and what remains to ship, based on an audit of the current codebase.
+
+### ✅ Shipped
+
+| Area | Status |
+|------|--------|
+| **Reader with progressive reveal** | `ProblemBlock` → `ScratchpadGate` → `HintStep` → `SolutionReveal` gating is wired end-to-end. Students must submit an approach on the canvas before hints unlock and again before the solution reveals. |
+| **Chapter content** | 149 structured problems across all 7 chapters. Chapters 1–2 hand-authored; chapters 3–7 auto-generated from markdown via `scripts/gen-chapters.js`. |
+| **Flashcard study loop** | SM-2 algorithm (`src/lib/sm2.ts`), card browser, filter bar, rating buttons, custom sets, mistake taxonomy UI. |
+| **Gamification core** | XP awarded on problem solves (25–75 XP, `ProblemBlock.tsx`) and flashcard reviews (5 XP, `flashcards/page.tsx`); level system, Fiero overlay, XP toasts, session nudges. |
+| **Auth surface** | Supabase `signInWithPassword` / `signUp` wired on `/(auth)/login` and `/(auth)/signup`, with graceful guest-mode fallback when Supabase is unavailable. |
+| **AI backend** | All six AI routes fully implemented: `/api/ai/{adaptive, evaluate-approach, interleaved, socratic, technique-atlas, weakness-profile}` plus a `/health` check and provider-agnostic `llm-router`. |
+| **Dashboard scaffolding** | Chapter list, section grid, stats overview, due-cards banner, recent activity, streak widget. |
+
+### 🚧 Next to Build (Priority Order)
+
+#### 1. Wire the AI backend into the UI (highest leverage)
+
+Every AI route is implemented but no component calls them today. Each needs a front-end surface:
+
+| Route | UI to build |
+|-------|------------|
+| `/api/ai/evaluate-approach` | Hook into `ScratchpadGate` submit — show AI feedback on the student's approach before revealing hints. |
+| `/api/ai/socratic` | New `/(app)/socratic/` route — chat-style mock-interview page that maintains a Socratic session. |
+| `/api/ai/interleaved` | New `/(app)/interleaved/` route — mixed-chapter practice session player driven by the scheduling engine. |
+| `/api/ai/weakness-profile` | Dashboard card + dedicated `/(app)/weakness/` page with gap analysis charts. |
+| `/api/ai/technique-atlas` | Cross-cutting browser surfacing problems grouped by underlying technique. |
+| `/api/ai/adaptive` | Plug into reader problem selection so difficulty adapts to time-to-solution + error signals. |
+
+#### 2. Move progress off `localStorage` → Supabase
+
+All SM-2 state, problem progress, streaks, and settings currently live only in the browser (`src/lib/storage.ts`, `ProgressProvider`). The Supabase tables exist in `supabase/migrations/001_ai_ml_infrastructure.sql` but are not yet read from or written to by the app.
+
+- [ ] Swap `loadProblemProgress()` / `saveProblemProgress()` to Supabase-backed implementations with optimistic local caching.
+- [ ] Persist flashcard SM-2 state, error taxonomy events, hint-consumption logs, time-to-solution samples.
+- [ ] Add middleware to protect `/(app)/*` routes for authenticated users (keep guest mode behind a flag).
+- [ ] Design a migration path so existing localStorage data syncs up on first login.
+
+#### 3. Close the gamification gaps
+
+- [ ] Fire XP for flashcard **mastery** events (currently defined in `useXPStore` but never dispatched).
+- [ ] Fire daily **streak XP** from `useStreak`.
+- [ ] Surface XP / level / streak in the dashboard header, not just on toast.
+- [ ] Build a lightweight achievements / badges surface (the design spec lives in `content/Design Specs/`).
+
+#### 4. Testing and CI
+
+The repo currently has zero automated tests and no CI configuration.
+
+- [ ] Add a testing framework (Vitest or Jest) with unit coverage for `sm2.ts`, `sm2-problems.ts`, `interleave.ts`, `llm-router.ts`.
+- [ ] Add Playwright end-to-end coverage for the three critical flows: read-a-problem, study-a-flashcard, complete-a-session.
+- [ ] Add a `.github/workflows/ci.yml` that runs `npm run lint`, `npm run build`, and the test suite on every PR.
+
+#### 5. Mobile, accessibility, and performance polish
+
+- [ ] Audit each reader route for mobile usability — the canvas and hint ladder need touch-first refinements.
+- [ ] Verify KaTeX render performance on chapters 3–5 (largest math payloads).
+- [ ] Add keyboard shortcuts for flashcard grading (`1`–`4`) and reader navigation.
+- [ ] Run an a11y pass (focus traps in modals, contrast on amber palette, aria labels on icon buttons).
+
+### 🌱 Later — Phase 3 (Scale)
+
+Aligned with the "Phase 3 — Scale" hiring plan in [Team Composition](#team-composition--agent-roles):
+
+- **Content authoring pipeline** — an admin UI for the Quant Content Author role so problems can be added without hand-editing markdown.
+- **Community layer** — study groups, shared decks, discussion threads on problems.
+- **Educator analytics** — cohort dashboards for bootcamps / university programs.
+- **Offline / PWA** — service-worker cache for reader content so study works on transit.
+- **Mobile app** — React Native wrapper reusing the existing components.
+
+### Tracking
+
+Larger items above should graduate into GitHub issues as they're picked up. Keep this section as the living north-star view; detailed ticket decomposition lives in the issue tracker.
+
+---
+
 ## Research
 
 The `content/Research/` directory contains the cognitive science foundation for the platform's design decisions, organized in three layers:
