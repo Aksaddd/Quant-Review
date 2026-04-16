@@ -20,6 +20,7 @@ import MistakeTaxonomy from '@/components/flashcards/MistakeTaxonomy';
 import AddToSetButton from '@/components/flashcards/AddToSetButton';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
 import { problemsById, SECTIONS } from '@/data/problems';
+import { textbookChapters } from '@/data/chapters';
 import type { ReviewGrade, Flashcard } from '@/lib/types';
 import { resolveState, isMastered, isDue } from '@/lib/sm2';
 
@@ -32,7 +33,11 @@ const CH1_SECTIONS = [
   { id: '1.5', title: 'Make Reasonable Assumptions' },
 ] as const;
 
-const ALL_SECTIONS = [...CH1_SECTIONS, ...SECTIONS];
+const CH3PLUS_SECTIONS = textbookChapters.flatMap((ch) =>
+  ch.sections.map((sec) => ({ id: sec.id, title: sec.title })),
+);
+
+const ALL_SECTIONS = [...CH1_SECTIONS, ...SECTIONS, ...CH3PLUS_SECTIONS];
 const SECTION_MAP = Object.fromEntries(ALL_SECTIONS.map((s) => [s.id, s.title]));
 
 function cardTitle(card: Flashcard): string {
@@ -478,7 +483,7 @@ export default function FlashcardsPage() {
         <div>
           <h1 className="text-2xl font-extrabold text-[#21242c]">Flashcards</h1>
           <p className="text-sm text-[#626975] mt-0.5">
-            {stats.total} cards across {SECTIONS.length} sections · {stats.mastered} mastered
+            {stats.total} cards across {ALL_SECTIONS.length} sections · {stats.mastered} mastered
           </p>
         </div>
         <button
@@ -694,8 +699,9 @@ export default function FlashcardsPage() {
       {/* ── By section view ────────────────────────────────────────────────── */}
       {browseTab === 'sections' && (
         <div className="space-y-3">
-          {SECTIONS.map((sec) => {
+          {ALL_SECTIONS.map((sec) => {
             const secCards   = allFlashcards.filter((c) => c.section === sec.id);
+            if (secCards.length === 0) return null;
             const secSm2     = secCards.map((c) => sm2Cards[c.id]).filter(Boolean);
             const reviewed   = secSm2.filter((c) => resolveState(c) === 'review').length;
             const mastered   = secSm2.filter(isMastered).length;
