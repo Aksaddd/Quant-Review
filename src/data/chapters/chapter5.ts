@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from content/chapters/chapter-05-stochastic-processes.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter5: Chapter = {
   id: 'chapter-5',
   number: 5,

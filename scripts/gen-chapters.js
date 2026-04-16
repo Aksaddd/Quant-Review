@@ -2,7 +2,7 @@
 /**
  * Chapter data generator.
  *
- * Parses the source markdown (content/chapters/chapter-0X-*.md) and produces structured
+ * Parses the source markdown (content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-0X-*.md) and produces structured
  * TypeScript data that matches chapter 2's Problem shape. Each section is
  * split into an ordered list of ContentBlocks (prose | problem) so the reader
  * can render textbook prose around the same interactive ProblemBlock UI used
@@ -16,7 +16,7 @@ const path = require('path');
 const CONFIGS = [
   {
     num: 3,
-    mdFile: 'content/chapters/chapter-03-calculus-linear-algebra.md',
+    mdFile: 'content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md',
     outFile: 'src/data/chapters/chapter3.ts',
     title: 'Calculus and Linear Algebra',
     pageRange: '33–58',
@@ -27,7 +27,7 @@ const CONFIGS = [
   },
   {
     num: 4,
-    mdFile: 'content/chapters/chapter-04-probability-theory.md',
+    mdFile: 'content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md',
     outFile: 'src/data/chapters/chapter4.ts',
     title: 'Probability Theory',
     pageRange: '59–103',
@@ -38,7 +38,7 @@ const CONFIGS = [
   },
   {
     num: 5,
-    mdFile: 'content/chapters/chapter-05-stochastic-processes.md',
+    mdFile: 'content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md',
     outFile: 'src/data/chapters/chapter5.ts',
     title: 'Stochastic Processes and Stochastic Calculus',
     pageRange: '105–136',
@@ -49,7 +49,7 @@ const CONFIGS = [
   },
   {
     num: 6,
-    mdFile: 'content/chapters/chapter-06-finance.md',
+    mdFile: 'content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md',
     outFile: 'src/data/chapters/chapter6.ts',
     title: 'Finance',
     pageRange: '137–169',
@@ -60,7 +60,7 @@ const CONFIGS = [
   },
   {
     num: 7,
-    mdFile: 'content/chapters/chapter-07-algorithms-numerical-methods.md',
+    mdFile: 'content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md',
     outFile: 'src/data/chapters/chapter7.ts',
     title: 'Algorithms and Numerical Methods',
     pageRange: '171–200',

@@ -229,7 +229,7 @@ The `content/Research/` directory contains learning science books that inform th
 
 ## Generating Chapter Data
 
-After editing any chapter markdown file in `content/chapters/`, regenerate the TypeScript data:
+After editing any chapter markdown file in `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
 
 ```bash
 node scripts/gen-chapters.js
