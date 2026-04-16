@@ -214,7 +214,7 @@ And render with **KaTeX** for clean display.
 
 ## Supplementary Books
 
-The `content/books/` directory contains learning science books that inform the platform's instructional design:
+The `content/Research/` directory contains learning science books that inform the platform's instructional design:
 
 | Book | Author | Focus |
 |------|--------|-------|
@@ -229,7 +229,7 @@ The `content/books/` directory contains learning science books that inform the p
 
 ## Generating Chapter Data
 
-After editing any chapter markdown file in `content/chapters/`, regenerate the TypeScript data:
+After editing any chapter markdown file in `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
 
 ```bash
 node scripts/gen-chapters.js

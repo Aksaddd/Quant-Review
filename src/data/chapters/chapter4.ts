@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from content/chapters/chapter-04-probability-theory.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter4: Chapter = {
   id: 'chapter-4',
   number: 4,
