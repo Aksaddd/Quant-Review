@@ -14,8 +14,8 @@ export function useCanvasStore() {
     try {
       const key = `${STORAGE_KEY_PREFIX}${problemId}`;
       const data = {
-        paths: snapshot.paths,
-        image: snapshot.image,
+        elements: snapshot.elements,
+        files: snapshot.files,
         savedAt: new Date().toISOString(),
       };
       localStorage.setItem(key, JSON.stringify(data));
@@ -31,8 +31,9 @@ export function useCanvasStore() {
       if (!raw) return null;
       const data = JSON.parse(raw);
       return {
-        paths: data.paths || [],
-        image: data.image || '',
+        elements: data.elements || [],
+        appState: {},
+        files: data.files || {},
       };
     } catch (e) {
       console.warn('Failed to load canvas snapshot:', e);
