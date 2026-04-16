@@ -18,9 +18,9 @@ Each prisoner must **simultaneously write down** their guess for their own hat c
 
 **Design a strategy that guarantees freedom, regardless of the hat assignment.**`,
 
-  solution: `**Strategy: Modular arithmetic assignment**
+  solution: `### Strategy: Modular Arithmetic Assignment
 
-**Setup:** Assign color codes 0–6 to the 7 colors. Label prisoners 0–6.
+Assign color codes 0–6 to the 7 colors. Label prisoners 0–6.
 
 **Each prisoner i's strategy:**
 
@@ -31,9 +31,7 @@ where $x_j$ is the hat color code of prisoner j (which prisoner i can see).
 
 In other words: prisoner i guesses $g_i = (i - \\sum_{j \\neq i} x_j) \\bmod 7$.
 
----
-
-**Proof that this works (by contradiction):**
+### Proof by Contradiction
 
 Let the true hat codes be $x_0, x_1, \\ldots, x_6$. Define:
 $$S = \\sum_{k=0}^{6} x_k \\pmod{7}$$
@@ -53,9 +51,9 @@ Then in particular, prisoner $r$ (whose guess is exactly $x_r$) also guessed wro
 
 **Therefore at least one prisoner (prisoner r) always guesses correctly.**
 
----
+### Final Answer
 
-**Final Answer:** Prisoner i guesses $(i − \\sum_{j≠i} x_j) \\bmod 7$. Prisoner r (where r = total sum mod 7) always guesses correctly. All 7 go free.`,
+Prisoner i guesses $(i − \\sum_{j≠i} x_j) \\bmod 7$. Prisoner r (where r = total sum mod 7) always guesses correctly. All 7 go free.`,
 
   hints: [
     'Assign numbers 0–6 to colors and 0–6 to prisoners. Think about modular arithmetic.',
