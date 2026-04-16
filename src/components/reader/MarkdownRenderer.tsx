@@ -53,14 +53,30 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
             if (inline) {
               return <code {...props}>{children}</code>;
             }
-            // Block code: pass through; <pre> wrapper handles container styling
+            // Block code: pass through; <pre> wrapper handles container styling.
+            // Inline styles below are a belt-and-suspenders guarantee that
+            // long equations wrap instead of forcing horizontal scroll —
+            // they win over any external CSS regardless of cascade/specificity.
             return (
-              <code className={codeClassName} {...props}>
+              <code
+                className={codeClassName}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  maxWidth: '100%',
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'anywhere',
+                }}
+                {...props}
+              >
                 {children}
               </code>
             );
           },
-          // Block code wrapper — auto-detect math content for richer styling
+          // Block code wrapper — auto-detect math content for richer styling.
+          // Inline wrap styles guarantee no horizontal scroll, even if a
+          // future CSS edit accidentally reintroduces overflow-x: auto.
           pre: ({ children, ...props }: any) => {
             const looksLikeMath = isMathBlock(children);
             return (
@@ -68,6 +84,15 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
                 {...props}
                 className={looksLikeMath ? 'math-display' : ''}
                 data-math={looksLikeMath ? 'true' : 'false'}
+                style={{
+                  width: '100%',
+                  maxWidth: '100%',
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'anywhere',
+                  overflowX: 'hidden',
+                  boxSizing: 'border-box',
+                }}
               >
                 {children}
               </pre>
