@@ -262,7 +262,11 @@ body {
   font-variant-numeric: tabular-nums slashed-zero;
   line-height: 1.75;
   letter-spacing: 0;
-  white-space: pre;
+  /* Wrap long equations so they stay visible without horizontal scroll.
+     Indentation is preserved via `pre-wrap`; long tokens can break. */
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
   tab-size: 2;
 }
 
@@ -626,14 +630,26 @@ body {
 .katex-display {
   margin: 1.6em 0 !important;
   padding: 0.5em 0;
+  /* Keep horizontal scroll as a last-resort fallback for truly huge
+     formulas, but also let the inner .katex shrink so equations are
+     visible without having to scroll sideways on normal screens. */
   overflow-x: auto;
   overflow-y: hidden;
   text-align: left !important;
+  max-width: 100%;
 }
 .katex-display > .katex {
   font-size: calc(1.32em * var(--math-scale, 1.05)) !important;
   text-align: left !important;
   display: inline-block !important;
+  max-width: 100%;
+}
+/* On narrow viewports, down-scale display math so it fits without
+   horizontal overflow. Clamps between 0.95em (phones) and 1.32em. */
+@media (max-width: 768px) {
+  .katex-display > .katex {
+    font-size: calc(clamp(0.95em, 3.2vw, 1.32em) * var(--math-scale, 1.05)) !important;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
