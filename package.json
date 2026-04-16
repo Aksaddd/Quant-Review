@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "node scripts/patch-tunnel-rat.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.89.0",
@@ -20,6 +21,7 @@
     "katex": "^0.16.10",
     "lucide-react": "^0.400.0",
     "next": "14.2.5",
+    "patch-package": "^8.0.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
