@@ -270,9 +270,12 @@ body {
   border: none;
   padding: 0;
   color: var(--rt-text, var(--text-primary));
-  /* Compound scaling: base body size × math-scale × 1.02 for display math.
-     At default 17px body × 1.05 math-scale ≈ 18.2px display math. */
-  font-size: calc(1em * var(--math-scale, 1.05));
+  /* Responsive math sizing: use clamp() so font shrinks on narrow
+     viewports so long equations fit in the available width. On a
+     desktop with a generous container this resolves near 17px; on a
+     ~700px tablet viewport it shrinks to ~12–13px so equations stay
+     on one line without needing to scroll or wrap awkwardly. */
+  font-size: clamp(0.72rem, 1.9vw, calc(1em * var(--math-scale, 1.05)));
   font-family: var(--font-mono);
   font-weight: 450;
   /* Enable JetBrains Mono ligatures + stylistic sets for a more
@@ -321,8 +324,10 @@ body {
   pointer-events: none;
 }
 .prose-reading pre.math-display code {
-  /* Slightly larger than non-math code blocks for maximum legibility */
-  font-size: calc(1.04em * var(--math-scale, 1.05));
+  /* Responsive font for math: scales with viewport so equations fit
+     without horizontal scroll. Desktop gets ~17.5px; ~700px viewport
+     gets ~12–13px; smallest phones get ~11.5px. */
+  font-size: clamp(0.72rem, 1.95vw, calc(1.04em * var(--math-scale, 1.05)));
   font-weight: 450;
   /* Redundant with .prose-reading pre code but restated here at higher
      specificity so no future edit to math-display can accidentally
@@ -333,6 +338,19 @@ body {
   white-space: pre-wrap !important;
   word-break: break-word !important;
   overflow-wrap: anywhere !important;
+}
+
+/* Let math-display blocks break out of the reading-card's horizontal
+   padding so they gain back ~48px of width for equations — equivalent
+   to one extra 8-character column on desktop. The inner padding is
+   restored so the "MATH" badge and accent border still look right. */
+.reading-card .prose-reading pre.math-display {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  border-radius: 0;
+  border-left-width: 4px;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
 }
 [data-reading-theme="dark"] .prose-reading pre.math-display::before {
   color: #5a9eff;
