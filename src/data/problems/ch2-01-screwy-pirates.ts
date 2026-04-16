@@ -23,7 +23,11 @@ Assume all pirates are perfectly rational with the following priorities (in orde
 
 **How will the gold be divided?**`,
 
-  solution: `**Strategy: Start simple — reduce the number of pirates and find the pattern.**
+  solution: `### Strategy: Simplify to Small Cases
+
+Start simple — reduce the number of pirates and find the pattern.
+
+### Base Cases
 
 **2 pirates:** Pirate 2 (most senior) proposes keeping all 100 for himself. He gets 50% of the vote (his own), so the plan passes. Pirate 1 gets nothing.
 
@@ -31,13 +35,13 @@ Assume all pirates are perfectly rational with the following priorities (in orde
 
 **4 pirates:** If pirate 4's plan fails, we go to 3-pirate case where pirate 2 gets 0. Pirate 4 offers pirate 2 just **1 coin**, keeps 99. Passes with 2/4 = 50% votes (pirates 2 and 4).
 
-**5 pirates:** If plan fails, we go to 4-pirate case where pirates 1 and 3 get 0. Pirate 5 offers them **1 coin each**, keeps 98. Passes with 3/5 votes (pirates 1, 3, and 5).
+### Solution for 5 Pirates
+
+If plan fails, we go to 4-pirate case where pirates 1 and 3 get 0. Pirate 5 offers them **1 coin each**, keeps 98. Passes with 3/5 votes (pirates 1, 3, and 5).
 
 **Pattern:** For odd total pirates (2n+1), the most senior pirate offers 1 coin each to pirates 1, 3, 5, …, 2n−1, and keeps the rest.
 
----
-
-**Final Answer:**
+### Final Distribution
 
 | Pirate | Coins |
 |--------|-------|

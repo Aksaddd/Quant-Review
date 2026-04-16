@@ -16,7 +16,7 @@ Your car starts with an **empty tank**.
 
 **Prove that there always exists a starting position from which you can drive the full circle without running out of gas.**`,
 
-  solution: `**Proof by induction:**
+  solution: `### Proof by Induction
 
 **Base case n=1:** The single gas can is the starting position. You drive to the finish on that one tank. ✓
 
@@ -32,15 +32,13 @@ Given n+1 cans, consider any adjacent pair (can i, can i+1) where the gas at can
 
 By the inductive hypothesis, there is a valid starting position for the n-can version. That starting position also works for the original n+1-can version (the merged can simulates stopping at i, refueling, then continuing to i+1). ∎
 
----
-
-**Alternative (Phantom Car Argument):**
+### Alternative: Phantom Car Argument
 
 Imagine a "fully-fueled" phantom car with unlimited gas drives the full circle starting from any point. Record the tank level at each gas can **before refueling**. The gas can with the **lowest recorded level** is the valid starting position for an empty-tank car.
 
----
+### Final Answer
 
-**Final Answer:** Proven by induction (merge argument) or phantom car method.`,
+Proven by induction (merge argument) or phantom car method.`,
 
   hints: [
     'Try the base case: 1 can, then 2 cans. Does a valid start always exist?',

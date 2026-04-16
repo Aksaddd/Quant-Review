@@ -18,7 +18,7 @@ Calls are random and can repeat; no wise man knows who has been called before. I
 
 **Design a strategy that guarantees freedom.**`,
 
-  solution: `**Strategy: Designate one wise man as the "spokesman" and assign asymmetric roles.**
+  solution: `### Strategy: Asymmetric Roles with a Designated Spokesman
 
 **Setup:**
 - Choose one wise man as the **spokesman**.
@@ -32,18 +32,17 @@ Calls are random and can repeat; no wise man knows who has been called before. I
 - Every time you enter and find the glass **upside-down**: flip it back to bottom-down and **increment your count by 1**.
 - When your count reaches **49**: all 49 others have been called at least once. Declare freedom.
 
----
+### Why It Works
 
-**Why it works:**
 - Each of the 49 non-spokesmen flips the glass exactly once (their "I've been here" signal).
 - The spokesman counts each signal. After 49 flips, all 49 others are accounted for.
 - The spokesman himself is included because he was called too (he's the one counting).
 
 **Guarantee:** The strategy terminates with probability 1 (by the infinite monkey theorem — all 50 will eventually be called).
 
----
+### Final Answer
 
-**Final Answer:** Designate a spokesman. Others flip once (bottom-to-up) to signal presence. Spokesman counts each flip-back (up-to-bottom). At count 49, declare freedom.`,
+Designate a spokesman. Others flip once (bottom-to-up) to signal presence. Spokesman counts each flip-back (up-to-bottom). At count 49, declare freedom.`,
 
   hints: [
     'How can one person know when everyone has been called, given no direct communication?',

@@ -14,7 +14,11 @@ const infiniteSequence: Problem = {
 
 (The tower of exponents continues infinitely.)`,
 
-  solution: `**Key insight:** An infinite sequence is self-similar — removing one layer leaves the same infinite sequence.
+  solution: `### Key Insight
+
+An infinite sequence is self-similar — removing one layer leaves the same infinite sequence.
+
+### Computing the Answer
 
 Since the tower is infinite, the exponent on the first x is itself the same infinite tower, which equals 2.
 
@@ -24,11 +28,11 @@ $$x^{(x^{x^{x^{\\cdots}}})} = x^2 = 2$$
 Solving:
 $$x^2 = 2 \\implies x = \\sqrt{2}$$
 
-**Verification:** Does $$(\\sqrt{2})^{(\\sqrt{2})^{(\\sqrt{2})^{\\cdots}}}$$ actually converge to 2?
+### Verification
+
+Does $$(\\sqrt{2})^{(\\sqrt{2})^{(\\sqrt{2})^{\\cdots}}}$$ actually converge to 2?
 
 Yes. For $$1 < x \\leq e^{1/e} \\approx 1.4447$$, the infinite power tower converges. Since $$\\sqrt{2} \\approx 1.414 < e^{1/e}$$, the tower converges — and the fixed point is indeed 2.
-
----
 
 **Final Answer: $$x = \\sqrt{2}$$**`,
 

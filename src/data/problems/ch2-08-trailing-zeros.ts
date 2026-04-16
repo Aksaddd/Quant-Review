@@ -12,9 +12,11 @@ const trailingZeros: Problem = {
 
   setup: `**How many trailing zeros does 100! (100 factorial) have?**`,
 
-  solution: `**Key insight:** Trailing zeros come from factors of **10 = 2 × 5**. Since factors of 2 far outnumber factors of 5 in any factorial, we only need to count how many times **5** divides into 100!
+  solution: `### Key Insight
 
-**Counting factors of 5 in 100!:**
+Trailing zeros come from factors of **10 = 2 × 5**. Since factors of 2 far outnumber factors of 5 in any factorial, we only need to count how many times **5** divides into 100!
+
+### Counting Factors of 5
 
 Every multiple of 5 contributes at least one factor of 5:
 - Multiples of 5 in [1, 100]: **100 / 5 = 20** numbers
@@ -26,12 +28,12 @@ Multiples of 125 = 5³ would contribute yet another, but **125 > 100**, so there
 
 **Total factors of 5 = 20 + 4 = 24**
 
-**General formula (Legendre's formula):**
+### General Formula
+
+**Legendre's formula:**
 $$\\lfloor n/5 \\rfloor + \\lfloor n/25 \\rfloor + \\lfloor n/125 \\rfloor + \\cdots$$
 
 For n = 100: 20 + 4 + 0 = **24**
-
----
 
 **Final Answer: 24 trailing zeros.**`,
 

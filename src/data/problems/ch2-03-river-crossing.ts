@@ -20,9 +20,11 @@ Crossing times:
 
 **What is the minimum time to get all four people across?**`,
 
-  solution: `**Key insight:** The two slowest people (A and B) should cross together, and the two fastest (C and D) should shuttle the torch back.
+  solution: `### Key Insight
 
-**Optimal sequence:**
+The two slowest people (A and B) should cross together, and the two fastest (C and D) should shuttle the torch back.
+
+### Optimal Sequence
 
 | Step | Who crosses | Direction | Time | Cumulative |
 |------|-------------|-----------|------|------------|
@@ -32,9 +34,9 @@ Crossing times:
 | 4 | C returns | ← | 2 min | 15 min |
 | 5 | C and D cross | → | 2 min | **17 min** |
 
-**Why not send A or B back?** If D brings A across first (10 min) then returns (1 min), then B and another cross — you use at least 10 + 1 + 5 = 16 min just for those three, plus more. Pairing A and B is always more efficient.
+### Why This Is Optimal
 
----
+**Why not send A or B back?** If D brings A across first (10 min) then returns (1 min), then B and another cross — you use at least 10 + 1 + 5 = 16 min just for those three, plus more. Pairing A and B is always more efficient.
 
 **Final Answer: 17 minutes.**`,
 

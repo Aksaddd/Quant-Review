@@ -14,7 +14,7 @@ const quantSalary: Problem = {
 
 **Design a protocol to accomplish this.**`,
 
-  solution: `**Strategy: Random masking with a circular chain**
+  solution: `### Strategy: Random Masking with a Circular Chain
 
 **Protocol:**
 
@@ -25,18 +25,17 @@ const quantSalary: Problem = {
 5. Quant 1 **subtracts R**, leaving **(S₁ + S₂ + … + S₈)**.
 6. Divide by **8** → **average salary**.
 
----
+### Why It's Secure
 
-**Why it's secure:**
 - No individual ever sees anyone else's salary directly.
 - Every intermediate value is masked by R — meaningless without knowing R.
 - Only Quant 1 knows R, and they only ever receive the masked total.
 
 **Note:** This protocol is actually used in practice by data providers to anonymize fund position data while still computing aggregate statistics.
 
----
+### Final Answer
 
-**Final Answer:** Circular chain with random mask R — each quant adds their salary, Quant 1 removes R at the end, divide by 8.`,
+Circular chain with random mask R — each quant adds their salary, Quant 1 removes R at the end, divide by 8.`,
 
   hints: [
     'What if the first person added a random number that only they know?',

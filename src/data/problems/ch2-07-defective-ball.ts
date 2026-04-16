@@ -14,13 +14,17 @@ const defectiveBall: Problem = {
 
 **Find the defective ball in exactly 3 weighings.** You must also determine whether it is heavier or lighter.`,
 
-  solution: `**Key insight:** Divide into groups of 3 (not 2). Each weighing has 3 outcomes: left heavy, right heavy, or balanced — giving you ternary information.
+  solution: `### Key Insight
 
-**Weighing 1:** Place balls **1–4** on the left, **5–8** on the right. Set aside **9–12**.
+Divide into groups of 3 (not 2). Each weighing has 3 outcomes: left heavy, right heavy, or balanced — giving you ternary information.
 
----
+### Weighing 1: Initial Split
 
-**Case A: Scales balance** → defective is in {9, 10, 11, 12}
+Place balls **1–4** on the left, **5–8** on the right. Set aside **9–12**.
+
+### Case A: Scales Balance
+
+Defective is in {9, 10, 11, 12}.
 
 **Weighing 2:** Weigh **9, 10, 11** vs **1, 2, 3** (known normals).
 - If balanced → ball **12** is defective.
@@ -29,7 +33,7 @@ const defectiveBall: Problem = {
   - **Weighing 3:** Weigh 9 vs 10. If balanced → 11. If not, the heavier one.
 - If 9,10,11 side is light → same logic, defective is lighter.
 
----
+### Case B and C: Scales Tilt
 
 **Case B: Left (1–4) is heavier** → defective is either H in {1,2,3,4} or L in {5,6,7,8}
 
@@ -38,14 +42,11 @@ const defectiveBall: Problem = {
 
 **Case C: Left (1–4) is lighter** → mirror of Case B.
 
----
+### General Rule
 
-**General rule:**
 - Knowing heavier/lighter: identify among **3ⁿ** balls in n weighings.
 - Not knowing: identify among **(3ⁿ − 3) / 2** balls in n weighings.
 - For n = 3: **(27 − 3) / 2 = 12** balls. ✓
-
----
 
 **Final Answer:** Solvable in 3 weighings using a divide-into-thirds decision tree.`,
 
