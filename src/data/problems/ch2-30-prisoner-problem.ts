@@ -18,7 +18,7 @@ A prisoner who guesses correctly is **freed**; otherwise **executed**.
 
 **Extension:** What if there are 3 hat colors (red, green, blue)?`,
 
-  solution: `**Strategy for 2 colors: Parity encoding**
+  solution: `### Strategy for 2 Colors: Parity Encoding
 
 **Setup:** Before the game, prisoners agree: *"Prisoner 1 will announce the color that makes the total number of red hats he sees ODD."*
 
@@ -32,9 +32,7 @@ A prisoner who guesses correctly is **freed**; otherwise **executed**.
 
 **Guarantee: At least 99 prisoners are saved.**
 
----
-
-**Extension to 3 colors (red=0, green=1, blue=2):**
+### Extension to 3 Colors
 
 Assign: red=0, green=1, blue=2.
 
@@ -43,13 +41,13 @@ Assign: red=0, green=1, blue=2.
 
 **At least 99 guaranteed to survive** with 3 colors as well.
 
----
+### General Rule for k Colors
 
-**General rule for k colors:** Prisoner 1 announces based on modular sum mod k. All others can deduce their color. **At least 99 guaranteed.**
+Prisoner 1 announces based on modular sum mod k. All others can deduce their color. **At least 99 guaranteed.**
 
----
+### Final Answer
 
-**Final Answer: 99 guaranteed survivors.** Prisoner 1 encodes parity; all others decode with certainty.`,
+**99 guaranteed survivors.** Prisoner 1 encodes parity; all others decode with certainty.`,
 
   hints: [
     'Prisoner 1 sacrifices themselves to encode information. What information is most useful?',

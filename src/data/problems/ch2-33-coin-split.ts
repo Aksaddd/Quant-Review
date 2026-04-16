@@ -16,9 +16,11 @@ const coinSplit: Problem = {
 
 **What is that sum?**`,
 
-  solution: `**Claim:** For a pile of n coins, the sum of all products equals **f(n) = n(n−1)/2**.
+  solution: `### Setting Up the Claim
 
-**Proof by strong induction:**
+**Claim:** For a pile of n coins, the sum of all products equals **f(n) = n(n−1)/2**.
+
+### Proof by Strong Induction
 
 **Base cases:**
 - f(1) = 0 (can't split a pile of 1 — no products)
@@ -37,7 +39,7 @@ $$= \\frac{N^2 - N}{2} = \\frac{N(N-1)}{2} \\checkmark$$
 
 The result is **independent of x** — the split choice doesn't matter. ∎
 
----
+### Computing the Answer
 
 **For n = 1000:**
 $$f(1000) = \\frac{1000 \\times 999}{2} = \\boxed{499{,}500}$$`,

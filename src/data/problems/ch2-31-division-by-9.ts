@@ -14,7 +14,7 @@ const divisionBy9: Problem = {
 
 **Bonus:** State the analogous rule for divisibility by 11.`,
 
-  solution: `**Proof:**
+  solution: `### Setting Up the Proof
 
 Write the integer as:
 $$a = a_n \\cdot 10^n + a_{n-1} \\cdot 10^{n-1} + \\cdots + a_1 \\cdot 10 + a_0$$
@@ -23,6 +23,8 @@ where $a_0, a_1, \\ldots, a_n$ are its digits.
 
 Define the digit sum:
 $$b = a_n + a_{n-1} + \\cdots + a_1 + a_0$$
+
+### Key Insight
 
 Compute the difference:
 $$a - b = a_n(10^n - 1) + a_{n-1}(10^{n-1} - 1) + \\cdots + a_1(10 - 1)$$
@@ -37,17 +39,15 @@ Therefore **a − b is divisible by 9**. This means: a ≡ b (mod 9).
 
 So a is divisible by 9 **if and only if** b (the digit sum) is divisible by 9. ∎
 
----
-
-**Bonus — Divisibility by 11:**
+### Bonus: Divisibility by 11
 
 Use alternating signs: $a_0 - a_1 + a_2 - a_3 + \\cdots$
 
 This works because $10 \\equiv -1 \\pmod{11}$, so $10^k \\equiv (-1)^k \\pmod{11}$.
 
----
+### Final Answer
 
-**Final Answer:** Proven. a ≡ digit_sum(a) (mod 9), because 10^k ≡ 1 (mod 9) for all k.`,
+Proven. a ≡ digit_sum(a) (mod 9), because 10^k ≡ 1 (mod 9) for all k.`,
 
   hints: [
     'Write the number in terms of its digits and powers of 10.',

@@ -14,28 +14,22 @@ const missingIntegers: Problem = {
 
 **Find the two missing integers.**`,
 
-  solution: `**Strategy: Use two equations (sum and sum of squares) to solve for two unknowns.**
+  solution: `### Setting Up the Equations
 
 Let the two missing integers be **x** and **y**.
 Let z₁, z₂, …, z₉₈ be the given integers.
-
----
 
 **Equation 1 — Sum:**
 $$x + y = \\frac{100 \\times 101}{2} - \\sum z_i = 5050 - \\sum z_i$$
 
 Compute the right side. Call it **S** = x + y.
 
----
-
 **Equation 2 — Sum of squares:**
 $$x^2 + y^2 = \\frac{100 \\times 101 \\times 201}{6} - \\sum z_i^2 = 338350 - \\sum z_i^2$$
 
 Compute the right side. Call it **Q** = x² + y².
 
----
-
-**Solve the system:**
+### Solving the System
 
 We know S = x + y and Q = x² + y².
 
@@ -49,9 +43,9 @@ Solve with the quadratic formula to find x and y exactly.
 
 **Algorithm runs in O(n)** — one pass to compute both sums.
 
----
+### Final Answer
 
-**Final Answer:** Compute S = expected sum − actual sum, Q = expected sum-of-squares − actual sum-of-squares, then solve the 2×2 system.`,
+Compute S = expected sum − actual sum, Q = expected sum-of-squares − actual sum-of-squares, then solve the 2×2 system.`,
 
   hints: [
     'One equation (sum) gives x + y but not x and y individually.',

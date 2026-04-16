@@ -14,7 +14,9 @@ const glassBalls: Problem = {
 
 **Minimize the number of drops needed in the worst case to determine X exactly.**`,
 
-  solution: `**Key insight: Use the first ball to scan in decreasing steps, then the second ball to scan linearly.**
+  solution: `### Key Insight: Decreasing Step Sizes
+
+Use the first ball to scan in decreasing steps, then the second ball to scan linearly.
 
 Let N = the maximum number of drops allowed.
 
@@ -29,7 +31,7 @@ If ball 1 breaks at step k, ball 2 scans linearly from the last safe floor (usin
 For 100 floors:
 $$N(N+1)/2 \\geq 100 \\implies N \\geq 14 \\quad (14 \\times 15 / 2 = 105 \\geq 100)$$
 
----
+### Optimal Drop Sequence
 
 **Optimal sequence of floors for ball 1:**
 14 → 27 → 39 → 50 → 60 → 69 → 77 → 84 → 90 → 95 → 99 → 100
@@ -42,9 +44,9 @@ Total: 2 drops (ball 1) + 13 (ball 2) = 15 — **still ≤ 14? No** — we'd use
 
 The key is that after the kth drop of ball 1, ball 2 has at most N−k drops remaining.
 
----
+### Final Answer
 
-**Final Answer: 14 drops minimum in the worst case.** Start ball 1 at floor 14, then 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100.`,
+**14 drops minimum in the worst case.** Start ball 1 at floor 14, then 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100.`,
 
   hints: [
     'If you use ball 1 to jump in large steps and it breaks, how many drops does ball 2 need?',

@@ -19,13 +19,13 @@ const mislabeledBags: Problem = {
 
 **What is the minimum number of fruit picks needed to identify all three bags correctly?**`,
 
-  solution: `**Answer: 1 pick.**
+  solution: `### Strategy
 
-**Strategy: Pick one fruit from the bag labeled "mix".**
+**Answer: 1 pick.** Pick one fruit from the bag labeled "mix."
 
 Since all bags are mislabeled, the bag labeled **"mix"** must actually contain either only apples or only oranges (not a mix).
 
----
+### Working Through the Cases
 
 **Case 1: You draw an orange** from the "mix" bag.
 - That bag is actually **all oranges**.
@@ -36,11 +36,9 @@ Since all bags are mislabeled, the bag labeled **"mix"** must actually contain e
 - That bag is actually **all apples**.
 - By the same logic: bag labeled "apple" → **mix**, bag labeled "orange" → **all oranges**.
 
----
+### Key Insight
 
-**Key insight:** The mislabeling constraint is so strong that one pick from the most informative bag (the "mix" label) cascades into full identification of all three.
-
----
+The mislabeling constraint is so strong that one pick from the most informative bag (the "mix" label) cascades into full identification of all three.
 
 **Final Answer: 1 pick — from the bag labeled "mix".**`,
 

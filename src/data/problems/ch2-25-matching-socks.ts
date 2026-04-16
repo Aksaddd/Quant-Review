@@ -19,21 +19,25 @@ You are in the dark and cannot see colors.
 
 **What is the minimum number of socks you must grab to guarantee a matching pair?**`,
 
-  solution: `**Apply the Pigeon Hole Principle:**
+  solution: `### Setting Up the Problem
+
+**Apply the Pigeon Hole Principle:**
 
 - **Pigeons** = socks drawn
 - **Holes** = sock colors = **3** (red, yellow, blue)
 
 By the Pigeon Hole Principle: if you draw **more socks than there are colors**, at least two must be the same color.
 
+### Computing the Answer
+
 Drawing **3 socks** could give one of each color (worst case — no match).
 Drawing **4 socks** guarantees at least two are the same color.
 
 Note: The actual quantities (2, 20, 31) are irrelevant — only the **number of distinct colors** matters.
 
----
+### Final Answer
 
-**Final Answer: 4 socks.**`,
+**4 socks.**`,
 
   hints: [
     'How many distinct colors are there?',

@@ -39,7 +39,7 @@ import fcP35 from './problems/fc-p-35-race-track';
 import fcP36 from './problems/fc-p-36-irrational-number';
 import fcP37 from './problems/fc-p-37-rainbow-hats';
 
-// ── Concept cards (9) ───────────────────────────────────────────────────────
+// ── Concept cards (9 ch1-2 + 20 ch3-7 = 29) ────────────────────────────────
 import fcC01 from './concepts/fc-c-01-problem-simplification';
 import fcC02 from './concepts/fc-c-02-logic-reasoning';
 import fcC03 from './concepts/fc-c-03-thinking-outside-box';
@@ -49,13 +49,61 @@ import fcC06 from './concepts/fc-c-06-pigeon-hole';
 import fcC07 from './concepts/fc-c-07-modular-arithmetic';
 import fcC08 from './concepts/fc-c-08-math-induction';
 import fcC09 from './concepts/fc-c-09-proof-by-contradiction';
+// Ch 3 — Calculus & Linear Algebra
+import fcC10 from './concepts/fc-c-10-lhospitals-rule';
+import fcC11 from './concepts/fc-c-11-logarithmic-differentiation';
+import fcC12 from './concepts/fc-c-12-integration-by-parts';
+import fcC13 from './concepts/fc-c-13-taylor-series';
+import fcC14 from './concepts/fc-c-14-newtons-method';
+import fcC15 from './concepts/fc-c-15-lagrange-multipliers';
+import fcC16 from './concepts/fc-c-16-cholesky-decomposition';
+// Ch 4 — Probability Theory
+import fcC17 from './concepts/fc-c-17-indicator-variables';
+import fcC18 from './concepts/fc-c-18-conditional-expectation';
+import fcC19 from './concepts/fc-c-19-gamblers-ruin';
+// Ch 5 — Stochastic Processes
+import fcC20 from './concepts/fc-c-20-markov-chains';
+import fcC21 from './concepts/fc-c-21-martingales';
+import fcC22 from './concepts/fc-c-22-dynamic-programming';
+import fcC23 from './concepts/fc-c-23-conway-leading-number';
+// Ch 6 — Finance
+import fcC24 from './concepts/fc-c-24-american-options';
+import fcC25 from './concepts/fc-c-25-volatility-smile';
+// Ch 7 — Algorithms & Numerical Methods
+import fcC26 from './concepts/fc-c-26-knuth-shuffle';
+import fcC27 from './concepts/fc-c-27-bit-manipulation';
+import fcC28 from './concepts/fc-c-28-monte-carlo';
+import fcC29 from './concepts/fc-c-29-finite-difference';
 
-// ── Formula cards (5) ───────────────────────────────────────────────────────
+// ── Formula cards (5 ch1-2 + 18 ch3-7 = 23) ────────────────────────────────
 import fcF01 from './formulas/fc-f-01-legendres-formula';
 import fcF02 from './formulas/fc-f-02-triangular-numbers';
 import fcF03 from './formulas/fc-f-03-sum-of-powers';
 import fcF04 from './formulas/fc-f-04-defective-ball-formula';
 import fcF05 from './formulas/fc-f-05-ramsey-theorem';
+// Ch 3 — Calculus & Linear Algebra
+import fcF06 from './formulas/fc-f-06-derivative-rules';
+import fcF07 from './formulas/fc-f-07-integration-formulas';
+import fcF08 from './formulas/fc-f-08-ode-solution-methods';
+import fcF09 from './formulas/fc-f-09-eigenvalues-eigenvectors';
+// Ch 4 — Probability Theory
+import fcF10 from './formulas/fc-f-10-bayes-formula';
+import fcF11 from './formulas/fc-f-11-inclusion-exclusion';
+import fcF12 from './formulas/fc-f-12-combinatorics';
+import fcF13 from './formulas/fc-f-13-distributions';
+import fcF14 from './formulas/fc-f-14-variance-covariance';
+import fcF15 from './formulas/fc-f-15-order-statistics';
+// Ch 5 — Stochastic Processes
+import fcF16 from './formulas/fc-f-16-brownian-motion';
+import fcF17 from './formulas/fc-f-17-itos-lemma';
+// Ch 6 — Finance
+import fcF18 from './formulas/fc-f-18-black-scholes';
+import fcF19 from './formulas/fc-f-19-put-call-parity';
+import fcF20 from './formulas/fc-f-20-greeks';
+import fcF21 from './formulas/fc-f-21-var-duration';
+// Ch 7 — Algorithms & Numerical Methods
+import fcF22 from './formulas/fc-f-22-sorting-complexity';
+import fcF23 from './formulas/fc-f-23-fibonacci';
 
 // ── Principle cards (5) ─────────────────────────────────────────────────────
 import fcPr01 from './principles/fc-pr-01-broad-knowledge';
@@ -72,10 +120,22 @@ export const allFlashcards: Flashcard[] = [
   fcP11, fcP12, fcP13, fcP14, fcP15, fcP16, fcP17, fcP18, fcP19, fcP20,
   fcP21, fcP22, fcP23, fcP24, fcP25, fcP26, fcP27, fcP28, fcP29, fcP30,
   fcP31, fcP32, fcP33, fcP34, fcP35, fcP36, fcP37,
-  // Concept cards
+  // Concept cards (ch 1-2)
   fcC01, fcC02, fcC03, fcC04, fcC05, fcC06, fcC07, fcC08, fcC09,
-  // Formula cards
+  // Concept cards (ch 3-7)
+  fcC10, fcC11, fcC12, fcC13, fcC14, fcC15, fcC16,
+  fcC17, fcC18, fcC19,
+  fcC20, fcC21, fcC22, fcC23,
+  fcC24, fcC25,
+  fcC26, fcC27, fcC28, fcC29,
+  // Formula cards (ch 1-2)
   fcF01, fcF02, fcF03, fcF04, fcF05,
+  // Formula cards (ch 3-7)
+  fcF06, fcF07, fcF08, fcF09,
+  fcF10, fcF11, fcF12, fcF13, fcF14, fcF15,
+  fcF16, fcF17,
+  fcF18, fcF19, fcF20, fcF21,
+  fcF22, fcF23,
   // Principle cards
   fcPr01, fcPr02, fcPr03, fcPr04, fcPr05,
 ];

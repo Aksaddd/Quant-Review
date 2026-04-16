@@ -20,7 +20,11 @@ At the end, if you have **more cards** than the dealer, you win \$100. The casin
 
 **How much would you pay to play this game?**`,
 
-  solution: `**Key insight: Your pile and the dealer's pile will always be equal.**
+  solution: `### Key Insight
+
+Your pile and the dealer's pile will always be equal.
+
+### Tracing the Invariant
 
 Consider what happens to the red and black cards:
 - Each "both red" pair adds 2 to your pile.
@@ -33,11 +37,9 @@ Every time a mixed pair is discarded, one red and one black card leave together 
 
 Since red and black are always removed in equal numbers (either both together in your/dealer pile, or one of each discarded), you will **always end up with the same number of cards** as the dealer.
 
-The game is a guaranteed **tie** — you can never win.
+### Final Answer
 
----
-
-**Final Answer: You should pay $0. This game can never be won.**`,
+The game is a guaranteed **tie** — you can never win. You should pay **$0**. This game can never be won.`,
 
   hints: [
     'Think about what happens to the count of red and black cards over time.',
