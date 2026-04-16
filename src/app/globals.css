@@ -247,7 +247,13 @@ body {
   border-left: 3px solid var(--ka-blue);
   padding: 1.15rem 1.4rem;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  overflow-x: auto;
+  /* Wrap at the container so long equations break onto new lines
+     instead of producing a horizontal scrollbar. */
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
   margin: 1.6em 0;
   box-shadow: inset 0 0 0 1px rgba(33, 36, 44, 0.02);
 }
@@ -271,10 +277,12 @@ body {
   line-height: 1.75;
   letter-spacing: 0;
   /* Wrap long equations so they stay visible without horizontal scroll.
-     Indentation is preserved via `pre-wrap`; long tokens can break. */
-  white-space: pre-wrap;
+     Indentation is preserved via `pre-wrap`; long tokens can break.
+     `!important` guards against lower-specificity inline-code overrides. */
+  white-space: pre-wrap !important;
   word-break: break-word;
   overflow-wrap: anywhere;
+  max-width: 100%;
   tab-size: 2;
 }
 
