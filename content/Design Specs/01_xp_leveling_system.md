@@ -626,11 +626,44 @@ alter table public.problem_progress
 
 **Scope for Frontend Engineer:** Low — add 3 fields to `ProblemProgress`, update `setProblemStatus` in `ProgressProvider` to stamp `lastSolvedAt` and increment `solveCount` when status becomes 'solved', and pass `isSpacedReview()` result into `awardProblemXP()`. Estimated 1-2 hours.
 
-### 3. Mixed Practice Mode — PENDING
+### 3. Mixed Practice Mode — RESOLVED
 
-**Proposal:** The Interleaving Bonus (1.25× multiplier) requires a "Mixed Practice" session mode that doesn't exist yet. This is a separate feature — flag for the Curriculum Lead to spec the problem selection algorithm.
+**Decision:** Mixed Practice is a shared-ownership feature. The Gamification Designer owns the UX/incentive layer (session flow, framing, XP bonus). The Curriculum Lead owns the knowledge graph and interleaving constraints. The Frontend/Systems Engineer owns the selection algorithm. The 1.25× XP multiplier is confirmed.
 
-**Status:** Awaiting review.
+**Research basis:**
+- Rohrer & Taylor (2007): interleaved students scored 43% vs 20% blocked on 1-week delayed test (the "215%" figure — ratio 43/20). Replicated by Taylor & Rohrer (2010) with 77% vs 38%.
+- Brunmair & Richter (2019) meta-analysis: overall effect d ≈ 0.67, with mathematics/procedural tasks showing the largest effects (d ≈ 0.7-1.0).
+- Discrimination hypothesis (Birnbaum et al. 2013, Kang & Pashler 2012): interleaving works primarily by forcing learners to identify WHICH strategy applies — exactly what quant interviews test. Largest benefit when problem types are superficially similar but require different approaches.
+- Sana, Yan, & Kim (2017): interleaving benefits are greatest after learners have basic competence with individual problem types. Complete novices need blocked practice first.
+
+**Design decisions (Gamification & UX Designer ownership):**
+
+1. **Framing:** Call it "Mixed Practice" or "Interview Simulation." Frame difficulty as a feature: "This mode mixes problem types like a real interview. It's harder — and research shows it's 2× more effective for long-term retention." Yan, Bjork, & Bjork (2016) found that explaining WHY interleaving works improves both buy-in and performance.
+
+2. **Unlock condition:** Available after completing problems in 3+ distinct chapters. Below that, within-chapter interleaving (mixing subtypes within probability, for example) provides partial discrimination practice. Message: "Complete 3 chapters to unlock Mixed Practice."
+
+3. **Session flow:**
+   - Default: 12-15 problems per session, drawn from 3-5 topic areas
+   - No consecutive same-type problems
+   - Target 65-75% accuracy (high enough to avoid frustration, low enough for desirable difficulty)
+   - Adaptive termination: end early if 4+ consecutive wrong (offer focused review); extend if in flow state
+   - Post-session feedback: accuracy broken down by chapter/topic, highlighting weak areas. This counteracts the metacognitive illusion that interleaving isn't working (Kornell & Bjork 2008 found learners systematically misjudge interleaving as less effective).
+
+4. **XP incentive:** 1.25× multiplier on all XP earned during a Mixed Practice session. This rewards choosing the harder, more effective study mode. The multiplier applies to individual problem XP, not as a flat session bonus — so harder problems in Mixed Practice earn proportionally more.
+
+5. **Visual differentiation:** Mixed Practice sessions get a distinct visual indicator (e.g., shuffled-cards icon, different accent color) to reinforce that this is a different mode with different rules.
+
+**Curriculum Lead dependencies (flagged):**
+- Knowledge graph: which chapters are prerequisites for which
+- Interleaving groups: which problem types are "related enough" to interleave together (e.g., different probability subtypes produce more discrimination benefit than probability + linear algebra)
+- Minimum mastery threshold per topic before it enters the interleaving pool (proposal: >60% accuracy on blocked problems in that chapter)
+
+**Frontend Engineer dependencies (flagged):**
+- Problem selection algorithm that respects prerequisites, interleaving constraints, and no-consecutive-same-type rule
+- Accuracy monitoring during session for adaptive termination
+- Post-session analytics computation
+
+**Scope for this spec:** The 1.25× XP multiplier, session framing, and post-session feedback are gamification layer decisions — confirmed and specced here. The problem selection algorithm is a separate spec to be co-authored with the Curriculum Lead.
 
 ### 4. Level Title Localization — PENDING
 
