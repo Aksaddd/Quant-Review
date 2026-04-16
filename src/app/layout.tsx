@@ -1,14 +1,22 @@
 import type { Metadata, Viewport } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 import '@excalidraw/excalidraw/index.css';
 
 /* ── Fonts ──────────────────────────────────────────────────────────────── */
-/* System font stack — zero network fetch, works offline / on restricted
-   networks (school, corporate, VPN). macOS renders with SF Pro / SF Mono
-   automatically. The CSS variables --font-inter / --font-lora / --font-mono
-   are declared in globals.css so the existing Tailwind + component styles
-   keep working unchanged. */
+/* System font stack for body + headings — zero runtime network fetch.
+   For mathematical symbols / display math (fenced code blocks), we
+   self-host JetBrains Mono via next/font. It ships strong Unicode math
+   coverage and contextual ligatures that render operators like ->, >=,
+   <=, != as →, ≥, ≤, ≠ for a cleaner typeset look. Next.js downloads and
+   self-hosts at build time, so offline runtime still works. */
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+  weight: ['400', '500', '600'],
+});
 export const metadata: Metadata = {
   title: {
     default: 'Quant Review — Master the Interview',
@@ -50,6 +58,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      className={jetbrainsMono.variable}
     >
       <body className="bg-[var(--surface-0)] text-[var(--text-primary)] antialiased">
         {children}

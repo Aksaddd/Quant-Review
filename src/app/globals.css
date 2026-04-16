@@ -85,12 +85,16 @@
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-lora:  'Iowan Old Style', 'Palatino Linotype', Palatino,
                 'Book Antiqua', Georgia, 'Times New Roman', Times, serif;
-  /* Math-optimized monospace stack. Prefers fonts with strong Unicode
-     coverage for mathematical operators (∑∫≤≥∈≠≈∞√∂∇→⇒⊕⊗), subscripts,
-     and Greek letters. Falls back gracefully through system monospace. */
-  --font-mono:  'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Fira Mono',
-                'SF Mono', 'Roboto Mono', 'Source Code Pro', ui-monospace,
-                Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  /* Math-optimized monospace stack. JetBrains Mono (self-hosted via
+     next/font in layout.tsx) leads the stack — it has excellent Unicode
+     coverage for mathematical operators (∑∫≤≥∈≠≈∞√∂∇→⇒⊕⊗), Greek
+     letters, sub/superscripts, and ships contextual ligatures that
+     render ->, >=, <=, != as →, ≥, ≤, ≠. Falls back gracefully through
+     system monospace fonts if the variable isn't defined. */
+  --font-mono:  var(--font-jetbrains-mono), 'JetBrains Mono', 'Cascadia Code',
+                'Fira Code', 'Fira Mono', 'SF Mono', 'Roboto Mono',
+                'Source Code Pro', ui-monospace, Menlo, Monaco, Consolas,
+                'Liberation Mono', 'Courier New', monospace;
 
   /* User-adjustable math scale (1.00 = default). The Reading Settings
      drawer exposes this as a slider. */
@@ -258,8 +262,12 @@ body {
   font-size: calc(1em * var(--math-scale, 1.05));
   font-family: var(--font-mono);
   font-weight: 450;
-  font-feature-settings: "tnum", "zero", "ss01", "ss02", "calt" 0;
+  /* Enable JetBrains Mono ligatures + stylistic sets for a more
+     typographic math look: "calt"/"liga" turn ->, >=, <=, !=, ==,
+     ===, =>, -> into →, ≥, ≤, ≠, ⩵, ≡, ⇒. "ss02" nets nicer italics. */
+  font-feature-settings: "tnum", "zero", "ss02", "calt", "liga";
   font-variant-numeric: tabular-nums slashed-zero;
+  font-variant-ligatures: contextual common-ligatures;
   line-height: 1.75;
   letter-spacing: 0;
   /* Wrap long equations so they stay visible without horizontal scroll.
