@@ -95,7 +95,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
 
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">§{problem.section}</span>
+              <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">{problem.section}</span>
               <DifficultyBadge difficulty={problem.difficulty} />
               {status === 'solved' && (
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e6f4ea] text-[#1fab54] border border-[#a8d5b5]">

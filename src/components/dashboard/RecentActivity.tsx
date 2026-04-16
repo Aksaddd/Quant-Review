@@ -41,7 +41,7 @@ export default function RecentActivity({ items }: RecentActivityProps) {
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-[#21242c] truncate">{problem.title}</p>
-                  <p className="text-xs text-[#9299a5]">§{problem.section}</p>
+                  <p className="text-xs text-[#9299a5]">{problem.section}</p>
                 </div>
                 <DifficultyBadge difficulty={problem.difficulty} size="sm" />
               </Link>
