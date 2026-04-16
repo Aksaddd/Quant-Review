@@ -42,28 +42,26 @@ export default function ApproachCanvas({
   const [expanded, setExpanded] = useState(!submitted);
   const [fullscreen, setFullscreen] = useState(false);
   const excalidrawAPIRef = useRef<any>(null);
-  const [currentSnapshot, setCurrentSnapshot] = useState<CanvasSnapshot | null>(
-    savedSnapshot || null
-  );
+  const snapshotRef = useRef<CanvasSnapshot | null>(savedSnapshot || null);
 
   const handleChange = useCallback(
     (elements: readonly any[], appState: Record<string, any>, files: any) => {
-      setCurrentSnapshot({
+      snapshotRef.current = {
         elements: elements as any[],
         appState: { theme: appState.theme },
         files: files || {},
-      });
+      };
     },
     []
   );
 
   const handleSubmit = useCallback(() => {
-    if (currentSnapshot) {
-      onSubmit(currentSnapshot);
+    if (snapshotRef.current) {
+      onSubmit(snapshotRef.current);
     } else {
       onSubmit({ elements: [], appState: {}, files: {} });
     }
-  }, [currentSnapshot, onSubmit]);
+  }, [onSubmit]);
 
   const handleClear = useCallback(() => {
     excalidrawAPIRef.current?.resetScene();
@@ -104,9 +102,9 @@ export default function ApproachCanvas({
         <div className="h-[300px] w-full">
           <Excalidraw
             initialData={{
-              elements: currentSnapshot?.elements || savedSnapshot?.elements || [],
+              elements: savedSnapshot?.elements || [],
               appState: { viewModeEnabled: true, zenModeEnabled: true, gridModeEnabled: false },
-              files: currentSnapshot?.files || savedSnapshot?.files || {},
+              files: savedSnapshot?.files || {},
             }}
             viewModeEnabled={true}
           />
