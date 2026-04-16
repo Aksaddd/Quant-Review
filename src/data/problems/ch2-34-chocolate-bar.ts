@@ -18,7 +18,7 @@ Prove that this number is the same regardless of the order of breaks.`,
 
   solution: `**Answer: 47 breaks.**
 
-**Intuitive proof:**
+### Intuitive Proof
 
 Each break takes one piece and turns it into two pieces — increasing the number of pieces by **exactly 1**.
 
@@ -29,9 +29,7 @@ Each break takes one piece and turns it into two pieces — increasing the numbe
 
 The order of breaks is irrelevant — every break always adds exactly one piece to the count.
 
----
-
-**Formal proof by induction:**
+### Formal Proof by Induction
 
 Let P(n) = "An m×n chocolate bar requires mn−1 breaks."
 
@@ -41,9 +39,9 @@ Let P(n) = "An m×n chocolate bar requires mn−1 breaks."
 
 Total = 1 + (mk−1) + (m(n−k)−1) = 1 + mk−1 + mn−mk−1 = mn−1. ✓
 
----
+### Final Answer
 
-**Final Answer: 47 breaks** for a 6×8 bar. In general, mn−1 breaks for an m×n bar.`,
+**47 breaks** for a 6×8 bar. In general, mn−1 breaks for an m×n bar.`,
 
   hints: [
     'Don\'t focus on HOW you break it — focus on what changes with each break.',

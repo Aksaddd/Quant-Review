@@ -19,7 +19,9 @@ The rules:
 
 **Will the sheep be eaten?**`,
 
-  solution: `**Strategy: Simplify to small cases and look for a parity pattern.**
+  solution: `### Strategy: Simplify to Small Cases
+
+Look for a parity pattern by starting with small numbers of tigers.
 
 **n = 1 tiger:** The single tiger eats the sheep immediately — there is no threat.
 → **Sheep is eaten.**
@@ -33,16 +35,16 @@ The rules:
 **n = 4 tigers:** After one tiger eats, we have 3 tigers and 1 new sheep — and from the n = 3 case, that sheep gets eaten. No tiger wants to become the new sheep. Nobody eats.
 → **Sheep is safe.**
 
-**Pattern:**
+### Identifying the Pattern
 
 | # Tigers | Outcome |
 |----------|---------|
 | Odd | Sheep is **eaten** |
 | Even | Sheep is **safe** |
 
----
+### Final Answer
 
-**Final Answer:** With **100 tigers (even)**, the sheep will **NOT** be eaten.`,
+With **100 tigers (even)**, the sheep will **NOT** be eaten.`,
 
   hints: [
     'Start with 1 tiger. What does it do?',

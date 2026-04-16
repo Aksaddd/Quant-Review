@@ -16,7 +16,7 @@ const counterfeitCoinsII: Problem = {
 
   solution: `**Answer: 1 weighing.**
 
-**Strategy: Use powers of 3 as sampling weights.**
+### Strategy: Use Powers of 3
 
 Take coins from each bag as follows:
 
@@ -30,6 +30,8 @@ Take coins from each bag as follows:
 
 **Total coins:** 1+3+9+27+81 = **121 coins**
 
+### Decoding the Deviation
+
 **If all coins were 10g:** expected weight = 121 × 10 = **1210 grams**
 
 **Actual weight:** 1210 + deviation, where deviation = Σ (cᵢ × dᵢ)
@@ -40,11 +42,13 @@ Take coins from each bag as follows:
 
 The deviation encodes a unique base-3 number, allowing us to read off d₁, d₂, d₃, d₄, d₅ directly.
 
-**Why it works:** By Pigeon Hole, all 3⁵ = 243 possible bag-type combinations produce **distinct total weights** (no two combinations give the same deviation sum).
+### Why It Works
 
----
+By Pigeon Hole, all 3⁵ = 243 possible bag-type combinations produce **distinct total weights** (no two combinations give the same deviation sum).
 
-**Final Answer: 1 weighing.** Take 1, 3, 9, 27, 81 coins from bags 1–5. The deviation from 1210g encodes all five bag types simultaneously.`,
+### Final Answer
+
+**1 weighing.** Take 1, 3, 9, 27, 81 coins from bags 1–5. The deviation from 1210g encodes all five bag types simultaneously.`,
 
   hints: [
     'You need to distinguish 3⁵ = 243 combinations in one weighing. How?',

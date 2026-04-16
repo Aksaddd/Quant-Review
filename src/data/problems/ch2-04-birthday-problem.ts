@@ -27,7 +27,7 @@ The following conversation takes place:
 
 **What is A's birthday?**`,
 
-  solution: `**Step 1 — Analyze your first statement.**
+  solution: `### Step 1: Analyze Your First Statement
 
 You said C doesn't know. For C to know immediately, C's day would have to appear in only one month. Check which days are unique:
 - Day **7** appears only in Jun → if C has 7, C knows immediately (Jun 7)
@@ -37,9 +37,7 @@ Since you are *certain* C doesn't know, the month you were told cannot be **June
 
 **Remaining candidates:** Mar 4, Mar 5, Mar 8, Sep 1, Sep 5
 
----
-
-**Step 2 — Analyze C's statement.**
+### Step 2: Analyze C's Statement
 
 C now knows the birthday. From the remaining candidates, C can deduce. If C's day still appeared in two remaining months, C couldn't know. Check day **5**: appears in both Mar 5 and Sep 5 — C still couldn't determine it. So day 5 is eliminated.
 
@@ -47,13 +45,9 @@ Eliminated: Mar 5, Sep 5
 
 **Remaining candidates:** Mar 4, Mar 8, Sep 1
 
----
-
-**Step 3 — Analyze your second statement.**
+### Step 3: Analyze Your Second Statement
 
 You now know too. March has **two** remaining candidates (Mar 4 and Mar 8), but September has only **one** (Sep 1). Since you know, you must have been told **September**.
-
----
 
 **Final Answer: September 1.**`,
 

@@ -14,25 +14,27 @@ const boxPacking: Problem = {
 
 Note: 53 × 4 = 212, and 6³ = 216, so there is enough total volume.`,
 
-  solution: `**Answer: No — it is impossible.**
+  solution: `### Setting Up the Coloring Argument
 
-**Proof by coloring argument:**
+**Answer: No — it is impossible.**
 
 Divide the 6×6×6 box into **27 non-overlapping 2×2×2 sub-cubes** (think of a 3×3×3 arrangement of 2×2×2 blocks). Color them alternating **black** and **white** like a 3D checkerboard.
 
 In a 3×3×3 arrangement: **14 cubes of one color**, **13 of the other**.
 
-**Key observation:** Any 1×1×4 brick, regardless of orientation, always passes through exactly **one black** and **one white** 2×2×2 sub-cube (it spans exactly 4 unit cells = 2 full sub-cubes side by side).
+### Key Observation
+
+Any 1×1×4 brick, regardless of orientation, always passes through exactly **one black** and **one white** 2×2×2 sub-cube (it spans exactly 4 unit cells = 2 full sub-cubes side by side).
 
 Wait — more precisely: a 1×1×4 brick covers exactly 4 cells. Since sub-cubes are 2×2×2 = 8 cells each, and the brick spans exactly 2 sub-cubes of opposite colors.
+
+### Deriving the Bound
 
 Each 2×2×2 sub-cube can hold **at most 4** such bricks (4 × 4 = 16 > 8, but only 4 non-overlapping bricks can fit).
 
 With only **13 sub-cubes** of the minority color, at most **13 × 4 = 52 bricks** can be placed before running out of minority-color sub-cubes.
 
 The **53rd brick** would require a 14th minority-color sub-cube — which doesn't exist.
-
----
 
 **Final Answer: No. The 53rd brick cannot be packed. Maximum is 52.**`,
 

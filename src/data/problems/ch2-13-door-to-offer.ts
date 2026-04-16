@@ -20,13 +20,13 @@ You may ask **one guard one yes/no question**.
 
 **What question do you ask, and how do you use the answer?**`,
 
-  solution: `**The Question:** Ask one guard:
+  solution: `### The Question
+
+Ask one guard:
 
 > *"If I asked the other guard whether your door leads to the job offer, would they say yes?"*
 
----
-
-**Why this works — 4 cases:**
+### Why This Works — 4 Cases
 
 | Your door | Guard asked | Other guard's answer | Double negation result |
 |-----------|-------------|---------------------|----------------------|
@@ -41,9 +41,9 @@ You may ask **one guard one yes/no question**.
 
 The double-negation (a liar lying about a truth-teller, or a truth-teller reporting a liar's lie) **always cancels out**, making the answer reliable regardless of which guard you ask.
 
----
+### Final Answer
 
-**Final Answer:** Ask either guard: *"Would the other guard say this is the offer door?"* If **No** → take this door. If **Yes** → take the other door.`,
+Ask either guard: *"Would the other guard say this is the offer door?"* If **No** → take this door. If **Yes** → take the other door.`,
 
   hints: [
     'Direct questions fail because you don\'t know if you\'re talking to the liar or truth-teller.',
