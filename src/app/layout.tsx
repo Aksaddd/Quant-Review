@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
+import '@excalidraw/excalidraw/index.css';
 
 /* ── Fonts ──────────────────────────────────────────────────────────────── */
 /* System font stack — zero network fetch, works offline / on restricted

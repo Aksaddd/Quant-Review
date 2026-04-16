@@ -14,8 +14,30 @@ import {
 // Lazy-load Excalidraw to avoid SSR issues in Next.js
 import dynamic from 'next/dynamic';
 const Excalidraw = dynamic(
-  async () => (await import('@excalidraw/excalidraw')).Excalidraw,
-  { ssr: false }
+  async () => {
+    try {
+      const mod = await import('@excalidraw/excalidraw');
+      return mod.Excalidraw;
+    } catch (err) {
+      console.error('Failed to load Excalidraw:', err);
+      // Return a fallback component
+      return function ExcalidrawFallback() {
+        return (
+          <div className="flex items-center justify-center h-full text-sm text-red-500 p-4">
+            Failed to load drawing canvas. Try refreshing the page.
+          </div>
+        );
+      };
+    }
+  },
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-full text-sm text-[#9299a5] p-4">
+        Loading canvas...
+      </div>
+    ),
+  }
 );
 
 export interface CanvasSnapshot {
