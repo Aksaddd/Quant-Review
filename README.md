@@ -214,7 +214,7 @@ And render with **KaTeX** for clean display.
 
 ## Supplementary Books
 
-The `content/books/` directory contains learning science books that inform the platform's instructional design:
+The `content/Research/` directory contains learning science books that inform the platform's instructional design:
 
 | Book | Author | Focus |
 |------|--------|-------|
