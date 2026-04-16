@@ -95,6 +95,47 @@
 
 ---
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- A Supabase project (for database, auth, and pgvector)
+- Anthropic API key (Claude) and Google API key (Gemini)
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/aksaddd/quant-review.git
+cd quant-review
+
+# Install dependencies
+npm install
+
+# Copy the env template and fill in your keys
+cp .env.local.example .env.local
+```
+
+### Development
+
+```bash
+npm run dev      # Start the Next.js dev server at http://localhost:3000
+npm run build    # Production build
+npm run start    # Run the production build
+npm run lint     # Lint with ESLint
+```
+
+### Regenerating Chapter Data
+
+After editing any chapter markdown under `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
+
+```bash
+node scripts/gen-chapters.js
+```
+
+---
+
 ## Book Overview
 
 This book prepares candidates for **quantitative finance interviews** by covering 200+ real interview problems across 7 chapters. Problems are drawn from actual interviews at top-tier quant firms, hedge funds, and trading desks.
@@ -372,18 +413,6 @@ cp .env.local.example .env.local
 ```
 
 Required environment variables include Supabase credentials, Anthropic (Claude) API key, and Google (Gemini) API key. See `.env.local.example` for the full list.
-
----
-
-## Generating Chapter Data
-
-After editing any chapter markdown file in `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
-
-```bash
-node scripts/gen-chapters.js
-```
-
-This parses chapters 3–7 and outputs structured TypeScript to `src/data/chapters/`.
 
 ---
 
