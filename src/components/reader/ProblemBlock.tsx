@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { useProgress } from '@/hooks/useProgress';
 import { useXPStore, XP_REWARDS } from '@/stores/useXPStore';
+import { useCanvasStore } from '@/hooks/useCanvasStore';
+import type { CanvasSnapshot } from '@/components/reader/ApproachCanvas';
 import { DifficultyBadge } from '@/components/ui/Badge';
 import MarkdownRenderer from './MarkdownRenderer';
 import SolutionReveal from './SolutionReveal';
@@ -17,8 +19,21 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
   const { getProblemStatus, setProblemStatus } = useProgress();
   const awardXP = useXPStore((s) => s.awardXP);
   const triggerFiero = useXPStore((s) => s.triggerFiero);
+  const { saveCanvas, loadCanvas } = useCanvasStore();
   const status = getProblemStatus(problem.id);
   const ref = useRef<HTMLDivElement>(null);
+  const [savedSnapshot, setSavedSnapshot] = useState<CanvasSnapshot | null>(null);
+
+  // Load any previously saved canvas on mount
+  useEffect(() => {
+    const snapshot = loadCanvas(problem.id);
+    if (snapshot) setSavedSnapshot(snapshot);
+  }, [problem.id, loadCanvas]);
+
+  const handleCanvasSubmit = useCallback((snapshot: CanvasSnapshot) => {
+    saveCanvas(problem.id, snapshot);
+    setSavedSnapshot(snapshot);
+  }, [problem.id, saveCanvas]);
 
   /* Auto-mark as 'attempted' when the problem scrolls into view */
   useEffect(() => {
@@ -117,6 +132,9 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
           finalAnswer={problem.finalAnswer}
           hints={problem.hints}
           currentStatus={status}
+          problemId={problem.id}
+          savedCanvasSnapshot={savedSnapshot}
+          onCanvasSubmit={handleCanvasSubmit}
           onSolved={handleSolved}
           onAttempted={() => { if (status === 'unseen') setProblemStatus(problem.id, 'attempted'); }}
           onUndoSolved={() => setProblemStatus(problem.id, 'attempted')}

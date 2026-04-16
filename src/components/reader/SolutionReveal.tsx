@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { CheckCircle2, ChevronDown, RotateCcw, Undo2 } from 'lucide-react';
 import HintStep from './HintStep';
-import ScratchpadGate from './ScratchpadGate';
+import ApproachCanvas, { type CanvasSnapshot } from './ApproachCanvas';
 import CollapsibleSolution from './CollapsibleSolution';
 
 interface SolutionRevealProps {
@@ -15,6 +15,9 @@ interface SolutionRevealProps {
   onUndoSolved?: () => void;
   onReset?: () => void;
   currentStatus: 'unseen' | 'attempted' | 'solved' | 'reading';
+  problemId: string;
+  savedCanvasSnapshot?: CanvasSnapshot | null;
+  onCanvasSubmit?: (snapshot: CanvasSnapshot) => void;
 }
 
 export default function SolutionReveal({
@@ -26,13 +29,17 @@ export default function SolutionReveal({
   onUndoSolved,
   onReset,
   currentStatus,
+  problemId,
+  savedCanvasSnapshot,
+  onCanvasSubmit,
 }: SolutionRevealProps) {
   const [showSolution, setShowSolution] = useState(false);
   const [scratchpadSubmitted, setScratchpadSubmitted] = useState(false);
   const hintsRevealedRef = useRef(0);
 
-  const handleScratchpadSubmit = (approach: string) => {
+  const handleCanvasSubmit = (snapshot: CanvasSnapshot) => {
     setScratchpadSubmitted(true);
+    onCanvasSubmit?.(snapshot);
     if (currentStatus === 'unseen') onAttempted?.();
   };
 
@@ -54,11 +61,13 @@ export default function SolutionReveal({
 
   return (
     <div className="space-y-3 mt-1">
-      {/* Generate Before Reveal: scratchpad gate */}
+      {/* Generate Before Reveal: drawing canvas */}
       {currentStatus !== 'solved' && (
-        <ScratchpadGate
-          onSubmit={handleScratchpadSubmit}
+        <ApproachCanvas
+          onSubmit={handleCanvasSubmit}
           submitted={scratchpadSubmitted}
+          savedSnapshot={savedCanvasSnapshot}
+          problemId={problemId}
         />
       )}
 
