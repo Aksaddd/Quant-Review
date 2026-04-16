@@ -12,9 +12,31 @@
 /
 ├── README.md                          ← You are here (metadata + build instructions)
 ├── content/
-│   ├── chapter-01-general-principles.md
-│   └── chapter-02-brain-teasers.md
-└── (future chapters to be added)
+│   ├── chapters/                      ← Quant interview chapter source markdown
+│   │   ├── chapter-01-general-principles.md
+│   │   ├── chapter-02-brain-teasers.md
+│   │   ├── chapter-03-calculus-linear-algebra.md
+│   │   ├── chapter-04-probability-theory.md
+│   │   ├── chapter-05-stochastic-processes.md
+│   │   ├── chapter-06-finance.md
+│   │   └── chapter-07-algorithms-numerical-methods.md
+│   └── books/                         ← Learning science supplementary books
+│       ├── building-a-second-brain.md
+│       ├── how-we-learn.md
+│       ├── make-it-stick.md
+│       ├── moonwalking-with-einstein.md
+│       ├── reality-is-broken.md
+│       └── uncommon-sense-teaching.md
+├── scripts/
+│   └── gen-chapters.js                ← Parses chapter markdown → TypeScript data
+├── src/
+│   ├── app/                           ← Next.js app router (pages & layouts)
+│   ├── components/                    ← React components (reader, flashcards, dashboard)
+│   ├── data/                          ← Structured TypeScript data (problems, flashcards)
+│   ├── hooks/                         ← Custom React hooks
+│   └── lib/                           ← Utilities and services
+└── supabase/
+    └── schema.sql                     ← Database schema
 ```
 
 ---
@@ -37,7 +59,7 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 
 ---
 
-## Content in This Repo (Chapters 1 & 2)
+## Content in This Repo
 
 ### Chapter 1 — General Principles
 
@@ -190,9 +212,30 @@ And render with **KaTeX** for clean display.
 
 ---
 
-## Future Chapters (To Be Added)
+## Supplementary Books
 
-When chapters 3–7 are extracted, they will follow the same markdown format and be added to `/content/`. Claude Code should be able to ingest new markdown files automatically without config changes.
+The `content/books/` directory contains learning science books that inform the platform's instructional design:
+
+| Book | Author | Focus |
+|------|--------|-------|
+| Building a Second Brain | Tiago Forte | Digital note-taking and knowledge organization |
+| How We Learn | Stanislas Dehaene | Neuroscience of learning |
+| Make It Stick | Brown, Roediger, McDaniel | Science of successful learning and memory |
+| Moonwalking with Einstein | Joshua Foer | Memory techniques and mnemonics |
+| Reality Is Broken | Jane McGonigal | Gamification and engagement |
+| Uncommon Sense Teaching | Oakley et al. | Practical teaching methods based on brain science |
+
+---
+
+## Generating Chapter Data
+
+After editing any chapter markdown file in `content/chapters/`, regenerate the TypeScript data:
+
+```bash
+node scripts/gen-chapters.js
+```
+
+This parses chapters 3–7 and outputs structured TypeScript to `src/data/chapters/`.
 
 ---
 

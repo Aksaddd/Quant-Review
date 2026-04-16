@@ -1,6 +1,6 @@
 import type { Chapter } from '@/lib/types';
 
-/** Auto-generated from chapter_03_calculus_linear_algebra.md — run `node scripts/gen-chapters.js` after editing. */
+/** Auto-generated from content/chapters/chapter-03-calculus-linear-algebra.md — run `node scripts/gen-chapters.js` after editing. */
 const chapter3: Chapter = {
   id: 'chapter-3',
   number: 3,
