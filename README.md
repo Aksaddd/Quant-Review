@@ -33,6 +33,8 @@
 │   │   ├── 07_quant_content_author.md
 │   │   ├── 08_growth_community_manager.md
 │   │   └── ai_ml_cost_analysis.md     ← LLM provider cost analysis & optimization
+│   ├── Design Specs/                  ← XP leveling, fiero mechanics, focus-mode nudges,
+│   │                                    epic-meaning narrative, technique atlas spec
 │   └── Research/                      ← Learning science research
 │       ├── Books/                     ← Six-book cognitive science synthesis sources
 │       │   ├── building-a-second-brain.md
@@ -46,9 +48,19 @@
 │           ├── primary-research-sources.md       ← ~82 peer-reviewed sources
 │           └── gamification-design-research.md   ← Gamification research synthesis
 ├── scripts/
-│   └── gen-chapters.js                ← Parses chapter markdown → TypeScript data
+│   ├── gen-chapters.js                ← Parses chapter markdown → TypeScript data
+│   └── patch-tunnel-rat.js            ← Postinstall patch for a transitive dep
 ├── src/
-│   ├── app/                           ← Next.js app router (pages & layouts)
+│   ├── app/                           ← Next.js 14 App Router
+│   │   ├── layout.tsx · page.tsx      ← Root layout + landing page
+│   │   ├── (app)/                     ← Authenticated app shell route group
+│   │   │   ├── dashboard/             ← Progress dashboard (chapters, stats, streaks)
+│   │   │   ├── flashcards/            ← Flashcard study interface
+│   │   │   ├── read/chapter-[1-7]/    ← One reader route per chapter (7 total)
+│   │   │   └── settings/              ← User settings
+│   │   ├── (auth)/                    ← Auth route group
+│   │   │   ├── login/
+│   │   │   └── signup/
 │   │   └── api/ai/                    ← AI/ML API routes
 │   │       ├── adaptive/              ← Adaptive difficulty engine
 │   │       ├── evaluate-approach/     ← Generate-before-reveal evaluation
@@ -58,17 +70,36 @@
 │   │       ├── technique-atlas/       ← Technique classification & atlas
 │   │       └── weakness-profile/      ← Personalized weakness analysis
 │   ├── components/                    ← React components
-│   │   ├── flashcards/                ← Flashcard UI + MistakeTaxonomy
-│   │   ├── gamification/              ← FieroOverlay, SessionNudge, XPBar, XPToast
-│   │   ├── layout/                    ← AppShell, FocusModeToggle, PageTransition
-│   │   └── reader/                    ← ProblemBlock, CollapsibleSolution, ScratchpadGate
-│   ├── data/                          ← Structured TypeScript data (problems, flashcards)
+│   │   ├── dashboard/                 ← ChapterList, SectionGrid, StatsOverview, DueCardsBanner, …
+│   │   ├── flashcards/                ← FlashcardCard, CardBrowser, MistakeTaxonomy, FilterBar, …
+│   │   ├── gamification/              ← XPBar, XPToast, FieroOverlay, SessionNudge
+│   │   ├── landing/                   ← Hero, Features, SectionPreview, CTA
+│   │   ├── layout/                    ← AppShell, Navbar, Sidebar, MobileNav, FocusModeToggle
+│   │   ├── providers/                 ← ProgressProvider, TextSettingsProvider
+│   │   ├── reader/                    ← ChapterReader, ProblemBlock, ScratchpadGate,
+│   │   │                                ApproachCanvas, HintStep, MarkdownRenderer, …
+│   │   └── ui/                        ← Button, Card, Badge, Modal, Progress
+│   ├── data/                          ← Structured TypeScript data
+│   │   ├── chapter1/                  ← 5 principle cards (ch1-01 … ch1-05)
+│   │   ├── problems/                  ← 37 Chapter-2 brain-teaser problems (ch2-01 … ch2-37)
+│   │   ├── chapters/                  ← Auto-generated data for chapters 3–7 (+ index)
+│   │   └── flashcards/                ← concepts/, formulas/, principles/, problems/ card sets
 │   ├── hooks/                         ← Custom React hooks
-│   │   ├── useErrorTracking.ts        ← Mistake taxonomy tracking
-│   │   ├── useInterleaved.ts          ← Interleaved practice session management
+│   │   ├── useFlashcards.ts           ← Filtering + retrieval for flashcards
+│   │   ├── useProgress.ts             ← Progress context (SM-2 state, due cards)
 │   │   ├── useProblemSR.ts            ← SM-2 spaced repetition for problems
-│   │   └── useTimerTracking.ts        ← Time-to-solution tracking
+│   │   ├── useCustomSets.ts           ← User-created card collections
+│   │   ├── useStreak.ts               ← Daily streak tracking
+│   │   ├── useCanvasStore.ts          ← Approach-canvas drawing state
+│   │   ├── useErrorTracking.ts        ← Mistake taxonomy tracking
+│   │   ├── useTextSettings.ts         ← Reader typography / theme preferences
+│   │   ├── useTimerTracking.ts        ← Time-to-solution tracking
+│   │   └── useInterleaved.ts          ← Interleaved practice session management
 │   ├── lib/
+│   │   ├── types.ts                   ← Shared domain types (Chapter, Problem, …)
+│   │   ├── sm2.ts                     ← SM-2 spaced repetition (flashcards)
+│   │   ├── storage.ts                 ← LocalStorage helpers
+│   │   ├── supabase.ts                ← Supabase client factory
 │   │   └── ai/                        ← AI/ML core library
 │   │       ├── claude.ts              ← Claude API client
 │   │       ├── gemini.ts              ← Gemini API client
@@ -85,12 +116,13 @@
 │   │       ├── types.ts               ← Shared AI/ML type definitions
 │   │       └── index.ts               ← Module exports
 │   └── stores/                        ← Zustand state stores
-│       ├── useSessionStore.ts         ← Session state (focus mode, timing)
+│       ├── useSessionStore.ts         ← Session state (focus mode, timing, nudges)
 │       └── useXPStore.ts              ← XP, leveling, and gamification state
 └── supabase/
-    ├── schema.sql                     ← Base database schema
+    ├── schema.sql                     ← Base schema — profiles, problem_progress, flashcard_progress
     └── migrations/
-        └── 001_ai_ml_infrastructure.sql ← AI/ML tables, events, and indexes
+        └── 001_ai_ml_infrastructure.sql ← AI/ML tables (problem_sm2_state, problem_sessions,
+                                            problem_errors), embeddings, pgvector indexes
 ```
 
 ---
@@ -175,7 +207,7 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 ### Chapter 2 — Brain Teasers
 
 **Page count:** 30 pages  
-**Problem count:** 28 problems  
+**Problem count:** 37 problems  
 **Topic tags:** `brain-teasers` `logic` `combinatorics` `game-theory` `induction` `modular-arithmetic` `symmetry` `pigeon-hole`
 
 #### Problem Index
@@ -222,18 +254,204 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 
 ---
 
+### Chapter 3 — Calculus and Linear Algebra
+
+**Page count:** 26 pages  
+**Problem count:** 19 problems  
+**Topic tags:** `calculus` `linear-algebra` `derivatives` `integration` `ode` `matrices`
+
+#### Problem Index
+
+| # | Problem Name | Section | Difficulty | Key Technique |
+|---|-------------|---------|------------|---------------|
+| 1 | Derivative of `y = (ln x)^(ln x)` | 3.1 Limits and Derivatives | Medium | Logarithmic differentiation, chain rule |
+| 2 | `eᵖ` vs. `πᵉ` | 3.1 | Medium | Monotonicity of `f(x) = ln(x)/x` |
+| 3 | Two Limits | 3.1 | Medium | L'Hôpital / series expansion |
+| 4 | Volume of Intersecting Cylinders | 3.2 Integration | Medium | Cross-section integration |
+| 5 | Snow Plow Problem | 3.2 | Medium | Separable ODE + geometric setup |
+| 6 | `E[X \| X > 0]` for Standard Normal | 3.2 | Medium | Truncated expectation via direct integration |
+| 7 | Bernoulli's Inequality | 3.4 Important Calculus Methods | Medium | Induction / convexity |
+| 8 | Root-Finding Algorithms | 3.4 | Medium | Bisection, Newton's method |
+| 9 | Distance From Origin to a Plane | 3.4 | Medium | Lagrange multipliers |
+| 10 | Separable ODE With Initial Condition | 3.5 ODEs | Medium | Separation of variables |
+| 11 | Change of Variable | 3.5 | Medium | Substitution in ODEs |
+| 12 | First-Order Linear ODE | 3.5 | Medium | Integrating factor |
+| 13 | Complex Roots ODE | 3.5 | Medium | Characteristic equation, Euler's formula |
+| 14 | Two Nonhomogeneous ODEs | 3.5 | Medium | Undetermined coefficients |
+| 15 | Max/Min Correlation (Vector Approach) | 3.6 Linear Algebra | Medium | Cauchy–Schwarz on centered vectors |
+| 16 | Linear Least Squares Regression | 3.6 | Medium | Normal equations, projection |
+| 17 | Eigenvalues and Eigenvectors of a 2×2 | 3.6 | Medium | Characteristic polynomial |
+| 18 | Correlation Bounds (PSD Approach) | 3.6 | Medium | Positive semidefiniteness of covariance matrix |
+| 19 | Generating Correlated Normal RVs | 3.6 | Medium | Cholesky decomposition |
+
+> Section 3.3 (*Partial Derivatives and Multiple Integrals*) is a reference-only section with no structured problems.
+
+---
+
+### Chapter 4 — Probability Theory
+
+**Page count:** 45 pages  
+**Problem count:** 40 problems  
+**Topic tags:** `probability` `combinatorics` `bayes` `distributions` `expectation` `variance`
+
+#### Problem Index
+
+| # | Problem Name | Section | Difficulty | Key Technique |
+|---|-------------|---------|------------|---------------|
+| 1 | Coin Toss Game | 4.1 Basic Probability | Medium | Complementary counting |
+| 2 | Card Game | 4.1 | Medium | Inclusion–exclusion |
+| 3 | Drunk Passenger | 4.1 | Medium | Symmetry argument |
+| 4 | N Points on a Circle | 4.1 | Medium | Symmetry, arc covering |
+| 5 | Poker Hands | 4.2 Combinatorial Analysis | Medium | Binomial/multinomial counting |
+| 6 | Hopping Rabbit | 4.2 | Medium | Stars and bars |
+| 7 | Screwy Pirates 2 | 4.2 | Medium | Combinatorial locking argument |
+| 8 | Chess Tournament | 4.2 | Medium | Counting pairings |
+| 9 | Application Letters (Derangement) | 4.2 | Medium | Derangement formula `!n` |
+| 10 | Birthday Problem | 4.2 | Medium | Complementary probability |
+| 11 | 100th Digit of `(1 + √2)³⁰⁰⁰` | 4.2 | Hard | Conjugate surds, integer parity |
+| 12 | Cubic of Integer | 4.2 | Medium | Modular arithmetic |
+| 13 | All-Girl World? | 4.3 Conditional Probability and Bayes' | Medium | Gambler's fallacy / independence |
+| 14 | Unfair Coin | 4.3 | Medium | Bayes' rule |
+| 15 | Fair Probability From an Unfair Coin | 4.3 | Medium | Von Neumann's trick |
+| 16 | Dart Game | 4.3 | Medium | Law of total probability |
+| 17 | Birthday Line | 4.3 | Medium | Conditioning on position |
+| 18 | Dice Order | 4.3 | Medium | Symmetry, ordering |
+| 19 | Monty Hall Problem | 4.3 | Medium | Bayes' rule, information update |
+| 20 | Amoeba Population | 4.3 | Hard | Generating functions / recursion |
+| 21 | Candies in a Jar | 4.3 | Medium | Conditional expectation |
+| 22 | Coin Toss Game (HT) | 4.3 | Medium | Markov chain / first-step analysis |
+| 23 | Aces | 4.3 | Medium | Symmetry in card positions |
+| 24 | Gambler's Ruin | 4.3 | Hard | Absorbing random walk |
+| 25 | Basketball Scores | 4.3 | Medium | Recursion on states |
+| 26 | Cars on a Road | 4.3 | Medium | Poisson process |
+| 27 | Meeting Probability | 4.4 Distributions | Medium | Geometric probability |
+| 28 | Probability of Triangle | 4.4 | Medium | Integration over feasible region |
+| 29 | Poisson Process and Memorylessness | 4.4 | Medium | Exponential inter-arrivals |
+| 30 | Moments of the Normal Distribution | 4.4 | Medium | Integration by parts, even/odd |
+| 31 | Connecting Noodles | 4.5 Expectation and Variance | Medium | Linearity of expectation |
+| 32 | Optimal Hedge Ratio | 4.5 | Medium | Variance minimization |
+| 33 | Dice Game | 4.5 | Medium | Conditional expectation |
+| 34 | Card Game — First Ace | 4.5 | Medium | Symmetry / order statistics |
+| 35 | Sum of Random Variables | 4.5 | Medium | Moment generating functions |
+| 36 | Coupon Collection | 4.5 | Medium | Geometric sum of expectations |
+| 37 | Joint Default Probability | 4.5 | Hard | Copulas / bivariate normal |
+| 38 | Expected Value of Max and Min | 4.6 Order Statistics | Medium | Order-statistic density |
+| 39 | Correlation of Max and Min | 4.6 | Medium | Joint distribution of extremes |
+| 40 | Random Ants | 4.6 | Medium | Symmetry + order-statistic tricks |
+
+---
+
+### Chapter 5 — Stochastic Processes and Stochastic Calculus
+
+**Page count:** 32 pages  
+**Problem count:** 13 problems  
+**Topic tags:** `markov-chains` `martingales` `brownian-motion` `ito` `sde` `dp`
+
+#### Problem Index
+
+| # | Problem Name | Section | Difficulty | Key Technique |
+|---|-------------|---------|------------|---------------|
+| 1 | Gambler's Ruin (Markov Chain) | 5.1 Markov Chain | Hard | Absorbing chain, first-step analysis |
+| 2 | Dice Question (12 vs. 7-7) | 5.1 | Hard | Expected hitting time |
+| 3 | Markov Chain Problem 3 | 5.1 | Hard | Stationary distribution |
+| 4 | Drunk Man on Bridge | 5.2 Martingale and Random Walk | Hard | Optional stopping theorem |
+| 5 | Dice Game (Wald's Equality) | 5.2 | Hard | Wald's identity |
+| 6 | Ticket Line (Ballot Problem) | 5.2 | Hard | Reflection principle |
+| 7 | Coin Sequence: `n` Heads in a Row | 5.2 | Hard | Martingale expected stopping time |
+| 8 | DP Dice Game (Up to 3 Rolls) | 5.3 Dynamic Programming | Hard | Backward induction |
+| 9 | World Series Betting | 5.3 | Hard | Value iteration / replication |
+| 10 | Dynamic Dice Game | 5.3 | Hard | Bellman equation |
+| 11 | Dynamic Card Game | 5.3 | Hard | Optimal stopping |
+| 12 | Correlation of `W_t` and `W_t²` | 5.4 Brownian Motion and Stochastic Calculus | Hard | Itô's lemma, BM moments |
+| 13 | Prob. of Ever Reaching `−1` With Positive Drift | 5.4 | Hard | Exponential martingale / hitting probability |
+
+---
+
+### Chapter 6 — Finance
+
+**Page count:** 33 pages  
+**Problem count:** 23 problems  
+**Topic tags:** `options` `black-scholes` `greeks` `exotics` `derivatives` `finance`
+
+#### Problem Index
+
+| # | Problem Name | Section | Difficulty | Key Technique |
+|---|-------------|---------|------------|---------------|
+| 1 | Price Direction of Options | 6.1 Option Pricing | Medium | Comparative statics on S, K, r, σ, τ, D |
+| 2 | Put-Call Parity | 6.1 | Medium | No-arbitrage replication |
+| 3 | Put-Spread Arbitrage | 6.1 | Medium | Monotonicity and convexity of option prices |
+| 4 | Black-Scholes-Merton PDE | 6.1 | Medium | Dynamic hedging derivation |
+| 5 | Digital / First-Passage Payoff | 6.1 | Hard | Martingale + first-hitting time |
+| 6 | Inverse Stock Price Contract (`1/Sₜ`) | 6.1 | Hard | Change of numeraire, risk-neutral pricing |
+| 7 | Call Delta of a European Call | 6.2 The Greeks | Medium | Differentiation of BS formula |
+| 8 | ATM Delta Near Maturity | 6.2 | Medium | Limiting behavior of `N(d₁)` |
+| 9 | Delta Hedging and Rebalancing | 6.2 | Medium | Replication portfolio maintenance |
+| 10 | ATM Call Approximation | 6.2 | Medium | Brenner–Subrahmanyam approximation |
+| 11 | Gamma of an ATM Option Near Maturity | 6.2 | Medium | Sensitivity blow-up at expiry |
+| 12 | Delta-Neutral: Gamma vs. Theta | 6.2 | Medium | P&L decomposition of Δ-hedged portfolio |
+| 13 | Constant vs. Stochastic Volatility | 6.2 | Hard | Jensen on convex payoff |
+| 14 | Recovering Risk-Neutral Density | 6.2 | Hard | Breeden–Litzenberger |
+| 15 | Bull Call Spread Boundaries | 6.3 Option Portfolios and Exotic Options | Medium | Payoff construction, no-arbitrage bounds |
+| 16 | Straddle | 6.3 | Medium | Volatility view via long C + long P |
+| 17 | Binary / Cash-or-Nothing Option | 6.3 | Medium | Digital pricing and static hedge |
+| 18 | Exchange Option (Margrabe) | 6.3 | Hard | Two-asset GBM, change of numeraire |
+| 19 | Portfolio Optimization (Minimum Variance) | 6.4 Other Finance Questions | Medium | Two-asset variance minimization |
+| 20 | Value at Risk (VaR) | 6.4 | Medium | Quantile risk measure + limitations |
+| 21 | Duration of an Inverse Floater | 6.4 | Hard | Decomposition into plain bond + swap |
+| 22 | Forwards vs. Futures | 6.4 | Medium | Daily marking-to-market and rate correlation |
+| 23 | Interest Rate Models | 6.4 | Medium | Vasicek, CIR, HJM / short-rate vs. forward-rate |
+
+---
+
+### Chapter 7 — Algorithms and Numerical Methods
+
+**Page count:** 30 pages  
+**Problem count:** 17 problems  
+**Topic tags:** `algorithms` `dp` `bit-manipulation` `numerical-methods` `monte-carlo`
+
+#### Problem Index
+
+| # | Problem Name | Section | Difficulty | Key Technique |
+|---|-------------|---------|------------|---------------|
+| 1 | Number Swap Without Extra Storage | 7.1 Algorithms | Easy | XOR / arithmetic swap |
+| 2 | Unique Elements (Sorted Array) | 7.1 | Easy | Two-pointer dedup |
+| 3 | Horner's Algorithm | 7.1 | Medium | Polynomial evaluation in `O(n)` |
+| 4 | Moving Average | 7.1 | Medium | Sliding window |
+| 5 | Sorting Algorithms | 7.1 | Medium | Insertion / merge / quicksort analysis |
+| 6 | Random Permutation (Fisher–Yates) | 7.1 | Medium | Uniform in-place shuffle |
+| 7 | Reservoir Sampling | 7.1 | Medium | Streaming uniform sample |
+| 8 | Min and Max in ≤ 3n/2 Comparisons | 7.1 | Medium | Pairwise comparison trick |
+| 9 | First Nonzero in Unknown-Length Array | 7.1 | Medium | Exponential + binary search |
+| 10 | Search in a Sorted 2D Grid | 7.1 | Medium | Staircase search `O(m + n)` |
+| 11 | Fibonacci Efficiency | 7.1 | Medium | Memoization / matrix exponentiation |
+| 12 | Maximum Contiguous Subarray | 7.1 | Medium | Kadane's algorithm |
+| 13 | Power-of-2 Check | 7.2 The Power of Two | Easy | Bit trick `n & (n-1) == 0` |
+| 14 | Multiplication by 7 | 7.2 | Easy | Shift-and-subtract |
+| 15 | Probability Simulation From Fair Coin | 7.2 | Medium | Binary expansion of `p` |
+| 16 | Poisonous Wine (Mice and Bottles) | 7.2 | Hard | Binary encoding of bottles |
+| 17 | Finite Difference: Time vs. Space Steps | 7.3 Numerical Methods | Hard | Stability (CFL) of explicit scheme |
+
+> Chapter 7 also covers Monte Carlo simulation (European call pricing, variance reduction, Δ/Γ estimation, π estimation) as worked examples within the Numerical Methods section.
+
+---
+
 ## Claude Code Instructions — Building the Ed-Tech Platform
 
 ### Tech Stack
 
 ```
-Frontend:   React 18+ / Next.js (App Router) + TypeScript + Tailwind CSS + Framer Motion
-State:      Zustand (client) + React Query / TanStack Query (server)
-AI/ML:      Claude API (Anthropic) + Gemini API (Google) via provider-agnostic router
-Database:   Supabase (PostgreSQL + pgvector + Auth + Realtime)
-Math:       KaTeX / MathJax (LaTeX formula rendering)
-Animations: Framer Motion + Lottie React
-Hosting:    Vercel (frontend) + Render/Railway (backend)
+Frontend:   React 18 · Next.js 14 (App Router) · TypeScript 5 · Tailwind CSS 3
+State:      Zustand 5 (client) · Supabase Realtime (server)
+AI/ML:      Anthropic SDK (Claude) + Google GenAI SDK (Gemini) via provider-agnostic llm-router
+Database:   Supabase — PostgreSQL + pgvector + Auth
+Math:       KaTeX + react-katex + remark-math / rehype-katex (LaTeX rendering)
+Markdown:   react-markdown + remark-gfm
+Canvas:     react-sketch-canvas + @excalidraw/excalidraw (scratchpad / approach canvas)
+Animation:  Framer Motion
+Icons:      lucide-react
+Toasts:     react-hot-toast
+Dates:      date-fns
+Hosting:    Vercel (frontend) + Supabase (managed backend)
 ```
 
 ### Core Features
@@ -426,4 +644,9 @@ Run migrations through the Supabase CLI or dashboard.
 
 ---
 
-*This README reflects the Main-Testing-1 integration branch, which includes all agent contributions merged from the foundation sprint.*
+## Contributing
+
+1. Create a feature branch off `main`.
+2. Run `npm run lint` and verify `npm run build` succeeds before opening a PR.
+3. If you touch chapter markdown, regenerate data with `node scripts/gen-chapters.js` and commit the generated TypeScript alongside your content changes.
+4. Keep new research or design documents under `content/Research/` or `content/Design Specs/` respectively, so the cognitive-science provenance stays discoverable.
