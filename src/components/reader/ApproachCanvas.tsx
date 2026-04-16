@@ -11,16 +11,17 @@ import {
   Trash2,
 } from 'lucide-react';
 
-// Lazy-load Excalidraw to avoid SSR issues in Next.js
+// Lazy-load Excalidraw + its CSS together, client-side only
 import dynamic from 'next/dynamic';
 const Excalidraw = dynamic(
   async () => {
     try {
+      // Import CSS alongside the component so both load client-side only
+      await import('@excalidraw/excalidraw/index.css');
       const mod = await import('@excalidraw/excalidraw');
       return mod.Excalidraw;
     } catch (err) {
       console.error('Failed to load Excalidraw:', err);
-      // Return a fallback component
       return function ExcalidrawFallback() {
         return (
           <div className="flex items-center justify-center h-full text-sm text-red-500 p-4">
@@ -33,7 +34,7 @@ const Excalidraw = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex items-center justify-center h-full text-sm text-[#9299a5] p-4">
+      <div className="flex items-center justify-center h-full text-sm text-[#9299a5] p-4 animate-pulse">
         Loading canvas...
       </div>
     ),
