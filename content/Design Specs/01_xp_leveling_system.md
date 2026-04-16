@@ -136,21 +136,24 @@ This produces an exponential curve where early levels come fast (onboarding mome
 
 ### Global Level Titles
 
-Finance-themed titles that resonate with the quant candidate audience:
+Interview-journey titles that mirror the actual path our users are on:
 
 | Levels | Title | Meaning |
 |--------|-------|---------|
-| 1-5 | **Intern** | Just getting started. Learning the fundamentals. |
-| 6-10 | **Analyst** | Building systematic skill. Developing technique recognition. |
-| 11-15 | **Associate** | Demonstrated breadth. Comfortable with multiple problem domains. |
-| 16-20 | **Vice President** | Deep expertise. Attacking hard problems with confidence. |
-| 21-24 | **Director** | Comprehensive mastery across chapters. Interview-ready. |
-| 25 | **Managing Director** | Complete platform mastery. The top. |
+| 1-5 | **Applicant** | Just getting started. Building foundations across problem types. |
+| 6-10 | **Candidate** | Baseline competence demonstrated. Would pass a first-round screen. |
+| 11-15 | **Finalist** | Can handle the problems that appear in real interviews. |
+| 16-20 | **Offer-Ready** | Performing at the level that earns offers at top firms. |
+| 21-25 | **Quant** | Comprehensive mastery. The aspiration fulfilled. |
 
-**Why finance titles:**
-- Our users are quant candidates. Finance career titles are immediately legible and aspirational for this audience.
-- They're professional, not childish — "Vice President" carries more weight for our users than "Gold Badge III."
-- The progression maps intuitively: an intern is learning, a Managing Director has mastered everything.
+**Why interview-journey titles (not finance hierarchy):**
+
+Research basis: Oyserman's Identity-Based Motivation theory (USC, multiple RCTs) shows that when a label aligns with a user's aspirational identity, difficulty is interpreted as *meaningful* ("this is what it takes to get there"). When labels feel incongruent, difficulty is interpreted as *pointless*.
+
+- **Finance titles (Intern → MD) rejected:** These are real professional titles with sell-side banking connotations. "VP" means something specific at Goldman Sachs — using it on a prep platform creates false credibility signals. Also, "Intern" is demeaning for users who may already work in finance. And the titles feel wrong for candidates targeting buy-side/prop trading firms (Jane Street, Two Sigma) that don't use this hierarchy.
+- **Gaming titles (Knight, Guardian, Bronze) rejected:** Too far from professional identity. Research on adult learners (25-35, graduate-educated) shows gamification feels patronizing when the naming metaphor comes from casual games. A 28-year-old with a master's in financial engineering does not want to be called "Bronze Explorer."
+- **Academic titles (Student → Professor) rejected:** Excludes the non-PhD cohort. "Professor" implies teaching, not practicing.
+- **Interview-journey titles chosen:** Every title maps to a stage in the actual journey the user is living. "Applicant" is where they literally are. "Quant" is who they aspire to become. No false credentials (nobody puts "Finalist on Quant Review" on a resume as a job title). The difficulty of hard problems at the "Finalist" level is identity-congruent: "This is what final-round interviews look like."
 
 ### Chapter Mastery Levels (Separate System)
 
@@ -247,12 +250,11 @@ const LEVEL_GROWTH = 1.18;
 const MAX_LEVEL = 25;
 
 const LEVEL_TITLES: Record<number, string> = {
-  1: 'Intern', 2: 'Intern', 3: 'Intern', 4: 'Intern', 5: 'Intern',
-  6: 'Analyst', 7: 'Analyst', 8: 'Analyst', 9: 'Analyst', 10: 'Analyst',
-  11: 'Associate', 12: 'Associate', 13: 'Associate', 14: 'Associate', 15: 'Associate',
-  16: 'Vice President', 17: 'Vice President', 18: 'Vice President', 19: 'Vice President', 20: 'Vice President',
-  21: 'Director', 22: 'Director', 23: 'Director', 24: 'Director',
-  25: 'Managing Director',
+  1: 'Applicant', 2: 'Applicant', 3: 'Applicant', 4: 'Applicant', 5: 'Applicant',
+  6: 'Candidate', 7: 'Candidate', 8: 'Candidate', 9: 'Candidate', 10: 'Candidate',
+  11: 'Finalist', 12: 'Finalist', 13: 'Finalist', 14: 'Finalist', 15: 'Finalist',
+  16: 'Offer-Ready', 17: 'Offer-Ready', 18: 'Offer-Ready', 19: 'Offer-Ready', 20: 'Offer-Ready',
+  21: 'Quant', 22: 'Quant', 23: 'Quant', 24: 'Quant', 25: 'Quant',
 };
 
 /** XP required to complete level N (go from N to N+1). */
@@ -463,7 +465,7 @@ interface ProgressContextValue {
 |----------|------|
 | Location | `StatsOverview` component — new XP stat card alongside existing 4 cards |
 | Animation | Counter rolls from previous total to new total on mount/update. `react-countup`, 1-2s, `ease-out`. |
-| Display | "2,847 XP" with small "Level 12 — Associate" subtitle |
+| Display | "2,847 XP" with small "Level 12 — Finalist" subtitle |
 | Progress bar | Full-width bar beneath the stat cards showing XP progress toward next level. Color: blue filling, gold flash at completion. |
 
 ### Level-Up Celebration
@@ -476,7 +478,7 @@ interface ProgressContextValue {
 | Animation sequence | 1. Backdrop fades in (200ms) |
 | | 2. Level badge scales up from center (0.5→1.0) with bounce overshoot (400ms) |
 | | 3. Confetti burst from center (100+ particles, 2s) — `canvas-confetti` |
-| | 4. Title text fades in: "Level 12" (large) + "Associate" (subtitle) |
+| | 4. Title text fades in: "Level 12" (large) + "Finalist" (subtitle) |
 | | 5. XP bar resets animation: gold → empty → blue (new level starting) |
 | | 6. "Continue" button appears (300ms fade-in) |
 | Dismiss | Click "Continue" or click backdrop. Calls `clearLevelUp()`. |
@@ -504,7 +506,7 @@ New component: `<XPBar />` — the primary XP visualization.
 | Fill animation | CSS `transition: width 700ms ease-out` |
 | Level-up flash | When bar reaches 100%: brief gold flash (`#FFB800` at 40% opacity, 300ms), then bar resets to 0% with new level label |
 | Corner radius | Fully rounded (`border-radius: 9999px`) |
-| Labels | Left: "Level {N} — {Title}". Right: "{current} / {needed} XP". Below-right: "{percent}%" |
+| Labels | Left: "Level {N} — {Title}" (e.g., "Level 12 — Finalist"). Right: "{current} / {needed} XP". Below-right: "{percent}%" |
 | Compact variant | Navbar: 4px height, no labels, tooltip on hover shows level + progress |
 | Accessibility | `role="progressbar"`, `aria-valuenow={xpInCurrentLevel}`, `aria-valuemin={0}`, `aria-valuemax={xpForLevel(level)}`, `aria-label="Level {N} progress: {percent}%"` |
 
@@ -665,11 +667,15 @@ alter table public.problem_progress
 
 **Scope for this spec:** The 1.25× XP multiplier, session framing, and post-session feedback are gamification layer decisions — confirmed and specced here. The problem selection algorithm is a separate spec to be co-authored with the Curriculum Lead.
 
-### 4. Level Title Localization — PENDING
+### 4. Level Title Localization — RESOLVED
 
-**Options:** Finance titles (Intern → MD), academic titles (Student → Professor), or quant-specific (Trainee → Quant).
+**Decision:** Interview-journey titles: Applicant → Candidate → Finalist → Offer-Ready → Quant.
 
-**Status:** Awaiting review.
+**Research basis:** Oyserman's Identity-Based Motivation theory (multiple RCTs) demonstrates that labels aligned with aspirational identity cause learners to interpret difficulty as meaningful rather than pointless. Finance titles (Intern → MD) create false credibility signals and carry sell-side banking connotations wrong for buy-side/prop trading candidates. Gaming titles (Knight, Guardian) feel patronizing to graduate-educated adults (research on adult learners, 2024-2025 studies). Academic titles (Student → Professor) exclude the non-PhD cohort.
+
+Interview-journey titles mirror the actual path users are on. Every title maps to a real stage in the quant recruiting process. "Quant" is the aspirational destination — the identity these users are working toward. No false credentials are created. Difficulty at the "Finalist" level is identity-congruent: "This is what final-round interviews look like."
+
+All references in the spec (LEVEL_TITLES constant, level-up modal text, XP bar labels, StatsOverview examples) have been updated to reflect the new titles.
 
 ### 5. XP Reset / Prestige System — RESOLVED
 
