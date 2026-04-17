@@ -115,6 +115,9 @@ import fcPr05 from './principles/fc-pr-05-reasonable-assumptions';
 // ── Effective C++ Things-to-Remember cards (106, auto-generated) ────────────
 import { effectiveCppFlashcards } from './effective-cpp';
 
+// ── Competitive Programmer's Handbook definition cards (auto-generated) ─────
+import { cpHandbookFlashcards } from './competitive-programmers-handbook';
+
 // ── Master export ───────────────────────────────────────────────────────────
 
 export const allFlashcards: Flashcard[] = [
@@ -143,6 +146,8 @@ export const allFlashcards: Flashcard[] = [
   fcPr01, fcPr02, fcPr03, fcPr04, fcPr05,
   // Effective C++ Things-to-Remember
   ...effectiveCppFlashcards,
+  // Competitive Programmer's Handbook bold-term definitions
+  ...cpHandbookFlashcards,
 ];
 
 /** O(1) lookup by card id */

@@ -1,0 +1,490 @@
+[
+  {
+    "id": "cph-1-def-1",
+    "chapter": 1,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 1 — Introduction. What is **arithmetic progression**?",
+    "back": "**arithmetic progression** a sequence of numbers where the difference between any two consecutive numbers is constant."
+  },
+  {
+    "id": "cph-1-def-2",
+    "chapter": 1,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 1 — Introduction. What is **geometric progression**?",
+    "back": "**geometric progression** a sequence of numbers where the ratio between any two consecutive numbers is constant."
+  },
+  {
+    "id": "cph-1-def-3",
+    "chapter": 1,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 1 — Introduction. What is **set**?",
+    "back": "**set** a collection of elements."
+  },
+  {
+    "id": "cph-1-def-4",
+    "chapter": 1,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 1 — Introduction. What is **predicate**?",
+    "back": "**predicate** an expression that is true or false depending on its parameters."
+  },
+  {
+    "id": "cph-2-def-1",
+    "chapter": 2,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 2 — Time complexity. What is **square root algorithm**?",
+    "back": "**square root algorithm** slower than $O$(log$n$) but faster than $O(n)$."
+  },
+  {
+    "id": "cph-3-def-1",
+    "chapter": 3,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 3 — Sorting. What is **Sorting**?",
+    "back": "**Sorting** a fundamental algorithm design problem."
+  },
+  {
+    "id": "cph-3-def-2",
+    "chapter": 3,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 3 — Sorting. What is **comparison operator**?",
+    "back": "**comparison operator** defined for the data type of the elements to be sorted."
+  },
+  {
+    "id": "cph-4-def-1",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **data structure**?",
+    "back": "**data structure** a way to store data in the memory of a computer."
+  },
+  {
+    "id": "cph-4-def-2",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **dynamic array**?",
+    "back": "**dynamic array** an array whose size can be changed during the execution of the program."
+  },
+  {
+    "id": "cph-4-def-3",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **set**?",
+    "back": "**set** a data structure that maintains a collection of elements."
+  },
+  {
+    "id": "cph-4-def-4",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **map**?",
+    "back": "**map** a generalized array that consists of key-value-pairs."
+  },
+  {
+    "id": "cph-4-def-5",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **iterator**?",
+    "back": "**iterator** a variable that points to an element in a data structure."
+  },
+  {
+    "id": "cph-4-def-6",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **bitset**?",
+    "back": "**bitset** an array whose each value is either 0 or 1."
+  },
+  {
+    "id": "cph-4-def-7",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **deque**?",
+    "back": "**deque** a dynamic array whose size can be efficiently changed at both ends of the array."
+  },
+  {
+    "id": "cph-4-def-8",
+    "chapter": 4,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 4 — Data structures. What is **stack**?",
+    "back": "**stack** a data structure that provides two $O$(1) time operations: adding an element to the top, and removing an element from the top."
+  },
+  {
+    "id": "cph-5-def-1",
+    "chapter": 5,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 5 — Complete search. What is **Complete search**?",
+    "back": "**Complete search** a general method that can be used to solve almost any algorithm problem."
+  },
+  {
+    "id": "cph-5-def-2",
+    "chapter": 5,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 5 — Complete search. What is **Meet in the middle**?",
+    "back": "**Meet in the middle** a technique where the search space is divided into two parts of about equal size."
+  },
+  {
+    "id": "cph-7-def-1",
+    "chapter": 7,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 7 — Dynamic programming. What is **Dynamic programming**?",
+    "back": "**Dynamic programming** a technique that combines the correctness of complete search and the efficiency of greedy algorithms."
+  },
+  {
+    "id": "cph-7-def-2",
+    "chapter": 7,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 7 — Dynamic programming. What is **knapsack**?",
+    "back": "**knapsack** problems where a set of objects is given, and subsets with some properties have to be found."
+  },
+  {
+    "id": "cph-8-def-1",
+    "chapter": 8,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 8 — Amortized analysis. What is **sliding window**?",
+    "back": "**sliding window** a constant-size subarray that moves from left to right through the array."
+  },
+  {
+    "id": "cph-10-def-1",
+    "chapter": 10,
+    "part": 1,
+    "difficulty": "beginner",
+    "front": "Chapter 10 — Bit manipulation. What is **Two’s complement**?",
+    "back": "**Two’s complement** used, which means that the opposite number of a number is calculated by first inverting all the bits in the number, and then increasing the number by one."
+  },
+  {
+    "id": "cph-11-def-1",
+    "chapter": 11,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 11 — Basics of graphs. What is **tree**?",
+    "back": "**tree** a connected graph that consists of $n$ nodes and $n-1$ edges."
+  },
+  {
+    "id": "cph-11-def-2",
+    "chapter": 11,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 11 — Basics of graphs. What is **adjacency matrix**?",
+    "back": "**adjacency matrix** a two-dimensional array that indicates which edges the graph contains."
+  },
+  {
+    "id": "cph-14-def-1",
+    "chapter": 14,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 14 — Tree algorithms. What is **tree**?",
+    "back": "**tree** a connected, acyclic graph that consists of $n$ nodes and $n -1$ edges."
+  },
+  {
+    "id": "cph-14-def-2",
+    "chapter": 14,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 14 — Tree algorithms. What is **binary tree**?",
+    "back": "**binary tree** a rooted tree where each node has a left and right subtree."
+  },
+  {
+    "id": "cph-15-def-1",
+    "chapter": 15,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 15 — Spanning trees. What is **minimum spanning tree**?",
+    "back": "**minimum spanning tree** a spanning tree whose weight is as small as possible."
+  },
+  {
+    "id": "cph-15-def-2",
+    "chapter": 15,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 15 — Spanning trees. What is **maximum spanning tree**?",
+    "back": "**maximum spanning tree** a spanning tree whose weight is as large as possible."
+  },
+  {
+    "id": "cph-16-def-1",
+    "chapter": 16,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 16 — Directed graphs. What is **topological sort**?",
+    "back": "**topological sort** an ordering of the nodes of a directed graph such that if there is a path from node $a$ to node $b$, then node $a$ appears before node $b$ in the ordering."
+  },
+  {
+    "id": "cph-19-def-1",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **Eulerian path**?",
+    "back": "**Eulerian path** a path that goes through each edge exactly once."
+  },
+  {
+    "id": "cph-19-def-2",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **Hamiltonian path**?",
+    "back": "**Hamiltonian path** a path that visits each node exactly once."
+  },
+  {
+    "id": "cph-19-def-3",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **Eulerian circuit**?",
+    "back": "**Eulerian circuit** an Eulerian path that starts and ends at the same node."
+  },
+  {
+    "id": "cph-19-def-4",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **De Bruijn sequence**?",
+    "back": "**De Bruijn sequence** a string that contains every string of length $n$ exactly once as a substring, for a fixed alphabet of $k$ characters."
+  },
+  {
+    "id": "cph-19-def-5",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **knight’s tour**?",
+    "back": "**knight’s tour** a sequence of moves of a knight on an $n \\times n$ chessboard following the rules of chess such that the knight visits each square exactly once."
+  },
+  {
+    "id": "cph-19-def-6",
+    "chapter": 19,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 19 — Paths and circuits. What is **Warnsdorf’s rule**?",
+    "back": "**Warnsdorf’s rule** a simple and effective heuristic for finding a knight’s tour$^3$."
+  },
+  {
+    "id": "cph-20-def-1",
+    "chapter": 20,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 20 — Flows and cuts. What is **path cover**?",
+    "back": "**path cover** a set of paths in a graph such that each node of the graph belongs to at least one path."
+  },
+  {
+    "id": "cph-20-def-2",
+    "chapter": 20,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 20 — Flows and cuts. What is **general path cover**?",
+    "back": "**general path cover** a path cover where a node can belong to more than one path."
+  },
+  {
+    "id": "cph-20-def-3",
+    "chapter": 20,
+    "part": 2,
+    "difficulty": "intermediate",
+    "front": "Chapter 20 — Flows and cuts. What is **antichain**?",
+    "back": "**antichain** a set of nodes of a graph such that there is no path from any node to another node using the edges of the graph."
+  },
+  {
+    "id": "cph-21-def-1",
+    "chapter": 21,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 21 — Number theory. What is **Number theory**?",
+    "back": "**Number theory** a branch of mathematics that studies integers."
+  },
+  {
+    "id": "cph-21-def-2",
+    "chapter": 21,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 21 — Number theory. What is **sieve of Eratosthenes**?",
+    "back": "**sieve of Eratosthenes** a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2."
+  },
+  {
+    "id": "cph-21-def-3",
+    "chapter": 21,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 21 — Number theory. What is **Pythagorean triple**?",
+    "back": "**Pythagorean triple** a triple $(a, b, c)$ that satisfies the Pythagorean theorem $a^2 + b^2 = c^2$, which means that there is a right triangle with side lengths $a$, $b$ and $c$."
+  },
+  {
+    "id": "cph-22-def-1",
+    "chapter": 22,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 22 — Combinatorics. What is **Inclusion-exclusion**?",
+    "back": "**Inclusion-exclusion** a technique that can be used for counting the size of a union of sets when the sizes of the intersections are known, and vice versa."
+  },
+  {
+    "id": "cph-22-def-2",
+    "chapter": 22,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 22 — Combinatorics. What is **Prüfer code**?",
+    "back": "**Prüfer code** a sequence of $n-2$ numbers that describes a labeled tree."
+  },
+  {
+    "id": "cph-23-def-1",
+    "chapter": 23,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 23 — Matrices. What is **matrix**?",
+    "back": "**matrix** a mathematical concept that corresponds to a two-dimensional array in programming."
+  },
+  {
+    "id": "cph-23-def-2",
+    "chapter": 23,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 23 — Matrices. What is **identity matrix**?",
+    "back": "**identity matrix** a square matrix where each element on the diagonal is 1 and all other elements are 0."
+  },
+  {
+    "id": "cph-24-def-1",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **probability**?",
+    "back": "**probability** a real number between 0 and 1 that indicates how probable an event is."
+  },
+  {
+    "id": "cph-24-def-2",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **random variable**?",
+    "back": "**random variable** a value that is generated by a random process."
+  },
+  {
+    "id": "cph-24-def-3",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **Markov chain**?",
+    "back": "**Markov chain** a random process that consists of states and transitions between them."
+  },
+  {
+    "id": "cph-24-def-4",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **randomized algorithm**?",
+    "back": "**randomized algorithm** an algorithm that is based on randomness."
+  },
+  {
+    "id": "cph-24-def-5",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **Monte Carlo algorithm**?",
+    "back": "**Monte Carlo algorithm** a randomized algorithm that may sometimes give a wrong answer."
+  },
+  {
+    "id": "cph-24-def-6",
+    "chapter": 24,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 24 — Probability. What is **Las Vegas algorithm**?",
+    "back": "**Las Vegas algorithm** a randomized algorithm that always gives the correct answer, but its running time varies randomly."
+  },
+  {
+    "id": "cph-25-def-1",
+    "chapter": 25,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 25 — Game theory. What is **winning state**?",
+    "back": "**winning state** a state where the player will win the game if they play optimally, and a **losing state** is a state where the player will lose the game if the opponent plays optimally."
+  },
+  {
+    "id": "cph-25-def-2",
+    "chapter": 25,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 25 — Game theory. What is **nim game**?",
+    "back": "**nim game** a simple game that has an important role in game theory, because many other games can be played using the same strategy."
+  },
+  {
+    "id": "cph-26-def-1",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **substring**?",
+    "back": "**substring** a sequence of consecutive characters in a string."
+  },
+  {
+    "id": "cph-26-def-2",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **subsequence**?",
+    "back": "**subsequence** a sequence of (not necessarily consecutive) characters in a string in their original order."
+  },
+  {
+    "id": "cph-26-def-3",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **prefix**?",
+    "back": "**prefix** a substring that starts at the beginning of a string, and a **suffix** is a substring that ends at the end of a string."
+  },
+  {
+    "id": "cph-26-def-4",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **period**?",
+    "back": "**period** a prefix of a string such that the string can be constructed by repeating the period."
+  },
+  {
+    "id": "cph-26-def-5",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **border**?",
+    "back": "**border** a string that is both a prefix and a suffix of a string."
+  },
+  {
+    "id": "cph-26-def-6",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **trie**?",
+    "back": "**trie** a rooted tree that maintains a set of strings."
+  },
+  {
+    "id": "cph-26-def-7",
+    "chapter": 26,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 26 — String algorithms. What is **String hashing**?",
+    "back": "**String hashing** a technique that allows us to efficiently check whether two strings are equal$^1$."
+  },
+  {
+    "id": "cph-27-def-1",
+    "chapter": 27,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 27 — Square root algorithms. What is **square root algorithm**?",
+    "back": "**square root algorithm** an algorithm that has a square root in its time complexity."
+  },
+  {
+    "id": "cph-30-def-1",
+    "chapter": 30,
+    "part": 3,
+    "difficulty": "advanced",
+    "front": "Chapter 30 — Sweep line algorithms. What is **convex hull**?",
+    "back": "**convex hull** the smallest convex polygon that contains all points of a given set."
+  }
+]

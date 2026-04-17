@@ -12,6 +12,7 @@ import { useProgress } from '@/components/providers/ProgressProvider';
 import { SECTIONS, problemsBySection } from '@/data/problems';
 import { textbookChapters } from '@/data/chapters';
 import { effectiveCppChapters } from '@/data/effective-cpp';
+import { cpHandbookParts } from '@/data/competitive-programmers-handbook';
 
 const TOP_NAV = [
   { href: '/dashboard',  label: 'Dashboard', icon: LayoutDashboard },
@@ -42,6 +43,14 @@ export default function Sidebar() {
 
   function toggleEcppChapter(n: number) {
     setOpenEcppChapters((prev) => ({ ...prev, [n]: !prev[n] }));
+  }
+
+  // Top-level Competitive Programmer's Handbook collapsible + per-Part accordions
+  const [cphOpen, setCphOpen] = useState(false);
+  const [openCphParts, setOpenCphParts] = useState<Record<number, boolean>>({});
+
+  function toggleCphPart(n: number) {
+    setOpenCphParts((prev) => ({ ...prev, [n]: !prev[n] }));
   }
 
   const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
@@ -384,6 +393,75 @@ export default function Sidebar() {
                             </span>
                             <span className="text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate leading-snug">
                               {it.title.replace(/\.$/, '')}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Competitive Programmer's Handbook */}
+        <div className="mt-3 pt-3 border-t border-[#e4e6ea]">
+          <button
+            onClick={() => setCphOpen(!cphOpen)}
+            className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"
+          >
+            <BookOpen size={13} />
+            <span className="flex-1 text-left truncate">CP Handbook · Laaksonen</span>
+            {cphOpen ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+          </button>
+
+          {cphOpen && (
+            <div className="mb-2 space-y-0.5">
+              <Link
+                href="/read/competitive-programmers-handbook"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+              >
+                <span className="w-4 h-4 rounded-md bg-[#1865f2] text-white flex items-center justify-center text-[9px] font-semibold shrink-0">
+                  30
+                </span>
+                <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate">
+                  All chapters
+                </span>
+              </Link>
+              {cpHandbookParts.map((part) => {
+                const open = !!openCphParts[part.number];
+                return (
+                  <div key={part.number}>
+                    <button
+                      onClick={() => toggleCphPart(part.number)}
+                      className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                    >
+                      <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
+                        Pt {part.roman}
+                      </span>
+                      <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors text-left truncate">
+                        {part.title}
+                      </span>
+                      {open ? (
+                        <ChevronDown size={12} className="text-[#9299a5] shrink-0" />
+                      ) : (
+                        <ChevronRight size={12} className="text-[#9299a5] shrink-0" />
+                      )}
+                    </button>
+                    {open && (
+                      <div className="ml-5 mb-1 border-l border-[#e4e6ea] space-y-0.5">
+                        {part.chapters.map((ch) => (
+                          <Link
+                            key={ch.chapter}
+                            href={`/read/competitive-programmers-handbook/${ch.chapter}`}
+                            className="flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-r-lg hover:bg-[#f0f1f3] transition-colors group"
+                          >
+                            <span className="text-[10px] font-semibold text-[#9299a5] tabular-nums shrink-0 w-7">
+                              Ch {ch.chapter}
+                            </span>
+                            <span className="text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate leading-snug">
+                              {ch.title}
                             </span>
                           </Link>
                         ))}

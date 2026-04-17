@@ -1,0 +1,207 @@
+{
+  "topo_order": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "by_part": [
+    {
+      "part": 1,
+      "roman": "I",
+      "title": "Basic techniques",
+      "chapters": [
+        {
+          "chapter": 1,
+          "title": "Introduction",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 2,
+          "title": "Time complexity",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 3,
+          "title": "Sorting",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 4,
+          "title": "Data structures",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 5,
+          "title": "Complete search",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 6,
+          "title": "Greedy algorithms",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 7,
+          "title": "Dynamic programming",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 8,
+          "title": "Amortized analysis",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 9,
+          "title": "Range queries",
+          "difficulty": "beginner"
+        },
+        {
+          "chapter": 10,
+          "title": "Bit manipulation",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "part": 2,
+      "roman": "II",
+      "title": "Graph algorithms",
+      "chapters": [
+        {
+          "chapter": 11,
+          "title": "Basics of graphs",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 12,
+          "title": "Graph traversal",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 13,
+          "title": "Shortest paths",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 14,
+          "title": "Tree algorithms",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 15,
+          "title": "Spanning trees",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 16,
+          "title": "Directed graphs",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 17,
+          "title": "Strong connectivity",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 18,
+          "title": "Tree queries",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 19,
+          "title": "Paths and circuits",
+          "difficulty": "intermediate"
+        },
+        {
+          "chapter": 20,
+          "title": "Flows and cuts",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "part": 3,
+      "roman": "III",
+      "title": "Advanced topics",
+      "chapters": [
+        {
+          "chapter": 21,
+          "title": "Number theory",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 22,
+          "title": "Combinatorics",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 23,
+          "title": "Matrices",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 24,
+          "title": "Probability",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 25,
+          "title": "Game theory",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 26,
+          "title": "String algorithms",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 27,
+          "title": "Square root algorithms",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 28,
+          "title": "Segment trees revisited",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 29,
+          "title": "Geometry",
+          "difficulty": "advanced"
+        },
+        {
+          "chapter": 30,
+          "title": "Sweep line algorithms",
+          "difficulty": "advanced"
+        }
+      ]
+    }
+  ]
+}
