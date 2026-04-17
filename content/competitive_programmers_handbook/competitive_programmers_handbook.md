@@ -515,19 +515,15 @@ Mathematics plays an important role in competitive programming, and it is not po
 
 Each sum of the form
 
-$^nX$
-
-$^{x=1}$ $x^k = 1^k +2^k +3^k +...+ n^k$,
+$$\sum_{x=1}^{n} x^k = 1^k + 2^k + 3^k + \ldots + n^k,$$
 
 where $k$ is a positive integer, has a closed-form formula that is a polynomial of degree $k+1$. For example$^1$,
 
-$^{x=1}$ $x = 1+2+3+...+ n =$ $n(n+1)$
+$$\sum_{x=1}^{n} x = 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}$$
 
-$^nX$
+and
 
-and $^nX$
-
-$^{x=1}$ $x^2 = 1^2 +2^2 +3^2 +...+ n^2 =$ $n(n+1)(2n+1)$
+$$\sum_{x=1}^{n} x^2 = 1^2 + 2^2 + 3^2 + \ldots + n^2 = \frac{n(n+1)(2n+1)}{6}.$$
 
 An **arithmetic progression** is a sequence of numbers where the difference between any two consecutive numbers is constant. For example,
 
@@ -2799,15 +2795,7 @@ Let `count`($k,x$) denote the number of ways to construct a solution for rows 1.
 <!-- PAGE 86 -->
 A solution is valid if row 1 does not contain the character $⊔$, row $n$ does not contain the character $⊓$, and all consecutive rows are *compatible*. For example, the rows $⊔$⊏⊐$⊔⊓⊓⊔$and ⊏⊐⊏⊐$⊔⊔⊓$are compatible, while the rows $⊓$⊏⊐$⊓$⊏⊐$⊓$ and ⊏⊐⊏⊐⊏⊐$⊔$are not compatible. Since a row consists of $m$ characters and there are four choices for each character, the number of distinct rows is at most 4$^m$. Thus, the time complexity of the solution is $O(n4^{2m})$ because we can go through the $O(4^m)$ possible states for each row, and for each state, there are $O(4^m)$ possible states for the previous row. In practice, it is a good idea to rotate the grid so that the shorter side has length $m$, because the factor 4$^{2m}$ dominates the time complexity. It is possible to make the solution more efficient by using a more compact representation for the rows. It turns out that it is sufficient to know which columns of the previous row contain the upper square of a vertical tile. Thus, we can represent a row using only characters $⊓$and □, where □is a combination of characters $⊔$, ⊏and ⊐. Using this representation, there are only 2$^m$ distinct rows and the time complexity is $O(n2^{2m})$. As a final note, there is also a surprising direct formula for calculating the number of tilings$^2$:
 
-$^{\lceil}_{n/2}^{\rceil}$ $Y$
-
-$^{\lceil}_{m/2}^{\rceil}$ $Y$
-
-$^{b=1}$ 4$\cdot$ (cos$^2 \pi a$
-
-$n+1 +$cos$^2$ $\pi b$ $m+1$)
-
-$^{a=1}$
+$$\prod_{a=1}^{\lceil n/2 \rceil} \prod_{b=1}^{\lceil m/2 \rceil} 4 \cdot \left(\cos^2 \frac{\pi a}{n+1} + \cos^2 \frac{\pi b}{m+1}\right)$$
 
 This formula is very efficient, because it calculates the number of tilings in $O(nm)$ time, but since the answer is a product of real numbers, a problem when using the formula is how to store the intermediate results accurately.
 
@@ -5635,9 +5623,7 @@ for (int x = 2; x <= n; x++) {
 
 The inner loop of the algorithm is executed $n/x$ times for each value of $x$. Thus, an upper bound for the running time of the algorithm is the harmonic sum
 
-$^nX$
-
-$^{x=2}$ $n/x = n/2+ n/3+ n/4+\cdot \cdot \cdot + n/n = O(n$log$n$).
+$$\sum_{x=2}^{n} \frac{n}{x} = \frac{n}{2} + \frac{n}{3} + \frac{n}{4} + \cdots + \frac{n}{n} = O(n \log n).$$
 
 In fact, the algorithm is more efficient, because the inner loop will be executed only if the number $x$ is prime. It can be shown that the running time of the algorithm is only $O(n$loglog$n$), a complexity very near to $O(n)$.
 
@@ -6228,13 +6214,7 @@ The formula can be derived by considering the possibilities how the element 1 ch
 
 **Burnside’s lemma** can be used to count the number of combinations so that only one representative is counted for each group of symmetric combinations. Burnside’s lemma states that the number of combinations is
 
-$^nX$
-
-$c(k)$
-
-$n$ ,
-
-$^{k=1}$
+$$\sum_{k=1}^{n} \frac{c(k)}{n},$$
 
 where there are $n$ ways to change the position of a combination, and there are $c(k)$ combinations that remain unchanged when the $k$th way is applied. As an example, let us calculate the number of necklaces of $n$ pearls, where each pearl has $m$ possible colors. Two necklaces are symmetric if they are similar after rotating them. For example, the necklace
 
@@ -6733,9 +6713,7 @@ For example, if the outcomes are [4,6] (meaning that we first throw a four and t
 
 The **expected value** $E[X]$ indicates the average value of a random variable $X$. The expected value can be calculated as the sum
 
-$^x$ $P(X = x)x$,
-
-$X$
+$$E[X] = \sum_{x} P(X = x) \cdot x,$$
 
 where $x$ goes through all possible values of $X$. For example, when throwing a dice, the expected outcome is
 

@@ -209,382 +209,374 @@
       },
       {
         "order": 49,
-        "text": "$^nX$"
+        "text": "$$\\sum_{x=1}^{n} x^k = 1^k + 2^k + 3^k + \\ldots + n^k,$$"
       },
       {
         "order": 50,
-        "text": "$^{x=1}$ $x^k = 1^k +2^k +3^k +...+ n^k$,"
-      },
-      {
-        "order": 51,
         "text": "where $k$ is a positive integer, has a closed-form formula that is a polynomial of degree $k+1$. For example$^1$,"
       },
       {
+        "order": 51,
+        "text": "$$\\sum_{x=1}^{n} x = 1 + 2 + 3 + \\ldots + n = \\frac{n(n+1)}{2}$$"
+      },
+      {
         "order": 52,
-        "text": "$^{x=1}$ $x = 1+2+3+...+ n =$ $n(n+1)$"
+        "text": "and"
       },
       {
         "order": 53,
-        "text": "$^nX$"
+        "text": "$$\\sum_{x=1}^{n} x^2 = 1^2 + 2^2 + 3^2 + \\ldots + n^2 = \\frac{n(n+1)(2n+1)}{6}.$$"
       },
       {
         "order": 54,
-        "text": "and $^nX$"
-      },
-      {
-        "order": 55,
-        "text": "$^{x=1}$ $x^2 = 1^2 +2^2 +3^2 +...+ n^2 =$ $n(n+1)(2n+1)$"
-      },
-      {
-        "order": 56,
         "text": "An **arithmetic progression** is a sequence of numbers where the difference between any two consecutive numbers is constant. For example,"
       },
       {
-        "order": 57,
+        "order": 55,
         "text": "3,7,11,15"
       },
       {
-        "order": 58,
+        "order": 56,
         "text": "is an arithmetic progression with constant 4. The sum of an arithmetic progression can be calculated using the formula"
       },
       {
-        "order": 59,
+        "order": 57,
         "text": "$$\\underbrace{a + \\cdots + b}_{n\\text{ numbers}} = \\frac{n(a+b)}{2}$$"
       },
       {
-        "order": 60,
+        "order": 58,
         "text": "where $a$ is the first number, $b$ is the last number and $n$ is the amount of numbers. For example,"
       },
       {
-        "order": 61,
+        "order": 59,
         "text": "$$3 + 7 + 11 + 15 = \\frac{4 \\cdot (3+15)}{2} = 36.$$"
       },
       {
-        "order": 62,
+        "order": 60,
         "text": "The formula is based on the fact that the sum consists of $n$ numbers and the value of each number is $(a+b)/2$ on average."
       },
       {
-        "order": 63,
+        "order": 61,
         "text": "A **geometric progression** is a sequence of numbers where the ratio between any two consecutive numbers is constant. For example,"
       },
       {
-        "order": 64,
+        "order": 62,
         "text": "$$3, 6, 12, 24$$"
       },
       {
-        "order": 65,
+        "order": 63,
         "text": "is a geometric progression with constant 2. The sum of a geometric progression can be calculated using the formula"
       },
       {
-        "order": 66,
+        "order": 64,
         "text": "$$a + ak + ak^2 + \\cdots + b = \\frac{bk - a}{k - 1}$$"
       },
       {
-        "order": 67,
+        "order": 65,
         "text": "where $a$ is the first number, $b$ is the last number and the ratio between consecutive numbers is $k$. For example,"
       },
       {
-        "order": 68,
+        "order": 66,
         "text": "$$3 + 6 + 12 + 24 = \\frac{24 \\cdot 2 - 3}{2 - 1} = 45.$$"
       },
       {
-        "order": 69,
+        "order": 67,
         "text": "This formula can be derived as follows. Let"
       },
       {
-        "order": 70,
+        "order": 68,
         "text": "$$S = a + ak + ak^2 + \\cdots + b.$$"
       },
       {
-        "order": 71,
+        "order": 69,
         "text": "By multiplying both sides by $k$, we get"
       },
       {
-        "order": 72,
+        "order": 70,
         "text": "$$kS = ak + ak^2 + ak^3 + \\cdots + bk,$$"
       },
       {
-        "order": 73,
+        "order": 71,
         "text": "and solving the equation"
       },
       {
-        "order": 74,
+        "order": 72,
         "text": "$$kS - S = bk - a$$"
       },
       {
-        "order": 75,
+        "order": 73,
         "text": "yields the formula."
       },
       {
-        "order": 76,
+        "order": 74,
         "text": "A special case of a sum of a geometric progression is the formula"
       },
       {
-        "order": 77,
+        "order": 75,
         "text": "$$1 + 2 + 4 + 8 + \\ldots + 2^{n-1} = 2^n - 1.$$"
       },
       {
-        "order": 78,
+        "order": 76,
         "text": "A **harmonic sum** is a sum of the form"
       },
       {
-        "order": 79,
+        "order": 77,
         "text": "$$\\sum_{x=1}^{n} \\frac{1}{x} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\ldots + \\frac{1}{n}.$$"
       },
       {
-        "order": 80,
+        "order": 78,
         "text": "An upper bound for a harmonic sum is $\\log_2(n) + 1$. Namely, we can modify each term $1/k$ so that $k$ becomes the nearest power of two that does not exceed $k$. For example, when $n = 6$, we can estimate the sum as follows:"
       },
       {
-        "order": 81,
+        "order": 79,
         "text": "$$1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\frac{1}{5} + \\frac{1}{6} \\le 1 + \\frac{1}{2} + \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4}.$$"
       },
       {
-        "order": 82,
+        "order": 80,
         "text": "This upper bound consists of $\\log_2(n) + 1$ parts $(1, 2 \\cdot 1/2, 4 \\cdot 1/4, \\text{etc.})$, and the value of each part is at most 1."
       },
       {
-        "order": 83,
+        "order": 81,
         "text": "A **set** is a collection of elements. For example, the set"
       },
       {
-        "order": 84,
+        "order": 82,
         "text": "$X =$ {2,4,7}"
       },
       {
-        "order": 85,
+        "order": 83,
         "text": "contains elements 2, 4 and 7. The symbol ; denotes an empty set, and $|S|$ denotes the size of a set $S$, i.e., the number of elements in the set. For example, in the above set, $|X| =$ 3. If a set $S$ contains an element $x$, we write $x \\in S$, and otherwise we write $x \\notin S$. For example, in the above set"
       },
       {
-        "order": 86,
+        "order": 84,
         "text": "4 $\\in X$ and 5 $\\notin X$."
       },
       {
-        "order": 87,
+        "order": 85,
         "text": "New sets can be constructed using set operations:"
       },
       {
-        "order": 88,
+        "order": 86,
         "text": "• The **intersection** $A \\cap B$ consists of elements that are in both $A$ and $B$. For example, if $A =$ {1,2,5} and $B =$ {2,4}, then $A \\cap B =$ {2}."
       },
       {
-        "order": 89,
+        "order": 87,
         "text": "• The **union** $A \\cup B$ consists of elements that are in $A$ or $B$ or both. For example, if $A =$ {3,7} and $B =$ {2,3,8}, then $A \\cup B =$ {2,3,7,8}."
       },
       {
-        "order": 90,
+        "order": 88,
         "text": "• The **complement** ¯$A$ consists of elements that are not in $A$. The interpretation of a complement depends on the **universal set**, which contains all possible elements. For example, if $A =$ {1,2,5,7} and the universal set is {1,2,...,10}, then ¯$A =$ {3,4,6,8,9,10}."
       },
       {
-        "order": 91,
+        "order": 89,
         "text": "• The **difference** $A$ \\ $B = A \\cap$ ¯$B$ consists of elements that are in $A$ but not in $B$. Note that $B$ can contain elements that are not in $A$. For example, if $A =$ {2,3,7,8} and $B =$ {3,5,8}, then $A$ \\$B =$ {2,7}."
       },
       {
-        "order": 92,
+        "order": 90,
         "text": "If each element of $A$ also belongs to $S$, we say that $A$ is a **subset** of $S$, denoted by $A \\subset S$. A set $S$ always has 2$^{|S|}$ subsets, including the empty set. For example, the subsets of the set {2,4,7} are"
       },
       {
-        "order": 93,
+        "order": 91,
         "text": ";, {2}, {4}, {7}, {2,4}, {2,7}, {4,7} and {2,4,7}."
       },
       {
-        "order": 94,
+        "order": 92,
         "text": "Some often used sets are $N$ (natural numbers), $Z$ (integers), $Q$ (rational numbers) and $R$ (real numbers). The set $N$ can be defined in two ways, depending on the situation: either $N =$ {0,1,2,...} or $N =$ {1,2,3,...}. We can also construct a set using a rule of the form"
       },
       {
-        "order": 95,
+        "order": 93,
         "text": "{$f (n)$ : $n \\in S$},"
       },
       {
-        "order": 96,
+        "order": 94,
         "text": "where $f (n)$ is some function. This set contains all elements of the form $f (n)$, where $n$ is an element in $S$. For example, the set"
       },
       {
-        "order": 97,
+        "order": 95,
         "text": "$X =$ {2$n$ : $n \\in Z$}"
       },
       {
-        "order": 98,
+        "order": 96,
         "text": "contains all even integers."
       },
       {
-        "order": 99,
+        "order": 97,
         "text": "The value of a logical expression is either **true** (1) or **false** (0). The most important logical operators are $¬$ (**negation**), $∧$(**conjunction**), $∨$(**disjunction**), $\\Rightarrow$ (**implication**) and $⇔$(**equivalence**). The following table shows the meanings of these operators:"
       },
       {
-        "order": 100,
+        "order": 98,
         "text": "$A$ $B$ $¬A$ $¬B$ $A ∧B$ $A ∨B$ $A \\Rightarrow B$ $A ⇔B$ 0 0 1 1 0 0 1 1 0 1 1 0 0 1 1 0 1 0 0 1 0 1 0 0 1 1 0 0 1 1 1 1"
       },
       {
-        "order": 101,
+        "order": 99,
         "text": "The expression $¬A$ has the opposite value of $A$. The expression $A ∧B$ is true if both $A$ and $B$ are true, and the expression $A ∨B$ is true if $A$ or $B$ or both are true. The expression $A \\Rightarrow B$ is true if whenever $A$ is true, also $B$ is true. The expression $A ⇔B$ is true if $A$ and $B$ are both true or both false. A **predicate** is an expression that is true or false depending on its parameters. Predicates are usually denoted by capital letters. For example, we can define a predicate $P(x)$ that is true exactly when $x$ is a prime number. Using this definition, $P$(7) is true but $P$(8) is false. A **quantifier** connects a logical expression to the elements of a set. The most important quantifiers are $\\forall$ (**for all**) and $\\exists$ (**there is**). For example,"
       },
       {
-        "order": 102,
+        "order": 100,
         "text": "$\\forall x(\\exists y(y < x))$"
       },
       {
-        "order": 103,
+        "order": 101,
         "text": "means that for each element $x$ in the set, there is an element $y$ in the set such that $y$ is smaller than $x$. This is true in the set of integers, but false in the set of natural numbers. Using the notation described above, we can express many kinds of logical propositions. For example,"
       },
       {
-        "order": 104,
+        "order": 102,
         "text": "$\\forall x((x > 1∧¬P(x)) \\Rightarrow (\\exists a(\\exists b(a > 1∧b > 1∧x = ab))))$"
       },
       {
-        "order": 105,
+        "order": 103,
         "text": "means that if a number $x$ is larger than 1 and not a prime number, then there are numbers $a$ and $b$ that are larger than 1 and whose product is $x$. This proposition is true in the set of integers."
       },
       {
-        "order": 106,
+        "order": 104,
         "text": "The function $\\lfloor x\\rfloor$ rounds the number $x$ down to an integer, and the function $\\lceil x\\rceil$ rounds the number $x$ up to an integer. For example,"
       },
       {
-        "order": 107,
+        "order": 105,
         "text": "$\\lfloor 3/2\\rfloor =$ 1 and $\\lceil 3/2\\rceil =$ 2."
       },
       {
-        "order": 108,
+        "order": 106,
         "text": "The functions min($x_1,x_2,...,x_n$) and max($x_1,x_2,...,x_n$) give the smallest and largest of values $x_1,x_2,...,x_n$. For example,"
       },
       {
-        "order": 109,
+        "order": 107,
         "text": "min(1,2,3) $= 1$ and max(1,2,3) $= 3$."
       },
       {
-        "order": 110,
+        "order": 108,
         "text": "The **factorial** $n!$ can be defined"
       },
       {
-        "order": 111,
+        "order": 109,
         "text": "$$\\prod_{x=1}^{n} x = 1 \\cdot 2 \\cdot 3 \\cdot \\ldots \\cdot n$$"
       },
       {
-        "order": 112,
+        "order": 110,
         "text": "or recursively"
       },
       {
-        "order": 113,
+        "order": 111,
         "text": "$$\\begin{aligned} 0! &= 1 \\\\ n! &= n \\cdot (n-1)! \\end{aligned}$$"
       },
       {
-        "order": 114,
+        "order": 112,
         "text": "The **Fibonacci numbers** arise in many situations. They can be defined recursively as follows:"
       },
       {
-        "order": 115,
+        "order": 113,
         "text": "$$\\begin{aligned} f(0) &= 0 \\\\ f(1) &= 1 \\\\ f(n) &= f(n-1) + f(n-2) \\end{aligned}$$"
       },
       {
-        "order": 116,
+        "order": 114,
         "text": "The first Fibonacci numbers are"
       },
       {
-        "order": 117,
+        "order": 115,
         "text": "$$0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \\ldots$$"
       },
       {
-        "order": 118,
+        "order": 116,
         "text": "There is also a closed-form formula for calculating Fibonacci numbers, which is sometimes called **Binet's formula**:"
       },
       {
-        "order": 119,
+        "order": 117,
         "text": "$$f(n) = \\frac{(1 + \\sqrt{5})^n - (1 - \\sqrt{5})^n}{2^n \\sqrt{5}}.$$"
       },
       {
-        "order": 120,
+        "order": 118,
         "text": "The **logarithm** of a number $x$ is denoted $\\log_k(x)$, where $k$ is the base of the logarithm. According to the definition, $\\log_k(x) = a$ exactly when $k^a = x$."
       },
       {
-        "order": 121,
+        "order": 119,
         "text": "A useful property of logarithms is that $\\log_k(x)$ equals the number of times we have to divide $x$ by $k$ before we reach the number 1. For example, $\\log_2(32) = 5$ because 5 divisions by 2 are needed:"
       },
       {
-        "order": 122,
+        "order": 120,
         "text": "$$32 \\to 16 \\to 8 \\to 4 \\to 2 \\to 1$$"
       },
       {
-        "order": 123,
+        "order": 121,
         "text": "Logarithms are often used in the analysis of algorithms, because many efficient algorithms halve something at each step. Hence, we can estimate the efficiency of such algorithms using logarithms."
       },
       {
-        "order": 124,
+        "order": 122,
         "text": "The logarithm of a product is"
       },
       {
-        "order": 125,
+        "order": 123,
         "text": "$$\\log_k(ab) = \\log_k(a) + \\log_k(b),$$"
       },
       {
-        "order": 126,
+        "order": 124,
         "text": "and consequently,"
       },
       {
-        "order": 127,
+        "order": 125,
         "text": "$$\\log_k(x^n) = n \\cdot \\log_k(x).$$"
       },
       {
-        "order": 128,
+        "order": 126,
         "text": "In addition, the logarithm of a quotient is"
       },
       {
-        "order": 129,
+        "order": 127,
         "text": "$$\\log_k\\left(\\frac{a}{b}\\right) = \\log_k(a) - \\log_k(b).$$"
       },
       {
-        "order": 130,
+        "order": 128,
         "text": "Another useful formula is"
       },
       {
-        "order": 131,
+        "order": 129,
         "text": "$$\\log_u(x) = \\frac{\\log_k(x)}{\\log_k(u)},$$ and using this, it is possible to calculate logarithms to any base if there is a way to calculate logarithms to some fixed base. The **natural logarithm** ln($x$) of a number $x$ is a logarithm whose base is $e ≈$2.71828. Another property of logarithms is that the number of digits of an integer $x$ in base $b$ is $\\lfloor$ log$_b(x)+1\\rfloor$ . For example, the representation of 123 in base 2 is 1111011 and $\\lfloor$ log$_2(123)+1\\rfloor =$ 7."
       },
       {
-        "order": 132,
+        "order": 130,
         "text": "The International Olympiad in Informatics (IOI) is an annual programming contest for secondary school students. Each country is allowed to send a team of four students to the contest. There are usually about 300 participants from 80 countries. The IOI consists of two five-hour long contests. In both contests, the participants are asked to solve three algorithm tasks of various difficulty. The tasks are divided into subtasks, each of which has an assigned score. Even if the contestants are divided into teams, they compete as individuals. The IOI syllabus [41] regulates the topics that may appear in IOI tasks. Almost all the topics in the IOI syllabus are covered by this book. Participants for the IOI are selected through national contests. Before the IOI, many regional contests are organized, such as the Baltic Olympiad in Informatics (BOI), the Central European Olympiad in Informatics (CEOI) and the Asia-Pacific Informatics Olympiad (APIO). Some countries organize online practice contests for future IOI participants, such as the Croatian Open Competition in Informatics [11] and the USA Computing Olympiad [68]. In addition, a large collection of problems from Polish contests is available online [60]."
       },
       {
-        "order": 133,
+        "order": 131,
         "text": "The International Collegiate Programming Contest (ICPC) is an annual programming contest for university students. Each team in the contest consists of three students, and unlike in the IOI, the students work together; there is only one computer available for each team. The ICPC consists of several stages, and finally the best teams are invited to the World Finals. While there are tens of thousands of participants in the contest, there are only a small number$^2$ of final slots available, so even advancing to the finals is a great achievement in some regions. In each ICPC contest, the teams have five hours of time to solve about ten algorithm problems. A solution to a problem is accepted only if it solves all test cases efficiently. During the contest, competitors may view the results of other"
       },
       {
-        "order": 134,
+        "order": 132,
         "text": "teams, but for the last hour the scoreboard is frozen and it is not possible to see the results of the last submissions. The topics that may appear at the ICPC are not so well specified as those at the IOI. In any case, it is clear that more knowledge is needed at the ICPC, especially more mathematical skills."
       },
       {
-        "order": 135,
+        "order": 133,
         "text": "There are also many online contests that are open for everybody. At the moment, the most active contest site is Codeforces, which organizes contests about weekly. In Codeforces, participants are divided into two divisions: beginners compete in Div2 and more experienced programmers in Div1. Other contest sites include AtCoder, CS Academy, HackerRank and Topcoder. Some companies organize online contests with onsite finals. Examples of such contests are Facebook Hacker Cup, Google Code Jam and Yandex.Algorithm. Of course, companies also use those contests for recruiting: performing well in a contest is a good way to prove one’s skills."
       },
       {
-        "order": 136,
+        "order": 134,
         "text": "There are already some books (besides this book) that focus on competitive programming and algorithmic problem solving:"
       },
       {
-        "order": 137,
+        "order": 135,
         "text": "• S. S. Skiena and M. A. Revilla: *Programming Challenges: The Programming Contest Training Manual* [59]"
       },
       {
-        "order": 138,
+        "order": 136,
         "text": "• S. Halim and F. Halim: *Competitive Programming 3: The New Lower Bound of Programming Contests* [33]"
       },
       {
-        "order": 139,
+        "order": 137,
         "text": "• K. Diks et al.: *Looking for a Challenge? The Ultimate Problem Set from the University of Warsaw Programming Competitions* [15]"
       },
       {
-        "order": 140,
+        "order": 138,
         "text": "The first two books are intended for beginners, whereas the last book contains advanced material. Of course, general algorithm books are also suitable for competitive programmers. Some popular books are:"
       },
       {
-        "order": 141,
+        "order": 139,
         "text": "• T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein: *Introduction to Algorithms* [13]"
       },
       {
-        "order": 142,
+        "order": 140,
         "text": "• J. Kleinberg and É. Tardos: *Algorithm Design* [45]"
       },
       {
-        "order": 143,
+        "order": 141,
         "text": "• S. S. Skiena: *The Algorithm Design Manual* [58]"
       }
     ],
@@ -1024,79 +1016,79 @@
         "title": "Sum formulas",
         "paragraph_range": [
           48,
-          82
+          80
         ]
       },
       {
         "level": 3,
         "title": "Set theory",
         "paragraph_range": [
-          83,
-          98
+          81,
+          96
         ]
       },
       {
         "level": 3,
         "title": "Logic",
         "paragraph_range": [
-          99,
-          105
+          97,
+          103
         ]
       },
       {
         "level": 3,
         "title": "Functions",
         "paragraph_range": [
-          106,
-          119
+          104,
+          117
         ]
       },
       {
         "level": 3,
         "title": "Logarithms",
         "paragraph_range": [
-          120,
-          131
+          118,
+          129
         ]
       },
       {
         "level": 3,
         "title": "Contests and resources",
         "paragraph_range": [
-          132,
-          131
+          130,
+          129
         ]
       },
       {
         "level": 3,
         "title": "IOI",
         "paragraph_range": [
-          132,
-          132
+          130,
+          130
         ]
       },
       {
         "level": 3,
         "title": "ICPC",
         "paragraph_range": [
-          133,
-          134
+          131,
+          132
         ]
       },
       {
         "level": 3,
         "title": "Online contests",
         "paragraph_range": [
-          135,
-          135
+          133,
+          133
         ]
       },
       {
         "level": 3,
         "title": "Books",
         "paragraph_range": [
-          136,
-          143
+          134,
+          141
         ]
       }
     ],
@@ -4596,26 +4588,10 @@
       },
       {
         "order": 116,
-        "text": "$^{\\lceil}_{n/2}^{\\rceil}$ $Y$"
+        "text": "$$\\prod_{a=1}^{\\lceil n/2 \\rceil} \\prod_{b=1}^{\\lceil m/2 \\rceil} 4 \\cdot \\left(\\cos^2 \\frac{\\pi a}{n+1} + \\cos^2 \\frac{\\pi b}{m+1}\\right)$$"
       },
       {
         "order": 117,
-        "text": "$^{\\lceil}_{m/2}^{\\rceil}$ $Y$"
-      },
-      {
-        "order": 118,
-        "text": "$^{b=1}$ 4$\\cdot$ (cos$^2 \\pi a$"
-      },
-      {
-        "order": 119,
-        "text": "$n+1 +$cos$^2$ $\\pi b$ $m+1$)"
-      },
-      {
-        "order": 120,
-        "text": "$^{a=1}$"
-      },
-      {
-        "order": 121,
         "text": "This formula is very efficient, because it calculates the number of tilings in $O(nm)$ time, but since the answer is a product of real numbers, a problem when using the formula is how to store the intermediate results accurately."
       }
     ],
@@ -5069,7 +5045,7 @@
         "title": "Counting tilings",
         "paragraph_range": [
           108,
-          121
+          117
         ]
       }
     ],
@@ -11092,414 +11068,410 @@
       },
       {
         "order": 39,
-        "text": "$^nX$"
+        "text": "$$\\sum_{x=2}^{n} \\frac{n}{x} = \\frac{n}{2} + \\frac{n}{3} + \\frac{n}{4} + \\cdots + \\frac{n}{n} = O(n \\log n).$$"
       },
       {
         "order": 40,
-        "text": "$^{x=2}$ $n/x = n/2+ n/3+ n/4+\\cdot \\cdot \\cdot + n/n = O(n$log$n$)."
-      },
-      {
-        "order": 41,
         "text": "In fact, the algorithm is more efficient, because the inner loop will be executed only if the number $x$ is prime. It can be shown that the running time of the algorithm is only $O(n$loglog$n$), a complexity very near to $O(n)$."
       },
       {
-        "order": 42,
+        "order": 41,
         "text": "The **greatest common divisor** of numbers $a$ and $b$, gcd($a,b$), is the greatest number that divides both $a$ and $b$, and the **least common multiple** of $a$ and $b$, lcm($a,b$), is the smallest number that is divisible by both $a$ and $b$. For example, gcd(24,36) $= 12$ and lcm(24,36) $= 72$. The greatest common divisor and the least common multiple are connected as follows:"
       },
       {
-        "order": 43,
+        "order": 42,
         "text": "lcm($a,b) =$ $ab$ gcd($a,b$)"
       },
       {
-        "order": 44,
+        "order": 43,
         "text": "**Euclid's algorithm**[^euclid] provides an efficient way to find the greatest common divisor of two numbers. The algorithm is based on the following formula:"
       },
       {
-        "order": 45,
+        "order": 44,
         "text": "$$\\gcd(a, b) = \\begin{cases} a & b = 0 \\\\ \\gcd(b, a \\bmod b) & b \\neq 0 \\end{cases}$$"
       },
       {
-        "order": 46,
+        "order": 45,
         "text": "For example,"
       },
       {
-        "order": 47,
+        "order": 46,
         "text": "$$\\gcd(24, 36) = \\gcd(36, 24) = \\gcd(24, 12) = \\gcd(12, 0) = 12.$$"
       },
       {
-        "order": 48,
+        "order": 47,
         "text": "The algorithm can be implemented as follows:"
       },
       {
-        "order": 49,
+        "order": 48,
         "text": "It can be shown that Euclid's algorithm works in $O(\\log n)$ time, where $n = \\min(a, b)$. The worst case for the algorithm is the case when $a$ and $b$ are consecutive Fibonacci numbers. For example,"
       },
       {
-        "order": 50,
+        "order": 49,
         "text": "$$\\gcd(13, 8) = \\gcd(8, 5) = \\gcd(5, 3) = \\gcd(3, 2) = \\gcd(2, 1) = \\gcd(1, 0) = 1.$$"
       },
       {
-        "order": 51,
+        "order": 50,
         "text": "Numbers $a$ and $b$ are **coprime** if $\\gcd(a, b) = 1$. **Euler's totient function** $\\varphi(n)$ gives the number of coprime numbers to $n$ between 1 and $n$. For example, $\\varphi(12) = 4$, because 1, 5, 7 and 11 are coprime to 12."
       },
       {
-        "order": 52,
+        "order": 51,
         "text": "The value of $\\varphi(n)$ can be calculated from the prime factorization of $n$ using the formula"
       },
       {
-        "order": 53,
+        "order": 52,
         "text": "$$\\varphi(n) = \\prod_{i=1}^{k} p_i^{\\alpha_i - 1} (p_i - 1).$$"
       },
       {
-        "order": 54,
+        "order": 53,
         "text": "For example, $\\varphi(12) = 2^1 \\cdot (2 - 1) \\cdot 3^0 \\cdot (3 - 1) = 4$. Note that $\\varphi(n) = n - 1$ if $n$ is prime."
       },
       {
-        "order": 55,
+        "order": 54,
         "text": "In **modular arithmetic**, the set of numbers is limited so that only numbers $0, 1, 2, \\ldots, m - 1$ are used, where $m$ is a constant. Each number $x$ is represented by the number $x \\bmod m$: the remainder after dividing $x$ by $m$. For example, if $m = 17$, then 75 is represented by $75 \\bmod 17 = 7$."
       },
       {
-        "order": 56,
+        "order": 55,
         "text": "Often we can take remainders before doing calculations. In particular, the following formulas hold:"
       },
       {
-        "order": 57,
+        "order": 56,
         "text": "$$\\begin{aligned} (x + y) \\bmod m &= (x \\bmod m + y \\bmod m) \\bmod m \\\\ (x - y) \\bmod m &= (x \\bmod m - y \\bmod m) \\bmod m \\\\ (x \\cdot y) \\bmod m &= (x \\bmod m \\cdot y \\bmod m) \\bmod m \\\\ x^n \\bmod m &= (x \\bmod m)^n \\bmod m \\end{aligned}$$"
       },
       {
-        "order": 58,
+        "order": 57,
         "text": "[^euclid]: Euclid was a Greek mathematician who lived in about 300 BC. This is perhaps the first known algorithm in history."
       },
       {
-        "order": 59,
+        "order": 58,
         "text": "There is often need to efficiently calculate the value of $x^n \\bmod m$. This can be done in $O(\\log n)$ time using the following recursion:"
       },
       {
-        "order": 60,
+        "order": 59,
         "text": "$$x^n = \\begin{cases} 1 & n = 0 \\\\ x^{n/2} \\cdot x^{n/2} & n \\text{ is even} \\\\ x^{n-1} \\cdot x & n \\text{ is odd} \\end{cases}$$"
       },
       {
-        "order": 61,
+        "order": 60,
         "text": "It is important that in the case of an even $n$, the value of $x^{n/2}$ is calculated only once. This guarantees that the time complexity of the algorithm is $O(\\log n)$, because $n$ is always halved when it is even."
       },
       {
-        "order": 62,
+        "order": 61,
         "text": "The following function calculates the value of $x^n \\bmod m$:"
       },
       {
-        "order": 63,
+        "order": 62,
         "text": "**Fermat's theorem** states that"
       },
       {
-        "order": 64,
+        "order": 63,
         "text": "$$x^{m-1} \\bmod m = 1$$"
       },
       {
-        "order": 65,
+        "order": 64,
         "text": "when $m$ is prime and $x$ and $m$ are coprime. This also yields"
       },
       {
-        "order": 66,
+        "order": 65,
         "text": "$$x^k \\bmod m = x^{k \\bmod (m-1)} \\bmod m.$$"
       },
       {
-        "order": 67,
+        "order": 66,
         "text": "More generally, **Euler's theorem** states that"
       },
       {
-        "order": 68,
+        "order": 67,
         "text": "$$x^{\\varphi(m)} \\bmod m = 1$$"
       },
       {
-        "order": 69,
+        "order": 68,
         "text": "when $x$ and $m$ are coprime. Fermat's theorem follows from Euler's theorem, because if $m$ is a prime, then $\\varphi(m) = m - 1$."
       },
       {
-        "order": 70,
+        "order": 69,
         "text": "The inverse of $x$ modulo $m$ is a number $x^{-1}$ such that"
       },
       {
-        "order": 71,
+        "order": 70,
         "text": "$$x x^{-1} \\bmod m = 1.$$"
       },
       {
-        "order": 72,
+        "order": 71,
         "text": "For example, if $x = 6$ and $m = 17$, then $x^{-1} = 3$, because $6 \\cdot 3 \\bmod 17 = 1$."
       },
       {
-        "order": 73,
+        "order": 72,
         "text": "Using modular inverses, we can divide numbers modulo $m$, because division by $x$ corresponds to multiplication by $x^{-1}$. For example, to evaluate the value"
       },
       {
-        "order": 74,
+        "order": 73,
         "text": "of $36/6 \\bmod 17$, we can use the formula $2 \\cdot 3 \\bmod 17$, because $36 \\bmod 17 = 2$ and $6^{-1} \\bmod 17 = 3$."
       },
       {
-        "order": 75,
+        "order": 74,
         "text": "However, a modular inverse does not always exist. For example, if $x = 2$ and $m = 4$, the equation"
       },
       {
-        "order": 76,
+        "order": 75,
         "text": "$$x x^{-1} \\bmod m = 1$$"
       },
       {
-        "order": 77,
+        "order": 76,
         "text": "cannot be solved, because all multiples of 2 are even and the remainder can never be 1 when $m = 4$. It turns out that the value of $x^{-1} \\bmod m$ can be calculated exactly when $x$ and $m$ are coprime."
       },
       {
-        "order": 78,
+        "order": 77,
         "text": "If a modular inverse exists, it can be calculated using the formula"
       },
       {
-        "order": 79,
+        "order": 78,
         "text": "$$x^{-1} = x^{\\varphi(m) - 1}.$$"
       },
       {
-        "order": 80,
+        "order": 79,
         "text": "If $m$ is prime, the formula becomes"
       },
       {
-        "order": 81,
+        "order": 80,
         "text": "$$x^{-1} = x^{m-2}.$$"
       },
       {
-        "order": 82,
+        "order": 81,
         "text": "For example,"
       },
       {
-        "order": 83,
+        "order": 82,
         "text": "$$6^{-1} \\bmod 17 = 6^{17-2} \\bmod 17 = 3.$$"
       },
       {
-        "order": 84,
+        "order": 83,
         "text": "This formula allows us to efficiently calculate modular inverses using the modular exponentation algorithm. The formula can be derived using Euler's theorem. First, the modular inverse should satisfy the following equation:"
       },
       {
-        "order": 85,
+        "order": 84,
         "text": "$$x x^{-1} \\bmod m = 1.$$"
       },
       {
-        "order": 86,
+        "order": 85,
         "text": "On the other hand, according to Euler's theorem,"
       },
       {
-        "order": 87,
+        "order": 86,
         "text": "$$x^{\\varphi(m)} \\bmod m = x x^{\\varphi(m) - 1} \\bmod m = 1,$$"
       },
       {
-        "order": 88,
+        "order": 87,
         "text": "so the numbers $x^{-1}$ and $x^{\\varphi(m) - 1}$ are equal."
       },
       {
-        "order": 89,
+        "order": 88,
         "text": "In programming, unsigned integers are represented modulo $2^k$, where $k$ is the number of bits of the data type. A usual consequence of this is that a number wraps around if it becomes too large."
       },
       {
-        "order": 90,
+        "order": 89,
         "text": "For example, in C++, numbers of type `unsigned int` are represented modulo $2^{32}$. The following code declares an `unsigned int` variable whose value is 123456789. After this, the value will be multiplied by itself, and the result is $123456789^2 \\bmod 2^{32} = 2537071545$."
       },
       {
-        "order": 91,
+        "order": 90,
         "text": "A **Diophantine equation** is an equation of the form"
       },
       {
-        "order": 92,
+        "order": 91,
         "text": "$ax+ by = c$,"
       },
       {
-        "order": 93,
+        "order": 92,
         "text": "where $a$, $b$ and $c$ are constants and the values of $x$ and $y$ should be found. Each number in the equation has to be an integer. For example, one solution for the equation 5$x+2y =$ 11 is $x =$ 3 and $y = -2$. We can efficiently solve a Diophantine equation by using Euclid’s algorithm. It turns out that we can extend Euclid’s algorithm so that it will find numbers $x$ and $y$ that satisfy the following equation:"
       },
       {
-        "order": 94,
+        "order": 93,
         "text": "$ax+ by =$ gcd($a,b$)"
       },
       {
-        "order": 95,
+        "order": 94,
         "text": "A Diophantine equation can be solved if $c$ is divisible by gcd($a,b$), and otherwise it cannot be solved. As an example, let us find numbers $x$ and $y$ that satisfy the following equation:"
       },
       {
-        "order": 96,
+        "order": 95,
         "text": "39$x+15y =$ 12"
       },
       {
-        "order": 97,
+        "order": 96,
         "text": "The equation can be solved, because gcd(39,15) $= 3$ and 3 $|$ 12. When Euclid’s algorithm calculates the greatest common divisor of 39 and 15, it produces the following sequence of function calls:"
       },
       {
-        "order": 98,
+        "order": 97,
         "text": "gcd(39,15) $=$ gcd(15,9) $=$ gcd(9,6) $=$ gcd(6,3) $=$ gcd(3,0) $= 3$"
       },
       {
-        "order": 99,
+        "order": 98,
         "text": "This corresponds to the following equations:"
       },
       {
-        "order": 100,
+        "order": 99,
         "text": "39$-2\\cdot$ 15 $= 9$ 15$-1\\cdot$ 9 $= 6$ 9$-1\\cdot$ 6 $= 3$"
       },
       {
-        "order": 101,
+        "order": 100,
         "text": "Using these equations, we can derive"
       },
       {
-        "order": 102,
+        "order": 101,
         "text": "39$\\cdot 2+15\\cdot (-5) =$ 3"
       },
       {
-        "order": 103,
+        "order": 102,
         "text": "and by multiplying this by 4, the result is"
       },
       {
-        "order": 104,
+        "order": 103,
         "text": "39$\\cdot 8+15\\cdot (-20) =$ 12,"
       },
       {
-        "order": 105,
+        "order": 104,
         "text": "so a solution to the equation is $x =$ 8 and $y = -2$0. A solution to a Diophantine equation is not unique, because we can form an infinite number of solutions if we know one solution. If a pair ($x, y$) is a solution, then also all pairs"
       },
       {
-        "order": 106,
+        "order": 105,
         "text": "($x+$ $kb$ gcd($a,b), y-$ $ka$ gcd($a,b$))"
       },
       {
-        "order": 107,
+        "order": 106,
         "text": "are solutions, where $k$ is any integer."
       },
       {
-        "order": 108,
+        "order": 107,
         "text": "The **Chinese remainder theorem** solves a group of equations of the form"
       },
       {
-        "order": 109,
+        "order": 108,
         "text": "$$\\begin{aligned} x &= a_1 \\bmod m_1 \\\\ x &= a_2 \\bmod m_2 \\\\ &\\cdots \\\\ x &= a_n \\bmod m_n \\end{aligned}$$"
       },
       {
-        "order": 110,
+        "order": 109,
         "text": "where all pairs of $m_1, m_2, \\ldots, m_n$ are coprime."
       },
       {
-        "order": 111,
+        "order": 110,
         "text": "Let $x_m^{-1}$ be the inverse of $x$ modulo $m$, and"
       },
       {
-        "order": 112,
+        "order": 111,
         "text": "$$X_k = \\frac{m_1 m_2 \\cdots m_n}{m_k}.$$"
       },
       {
-        "order": 113,
+        "order": 112,
         "text": "Using this notation, a solution to the equations is"
       },
       {
-        "order": 114,
+        "order": 113,
         "text": "$$x = a_1 X_1 X_{1\\,m_1}^{-1} + a_2 X_2 X_{2\\,m_2}^{-1} + \\cdots + a_n X_n X_{n\\,m_n}^{-1}.$$"
       },
       {
-        "order": 115,
+        "order": 114,
         "text": "In this solution, for each $k = 1, 2, \\ldots, n$,"
       },
       {
-        "order": 116,
+        "order": 115,
         "text": "$$a_k X_k X_{k\\,m_k}^{-1} \\bmod m_k = a_k,$$"
       },
       {
-        "order": 117,
+        "order": 116,
         "text": "because"
       },
       {
-        "order": 118,
+        "order": 117,
         "text": "$$X_k X_{k\\,m_k}^{-1} \\bmod m_k = 1.$$"
       },
       {
-        "order": 119,
+        "order": 118,
         "text": "Since all other terms in the sum are divisible by $m_k$, they have no effect on the remainder, and $x \\bmod m_k = a_k$."
       },
       {
-        "order": 120,
+        "order": 119,
         "text": "For example, a solution for"
       },
       {
-        "order": 121,
+        "order": 120,
         "text": "$$\\begin{aligned} x &= 3 \\bmod 5 \\\\ x &= 4 \\bmod 7 \\\\ x &= 2 \\bmod 3 \\end{aligned}$$"
       },
       {
-        "order": 122,
+        "order": 121,
         "text": "is"
       },
       {
-        "order": 123,
+        "order": 122,
         "text": "$$3 \\cdot 21 \\cdot 1 + 4 \\cdot 15 \\cdot 1 + 2 \\cdot 35 \\cdot 2 = 263.$$"
       },
       {
-        "order": 124,
+        "order": 123,
         "text": "Once we have found a solution $x$, we can create an infinite number of other solutions, because all numbers of the form"
       },
       {
-        "order": 125,
+        "order": 124,
         "text": "$$x + m_1 m_2 \\cdots m_n$$"
       },
       {
-        "order": 126,
+        "order": 125,
         "text": "are solutions."
       },
       {
-        "order": 127,
+        "order": 126,
         "text": "**Lagrange's theorem** states that every positive integer can be represented as a sum of four squares, i.e., $a^2 + b^2 + c^2 + d^2$. For example, the number 123 can be represented as the sum $8^2 + 5^2 + 5^2 + 3^2$."
       },
       {
-        "order": 128,
+        "order": 127,
         "text": "**Zeckendorf's theorem** states that every positive integer has a unique representation as a sum of Fibonacci numbers such that no two numbers are equal or consecutive Fibonacci numbers. For example, the number 74 can be represented as the sum $55 + 13 + 5 + 1$."
       },
       {
-        "order": 129,
+        "order": 128,
         "text": "A **Pythagorean triple** is a triple $(a, b, c)$ that satisfies the Pythagorean theorem $a^2 + b^2 = c^2$, which means that there is a right triangle with side lengths $a$, $b$ and $c$. For example, $(3, 4, 5)$ is a Pythagorean triple."
       },
       {
-        "order": 130,
+        "order": 129,
         "text": "If $(a, b, c)$ is a Pythagorean triple, all triples of the form $(ka, kb, kc)$ are also Pythagorean triples where $k > 1$. A Pythagorean triple is *primitive* if $a$, $b$ and $c$ are coprime, and all Pythagorean triples can be constructed from primitive triples using a multiplier $k$."
       },
       {
-        "order": 131,
+        "order": 130,
         "text": "**Euclid's formula** can be used to produce all primitive Pythagorean triples. Each such triple is of the form"
       },
       {
-        "order": 132,
+        "order": 131,
         "text": "$$(n^2 - m^2,\\ 2nm,\\ n^2 + m^2),$$"
       },
       {
-        "order": 133,
+        "order": 132,
         "text": "where $0 < m < n$, $n$ and $m$ are coprime and at least one of $n$ and $m$ is even. For example, when $m = 1$ and $n = 2$, the formula produces the smallest Pythagorean triple"
       },
       {
-        "order": 134,
+        "order": 133,
         "text": "$$(2^2 - 1^2,\\ 2 \\cdot 2 \\cdot 1,\\ 2^2 + 1^2) = (3, 4, 5).$$"
       },
       {
-        "order": 135,
+        "order": 134,
         "text": "**Wilson's theorem** states that a number $n$ is prime exactly when"
       },
       {
-        "order": 136,
+        "order": 135,
         "text": "$$(n - 1)! \\bmod n = n - 1.$$"
       },
       {
-        "order": 137,
+        "order": 136,
         "text": "For example, the number 11 is prime, because"
       },
       {
-        "order": 138,
+        "order": 137,
         "text": "$$10! \\bmod 11 = 10,$$"
       },
       {
-        "order": 139,
+        "order": 138,
         "text": "and the number 12 is not prime, because"
       },
       {
-        "order": 140,
+        "order": 139,
         "text": "$$11! \\bmod 12 = 0 \\neq 11.$$"
       },
       {
-        "order": 141,
+        "order": 140,
         "text": "Hence, Wilson's theorem can be used to find out whether a number is prime. However, in practice, the theorem cannot be applied to large values of $n$, because it is difficult to calculate values of $(n - 1)!$ when $n$ is large."
       }
     ],
@@ -11538,40 +11510,40 @@
         "order": 3,
         "language": "cpp",
         "code": "int gcd(int a, int b) {\n    if (b == 0) return a;\n    return gcd(b, a%b);\n}",
-        "preceding_paragraph_order": 48,
+        "preceding_paragraph_order": 47,
         "explanatory_paragraphs": [
-          49,
-          50
+          48,
+          49
         ]
       },
       {
         "order": 4,
         "language": "cpp",
         "code": "int modpow(int x, int n, int m) {\n    if (n == 0) return 1%m;\n    long long u = modpow(x,n/2,m);\n    u = (u*u)%m;\n    if (n%2 == 1) u = (u*x)%m;\n    return u;\n}",
-        "preceding_paragraph_order": 62,
+        "preceding_paragraph_order": 61,
         "explanatory_paragraphs": [
-          63,
-          64
+          62,
+          63
         ]
       },
       {
         "order": 5,
         "language": "cpp",
         "code": "unsigned int x = 123456789;\ncout << x*x << \"\\n\"; // 2537071545",
-        "preceding_paragraph_order": 90,
+        "preceding_paragraph_order": 89,
         "explanatory_paragraphs": [
-          91,
-          92
+          90,
+          91
         ]
       },
       {
         "order": 6,
         "language": "cpp",
         "code": "unsigned int x = 123456789;\ncout << x*x << \"\\n\"; // 2537071545",
-        "preceding_paragraph_order": 90,
+        "preceding_paragraph_order": 89,
         "explanatory_paragraphs": [
-          91,
-          92
+          90,
+          91
         ]
       }
     ],
@@ -11621,100 +11593,108 @@
         "title": "Sieve of Eratosthenes",
         "paragraph_range": [
           36,
-          41
+          40
         ]
       },
       {
         "level": 3,
         "title": "Euclid’s algorithm",
         "paragraph_range": [
-          42,
-          50
+          41,
+          49
         ]
       },
       {
         "level": 3,
         "title": "Euler's totient function",
         "paragraph_range": [
-          51,
-          54
+          50,
+          53
         ]
       },
       {
         "level": 2,
         "title": "Modular arithmetic",
         "paragraph_range": [
-          55,
-          58
+          54,
+          57
         ]
       },
       {
         "level": 3,
         "title": "Modular exponentiation",
         "paragraph_range": [
-          59,
-          62
+          58,
+          61
         ]
       },
       {
         "level": 3,
         "title": "Fermat's theorem and Euler's theorem",
         "paragraph_range": [
-          63,
-          69
+          62,
+          68
         ]
       },
       {
         "level": 3,
         "title": "Modular inverse",
         "paragraph_range": [
-          70,
-          88
+          69,
+          87
         ]
       },
       {
         "level": 3,
         "title": "Computer arithmetic",
         "paragraph_range": [
-          89,
-          90
+          88,
+          89
         ]
       },
       {
         "level": 2,
         "title": "Solving equations",
         "paragraph_range": [
-          91,
-          90
+          90,
+          89
         ]
       },
       {
         "level": 3,
         "title": "Diophantine equations",
         "paragraph_range": [
-          91,
-          107
+          90,
+          106
         ]
       },
       {
         "level": 3,
         "title": "Chinese remainder theorem",
         "paragraph_range": [
-          108,
-          126
+          107,
+          125
         ]
       },
       {
         "level": 2,
         "title": "Other results",
         "paragraph_range": [
-          127,
-          126
+          126,
+          125
         ]
       },
       {
         "level": 3,
         "title": "Lagrange's theorem",
+        "paragraph_range": [
+          126,
+          126
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Zeckendorf's theorem",
         "paragraph_range": [
           127,
           127
@@ -11722,26 +11702,18 @@
       },
       {
         "level": 3,
-        "title": "Zeckendorf's theorem",
-        "paragraph_range": [
-          128,
-          128
-        ]
-      },
-      {
-        "level": 3,
         "title": "Pythagorean triples",
         "paragraph_range": [
-          129,
-          134
+          128,
+          133
         ]
       },
       {
         "level": 3,
         "title": "Wilson's theorem",
         "paragraph_range": [
-          135,
-          141
+          134,
+          140
         ]
       }
     ],
@@ -12226,86 +12198,74 @@
       },
       {
         "order": 115,
-        "text": "$^nX$"
+        "text": "$$\\sum_{k=1}^{n} \\frac{c(k)}{n},$$"
       },
       {
         "order": 116,
-        "text": "$c(k)$"
-      },
-      {
-        "order": 117,
-        "text": "$n$ ,"
-      },
-      {
-        "order": 118,
-        "text": "$^{k=1}$"
-      },
-      {
-        "order": 119,
         "text": "where there are $n$ ways to change the position of a combination, and there are $c(k)$ combinations that remain unchanged when the $k$th way is applied. As an example, let us calculate the number of necklaces of $n$ pearls, where each pearl has $m$ possible colors. Two necklaces are symmetric if they are similar after rotating them. For example, the necklace"
       },
       {
-        "order": 120,
+        "order": 117,
         "text": "has the following symmetric necklaces:"
       },
       {
-        "order": 121,
+        "order": 118,
         "text": "There are $n$ ways to change the position of a necklace, because we can rotate it $0, 1, \\ldots, n - 1$ steps clockwise. If the number of steps is 0, all $m^n$ necklaces remain the same, and if the number of steps is 1, only the $m$ necklaces where each pearl has the same color remain the same."
       },
       {
-        "order": 122,
+        "order": 119,
         "text": "More generally, when the number of steps is $k$, a total of"
       },
       {
-        "order": 123,
+        "order": 120,
         "text": "$$m^{\\gcd(k, n)}$$"
       },
       {
-        "order": 124,
+        "order": 121,
         "text": "necklaces remain the same, where $\\gcd(k, n)$ is the greatest common divisor of $k$ and $n$. The reason for this is that blocks of pearls of size $\\gcd(k, n)$ will replace each other. Thus, according to Burnside's lemma, the number of necklaces is"
       },
       {
-        "order": 125,
+        "order": 122,
         "text": "$$\\sum_{i=0}^{n-1} \\frac{m^{\\gcd(i, n)}}{n}.$$"
       },
       {
-        "order": 126,
+        "order": 123,
         "text": "For example, the number of necklaces of length 4 with 3 colors is"
       },
       {
-        "order": 127,
+        "order": 124,
         "text": "$$\\frac{3^4 + 3 + 3^2 + 3}{4} = 24.$$"
       },
       {
-        "order": 128,
+        "order": 125,
         "text": "**Cayley's formula** states that there are $n^{n-2}$ labeled trees that contain $n$ nodes. The nodes are labeled $1, 2, \\ldots, n$, and two trees are different if either their structure or labeling is different."
       },
       {
-        "order": 129,
+        "order": 126,
         "text": "For example, when $n = 4$, the number of labeled trees is $4^{4-2} = 16$:"
       },
       {
-        "order": 130,
+        "order": 127,
         "text": "Next we will see how Cayley's formula can be derived using Prüfer codes."
       },
       {
-        "order": 131,
+        "order": 128,
         "text": "A **Prüfer code** is a sequence of $n-2$ numbers that describes a labeled tree. The code is constructed by following a process that removes $n-2$ leaves from the tree. At each step, the leaf with the smallest label is removed, and the label of its only neighbor is added to the code. For example, let us calculate the Prüfer code of the following graph:"
       },
       {
-        "order": 132,
+        "order": 129,
         "text": "First we remove node 1 and add node 4 to the code:"
       },
       {
-        "order": 133,
+        "order": 130,
         "text": "Then we remove node 3 and add node 4 to the code:"
       },
       {
-        "order": 134,
+        "order": 131,
         "text": "Finally we remove node 4 and add node 2 to the code:"
       },
       {
-        "order": 135,
+        "order": 132,
         "text": "Thus, the Prüfer code of the graph is [4,4,2]. We can construct a Prüfer code for any tree, and more importantly, the original tree can be reconstructed from a Prüfer code. Hence, the number of labeled trees of $n$ nodes equals $n^{n-2}$, the number of Prüfer codes of size $n$."
       }
     ],
@@ -12431,23 +12391,23 @@
         "title": "Burnside’s lemma",
         "paragraph_range": [
           114,
-          127
+          124
         ]
       },
       {
         "level": 3,
         "title": "Cayley's formula",
         "paragraph_range": [
-          128,
-          130
+          125,
+          127
         ]
       },
       {
         "level": 3,
         "title": "Prüfer code",
         "paragraph_range": [
-          131,
-          135
+          128,
+          132
         ]
       }
     ],
@@ -12500,27 +12460,27 @@
       {
         "src": "/cp-handbook/figures/fig_p225_necklaces.png",
         "alt": "Four colored-pearl necklaces showing rotation equivalences",
-        "preceding_paragraph_order": 120
+        "preceding_paragraph_order": 117
       },
       {
         "src": "/cp-handbook/figures/fig_p225_labeled_trees.png",
         "alt": "Sixteen different labeled trees with 4 nodes each",
-        "preceding_paragraph_order": 129
+        "preceding_paragraph_order": 126
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto1.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 131
+        "preceding_paragraph_order": 128
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto2.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 132
+        "preceding_paragraph_order": 129
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto3.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 133
+        "preceding_paragraph_order": 130
       }
     ],
     "footnotes": [],
@@ -13330,143 +13290,143 @@
       },
       {
         "order": 64,
-        "text": "$^x$ $P(X = x)x$,"
+        "text": "$$E[X] = \\sum_{x} P(X = x) \\cdot x,$$"
       },
       {
         "order": 65,
-        "text": "$X$"
-      },
-      {
-        "order": 66,
         "text": "where $x$ goes through all possible values of $X$. For example, when throwing a dice, the expected outcome is"
       },
       {
-        "order": 67,
+        "order": 66,
         "text": "1/6$\\cdot 1+1/6\\cdot 2+1/6\\cdot 3+1/6\\cdot 4+1/6\\cdot 5+1/6\\cdot 6 =$ 7/2."
       },
       {
-        "order": 68,
+        "order": 67,
         "text": "A useful property of expected values is **linearity**. It means that the sum $E[X_1 + X_2 + \\cdot \\cdot \\cdot + X_n]$ always equals the sum $E[X_1] + E[X_2] + \\cdot \\cdot \\cdot + E[X_n]$. This formula holds even if random variables depend on each other. For example, when throwing two dice, the expected sum is"
       },
       {
-        "order": 69,
+        "order": 68,
         "text": "$E[X_1 + X_2] = E[X_1]+ E[X_2] = 7/2+7/2 =$ 7."
       },
       {
-        "order": 70,
+        "order": 69,
         "text": "Let us now consider a problem where $n$ balls are randomly placed in $n$ boxes, and our task is to calculate the expected number of empty boxes. Each ball has an equal probability to be placed in any of the boxes. For example, if $n =$ 2, the possibilities are as follows:"
       },
       {
-        "order": 71,
+        "order": 70,
         "text": "In this case, the expected number of empty boxes is"
       },
       {
-        "order": 72,
+        "order": 71,
         "text": "0$+0+1+1$"
       },
       {
-        "order": 73,
+        "order": 72,
         "text": "4 $= 1$"
       },
       {
-        "order": 74,
+        "order": 73,
         "text": "2."
       },
       {
-        "order": 75,
+        "order": 74,
         "text": "In the general case, the probability that a single box is empty is"
       },
       {
-        "order": 76,
+        "order": 75,
         "text": "$³n-1$"
       },
       {
-        "order": 77,
+        "order": 76,
         "text": "$´^n$ ,"
       },
       {
-        "order": 78,
+        "order": 77,
         "text": "$n$"
       },
       {
-        "order": 79,
+        "order": 78,
         "text": "because no ball should be placed in it. Hence, using linearity, the expected number of empty boxes is"
       },
       {
-        "order": 80,
+        "order": 79,
         "text": "$n\\cdot$ $³n-1$"
       },
       {
-        "order": 81,
+        "order": 80,
         "text": "$´^n$ ."
       },
       {
-        "order": 82,
+        "order": 81,
         "text": "$n$"
       },
       {
-        "order": 83,
+        "order": 82,
         "text": "The **distribution** of a random variable $X$ shows the probability of each value that $X$ may have. The distribution consists of values $P(X = x)$. For example, when throwing two dice, the distribution for their sum is:"
       },
       {
-        "order": 84,
+        "order": 83,
         "text": "$x$ 2 3 4 5 6 7 8 9 10 11 12 $P(X = x)$ 1/36 2/36 3/36 4/36 5/36 6/36 5/36 4/36 3/36 2/36 1/36"
       },
       {
-        "order": 85,
+        "order": 84,
         "text": "In a **uniform distribution**, the random variable $X$ has $n$ possible values $a,a+1,...,b$ and the probability of each value is 1/$n$. For example, when throwing a dice, $a =$ 1, $b =$ 6 and $P(X = x) =$ 1/6 for each value $x$. The expected value of $X$ in a uniform distribution is"
       },
       {
-        "order": 86,
+        "order": 85,
         "text": "$E[X] =$ $a+ b$"
       },
       {
-        "order": 87,
+        "order": 86,
         "text": "In a **binomial distribution**, $n$ attempts are made and the probability that a single attempt succeeds is $p$. The random variable $X$ counts the number of successful attempts, and the probability of a value $x$ is"
       },
       {
-        "order": 88,
+        "order": 87,
         "text": "$!$"
       },
       {
-        "order": 89,
+        "order": 88,
         "text": "$P(X = x) = p^x(1-p)^{n-x}$ $Ã$ $n$ $x$"
       },
       {
-        "order": 90,
+        "order": 89,
         "text": ","
       },
       {
-        "order": 91,
+        "order": 90,
         "text": "where $p^x$ and (1$-p)^{n-x}$ correspond to successful and unsuccessful attemps, and $¡^n$ $^x$ $¢$ is the number of ways we can choose the order of the attempts. For example, when throwing a dice ten times, the probability of throwing a six exactly three times is (1/6)$^3(5/6)^7¡^{10}$ $^3$ $¢$ . The expected value of $X$ in a binomial distribution is"
       },
       {
-        "order": 92,
+        "order": 91,
         "text": "$E[X] = pn$."
       },
       {
-        "order": 93,
+        "order": 92,
         "text": "In a **geometric distribution**, the probability that an attempt succeeds is $p$, and we continue until the first success happens. The random variable $X$ counts the number of attempts needed, and the probability of a value $x$ is"
       },
       {
-        "order": 94,
+        "order": 93,
         "text": "$P(X = x) = (1-p)^{x-1}p$,"
       },
       {
-        "order": 95,
+        "order": 94,
         "text": "where (1$-p)^{x-1}$ corresponds to the unsuccessful attemps and $p$ corresponds to the first successful attempt. For example, if we throw a dice until we throw a six, the probability that the number of throws is exactly 4 is (5/6)$^3$1/6. The expected value of $X$ in a geometric distribution is"
       },
       {
-        "order": 96,
+        "order": 95,
         "text": "$E[X] =$ 1"
       },
       {
-        "order": 97,
+        "order": 96,
         "text": "$p$."
       },
       {
-        "order": 98,
+        "order": 97,
         "text": "A **Markov chain** is a random process that consists of states and transitions between them. For each state, we know the probabilities for moving to other states. A Markov chain can be represented as a graph whose nodes are states and edges are transitions. As an example, consider a problem where we are in floor 1 in an $n$ floor building. At each step, we randomly walk either one floor up or one floor down, except that we always walk one floor up from floor 1 and one floor down from floor $n$. What is the probability of being in floor $m$ after $k$ steps? In this problem, each floor of the building corresponds to a state in a Markov chain. For example, if $n =$ 5, the graph is as follows:"
+      },
+      {
+        "order": 98,
+        "text": "1 1/2 1/2 1/2"
       },
       {
         "order": 99,
@@ -13474,106 +13434,102 @@
       },
       {
         "order": 100,
-        "text": "1 1/2 1/2 1/2"
-      },
-      {
-        "order": 101,
         "text": "The probability distribution of a Markov chain is a vector [$p_1, p_2,..., p_n$], where $p_k$ is the probability that the current state is $k$. The formula $p_1 + p_2 +\\cdot \\cdot \\cdot +$ $p_n =$ 1 always holds. In the above scenario, the initial distribution is [1,0,0,0,0], because we always begin in floor 1. The next distribution is [0,1,0,0,0], because we can only move from floor 1 to floor 2. After this, we can either move one floor up or one floor down, so the next distribution is [1/2,0,1/2,0,0], and so on. An efficient way to simulate the walk in a Markov chain is to use dynamic programming. The idea is to maintain the probability distribution, and at each step go through all possibilities how we can move. Using this method, we can simulate a walk of $m$ steps in $O(n^2m)$ time. The transitions of a Markov chain can also be represented as a matrix that updates the probability distribution. In the above scenario, the matrix is"
       },
       {
-        "order": 102,
+        "order": 101,
         "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 103,
+        "order": 102,
         "text": "When we multiply a probability distribution by this matrix, we get the new distribution after moving one step. For example, we can move from the distribution [1,0,0,0,0] to the distribution [0,1,0,0,0] as follows:"
       },
       {
-        "order": 104,
+        "order": 103,
         "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix} \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 105,
+        "order": 104,
         "text": "By calculating matrix powers efficiently, we can calculate the distribution after $m$ steps in $O(n^3$log$m$) time."
       },
       {
-        "order": 106,
+        "order": 105,
         "text": "Sometimes we can use randomness for solving a problem, even if the problem is not related to probabilities. A **randomized algorithm** is an algorithm that is based on randomness. A **Monte Carlo algorithm** is a randomized algorithm that may sometimes give a wrong answer. For such an algorithm to be useful, the probability of a wrong answer should be small."
       },
       {
-        "order": 107,
+        "order": 106,
         "text": "A **Las Vegas algorithm** is a randomized algorithm that always gives the correct answer, but its running time varies randomly. The goal is to design an algorithm that is efficient with high probability. Next we will go through three example problems that can be solved using randomness."
       },
       {
-        "order": 108,
+        "order": 107,
         "text": "The $kth$ **order statistic** of an array is the element at position $k$ after sorting the array in increasing order. It is easy to calculate any order statistic in $O(n$log$n$) time by first sorting the array, but is it really needed to sort the entire array just to find one element? It turns out that we can find order statistics using a randomized algorithm without sorting the array. The algorithm, called **quickselect**$^1$, is a Las Vegas algorithm: its running time is usually $O(n)$ but $O(n^2)$ in the worst case. The algorithm chooses a random element $x$ of the array, and moves elements smaller than $x$ to the left part of the array, and all other elements to the right part of the array. This takes $O(n)$ time when there are $n$ elements. Assume that the left part contains $a$ elements and the right part contains $b$ elements. If $a = k$, element $x$ is the $k$th order statistic. Otherwise, if $a > k$, we recursively find the $k$th order statistic for the left part, and if $a < k$, we recursively find the $r$th order statistic for the right part where $r = k -a$. The search continues in a similar way, until the element has been found. When each element $x$ is randomly chosen, the size of the array about halves at each step, so the time complexity for finding the $k$th order statistic is about"
       },
       {
-        "order": 109,
+        "order": 108,
         "text": "$n+ n/2+ n/4+ n/8+\\cdot \\cdot \\cdot < 2n = O(n)$."
       },
       {
-        "order": 110,
+        "order": 109,
         "text": "The worst case of the algorithm requires still $O(n^2)$ time, because it is possible that $x$ is always chosen in such a way that it is one of the smallest or largest elements in the array and $O(n)$ steps are needed. However, the probability for this is so small that this never happens in practice."
       },
       {
-        "order": 111,
+        "order": 110,
         "text": "Our next problem is to $verify$ if $AB = C$ holds when $A, B$ and $C$ are matrices of size $n \\times n$. Of course, we can solve the problem by calculating the product $AB$ again (in $O(n^3)$ time using the basic algorithm), but one could hope that verifying the answer would by easier than to calculate it from scratch. It turns out that we can solve the problem using a Monte Carlo algorithm$^2$"
       },
       {
-        "order": 112,
+        "order": 111,
         "text": "whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$."
       },
       {
-        "order": 113,
+        "order": 112,
         "text": "The time complexity of the algorithm is $O(n^2)$, because we can calculate the matrices $ABX$ and $CX$ in $O(n^2)$ time. We can calculate the matrix $ABX$ efficiently by using the representation $A(BX)$, so only two multiplications of $n\\times n$ and $n\\times$ 1 size matrices are needed. The drawback of the algorithm is that there is a small chance that the algorithm makes a mistake when it reports that $AB = C$. For example,"
       },
       {
-        "order": 114,
+        "order": 113,
         "text": "$\\cdot$ 6 8 1 3"
       },
       {
-        "order": 115,
+        "order": 114,
         "text": "$̸=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 116,
+        "order": 115,
         "text": ","
       },
       {
-        "order": 117,
+        "order": 116,
         "text": "but $\\cdot$ 6 8 1 3"
       },
       {
-        "order": 118,
+        "order": 117,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 119,
+        "order": 118,
         "text": "$=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 120,
+        "order": 119,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 121,
+        "order": 120,
         "text": "."
       },
       {
-        "order": 122,
+        "order": 121,
         "text": "However, in practice, the probability that the algorithm makes a mistake is small, and we can decrease the probability by verifying the result using multiple random vectors $X$ before reporting that $AB = C$."
       },
       {
-        "order": 123,
+        "order": 122,
         "text": "Given a graph that contains $n$ nodes and $m$ edges, our task is to find a way to color the nodes of the graph using two colors so that for at least $m$/2 edges, the endpoints have different colors. For example, in the graph"
       },
       {
-        "order": 124,
+        "order": 123,
         "text": "a valid coloring is as follows:"
       },
       {
-        "order": 125,
+        "order": 124,
         "text": "The above graph contains 7 edges, and for 5 of them, the endpoints have different colors, so the coloring is valid. The problem can be solved using a Las Vegas algorithm that generates random colorings until a valid coloring has been found. In a random coloring, the color of each node is independently chosen so that the probability of both colors is 1/2. In a random coloring, the probability that the endpoints of a single edge have different colors is 1/2. Hence, the expected number of edges whose endpoints have different colors is $m$/2. Since it is expected that a random coloring is valid, we will quickly find a valid coloring in practice."
       }
     ],
@@ -13656,55 +13612,55 @@
         "title": "Expected value",
         "paragraph_range": [
           63,
-          82
+          81
         ]
       },
       {
         "level": 3,
         "title": "Distributions",
         "paragraph_range": [
-          83,
-          97
+          82,
+          96
         ]
       },
       {
         "level": 3,
         "title": "Markov chains",
         "paragraph_range": [
-          98,
-          105
+          97,
+          104
         ]
       },
       {
         "level": 3,
         "title": "Randomized algorithms",
         "paragraph_range": [
-          106,
-          107
+          105,
+          106
         ]
       },
       {
         "level": 3,
         "title": "Order statistics",
         "paragraph_range": [
-          108,
-          110
+          107,
+          109
         ]
       },
       {
         "level": 3,
         "title": "Verifying matrix multiplication",
         "paragraph_range": [
-          111,
-          122
+          110,
+          121
         ]
       },
       {
         "level": 3,
         "title": "Graph coloring",
         "paragraph_range": [
-          123,
-          125
+          122,
+          124
         ]
       }
     ],
@@ -13712,12 +13668,12 @@
       {
         "src": "/cp-handbook/figures/fig_p243_123.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 123
+        "preceding_paragraph_order": 122
       },
       {
         "src": "/cp-handbook/figures/fig_p243_124.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 124
+        "preceding_paragraph_order": 123
       }
     ],
     "footnotes": [
