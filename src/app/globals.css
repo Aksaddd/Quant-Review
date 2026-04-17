@@ -80,11 +80,15 @@
   --shadow-lg: 0 8px 24px rgba(33,36,44,0.12), 0 4px 8px rgba(33,36,44,0.06);
   --shadow-brand: 0 0 0 3px rgba(24, 101, 242, 0.2);
 
-  /* Fonts — system stack (no Google Fonts fetch required) */
-  --font-inter: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-                Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-lora:  'Iowan Old Style', 'Palatino Linotype', Palatino,
-                'Book Antiqua', Georgia, 'Times New Roman', Times, serif;
+  /* Fonts — Apple-first system stack. SF Pro Text on Apple devices,
+     graceful fallback everywhere else. New York (ui-serif) for body reading
+     on Apple; Iowan Old Style / Georgia elsewhere. */
+  --font-inter: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter',
+                system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+                sans-serif;
+  --font-lora:  ui-serif, 'New York', 'Source Serif 4', 'Iowan Old Style',
+                'Palatino Linotype', Palatino, 'Book Antiqua', Georgia,
+                'Times New Roman', Times, serif;
   /* Math-optimized monospace stack. Prefers fonts with strong Unicode
      coverage for mathematical operators (∑∫≤≥∈≠≈∞√∂∇→⇒⊕⊗), subscripts,
      and Greek letters. Falls back gracefully through system monospace. */
@@ -194,14 +198,20 @@ body {
   min-height: 100dvh;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar        { width: 6px; height: 6px; }
-::-webkit-scrollbar-track  { background: var(--surface-3); }
-::-webkit-scrollbar-thumb  { background: var(--surface-5); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--surface-border-strong); }
+/* Scrollbar — Apple-style: thin, transparent thumb that fades in on hover */
+::-webkit-scrollbar        { width: 10px; height: 10px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  {
+  background: transparent;
+  border-radius: 9999px;
+  transition: background var(--dur-short) var(--ease-standard);
+}
+.eureka-active:hover ::-webkit-scrollbar-thumb,
+body:hover ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.35); }
+::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.55); }
 
-/* Selection */
-::selection { background: var(--ka-blue-mid); color: var(--ka-blue-dark); }
+/* Selection — accent-tinted */
+::selection { background: var(--eureka-accent-tint-strong); color: inherit; }
 
 /* ─────────────────────────────────────────────────────────────────────────────
    TYPOGRAPHY
