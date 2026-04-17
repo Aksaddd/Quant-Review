@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CheckCircle2, ChevronRight, BookOpen } from 'lucide-react';
+import { CheckCircle2, ChevronRight } from 'lucide-react';
 import type { SectionStats } from '@/lib/types';
 
 const SECTION_EMOJIS: Record<string, string> = {
@@ -16,11 +16,14 @@ function masteryLabel(pct: number): string {
   return 'Mastered';
 }
 
+/**
+ * Mastery uses a single-accent luminance ramp instead of the prior
+ * blue→green semantic ladder, so the user's accent picks through.
+ */
 function masteryColor(pct: number): string {
-  if (pct === 0)   return '#e4e6ea';
-  if (pct < 50)    return '#a3c4f3';
-  if (pct < 100)   return '#1865f2';
-  return '#1fab54';
+  if (pct === 0)   return '#d2d2d7';                // Apple grey 300
+  if (pct === 100) return '#30d158';                // iOS green — milestone
+  return 'var(--eureka-accent)';                    // any partial progress
 }
 
 interface SectionGridProps {
@@ -31,10 +34,11 @@ export default function SectionGrid({ sections }: SectionGridProps) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-[#21242c]">Course Units</h2>
+        <h2 className="text-[17px] font-semibold tracking-tight text-[#1d1d1f]">Course Units</h2>
         <Link
           href="/read/chapter-2"
-          className="text-sm font-semibold text-[var(--ka-blue)] hover:underline flex items-center gap-1"
+          className="text-[13px] font-semibold hover:underline flex items-center gap-1"
+          style={{ color: 'var(--eureka-accent)' }}
         >
           View all <ChevronRight size={14} />
         </Link>
@@ -51,23 +55,32 @@ export default function SectionGrid({ sections }: SectionGridProps) {
             <Link
               key={sec.section}
               href={`/read/chapter-2#section-${sec.section}`}
-              className="group flex items-center gap-4 p-4 bg-white border border-[#e4e6ea] rounded-lg hover:border-[#c8ccd4] hover:shadow-sm transition-all duration-150"
+              className="group flex items-center gap-4 p-4 transition-all duration-200"
+              style={{
+                background: '#ffffff',
+                border: '0.5px solid rgba(0,0,0,0.06)',
+                borderRadius: 14,
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                transitionTimingFunction: 'var(--ease-standard)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-1px)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
             >
               {/* Mastery ring */}
               <div className="relative w-11 h-11 shrink-0">
                 <svg width="44" height="44" viewBox="0 0 44 44">
-                  <circle cx="22" cy="22" r="18" fill="none" stroke="#e4e6ea" strokeWidth="3" />
+                  <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="2.5" />
                   {pct > 0 && (
                     <circle
                       cx="22" cy="22" r="18"
                       fill="none"
                       stroke={color}
-                      strokeWidth="3"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeDasharray={`${2 * Math.PI * 18}`}
                       strokeDashoffset={`${2 * Math.PI * 18 * (1 - pct / 100)}`}
                       transform="rotate(-90 22 22)"
-                      style={{ transition: 'stroke-dashoffset 0.6s ease' }}
+                      style={{ transition: 'stroke-dashoffset 600ms var(--ease-standard)' }}
                     />
                   )}
                 </svg>
@@ -79,18 +92,25 @@ export default function SectionGrid({ sections }: SectionGridProps) {
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <p className="text-[11px] font-medium text-[#9299a5]">{sec.section}</p>
+                  <p className="text-[10px] font-medium text-[#86868b] tabular-nums">{sec.section}</p>
                   <span
-                    className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
-                    style={{ backgroundColor: color + '20', color }}
+                    className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md tracking-tight"
+                    style={
+                      pct === 0
+                        ? { background: 'rgba(0,0,0,0.05)', color: '#86868b' }
+                        : pct === 100
+                        ? { background: 'rgba(48,209,88,0.14)', color: '#1f9b46' }
+                        : { background: 'var(--eureka-accent-tint)', color: 'var(--eureka-accent)' }
+                    }
                   >
                     {label}
                   </span>
                 </div>
-                <p className="text-sm font-semibold text-[#21242c] group-hover:text-[var(--ka-blue)] transition-colors">
+                <p className="text-[14px] font-semibold tracking-tight text-[#1d1d1f] group-hover:text-[var(--eureka-accent)] transition-colors duration-200"
+                   style={{ transitionTimingFunction: 'var(--ease-standard)' }}>
                   {sec.sectionTitle}
                 </p>
-                <p className="text-[12px] text-[#9299a5] mt-0.5">
+                <p className="text-[11px] text-[#86868b] mt-0.5 tabular-nums">
                   {sec.solved} / {sec.total} problems
                 </p>
               </div>
@@ -107,23 +127,24 @@ export default function SectionGrid({ sections }: SectionGridProps) {
                         return (
                           <span
                             key={i}
-                            className="w-2 h-2 rounded-full"
-                            style={{ backgroundColor: i < filled ? '#1fab54' : '#e4e6ea' }}
+                            className="w-[6px] h-[6px] rounded-full"
+                            style={{ background: i < filled ? '#30d158' : 'rgba(0,0,0,0.08)' }}
                           />
                         );
                       })}
                     </div>
-                    <span className="text-[9px] text-[#9299a5]">
+                    <span className="text-[9px] text-[#86868b] tabular-nums">
                       {sec.cardsMastered}/{sec.cardsReviewed > 0 ? sec.cardsReviewed : '?'} mastered
                     </span>
                   </div>
                 )}
                 {complete ? (
-                  <CheckCircle2 size={20} className="text-[#1fab54]" />
+                  <CheckCircle2 size={20} style={{ color: '#30d158' }} />
                 ) : (
                   <div className="flex items-center gap-1">
-                    <span className="text-sm font-bold" style={{ color }}>{pct}%</span>
-                    <ChevronRight size={15} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors" />
+                    <span className="text-[13px] font-semibold tabular-nums tracking-tight" style={{ color }}>{pct}%</span>
+                    <ChevronRight size={15} className="text-[#86868b] group-hover:text-[var(--eureka-accent)] transition-colors duration-200"
+                                   style={{ transitionTimingFunction: 'var(--ease-standard)' }} />
                   </div>
                 )}
               </div>
