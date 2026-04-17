@@ -529,8 +529,6 @@ and $^nX$
 
 $^{x=1}$ $x^2 = 1^2 +2^2 +3^2 +...+ n^2 =$ $n(n+1)(2n+1)$
 
-6 .
-
 An **arithmetic progression** is a sequence of numbers where the difference between any two consecutive numbers is constant. For example,
 
 3,7,11,15
@@ -992,11 +990,7 @@ Given an array that contains $n$ elements, your task is to sort the elements in 
 
 For example, the array
 
-1 3 8 2 9 2 5 6
-
 will be as follows after sorting:
-
-1 2 2 3 5 6 8 9
 
 ### O(n2) algorithms
 
@@ -1016,8 +1010,6 @@ for (int i = 0; i < n; i++) {
 ```
 
 After the first round of the algorithm, the largest element will be in the correct position, and in general, after $k$ rounds, the $k$ largest elements will be in the correct positions. Thus, after $n$ rounds, the whole array will be sorted. For example, in the array
-
-1 3 8 2 9 2 5 6
 
 the first round of bubble sort swaps elements as follows:
 
@@ -1054,22 +1046,14 @@ It is possible to sort an array efficiently in $O(n$log$n$) time using algorithm
 
 Merge sort is an efficient algorithm, because it halves the size of the subarray at each step. The recursion consists of $O$(log$n$) levels, and processing each level takes $O(n)$ time. Merging the subarrays `array`[$a...k$] and `array`[$k + 1...b$] is possible in linear time, because they are already sorted. For example, consider sorting the following array:
 
-1 3 6 2 8 2 5 9
-
 The array will be divided into two subarrays as follows:
 
-1 3 6 2 8 2 5 9
-
 Then, the subarrays will be sorted recursively as follows:
-
-1 2 3 6 2 5 8 9
 
 > **[1]** According to [47], merge sort was invented by J. von Neumann in 1945.
 
 <!-- PAGE 38 -->
 Finally, the algorithm merges the sorted subarrays and creates the final sorted array:
-
-1 2 2 3 5 6 8 9
 
 ### Sorting lower bound
 
@@ -1094,13 +1078,7 @@ The lower bound $n$log$n$ does not apply to algorithms that do not compare array
 <!-- PAGE 39 -->
 For example, the array
 
-1 3 6 9 9 3 5 9
-
 corresponds to the following bookkeeping array:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$
-
-1 0 2 0 1 1 0 0 3
 
 For example, the value at position 3 in the bookkeeping array is 2, because the element 3 appears 2 times in the original array. Construction of the bookkeeping array takes $O(n)$ time. After this, the sorted array can be created in $O(n)$ time because the number of occurrences of each element can be retrieved from the bookkeeping array. Thus, the total time complexity of counting sort is $O(n)$. Counting sort is a very efficient algorithm but it can only be used when the constant $c$ is small enough, so that the array elements can be used as indices in the bookkeeping array.
 
@@ -1515,8 +1493,6 @@ for (auto x : m) {
 
 Many functions in the C++ standard library operate with iterators. An **iterator** is a variable that points to an element in a data structure. The often used iterators `begin` and `end` define a range that contains all elements in a data structure. The iterator `begin` points to the first element in the data structure, and the iterator `end` points to the position $after$ the last element. The situation looks as follows:
 
-{ 3, 4, 6, 8, 12, 13, 14, 17 } $↑$ $↑$
-
                s.begin()
                                                      s.end()
 
@@ -1839,8 +1815,6 @@ When the function `search` is called with parameter $k$, it decides whether to i
 
 search(3) search(3) search(3) search(3) search(3) search(3) search(3) search(3)
 
-; {2} {1} {1,2} {0} {0,2} {0,1} {0,1,2}
-
 ### Method 2
 
 Another way to generate subsets is based on the bit representation of integers. Each subset of a set of $n$ elements can be represented as a sequence of $n$ bits, which corresponds to an integer between 0...2$^n-1$. The ones in the bit sequence indicate which elements are included in the subset. The usual convention is that the last bit corresponds to element 0, the second last bit corresponds to element 1, and so on. For example, the bit representation of 25 is 11001, which corresponds to the subset {0,3,4}. The following code goes through the subsets of a set of $n$ elements
@@ -2129,10 +2103,6 @@ Let us now consider a problem where we are given $n$ tasks with durations and de
 task duration deadline $A$ 4 2 $B$ 3 5 $C$ 2 7 $D$ 4 5
 
 In this case, an optimal schedule for the tasks is as follows:
-
-$^0$ $^5$ $^{10}$
-
-$C$ $B$ $A$ $D$
 
 In this solution, $C$ yields 5 points, $B$ yields 0 points, $A$ yields $-7$ points and $D$ yields $-8$ points, so the total score is $-1$0. Surprisingly, the optimal solution to the problem does not depend on the deadlines at all, but a correct greedy strategy is to simply perform the tasks $sorted$ $by$ $their$ *durations* in increasing order. The reason for this is that if we ever perform two tasks one after another such that the first task takes longer than the second task, we can obtain a better solution if we swap the tasks. For example, consider the following schedule:
 
@@ -2592,15 +2562,7 @@ Now we have discussed all basic ideas of dynamic programming. Since dynamic prog
 
 Our first problem is to find the **longest increasing subsequence** in an array of $n$ elements. This is a maximum-length sequence of array elements that goes from left to right, and each element in the sequence is larger than the previous element. For example, in the array
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-6 2 5 1 7 4 8 3
-
 the longest increasing subsequence contains 4 elements:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-6 2 5 1 7 4 8 3
 
 Let `length`($k$) denote the length of the longest increasing subsequence that ends at position $k$. Thus, if we calculate all values of `length`($k$) where 0 $\le k \le n-1$, we will find out the length of the longest increasing subsequence. For example, the values of the function for the above array are as follows:
 
@@ -2871,38 +2833,24 @@ In the **two pointers method**, two pointers are used to iterate through the arr
 
 As the first example, consider a problem where we are given an array of $n$ positive integers and a target sum $x$, and we want to find a subarray whose sum is $x$ or report that there is no such subarray. For example, the array
 
-1 3 2 5 1 1 2 3
-
 contains a subarray whose sum is 8:
-
-1 3 2 5 1 1 2 3
 
 This problem can be solved in $O(n)$ time by using the two pointers method. The idea is to maintain pointers that point to the first and last value of a subarray. On each turn, the left pointer moves one step to the right, and the right pointer moves to the right as long as the resulting subarray sum is at most $x$. If the sum becomes exactly $x$, a solution has been found.
 
 <!-- PAGE 88 -->
 As an example, consider the following array and a target sum $x =$ 8:
 
-1 3 2 5 1 1 2 3
-
 The initial subarray contains the values 1, 3 and 2 whose sum is 6:
-
-1 3 2 5 1 1 2 3
 
 Then, the left pointer moves one step to the right. The right pointer does not move, because otherwise the subarray sum would exceed $x$.
 
-1 3 2 5 1 1 2 3
-
 Again, the left pointer moves one step to the right, and this time the right pointer moves three steps to the right. The subarray sum is 2$+5+1 =$ 8, so a subarray whose sum is $x$ has been found.
-
-1 3 2 5 1 1 2 3
 
 The running time of the algorithm depends on the number of steps the right pointer moves. While there is no useful upper bound on how many steps the pointer can move on a $single$ turn. we know that the pointer moves $a$ $total$ $of$ $O(n)$ steps during the algorithm, because it only moves to the right. Since both the left and right pointer move $O(n)$ steps during the algorithm, the algorithm works in $O(n)$ time.
 
 ### 2SUM problem
 
 Another problem that can be solved using the two pointers method is the following problem, also known as the **2SUM problem**: given an array of $n$ numbers and a target sum $x$, find two array values such that their sum is $x$, or report that no such values exist. To solve the problem, we first sort the array values in increasing order. After that, we iterate through the array using two pointers. The left pointer starts at the first value and moves one step to the right on each turn. The right pointer begins at the last value and always moves to the left until the sum of the left and right value is at most $x$. If the sum is exactly $x$, a solution has been found. For example, consider the following array and a target sum $x =$ 12:
-
-1 4 5 6 7 9 9 10
 
 The initial positions of the pointers are as follows. The sum of the values is 1$+10 =$ 11 that is smaller than $x$.
 
@@ -2911,11 +2859,7 @@ The initial positions of the pointers are as follows. The sum of the values is 1
 
 Then the left pointer moves one step to the right. The right pointer moves three steps to the left, and the sum becomes 4$+7 =$ 11.
 
-1 4 5 6 7 9 9 10
-
 After this, the left pointer moves one step to the right again. The right pointer does not move, and a solution 5$+7 =$ 12 has been found.
-
-1 4 5 6 7 9 9 10
 
 The running time of the algorithm is $O(n$log$n$), because it first sorts the array in $O(n$log$n$) time, and then both pointers move $O(n)$ steps. Note that it is possible to solve the problem in another way in $O(n$log$n$) time using binary search. In such a solution, we iterate through the array and for each array value, we try to find another value that yields the sum $x$. This can be done by performing $n$ binary searches, each of which takes $O$(log$n$) time. A more difficult problem is the **3SUM problem** that asks to find $three$ array values whose sum is $x$. Using the idea of the above algorithm, this problem can be solved in $O(n^2)$ time$^1$. Can you see how?
 
@@ -2930,23 +2874,13 @@ Amortized analysis is often used to estimate the number of operations performed 
 
 First, the elements 1, 3 and 4 are added to the stack, because each element is larger than the previous element. Thus, the nearest smaller element of 4 is 3, and the nearest smaller element of 3 is 1.
 
-1 3 4 2 5 3 4 2
-
 The next element 2 is smaller than the two top elements in the stack. Thus, the elements 3 and 4 are removed from the stack, and then the element 2 is added to the stack. Its nearest smaller element is 1:
-
-1 3 4 2 5 3 4 2
 
 Then, the element 5 is larger than the element 2, so it will be added to the stack, and its nearest smaller element is 2:
 
-1 3 4 2 5 3 4 2
-
 After this, the element 5 is removed from the stack and the elements 3 and 4 are added to the stack:
 
-1 3 4 2 5 3 4 2
-
 Finally, all elements except 1 are removed from the stack and the last element 2 is added to the stack:
-
-1 3 4 2 5 3 4 2
 
 The efficiency of the algorithm depends on the total number of stack operations. If the current element is larger than the top element in the stack, it is directly added to the stack, which is efficient. However, sometimes the stack can contain several larger elements and it takes time to remove them. Still, each element is added *exactly* $once$ to the stack and removed $at$ $most$ $once$ from the stack. Thus, each element causes $O$(1) stack operations, and the algorithm works in $O(n)$ time.
 
@@ -2955,28 +2889,16 @@ The efficiency of the algorithm depends on the total number of stack operations.
 
 A **sliding window** is a constant-size subarray that moves from left to right through the array. At each window position, we want to calculate some information about the elements inside the window. In this section, we focus on the problem of maintaining the **sliding window minimum**, which means that we should report the smallest value inside each window. The sliding window minimum can be calculated using a similar idea that we used to calculate the nearest smaller elements. We maintain a queue where each element is larger than the previous element, and the first element always corresponds to the minimum element inside the window. After each window move, we remove elements from the end of the queue until the last queue element is smaller than the new window element, or the queue becomes empty. We also remove the first queue element if it is not inside the window anymore. Finally, we add the new window element to the end of the queue. As an example, consider the following array:
 
-2 1 4 5 3 4 1 2
-
 Suppose that the size of the sliding window is 4. At the first window position, the smallest value is 1:
-
-2 1 4 5 3 4 1 2
 
 Then the window moves one step right. The new element 3 is smaller than the elements 4 and 5 in the queue, so the elements 4 and 5 are removed from the queue and the element 3 is added to the queue. The smallest value is still 1.
 
-2 1 4 5 3 4 1 2
-
 After this, the window moves again, and the smallest element 1 does not belong to the window anymore. Thus, it is removed from the queue and the smallest value is now 3. Also the new element 4 is added to the queue.
-
-2 1 4 5 3 4 1 2
 
 The next new element 1 is smaller than all elements in the queue. Thus, all elements are removed from the queue and it will only contain the element 1:
 
-2 1 4 5 3 4 1 2
-
 <!-- PAGE 92 -->
 Finally the window reaches its last position. The element 2 is added to the queue, but the smallest value inside the window is still 1.
-
-2 1 4 5 3 4 1 2
 
 Since each array element is added to the queue exactly once and removed from the queue at most once, the algorithm works in $O(n)$ time.
 
@@ -2994,10 +2916,6 @@ In this chapter, we discuss data structures that allow us to efficiently process
 • `max`$_q(a,b)$: find the maximum value in range [$a,b$]
 
 For example, consider the range [3,6] in the following array:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 8 4 6 1 3 4
 
 In this case, `sum`$_q(3,6) =$ 14, `min`$_q(3,6) =$ 1 and `max`$_q(3,6) =$ 6. A simple way to process range queries is to use a loop that goes through all array values in the range. For example, the following function can be used to process sum queries on an array:
 
@@ -3022,15 +2940,7 @@ We first focus on a situation where the array is $static$, i.e., the array value
 
 We can easily process sum queries on a static array by constructing a **prefix sum array**. Each value in the prefix sum array equals the sum of values in the original array up to that position, i.e., the value at position $k$ is `sum`$_q(0,k)$. The prefix sum array can be constructed in $O(n)$ time. For example, consider the following array:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
-
 The corresponding prefix sum array is as follows:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 4 8 16 22 23 27 29
 
 Since the prefix sum array contains all values of `sum`$_q(0,k)$, we can calculate any value of `sum`$_q(a,b)$ in $O$(1) time as follows:
 
@@ -3038,15 +2948,7 @@ Since the prefix sum array contains all values of `sum`$_q(0,k)$, we can calcula
 
 By defining `sum`$_q(0,-1) =$ 0, the above formula also holds when $a =$ 0. For example, consider the range [3,6]:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
-
 In this case `sum`$_q(3,6) = 8+6+1+4 =$ 19. This sum can be calculated from two values of the prefix sum array:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 4 8 16 22 23 27 29
 
 Thus, `sum`$_q(3,6) =$ `sum`$_q(0,6)-$`sum`$_q(0,2) = 27-8 =$ 19. It is also possible to generalize this idea to higher dimensions. For example, we can construct a two-dimensional prefix sum array that can be used to calculate the sum of any rectangular subarray in $O$(1) time. Each sum in such an array corresponds to a subarray that begins at the upper-left corner of the array.
 
@@ -3064,10 +2966,6 @@ where $S(X)$ denotes the sum of values in a rectangular subarray from the upperl
 ### Minimum queries
 
 Minimum queries are more difficult to process than sum queries. Still, there is a quite simple $O(n$log$n$) time preprocessing method after which we can answer any minimum query in $O$(1) time$^1$. Note that since minimum and maximum queries can be processed similarly, we can focus on minimum queries. The idea is to precalculate all values of min$_q(a,b)$ where $b -a+1$ (the length of the range) is a power of two. For example, for the array
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
 
 the following values are calculated:
 
@@ -3090,19 +2988,7 @@ where $b-a+1$ is a power of two and $w = (b-a+1)$/2. Calculating all those value
 
 In the above formula, the range [$a,b$] is represented as the union of the ranges [$a,a+ k -1$] and [$b -k +1,b$], both of length $k$. As an example, consider the range [1,6]:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
-
 The length of the range is 6, and the largest power of two that does not exceed 6 is 4. Thus the range [1,6] is the union of the ranges [1,4] and [3,6]:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-1 3 4 8 6 1 4 2
 
 Since `min`$_q(1,4) =$ 3 and `min`$_q(3,6) =$ 1, we conclude that `min`$_q(1,6) =$ 1.
 
@@ -3121,27 +3007,11 @@ Even if the name of the structure is a binary indexed $tree$, it is usually repr
 <!-- PAGE 97 -->
 i.e., each position $k$ contains the sum of values in a range of the original array whose length is $p(k)$ and that ends at position $k$. For example, since $p(6) =$ 2, `tree`[6] contains the value of `sum`$_q$(5,6). For example, consider the following array:
 
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
-
-1 3 4 8 6 1 4 2
-
 The corresponding binary indexed tree is as follows:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
-
-1 4 4 16 6 7 4 29
 
 The following picture shows more clearly how each value in the binary indexed tree corresponds to a range in the original array:
 
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
-
-1 4 4 16 6 7 4 29
-
 Using a binary indexed tree, any value of `sum`$_q(1,k)$ can be calculated in $O$(log$n$) time, because a range [1,$k$] can always be divided into $O$(log$n$) ranges whose sums are stored in the tree. For example, the range [1,7] consists of the following ranges:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
-
-1 4 4 16 6 7 4 29
 
 Thus, we can calculate the corresponding sum as follows:
 
@@ -3153,10 +3023,6 @@ To calculate the value of `sum`$_q(a,b)$ where $a >$ 1, we can use the same tric
 
 <!-- PAGE 98 -->
 Since we can calculate both `sum`$_q(1,b)$ and `sum`$_q(1,a-1$) in $O$(log$n$) time, the total time complexity is $O$(log$n$). Then, after updating a value in the original array, several values in the binary indexed tree should be updated. For example, if the value at position 3 changes, the sums of the following ranges change:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
-
-1 4 4 16 6 7 4 29
 
 Since each array element belongs to $O$(log$n$) ranges in the binary indexed tree, it suffices to update $O$(log$n$) values in the tree.
 
@@ -3199,10 +3065,6 @@ A **segment tree**$^3$ is a data structure that supports two operations: process
 
 A segment tree is a binary tree such that the nodes on the bottom level of the tree correspond to the array elements, and the other nodes contain information needed for processing range queries. In this section, we assume that the size of the array is a power of two and zero-based indexing is used, because it is convenient to build a segment tree for such an array. If the size of the array is not a power of two, we can always append extra elements to it. We will first discuss segment trees that support sum queries. As an example, consider the following array:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-5 8 6 3 2 7 2 6
-
 The corresponding segment tree is as follows:
 
 ![Figure from page 99](figures/fig_p099_025.png)
@@ -3213,10 +3075,6 @@ Each internal tree node corresponds to an array range whose size is a power of t
 
 <!-- PAGE 100 -->
 It turns out that any range [$a,b$] can be divided into $O$(log$n$) ranges whose values are stored in tree nodes. For example, consider the range [2,7]:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-5 8 6 3 2 7 2 6
 
 Here `sum`$_q(2,7) = 6+3+2+7+2+6 =$ 26. In this case, the following two tree nodes correspond to the range:
 
@@ -3238,10 +3096,6 @@ We store a segment tree as an array of 2$n$ elements where $n$ is the size of th
 ![Figure from page 101](figures/fig_p101_028.png)
 
 is stored as follows:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
-39 22 17 13 9 9 8 5 8 6 3 2 7 2 6
 
 Using this representation, the parent of `tree`[$k$] is `tree`[$\lfloor k/2\rfloor$ ], and its children are `tree`[2$k$] and `tree`[2$k+1$]. Note that this implies that the position of a node is even if it is a left child and odd if it is a right child. The following function calculates the value of `sum`$_q(a,b)$:
 
@@ -3296,13 +3150,7 @@ $c$(8) $= 1$ $c$(555) $= 2$ $c(10^9)$ $= 3$
 
 So far, we have implemented data structures that support range queries and updates of single values. Let us now consider an opposite situation, where we should update ranges and retrieve single values. We focus on an operation that increases all elements in a range [$a,b$] by $x$. Surprisingly, we can use the data structures presented in this chapter also in this situation. To do this, we build a **difference array** whose values indicate the differences between consecutive values in the original array. Thus, the original array is the prefix sum array of the difference array. For example, consider the following array:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
-
-3 3 1 1 1 5 2 2
-
 The difference array for the above array is as follows:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
 3 0 $-2$ 0 0 4 $-3$ 0
 
@@ -3591,8 +3439,6 @@ Bit operations provide an efficient and convenient way to implement dynamic prog
 
 As a first example, consider the following problem: We are given the prices of $k$ products over $n$ days, and we want to buy each product exactly once. However, we are allowed to buy at most one product in a day. What is the minimum total price? For example, consider the following scenario ($k =$ 3 and $n =$ 8):
 
-0 1 2 3 4 5 6 7
-
 ![Figure from page 112](figures/fig_p112_031.png)
 
 product 0
@@ -3602,8 +3448,6 @@ product 1
 product 2
 
 In this scenario, the minimum total price is 5:
-
-0 1 2 3 4 5 6 7
 
 ![Figure from page 112](figures/fig_p112_032.png)
 
@@ -4339,8 +4183,6 @@ On the third round, node 3 is the new intermediate round. There is a new path be
 
 The algorithm continues like this, until all nodes have been appointed intermediate nodes. After the algorithm has finished, the array contains the minimum distances between any two nodes:
 
-1 2 3 4 5 1 0 5 7 3 1 2 5 0 2 8 6 3 7 2 0 7 8 4 3 8 7 0 2 5 1 6 8 2 0
-
 For example, the array tells us that the shortest distance between nodes 2 and 4 is 8. This corresponds to the following path:
 
 <!-- PAGE 141 -->
@@ -4496,8 +4338,6 @@ node $x$ 1 2 3 4 5 6
 ```cpp
                    maxLength(x)
 ```
-
-2 2 3 3 3 3
 
 Also in this problem, a good starting point for solving the problem is to root the tree arbitrarily:
 
@@ -4745,8 +4585,6 @@ A **topological sort** is an ordering of the nodes of a directed graph such that
 
 one topological sort is [4,1,5,2,3,6]:
 
-1 2 3 4 5 6
-
 An acyclic graph always has a topological sort. However, if the graph contains a cycle, it is not possible to form a topological sort, because no node of the cycle can appear before the other nodes of the cycle in the ordering. It turns out that depth-first search can be used to both check if a directed graph contains a cycle and, if it does not contain a cycle, to construct a topological sort.
 
 > **[1]** Directed acyclic graphs are sometimes called DAGs.
@@ -4861,8 +4699,6 @@ defines the following graph:
 ![Figure from page 164](figures/fig_p164_auto1.png)
 
 Since each node of a successor graph has a unique successor, we can also define a function `succ`($x,k$) that gives the node that we will reach if we begin at node $x$ and walk $k$ steps forward. For example, in the above graph `succ`(4,6) $= 2$, because we will reach node 2 by walking 6 steps from node 4:
-
-4 6 2 5 2 5 2
 
 A straightforward way to calculate a value of `succ`($x,k$) is to start at node $x$ and walk $k$ steps forward, which takes $O(k)$ time. However, using preprocessing, any value of `succ`($x,k$) can be calculated in only $O$(log$k$) time. The idea is to precalculate all values of `succ`($x,k$) where $k$ is a power of two and at most $u$, where $u$ is the maximum number of steps we will ever walk. This can be efficiently done, because we can use the following recursion:
 
@@ -5043,8 +4879,6 @@ The structure of the graph tells us whether it is possible to assign the values 
 <!-- PAGE 172 -->
 they already have values, they remain unchanged. The process continues until each variable has been assigned a value. The component graph for the formula $L_1$ is as follows:
 
-$A$ $B$ $C$ $D$
-
 The components are $A =$ {$¬x_4$}, $B =$ {$x_1,x_2,¬x_3$}, $C =$ {$¬x_1,¬x_2,x_3$} and $D =$ {$x_4$}. When constructing the solution, we first process the component $D$ where $x_4$ becomes true. After this, we process the component $C$ where $x_1$ and $x_2$ become false and $x_3$ becomes true. All variables have been assigned values, so the remaining components $A$ and $B$ do not change the variables. Note that this method works, because the graph has a special structure: if there are paths from node $x_i$ to node $x_j$ and from node $x_j$ to node $¬x_j$, then node $x_i$ never becomes true. The reason for this is that there is also a path from node $¬x_j$ to node $¬x_i$, and both $x_i$ and $x_j$ become false. A more difficult problem is the **3SAT problem**, where each part of the formula is of the form ($a_i ∨b_i ∨c_i$). This problem is NP-hard, so no efficient algorithm for solving the problem is known.
 
 <!-- PAGE 173 -->
@@ -5079,13 +4913,9 @@ $x$ 1 2 3 4 5 6 7 8
                ancestor(x,1)
 ```
 
-0 1 4 1 1 2 4 7
-
 ```cpp
                ancestor(x,2)
 ```
-
-0 0 1 0 0 1 1 4
 
 ```cpp
                ancestor(x,4)
@@ -5107,14 +4937,10 @@ a depth-first search proceeds as follows:
 
 Hence, the corresponding tree traversal array is as follows:
 
-1 2 6 3 4 7 8 9 5
-
 <!-- PAGE 175 -->
 ### Subtree queries
 
 Each subtree of a tree corresponds to a subarray of the tree traversal array such that the first element of the subarray is the root node. For example, the following subarray contains the nodes of the subtree of node 4:
-
-1 2 6 3 4 7 8 9 5
 
 Using this fact, we can efficiently process queries that are related to subtrees of a tree. As an example, consider a problem where each node is assigned a value, and our task is to support the following queries:
 
@@ -5218,27 +5044,15 @@ However, we use a different tree traversal array than before: we add each node t
 <!-- PAGE 179 -->
 We store two values in the array: the identifier of the node and the depth of the node in the tree. The following array corresponds to the above tree:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$
-
-1 2 5 2 6 8 6 2 1 3 1 4 7 4 1
-
 node id
 
 depth
-
-1 2 3 2 3 4 3 2 1 2 1 2 3 2 1
 
 Now we can find the lowest common ancestor of nodes $a$ and $b$ by finding the node with the *minimum* depth between nodes $a$ and $b$ in the array. For example, the lowest common ancestor of nodes 5 and 8 can be found as follows:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$
-
-1 2 5 2 6 8 6 2 1 3 1 4 7 4 1
-
 node id
 
 depth
-
-1 2 3 2 3 4 3 2 1 2 1 2 3 2 1
 
 $↑$
 
@@ -5273,8 +5087,6 @@ In this problem, we can use map structures to answer the queries. For example, t
 
 <!-- PAGE 181 -->
 If we create such a data structure for each node, we can easily process all given queries, because we can handle all queries related to a node immediately after creating its data structure. For example, the above map structure for node 4 tells us that its subtree contains two nodes whose value is 3. However, it would be too slow to create all data structures from scratch. Instead, at each node $s$, we create an initial data structure `d`[$s$] that only contains the value of $s$. After this, we go through the children of $s$ and $merge$ `d`[$s$] and all data structures `d`[$u$] where $u$ is a child of $s$. For example, in the above tree, the map for node 4 is created by merging the following maps:
-
-$^1$ $^1$ $^3$ $^1$
 
 $^4$ $^1$
 
@@ -5830,10 +5642,6 @@ Note that each prime factor appears in the vector as many times as it divides th
 ### Sieve of Eratosthenes
 
 The **sieve of Eratosthenes** is a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2...$n$ is prime and, if it is not, find one prime factor of the number. The algorithm builds an array `sieve` whose positions 2,3,...,$n$ are used. The value `sieve`[$k] =$ 0 means that $k$ is prime, and the value `sieve`[$k] ̸=$ 0 means that $k$ is not a prime and one of its prime factors is `sieve`[$k$]. The algorithm iterates through the numbers 2...$n$ one by one. Always when a new prime $x$ is found, the algorithm records that the multiples of $x (2x,3x,4x,...)$ are not primes, because the number $x$ divides them. For example, if $n =$ 20, the array is as follows:
-
-$^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$ $^{16}$ $^{17}$ $^{18}$ $^{19}$ $^{20}$
-
-0 0 2 0 3 0 2 3 5 0 3 0 7 5 2 0 3 0 5
 
 The following code implements the sieve of Eratosthenes. The code assumes that each element of `sieve` is initially zero.
 
@@ -6534,8 +6342,6 @@ $$
 
 $$
 
-6 7 9 13 0 5 7 8 4 4 2 18
-
 $A^T =$
 
 $$
@@ -6720,8 +6526,6 @@ $$
 
 $$
 
-0 0 0 1 0 0 1 0 0 0 1 1 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0
-
 $$
 
 $$
@@ -6735,8 +6539,6 @@ Now, for example, the matrix
 $$
 
 $$
-
-0 0 1 1 1 0 2 0 0 0 2 2 0 2 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0
 
 $$
 
@@ -7020,8 +6822,6 @@ In a **uniform distribution**, the random variable $X$ has $n$ possible values $
 
 $E[X] =$ $a+ b$
 
-2 .
-
 In a **binomial distribution**, $n$ attempts are made and the probability that a single attempt succeeds is $p$. The random variable $X$ counts the number of successful attempts, and the probability of a value $x$ is
 
 $!$
@@ -7174,10 +6974,6 @@ A **winning state** is a state where the player will win the game if they play o
 <!-- PAGE 246 -->
 2 or 3 sticks and win the game. State 4, in turn, is a losing state, because any move leads to a state that is a winning state for the opponent. More generally, if there is a move that leads from the current state to a losing state, the current state is a winning state, and otherwise the current state is a losing state. Using this observation, we can classify all states of a game starting with losing states where there are no possible moves. The states 0...15 of the above game can be classified as follows ($W$ denotes a winning state and $L$ denotes a losing state):
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
-$L$ $W$ $W$ $W$ $L$ $W$ $W$ $W$ $L$ $W$ $W$ $W$ $L$ $W$ $W$ $W$
-
 It is easy to analyze this game: a state $k$ is a losing state if $k$ is divisible by 4, and otherwise it is a winning state. An optimal way to play the game is to always choose a move after which the number of sticks in the heap is divisible by 4. Finally, there are no sticks left and the opponent has lost. Of course, this strategy requires that the number of sticks is $not$ divisible by 4 when it is our move. If it is, there is nothing we can do, and the opponent will win the game if they play optimally.
 
 ### State graph
@@ -7187,10 +6983,6 @@ Let us now consider another stick game, where in each state $k$, it is allowed t
 ![Figure from page 246](figures/fig_p246_125.png)
 
 The final state in this game is always state 1, which is a losing state, because there are no valid moves. The classification of states 1...9 is as follows:
-
-$^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$
-
-$L$ $W$ $L$ $W$ $L$ $W$ $L$ $W$ $L$
 
 Surprisingly, in this game, all even-numbered states are winning states, and all odd-numbered states are losing states.
 
@@ -7415,8 +7207,6 @@ where $s[0],s[1],...,s[n-1$] are interpreted as the codes of the characters of `
                                            Y
 ```
 
-65 76 76 69 89
-
 Thus, if $A =$ 3 and $B =$ 97, the hash value of `ALLEY` is
 
 (65$\cdot 3^4 +76\cdot 3^3 +76\cdot 3^2 +69\cdot 3^1 +89\cdot 3^0$) mod 97 $= 52$.
@@ -7478,8 +7268,6 @@ The **Z-array** `z` of a string `s` of length $n$ contains for each $k = 0,1,...
 <!-- PAGE 258 -->
 `s`. Thus, `z`[$k] =$ $p$ tells us that `s`[0... $p -1$] equals `s`[$k...k + p -1$]. Many string processing problems can be efficiently solved using the Z-array. For example, the Z-array of `ACBACDACBACBACDA` is as follows:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
 ```cpp
       A
           C
@@ -7507,8 +7295,6 @@ In this case, for example, `z`[6] $= 5$, because the substring `ACBAC` of length
 
 Next we describe an algorithm, called the **Z-algorithm**$^2$, that efficiently constructs the Z-array in $O(n)$ time. The algorithm calculates the Z-array values from left to right by both using information already stored in the Z-array and comparing substrings character by character. To efficiently calculate the Z-array values, the algorithm maintains a range [$x, y$] such that `s`[$x... y$] is a prefix of `s` and $y$ is as large as possible. Since we know that `s`[0... $y-x$] and `s`[$x... y$] are equal, we can use this information when calculating Z-values for positions $x+1,x+2,..., y$. At each position $k$, we first check the value of `z`[$k -x$]. If $k +$`z`[$k -x] < y$, we know that `z`[$k] =$ `z`[$k -x$]. However, if $k +$`z`[$k -x] \ge y$, `s`[0... $y-k$] equals `s`[$k... y$], and to determine the value of `z`[$k$] we need to compare the substrings character by character. Still, the algorithm works in $O(n)$ time, because we start comparing at positions $y-k+1$ and $y+1$. For example, let us construct the following Z-array:
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
 A C B A C D A C B A C B A C D A
 
 – ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
@@ -7516,8 +7302,6 @@ A C B A C D A C B A C B A C D A
 After calculating the value `z`[6] $= 5$, the current [$x, y$] range is [6,10]:
 
 $x$ $y$
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
 
 A C B A C D A C B A C B A C D A
 
@@ -7530,23 +7314,17 @@ Now we can calculate subsequent Z-array values efficiently, because we know that
 <!-- PAGE 259 -->
 $x$ $y$
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
 ![Figure from page 259](figures/fig_p259_134.png)
 
 Then, since `z`[3] $= 2$, we know that `z`[9] $\ge$ 2:
 
 $x$ $y$
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
 ![Figure from page 259](figures/fig_p259_135.png)
 
 However, we have no information about the string after position 10, so we need to compare the substrings character by character:
 
 $x$ $y$
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
 
 A C B A C D A C B A C B A C D A
 
@@ -7556,8 +7334,6 @@ It turns out that `z`[9] $= 7$, so the new [$x, y$] range is [9,15]:
 
 $x$ $y$
 
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
-
 A C B A C D A C B A C B A C D A
 
 – 0 0 2 0 0 5 0 0 7 ? ? ? ? ? ?
@@ -7565,8 +7341,6 @@ A C B A C D A C B A C B A C D A
 After this, all the remaining Z-array values can be determined by using the information already stored in the Z-array:
 
 $x$ $y$
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
 
 A C B A C D A C B A C B A C D A
 
@@ -7576,8 +7350,6 @@ A C B A C D A C B A C B A C D A
 ### Using the Z-array
 
 It is often a matter of taste whether to use string hashing or the Z-algorithm. Unlike hashing, the Z-algorithm always works and there is no risk for collisions. On the other hand, the Z-algorithm is more difficult to implement and some problems can only be solved using hashing. As an example, consider again the pattern matching problem, where our task is to find the occurrences of a pattern $p$ in a string $s$. We already solved this problem efficiently using string hashing, but the Z-algorithm provides another way to solve the problem. A usual idea in string processing is to construct a string that consists of multiple strings separated by special characters. In this problem, we can construct a string $p$`#`$s$, where $p$ and $s$ are separated by a special character `#` that does not occur in the strings. The Z-array of $p$`#`$s$ tells us the positions where $p$ occurs in $s$, because such positions contain the length of $p$. For example, if $s =$`HATTIVATTI` and $p =$`ATT`, the Z-array is as follows:
-
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$
 
 A T T
 #
@@ -7613,15 +7385,7 @@ vector<int> z(string s) {
 
 A **square root algorithm** is an algorithm that has a square root in its time complexity. A square root can be seen as a "poor man’s logarithm": the complexity $O(pn)$ is better than $O(n)$ but worse than $O$(log$n$). In any case, many square root algorithms are fast and usable in practice. As an example, consider the problem of creating a data structure that supports two operations on an array: modifying an element at a given position and calculating the sum of elements in the given range. We have previously solved the problem using binary indexed and segment trees, that support both operations in $O$(log$n$) time. However, now we will solve the problem in another way using a square root structure that allows us to modify elements in $O$(1) time and calculate sums in $O(pn)$ time. The idea is to divide the array into $blocks$ of size $pn$ so that each block contains the sum of elements inside the block. For example, an array of 16 elements will be divided into blocks of 4 elements as follows:
 
-21 17 20 13
-
-5 8 6 3 2 7 2 6 7 1 7 5 6 2 3 2
-
 In this structure, it is easy to modify array elements, because it is only needed to update the sum of a single block after each modification, which can be done in $O$(1) time. For example, the following picture shows how the value of an element and the sum of the corresponding block change:
-
-21 15 20 13
-
-5 8 6 3 2 5 2 6 7 1 7 5 6 2 3 2
 
 Then, to calculate the sum of elements in a range, we divide the range into three parts such that the sum consists of values of single elements and sums of blocks between them:
 
@@ -7694,8 +7458,6 @@ Some square root algorithms are based on the following observation: if a positiv
 
 $k(k +1)$
 
-2 .
-
 Thus, the maximum amount of distinct numbers is $k = O(pn)$. Next we will discuss two problems that can be solved efficiently using this observation.
 
 ### Knapsack
@@ -7736,11 +7498,7 @@ Thus, all queries whose left endpoints are in a certain block are processed one 
 
 As an example, consider a problem where we are given a set of queries, each of them corresponding to a range in an array, and our task is to calculate for each query the number of *distinct* elements in the range. In Mo’s algorithm, the queries are always sorted in the same way, but it depends on the problem how the answer to the query is maintained. In this problem, we can maintain an array `count` where `count`[$x$] indicates the number of times an element $x$ occurs in the active range. When we move from one query to another query, the active range changes. For example, if the current range is
 
-4 2 5 4 2 4 3 3 4
-
 and the next range is
-
-4 2 5 4 2 4 3 3 4
 
 there will be three steps: the left endpoint moves one step to the right, and the right endpoint moves two steps to the right. After each step, the array `count` needs to be updated. After adding an element $x$, we increase the value of `count`[$x$] by 1, and if `count`[$x] =$ 1 after this, we also increase the answer to the query by 1. Similarly, after removing an element $x$, we decrease the value of `count`[$x$] by 1, and if `count`[$x] =$ 0 after this, we also decrease the answer to the query by 1. In this problem, the time needed to perform each step is $O$(1), so the total time complexity of the algorithm is $O(npn)$.
 
@@ -7843,8 +7601,6 @@ The value of such a sum can be efficiently calculated using sum formulas. For ex
 
 $z_1(0+1+\cdot \cdot \cdot + y-x) = z_1$ ($y-x)(y-x+1$)
 
-2 .
-
 When propagating an update in the tree, the indices of $p(u)$ change, because in each range [$x, y$], the values are calculated for $u = 0,1,..., y-x$. However, this is not a problem, because $p^′(u) = p(u + h)$ is a polynomial of equal degree as $p(u)$. For example, if $p(u) = t_2u^2 + t_1u -t_0$, then
 
 $p^′(u) = t_2(u + h)^2 + t_1(u + h)-t_0 = t_2u^2 +(2ht_2 + t_1)u + t_2h^2 + t_1h-t_0$.
@@ -7902,8 +7658,6 @@ The structure of each previous tree can be reconstructed by following the pointe
 ### Data structures
 
 Instead of single values, nodes in a segment tree can also contain *data structures* that maintain information about the corresponding ranges. In such a tree, the operations take $O(f (n)$log$n$) time, where $f (n)$ is the time needed for processing a single node during an operation. As an example, consider a segment tree that supports queries of the form "how many times does an element $x$ appear in the range [$a,b$]?" For example, the element 1 appears three times in the following range:
-
-3 1 2 3 1 1 1 2
 
 To support such queries, we build a segment tree where each node is assigned a data structure that can be asked how many times any element $x$ appears in the corresponding range. Using this tree, the answer to a query can be calculated by combining the results from the nodes that belong to the range. For example, the following segment tree corresponds to the above array:
 
@@ -8240,10 +7994,6 @@ We go through the events from left to right and maintain a counter. Always when 
 <!-- PAGE 286 -->
 ![Figure from page 286](figures/fig_p286_163.png)
 
-$+$ $-$ $+$ $-$ $+$ $-$ $+$ $-$
-
-3 1 2 2 2 0 1 1
-
 The symbols $+$ and $-$indicate whether the value of the counter increases or decreases, and the value of the counter is shown below. The maximum value of the counter is 3 between John’s arrival and Maria’s leaving. The running time of the algorithm is $O(n$log$n$), because sorting the events takes $O(n$log$n$) time and the rest of the algorithm takes $O(n)$ time.
 
 ### Intersection points
@@ -8294,12 +8044,6 @@ the convex hull is as follows:
 
 <!-- PAGE 289 -->
 **Andrew’s algorithm** [3] provides an easy way to construct the convex hull for a set of points in $O(n$log$n$) time. The algorithm first locates the leftmost and rightmost points, and then constructs the convex hull in two parts: first the upper hull and then the lower hull. Both parts are similar, so we can focus on constructing the upper hull. First, we sort the points primarily according to x coordinates and secondarily according to y coordinates. After this, we go through the points and add each point to the hull. Always after adding a point to the hull, we make sure that the last line segment in the hull does not turn left. As long as it turns left, we repeatedly remove the second last point from the hull. The following pictures show how Andrew’s algorithm works:
-
-9 10 11 12
-
-13 14 15 16
-
-17 18 19 20
 
 <!-- PAGE 290 -->
 <!-- PAGE 291 -->
