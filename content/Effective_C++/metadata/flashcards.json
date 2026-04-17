@@ -1,0 +1,850 @@
+[
+  {
+    "id": "item-1-ttr-0",
+    "item": 1,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 1 — View C++ as a federation of languages. Learn to view C++ as a federation of languages: Rules for effective C++ programming vary, depending on the part of C++ you are using. What is rule #1 to remember?",
+    "back": "Rules for effective C++ programming vary, depending on the part of C++ you are using."
+  },
+  {
+    "id": "item-2-ttr-0",
+    "item": 2,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 2 — Prefer consts, enums, and inlines to #defines. Learn to prefer consts, enums, and inlines to #defines: For simple constants, prefer `const` objects or enums to `#define`s. What is rule #1 to remember?",
+    "back": "For simple constants, prefer `const` objects or enums to `#define`s."
+  },
+  {
+    "id": "item-2-ttr-1",
+    "item": 2,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 2 — Prefer consts, enums, and inlines to #defines. Learn to prefer consts, enums, and inlines to #defines: For simple constants, prefer `const` objects or enums to `#define`s. What is rule #2 to remember?",
+    "back": "For function-like macros, prefer inline functions to `#define`s."
+  },
+  {
+    "id": "item-3-ttr-0",
+    "item": 3,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 3 — Use const whenever possible. Learn to use const whenever possible: Declaring something `const` helps compilers detect usage errors. `const` can be applied to objects at any scope, to function parameters and return types, and to member functions as a whole. What is rule #1 to remember?",
+    "back": "Declaring something `const` helps compilers detect usage errors. `const` can be applied to objects at any scope, to function parameters and return types, and to member functions as a whole."
+  },
+  {
+    "id": "item-3-ttr-1",
+    "item": 3,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 3 — Use const whenever possible. Learn to use const whenever possible: Declaring something `const` helps compilers detect usage errors. `const` can be applied to objects at any scope, to function parameters and return types, and to member functions as a whole. What is rule #2 to remember?",
+    "back": "Compilers enforce bitwise constness, but you should program using conceptual constness."
+  },
+  {
+    "id": "item-3-ttr-2",
+    "item": 3,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 3 — Use const whenever possible. Learn to use const whenever possible: Declaring something `const` helps compilers detect usage errors. `const` can be applied to objects at any scope, to function parameters and return types, and to member functions as a whole. What is rule #3 to remember?",
+    "back": "When `const` and non-`const` member functions have essentially identical implementations, code duplication can be avoided by having the non-`const` version call the `const` version."
+  },
+  {
+    "id": "item-4-ttr-0",
+    "item": 4,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 4 — Make sure that objects are initialized before they're used. Learn to make sure that objects are initialized before they're used: Manually initialize objects of built-in type, because C++ only sometimes initializes them itself. What is rule #1 to remember?",
+    "back": "Manually initialize objects of built-in type, because C++ only sometimes initializes them itself."
+  },
+  {
+    "id": "item-4-ttr-1",
+    "item": 4,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 4 — Make sure that objects are initialized before they're used. Learn to make sure that objects are initialized before they're used: Manually initialize objects of built-in type, because C++ only sometimes initializes them itself. What is rule #2 to remember?",
+    "back": "In a constructor, prefer use of the member initialization list to assignment inside the body of the constructor. List data members in the initialization list in the same order they're declared in the class."
+  },
+  {
+    "id": "item-4-ttr-2",
+    "item": 4,
+    "chapter": 1,
+    "difficulty": "beginner",
+    "front": "Item 4 — Make sure that objects are initialized before they're used. Learn to make sure that objects are initialized before they're used: Manually initialize objects of built-in type, because C++ only sometimes initializes them itself. What is rule #3 to remember?",
+    "back": "Avoid initialization order problems across translation units by replacing non-local static objects with local static objects."
+  },
+  {
+    "id": "item-5-ttr-0",
+    "item": 5,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 5 — Know what functions C++ silently writes and calls. Learn to know what functions C++ silently writes and calls: Compilers may implicitly generate a class's default constructor, copy constructor, copy assignment operator, and destructor. What is rule #1 to remember?",
+    "back": "Compilers may implicitly generate a class's default constructor, copy constructor, copy assignment operator, and destructor."
+  },
+  {
+    "id": "item-6-ttr-0",
+    "item": 6,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 6 — Explicitly disallow the use of compiler-generated functions you do not want. Learn to explicitly disallow the use of compiler-generated functions you do not want: To disallow functionality automatically provided by compilers, declare the corresponding member functions `private` and give no implementations. Using a base class like `Uncopyable` is one way to do this. What is rule #1 to remember?",
+    "back": "To disallow functionality automatically provided by compilers, declare the corresponding member functions `private` and give no implementations. Using a base class like `Uncopyable` is one way to do this."
+  },
+  {
+    "id": "item-7-ttr-0",
+    "item": 7,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 7 — Declare destructors virtual in polymorphic base classes. Learn to declare destructors virtual in polymorphic base classes: Polymorphic base classes should declare virtual destructors. If a class has any virtual functions, it should have a virtual destructor. What is rule #1 to remember?",
+    "back": "Polymorphic base classes should declare virtual destructors. If a class has any virtual functions, it should have a virtual destructor."
+  },
+  {
+    "id": "item-7-ttr-1",
+    "item": 7,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 7 — Declare destructors virtual in polymorphic base classes. Learn to declare destructors virtual in polymorphic base classes: Polymorphic base classes should declare virtual destructors. If a class has any virtual functions, it should have a virtual destructor. What is rule #2 to remember?",
+    "back": "Classes not designed to be base classes or not designed to be used polymorphically should not declare virtual destructors."
+  },
+  {
+    "id": "item-8-ttr-0",
+    "item": 8,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 8 — Prevent exceptions from leaving destructors. Learn to prevent exceptions from leaving destructors: Destructors should never emit exceptions. If functions called in a destructor may throw, the destructor should catch any exceptions, then swallow them or terminate the program. What is rule #1 to remember?",
+    "back": "Destructors should never emit exceptions. If functions called in a destructor may throw, the destructor should catch any exceptions, then swallow them or terminate the program."
+  },
+  {
+    "id": "item-8-ttr-1",
+    "item": 8,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 8 — Prevent exceptions from leaving destructors. Learn to prevent exceptions from leaving destructors: Destructors should never emit exceptions. If functions called in a destructor may throw, the destructor should catch any exceptions, then swallow them or terminate the program. What is rule #2 to remember?",
+    "back": "If class clients need to be able to react to exceptions thrown during an operation, the class should provide a regular (i.e., non-destructor) function that performs the operation."
+  },
+  {
+    "id": "item-9-ttr-0",
+    "item": 9,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 9 — Never call virtual functions during construction or destruction. Learn to never call virtual functions during construction or destruction: Don't call virtual functions during construction or destruction, because such calls will never go to a more derived class than that of the currently executing constructor or destructor. What is rule #1 to remember?",
+    "back": "Don't call virtual functions during construction or destruction, because such calls will never go to a more derived class than that of the currently executing constructor or destructor."
+  },
+  {
+    "id": "item-10-ttr-0",
+    "item": 10,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 10 — Have assignment operators return a reference to *this. Learn to have assignment operators return a reference to *this: Have assignment operators return a reference to `*this`. What is rule #1 to remember?",
+    "back": "Have assignment operators return a reference to `*this`."
+  },
+  {
+    "id": "item-11-ttr-0",
+    "item": 11,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 11 — Handle assignment to self in operator=. Learn to handle assignment to self in operator=: Make sure `operator=` is well-behaved when an object is assigned to itself. Techniques include comparing addresses of source and target objects, careful statement ordering, and copy-and-`swap`. What is rule #1 to remember?",
+    "back": "Make sure `operator=` is well-behaved when an object is assigned to itself. Techniques include comparing addresses of source and target objects, careful statement ordering, and copy-and-`swap`."
+  },
+  {
+    "id": "item-11-ttr-1",
+    "item": 11,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 11 — Handle assignment to self in operator=. Learn to handle assignment to self in operator=: Make sure `operator=` is well-behaved when an object is assigned to itself. Techniques include comparing addresses of source and target objects, careful statement ordering, and copy-and-`swap`. What is rule #2 to remember?",
+    "back": "Make sure that any function operating on more than one object behaves correctly if two or more of the objects are the same."
+  },
+  {
+    "id": "item-12-ttr-0",
+    "item": 12,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 12 — Copy all parts of an object. Learn to copy all parts of an object: Copying functions should be sure to copy all of an object's data members and all of its base class parts. What is rule #1 to remember?",
+    "back": "Copying functions should be sure to copy all of an object's data members and all of its base class parts."
+  },
+  {
+    "id": "item-12-ttr-1",
+    "item": 12,
+    "chapter": 2,
+    "difficulty": "beginner",
+    "front": "Item 12 — Copy all parts of an object. Learn to copy all parts of an object: Copying functions should be sure to copy all of an object's data members and all of its base class parts. What is rule #2 to remember?",
+    "back": "Don't try to implement one of the copying functions in terms of the other. Instead, put common functionality in a third function that both call."
+  },
+  {
+    "id": "item-13-ttr-0",
+    "item": 13,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 13 — Use objects to manage resources. Learn to use objects to manage resources: To prevent resource leaks, use RAII objects that acquire resources in their constructors and release them in their destructors. What is rule #1 to remember?",
+    "back": "To prevent resource leaks, use RAII objects that acquire resources in their constructors and release them in their destructors."
+  },
+  {
+    "id": "item-13-ttr-1",
+    "item": 13,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 13 — Use objects to manage resources. Learn to use objects to manage resources: To prevent resource leaks, use RAII objects that acquire resources in their constructors and release them in their destructors. What is rule #2 to remember?",
+    "back": "Two commonly useful RAII classes are `TR1::shared_ptr` and `auto_ptr`. `tr1::shared_ptr` is usually the better choice, because its behavior when copied is intuitive. Copying an `auto_ptr` sets it to null."
+  },
+  {
+    "id": "item-14-ttr-0",
+    "item": 14,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 14 — Think carefully about copying behavior in resource-managing classes. Learn to think carefully about copying behavior in resource-managing classes: Copying an RAII object entails copying the resource it manages, so the copying behavior of the resource determines the copying behavior of the RAII object. What is rule #1 to remember?",
+    "back": "Copying an RAII object entails copying the resource it manages, so the copying behavior of the resource determines the copying behavior of the RAII object."
+  },
+  {
+    "id": "item-14-ttr-1",
+    "item": 14,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 14 — Think carefully about copying behavior in resource-managing classes. Learn to think carefully about copying behavior in resource-managing classes: Copying an RAII object entails copying the resource it manages, so the copying behavior of the resource determines the copying behavior of the RAII object. What is rule #2 to remember?",
+    "back": "Common RAII class copying behaviors are disallowing copying and performing reference counting, but other behaviors are possible."
+  },
+  {
+    "id": "item-15-ttr-0",
+    "item": 15,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 15 — Provide access to raw resources in resource-managing classes. Learn to provide access to raw resources in resource-managing classes: APIs often require access to raw resources, so each RAII class should offer a way to get at the resource it manages. What is rule #1 to remember?",
+    "back": "APIs often require access to raw resources, so each RAII class should offer a way to get at the resource it manages."
+  },
+  {
+    "id": "item-15-ttr-1",
+    "item": 15,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 15 — Provide access to raw resources in resource-managing classes. Learn to provide access to raw resources in resource-managing classes: APIs often require access to raw resources, so each RAII class should offer a way to get at the resource it manages. What is rule #2 to remember?",
+    "back": "Access may be via explicit conversion or implicit conversion. In general, explicit conversion is safer, but implicit conversion is more convenient for clients."
+  },
+  {
+    "id": "item-16-ttr-0",
+    "item": 16,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 16 — Use the same form in corresponding uses of new and delete. Learn to use the same form in corresponding uses of new and delete: If you use `[]` in a `new` expression, you must use `[]` in the corresponding `delete` expression. If you don't use `[]` in a `new` expression, you mustn't use `[]` in the corresponding `delete` expression. What is rule #1 to remember?",
+    "back": "If you use `[]` in a `new` expression, you must use `[]` in the corresponding `delete` expression. If you don't use `[]` in a `new` expression, you mustn't use `[]` in the corresponding `delete` expression."
+  },
+  {
+    "id": "item-17-ttr-0",
+    "item": 17,
+    "chapter": 3,
+    "difficulty": "intermediate",
+    "front": "Item 17 — Store newed objects in smart pointers in standalone statements. Learn to store newed objects in smart pointers in standalone statements: Store `new`ed objects in smart pointers in standalone statements. Failure to do this can lead to subtle resource leaks when exceptions are thrown. What is rule #1 to remember?",
+    "back": "Store `new`ed objects in smart pointers in standalone statements. Failure to do this can lead to subtle resource leaks when exceptions are thrown."
+  },
+  {
+    "id": "item-18-ttr-0",
+    "item": 18,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 18 — Make interfaces easy to use correctly and hard to use incorrectly. Learn to make interfaces easy to use correctly and hard to use incorrectly: Good interfaces are easy to use correctly and hard to use incorrectly. Your should strive for these characteristics in all your interfaces. What is rule #1 to remember?",
+    "back": "Good interfaces are easy to use correctly and hard to use incorrectly. Your should strive for these characteristics in all your interfaces."
+  },
+  {
+    "id": "item-18-ttr-1",
+    "item": 18,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 18 — Make interfaces easy to use correctly and hard to use incorrectly. Learn to make interfaces easy to use correctly and hard to use incorrectly: Good interfaces are easy to use correctly and hard to use incorrectly. Your should strive for these characteristics in all your interfaces. What is rule #2 to remember?",
+    "back": "Ways to facilitate correct use include consistency in interfaces and behavioral compatibility with built-in types."
+  },
+  {
+    "id": "item-18-ttr-2",
+    "item": 18,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 18 — Make interfaces easy to use correctly and hard to use incorrectly. Learn to make interfaces easy to use correctly and hard to use incorrectly: Good interfaces are easy to use correctly and hard to use incorrectly. Your should strive for these characteristics in all your interfaces. What is rule #3 to remember?",
+    "back": "Ways to prevent errors include creating new types, restricting operations on types, constraining object values, and eliminating client resource management responsibilities."
+  },
+  {
+    "id": "item-18-ttr-3",
+    "item": 18,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 18 — Make interfaces easy to use correctly and hard to use incorrectly. Learn to make interfaces easy to use correctly and hard to use incorrectly: Good interfaces are easy to use correctly and hard to use incorrectly. Your should strive for these characteristics in all your interfaces. What is rule #4 to remember?",
+    "back": "`TR1::shared_ptr` supports custom deleters. This prevents the cross-DLL problem, can be used to automatically unlock mutexes (see [Item 14](<#0321334876ch03lev1sec2html-item-14-think-carefully-about-copying-behavior-in-resource-managing-classes>)), etc."
+  },
+  {
+    "id": "item-19-ttr-0",
+    "item": 19,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 19 — Treat class design as type design. Learn to treat class design as type design: Class design is type design. Before defining a new type, be sure to consider all the issues discussed in this Item. What is rule #1 to remember?",
+    "back": "Class design is type design. Before defining a new type, be sure to consider all the issues discussed in this Item."
+  },
+  {
+    "id": "item-20-ttr-0",
+    "item": 20,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 20 — Prefer pass-by-reference-to-const to pass-by-value. Learn to prefer pass-by-reference-to-const to pass-by-value: Prefer pass-by-reference-to-`const` over pass-by-value. It's typically more efficient and it avoids the slicing problem. What is rule #1 to remember?",
+    "back": "Prefer pass-by-reference-to-`const` over pass-by-value. It's typically more efficient and it avoids the slicing problem."
+  },
+  {
+    "id": "item-20-ttr-1",
+    "item": 20,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 20 — Prefer pass-by-reference-to-const to pass-by-value. Learn to prefer pass-by-reference-to-const to pass-by-value: Prefer pass-by-reference-to-`const` over pass-by-value. It's typically more efficient and it avoids the slicing problem. What is rule #2 to remember?",
+    "back": "The rule doesn't apply to built-in types and STL iterator and function object types. For them, pass-by-value is usually appropriate."
+  },
+  {
+    "id": "item-21-ttr-0",
+    "item": 21,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 21 — Don't try to return a reference when you must return an object. Learn to don't try to return a reference when you must return an object: Never return a pointer or reference to a local stack object, a reference to a heap-allocated object, or a pointer or reference to a local static object if there is a chance that more than one such object will be needed. ([Item 4](<#0321334876ch01lev1sec4html-item-4-make-sure-that-objects-are-initialized-before-theyre-used>) provides an example of a design where returning a reference to a local static is reasonable, at least in single-threaded environments.). What is rule #1 to remember?",
+    "back": "Never return a pointer or reference to a local stack object, a reference to a heap-allocated object, or a pointer or reference to a local static object if there is a chance that more than one such object will be needed. ([Item 4](<#0321334876ch01lev1sec4html-item-4-make-sure-that-objects-are-initialized-before-theyre-used>) provides an example of a design where returning a reference to a local static is reasonable, at least in single-threaded environments.)"
+  },
+  {
+    "id": "item-22-ttr-0",
+    "item": 22,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 22 — Declare data members private. Learn to declare data members private: Declare data members `private`. It gives clients syntactically uniform access to data, affords fine-grained access control, allows invariants to be enforced, and offers class authors implementation flexibility. What is rule #1 to remember?",
+    "back": "Declare data members `private`. It gives clients syntactically uniform access to data, affords fine-grained access control, allows invariants to be enforced, and offers class authors implementation flexibility."
+  },
+  {
+    "id": "item-22-ttr-1",
+    "item": 22,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 22 — Declare data members private. Learn to declare data members private: Declare data members `private`. It gives clients syntactically uniform access to data, affords fine-grained access control, allows invariants to be enforced, and offers class authors implementation flexibility. What is rule #2 to remember?",
+    "back": "`protected` is no more encapsulated than `public`."
+  },
+  {
+    "id": "item-23-ttr-0",
+    "item": 23,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 23 — Prefer non-member non-friend functions to member functions. Learn to prefer non-member non-friend functions to member functions: Prefer non-member non-friend functions to member functions. Doing so increases encapsulation, packaging flexibility, and functional extensibility. What is rule #1 to remember?",
+    "back": "Prefer non-member non-friend functions to member functions. Doing so increases encapsulation, packaging flexibility, and functional extensibility."
+  },
+  {
+    "id": "item-24-ttr-0",
+    "item": 24,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 24 — Declare non-member functions when type conversions should apply to all parameters. Learn to declare non-member functions when type conversions should apply to all parameters: If you need type conversions on all parameters to a function (including the one pointed to by the `this` pointer), the function must be a non-member. What is rule #1 to remember?",
+    "back": "If you need type conversions on all parameters to a function (including the one pointed to by the `this` pointer), the function must be a non-member."
+  },
+  {
+    "id": "item-25-ttr-0",
+    "item": 25,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 25 — Consider support for a non-throwing swap. Learn to consider support for a non-throwing swap: Provide a `swap` member function when `std::swap` would be inefficient for your type. Make sure your `swap` doesn't throw exceptions. What is rule #1 to remember?",
+    "back": "Provide a `swap` member function when `std::swap` would be inefficient for your type. Make sure your `swap` doesn't throw exceptions."
+  },
+  {
+    "id": "item-25-ttr-1",
+    "item": 25,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 25 — Consider support for a non-throwing swap. Learn to consider support for a non-throwing swap: Provide a `swap` member function when `std::swap` would be inefficient for your type. Make sure your `swap` doesn't throw exceptions. What is rule #2 to remember?",
+    "back": "If you offer a member `swap`, also offer a non-member `swap` that calls the member. For classes (not templates), specialize `std::swap`, too."
+  },
+  {
+    "id": "item-25-ttr-2",
+    "item": 25,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 25 — Consider support for a non-throwing swap. Learn to consider support for a non-throwing swap: Provide a `swap` member function when `std::swap` would be inefficient for your type. Make sure your `swap` doesn't throw exceptions. What is rule #3 to remember?",
+    "back": "When calling `swap`, employ a `using` declaration for `std::swap`, then call `swap` without namespace qualification."
+  },
+  {
+    "id": "item-25-ttr-3",
+    "item": 25,
+    "chapter": 4,
+    "difficulty": "intermediate",
+    "front": "Item 25 — Consider support for a non-throwing swap. Learn to consider support for a non-throwing swap: Provide a `swap` member function when `std::swap` would be inefficient for your type. Make sure your `swap` doesn't throw exceptions. What is rule #4 to remember?",
+    "back": "It's fine to totally specialize `std` templates for user-defined types, but never try to add something completely new to `std`."
+  },
+  {
+    "id": "item-26-ttr-0",
+    "item": 26,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 26 — Postpone variable definitions as long as possible. Learn to postpone variable definitions as long as possible: Postpone variable definitions as long as possible. It increases program clarity and improves program efficiency. What is rule #1 to remember?",
+    "back": "Postpone variable definitions as long as possible. It increases program clarity and improves program efficiency."
+  },
+  {
+    "id": "item-27-ttr-0",
+    "item": 27,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 27 — Minimize casting. Learn to minimize casting: Avoid casts whenever practical, especially `dynamic_cast`s in performance-sensitive code. If a design requires casting, try to develop a cast-free alternative. What is rule #1 to remember?",
+    "back": "Avoid casts whenever practical, especially `dynamic_cast`s in performance-sensitive code. If a design requires casting, try to develop a cast-free alternative."
+  },
+  {
+    "id": "item-27-ttr-1",
+    "item": 27,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 27 — Minimize casting. Learn to minimize casting: Avoid casts whenever practical, especially `dynamic_cast`s in performance-sensitive code. If a design requires casting, try to develop a cast-free alternative. What is rule #2 to remember?",
+    "back": "When casting is necessary, try to hide it inside a function. Clients can then call the function instead of putting casts in their own code."
+  },
+  {
+    "id": "item-27-ttr-2",
+    "item": 27,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 27 — Minimize casting. Learn to minimize casting: Avoid casts whenever practical, especially `dynamic_cast`s in performance-sensitive code. If a design requires casting, try to develop a cast-free alternative. What is rule #3 to remember?",
+    "back": "Prefer C++-style casts to old-style casts. They are easier to see, and they are more specific about what they do."
+  },
+  {
+    "id": "item-28-ttr-0",
+    "item": 28,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 28 — Avoid returning \"handles\" to object internals. Learn to avoid returning \"handles\" to object internals: Avoid returning handles (references, pointers, or iterators) to object internals. It increases encapsulation, helps `const` member functions act `const`, and minimizes the creation of dangling handles. What is rule #1 to remember?",
+    "back": "Avoid returning handles (references, pointers, or iterators) to object internals. It increases encapsulation, helps `const` member functions act `const`, and minimizes the creation of dangling handles."
+  },
+  {
+    "id": "item-29-ttr-0",
+    "item": 29,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 29 — Strive for exception-safe code. Learn to strive for exception-safe code: Exception-safe functions leak no resources and allow no data structures to become corrupted, even when exceptions are thrown. Such functions offer the basic, strong, or nothrow guarantees. What is rule #1 to remember?",
+    "back": "Exception-safe functions leak no resources and allow no data structures to become corrupted, even when exceptions are thrown. Such functions offer the basic, strong, or nothrow guarantees."
+  },
+  {
+    "id": "item-29-ttr-1",
+    "item": 29,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 29 — Strive for exception-safe code. Learn to strive for exception-safe code: Exception-safe functions leak no resources and allow no data structures to become corrupted, even when exceptions are thrown. Such functions offer the basic, strong, or nothrow guarantees. What is rule #2 to remember?",
+    "back": "The strong guarantee can often be implemented via copy-and-`swap`, but the strong guarantee is not practical for all functions."
+  },
+  {
+    "id": "item-29-ttr-2",
+    "item": 29,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 29 — Strive for exception-safe code. Learn to strive for exception-safe code: Exception-safe functions leak no resources and allow no data structures to become corrupted, even when exceptions are thrown. Such functions offer the basic, strong, or nothrow guarantees. What is rule #3 to remember?",
+    "back": "A function can usually offer a guarantee no stronger than the weakest guarantee of the functions it calls."
+  },
+  {
+    "id": "item-30-ttr-0",
+    "item": 30,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 30 — Understand the ins and outs of inlining. Learn to understand the ins and outs of inlining: Limit most inlining to small, frequently called functions. This facilitates debugging and binary upgradability, minimizes potential code bloat, and maximizes the chances of greater program speed. What is rule #1 to remember?",
+    "back": "Limit most inlining to small, frequently called functions. This facilitates debugging and binary upgradability, minimizes potential code bloat, and maximizes the chances of greater program speed."
+  },
+  {
+    "id": "item-30-ttr-1",
+    "item": 30,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 30 — Understand the ins and outs of inlining. Learn to understand the ins and outs of inlining: Limit most inlining to small, frequently called functions. This facilitates debugging and binary upgradability, minimizes potential code bloat, and maximizes the chances of greater program speed. What is rule #2 to remember?",
+    "back": "Don't declare function templates `inline` just because they appear in header files."
+  },
+  {
+    "id": "item-31-ttr-0",
+    "item": 31,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 31 — Minimize compilation dependencies between files. Learn to minimize compilation dependencies between files: The general idea behind minimizing compilation dependencies is to depend on declarations instead of definitions. Two approaches based on this idea are Handle classes and Interface classes. What is rule #1 to remember?",
+    "back": "The general idea behind minimizing compilation dependencies is to depend on declarations instead of definitions. Two approaches based on this idea are Handle classes and Interface classes."
+  },
+  {
+    "id": "item-31-ttr-1",
+    "item": 31,
+    "chapter": 5,
+    "difficulty": "intermediate",
+    "front": "Item 31 — Minimize compilation dependencies between files. Learn to minimize compilation dependencies between files: The general idea behind minimizing compilation dependencies is to depend on declarations instead of definitions. Two approaches based on this idea are Handle classes and Interface classes. What is rule #2 to remember?",
+    "back": "Library header files should exist in full and declaration-only forms. This applies regardless of whether templates are involved."
+  },
+  {
+    "id": "item-32-ttr-0",
+    "item": 32,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 32 — Make sure public inheritance models \"is-a.\". Learn to make sure public inheritance models \"is-a.\": Public inheritance means \"is-a.\" Everything that applies to base classes must also apply to derived classes, because every derived class object is a base class object. What is rule #1 to remember?",
+    "back": "Public inheritance means \"is-a.\" Everything that applies to base classes must also apply to derived classes, because every derived class object is a base class object."
+  },
+  {
+    "id": "item-33-ttr-0",
+    "item": 33,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 33 — Avoid hiding inherited names. Learn to avoid hiding inherited names: Names in derived classes hide names in base classes. Under public inheritance, this is never desirable. What is rule #1 to remember?",
+    "back": "Names in derived classes hide names in base classes. Under public inheritance, this is never desirable."
+  },
+  {
+    "id": "item-33-ttr-1",
+    "item": 33,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 33 — Avoid hiding inherited names. Learn to avoid hiding inherited names: Names in derived classes hide names in base classes. Under public inheritance, this is never desirable. What is rule #2 to remember?",
+    "back": "To make hidden names visible again, employ `using` declarations or forwarding functions."
+  },
+  {
+    "id": "item-34-ttr-0",
+    "item": 34,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 34 — Differentiate between inheritance of interface and inheritance of implementation. Learn to differentiate between inheritance of interface and inheritance of implementation: Inheritance of interface is different from inheritance of implementation. Under public inheritance, derived classes always inherit base class interfaces. What is rule #1 to remember?",
+    "back": "Inheritance of interface is different from inheritance of implementation. Under public inheritance, derived classes always inherit base class interfaces."
+  },
+  {
+    "id": "item-34-ttr-1",
+    "item": 34,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 34 — Differentiate between inheritance of interface and inheritance of implementation. Learn to differentiate between inheritance of interface and inheritance of implementation: Inheritance of interface is different from inheritance of implementation. Under public inheritance, derived classes always inherit base class interfaces. What is rule #2 to remember?",
+    "back": "Pure virtual functions specify inheritance of interface only."
+  },
+  {
+    "id": "item-34-ttr-2",
+    "item": 34,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 34 — Differentiate between inheritance of interface and inheritance of implementation. Learn to differentiate between inheritance of interface and inheritance of implementation: Inheritance of interface is different from inheritance of implementation. Under public inheritance, derived classes always inherit base class interfaces. What is rule #3 to remember?",
+    "back": "Simple (impure) virtual functions specify inheritance of interface plus inheritance of a default implementation."
+  },
+  {
+    "id": "item-34-ttr-3",
+    "item": 34,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 34 — Differentiate between inheritance of interface and inheritance of implementation. Learn to differentiate between inheritance of interface and inheritance of implementation: Inheritance of interface is different from inheritance of implementation. Under public inheritance, derived classes always inherit base class interfaces. What is rule #4 to remember?",
+    "back": "Non-virtual functions specify inheritance of interface plus inheritance of a mandatory implementation."
+  },
+  {
+    "id": "item-35-ttr-0",
+    "item": 35,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 35 — Consider alternatives to virtual functions. Learn to consider alternatives to virtual functions: Alternatives to virtual functions include the NVI idiom and various forms of the Strategy design pattern. The NVI idiom is itself an example of the Template Method design pattern. What is rule #1 to remember?",
+    "back": "Alternatives to virtual functions include the NVI idiom and various forms of the Strategy design pattern. The NVI idiom is itself an example of the Template Method design pattern."
+  },
+  {
+    "id": "item-35-ttr-1",
+    "item": 35,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 35 — Consider alternatives to virtual functions. Learn to consider alternatives to virtual functions: Alternatives to virtual functions include the NVI idiom and various forms of the Strategy design pattern. The NVI idiom is itself an example of the Template Method design pattern. What is rule #2 to remember?",
+    "back": "A disadvantage of moving functionality from a member function to a function outside the class is that the non-member function lacks access to the class's non-public members."
+  },
+  {
+    "id": "item-35-ttr-2",
+    "item": 35,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 35 — Consider alternatives to virtual functions. Learn to consider alternatives to virtual functions: Alternatives to virtual functions include the NVI idiom and various forms of the Strategy design pattern. The NVI idiom is itself an example of the Template Method design pattern. What is rule #3 to remember?",
+    "back": "`tr1::function` objects act like generalized function pointers. Such objects support all callable entities compatible with a given target signature."
+  },
+  {
+    "id": "item-36-ttr-0",
+    "item": 36,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 36 — Never redefine an inherited non-virtual function. Learn to never redefine an inherited non-virtual function: Never redefine an inherited non-virtual function. What is rule #1 to remember?",
+    "back": "Never redefine an inherited non-virtual function."
+  },
+  {
+    "id": "item-37-ttr-0",
+    "item": 37,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 37 — Never redefine a function's inherited default parameter value. Learn to never redefine a function's inherited default parameter value: Never redefine an inherited default parameter value, because default parameter values are statically bound, while virtual functions — the only functions you should be overriding — are dynamically bound. What is rule #1 to remember?",
+    "back": "Never redefine an inherited default parameter value, because default parameter values are statically bound, while virtual functions — the only functions you should be overriding — are dynamically bound."
+  },
+  {
+    "id": "item-38-ttr-0",
+    "item": 38,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 38 — Model \"has-a\" or \"is-implemented-in-terms-of\" through composition. Learn to model \"has-a\" or \"is-implemented-in-terms-of\" through composition: Composition has meanings completely different from that of public inheritance. What is rule #1 to remember?",
+    "back": "Composition has meanings completely different from that of public inheritance."
+  },
+  {
+    "id": "item-38-ttr-1",
+    "item": 38,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 38 — Model \"has-a\" or \"is-implemented-in-terms-of\" through composition. Learn to model \"has-a\" or \"is-implemented-in-terms-of\" through composition: Composition has meanings completely different from that of public inheritance. What is rule #2 to remember?",
+    "back": "In the application domain, composition means has-a. In the implementation domain, it means is-implemented-in-terms-of."
+  },
+  {
+    "id": "item-39-ttr-0",
+    "item": 39,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 39 — Use private inheritance judiciously. Learn to use private inheritance judiciously: Private inheritance means is-implemented-in-terms of. It's usually inferior to composition, but it makes sense when a derived class needs access to protected base class members or needs to redefine inherited virtual functions. What is rule #1 to remember?",
+    "back": "Private inheritance means is-implemented-in-terms of. It's usually inferior to composition, but it makes sense when a derived class needs access to protected base class members or needs to redefine inherited virtual functions."
+  },
+  {
+    "id": "item-39-ttr-1",
+    "item": 39,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 39 — Use private inheritance judiciously. Learn to use private inheritance judiciously: Private inheritance means is-implemented-in-terms of. It's usually inferior to composition, but it makes sense when a derived class needs access to protected base class members or needs to redefine inherited virtual functions. What is rule #2 to remember?",
+    "back": "Unlike composition, private inheritance can enable the empty base optimization. This can be important for library developers who strive to minimize object sizes."
+  },
+  {
+    "id": "item-40-ttr-0",
+    "item": 40,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 40 — Use multiple inheritance judiciously. Learn to use multiple inheritance judiciously: Multiple inheritance is more complex than single inheritance. It can lead to new ambiguity issues and to the need for virtual inheritance. What is rule #1 to remember?",
+    "back": "Multiple inheritance is more complex than single inheritance. It can lead to new ambiguity issues and to the need for virtual inheritance."
+  },
+  {
+    "id": "item-40-ttr-1",
+    "item": 40,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 40 — Use multiple inheritance judiciously. Learn to use multiple inheritance judiciously: Multiple inheritance is more complex than single inheritance. It can lead to new ambiguity issues and to the need for virtual inheritance. What is rule #2 to remember?",
+    "back": "Virtual inheritance imposes costs in size, speed, and complexity of initialization and assignment. It's most practical when virtual base classes have no data."
+  },
+  {
+    "id": "item-40-ttr-2",
+    "item": 40,
+    "chapter": 6,
+    "difficulty": "intermediate",
+    "front": "Item 40 — Use multiple inheritance judiciously. Learn to use multiple inheritance judiciously: Multiple inheritance is more complex than single inheritance. It can lead to new ambiguity issues and to the need for virtual inheritance. What is rule #3 to remember?",
+    "back": "Multiple inheritance does have legitimate uses. One scenario involves combining public inheritance from an Interface class with private inheritance from a class that helps with implementation."
+  },
+  {
+    "id": "item-41-ttr-0",
+    "item": 41,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 41 — Understand implicit interfaces and compile-time polymorphism. Learn to understand implicit interfaces and compile-time polymorphism: Both classes and templates support interfaces and polymorphism. What is rule #1 to remember?",
+    "back": "Both classes and templates support interfaces and polymorphism."
+  },
+  {
+    "id": "item-41-ttr-1",
+    "item": 41,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 41 — Understand implicit interfaces and compile-time polymorphism. Learn to understand implicit interfaces and compile-time polymorphism: Both classes and templates support interfaces and polymorphism. What is rule #2 to remember?",
+    "back": "For classes, interfaces are explicit and centered on function signatures. Polymorphism occurs at runtime through virtual functions."
+  },
+  {
+    "id": "item-41-ttr-2",
+    "item": 41,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 41 — Understand implicit interfaces and compile-time polymorphism. Learn to understand implicit interfaces and compile-time polymorphism: Both classes and templates support interfaces and polymorphism. What is rule #3 to remember?",
+    "back": "For template parameters, interfaces are implicit and based on valid expressions. Polymorphism occurs during compilation through template instantiation and function overloading resolution."
+  },
+  {
+    "id": "item-42-ttr-0",
+    "item": 42,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 42 — Understand the two meanings of typename. Learn to understand the two meanings of typename: When declaring template parameters, `class` and `typename` are interchangeable. What is rule #1 to remember?",
+    "back": "When declaring template parameters, `class` and `typename` are interchangeable."
+  },
+  {
+    "id": "item-42-ttr-1",
+    "item": 42,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 42 — Understand the two meanings of typename. Learn to understand the two meanings of typename: When declaring template parameters, `class` and `typename` are interchangeable. What is rule #2 to remember?",
+    "back": "Use `typename` to identify nested dependent type names, except in base class lists or as a base class identifier in a member initialization list."
+  },
+  {
+    "id": "item-43-ttr-0",
+    "item": 43,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 43 — Know how to access names in templatized base classes. Learn to know how to access names in templatized base classes: In derived class templates, refer to names in base class templates via a \"`this->`\" prefix, via `using` declarations, or via an explicit base class qualification. What is rule #1 to remember?",
+    "back": "In derived class templates, refer to names in base class templates via a \"`this->`\" prefix, via `using` declarations, or via an explicit base class qualification."
+  },
+  {
+    "id": "item-44-ttr-0",
+    "item": 44,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 44 — Factor parameter-independent code out of templates. Learn to factor parameter-independent code out of templates: Templates generate multiple classes and multiple functions, so any template code not dependent on a template parameter causes bloat. What is rule #1 to remember?",
+    "back": "Templates generate multiple classes and multiple functions, so any template code not dependent on a template parameter causes bloat."
+  },
+  {
+    "id": "item-44-ttr-1",
+    "item": 44,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 44 — Factor parameter-independent code out of templates. Learn to factor parameter-independent code out of templates: Templates generate multiple classes and multiple functions, so any template code not dependent on a template parameter causes bloat. What is rule #2 to remember?",
+    "back": "Bloat due to non-type template parameters can often be eliminated by replacing template parameters with function parameters or class data members."
+  },
+  {
+    "id": "item-44-ttr-2",
+    "item": 44,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 44 — Factor parameter-independent code out of templates. Learn to factor parameter-independent code out of templates: Templates generate multiple classes and multiple functions, so any template code not dependent on a template parameter causes bloat. What is rule #3 to remember?",
+    "back": "Bloat due to type parameters can be reduced by sharing implementations for instantiation types with identical binary representations."
+  },
+  {
+    "id": "item-45-ttr-0",
+    "item": 45,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 45 — Use member function templates to accept \"all compatible types.\". Learn to use member function templates to accept \"all compatible types.\": Use member function templates to generate functions that accept all compatible types. What is rule #1 to remember?",
+    "back": "Use member function templates to generate functions that accept all compatible types."
+  },
+  {
+    "id": "item-45-ttr-1",
+    "item": 45,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 45 — Use member function templates to accept \"all compatible types.\". Learn to use member function templates to accept \"all compatible types.\": Use member function templates to generate functions that accept all compatible types. What is rule #2 to remember?",
+    "back": "If you declare member templates for generalized copy construction or generalized assignment, you'll still need to declare the normal copy constructor and copy assignment operator, too."
+  },
+  {
+    "id": "item-46-ttr-0",
+    "item": 46,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 46 — Define non-member functions inside templates when type conversions are desired. Learn to define non-member functions inside templates when type conversions are desired: When writing a class template that offers functions related to the template that support implicit type conversions on all parameters, define those functions as friends inside the class template. What is rule #1 to remember?",
+    "back": "When writing a class template that offers functions related to the template that support implicit type conversions on all parameters, define those functions as friends inside the class template."
+  },
+  {
+    "id": "item-47-ttr-0",
+    "item": 47,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 47 — Use traits classes for information about types. Learn to use traits classes for information about types: Traits classes make information about types available during compilation. They're implemented using templates and template specializations. What is rule #1 to remember?",
+    "back": "Traits classes make information about types available during compilation. They're implemented using templates and template specializations."
+  },
+  {
+    "id": "item-47-ttr-1",
+    "item": 47,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 47 — Use traits classes for information about types. Learn to use traits classes for information about types: Traits classes make information about types available during compilation. They're implemented using templates and template specializations. What is rule #2 to remember?",
+    "back": "In conjunction with overloading, traits classes make it possible to perform compile-time `if...else` tests on types."
+  },
+  {
+    "id": "item-48-ttr-0",
+    "item": 48,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 48 — Be aware of template metaprogramming. Learn to be aware of template metaprogramming: Template metaprogramming can shift work from runtime to compile-time, thus enabling earlier error detection and higher runtime performance. What is rule #1 to remember?",
+    "back": "Template metaprogramming can shift work from runtime to compile-time, thus enabling earlier error detection and higher runtime performance."
+  },
+  {
+    "id": "item-48-ttr-1",
+    "item": 48,
+    "chapter": 7,
+    "difficulty": "advanced",
+    "front": "Item 48 — Be aware of template metaprogramming. Learn to be aware of template metaprogramming: Template metaprogramming can shift work from runtime to compile-time, thus enabling earlier error detection and higher runtime performance. What is rule #2 to remember?",
+    "back": "TMP can be used to generate custom code based on combinations of policy choices, and it can also be used to avoid generating code inappropriate for particular types."
+  },
+  {
+    "id": "item-49-ttr-0",
+    "item": 49,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 49 — Understand the behavior of the new-handler. Learn to understand the behavior of the new-handler: `set_new_handler` allows you to specify a function to be called when memory allocation requests cannot be satisfied. What is rule #1 to remember?",
+    "back": "`set_new_handler` allows you to specify a function to be called when memory allocation requests cannot be satisfied."
+  },
+  {
+    "id": "item-49-ttr-1",
+    "item": 49,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 49 — Understand the behavior of the new-handler. Learn to understand the behavior of the new-handler: `set_new_handler` allows you to specify a function to be called when memory allocation requests cannot be satisfied. What is rule #2 to remember?",
+    "back": "Nothrow `new` is of limited utility, because it applies only to memory allocation; subsequent constructor calls may still throw exceptions."
+  },
+  {
+    "id": "item-50-ttr-0",
+    "item": 50,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 50 — Understand when it makes sense to replace new and delete. Learn to understand when it makes sense to replace new and delete: There are many valid reasons for writing custom versions of `new` and `delete`, including improving performance, debugging heap usage errors, and collecting heap usage information. What is rule #1 to remember?",
+    "back": "There are many valid reasons for writing custom versions of `new` and `delete`, including improving performance, debugging heap usage errors, and collecting heap usage information."
+  },
+  {
+    "id": "item-51-ttr-0",
+    "item": 51,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 51 — Adhere to convention when writing new and delete. Learn to adhere to convention when writing new and delete: `operator new` should contain an infinite loop trying to allocate memory, should call the new-handler if it can't satisfy a memory request, and should handle requests for zero bytes. Class-specific versions should handle requests for larger blocks than expected. What is rule #1 to remember?",
+    "back": "`operator new` should contain an infinite loop trying to allocate memory, should call the new-handler if it can't satisfy a memory request, and should handle requests for zero bytes. Class-specific versions should handle requests for larger blocks than expected."
+  },
+  {
+    "id": "item-51-ttr-1",
+    "item": 51,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 51 — Adhere to convention when writing new and delete. Learn to adhere to convention when writing new and delete: `operator new` should contain an infinite loop trying to allocate memory, should call the new-handler if it can't satisfy a memory request, and should handle requests for zero bytes. Class-specific versions should handle requests for larger blocks than expected. What is rule #2 to remember?",
+    "back": "`operator delete` should do nothing if passed a pointer that is null. Class-specific versions should handle blocks that are larger than expected."
+  },
+  {
+    "id": "item-52-ttr-0",
+    "item": 52,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 52 — Write placement delete if you write placement new. Learn to write placement delete if you write placement new: When you write a placement version of `operator new`, be sure to write the corresponding placement version of `operator delete`. If you don't, your program may experience subtle, intermittent memory leaks. What is rule #1 to remember?",
+    "back": "When you write a placement version of `operator new`, be sure to write the corresponding placement version of `operator delete`. If you don't, your program may experience subtle, intermittent memory leaks."
+  },
+  {
+    "id": "item-52-ttr-1",
+    "item": 52,
+    "chapter": 8,
+    "difficulty": "advanced",
+    "front": "Item 52 — Write placement delete if you write placement new. Learn to write placement delete if you write placement new: When you write a placement version of `operator new`, be sure to write the corresponding placement version of `operator delete`. If you don't, your program may experience subtle, intermittent memory leaks. What is rule #2 to remember?",
+    "back": "When you declare placement versions of `new` and `delete`, be sure not to unintentionally hide the normal versions of those functions."
+  },
+  {
+    "id": "item-53-ttr-0",
+    "item": 53,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 53 — Pay attention to compiler warnings. Learn to pay attention to compiler warnings: Take compiler warnings seriously, and strive to compile warning-free at the maximum warning level supported by your compilers. What is rule #1 to remember?",
+    "back": "Take compiler warnings seriously, and strive to compile warning-free at the maximum warning level supported by your compilers."
+  },
+  {
+    "id": "item-53-ttr-1",
+    "item": 53,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 53 — Pay attention to compiler warnings. Learn to pay attention to compiler warnings: Take compiler warnings seriously, and strive to compile warning-free at the maximum warning level supported by your compilers. What is rule #2 to remember?",
+    "back": "Don't become dependent on compiler warnings, because different compilers warn about different things. Porting to a new compiler may eliminate warning messages you've come to rely on."
+  },
+  {
+    "id": "item-54-ttr-0",
+    "item": 54,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 54 — Familiarize yourself with the standard library, including TR1. Learn to familiarize yourself with the standard library, including TR1: The primary standard C++ library functionality consists of the STL, iostreams, and locales. The C99 standard library is also included. What is rule #1 to remember?",
+    "back": "The primary standard C++ library functionality consists of the STL, iostreams, and locales. The C99 standard library is also included."
+  },
+  {
+    "id": "item-54-ttr-1",
+    "item": 54,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 54 — Familiarize yourself with the standard library, including TR1. Learn to familiarize yourself with the standard library, including TR1: The primary standard C++ library functionality consists of the STL, iostreams, and locales. The C99 standard library is also included. What is rule #2 to remember?",
+    "back": "TR1 adds support for smart pointers (e.g., `tr1::shared_ptr`), generalized function pointers (`tr1::function`), hash-based containers, regular expressions, and 10 other components."
+  },
+  {
+    "id": "item-54-ttr-2",
+    "item": 54,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 54 — Familiarize yourself with the standard library, including TR1. Learn to familiarize yourself with the standard library, including TR1: The primary standard C++ library functionality consists of the STL, iostreams, and locales. The C99 standard library is also included. What is rule #3 to remember?",
+    "back": "TR1 itself is only a specification. To take advantage of TR1, you need an implementation. One source for implementations of TR1 components is Boost."
+  },
+  {
+    "id": "item-55-ttr-0",
+    "item": 55,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 55 — Familiarize yourself with Boost. Learn to familiarize yourself with Boost: Boost is a community and web site for the development of free, open source, peer-reviewed C++ libraries. Boost plays an influential role in C++ standardization. What is rule #1 to remember?",
+    "back": "Boost is a community and web site for the development of free, open source, peer-reviewed C++ libraries. Boost plays an influential role in C++ standardization."
+  },
+  {
+    "id": "item-55-ttr-1",
+    "item": 55,
+    "chapter": 9,
+    "difficulty": "advanced",
+    "front": "Item 55 — Familiarize yourself with Boost. Learn to familiarize yourself with Boost: Boost is a community and web site for the development of free, open source, peer-reviewed C++ libraries. Boost plays an influential role in C++ standardization. What is rule #2 to remember?",
+    "back": "Boost offers implementations of many TR1 components, but it also offers many other libraries, too."
+  }
+]
