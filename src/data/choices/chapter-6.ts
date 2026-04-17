@@ -137,6 +137,12 @@ const chapter6Choices: Record<string, Choice[]> = {
     { id: 'c', text: 'Forwards are more valuable when futures prices are positively correlated with rates because forward holders avoid reinvestment risk.', correct: false, rationale: 'Positive correlation favors futures due to the reinvestment benefit; forwards lose this optionality.' },
     { id: 'd', text: 'Forwards are always more valuable because they avoid the counterparty risk of a clearing house.', correct: false, rationale: 'Forwards actually carry higher bilateral counterparty risk than futures; the correlation question is about rate dynamics, not credit.' },
   ],
+  'ch6-6-4-05-other-finance-questions-problem-5': [
+    { id: 'a', text: 'Classify models along two axes: short-rate vs. forward-rate (e.g., HJM) and equilibrium (Vasicek, CIR) vs. no-arbitrage (Ho-Lee, Hull-White).', correct: true, rationale: 'Short-rate models describe the instantaneous rate directly while HJM models entire forward curves; equilibrium models impose dynamics but may misfit the curve, while no-arbitrage models calibrate to it exactly.' },
+    { id: 'b', text: 'All interest-rate models are equivalent once calibrated to today\'s yield curve; differences are purely numerical.', correct: false, rationale: 'Even after calibration, models differ in dynamics (e.g., Vasicek allows negative rates; CIR does not) and in which derivatives they price consistently.' },
+    { id: 'c', text: 'Short-rate models and HJM models both describe the instantaneous short rate; they differ only in the choice of volatility structure.', correct: false, rationale: 'HJM models describe the whole forward-rate curve, not just the short rate, which is its defining distinction from short-rate models.' },
+    { id: 'd', text: 'Equilibrium models like Vasicek are preferred because they always match the observed yield curve exactly.', correct: false, rationale: 'Equilibrium models typically do not fit the curve exactly; that property belongs to no-arbitrage models like Ho-Lee and Hull-White.' },
+  ],
 };
 
 export default chapter6Choices;
