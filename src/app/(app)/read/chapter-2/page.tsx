@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { useTextSettings } from '@/hooks/useTextSettings';
 import { useProgress } from '@/hooks/useProgress';
 import { chapter2Problems, SECTIONS } from '@/data/problems';
@@ -113,7 +115,7 @@ export default function Chapter2Page() {
         <ReaderProgressPanel />
 
         {/* End of chapter */}
-        <div className="mt-12 py-8 text-center bg-white border border-[#e4e6ea] rounded-lg">
+        <div className="mt-12 py-8 px-6 text-center bg-white border border-[#e4e6ea] rounded-lg">
           <p className="text-3xl mb-2">🎓</p>
           <p className="text-lg font-bold text-[#21242c]">End of Chapter 2</p>
           <p className="text-sm text-[#626975] mt-1">
@@ -121,6 +123,13 @@ export default function Chapter2Page() {
               ? `All ${totalProblems} problems solved. Outstanding!`
               : `${totalProblems - totalSolved} problems remaining. Keep going!`}
           </p>
+          <Link
+            href="/read/chapter-3"
+            className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full bg-[var(--ka-blue)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+          >
+            Continue to Chapter 3: Calculus and Linear Algebra
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </div>
