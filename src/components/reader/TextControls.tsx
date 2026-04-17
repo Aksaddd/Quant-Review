@@ -9,7 +9,7 @@ import {
   LINE_HEIGHT_RANGE,
   LETTER_SPACING_RANGE,
   MATH_SCALE_RANGE,
-} from '@/components/providers/TextSettingsProvider';
+} from '@/stores/useReadingSettingsStore';
 
 const THEMES = [
   { value: 'dark' as const,  label: 'Dark',  bg: '#0f1117', text: '#e2e8f0' },
