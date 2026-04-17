@@ -1,0 +1,390 @@
+{
+  "topo_order": [
+    20,
+    10,
+    34,
+    41,
+    11,
+    25,
+    42,
+    4,
+    21,
+    52,
+    50,
+    55,
+    48,
+    47,
+    54,
+    35,
+    37,
+    36,
+    33,
+    43,
+    44,
+    46,
+    53,
+    30,
+    38,
+    32,
+    40,
+    39,
+    49,
+    51,
+    16,
+    31,
+    23,
+    24,
+    27,
+    28,
+    3,
+    2,
+    15,
+    45,
+    14,
+    26,
+    18,
+    22,
+    12,
+    5,
+    6,
+    7,
+    8,
+    13,
+    29,
+    1,
+    9,
+    17,
+    19
+  ],
+  "by_chapter": [
+    {
+      "chapter": 1,
+      "title": "Accustoming Yourself to C++",
+      "items": [
+        {
+          "item": 4,
+          "title": "Make sure that objects are initialized before they're used",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 3,
+          "title": "Use const whenever possible",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 2,
+          "title": "Prefer consts, enums, and inlines to #defines",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 1,
+          "title": "View C++ as a federation of languages",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "title": "Constructors, Destructors, and Assignment Operators",
+      "items": [
+        {
+          "item": 10,
+          "title": "Have assignment operators return a reference to *this",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 11,
+          "title": "Handle assignment to self in operator=",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 12,
+          "title": "Copy all parts of an object",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 5,
+          "title": "Know what functions C++ silently writes and calls",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 6,
+          "title": "Explicitly disallow the use of compiler-generated functions you do not want",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 7,
+          "title": "Declare destructors virtual in polymorphic base classes",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 8,
+          "title": "Prevent exceptions from leaving destructors",
+          "difficulty": "beginner"
+        },
+        {
+          "item": 9,
+          "title": "Never call virtual functions during construction or destruction",
+          "difficulty": "beginner"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "title": "Resource Management",
+      "items": [
+        {
+          "item": 16,
+          "title": "Use the same form in corresponding uses of new and delete.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 15,
+          "title": "Provide access to raw resources in resource-managing classes.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 14,
+          "title": "Think carefully about copying behavior in resource-managing classes.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 13,
+          "title": "Use objects to manage resources.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 17,
+          "title": "Store newed objects in smart pointers in standalone statements.",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "title": "Designs and Declarations",
+      "items": [
+        {
+          "item": 20,
+          "title": "Prefer pass-by-reference-to-const to pass-by-value",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 25,
+          "title": "Consider support for a non-throwing swap",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 21,
+          "title": "Don't try to return a reference when you must return an object",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 23,
+          "title": "Prefer non-member non-friend functions to member functions",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 24,
+          "title": "Declare non-member functions when type conversions should apply to all parameters",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 18,
+          "title": "Make interfaces easy to use correctly and hard to use incorrectly",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 22,
+          "title": "Declare data members private",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 19,
+          "title": "Treat class design as type design",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "title": "Implementations",
+      "items": [
+        {
+          "item": 30,
+          "title": "Understand the ins and outs of inlining.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 31,
+          "title": "Minimize compilation dependencies between files.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 27,
+          "title": "Minimize casting.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 28,
+          "title": "Avoid returning \"handles\" to object internals.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 26,
+          "title": "Postpone variable definitions as long as possible.",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 29,
+          "title": "Strive for exception-safe code.",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "title": "Inheritance and Object-Oriented Design",
+      "items": [
+        {
+          "item": 34,
+          "title": "Differentiate between inheritance of interface and inheritance of implementation",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 35,
+          "title": "Consider alternatives to virtual functions",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 37,
+          "title": "Never redefine a function's inherited default parameter value",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 36,
+          "title": "Never redefine an inherited non-virtual function",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 33,
+          "title": "Avoid hiding inherited names",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 38,
+          "title": "Model \"has-a\" or \"is-implemented-in-terms-of\" through composition",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 32,
+          "title": "Make sure public inheritance models \"is-a.\"",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 40,
+          "title": "Use multiple inheritance judiciously",
+          "difficulty": "intermediate"
+        },
+        {
+          "item": 39,
+          "title": "Use private inheritance judiciously",
+          "difficulty": "intermediate"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "title": "Templates and Generic Programming",
+      "items": [
+        {
+          "item": 41,
+          "title": "Understand implicit interfaces and compile-time polymorphism",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 42,
+          "title": "Understand the two meanings of typename",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 48,
+          "title": "Be aware of template metaprogramming",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 47,
+          "title": "Use traits classes for information about types",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 43,
+          "title": "Know how to access names in templatized base classes",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 44,
+          "title": "Factor parameter-independent code out of templates",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 46,
+          "title": "Define non-member functions inside templates when type conversions are desired",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 45,
+          "title": "Use member function templates to accept \"all compatible types.\"",
+          "difficulty": "advanced"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "title": "Customizing new and delete",
+      "items": [
+        {
+          "item": 52,
+          "title": "Write placement delete if you write placement new",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 50,
+          "title": "Understand when it makes sense to replace new and delete",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 49,
+          "title": "Understand the behavior of the new-handler",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 51,
+          "title": "Adhere to convention when writing new and delete",
+          "difficulty": "advanced"
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "title": "Miscellany",
+      "items": [
+        {
+          "item": 55,
+          "title": "Familiarize yourself with Boost.",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 54,
+          "title": "Familiarize yourself with the standard library, including TR1",
+          "difficulty": "advanced"
+        },
+        {
+          "item": 53,
+          "title": "Pay attention to compiler warnings.",
+          "difficulty": "advanced"
+        }
+      ]
+    }
+  ]
+}
