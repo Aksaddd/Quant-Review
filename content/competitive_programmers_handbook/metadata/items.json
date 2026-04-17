@@ -5852,11 +5852,11 @@
       },
       {
         "order": 15,
-        "text": "The **xor** operation $x \\mathbin{\\hat{}} y$ produces a number that has one bits in positions where exactly one of $x$ and $y$ have one bits. For example, $22 \\mathbin{\\hat{}} 26 = 12$, because"
+        "text": "The **xor** operation $x \\oplus y$ produces a number that has one bits in positions where exactly one of $x$ and $y$ have one bits. For example, $22 \\oplus 26 = 12$, because"
       },
       {
         "order": 16,
-        "text": "The **not** operation `~x` produces a number where all the bits of $x$ have been inverted. The formula $\\texttt{\\~}x = -x - 1$ holds, for example, $\\texttt{\\~}29 = -30$."
+        "text": "The **not** operation `~x` produces a number where all the bits of $x$ have been inverted. The formula $\\sim x = -x - 1$ holds, for example, $\\sim 29 = -30$."
       },
       {
         "order": 17,
@@ -5876,7 +5876,7 @@
       },
       {
         "order": 21,
-        "text": "It is also possible to modify single bits of numbers using similar ideas. For example, the formula $x \\mathbin{|} (1 \\ll k)$ sets the $k$th bit of $x$ to one, the formula $x \\mathbin{\\&} \\texttt{\\~}(1 \\ll k)$ sets the $k$th bit of $x$ to zero, and the formula $x \\mathbin{\\hat{}} (1 \\ll k)$ inverts the $k$th bit of $x$."
+        "text": "It is also possible to modify single bits of numbers using similar ideas. For example, the formula $x \\mathbin{|} (1 \\ll k)$ sets the $k$th bit of $x$ to one, the formula $x \\mathbin{\\&} \\sim (1 \\ll k)$ sets the $k$th bit of $x$ to zero, and the formula $x \\oplus (1 \\ll k)$ inverts the $k$th bit of $x$."
       },
       {
         "order": 22,

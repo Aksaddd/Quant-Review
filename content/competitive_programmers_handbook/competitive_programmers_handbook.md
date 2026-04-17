@@ -3195,7 +3195,7 @@ The **or** operation $x$ | $y$ produces a number that has one bits in positions 
 
 ### Xor operation
 
-The **xor** operation $x \mathbin{\hat{}} y$ produces a number that has one bits in positions where exactly one of $x$ and $y$ have one bits. For example, $22 \mathbin{\hat{}} 26 = 12$, because
+The **xor** operation $x \oplus y$ produces a number that has one bits in positions where exactly one of $x$ and $y$ have one bits. For example, $22 \oplus 26 = 12$, because
 
 ```
     10110   (22)
@@ -3205,7 +3205,7 @@ The **xor** operation $x \mathbin{\hat{}} y$ produces a number that has one bits
 
 ### Not operation
 
-The **not** operation `~x` produces a number where all the bits of $x$ have been inverted. The formula $\texttt{\~}x = -x - 1$ holds, for example, $\texttt{\~}29 = -30$.
+The **not** operation `~x` produces a number where all the bits of $x$ have been inverted. The formula $\sim x = -x - 1$ holds, for example, $\sim 29 = -30$.
 
 The result of the not operation at the bit level depends on the length of the bit representation, because the operation inverts all bits. For example, if the numbers are 32-bit `int` numbers, the result is as follows:
 
@@ -3231,7 +3231,7 @@ for (int i = 31; i >= 0; i--) {
 }
 ```
 
-It is also possible to modify single bits of numbers using similar ideas. For example, the formula $x \mathbin{|} (1 \ll k)$ sets the $k$th bit of $x$ to one, the formula $x \mathbin{\&} \texttt{\~}(1 \ll k)$ sets the $k$th bit of $x$ to zero, and the formula $x \mathbin{\hat{}} (1 \ll k)$ inverts the $k$th bit of $x$.
+It is also possible to modify single bits of numbers using similar ideas. For example, the formula $x \mathbin{|} (1 \ll k)$ sets the $k$th bit of $x$ to one, the formula $x \mathbin{\&} \sim (1 \ll k)$ sets the $k$th bit of $x$ to zero, and the formula $x \oplus (1 \ll k)$ inverts the $k$th bit of $x$.
 
 The formula $x \mathbin{\&} (x - 1)$ sets the last one bit of $x$ to zero, and the formula $x \mathbin{\&} -x$ sets all the one bits to zero, except for the last one bit. The formula $x \mathbin{|} (x - 1)$ inverts all the bits after the last one bit. Also note that a positive number $x$ is a power of two exactly when $x \mathbin{\&} (x - 1) = 0$.
 <!-- PAGE 108 -->
