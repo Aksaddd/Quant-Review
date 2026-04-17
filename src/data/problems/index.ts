@@ -1,4 +1,5 @@
 import { Problem } from '@/lib/types';
+import { withChoices } from '@/data/choices';
 
 import screwyPirates     from './ch2-01-screwy-pirates';
 import tigerAndSheep     from './ch2-02-tiger-and-sheep';
@@ -38,7 +39,7 @@ import raceTrack         from './ch2-35-race-track';
 import irrationalNumber  from './ch2-36-irrational-number';
 import rainbowHats       from './ch2-37-rainbow-hats';
 
-export const chapter2Problems: Problem[] = [
+const rawChapter2Problems: Problem[] = [
   screwyPirates,
   tigerAndSheep,
   riverCrossing,
@@ -77,6 +78,8 @@ export const chapter2Problems: Problem[] = [
   irrationalNumber,
   rainbowHats,
 ];
+
+export const chapter2Problems: Problem[] = rawChapter2Problems.map(withChoices);
 
 /** All problems indexed by id for O(1) lookup */
 export const problemsById: Record<string, Problem> = Object.fromEntries(
