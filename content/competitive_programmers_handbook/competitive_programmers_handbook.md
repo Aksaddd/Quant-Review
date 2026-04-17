@@ -525,8 +525,6 @@ $^{x=1}$ $x = 1+2+3+...+ n =$ $n(n+1)$
 
 $^nX$
 
-2
-
 and $^nX$
 
 $^{x=1}$ $x^2 = 1^2 +2^2 +3^2 +...+ n^2 =$ $n(n+1)(2n+1)$
@@ -1292,13 +1290,11 @@ $x$ 0 1 $\cdot \cdot \cdot$ $k -1$ $k$ $k+1$ $\cdot \cdot \cdot$ `ok`($x$)
                  false
                          false
 
-
 $\cdot \cdot \cdot$
 
                                       false
                                               true
                                                      true
-
 
 $\cdot \cdot \cdot$
 
@@ -1523,7 +1519,6 @@ Many functions in the C++ standard library operate with iterators. An **iterator
 
                s.begin()
                                                      s.end()
-
 
 Note the asymmetry in the iterators: `s.begin()` points to an element in the data structure, while `s.end()` points outside the data structure. Thus, the range defined by the iterators is *half-open*.
 
@@ -1840,11 +1835,9 @@ When the function `search` is called with parameter $k$, it decides whether to i
 
                                 search(0)
 
-
 ![Figure from page 58](figures/fig_p058_003.png)
 
 search(3) search(3) search(3) search(3) search(3) search(3) search(3) search(3)
-
 
 ; {2} {1} {1,2} {0} {0,2} {0,1} {0,1,2}
 
@@ -2201,25 +2194,17 @@ character codeword
                                   A
 ```
 
-00
-
 ```cpp
                                   B
 ```
-
-01
 
 ```cpp
                                   C
 ```
 
-10
-
 ```cpp
                                   D
 ```
-
-11
 
 This is a **constant-length** code which means that the length of each codeword is the same. For example, we can compress the string `AABACDACA` as follows:
 
@@ -2233,25 +2218,17 @@ character codeword
                                   A
 ```
 
-0
-
 ```cpp
                                   B
 ```
-
-110
 
 ```cpp
                                   C
 ```
 
-10
-
 ```cpp
                                   D
 ```
-
-111
 
 An optimal code produces a compressed string that is as short as possible. In this case, the compressed string using the optimal code is
 
@@ -2266,33 +2243,23 @@ character codeword
                                   A
 ```
 
-10
-
 ```cpp
                                   B
 ```
-
-11
 
 ```cpp
                                   C
 ```
 
-1011
-
 ```cpp
                                   D
 ```
-
-111
 
 Using this code, it would not be possible to know if the compressed string 1011 corresponds to the string `AB` or the string `C`.
 
 ### Huffman coding
 
 **Huffman coding**$^2$ is a greedy algorithm that constructs an optimal code for compressing a given string. The algorithm builds a binary tree based on the frequencies of the characters in the string, and each character’s codeword can be read by following a path from the root to the corresponding node. A move to the left corresponds to bit 0, and a move to the right corresponds to bit 1. Initially, each character of the string is represented by a node whose weight is the number of times the character occurs in the string. Then at each step two nodes with minimum weights are combined by creating a new node whose weight is the sum of the weights of the original nodes. The process continues until all nodes have been combined. Next we will see how Huffman coding creates the optimal code for the string `AABACDACA`. Initially, there are four nodes that correspond to the characters of the string:
-
-5 1 2 1
 
 ```cpp
                     A
@@ -2319,8 +2286,6 @@ After this, the nodes with weight 2 are combined:
 
 ![Figure from page 74](figures/fig_p074_017.png)
 
-5
-
 ```cpp
                                       B
                                                 D
@@ -2344,25 +2309,17 @@ character codeword
                                   A
 ```
 
-0
-
 ```cpp
                                   B
 ```
-
-110
 
 ```cpp
                                   C
 ```
 
-10
-
 ```cpp
                                   D
 ```
-
-111
 
 <!-- PAGE 75 -->
 # Chapter 7
@@ -2975,31 +2932,21 @@ First, the elements 1, 3 and 4 are added to the stack, because each element is l
 
 1 3 4 2 5 3 4 2
 
-1 3 4
-
 The next element 2 is smaller than the two top elements in the stack. Thus, the elements 3 and 4 are removed from the stack, and then the element 2 is added to the stack. Its nearest smaller element is 1:
 
 1 3 4 2 5 3 4 2
-
-1 2
 
 Then, the element 5 is larger than the element 2, so it will be added to the stack, and its nearest smaller element is 2:
 
 1 3 4 2 5 3 4 2
 
-1 2 5
-
 After this, the element 5 is removed from the stack and the elements 3 and 4 are added to the stack:
 
 1 3 4 2 5 3 4 2
 
-1 2 3 4
-
 Finally, all elements except 1 are removed from the stack and the last element 2 is added to the stack:
 
 1 3 4 2 5 3 4 2
-
-1 2
 
 The efficiency of the algorithm depends on the total number of stack operations. If the current element is larger than the top element in the stack, it is directly added to the stack, which is efficient. However, sometimes the stack can contain several larger elements and it takes time to remove them. Still, each element is added *exactly* $once$ to the stack and removed $at$ $most$ $once$ from the stack. Thus, each element causes $O$(1) stack operations, and the algorithm works in $O(n)$ time.
 
@@ -3014,32 +2961,22 @@ Suppose that the size of the sliding window is 4. At the first window position, 
 
 2 1 4 5 3 4 1 2
 
-1 4 5
-
 Then the window moves one step right. The new element 3 is smaller than the elements 4 and 5 in the queue, so the elements 4 and 5 are removed from the queue and the element 3 is added to the queue. The smallest value is still 1.
 
 2 1 4 5 3 4 1 2
-
-1 3
 
 After this, the window moves again, and the smallest element 1 does not belong to the window anymore. Thus, it is removed from the queue and the smallest value is now 3. Also the new element 4 is added to the queue.
 
 2 1 4 5 3 4 1 2
 
-3 4
-
 The next new element 1 is smaller than all elements in the queue. Thus, all elements are removed from the queue and it will only contain the element 1:
 
 2 1 4 5 3 4 1 2
-
-1
 
 <!-- PAGE 92 -->
 Finally the window reaches its last position. The element 2 is added to the queue, but the smallest value inside the window is still 1.
 
 2 1 4 5 3 4 1 2
-
-1 2
 
 Since each array element is added to the queue exactly once and removed from the queue at most once, the algorithm works in $O(n)$ time.
 
@@ -3866,13 +3803,9 @@ A **graph** consists of **nodes** and **edges**. In this book, the variable $n$ 
 
 ![Figure from page 119](figures/fig_p119_033.png)
 
-5
-
 A **path** leads from node $a$ to node $b$ through edges of the graph. The **length** of a path is the number of edges in it. For example, the above graph contains a path 1 $\to 3 \to 4 \to$ 5 of length 3 from node 1 to node 5:
 
 ![Figure from page 119](figures/fig_p119_034.png)
-
-5
 
 A path is a **cycle** if the first and last node is the same. For example, the above graph contains a cycle 1 $\to 3 \to 4 \to$ 1. A path is **simple** if each node appears at most once in the path.
 
@@ -3901,8 +3834,6 @@ A graph is **directed** if the edges can be traversed in one direction only. For
 
 ![Figure from page 120](figures/fig_p120_037.png)
 
-5
-
 The above graph contains a path 3 $\to 1 \to 2 \to$ 5 from node 3 to node 5, but there is no path from node 5 to node 3.
 
 <!-- PAGE 121 -->
@@ -3920,13 +3851,9 @@ Two nodes are **neighbors** or **adjacent** if there is an edge between them. Th
 
 ![Figure from page 121](figures/fig_p121_038.png)
 
-5
-
 The sum of degrees in a graph is always 2$m$, where $m$ is the number of edges, because each edge increases the degree of exactly two nodes by one. For this reason, the sum of degrees is always even. A graph is **regular** if the degree of every node is a constant $d$. A graph is **complete** if the degree of every node is $n-1$, i.e., the graph contains all possible edges between the nodes. In a directed graph, the **indegree** of a node is the number of edges that end at the node, and the **outdegree** of a node is the number of edges that start at the node. For example, in the following graph, the indegree of node 2 is 2, and the outdegree of node 2 is 1.
 
 ![Figure from page 121](figures/fig_p121_039.png)
-
-5
 
 <!-- PAGE 122 -->
 ### Colorings
@@ -3935,33 +3862,17 @@ In a **coloring** of a graph, each node is assigned a color so that no adjacent 
 
 ![Figure from page 122](figures/fig_p122_040.png)
 
-3
-
-6
-
 is bipartite, because it can be colored as follows:
 
 ![Figure from page 122](figures/fig_p122_041.png)
-
-3
-
-6
 
 However, the graph
 
 ![Figure from page 122](figures/fig_p122_042.png)
 
-3
-
-6
-
 is not bipartite, because it is not possible to color the following cycle of three nodes using two colors:
 
 ![Figure from page 122](figures/fig_p122_043.png)
-
-3
-
-6
 
 ### Simplicity
 
@@ -3983,10 +3894,6 @@ vector<int> adj[N];
 ```
 
 The constant $N$ is chosen so that all adjacency lists can be stored. For example, the graph
-
-1 2 3
-
-4
 
 can be stored as follows:
 
@@ -4037,10 +3944,6 @@ int adj[N][N];
 
 where each value `adj`[$a][b$] indicates whether the graph contains an edge from node $a$ to node $b$. If the edge is included in the graph, then `adj`[$a][b] =$ 1, and otherwise `adj`[$a][b] =$ 0. For example, the graph
 
-1 2 3
-
-4
-
 can be represented as follows:
 
 ![Figure from page 124](figures/fig_p124_auto1.png)
@@ -4065,10 +3968,6 @@ vector<pair<int,int>> edges;
 ```
 
 where each pair ($a,b$) denotes that there is an edge from node $a$ to node $b$. Thus, the graph
-
-1 2 3
-
-4
 
 can be represented as follows:
 
@@ -4171,27 +4070,11 @@ void dfs(int s) {
 
 Let us consider how breadth-first search processes the following graph:
 
-1 2 3
-
-4 5 6
-
 Suppose that the search begins at node 1. First, we process all nodes that can be reached from node 1 using a single edge:
-
-1 2 3
-
-4 5 6
 
 After this, we proceed to nodes 3 and 5:
 
-1 2 3
-
-4 5 6
-
 Finally, we visit node 6:
-
-1 2 3
-
-4 5 6
 
 <!-- PAGE 130 -->
 Now we have calculated the distances from the starting node to all nodes of the graph. The distances are as follows:
@@ -4289,36 +4172,18 @@ Let us consider how the Bellman–Ford algorithm works in the following graph:
 
 ![Figure from page 133](figures/fig_p133_047.png)
 
-2
-
-6
-
 $\infty$
-
-2
 
 > **[1]** The algorithm is named after R. E. Bellman and L. R. Ford who published it independently in 1958 and 1956, respectively [5, 24].
 
 <!-- PAGE 134 -->
 Each node of the graph is assigned a distance. Initially, the distance to the starting node is 0, and the distance to all other nodes is infinite. The algorithm searches for edges that reduce distances. First, all edges from node 1 reduce distances:
 
-0 5
-
 ![Figure from page 134](figures/fig_p134_048.png)
-
-2
-
-5
 
 $\infty$
 
-2
-
-3 7
-
 After this, edges 2 $\to$ 5 and 3 $\to$ 4 reduce distances:
-
-0 5
 
 ![Figure from page 134](figures/fig_p134_049.png)
 
@@ -4326,15 +4191,11 @@ After this, edges 2 $\to$ 5 and 3 $\to$ 4 reduce distances:
 
 Finally, there is one more change:
 
-0 5
-
 ![Figure from page 134](figures/fig_p134_050.png)
 
 ![Figure from page 134](figures/fig_p134_auto2.png)
 
 After this, no edge can reduce any distance. This means that the distances are final, and we have successfully calculated the shortest distances from the starting node to all nodes of the graph. For example, the shortest distance 3 from node 1 to node 5 corresponds to the following path:
-
-0 5
 
 ![Figure from page 134](figures/fig_p134_051.png)
 
@@ -4386,13 +4247,7 @@ $\infty$ $\infty$
 
 $\infty$
 
-1
-
-2 1
-
 $\infty$ 0
-
-5
 
 Like in the Bellman–Ford algorithm, initially the distance to the starting node is 0 and the distance to all other nodes is infinite. At each step, Dijkstra’s algorithm selects a node that has not been processed yet and whose distance is as small as possible. The first such node is node 1 with distance 0.
 
@@ -4530,15 +4385,9 @@ A **tree** is a connected, acyclic graph that consists of $n$ nodes and $n -1$ e
 
 ![Figure from page 143](figures/fig_p143_054.png)
 
-5
-
-6 8
-
 The **leaves** of a tree are the nodes with degree 1, i.e., with only one neighbor. For example, the leaves of the above tree are nodes 3, 5, 7 and 8. In a **rooted** tree, one of the nodes is appointed the **root** of the tree, and all other nodes are placed underneath the root. For example, in the following tree, node 1 is the root node.
 
 ![Figure from page 143](figures/fig_p143_055.png)
-
-8
 
 In a rooted tree, the **children** of a node are its lower neighbors, and the **parent** of a node is its upper neighbor. Each node has exactly one parent, except for the root that does not have a parent. For example, in the above tree, the children of node 2 are nodes 5 and 6, and its parent is node 1.
 
@@ -4592,17 +4441,9 @@ The **diameter** of a tree is the maximum length of a path between two nodes. Fo
 
 ![Figure from page 145](figures/fig_p145_056.png)
 
-5
-
-6
-
 The diameter of this tree is 4, which corresponds to the following path:
 
 ![Figure from page 145](figures/fig_p145_057.png)
-
-5
-
-6
 
 Note that there may be several maximum-length paths. In the above path, we could replace node 6 with node 5 to obtain another path with length 4. Next we will discuss two $O(n)$ time algorithms for calculating the diameter of a tree. The first algorithm is based on dynamic programming, and the second algorithm uses two depth-first searches.
 
@@ -4629,11 +4470,7 @@ Another efficient way to calculate the diameter of a tree is based on two depthf
 
 ![Figure from page 146](figures/fig_p146_059.png)
 
-5
-
 $b$
-
-6
 
 This is an elegant method, but why does it work? It helps to draw the tree differently so that the path that corresponds to the diameter is horizontal, and all other nodes hang from it:
 
@@ -4906,10 +4743,6 @@ It turns out that in both cases, we can design efficient algorithms that are bas
 
 A **topological sort** is an ordering of the nodes of a directed graph such that if there is a path from node $a$ to node $b$, then node $a$ appears before node $b$ in the ordering. For example, for the graph
 
-1 2 3
-
-4 5 6
-
 one topological sort is [4,1,5,2,3,6]:
 
 1 2 3 4 5 6
@@ -4935,28 +4768,14 @@ Initially, the state of each node is 0. When a search reaches a node for the fir
 
 In the example graph, the search first proceeds from node 1 to node 6:
 
-1 2 3
-
-4 5 6
-
 Now node 6 has been processed, so it is added to the list. After this, also nodes 3, 2 and 1 are added to the list:
 
-1 2 3
-
-4 5 6
-
 At this point, the list is [6,3,2,1]. The next search begins at node 4:
-
-1 2 3
-
-4 5 6
 
 <!-- PAGE 161 -->
 Thus, the final list is [6,3,2,1,5,4]. We have processed all nodes, so a topological sort has been found. The topological sort is the reverse list [4,5,1,2,3,6]:
 
 ![Figure from page 161](figures/fig_p161_065.png)
-
-3 6
 
 Note that a topological sort is not unique, and there can be several topological sorts for a graph.
 
@@ -4964,15 +4783,7 @@ Note that a topological sort is not unique, and there can be several topological
 
 Let us now consider a graph for which we cannot construct a topological sort, because the graph contains a cycle:
 
-1 2 3
-
-4 5 6
-
 The search proceeds as follows:
-
-1 2 3
-
-4 5 6
 
 The search reaches node 2 whose state is 1, which means that the graph contains a cycle. In this example, there is a cycle 2 $\to 3 \to 5 \to$ 2.
 
@@ -4993,10 +4804,6 @@ If a directed graph is acyclic, dynamic programming can be applied to it. For ex
 
 As an example, let us calculate the number of paths from node 1 to node 6 in the following graph:
 
-1 2 3
-
-4 5 6
-
 There are a total of three such paths:
 
 • 1 $\to 2 \to 3 \to$ 6
@@ -5012,8 +4819,6 @@ Let `paths`($x$) denote the number of paths from node 1 to node $x$. As a base c
 where $a_1,a_2,...,a_k$ are the nodes from which there is an edge to $x$. Since the graph is acyclic, the values of `paths`($x$) can be calculated in the order of a topological sort. A topological sort for the above graph is as follows:
 
 ![Figure from page 162](figures/fig_p162_066.png)
-
-3 6
 
 Hence, the numbers of paths are as follows:
 
@@ -5319,13 +5124,7 @@ Using this fact, we can efficiently process queries that are related to subtrees
 
 Consider the following tree where the blue numbers are the values of the nodes. For example, the sum of the subtree of node 4 is 3$+4+3+1 =$ 11.
 
-2
-
 ![Figure from page 175](figures/fig_p175_075.png)
-
-3 1
-
-4 4 3 1
 
 The idea is to construct a tree traversal array that contains three values for each node: the identifier of the node, the size of the subtree, and the value of the node. For example, the array for the above tree is as follows:
 
@@ -5360,13 +5159,7 @@ Using a tree traversal array, we can also efficiently calculate sums of values o
 
 For example, in the following tree, the sum of values from the root node to node 7 is 4$+5+5 =$ 14:
 
-4
-
 ![Figure from page 176](figures/fig_p176_078.png)
-
-5 2
-
-3 5 3 1
 
 We can solve this problem like before, but now each value in the last row of the array is the sum of values on a path from the root to the node. For example, the following array corresponds to the above tree:
 
@@ -5409,8 +5202,6 @@ One way to solve the problem is to use the fact that we can efficiently find the
 After this, we determine the minimum number of steps needed to move both pointers upwards so that they will point to the same node. The node to which the pointers point after this is the lowest common ancestor. In the example scenario, it suffices to move both pointers one step upwards to node 2, which is the lowest common ancestor:
 
 ![Figure from page 178](figures/fig_p178_083.png)
-
-8
 
 Since both parts of the algorithm can be performed in $O$(log$n$) time using precomputed information, we can find the lowest common ancestor of any two nodes in $O$(log$n$) time.
 
@@ -5463,8 +5254,6 @@ where $c$ is the lowest common ancestor of $a$ and $b$ and `depth`($s$) denotes 
 
 ![Figure from page 179](figures/fig_p179_085.png)
 
-8
-
 <!-- PAGE 180 -->
 The lowest common ancestor of nodes 5 and 8 is node 2. The depths of the nodes are `depth`(5) $= 3$, `depth`(8) $= 4$ and `depth`(2) $= 2$, so the distance between nodes 5 and 8 is 3$+4-2\cdot 2 =$ 3.
 
@@ -5476,13 +5265,7 @@ So far, we have discussed $online$ algorithms for tree queries. Those algorithms
 
 One method to construct an offline algorithm is to perform a depth-first tree traversal and maintain data structures in nodes. At each node $s$, we create a data structure `d`[$s$] that is based on the data structures of the children of $s$. Then, using this data structure, all queries related to $s$ are processed. As an example, consider the following problem: We are given a tree where each node has some value. Our task is to process queries of the form "calculate the number of nodes with value $x$ in the subtree of node $s$". For example, in the following tree, the subtree of node 4 contains two nodes whose value is 3.
 
-2
-
 ![Figure from page 180](figures/fig_p180_086.png)
-
-3 1
-
-4 4 3 1
 
 In this problem, we can use map structures to answer the queries. For example, the maps for node 4 and its children are as follows:
 
@@ -5516,13 +5299,9 @@ For example, suppose that we want to find the lowest common ancestors of node pa
 
 ![Figure from page 182](figures/fig_p182_088.png)
 
-8
-
 In the following trees, gray nodes denote visited nodes and dashed groups of nodes belong to the same set. When the algorithm visits node 8, it notices that node 5 has been visited and the highest node in its set is 2. Thus, the lowest common ancestor of nodes 5 and 8 is 2:
 
 ![Figure from page 182](figures/fig_p182_089.png)
-
-8
 
 Later, when visiting node 7, the algorithm determines that the lowest common ancestor of nodes 2 and 7 is 1:
 
@@ -5553,15 +5332,9 @@ has an Eulerian path from node 2 to node 5:
 
 5.
 
-1 2
-
 4.
 
 2.
-
-3
-
-4 5
 
 6.
 
@@ -5578,17 +5351,11 @@ has an Eulerian circuit that starts and ends at node 1:
 
 5. 6.
 
-1 2
-
 3.
-
-3
 
 1.
 
 2.
-
-4 5
 
 4.
 
@@ -5621,15 +5388,9 @@ nodes 1, 3 and 4 have both indegree 1 and outdegree 1, node 2 has indegree 1 and
 
 1.
 
-1 2
-
 6.
 
 4.
-
-3
-
-4 5
 
 2. 3.
 
@@ -5671,15 +5432,9 @@ contains a Hamiltonian path from node 1 to node 3:
 
 4.
 
-1 2
-
 3.
 
-3
-
 1.
-
-4 5
 
 2.
 
@@ -5689,13 +5444,7 @@ If a Hamiltonian path begins and ends at the same node, it is called a **Hamil- 
 
 2.
 
-1 2
-
-3
-
 5.
-
-4 5
 
 3. 4.
 
@@ -5929,15 +5678,7 @@ A **path cover** is a set of paths in a graph such that each node of the graph b
 
 In a **node-disjoint path cover**, each node belongs to exactly one path. As an example, consider the following graph:
 
-1 2 3 4
-
-5 6 7
-
 A minimum node-disjoint path cover of this graph consists of three paths. For example, we can choose the following paths:
-
-1 2 3 4
-
-5 6 7
 
 Note that one of the paths only contains node 2, so it is possible that a path does not contain any edges. We can find a minimum node-disjoint path cover by constructing a *matching* $graph$ where each node of the original graph is represented by two nodes: a left node and a right node. There is an edge from a left node to a right node if there is such an edge in the original graph. In addition, the matching graph contains a source and a sink, and there are edges from the source to all left nodes and from all right nodes to the sink. A maximum matching in the resulting graph corresponds to a minimum nodedisjoint path cover in the original graph. For example, the following matching graph for the above graph contains a maximum matching of size 4:
 
@@ -5950,21 +5691,9 @@ Each edge in the maximum matching of the matching graph corresponds to an edge i
 
 A **general path cover** is a path cover where a node can belong to more than one path. A minimum general path cover may be smaller than a minimum node-disjoint path cover, because a node can be used multiple times in paths. Consider again the following graph:
 
-1 2 3 4
-
-5 6 7
-
 The minimum general path cover of this graph consists of two paths. For example, the first path may be as follows:
 
-1 2 3 4
-
-5 6 7
-
 And the second path may be as follows:
-
-1 2 3 4
-
-5 6 7
 
 A minimum general path cover can be found almost like a minimum nodedisjoint path cover. It suffices to add some new edges to the matching graph so that there is an edge $a \to b$ always when there is a path from $a$ to $b$ in the original graph (possibly through several edges). The matching graph for the above graph is as follows:
 
@@ -5974,10 +5703,6 @@ A minimum general path cover can be found almost like a minimum nodedisjoint pat
 ### Dilworth’s theorem
 
 An **antichain** is a set of nodes of a graph such that there is no path from any node to another node using the edges of the graph. **Dilworth’s theorem** states that in a directed acyclic graph, the size of a minimum general path cover equals the size of a maximum antichain. For example, nodes 3 and 7 form an antichain in the following graph:
-
-1 2 3 4
-
-5 6 7
 
 This is a maximum antichain, because it is not possible to construct any antichain that would contain three nodes. We have seen before that the size of a minimum general path cover of this graph consists of two paths.
 
@@ -6772,10 +6497,6 @@ Then we remove node 3 and add node 4 to the code:
 
 Finally we remove node 4 and add node 2 to the code:
 
-2
-
-5
-
 Thus, the Prüfer code of the graph is [4,4,2]. We can construct a Prüfer code for any tree, and more importantly, the original tree can be reconstructed from a Prüfer code. Hence, the number of labeled trees of $n$ nodes equals $n^{n-2}$, the number of Prüfer codes of size $n$.
 
 <!-- PAGE 227 -->
@@ -7330,8 +7051,6 @@ A **Markov chain** is a random process that consists of states and transitions b
 <!-- PAGE 241 -->
 1 1/2 1/2 1/2
 
-1 2 3 4 5
-
 1 1/2 1/2 1/2
 
 The probability distribution of a Markov chain is a vector [$p_1, p_2,..., p_n$], where $p_k$ is the probability that the current state is $k$. The formula $p_1 + p_2 +\cdot \cdot \cdot +$ $p_n =$ 1 always holds. In the above scenario, the initial distribution is [1,0,0,0,0], because we always begin in floor 1. The next distribution is [0,1,0,0,0], because we can only move from floor 1 to floor 2. After this, we can either move one floor up or one floor down, so the next distribution is [1/2,0,1/2,0,0], and so on. An efficient way to simulate the walk in a Markov chain is to use dynamic programming. The idea is to maintain the probability distribution, and at each step go through all possibilities how we can move. Using this method, we can simulate a walk of $m$ steps in $O(n^2m)$ time. The transitions of a Markov chain can also be represented as a matrix that updates the probability distribution. In the above scenario, the matrix is
@@ -7361,10 +7080,6 @@ $$
 $$
 
 0 1/2 0 0 0 1 0 1/2 0 0 0 1/2 0 1/2 0 0 0 1/2 0 1 0 0 0 1/2 0
-
-1 0 0 0 0
-
-0 1 0 0 0
 
 $$
 
@@ -7430,13 +7145,9 @@ Given a graph that contains $n$ nodes and $m$ edges, our task is to find a way t
 
 ![Figure from page 243](figures/fig_p243_123.png)
 
-5
-
 a valid coloring is as follows:
 
 ![Figure from page 243](figures/fig_p243_124.png)
-
-5
 
 The above graph contains 7 edges, and for 5 of them, the endpoints have different colors, so the coloring is valid. The problem can be solved using a Las Vegas algorithm that generates random colorings until a valid coloring has been found. In a random coloring, the color of each node is independently chosen so that the probability of both colors is 1/2. In a random coloring, the probability that the endpoints of a single edge have different colors is 1/2. Hence, the expected number of edges whose endpoints have different colors is $m$/2. Since it is expected that a random coloring is valid, we will quickly find a valid coloring in practice.
 
@@ -7492,25 +7203,17 @@ The **nim game** is a simple game that has an important role in game theory, bec
 
 It turns out that we can easily classify any nim state by calculating the **nim sum** $s = x_1 ⊕x_2 ⊕\cdot \cdot \cdot ⊕x_n$, where $⊕$is the xor operation$^1$. The states whose nim sum is 0 are losing states, and all other states are winning states. For example, the nim sum of [10,12,5] is 10$⊕12⊕5 =$ 3, so the state is a winning state. But how is the nim sum related to the nim game? We can explain this by looking at how the nim sum changes when the nim state changes. *Losing states:* The final state [0,0,...,0] is a losing state, and its nim sum is 0, as expected. In other losing states, any move leads to a winning state, because when a single value $x_k$ changes, the nim sum also changes, so the nim sum is different from 0 after the move. *Winning states:* We can move to a losing state if there is any heap $k$ for which $x_k ⊕s < x_k$. In this case, we can remove sticks from heap $k$ so that it will contain $x_k ⊕s$ sticks, which will lead to a losing state. There is always such a heap, where $x_k$ has a one bit at the position of the leftmost one bit of $s$. As an example, consider the state [10,12,5]. This state is a winning state, because its nim sum is 3. Thus, there has to be a move which leads to a losing state. Next we will find out such a move. The nim sum of the state is as follows:
 
-10
-
 ```cpp
                                     1010
 ```
-
-12
 
 ```cpp
                                     1100
 ```
 
-5
-
 ```cpp
                                     0101
 ```
-
-3
 
 ```cpp
                                     0011
@@ -7518,25 +7221,17 @@ It turns out that we can easily classify any nim state by calculating the **nim 
 
 In this case, the heap with 10 sticks is the only heap that has a one bit at the position of the leftmost one bit of the nim sum:
 
-10
-
 ```cpp
                                     1010
 ```
-
-12
 
 ```cpp
                                     1100
 ```
 
-5
-
 ```cpp
                                     0101
 ```
-
-3
 
 ```cpp
                                     0011
@@ -7547,25 +7242,17 @@ In this case, the heap with 10 sticks is the only heap that has a one bit at the
 <!-- PAGE 248 -->
 The new size of the heap has to be 10$⊕3 =$ 9, so we will remove just one stick. After this, the state will be [9,12,5], which is a losing state:
 
-9
-
 ```cpp
                                     1001
 ```
-
-12
 
 ```cpp
                                     1100
 ```
 
-5
-
 ```cpp
                                     0101
 ```
-
-0
 
 ```cpp
                                     0000
@@ -7601,10 +7288,6 @@ where $g_1, g_2,..., g_n$ are the Grundy numbers of the states to which we can m
 the Grundy numbers are as follows:
 
 ![Figure from page 249](figures/fig_p249_128.png)
-
-0
-
-2
 
 The Grundy number of a losing state is 0, and the Grundy number of a winning state is a positive number. The Grundy number of a state corresponds to the number of sticks in a nim heap. If the Grundy number is 0, we can only move to states whose Grundy numbers are positive, and if the Grundy number is $x >$ 0, we can move to states whose Grundy numbers include all numbers 0,1,...,$x-1$. As an example, consider a game where the players move a figure in a maze. Each square in the maze is either floor or wall. On each turn, the player has to move the figure some number of steps left or up. The winner of the game is the player who makes the last move. The following picture shows a possible initial state of the game, where @ denotes the figure and * denotes a square where it can move.
 
@@ -8497,8 +8180,6 @@ The Euclidean distance between the points is $p$
 
 (5$-2)^2 +(2-1)^2 =$ $p$
 
-10
-
 and the Manhattan distance is
 
 $|5-2|+|2-1| =$ 4.
@@ -8613,10 +8294,6 @@ the convex hull is as follows:
 
 <!-- PAGE 289 -->
 **Andrew’s algorithm** [3] provides an easy way to construct the convex hull for a set of points in $O(n$log$n$) time. The algorithm first locates the leftmost and rightmost points, and then constructs the convex hull in two parts: first the upper hull and then the lower hull. Both parts are similar, so we can focus on constructing the upper hull. First, we sort the points primarily according to x coordinates and secondarily according to y coordinates. After this, we go through the points and add each point to the hull. Always after adding a point to the hull, we make sure that the last line segment in the hull does not turn left. As long as it turns left, we repeatedly remove the second last point from the hull. The following pictures show how Andrew’s algorithm works:
-
-1 2 3 4
-
-5 6 7 8
 
 9 10 11 12
 
