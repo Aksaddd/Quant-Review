@@ -24,7 +24,6 @@ function masteryLevel(pct: number): 0 | 1 | 2 | 3 {
   return 3;
 }
 
-const MASTERY_LABELS = ['Not started', 'Familiar', 'Proficient', 'Mastered'];
 const MASTERY_COLORS = ['bg-[#e4e6ea]', 'bg-[#a3c4f3]', 'bg-[#1865f2]', 'bg-[#1fab54]'];
 
 export default function Sidebar() {
@@ -233,19 +232,6 @@ export default function Sidebar() {
                 </div>
               );
             })}
-
-            {/* Mastery legend */}
-            <div className="mt-3 mx-1 p-3 rounded-lg bg-[#f7f8fa] border border-[#e4e6ea]">
-              <p className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider mb-2">Mastery</p>
-              <div className="space-y-1.5">
-                {MASTERY_LABELS.map((label, i) => (
-                  <div key={label} className="flex items-center gap-2">
-                    <span className={clsx('w-2 h-2 rounded-full shrink-0', MASTERY_COLORS[i])} />
-                    <span className="text-[11px] text-[#9299a5]">{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         )}
 
