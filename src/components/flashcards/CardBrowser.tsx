@@ -57,42 +57,67 @@ export default function CardBrowser({
   }, [index, cards.length]);
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa] flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--apple-grey-100, #f5f5f7)' }}>
       {/* Top bar */}
-      <div className="bg-white border-b border-[#e4e6ea] px-4 sm:px-6 py-3 flex items-center gap-3">
+      <div
+        className="px-4 sm:px-6 py-3 flex items-center gap-3"
+        style={{
+          background: 'var(--material-thin-light)',
+          backdropFilter: 'var(--material-blur)',
+          WebkitBackdropFilter: 'var(--material-blur)',
+          borderBottom: '0.5px solid rgba(0,0,0,0.06)',
+        }}
+      >
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
+          className="flex items-center gap-1.5 text-[13px] text-[#6e6e73] hover:text-[#1d1d1f] transition-colors duration-200 shrink-0"
+          style={{ transitionTimingFunction: 'var(--ease-standard)' }}
         >
           <ChevronLeft size={16} /> Back
         </button>
-        {title && <span className="text-sm font-semibold text-[#21242c] truncate">{title}</span>}
+        {title && <span className="text-[13px] font-semibold tracking-tight text-[#1d1d1f] truncate">{title}</span>}
         <div className="flex-1" />
-        <span className="text-xs text-[#9299a5] font-medium whitespace-nowrap">{index + 1} / {cards.length}</span>
+        <span className="text-[11px] text-[#86868b] font-medium whitespace-nowrap tabular-nums">{index + 1} / {cards.length}</span>
         <button
           onClick={() => onStudy(cards)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--ka-blue)] text-white text-xs font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold tracking-tight text-white transition-all duration-200 active:scale-[0.97]"
+          style={{
+            borderRadius: 10,
+            background: 'var(--eureka-accent)',
+            transitionTimingFunction: 'var(--ease-standard)',
+          }}
         >
           <Brain size={12} /> Study set
         </button>
       </div>
 
       {/* Thin progress bar */}
-      <div className="h-0.5 bg-[#e4e6ea]">
+      <div style={{ height: 2, background: 'rgba(0,0,0,0.06)' }}>
         <div
-          className="h-full bg-[var(--ka-blue)] transition-all duration-300"
-          style={{ width: `${((index + 1) / cards.length) * 100}%` }}
+          style={{
+            height: '100%',
+            width: `${((index + 1) / cards.length) * 100}%`,
+            background: 'var(--eureka-accent)',
+            transition: 'width 300ms var(--ease-standard)',
+          }}
         />
       </div>
 
       <div className="flex-1 flex flex-col items-center px-4 sm:px-6 py-8 max-w-3xl mx-auto w-full">
         {/* Metadata row */}
         <div className="flex flex-wrap items-center gap-2 mb-5 self-start">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
-            <BookOpen size={12} className="text-[#9299a5]" />
-            <span className="text-[11px] font-bold text-[#626975]">{card.section}</span>
-            <span className="text-[#c8ccd4]">·</span>
-            <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
+          <div
+            className="flex items-center gap-1.5 px-3 py-1.5"
+            style={{
+              background: '#ffffff',
+              border: '0.5px solid rgba(0,0,0,0.06)',
+              borderRadius: 10,
+            }}
+          >
+            <BookOpen size={12} className="text-[#86868b]" />
+            <span className="text-[11px] font-semibold text-[#6e6e73] tabular-nums">{card.section}</span>
+            <span className="text-[#d2d2d7]">·</span>
+            <span className="text-[11px] font-semibold text-[#1d1d1f] tracking-tight">{secTitle}</span>
           </div>
           <TypeBadge type={card.type} />
           <DifficultyBadge difficulty={card.difficulty} />
@@ -108,13 +133,24 @@ export default function CardBrowser({
         </div>
 
         {/* Front */}
-        <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6 mb-4">
+        <div
+          className="w-full p-6 mb-4"
+          style={{
+            background: '#ffffff',
+            border: '0.5px solid rgba(0,0,0,0.06)',
+            borderRadius: 16,
+            boxShadow: '0 1px 2px rgba(0,0,0,0.03), 0 6px 20px -12px rgba(0,0,0,0.08)',
+          }}
+        >
           {problem && (
-            <h2 className="text-lg font-bold text-[#21242c] mb-4 pb-3 border-b border-[#e4e6ea]">
+            <h2
+              className="text-[17px] font-semibold tracking-tight text-[#1d1d1f] mb-4 pb-3"
+              style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}
+            >
               {problem.title}
             </h2>
           )}
-          <div className="prose-reading text-[#21242c]">
+          <div className="prose-reading text-[#1d1d1f]">
             <MarkdownRenderer content={front} />
           </div>
         </div>
@@ -123,21 +159,48 @@ export default function CardBrowser({
         {!showBack ? (
           <button
             onClick={() => setShowBack(true)}
-            className="w-full py-3 rounded-lg border-2 border-[var(--ka-blue)] text-[var(--ka-blue)] font-semibold text-sm hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150 mb-4"
+            className="w-full py-3 font-semibold text-[13px] tracking-tight transition-all duration-200 mb-4 active:scale-[0.99]"
+            style={{
+              borderRadius: 12,
+              background: 'var(--eureka-accent-tint)',
+              color: 'var(--eureka-accent)',
+              border: '0.5px solid var(--eureka-accent-tint-strong)',
+              transitionTimingFunction: 'var(--ease-standard)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--eureka-accent)';
+              e.currentTarget.style.color = '#ffffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--eureka-accent-tint)';
+              e.currentTarget.style.color = 'var(--eureka-accent)';
+            }}
           >
             Show answer <span className="text-[11px] opacity-60 ml-1">(Space)</span>
           </button>
         ) : (
-          <div className="w-full bg-white border border-[#e4e6ea] rounded-lg shadow-sm p-6 mb-4 animate-fade-up">
-            <p className="text-xs font-bold text-[#626975] uppercase tracking-wider mb-4 pb-3 border-b border-[#e4e6ea]">
+          <div
+            className="w-full p-6 mb-4 animate-fade-up"
+            style={{
+              background: '#ffffff',
+              border: '0.5px solid var(--eureka-accent-tint-strong)',
+              borderRadius: 16,
+              boxShadow: '0 1px 2px rgba(0,0,0,0.03), 0 10px 32px -14px var(--eureka-accent-tint-strong)',
+            }}
+          >
+            <p
+              className="text-[10px] font-semibold uppercase tracking-[0.08em] mb-4 pb-3"
+              style={{ color: 'var(--eureka-accent)', borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}
+            >
               Answer
             </p>
-            <div className="prose-reading text-[#21242c]">
+            <div className="prose-reading text-[#1d1d1f]">
               <MarkdownRenderer content={back} />
             </div>
             <button
               onClick={() => setShowBack(false)}
-              className="mt-4 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+              className="mt-4 text-[11px] text-[#86868b] hover:text-[#424245] transition-colors duration-200"
+              style={{ transitionTimingFunction: 'var(--ease-standard)' }}
             >
               Hide answer
             </button>
@@ -149,7 +212,14 @@ export default function CardBrowser({
           <button
             onClick={() => go(-1)}
             disabled={index === 0}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97] disabled:opacity-30 disabled:cursor-not-allowed disabled:active:scale-100"
+            style={{
+              borderRadius: 12,
+              background: '#ffffff',
+              border: '0.5px solid rgba(0,0,0,0.08)',
+              color: '#424245',
+              transitionTimingFunction: 'var(--ease-standard)',
+            }}
           >
             <ChevronLeft size={15} /> Previous
           </button>
@@ -161,11 +231,13 @@ export default function CardBrowser({
                 <button
                   key={i}
                   onClick={() => { setIndex(i); setShowBack(false); }}
-                  className={`rounded-full transition-all duration-200 ${
-                    i === index
-                      ? 'w-2.5 h-2.5 bg-[var(--ka-blue)]'
-                      : 'w-2 h-2 bg-[#e4e6ea] hover:bg-[#c8ccd4]'
-                  }`}
+                  className="rounded-full"
+                  style={{
+                    width:  i === index ? 10 : 8,
+                    height: i === index ? 10 : 8,
+                    background: i === index ? 'var(--eureka-accent)' : 'rgba(0,0,0,0.12)',
+                    transition: 'width 200ms var(--ease-standard), height 200ms var(--ease-standard), background 200ms var(--ease-standard)',
+                  }}
                 />
               ))}
             </div>
@@ -174,13 +246,20 @@ export default function CardBrowser({
           <button
             onClick={() => go(1)}
             disabled={index === cards.length - 1}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[#e4e6ea] text-sm font-semibold text-[#626975] hover:border-[#c8ccd4] hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97] disabled:opacity-30 disabled:cursor-not-allowed disabled:active:scale-100"
+            style={{
+              borderRadius: 12,
+              background: '#ffffff',
+              border: '0.5px solid rgba(0,0,0,0.08)',
+              color: '#424245',
+              transitionTimingFunction: 'var(--ease-standard)',
+            }}
           >
             Next <ChevronRight size={15} />
           </button>
         </div>
 
-        <p className="text-[10px] text-[#c8ccd4] mt-4">
+        <p className="text-[10px] text-[#a1a1a6] mt-4 tracking-tight">
           ← → to navigate · Space to flip
         </p>
       </div>

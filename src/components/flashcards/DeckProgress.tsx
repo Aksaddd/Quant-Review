@@ -11,15 +11,19 @@ export default function DeckProgress({ current, total, reviewed }: DeckProgressP
 
   return (
     <div>
-      <div className="h-2 bg-[#e4e6ea] rounded-full overflow-hidden">
+      <div className="h-[3px] rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.06)' }}>
         <div
-          className="h-full bg-[var(--ka-blue)] rounded-full transition-all duration-500"
-          style={{ width: `${pct}%` }}
+          className="h-full rounded-full"
+          style={{
+            width: `${pct}%`,
+            background: 'var(--eureka-accent)',
+            transition: 'width 500ms var(--ease-standard)',
+          }}
         />
       </div>
       <div className="flex items-center justify-between mt-1">
-        <span className="text-[10px] text-[#9299a5]">{reviewed} reviewed</span>
-        <span className="text-[10px] font-semibold text-[var(--ka-blue)]">{pct}%</span>
+        <span className="text-[10px] text-[#86868b] tabular-nums">{reviewed} reviewed</span>
+        <span className="text-[10px] font-semibold tabular-nums tracking-tight" style={{ color: 'var(--eureka-accent)' }}>{pct}%</span>
       </div>
     </div>
   );

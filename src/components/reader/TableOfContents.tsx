@@ -38,23 +38,43 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
   const totalSolved = problems.filter((p) => getProblemStatus(p.id) === 'solved').length;
 
   return (
-    <div className="bg-white border border-[#e4e6ea] rounded-lg overflow-hidden">
+    <div
+      className="overflow-hidden"
+      style={{
+        background: 'var(--material-thin-light)',
+        backdropFilter: 'var(--material-blur)',
+        WebkitBackdropFilter: 'var(--material-blur)',
+        border: '0.5px solid rgba(0,0,0,0.06)',
+        borderRadius: 14,
+      }}
+    >
       <button
-        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#21242c] hover:bg-[#f7f8fa] transition-colors"
+        className="w-full flex items-center gap-2 px-4 py-3 text-[13px] font-semibold tracking-tight text-[#1d1d1f] transition-colors duration-200"
+        style={{ transitionTimingFunction: 'var(--ease-standard)' }}
         onClick={() => setOpen(!open)}
+        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0,0,0,0.03)')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
       >
-        <List size={15} className="text-[#626975]" />
+        <List size={15} className="text-[#6e6e73]" />
         <span className="flex-1 text-left">Table of Contents</span>
-        <span className="text-xs text-[#9299a5] font-normal">{totalSolved}/{problems.length} solved</span>
-        {open ? <ChevronDown size={14} className="text-[#9299a5]" /> : <ChevronRight size={14} className="text-[#9299a5]" />}
+        <span className="text-[11px] text-[#86868b] font-normal tabular-nums">{totalSolved}/{problems.length} solved</span>
+        {open ? <ChevronDown size={14} className="text-[#86868b]" /> : <ChevronRight size={14} className="text-[#86868b]" />}
       </button>
 
       {open && (
-        <div className="border-t border-[#e4e6ea] max-h-[60vh] overflow-y-auto">
+        <div className="max-h-[60vh] overflow-y-auto" style={{ borderTop: '0.5px solid rgba(0,0,0,0.06)' }}>
           {grouped.map((sec) => (
             <div key={sec.id}>
-              <div className="px-4 py-2 bg-[#f7f8fa] sticky top-0 z-10 border-b border-[#e4e6ea]">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[#9299a5]">
+              <div
+                className="px-4 py-2 sticky top-0 z-10"
+                style={{
+                  background: 'rgba(245,245,247,0.92)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  borderBottom: '0.5px solid rgba(0,0,0,0.06)',
+                }}
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-[#86868b]">
                   {sec.id} · {sec.title}
                 </p>
               </div>
@@ -66,17 +86,21 @@ export default function TableOfContents({ problems }: TableOfContentsProps) {
                     <li key={p.id}>
                       <a
                         href={`#${p.id}`}
-                        className={`flex items-center gap-3 px-4 py-2 text-sm transition-colors
-                          ${isActive
-                            ? 'bg-[var(--ka-blue-light)] text-[var(--ka-blue)] font-semibold'
-                            : 'text-[#626975] hover:bg-[#f7f8fa] hover:text-[#21242c]'
-                          }`}
+                        className="flex items-center gap-3 px-4 py-2 text-[13px] tracking-tight transition-colors duration-200"
+                        style={{
+                          background: isActive ? 'var(--eureka-accent-tint)' : 'transparent',
+                          color: isActive ? 'var(--eureka-accent)' : '#424245',
+                          fontWeight: isActive ? 600 : 400,
+                          transitionTimingFunction: 'var(--ease-standard)',
+                        }}
                         onClick={() => setOpen(false)}
+                        onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}
+                        onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.background = 'transparent'; }}
                       >
                         {status === 'solved' ? (
-                          <CheckCircle2 size={13} className="text-[#1fab54] shrink-0" />
+                          <CheckCircle2 size={13} style={{ color: '#30d158' }} className="shrink-0" />
                         ) : (
-                          <Circle size={13} className="text-[#c8ccd4] shrink-0" />
+                          <Circle size={13} style={{ color: '#d2d2d7' }} className="shrink-0" />
                         )}
                         <span className="truncate">{p.title}</span>
                       </a>

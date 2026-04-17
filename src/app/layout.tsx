@@ -37,7 +37,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#06060f',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f5f5f7' },
+    { media: '(prefers-color-scheme: dark)',  color: '#1c1c1e' },
+  ],
 };
 
 /* ── Layout ─────────────────────────────────────────────────────────────── */
@@ -51,25 +54,28 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body className="bg-[var(--surface-0)] text-[var(--text-primary)] antialiased">
+      <body className="eureka-active bg-[var(--surface-0)] text-[var(--text-primary)] antialiased">
         {children}
         <Toaster
           position="bottom-right"
           toastOptions={{
             duration: 3000,
             style: {
-              background: 'var(--surface-3)',
+              background: 'var(--material-thin-light)',
+              backdropFilter: 'var(--material-blur)',
+              WebkitBackdropFilter: 'var(--material-blur)',
               color: 'var(--text-primary)',
-              border: '1px solid var(--surface-border-strong)',
-              borderRadius: 'var(--radius-md)',
+              border: '0.5px solid rgba(0,0,0,0.08)',
+              borderRadius: 'var(--radius-hud)',
+              boxShadow: 'var(--shadow-hud)',
               fontSize: '0.875rem',
               fontFamily: 'var(--font-inter)',
             },
             success: {
-              iconTheme: { primary: '#10b981', secondary: 'var(--surface-3)' },
+              iconTheme: { primary: 'var(--eureka-accent)', secondary: 'transparent' },
             },
             error: {
-              iconTheme: { primary: '#ef4444', secondary: 'var(--surface-3)' },
+              iconTheme: { primary: '#ef4444', secondary: 'transparent' },
             },
           }}
         />

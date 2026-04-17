@@ -20,14 +20,30 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-[#e4e6ea]">
+    <header
+      className="sticky top-0 z-40"
+      style={{
+        background: 'var(--material-thin-light)',
+        backdropFilter: 'var(--material-blur)',
+        WebkitBackdropFilter: 'var(--material-blur)',
+        borderBottom: '0.5px solid rgba(0,0,0,0.06)',
+      }}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-[var(--ka-blue)] flex items-center justify-center">
-            <span className="text-white font-bold text-sm">Q</span>
+          <div
+            className="w-8 h-8 flex items-center justify-center transition-transform duration-200 group-hover:scale-[1.04]"
+            style={{
+              borderRadius: 10,
+              background: 'var(--eureka-accent)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+              transitionTimingFunction: 'var(--ease-standard)',
+            }}
+          >
+            <span className="text-white font-semibold text-sm tracking-tight">Q</span>
           </div>
-          <span className="font-bold text-[15px] text-[#21242c] hidden sm:block">
+          <span className="font-semibold text-[15px] text-[#1d1d1f] hidden sm:block tracking-tight">
             Quant Review
           </span>
         </Link>
@@ -65,7 +81,15 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-[#e4e6ea] bg-white px-4 py-3 animate-fade-up">
+        <div
+          className="md:hidden px-4 py-3 animate-fade-up"
+          style={{
+            background: 'var(--material-regular-light)',
+            backdropFilter: 'var(--material-blur)',
+            WebkitBackdropFilter: 'var(--material-blur)',
+            borderTop: '0.5px solid rgba(0,0,0,0.06)',
+          }}
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
@@ -104,18 +128,33 @@ export function AppTopBar({ title }: { title?: string }) {
     title ?? '';
 
   return (
-    <header className="lg:hidden sticky top-0 z-30 bg-white border-b border-[#e4e6ea] px-4 h-14 flex items-center justify-between">
+    <header
+      className="lg:hidden sticky top-0 z-30 px-4 h-14 flex items-center justify-between"
+      style={{
+        background: 'var(--material-thin-light)',
+        backdropFilter: 'var(--material-blur)',
+        WebkitBackdropFilter: 'var(--material-blur)',
+        borderBottom: '0.5px solid rgba(0,0,0,0.06)',
+      }}
+    >
       {/* Logo + breadcrumb */}
       <div className="flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[var(--ka-blue)] flex items-center justify-center">
-            <span className="text-white font-bold text-xs">Q</span>
+          <div
+            className="w-7 h-7 flex items-center justify-center"
+            style={{
+              borderRadius: 8,
+              background: 'var(--eureka-accent)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+            }}
+          >
+            <span className="text-white font-semibold text-xs tracking-tight">Q</span>
           </div>
         </Link>
         {crumb && (
           <>
-            <span className="text-[#e4e6ea]">/</span>
-            <span className="text-sm font-semibold text-[#21242c]">{crumb}</span>
+            <span className="text-[#d2d2d7]">/</span>
+            <span className="text-sm font-semibold text-[#1d1d1f] tracking-tight">{crumb}</span>
           </>
         )}
       </div>
@@ -124,7 +163,12 @@ export function AppTopBar({ title }: { title?: string }) {
       {dueCards.length > 0 && (
         <Link
           href="/flashcards"
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--ka-blue-light)] text-[var(--ka-blue)] text-xs font-semibold"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-colors duration-200"
+          style={{
+            background: 'var(--eureka-accent-tint)',
+            color: 'var(--eureka-accent)',
+            transitionTimingFunction: 'var(--ease-standard)',
+          }}
         >
           {dueCards.length} due
         </Link>

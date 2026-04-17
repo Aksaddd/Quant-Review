@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { clsx } from 'clsx';
 
 interface ModalProps {
@@ -19,6 +20,15 @@ const sizeStyles = {
   lg: 'max-w-2xl',
 };
 
+const SPRING = { type: 'spring' as const, stiffness: 380, damping: 32, mass: 0.9 };
+
+/**
+ * Modal — Apple translucent HUD.
+ *
+ * Dim backdrop at low opacity + subtle blur so the canvas shows through,
+ * never black. Panel is SF-style material with backdrop-filter blur.
+ * Spring entrance/exit. Outside-tap and Escape dismiss.
+ */
 export default function Modal({
   open,
   onClose,
@@ -29,7 +39,6 @@ export default function Modal({
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
-  /* Close on Escape */
   useEffect(() => {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -39,7 +48,6 @@ export default function Modal({
     return () => document.removeEventListener('keydown', handleKey);
   }, [open, onClose]);
 
-  /* Lock scroll */
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -49,59 +57,82 @@ export default function Modal({
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  if (!open) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-    >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
-        onClick={onClose}
-      />
-
-      {/* Panel */}
-      <div
-        ref={panelRef}
-        className={clsx(
-          'relative w-full rounded-2xl',
-          'bg-[var(--surface-2)] border border-[var(--surface-border-strong)]',
-          'shadow-[var(--shadow-lg)]',
-          'animate-scale-in',
-          sizeStyles[size],
-          className
-        )}
-      >
-        {/* Header */}
-        {title && (
-          <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[var(--surface-border)]">
-            <h2 className="text-base font-semibold text-[var(--text-primary)]">{title}</h2>
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5 transition-colors"
-              aria-label="Close"
-            >
-              <X size={16} />
-            </button>
-          </div>
-        )}
-
-        {!title && (
-          <button
+    <AnimatePresence>
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Backdrop — dim + subtle blur, outside-tap dismisses */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="absolute inset-0"
+            style={{
+              background: 'rgba(0,0,0,0.18)',
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)',
+            }}
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5 transition-colors z-10"
-            aria-label="Close"
-          >
-            <X size={16} />
-          </button>
-        )}
+          />
 
-        {/* Body */}
-        <div className="p-6">{children}</div>
-      </div>
-    </div>
+          {/* Panel — translucent HUD */}
+          <motion.div
+            ref={panelRef}
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.96 }}
+            transition={SPRING}
+            className={clsx('relative w-full overflow-hidden', sizeStyles[size], className)}
+            style={{
+              background: 'var(--material-regular-light)',
+              backdropFilter: 'var(--material-blur-strong)',
+              WebkitBackdropFilter: 'var(--material-blur-strong)',
+              border: '0.5px solid rgba(0,0,0,0.06)',
+              borderRadius: 20,
+              boxShadow: 'var(--shadow-hud)',
+              color: '#1d1d1f',
+            }}
+          >
+            {title && (
+              <div
+                className="flex items-center justify-between px-6 pt-5 pb-4"
+                style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}
+              >
+                <h2 className="text-[15px] font-semibold tracking-tight">{title}</h2>
+                <CloseButton onClose={onClose} />
+              </div>
+            )}
+
+            {!title && (
+              <div className="absolute top-4 right-4 z-10">
+                <CloseButton onClose={onClose} />
+              </div>
+            )}
+
+            <div className="p-6">{children}</div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function CloseButton({ onClose }: { onClose: () => void }) {
+  return (
+    <button
+      onClick={onClose}
+      aria-label="Close"
+      className="p-1.5 rounded-lg text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-200 ease-standard"
+      style={{ background: 'transparent' }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0,0,0,0.05)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+    >
+      <X size={16} />
+    </button>
   );
 }

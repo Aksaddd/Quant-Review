@@ -28,19 +28,25 @@ interface FilterBarProps {
 export default function FilterBar({ filter, onChange, dueCount }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-3 items-center">
-      {/* Type tabs */}
-      <div className="flex gap-0.5 bg-[#f0f1f3] rounded-lg p-1">
+      {/* Type segmented control */}
+      <div
+        className="flex gap-[2px] p-[2px]"
+        style={{ background: 'rgba(0,0,0,0.06)', borderRadius: 10 }}
+      >
         {TYPES.map((t) => {
           const active = filter.type === t.value || (!filter.type && t.value === 'all');
           return (
             <button
               key={t.value}
               onClick={() => onChange({ ...filter, type: t.value })}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-100
-                ${active
-                  ? 'bg-white text-[#21242c] shadow-sm border border-[#e4e6ea]'
-                  : 'text-[#626975] hover:text-[#21242c]'
-                }`}
+              className="px-3 py-1.5 text-[12px] font-medium tracking-tight transition-colors duration-200"
+              style={{
+                borderRadius: 8,
+                background: active ? 'var(--eureka-accent)' : 'transparent',
+                color: active ? '#ffffff' : '#424245',
+                fontWeight: active ? 600 : 500,
+                transitionTimingFunction: 'var(--ease-standard)',
+              }}
             >
               {t.label}
             </button>
@@ -51,13 +57,29 @@ export default function FilterBar({ filter, onChange, dueCount }: FilterBarProps
       {/* Due toggle */}
       <button
         onClick={() => onChange({ ...filter, dueOnly: !filter.dueOnly })}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all
-          ${filter.dueOnly
-            ? 'bg-[var(--ka-blue-light)] border-[#a8c4f8] text-[var(--ka-blue)]'
-            : 'bg-white border-[#c8ccd4] text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)]'
-          }`}
+        className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold tracking-tight transition-all duration-200"
+        style={
+          filter.dueOnly
+            ? {
+                borderRadius: 10,
+                background: 'var(--eureka-accent-tint)',
+                color: 'var(--eureka-accent)',
+                border: '0.5px solid var(--eureka-accent-tint-strong)',
+                transitionTimingFunction: 'var(--ease-standard)',
+              }
+            : {
+                borderRadius: 10,
+                background: '#ffffff',
+                color: '#424245',
+                border: '0.5px solid rgba(0,0,0,0.08)',
+                transitionTimingFunction: 'var(--ease-standard)',
+              }
+        }
       >
-        <span className={`w-2 h-2 rounded-full ${dueCount > 0 ? 'bg-[var(--ka-blue)]' : 'bg-[#9299a5]'}`} />
+        <span
+          className="w-2 h-2 rounded-full"
+          style={{ background: dueCount > 0 ? 'var(--eureka-accent)' : '#86868b' }}
+        />
         Due ({dueCount})
       </button>
 
@@ -65,7 +87,13 @@ export default function FilterBar({ filter, onChange, dueCount }: FilterBarProps
       <select
         value={filter.difficulty ?? 'all'}
         onChange={(e) => onChange({ ...filter, difficulty: e.target.value as any })}
-        className="ml-auto text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#c8ccd4] bg-white text-[#626975] focus:outline-none focus:border-[var(--ka-blue)] cursor-pointer"
+        className="ml-auto text-[12px] font-semibold tracking-tight px-3 py-1.5 cursor-pointer focus:outline-none"
+        style={{
+          borderRadius: 10,
+          background: '#ffffff',
+          color: '#424245',
+          border: '0.5px solid rgba(0,0,0,0.08)',
+        }}
       >
         {DIFFICULTIES.map((d) => (
           <option key={d.value} value={d.value}>{d.label}</option>
