@@ -8,6 +8,7 @@ import type { CanvasSnapshot } from '@/components/reader/ApproachCanvas';
 import { DifficultyBadge } from '@/components/ui/Badge';
 import MarkdownRenderer from './MarkdownRenderer';
 import SolutionReveal from './SolutionReveal';
+import MultipleChoiceQuestion from './MultipleChoiceQuestion';
 import type { Problem } from '@/lib/types';
 
 interface ProblemBlockProps {
@@ -145,6 +146,16 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
           <MarkdownRenderer content={problem.setup} />
         </div>
       </div>
+
+      {/* Multiple choice */}
+      {problem.choices && problem.choices.length > 0 && (
+        <div className="px-5">
+          <MultipleChoiceQuestion
+            problemId={problem.id}
+            choices={problem.choices}
+          />
+        </div>
+      )}
 
       {/* Solution */}
       <div className="px-5 pb-5">

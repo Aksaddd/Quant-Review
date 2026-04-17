@@ -10,6 +10,13 @@ export type FlashcardType = 'problem' | 'concept' | 'formula' | 'principle';
 
 // ── Problem ──────────────────────────────────
 
+export interface Choice {
+  id: string;           // 'a' | 'b' | 'c' | 'd'
+  text: string;         // choice text (markdown supported)
+  correct: boolean;
+  rationale?: string;   // why this choice is right / wrong
+}
+
 export interface Problem {
   id: string;            // e.g. "ch2-screwy-pirates"
   chapter: number;       // 2
@@ -23,6 +30,7 @@ export interface Problem {
   difficulty: Difficulty;
   keyTechnique: string;  // one-liner, e.g. "Problem simplification, game theory"
   finalAnswer?: string;  // short answer for quick reference
+  choices?: Choice[];    // multiple-choice answers — exactly one `correct: true`
 }
 
 // ── Flashcard ────────────────────────────────
