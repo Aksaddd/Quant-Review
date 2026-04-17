@@ -74,10 +74,11 @@
 │   │   ├── flashcards/                ← FlashcardCard, CardBrowser, MistakeTaxonomy, FilterBar, …
 │   │   ├── gamification/              ← XPBar, XPToast, FieroOverlay, SessionNudge
 │   │   ├── landing/                   ← Hero, Features, SectionPreview, CTA
-│   │   ├── layout/                    ← AppShell, Navbar, Sidebar, MobileNav, FocusModeToggle
-│   │   ├── providers/                 ← ProgressProvider, TextSettingsProvider
+│   │   ├── layout/                    ← AppShell, Navbar, Sidebar, MobileNav, CommandBar,
+│   │   │                                FocusModeToggle
+│   │   ├── providers/                 ← ProgressProvider, ReadingSettingsSync
 │   │   ├── reader/                    ← ChapterReader, ProblemBlock, ScratchpadGate,
-│   │   │                                ApproachCanvas, HintStep, MarkdownRenderer, …
+│   │   │                                ApproachCanvas, HintStep, MarkdownRenderer, TextControls, …
 │   │   └── ui/                        ← Button, Card, Badge, Modal, Progress
 │   ├── data/                          ← Structured TypeScript data
 │   │   ├── chapter1/                  ← 5 principle cards (ch1-01 … ch1-05)
@@ -92,7 +93,9 @@
 │   │   ├── useStreak.ts               ← Daily streak tracking
 │   │   ├── useCanvasStore.ts          ← Approach-canvas drawing state
 │   │   ├── useErrorTracking.ts        ← Mistake taxonomy tracking
-│   │   ├── useTextSettings.ts         ← Reader typography / theme preferences
+│   │   ├── useTextSettings.ts         ← Back-compat adapter over useReadingSettingsStore
+│   │   ├── useIdleChrome.ts           ← Auto-hide chrome on user idle
+│   │   ├── useKeyboardShortcuts.ts    ← ⌘K / ⌘F / ⌘. / ⌘⇧H / Esc global shortcuts
 │   │   ├── useTimerTracking.ts        ← Time-to-solution tracking
 │   │   └── useInterleaved.ts          ← Interleaved practice session management
 │   ├── lib/
@@ -117,6 +120,8 @@
 │   │       └── index.ts               ← Module exports
 │   └── stores/                        ← Zustand state stores
 │       ├── useSessionStore.ts         ← Session state (focus mode, timing, nudges)
+│       ├── useReadingSettingsStore.ts ← Reader prefs: font, theme, accent, focus mode,
+│       │                                chrome auto-hide, haptics — persists to qr:settings
 │       └── useXPStore.ts              ← XP, leveling, and gamification state
 └── supabase/
     ├── schema.sql                     ← Base schema — profiles, problem_progress, flashcard_progress
@@ -562,6 +567,19 @@ A snapshot of where the platform stands today and what remains to ship, based on
 | **Auth surface** | Supabase `signInWithPassword` / `signUp` wired on `/(auth)/login` and `/(auth)/signup`, with graceful guest-mode fallback when Supabase is unavailable. |
 | **AI backend** | All six AI routes fully implemented: `/api/ai/{adaptive, evaluate-approach, interleaved, socratic, technique-atlas, weakness-profile}` plus a `/health` check and provider-agnostic `llm-router`. |
 | **Dashboard scaffolding** | Chapter list, section grid, stats overview, due-cards banner, recent activity, streak widget. |
+| **Apple / flow-state UXI pass** | Full-product visual system built on Apple HIG. SF-style translucent chrome (`backdrop-filter` materials on Sidebar/Navbar/MobileNav/Modal/HUDs), monochromatic luminance palette + user-selectable accent (`useReadingSettingsStore.accent` — Teal/Blue/Indigo/Purple/Pink/Orange/Green/Graphite) piped through `--eureka-accent` CSS vars. Spring motion via framer-motion, Apple focus ring, hairline `0.5px rgba` borders, iOS-hue semantic states. Auto-hide chrome (`useIdleChrome`), `⌘K` spotlight command bar, `⌘F` focus mode, `⌘.` reading settings HUD. See `src/stores/useReadingSettingsStore.ts` and `src/app/globals.css` (`:root` Apple tokens). |
+
+### ⌨️ Keyboard Shortcuts
+
+| Keys | Action |
+|------|--------|
+| `⌘ K` / `Ctrl K` | Open command bar (navigation, theme, accent, reset) |
+| `⌘ F` / `Ctrl F` | Toggle focus mode (dims chrome + sidebar + top bar) |
+| `⌘ .` / `Ctrl .` | Toggle reading settings HUD |
+| `⌘ ⇧ H` / `Ctrl Shift H` | Highlight current selection (host-wired) |
+| `Esc` | Dismiss any open HUD / command bar |
+
+Global shortcuts are defined in `src/hooks/useKeyboardShortcuts.ts` and mounted once in `AppShell`. Respects `prefers-reduced-motion`.
 
 ### 🚧 Next to Build (Priority Order)
 
