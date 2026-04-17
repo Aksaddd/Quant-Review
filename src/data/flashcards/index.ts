@@ -112,6 +112,9 @@ import fcPr03 from './principles/fc-pr-03-listen-carefully';
 import fcPr04 from './principles/fc-pr-04-speak-your-mind';
 import fcPr05 from './principles/fc-pr-05-reasonable-assumptions';
 
+// ── Effective C++ Things-to-Remember cards (106, auto-generated) ────────────
+import { effectiveCppFlashcards } from './effective-cpp';
+
 // ── Master export ───────────────────────────────────────────────────────────
 
 export const allFlashcards: Flashcard[] = [
@@ -138,6 +141,8 @@ export const allFlashcards: Flashcard[] = [
   fcF22, fcF23,
   // Principle cards
   fcPr01, fcPr02, fcPr03, fcPr04, fcPr05,
+  // Effective C++ Things-to-Remember
+  ...effectiveCppFlashcards,
 ];
 
 /** O(1) lookup by card id */

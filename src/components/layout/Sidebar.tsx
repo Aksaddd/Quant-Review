@@ -11,6 +11,7 @@ import { clsx } from 'clsx';
 import { useProgress } from '@/components/providers/ProgressProvider';
 import { SECTIONS, problemsBySection } from '@/data/problems';
 import { textbookChapters } from '@/data/chapters';
+import { effectiveCppChapters } from '@/data/effective-cpp';
 
 const TOP_NAV = [
   { href: '/dashboard',  label: 'Dashboard', icon: LayoutDashboard },
@@ -35,6 +36,13 @@ export default function Sidebar() {
   const [openChapters, setOpenChapters] = useState<Record<number, boolean>>({});
   // Track which sections are expanded to show individual problems
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  // Top-level Effective C++ collapsible + per-chapter accordions
+  const [ecppOpen, setEcppOpen] = useState(false);
+  const [openEcppChapters, setOpenEcppChapters] = useState<Record<number, boolean>>({});
+
+  function toggleEcppChapter(n: number) {
+    setOpenEcppChapters((prev) => ({ ...prev, [n]: !prev[n] }));
+  }
 
   const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
 
@@ -318,6 +326,75 @@ export default function Sidebar() {
             </div>
           );
         })}
+
+        {/* Effective C++ */}
+        <div className="mt-3 pt-3 border-t border-[#e4e6ea]">
+          <button
+            onClick={() => setEcppOpen(!ecppOpen)}
+            className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"
+          >
+            <BookOpen size={13} />
+            <span className="flex-1 text-left truncate">Effective C++ · Meyers</span>
+            {ecppOpen ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+          </button>
+
+          {ecppOpen && (
+            <div className="mb-2 space-y-0.5">
+              <Link
+                href="/read/effective-cpp"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+              >
+                <span className="w-4 h-4 rounded-md bg-[#1865f2] text-white flex items-center justify-center text-[9px] font-semibold shrink-0">
+                  55
+                </span>
+                <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate">
+                  All items
+                </span>
+              </Link>
+              {effectiveCppChapters.map((ec) => {
+                const open = !!openEcppChapters[ec.number];
+                return (
+                  <div key={ec.number}>
+                    <button
+                      onClick={() => toggleEcppChapter(ec.number)}
+                      className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                    >
+                      <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
+                        Ch {ec.number}
+                      </span>
+                      <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors text-left truncate">
+                        {ec.title}
+                      </span>
+                      {open ? (
+                        <ChevronDown size={12} className="text-[#9299a5] shrink-0" />
+                      ) : (
+                        <ChevronRight size={12} className="text-[#9299a5] shrink-0" />
+                      )}
+                    </button>
+                    {open && (
+                      <div className="ml-5 mb-1 border-l border-[#e4e6ea] space-y-0.5">
+                        {ec.items.map((it) => (
+                          <Link
+                            key={it.item}
+                            href={`/read/effective-cpp/${it.item}`}
+                            className="flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-r-lg hover:bg-[#f0f1f3] transition-colors group"
+                          >
+                            <span className="text-[10px] font-semibold text-[#9299a5] tabular-nums shrink-0 w-7">
+                              #{it.item}
+                            </span>
+                            <span className="text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate leading-snug">
+                              {it.title.replace(/\.$/, '')}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Bottom — settings */}
