@@ -1,8 +1,11 @@
 # Quant Interview Review — Ed-Tech Platform
 
-> **Source Book:** *A Practical Guide to Quantitative Finance Interviews* — Xinfeng Zhou (2008)  
-> **Extraction Date:** 2026  
-> **Purpose:** Structured content for an interactive ed-tech web app where users can read, review, and practice problems from the book.
+> **Source Books:**
+> - *A Practical Guide to Quantitative Finance Interviews* — Xinfeng Zhou (2008) — 200+ problems, 7 chapters
+> - *Effective C++, 3rd Edition* — Scott Meyers (2005) — 55 items, 9 chapters
+>
+> **Extraction Dates:** 2026
+> **Purpose:** Structured content for an interactive ed-tech web app where users can read, review, and practice problems and C++ best-practice items from both books.
 
 ---
 
@@ -22,6 +25,17 @@
 │   │   ├── chapter-05-stochastic-processes.md
 │   │   ├── chapter-06-finance.md
 │   │   └── chapter-07-algorithms-numerical-methods.md
+│   ├── Effective_C++/                 ← Scott Meyers 3rd ed. — 55 items, 9 chapters
+│   │   ├── Scott Meyers - Effective C++ ... .md   ← Normalized book markdown
+│   │   ├── Effective C++ 3rd ed.pdf   ← Canonical PDF source
+│   │   ├── clean_chm_md.py            ← CHM → Markdown cleanup
+│   │   ├── align_with_pdf.py          ← Paragraph-recovery alignment pass
+│   │   └── metadata/                  ← Extracted curriculum JSON (scripts/extract_effective_cpp.py)
+│   │       ├── items.json             ← 55 Item records (paragraphs, code, subsections, TtR, x-refs)
+│   │       ├── flashcards.json        ← 106 Things-to-Remember cards
+│   │       ├── code_exercises.json    ← 400 fill-in-the-blank exercises
+│   │       ├── prerequisite_graph.json← Directed x-ref graph + SCC clusters
+│   │       └── learning_path.json     ← Topo-sorted learning path by chapter
 │   ├── Agent Roles/                   ← Team composition & role definitions
 │   │   ├── 00_team_overview.md        ← CTO strategic doc — phased hiring plan
 │   │   ├── 01_lead_fullstack_engineer.md
@@ -48,7 +62,8 @@
 │           ├── primary-research-sources.md       ← ~82 peer-reviewed sources
 │           └── gamification-design-research.md   ← Gamification research synthesis
 ├── scripts/
-│   ├── gen-chapters.js                ← Parses chapter markdown → TypeScript data
+│   ├── gen-chapters.js                ← Parses Zhou chapter markdown → TypeScript data
+│   ├── extract_effective_cpp.py       ← Parses Effective C++ markdown → metadata JSON
 │   └── patch-tunnel-rat.js            ← Postinstall patch for a transitive dep
 ├── src/
 │   ├── app/                           ← Next.js 14 App Router
@@ -56,7 +71,9 @@
 │   │   ├── (app)/                     ← Authenticated app shell route group
 │   │   │   ├── dashboard/             ← Progress dashboard (chapters, stats, streaks)
 │   │   │   ├── flashcards/            ← Flashcard study interface
-│   │   │   ├── read/chapter-[1-7]/    ← One reader route per chapter (7 total)
+│   │   │   ├── read/chapter-[1-7]/    ← Zhou reader — one route per chapter (7 total)
+│   │   │   ├── read/effective-cpp/    ← Effective C++ index (55 items grouped by chapter)
+│   │   │   │   └── [item]/            ← Per-item reader — prose + code + Things to Remember
 │   │   │   └── settings/              ← User settings
 │   │   ├── (auth)/                    ← Auth route group
 │   │   │   ├── login/
@@ -83,8 +100,10 @@
 │   ├── data/                          ← Structured TypeScript data
 │   │   ├── chapter1/                  ← 5 principle cards (ch1-01 … ch1-05)
 │   │   ├── problems/                  ← 37 Chapter-2 brain-teaser problems (ch2-01 … ch2-37)
-│   │   ├── chapters/                  ← Auto-generated data for chapters 3–7 (+ index)
+│   │   ├── chapters/                  ← Auto-generated data for Zhou chapters 3–7 (+ index)
+│   │   ├── effective-cpp.ts           ← Typed loader over Effective C++ metadata JSON
 │   │   └── flashcards/                ← concepts/, formulas/, principles/, problems/ card sets
+│   │       └── effective-cpp.ts       ← 106 Effective C++ Things-to-Remember cards
 │   ├── hooks/                         ← Custom React hooks
 │   │   ├── useFlashcards.ts           ← Filtering + retrieval for flashcards
 │   │   ├── useProgress.ts             ← Progress context (SM-2 state, due cards)
@@ -165,19 +184,29 @@ npm run lint     # Lint with ESLint
 
 ### Regenerating Chapter Data
 
-After editing any chapter markdown under `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
+After editing any **Zhou** chapter markdown under `content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/`, regenerate the TypeScript data:
 
 ```bash
 node scripts/gen-chapters.js
 ```
 
+After editing the **Effective C++** source markdown under `content/Effective_C++/`, regenerate the curriculum metadata JSON:
+
+```bash
+python3 scripts/extract_effective_cpp.py
+```
+
+The extractor prints a validation report (55 items, 400 code examples, every cross-reference resolves, every anchor unique) and writes `content/Effective_C++/metadata/{items,flashcards,code_exercises,learning_path,prerequisite_graph}.json`.
+
 ---
 
-## Book Overview
+## Book Overviews
 
-This book prepares candidates for **quantitative finance interviews** by covering 200+ real interview problems across 7 chapters. Problems are drawn from actual interviews at top-tier quant firms, hedge funds, and trading desks.
+The platform currently ships structured content from two source books:
 
-### Full Table of Contents
+### Zhou — *A Practical Guide to Quantitative Finance Interviews* (2008)
+
+Prepares candidates for **quantitative finance interviews** by covering 200+ real interview problems across 7 chapters. Problems are drawn from actual interviews at top-tier quant firms, hedge funds, and trading desks.
 
 | Chapter | Title | Book Pages |
 |---------|-------|-----------|
@@ -188,6 +217,22 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 | 5 | Stochastic Processes and Stochastic Calculus | 105–136 |
 | 6 | Finance | 137–169 |
 | 7 | Algorithms and Numerical Methods | 171–200 |
+
+### Meyers — *Effective C++, 3rd Edition* (2005)
+
+The canonical best-practices reference for C++. 55 items across 9 chapters teach idioms, pitfalls, and design patterns essential for writing safe, efficient C++ — highly relevant for quant developer interviews.
+
+| Chapter | Title | Items |
+|---------|-------|-------|
+| 1 | Accustoming Yourself to C++ | 4 |
+| 2 | Constructors, Destructors, and Assignment Operators | 8 |
+| 3 | Resource Management | 5 |
+| 4 | Designs and Declarations | 8 |
+| 5 | Implementations | 6 |
+| 6 | Inheritance and Object-Oriented Design | 9 |
+| 7 | Templates and Generic Programming | 8 |
+| 8 | Customizing `new` and `delete` | 4 |
+| 9 | Miscellany | 3 |
 
 ---
 
@@ -440,6 +485,39 @@ This book prepares candidates for **quantitative finance interviews** by coverin
 
 ---
 
+### Effective C++ — Item Index (55 items)
+
+**Source book:** Scott Meyers, *Effective C++ 3rd Edition* (2005)
+**Difficulty mapping:** Ch 1–2 = beginner · Ch 3–6 = intermediate · Ch 7–9 = advanced (Item 48 bumped to advanced)
+
+| Chapter | Items | Topic |
+|---------|-------|-------|
+| 1 — Accustoming Yourself to C++ | 1–4 | Sublanguages, `const`/`enum`/`inline` over `#define`, initialization ordering |
+| 2 — Constructors, Destructors, and Assignment Operators | 5–12 | Compiler-generated functions, self-assignment, copy-and-swap, copy all parts |
+| 3 — Resource Management | 13–17 | RAII, `tr1::shared_ptr`, copying resource-managing objects, explicit conversions |
+| 4 — Designs and Declarations | 18–25 | Interface design, pass-by-reference-to-const, non-member functions, custom `swap` |
+| 5 — Implementations | 26–31 | Postpone declarations, minimize casting, avoid returning handles, exception safety |
+| 6 — Inheritance and Object-Oriented Design | 32–40 | Public vs. private inheritance, NVI idiom, avoid hiding inherited names, multiple inheritance |
+| 7 — Templates and Generic Programming | 41–48 | Implicit interfaces, `typename`, dependent base classes, template metaprogramming |
+| 8 — Customizing `new` and `delete` | 49–52 | Custom allocators, placement `new`/`delete`, matching signatures |
+| 9 — Miscellany | 53–55 | Compiler warnings, TR1, Boost |
+
+Each item is surfaced at `/read/effective-cpp/[item]` with:
+- Paragraphs + fenced C++ code examples re-interleaved in original reading order
+- A "Things to Remember" checklist (auto-generated flashcards in the review deck)
+- Resolved cross-references back to related items
+- Difficulty badge and concept tags (controlled vocabulary: `const`, `raii`, `templates`, `exception-safety`, `rtti`, `rule-of-three`, etc.)
+
+The extraction pipeline (`scripts/extract_effective_cpp.py`) produces:
+- **55 items** (numbered 1–55, one record each)
+- **400 code examples** (including 7 nested in bullet lists)
+- **106 Things-to-Remember bullets**
+- **220 cross-references** forming a dense x-ref graph (Tarjan SCC detects the expected "study-together" cluster of 51 interconnected items)
+
+> Every cross-reference resolves to an existing Item; every anchor is unique. Run `python3 scripts/extract_effective_cpp.py` after editing the source markdown to regenerate `content/Effective_C++/metadata/*.json`.
+
+---
+
 ## Claude Code Instructions — Building the Ed-Tech Platform
 
 ### Tech Stack
@@ -568,6 +646,7 @@ A snapshot of where the platform stands today and what remains to ship, based on
 | **AI backend** | All six AI routes fully implemented: `/api/ai/{adaptive, evaluate-approach, interleaved, socratic, technique-atlas, weakness-profile}` plus a `/health` check and provider-agnostic `llm-router`. |
 | **Dashboard scaffolding** | Chapter list, section grid, stats overview, due-cards banner, recent activity, streak widget. |
 | **Apple / flow-state UXI pass** | Full-product visual system built on Apple HIG. SF-style translucent chrome (`backdrop-filter` materials on Sidebar/Navbar/MobileNav/Modal/HUDs), monochromatic luminance palette + user-selectable accent (`useReadingSettingsStore.accent` — Teal/Blue/Indigo/Purple/Pink/Orange/Green/Graphite) piped through `--eureka-accent` CSS vars. Spring motion via framer-motion, Apple focus ring, hairline `0.5px rgba` borders, iOS-hue semantic states. Auto-hide chrome (`useIdleChrome`), `⌘K` spotlight command bar, `⌘F` focus mode, `⌘.` reading settings HUD. See `src/stores/useReadingSettingsStore.ts` and `src/app/globals.css` (`:root` Apple tokens). |
+| **Effective C++ curriculum** | Parser + extractor (`scripts/extract_effective_cpp.py`) produces `content/Effective_C++/metadata/*.json`. Reader routes at `/read/effective-cpp` (index) and `/read/effective-cpp/[item]` (per-item, all 55 statically prerendered) interleave prose + code, render Things-to-Remember as a numbered checklist, and expose working cross-references. Sidebar "Effective C++ · Meyers" accordion drills chapter → item. 106 Things-to-Remember cards auto-wired into the flashcard deck (namespaced section `ecpp-chN`, difficulty mapped beginner/intermediate/advanced → easy/medium/hard). |
 
 ### ⌨️ Keyboard Shortcuts
 
@@ -626,6 +705,14 @@ The repo currently has zero automated tests and no CI configuration.
 - [ ] Verify KaTeX render performance on chapters 3–5 (largest math payloads).
 - [ ] Add keyboard shortcuts for flashcard grading (`1`–`4`) and reader navigation.
 - [ ] Run an a11y pass (focus traps in modals, contrast on amber palette, aria labels on icon buttons).
+
+#### 6. Effective C++ curriculum — depth pass
+
+- [ ] Hand-author quant-themed MCQs for each of the 55 items (2–3 per item, ~120–150 total) reusing the existing `Problem` + `choices` schema, surfaced as a "Practice" block on each item page.
+- [ ] Back the 400 `code_exercises.json` entries with a **runnable C++ sandbox** — likely a self-hosted [Piston](https://github.com/engineer-man/piston) instance proxied through `/api/cpp-run`, paired with Monaco editor. Compile + execute + diff stdout against expected output. (A custom from-scratch C++ compiler is intractable; the actionable path is self-hosted Piston or a WASM Clang bundle.)
+- [ ] Add SM-2 progress tracking to the 106 Effective C++ flashcards on par with the Zhou decks.
+- [ ] Surface the `prerequisite_graph.json` as an interactive concept map at `/read/effective-cpp/graph` (forcegraph).
+- [ ] Fill in the ~10 silently-missing figures by either authoring replacements or adding explanatory diagrams.
 
 ### 🌱 Later — Phase 3 (Scale)
 
