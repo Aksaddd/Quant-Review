@@ -182,95 +182,11 @@ Draft July 3, 2018
 ii
 
 <!-- PAGE 3 -->
-# Contents
-
-**Preface ix I Basic techniques 1 1 Introduction 3** 1.1 Programming languages . . . . . . . . . . . . . . . . . . . . . . . . . 3 1.2 Input and output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.3 Working with numbers . . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.4 Shortening code . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.5 Mathematics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.6 Contests and resources . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-
-**2 Time complexity 17** 2.1 Calculation rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 2.2 Complexity classes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 2.3 Estimating efficiency . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 2.4 Maximum subarray sum . . . . . . . . . . . . . . . . . . . . . . . . . 21
-
-**3 Sorting 25** 3.1 Sorting theory . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 3.2 Sorting in C++ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 3.3 Binary search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
-
-**4 Data structures 35** 4.1 Dynamic arrays . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 4.2 Set structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 4.3 Map structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 4.4 Iterators and ranges . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 4.5 Other structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41 4.6 Comparison to sorting . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-
-**5 Complete search 47** 5.1 Generating subsets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 5.2 Generating permutations . . . . . . . . . . . . . . . . . . . . . . . . . 49 5.3 Backtracking . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 5.4 Pruning the search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 5.5 Meet in the middle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
-
-iii
-
-<!-- PAGE 4 -->
-**6 Greedy algorithms 57** 6.1 Coin problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57 6.2 Scheduling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58 6.3 Tasks and deadlines . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60 6.4 Minimizing sums . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61 6.5 Data compression . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
-
-**7 Dynamic programming 65** 7.1 Coin problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65 7.2 Longest increasing subsequence . . . . . . . . . . . . . . . . . . . . . 70 7.3 Paths in a grid . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71 7.4 Knapsack problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72 7.5 Edit distance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 7.6 Counting tilings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
-
-**8 Amortized analysis 77** 8.1 Two pointers method . . . . . . . . . . . . . . . . . . . . . . . . . . . 77 8.2 Nearest smaller elements . . . . . . . . . . . . . . . . . . . . . . . . . 79 8.3 Sliding window minimum . . . . . . . . . . . . . . . . . . . . . . . . . 81
-
-**9 Range queries 83** 9.1 Static array queries . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84 9.2 Binary indexed tree . . . . . . . . . . . . . . . . . . . . . . . . . . . . 86 9.3 Segment tree . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89 9.4 Additional techniques . . . . . . . . . . . . . . . . . . . . . . . . . . . 93
-
-**10 Bit manipulation 95** 10.1 Bit representation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 10.2 Bit operations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96 10.3 Representing sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 98 10.4 Bit optimizations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 10.5 Dynamic programming . . . . . . . . . . . . . . . . . . . . . . . . . . 102
-
-**II Graph algorithms 107 11 Basics of graphs 109** 11.1 Graph terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 11.2 Graph representation . . . . . . . . . . . . . . . . . . . . . . . . . . . 113
-
-**12 Graph traversal 117** 12.1 Depth-first search . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117 12.2 Breadth-first search . . . . . . . . . . . . . . . . . . . . . . . . . . . . 119 12.3 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121
-
-iv
-
-<!-- PAGE 5 -->
-**13 Shortest paths 123** 13.1 Bellman–Ford algorithm . . . . . . . . . . . . . . . . . . . . . . . . . 123 13.2 Dijkstra’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . 126 13.3 Floyd–Warshall algorithm . . . . . . . . . . . . . . . . . . . . . . . . 129
-
-**14 Tree algorithms 133** 14.1 Tree traversal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 134 14.2 Diameter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 135 14.3 All longest paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137 14.4 Binary trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 139
-
-**15 Spanning trees 141** 15.1 Kruskal’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . 142 15.2 Union-find structure . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145 15.3 Prim’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 147
-
-**16 Directed graphs 149** 16.1 Topological sorting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 149 16.2 Dynamic programming . . . . . . . . . . . . . . . . . . . . . . . . . . 151 16.3 Successor paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 154 16.4 Cycle detection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155
-
-**17 Strong connectivity 157** 17.1 Kosaraju’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . 158 17.2 2SAT problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
-
-**18 Tree queries 163** 18.1 Finding ancestors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163 18.2 Subtrees and paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . 164 18.3 Lowest common ancestor . . . . . . . . . . . . . . . . . . . . . . . . . 167 18.4 Offline algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 170
-
-**19 Paths and circuits 173** 19.1 Eulerian paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173 19.2 Hamiltonian paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 177 19.3 De Bruijn sequences . . . . . . . . . . . . . . . . . . . . . . . . . . . . 178 19.4 Knight’s tours . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 179
-
-**20 Flows and cuts 181** 20.1 Ford–Fulkerson algorithm . . . . . . . . . . . . . . . . . . . . . . . . 182 20.2 Disjoint paths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 186 20.3 Maximum matchings . . . . . . . . . . . . . . . . . . . . . . . . . . . 187 20.4 Path covers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 190
-
-v
-
-<!-- PAGE 6 -->
-**III Advanced topics 195 21 Number theory 197** 21.1 Primes and factors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197 21.2 Modular arithmetic . . . . . . . . . . . . . . . . . . . . . . . . . . . . 201 21.3 Solving equations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 204 21.4 Other results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 205
-
-**22 Combinatorics 207** 22.1 Binomial coefficients . . . . . . . . . . . . . . . . . . . . . . . . . . . . 208 22.2 Catalan numbers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 210 22.3 Inclusion-exclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 212 22.4 Burnside’s lemma . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 214 22.5 Cayley’s formula . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 215
-
-**23 Matrices 217** 23.1 Operations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 217 23.2 Linear recurrences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 220 23.3 Graphs and matrices . . . . . . . . . . . . . . . . . . . . . . . . . . . 222
-
-**24 Probability 225** 24.1 Calculation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 225 24.2 Events . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 226 24.3 Random variables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 228 24.4 Markov chains . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 230 24.5 Randomized algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . 231
-
-**25 Game theory 235** 25.1 Game states . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 235 25.2 Nim game . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 237 25.3 Sprague–Grundy theorem . . . . . . . . . . . . . . . . . . . . . . . . 238
-
-**26 String algorithms 243** 26.1 String terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 243 26.2 Trie structure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 244 26.3 String hashing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 245 26.4 Z-algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 247
-
-**27 Square root algorithms 251** 27.1 Combining algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . 252 27.2 Integer partitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 254 27.3 Mo’s algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 255
-
-**28 Segment trees revisited 257** 28.1 Lazy propagation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 258 28.2 Dynamic trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 261 28.3 Data structures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 263 28.4 Two-dimensionality . . . . . . . . . . . . . . . . . . . . . . . . . . . . 264
-
-vi
-
-<!-- PAGE 7 -->
-**29 Geometry 265** 29.1 Complex numbers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 266 29.2 Points and lines . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 268 29.3 Polygon area . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 271 29.4 Distance functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 272
-
-**30 Sweep line algorithms 275** 30.1 Intersection points . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 276 30.2 Closest pair problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . 277 30.3 Convex hull problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . 278
-
-**Bibliography 281**
-
-vii
-
-<!-- PAGE 8 -->
-viii
-
-<!-- PAGE 9 -->
 # Preface
 
 The purpose of this book is to give you a thorough introduction to competitive programming. It is assumed that you already know the basics of programming, but no previous background in competitive programming is needed. The book is especially intended for students who want to learn algorithms and possibly participate in the International Olympiad in Informatics (IOI) or in the International Collegiate Programming Contest (ICPC). Of course, the book is also suitable for anybody else interested in competitive programming. It takes a long time to become a good competitive programmer, but it is also an opportunity to learn a lot. You can be sure that you will get a good general understanding of algorithms if you spend time reading the book, solving problems and taking part in contests. The book is under continuous development. You can always send feedback on
 
-```cpp
 the book to ahslaaks@cs.helsinki.fi.
-```
 
 Helsinki, July 2018 Antti Laaksonen
 
@@ -313,7 +229,7 @@ int main() {
 
 The `#include` line at the beginning of the code is a feature of the `g++` compiler that allows us to include the entire standard library. Thus, it is not needed to separately include libraries such as `iostream`, `vector` and `algorithm`, but rather they are available automatically. The `using` line declares that the classes and functions of the standard library can be used directly in the code. Without the `using` line we would have to write, for example, `std::cout`, but now it suffices to write `cout`. The code can be compiled using the following command:
 
-```cpp
+```bash
 g++ -std=c++11 -O2 -Wall test.cpp -o test
 ```
 
@@ -332,7 +248,7 @@ cin >> a >> b >> x;
 
 This kind of code always works, assuming that there is at least one space or newline between each element in the input. For example, the above code can read both of the following inputs:
 
-```cpp
+```
 123 456 monkey
 123
       456
@@ -393,19 +309,19 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 ```
 
-After this, the program reads the input from the file ”input.txt” and writes the output to the file ”output.txt”.
+After this, the program reads the input from the file "input.txt" and writes the output to the file "output.txt".
 
 ### Working with numbers
 
 ### Integers
 
-The most used integer type in competitive programming is `int`, which is a 32-bit type with a value range of $-2^{31}...2^{31} -$1 or about $-2\cdot 10^9...2\cdot 10^9$. If the type `int` is not enough, the 64-bit type `long` `long` can be used. It has a value range of $-2^{63}...2^{63} -$1 or about $-9\cdot 10^{18}...9\cdot 10^{18}$. The following code defines a `long` `long` variable:
+The most used integer type in competitive programming is `int`, which is a 32-bit type with a value range of $-2^{31}...2^{31}-1$ or about $-2\cdot 10^9...2\cdot 10^9$. If the type `int` is not enough, the 64-bit type `long long` can be used. It has a value range of $-2^{63}...2^{63}-1$ or about $-9\cdot 10^{18}...9\cdot 10^{18}$. The following code defines a `long long` variable:
 
 ```cpp
 long long x = 123456789123456789LL;
 ```
 
-The suffix `LL` means that the type of the number is `long` `long`. A common mistake when using the type `long` `long` is that the type `int` is still used somewhere in the code. For example, the following code contains a subtle error:
+The suffix `LL` means that the type of the number is `long long`. A common mistake when using the type `long long` is that the type `int` is still used somewhere in the code. For example, the following code contains a subtle error:
 
 ```cpp
 int a = 123456789;
@@ -413,14 +329,14 @@ long long b = a*a;
 cout << b << "\n"; // -1757895751
 ```
 
-Even though the variable `b` is of type `long` `long`, both numbers in the expression `a*a` are of type `int` and the result is also of type `int`. Because of this, the variable `b` will contain a wrong result. The problem can be solved by changing the type of `a` to `long` `long` or by changing the expression to `(long` `long)a*a`. Usually contest problems are set so that the type `long` `long` is enough. Still, it is good to know that the `g++` compiler also provides a 128-bit type `__int128_t` with a value range of $-2^{127}...2^{127} -$1 or about $-10^{38}...10^{38}$. However, this type is not available in all contest systems.
+Even though the variable `b` is of type `long long`, both numbers in the expression `a*a` are of type `int` and the result is also of type `int`. Because of this, the variable `b` will contain a wrong result. The problem can be solved by changing the type of `a` to `long long` or by changing the expression to `(long long)a*a`. Usually contest problems are set so that the type `long long` is enough. Still, it is good to know that the `g++` compiler also provides a 128-bit type `__int128_t` with a value range of $-2^{127}...2^{127}-1$ or about $-10^{38}...10^{38}$. However, this type is not available in all contest systems.
 
 ### Modular arithmetic
 
-We denote by $x$ mod $m$ the remainder when $x$ is divided by $m$. For example, 17 mod 5 $=$ 2, because 17 $= 3\cdot 5+$2. Sometimes, the answer to a problem is a very large number but it is enough to output it ”modulo $m$”, i.e., the remainder when the answer is divided by $m$ (for
+We denote by $x$ mod $m$ the remainder when $x$ is divided by $m$. For example, 17 mod 5 $= 2$, because 17 $= 3\cdot 5+2$. Sometimes, the answer to a problem is a very large number but it is enough to output it "modulo $m$", i.e., the remainder when the answer is divided by $m$ (for
 
 <!-- PAGE 17 -->
-example, ”modulo 10$^9 +$7”). The idea is that even if the actual answer is very large, it suffices to use the types `int` and `long` `long`. An important property of the remainder is that in addition, subtraction and multiplication, the remainder can be taken before the operation:
+example, "modulo 10$^9+7$"). The idea is that even if the actual answer is very large, it suffices to use the types `int` and `long long`. An important property of the remainder is that in addition, subtraction and multiplication, the remainder can be taken before the operation:
 
 ($a+ b$) mod $m$ $=$ ($a$ mod $m+ b$ mod $m$) mod $m$ ($a-b$) mod $m$ $=$ ($a$ mod $m-b$ mod $m$) mod $m$ ($a\cdot b$) mod $m$ $=$ ($a$ mod $m\cdot b$ mod $m$) mod $m$
 
@@ -434,7 +350,7 @@ for (int i = 2; i <= n; i++) {
 cout << x%m << "\n";
 ```
 
-Usually we want the remainder to always be between 0...$m-$1. However, in C++ and other languages, the remainder of a negative number is either zero or negative. An easy way to make sure there are no negative remainders is to first calculate the remainder as usual and then add $m$ if the result is negative:
+Usually we want the remainder to always be between 0...$m-1$. However, in C++ and other languages, the remainder of a negative number is either zero or negative. An easy way to make sure there are no negative remainders is to first calculate the remainder as usual and then add $m$ if the result is negative:
 
 ```cpp
 x = x%m;
@@ -445,7 +361,7 @@ However, this is only needed when there are subtractions in the code and the rem
 
 ### Floating point numbers
 
-The usual floating point types in competitive programming are the 64-bit `double` and, as an extension in the `g++` compiler, the 80-bit `long` `double`. In most cases, `double` is enough, but `long` `double` is more accurate. The required precision of the answer is usually given in the problem statement. An easy way to output the answer is to use the `printf` function and give the number of decimal places in the formatting string. For example, the following code prints the value of $x$ with 9 decimal places:
+The usual floating point types in competitive programming are the 64-bit `double` and, as an extension in the `g++` compiler, the 80-bit `long double`. In most cases, `double` is enough, but `long double` is more accurate. The required precision of the answer is usually given in the problem statement. An easy way to output the answer is to use the `printf` function and give the number of decimal places in the formatting string. For example, the following code prints the value of $x$ with 9 decimal places:
 
 ```cpp
 printf("%.9f\n", x);
@@ -475,7 +391,7 @@ Short code is ideal in competitive programming, because programs should be writt
 
 ### Type names
 
-Using the command `typedef` it is possible to give a shorter name to a datatype. For example, the name `long` `long` is long, so we can define a shorter name `ll`:
+Using the command `typedef` it is possible to give a shorter name to a datatype. For example, the name `long long` is long, so we can define a shorter name `ll`:
 
 ```cpp
 typedef long long ll;
@@ -603,7 +519,7 @@ $^nX$
 
 $^{x=1}$ $x^k = 1^k +2^k +3^k +...+ n^k$,
 
-where $k$ is a positive integer, has a closed-form formula that is a polynomial of degree $k +$1. For example$^1$,
+where $k$ is a positive integer, has a closed-form formula that is a polynomial of degree $k+1$. For example$^1$,
 
 $^{x=1}$ $x = 1+2+3+...+ n =$ $n(n+1)$
 
@@ -621,7 +537,7 @@ An **arithmetic progression** is a sequence of numbers where the difference betw
 
 3,7,11,15
 
-$^1_{There is even a general formula for such sums, called Faulhaber’s formula, but it is too}$ $^{complex to be presented here.}$
+> **[1]** There is even a general formula for such sums, called Faulhaber’s formula, but it is too complex to be presented here.
 
 <!-- PAGE 21 -->
 
@@ -734,7 +650,7 @@ $\lfloor 3/2\rfloor =$ 1 and $\lceil 3/2\rceil =$ 2.
 
 The functions min($x_1,x_2,...,x_n$) and max($x_1,x_2,...,x_n$) give the smallest and largest of values $x_1,x_2,...,x_n$. For example,
 
-min(1,2,3) $=$ 1 and max(1,2,3) $=$ 3.
+min(1,2,3) $= 1$ and max(1,2,3) $= 3$.
 
 <!-- PAGE 24 -->
 
@@ -796,7 +712,7 @@ The International Olympiad in Informatics (IOI) is an annual programming contest
 
 The International Collegiate Programming Contest (ICPC) is an annual programming contest for university students. Each team in the contest consists of three students, and unlike in the IOI, the students work together; there is only one computer available for each team. The ICPC consists of several stages, and finally the best teams are invited to the World Finals. While there are tens of thousands of participants in the contest, there are only a small number$^2$ of final slots available, so even advancing to the finals is a great achievement in some regions. In each ICPC contest, the teams have five hours of time to solve about ten algorithm problems. A solution to a problem is accepted only if it solves all test cases efficiently. During the contest, competitors may view the results of other
 
-$^2_{The exact number of final slots varies from year to year; in 2017, there were 133 final slots.}$
+> **[2]** The exact number of final slots varies from year to year; in 2017, there were 133 final slots.
 
 <!-- PAGE 26 -->
 teams, but for the last hour the scoreboard is frozen and it is not possible to see the results of the last submissions. The topics that may appear at the ICPC are not so well specified as those at the IOI. In any case, it is clear that more knowledge is needed at the ICPC, especially more mathematical skills.
@@ -857,7 +773,7 @@ for (int i = 1; i <= n; i++) {
 
 ### Order of magnitude
 
-A time complexity does not tell us the exact number of times the code inside a loop is executed, but it only shows the order of magnitude. In the following examples, the code inside the loop is executed 3$n$, $n+$5 and $\lceil n/2\rceil$ times, but the time complexity of each code is $O(n)$.
+A time complexity does not tell us the exact number of times the code inside a loop is executed, but it only shows the order of magnitude. In the following examples, the code inside the loop is executed 3$n$, $n+5$ and $\lceil n/2\rceil$ times, but the time complexity of each code is $O(n)$.
 
 ```cpp
 for (int i = 1; i <= 3*n; i++) {
@@ -966,7 +882,7 @@ $O(n$!) This time complexity often indicates that the algorithm iterates through
 
 An algorithm is **polynomial** if its time complexity is at most $O(n^k)$ where $k$ is a constant. All the above time complexities except $O(2^n)$ and $O(n$!) are polynomial. In practice, the constant $k$ is usually small, and therefore a polynomial time complexity roughly means that the algorithm is *efficient*. Most algorithms in this book are polynomial. Still, there are many important problems for which no polynomial algorithm is known, i.e., nobody knows how to solve them efficiently. **NP-hard** problems are an important set of problems, for which no polynomial algorithm is known$^1$.
 
-$^1_{A classic book on the topic is M. R. Garey’s and D. S. Johnson’s Computers and Intractability:}$ $^{A Guide to the Theory of NP-Completeness [28].}$
+> **[1]** A classic book on the topic is M. R. Garey’s and D. S. Johnson’s Computers and Intractability: A Guide to the Theory of NP-Completeness [28].
 
 <!-- PAGE 31 -->
 ## Estimating efficiency
@@ -981,14 +897,14 @@ For example, if the input size is $n = 10^5$, it is probably expected that the t
 
 There are often several possible algorithms for solving a problem such that their time complexities are different. This section discusses a classic problem that has a straightforward $O(n^3)$ solution. However, by designing a better algorithm, it is possible to solve the problem in $O(n^2)$ time and even in $O(n)$ time. Given an array of $n$ numbers, our task is to calculate the **maximum subar- ray sum**, i.e., the largest possible sum of a sequence of consecutive values in the array$^2$. The problem is interesting when there may be negative values in the array. For example, in the array
 
-$-$1 2 4 $-$3 5 2 $-$5 2
+$-1$ 2 4 $-3$ 5 2 $-5$ 2
 
-$^2_{J. Bentley’s book Programming Pearls [8] made the problem popular.}$
+> **[2]** J. Bentley’s book Programming Pearls [8] made the problem popular.
 
 <!-- PAGE 32 -->
 the following subarray produces the maximum sum 10:
 
-$-$1 2 4 $-$3 5 2 $-$5 2
+$-1$ 2 4 $-3$ 5 2 $-5$ 2
 
 We assume that an empty subarray is allowed, so the maximum subarray sum is always at least 0.
 
@@ -1037,9 +953,9 @@ Surprisingly, it is possible to solve the problem in $O(n)$ time$^3$, which mean
 
 1. The subarray only contains the element at position $k$.
 
-2. The subarray consists of a subarray that ends at position $k -$1, followed by the element at position $k$.
+2. The subarray consists of a subarray that ends at position $k -1$, followed by the element at position $k$.
 
-In the latter case, since we want to find a subarray with maximum sum, the subarray that ends at position $k -$1 should also have the maximum sum. Thus, we can solve the problem efficiently by calculating the maximum subarray sum for each ending position from left to right. The following code implements the algorithm:
+In the latter case, since we want to find a subarray with maximum sum, the subarray that ends at position $k -1$ should also have the maximum sum. Thus, we can solve the problem efficiently by calculating the maximum subarray sum for each ending position from left to right. The following code implements the algorithm:
 
 ```cpp
 int best = 0, sum = 0;
@@ -1058,7 +974,7 @@ It is interesting to study how efficient algorithms are in practice. The followi
 
 array size $n$ Algorithm 1 Algorithm 2 Algorithm 3 10$^2$ 0.0 s 0.0 s 0.0 s 10$^3$ 0.1 s 0.0 s 0.0 s 10$^4$ > 10.0 s 0.1 s 0.0 s 10$^5$ > 10.0 s 5.3 s 0.0 s 10$^6$ > 10.0 s > 10.0 s 0.0 s 10$^7$ > 10.0 s > 10.0 s 0.0 s
 
-$^3_{In [8], this linear-time algorithm is attributed to J. B. Kadane, and the algorithm is sometimes}$ $^{called Kadane’s algorithm.}$
+> **[3]** In [8], this linear-time algorithm is attributed to J. B. Kadane, and the algorithm is sometimes called Kadane’s algorithm.
 
 <!-- PAGE 34 -->
 The comparison shows that all algorithms are efficient when the input size is small, but larger inputs bring out remarkable differences in the running times of the algorithms. Algorithm 1 becomes slow when $n = 10^4$, and Algorithm 2 becomes slow when $n = 10^5$. Only Algorithm 3 is able to process even the largest inputs instantly.
@@ -1068,7 +984,7 @@ The comparison shows that all algorithms are efficient when the input size is sm
 
 ## Sorting
 
-**Sorting** is a fundamental algorithm design problem. Many efficient algorithms use sorting as a subroutine, because it is often easier to process data if the elements are in a sorted order. For example, the problem ”does an array contain two equal elements?” is easy to solve using sorting. If the array contains two equal elements, they will be next to each other after sorting, so it is easy to find them. Also, the problem ”what is the most frequent element in an array?” can be solved similarly. There are many algorithms for sorting, and they are also good examples of how to apply different algorithm design techniques. The efficient general sorting algorithms work in $O(n$log$n$) time, and many algorithms that use sorting as a subroutine also have this time complexity.
+**Sorting** is a fundamental algorithm design problem. Many efficient algorithms use sorting as a subroutine, because it is often easier to process data if the elements are in a sorted order. For example, the problem "does an array contain two equal elements?" is easy to solve using sorting. If the array contains two equal elements, they will be next to each other after sorting, so it is easy to find them. Also, the problem "what is the most frequent element in an array?" can be solved similarly. There are many algorithms for sorting, and they are also good examples of how to apply different algorithm design techniques. The efficient general sorting algorithms work in $O(n$log$n$) time, and many algorithms that use sorting as a subroutine also have this time complexity.
 
 ### Sorting theory
 
@@ -1089,7 +1005,7 @@ will be as follows after sorting:
 Simple algorithms for sorting an array work in $O(n^2)$ time. Such algorithms are short and usually consist of two nested loops. A famous $O(n^2)$ time sorting
 
 <!-- PAGE 36 -->
-algorithm is **bubble sort** where the elements ”bubble” in the array according to their values. Bubble sort consists of $n$ rounds. On each round, the algorithm iterates through the elements of the array. Whenever two consecutive elements are found that are not in correct order, the algorithm swaps them. The algorithm can be implemented as follows:
+algorithm is **bubble sort** where the elements "bubble" in the array according to their values. Bubble sort consists of $n$ rounds. On each round, the algorithm iterates through the elements of the array. Whenever two consecutive elements are found that are not in correct order, the algorithm swaps them. The algorithm can be implemented as follows:
 
 ```cpp
 for (int i = 0; i < n; i++) {
@@ -1150,7 +1066,7 @@ Then, the subarrays will be sorted recursively as follows:
 
 1 2 3 6 2 5 8 9
 
-$^1_{According to [47], merge sort was invented by J. von Neumann in 1945.}$
+> **[1]** According to [47], merge sort was invented by J. von Neumann in 1945.
 
 <!-- PAGE 38 -->
 Finally, the algorithm merges the sorted subarrays and creates the final sorted array:
@@ -1163,7 +1079,7 @@ Is it possible to sort an array faster than in $O(n$log$n$) time? It turns out t
 
 ![Figure from page 38](figures/fig_p038_002.png)
 
-Here ”$x < y$?” means that some elements $x$ and $y$ are compared. If $x < y$, the process continues to the left, and otherwise to the right. The results of the process are the possible ways to sort the array, a total of $n$! ways. For this reason, the height of the tree must be at least
+Here "$x < y$?" means that some elements $x$ and $y$ are compared. If $x < y$, the process continues to the left, and otherwise to the right. The results of the process are the possible ways to sort the array, a total of $n$! ways. For this reason, the height of the tree must be at least
 
 log$_2(n$!) $=$ log$_2(1)+$log$_2(2)+\cdot \cdot \cdot +$log$_2(n)$.
 
@@ -1221,7 +1137,7 @@ string s = "monkey";
 sort(s.begin(), s.end());
 ```
 
-Sorting a string means that the characters of the string are sorted. For example, the string ”monkey” becomes ”ekmnoy”.
+Sorting a string means that the characters of the string are sorted. For example, the string "monkey" becomes "ekmnoy".
 
 ### Comparison operators
 
@@ -1251,7 +1167,7 @@ After this, the order of the tuples is (1,5,3), (2,1,3) and (2,1,4).
 
 User-defined structs do not have a comparison operator automatically. The operator should be defined inside the struct as a function `operator<`, whose parameter is another element of the same type. The operator should return `true` if the element is smaller than the parameter, and `false` otherwise. For example, the following struct `P` contains the x and y coordinates of a point. The comparison operator is defined so that the points are sorted primarily by the
 
-$^2_{Note that in some older compilers, the function}$ `make_tuple`$_{has to be used to create a tuple}$ $^{instead of braces (for example,}$ `make_tuple(2,1,4)`$^{instead of}$ `{2,1,4}`$^{).}$
+> **[2]** Note that in some older compilers, the function`make_tuple` has to be used to create a tuple instead of braces (for example,`make_tuple(2,1,4)` instead of`{2,1,4}` ).
 
 <!-- PAGE 41 -->
 x coordinate and secondarily by the y coordinate.
@@ -1314,7 +1230,7 @@ while (a <= b) {
 }
 ```
 
-In this implementation, the active region is $a...b$, and initially the region is 0...$n-$1. The algorithm halves the size of the region at each step, so the time complexity is $O$(log$n$).
+In this implementation, the active region is $a...b$, and initially the region is 0...$n-1$. The algorithm halves the size of the region at each step, so the time complexity is $O$(log$n$).
 
 ### Method 2
 
@@ -1371,20 +1287,18 @@ cout << r.second-r.first << "\n";
 
 An important use for binary search is to find the position where the value of a *function* changes. Suppose that we wish to find the smallest value $k$ that is a valid solution for a problem. We are given a function `ok`($x$) that returns `true` if $x$ is a valid solution and `false` otherwise. In addition, we know that `ok`($x$) is `false` when $x < k$ and `true` when $x \ge k$. The situation looks as follows:
 
-$x$ 0 1 $\cdot \cdot \cdot$ $k -$1 $k$ $k +$1 $\cdot \cdot \cdot$ `ok`($x$)
+$x$ 0 1 $\cdot \cdot \cdot$ $k -1$ $k$ $k+1$ $\cdot \cdot \cdot$ `ok`($x$)
 
-```cpp
                  false
                          false
-```
+
 
 $\cdot \cdot \cdot$
 
-```cpp
                                       false
                                               true
                                                      true
-```
+
 
 $\cdot \cdot \cdot$
 
@@ -1399,17 +1313,17 @@ for (int b = z; b >= 1; b /= 2) {
 int k = x+1;
 ```
 
-The search finds the largest value of $x$ for which `ok`($x$) is `false`. Thus, the next value $k = x+$1 is the smallest possible value for which `ok`($k$) is `true`. The initial jump length $z$ has to be large enough, for example some value for which we know beforehand that `ok`($z$) is `true`. The algorithm calls the function `ok` $O$(log $z$) times, so the total time complexity depends on the function `ok`. For example, if the function works in $O(n)$ time, the total time complexity is $O(n$log $z$).
+The search finds the largest value of $x$ for which `ok`($x$) is `false`. Thus, the next value $k = x+1$ is the smallest possible value for which `ok`($k$) is `true`. The initial jump length $z$ has to be large enough, for example some value for which we know beforehand that `ok`($z$) is `true`. The algorithm calls the function `ok` $O$(log $z$) times, so the total time complexity depends on the function `ok`. For example, if the function works in $O(n)$ time, the total time complexity is $O(n$log $z$).
 
 ### Finding the maximum value
 
 Binary search can also be used to find the maximum value for a function that is first increasing and then decreasing. Our task is to find a position $k$ such that
 
-• $f (x) < f (x+$1) when $x < k$, and
+• $f (x) < f (x+1$) when $x < k$, and
 
-• $f (x) > f (x+$1) when $x \ge k$.
+• $f (x) > f (x+1$) when $x \ge k$.
 
-The idea is to use binary search for finding the largest value of $x$ for which $f (x) < f (x+1)$. This implies that $k = x+$1 because $f (x+1) > f (x+2)$. The following code implements the search:
+The idea is to use binary search for finding the largest value of $x$ for which $f (x) < f (x+1)$. This implies that $k = x+1$ because $f (x+1) > f (x+2)$. The following code implements the search:
 
 ```cpp
 int x = -1;
@@ -1497,7 +1411,7 @@ The internal implementation of a vector uses an ordinary array. If the size of t
 string a = "hatti";
 string b = a+a;
 cout << b << "\n"; // hattihatti
-b[5] = ’v’;
+b[5] = 'v';
 cout << b << "\n"; // hattivatti
 string c = b.substr(3,4);
 cout << c << "\n"; // tiva
@@ -1567,7 +1481,7 @@ cout << s.count(5) << "\n"; // 2
 
 ### Map structures
 
-A **map** is a generalized array that consists of key-value-pairs. While the keys in an ordinary array are always the consecutive integers 0,1,...,$n-$1, where $n$ is the size of the array, the keys in a map can be of any data type and they do not have to be consecutive values. The C++ standard library contains two map implementations that correspond to the set implementations: the structure `map` is based on a balanced binary tree and accessing elements takes $O$(log$n$) time, while the structure `unordered_map` uses hashing and accessing elements takes $O$(1) time on average. The following code creates a map where the keys are strings and the values are integers:
+A **map** is a generalized array that consists of key-value-pairs. While the keys in an ordinary array are always the consecutive integers 0,1,...,$n-1$, where $n$ is the size of the array, the keys in a map can be of any data type and they do not have to be consecutive values. The C++ standard library contains two map implementations that correspond to the set implementations: the structure `map` is based on a balanced binary tree and accessing elements takes $O$(log$n$) time, while the structure `unordered_map` uses hashing and accessing elements takes $O$(1) time on average. The following code creates a map where the keys are strings and the values are integers:
 
 ```cpp
 map<string,int> m;
@@ -1577,7 +1491,7 @@ m["harpsichord"] = 9;
 cout << m["banana"] << "\n"; // 3
 ```
 
-If the value of a key is requested but the map does not contain it, the key is automatically added to the map with a default value. For example, in the following code, the key ”aybabtu” with value 0 is added to the map.
+If the value of a key is requested but the map does not contain it, the key is automatically added to the map with a default value. For example, in the following code, the key "aybabtu" with value 0 is added to the map.
 
 <!-- PAGE 49 -->
 ```cpp
@@ -1607,10 +1521,9 @@ Many functions in the C++ standard library operate with iterators. An **iterator
 
 { 3, 4, 6, 8, 12, 13, 14, 17 } $↑$ $↑$
 
-```cpp
                s.begin()
                                                      s.end()
-```
+
 
 Note the asymmetry in the iterators: `s.begin()` points to an element in the data structure, while `s.end()` points outside the data structure. Thus, the range defined by the iterators is *half-open*.
 
@@ -1907,7 +1820,7 @@ We first consider the problem of generating all subsets of a set of $n$ elements
 
 ### Method 1
 
-An elegant way to go through all subsets of a set is to use recursion. The following function `search` generates the subsets of the set {0,1,...,$n -$1}. The function maintains a vector `subset` that will contain the elements of each subset. The search begins when the function is called with parameter 0.
+An elegant way to go through all subsets of a set is to use recursion. The following function `search` generates the subsets of the set {0,1,...,$n -1$}. The function maintains a vector `subset` that will contain the elements of each subset. The search begins when the function is called with parameter 0.
 
 <!-- PAGE 58 -->
 ```cpp
@@ -1923,23 +1836,21 @@ void search(int k) {
 }
 ```
 
-When the function `search` is called with parameter $k$, it decides whether to include the element $k$ in the subset or not, and in both cases, then calls itself with parameter $k +$1 However, if $k = n$, the function notices that all elements have been processed and a subset has been generated. The following tree illustrates the function calls when $n =$ 3. We can always choose either the left branch ($k$ is not included in the subset) or the right branch ($k$ is included in the subset).
+When the function `search` is called with parameter $k$, it decides whether to include the element $k$ in the subset or not, and in both cases, then calls itself with parameter $k+1$ However, if $k = n$, the function notices that all elements have been processed and a subset has been generated. The following tree illustrates the function calls when $n =$ 3. We can always choose either the left branch ($k$ is not included in the subset) or the right branch ($k$ is included in the subset).
 
-```cpp
                                 search(0)
-```
+
 
 ![Figure from page 58](figures/fig_p058_003.png)
 
-```cpp
 search(3) search(3) search(3) search(3) search(3) search(3) search(3) search(3)
-```
+
 
 ; {2} {1} {1,2} {0} {0,2} {0,1} {0,1,2}
 
 ### Method 2
 
-Another way to generate subsets is based on the bit representation of integers. Each subset of a set of $n$ elements can be represented as a sequence of $n$ bits, which corresponds to an integer between 0...2$^n -$1. The ones in the bit sequence indicate which elements are included in the subset. The usual convention is that the last bit corresponds to element 0, the second last bit corresponds to element 1, and so on. For example, the bit representation of 25 is 11001, which corresponds to the subset {0,3,4}. The following code goes through the subsets of a set of $n$ elements
+Another way to generate subsets is based on the bit representation of integers. Each subset of a set of $n$ elements can be represented as a sequence of $n$ bits, which corresponds to an integer between 0...2$^n-1$. The ones in the bit sequence indicate which elements are included in the subset. The usual convention is that the last bit corresponds to element 0, the second last bit corresponds to element 1, and so on. For example, the bit representation of 25 is 11001, which corresponds to the subset {0,3,4}. The following code goes through the subsets of a set of $n$ elements
 
 ```cpp
 for (int b = 0; b < (1<<n); b++) {
@@ -1965,7 +1876,7 @@ Next we consider the problem of generating all permutations of a set of $n$ elem
 
 ### Method 1
 
-Like subsets, permutations can be generated using recursion. The following function `search` goes through the permutations of the set {0,1,...,$n -$1}. The function builds a vector `permutation` that contains the permutation, and the search begins when the function is called without parameters.
+Like subsets, permutations can be generated using recursion. The following function `search` goes through the permutations of the set {0,1,...,$n -1$}. The function builds a vector `permutation` that contains the permutation, and the search begins when the function is called without parameters.
 
 ```cpp
 void search() {
@@ -1988,7 +1899,7 @@ Each function call adds a new element to `permutation`. The array `chosen` indic
 
 ### Method 2
 
-Another method for generating permutations is to begin with the permutation {0,1,...,$n -$1} and repeatedly use a function that constructs the next permutation in increasing order. The C++ standard library contains the function `next_permutation` that can be used for this:
+Another method for generating permutations is to begin with the permutation {0,1,...,$n -1$} and repeatedly use a function that constructs the next permutation in increasing order. The C++ standard library contains the function `next_permutation` that can be used for this:
 
 <!-- PAGE 60 -->
 ```cpp
@@ -2045,31 +1956,9 @@ void search(int y) {
 }
 ```
 
-The search begins by calling `search(0)`. The size of the board is $n \times n$, and the code calculates the number of solutions to `count`. The code assumes that the rows and columns of the board are numbered from 0 to $n-$1. When the function `search` is called with parameter $y$, it places a queen on row $y$ and then calls itself with parameter $y+$1. Then, if $y = n$, a solution has been found and the variable `count` is increased by one. The array `column` keeps track of columns that contain a queen, and the arrays `diag1` and `diag2` keep track of diagonals. It is not allowed to add another queen to a column or diagonal that already contains a queen. For example, the columns and diagonals of the 4$\times$ 4 board are numbered as follows:
+The search begins by calling `search(0)`. The size of the board is $n \times n$, and the code calculates the number of solutions to `count`. The code assumes that the rows and columns of the board are numbered from 0 to $n-1$. When the function `search` is called with parameter $y$, it places a queen on row $y$ and then calls itself with parameter $y+1$. Then, if $y = n$, a solution has been found and the variable `count` is increased by one. The array `column` keeps track of columns that contain a queen, and the arrays `diag1` and `diag2` keep track of diagonals. It is not allowed to add another queen to a column or diagonal that already contains a queen. For example, the columns and diagonals of the 4$\times$ 4 board are numbered as follows:
 
-0 1 2 3
-
-0 1 2 3
-
-3 4 5 6
-
-0 1 2 3
-
-1 2 3 4
-
-2 3 4 5
-
-0 1 2 3
-
-2 3 4 5
-
-1 2 3 4
-
-0 1 2 3
-
-3 4 5 6
-
-0 1 2 3
+![Figure from page 61](figures/fig_p061_auto1.png)
 
 ```cpp
            column
@@ -2081,9 +1970,9 @@ Let $q(n)$ denote the number of ways to place $n$ queens on an $n\times n$ chess
 
 ### Pruning the search
 
-We can often optimize backtracking by pruning the search tree. The idea is to add ”intelligence” to the algorithm so that it will notice as soon as possible if a partial solution cannot be extended to a complete solution. Such optimizations can have a tremendous effect on the efficiency of the search.
+We can often optimize backtracking by pruning the search tree. The idea is to add "intelligence" to the algorithm so that it will notice as soon as possible if a partial solution cannot be extended to a complete solution. Such optimizations can have a tremendous effect on the efficiency of the search.
 
-$^1_{There is no known way to efficiently calculate larger values of q(n). The current record is}$ $^{q(27) = 234907967154122528, calculated in 2016 [55].}$
+> **[1]** There is no known way to efficiently calculate larger values of q(n). The current record is q(27) = 234907967154122528, calculated in 2016 [55].
 
 <!-- PAGE 62 -->
 Let us consider the problem of calculating the number of paths in an $n \times n$ grid from the upper-left corner to the lower-right corner such that the path visits each square exactly once. For example, in a 7$\times$ 7 grid, there are 111712 such paths. One of the paths is as follows:
@@ -2160,7 +2049,7 @@ Now is a good moment to stop optimizing the algorithm and see what we have achie
 
 2$^n$.
 
-$^2_{This idea was introduced in 1974 by E. Horowitz and S. Sahni [39].}$
+> **[2]** This idea was introduced in 1974 by E. Horowitz and S. Sahni [39].
 
 <!-- PAGE 65 -->
 The idea is to divide the list into two lists $A$ and $B$ such that both lists contain about half of the numbers. The first search generates all subsets of $A$ and stores their sums to a list $S_A$. Correspondingly, the second search creates a list $S_B$ from $B$. After this, it suffices to check if it is possible to choose one element from $S_A$ and another element from $S_B$ such that their sum is $x$. This is possible exactly when there is a way to form the sum $x$ using the numbers of the original list. For example, suppose that the list is [2,4,5,9] and $x =$ 15. First, we divide the list into $A =$ [2,4] and $B =$ [5,9]. After this, we create lists $S_A =$ [0,2,4,6] and $S_B =$ [0,5,9,14]. In this case, the sum $x =$ 15 is possible to form, because $S_A$ contains the sum 6, $S_B$ contains the sum 9, and 6$+9 =$ 15. This corresponds to the solution [2,4,9]. We can implement the algorithm so that its time complexity is $O(2^{n/2})$. First, we generate $sorted$ lists $S_A$ and $S_B$, which can be done in $O(2^{n/2})$ time using a merge-like technique. After this, since the lists are sorted, we can check in $O(2^{n/2})$ time if the sum $x$ can be created from $S_A$ and $S_B$.
@@ -2179,18 +2068,18 @@ As a first example, we consider a problem where we are given a set of coins and 
 
 {1,2,5,10,20,50,100,200}
 
-and $n =$ 520, we need at least four coins. The optimal solution is to select coins 200$+200+100+$20 whose sum is 520.
+and $n =$ 520, we need at least four coins. The optimal solution is to select coins 200$+200+100+20$ whose sum is 520.
 
 ### Greedy algorithm
 
 A simple greedy algorithm to the problem always selects the largest possible coin, until the required sum of money has been constructed. This algorithm works in the example case, because we first select two 200 cent coins, then one 100 cent coin and finally one 20 cent coin. But does this algorithm always work? It turns out that if the coins are the euro coins, the greedy algorithm $always$ works, i.e., it always produces a solution with the fewest possible number of coins. The correctness of the algorithm can be shown as follows: First, each coin 1, 5, 10, 50 and 100 appears at most once in an optimal solution, because if the solution would contain two such coins, we could replace
 
 <!-- PAGE 68 -->
-them by one coin and obtain a better solution. For example, if the solution would contain coins 5$+$5, we could replace them by coin 10. In the same way, coins 2 and 20 appear at most twice in an optimal solution, because we could replace coins 2$+2+$2 by coins 5$+$1 and coins 20$+20+$20 by coins 50 $+$ 10. Moreover, an optimal solution cannot contain coins 2 $+ 2 +$ 1 or 20$+20+$10, because we could replace them by coins 5 and 50. Using these observations, we can show for each coin $x$ that it is not possible to optimally construct a sum $x$ or any larger sum by only using coins that are smaller than $x$. For example, if $x =$ 100, the largest optimal sum using the smaller coins is 50$+20+20+5+2+2 =$ 99. Thus, the greedy algorithm that always selects the largest coin produces the optimal solution. This example shows that it can be difficult to argue that a greedy algorithm works, even if the algorithm itself is simple.
+them by one coin and obtain a better solution. For example, if the solution would contain coins 5$+5$, we could replace them by coin 10. In the same way, coins 2 and 20 appear at most twice in an optimal solution, because we could replace coins 2$+2+2$ by coins 5$+1$ and coins 20$+20+20$ by coins 50 $+$ 10. Moreover, an optimal solution cannot contain coins 2 $+ 2 +$ 1 or 20$+20+10$, because we could replace them by coins 5 and 50. Using these observations, we can show for each coin $x$ that it is not possible to optimally construct a sum $x$ or any larger sum by only using coins that are smaller than $x$. For example, if $x =$ 100, the largest optimal sum using the smaller coins is 50$+20+20+5+2+2 =$ 99. Thus, the greedy algorithm that always selects the largest coin produces the optimal solution. This example shows that it can be difficult to argue that a greedy algorithm works, even if the algorithm itself is simple.
 
 ### General case
 
-In the general case, the coin set can contain any coins and the greedy algorithm *does not* necessarily produce an optimal solution. We can prove that a greedy algorithm does not work by showing a counterexample where the algorithm gives a wrong answer. In this problem we can easily find a counterexample: if the coins are {1,3,4} and the target sum is 6, the greedy algorithm produces the solution 4$+1+$1 while the optimal solution is 3$+$3. It is not known if the general coin problem can be solved using any greedy algorithm$^1$. However, as we will see in Chapter 7, in some cases, the general problem can be efficiently solved using a dynamic programming algorithm that always gives the correct answer.
+In the general case, the coin set can contain any coins and the greedy algorithm *does not* necessarily produce an optimal solution. We can prove that a greedy algorithm does not work by showing a counterexample where the algorithm gives a wrong answer. In this problem we can easily find a counterexample: if the coins are {1,3,4} and the target sum is 6, the greedy algorithm produces the solution 4$+1+1$ while the optimal solution is 3$+3$. It is not known if the general coin problem can be solved using any greedy algorithm$^1$. However, as we will see in Chapter 7, in some cases, the general problem can be efficiently solved using a dynamic programming algorithm that always gives the correct answer.
 
 ### Scheduling
 
@@ -2200,7 +2089,7 @@ event starting time ending time $A$ 1 3 $B$ 2 5 $C$ 3 9 $D$ 6 8
 
 In this case the maximum number of events is two. For example, we can select events $B$ and $D$ as follows:
 
-$^1_{However, it is possible to check in polynomial time if the greedy algorithm presented in this}$ $^{chapter works for a given set of coins [53].}$
+> **[1]** However, it is possible to check in polynomial time if the greedy algorithm presented in this chapter works for a given set of coins [53].
 
 <!-- PAGE 69 -->
 ![Figure from page 69](figures/fig_p069_011.png)
@@ -2252,7 +2141,7 @@ $^0$ $^5$ $^{10}$
 
 $C$ $B$ $A$ $D$
 
-In this solution, $C$ yields 5 points, $B$ yields 0 points, $A$ yields $-$7 points and $D$ yields $-$8 points, so the total score is $-$10. Surprisingly, the optimal solution to the problem does not depend on the deadlines at all, but a correct greedy strategy is to simply perform the tasks $sorted$ $by$ $their$ *durations* in increasing order. The reason for this is that if we ever perform two tasks one after another such that the first task takes longer than the second task, we can obtain a better solution if we swap the tasks. For example, consider the following schedule:
+In this solution, $C$ yields 5 points, $B$ yields 0 points, $A$ yields $-7$ points and $D$ yields $-8$ points, so the total score is $-1$0. Surprisingly, the optimal solution to the problem does not depend on the deadlines at all, but a correct greedy strategy is to simply perform the tasks $sorted$ $by$ $their$ *durations* in increasing order. The reason for this is that if we ever perform two tasks one after another such that the first task takes longer than the second task, we can obtain a better solution if we swap the tasks. For example, consider the following schedule:
 
 <!-- PAGE 71 -->
 
@@ -2414,11 +2303,7 @@ Using this code, it would not be possible to know if the compressed string 1011 
 
 The node that represents character `A` has weight 5 because character `A` appears 5 times in the string. The other weights have been calculated in the same way. The first step is to combine the nodes that correspond to characters `B` and `D`, both with weight 1. The result is:
 
-2
-
-0 1
-
-5 2 1 1
+![Figure from page 73](figures/fig_p073_auto1.png)
 
 ```cpp
                     A
@@ -2427,7 +2312,7 @@ The node that represents character `A` has weight 5 because character `A` appear
                                                    D
 ```
 
-$^2_{D. A. Huffman discovered this method when solving a university course assignment and}$ $^{published the algorithm in 1952 [40].}$
+> **[2]** D. A. Huffman discovered this method when solving a university course assignment and published the algorithm in 1952 [40].
 
 <!-- PAGE 74 -->
 After this, the nodes with weight 2 are combined:
@@ -2505,71 +2390,71 @@ The idea in dynamic programming is to formulate the problem recursively so that 
                             solve(0)
 ```
 
-$=$ 0
+$= 0$
 
 ```cpp
                             solve(1)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             solve(2)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             solve(3)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             solve(4)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             solve(5)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             solve(6)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             solve(7)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             solve(8)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             solve(9)
 ```
 
-$=$ 3 `solve`(10) $=$ 3
+$= 3$ `solve`(10) $= 3$
 
-For example, `solve`(10) $=$ 3, because at least 3 coins are needed to form the sum 10. The optimal solution is 3$+3+4 =$ 10. The essential property of `solve` is that its values can be recursively calculated from its smaller values. The idea is to focus on the *first* coin that we choose for the sum. For example, in the above scenario, the first coin can be either 1, 3 or 4. If we first choose coin 1, the remaining task is to form the sum 9 using the minimum number of coins, which is a subproblem of the original problem. Of course, the same applies to coins 3 and 4. Thus, we can use the following recursive formula to calculate the minimum number of coins:
+For example, `solve`(10) $= 3$, because at least 3 coins are needed to form the sum 10. The optimal solution is 3$+3+4 =$ 10. The essential property of `solve` is that its values can be recursively calculated from its smaller values. The idea is to focus on the *first* coin that we choose for the sum. For example, in the above scenario, the first coin can be either 1, 3 or 4. If we first choose coin 1, the remaining task is to form the sum 9 using the minimum number of coins, which is a subproblem of the original problem. Of course, the same applies to coins 3 and 4. Thus, we can use the following recursive formula to calculate the minimum number of coins:
 
-`solve`($x) =$ min(`solve`($x-1)+$1,
+`solve`($x) =$ min(`solve`($x-1)+1$,
 
-`solve`($x-3)+$1,
+`solve`($x-3)+1$,
 
-`solve`($x-4)+$1).
+`solve`($x-4)+1$).
 
-The base case of the recursion is `solve`(0) $=$ 0, because no coins are needed to form an empty sum. For example,
+The base case of the recursion is `solve`(0) $= 0$, because no coins are needed to form an empty sum. For example,
 
 `solve`(10) $=$ `solve`(7)$+1 =$ `solve`(4)$+2 =$ `solve`(0)$+3 =$ 3.
 
@@ -2585,7 +2470,7 @@ $\infty$ $x <$ 0
 
 $$ $$ $$
 
-min$_c^{\in}_{coins}$`solve`($x-c)+$1 $x >$ 0
+min$_c^{\in}_{coins}$`solve`($x-c)+1$ $x >$ 0
 
 First, if $x <$ 0, the value is $\infty$ , because it is impossible to form a negative sum of money. Then, if $x =$ 0, the value is 0, because no coins are needed to form an
 
@@ -2686,25 +2571,25 @@ while (n > 0) {
 
 Let us now consider another version of the coin problem where our task is to calculate the total number of ways to produce a sum $x$ using the coins. For example, if `coins` $=$ {1,3,4} and $x =$ 5, there are a total of 6 ways:
 
-• 1$+1+1+1+$1
+• 1$+1+1+1+1$
 
-• 3$+1+$1
+• 3$+1+1$
 
-• 1$+1+$3
+• 1$+1+3$
 
-• 1$+$4
+• 1$+4$
 
-• 1$+3+$1
+• 1$+3+1$
 
-• 4$+$1
+• 4$+1$
 
-Again, we can solve the problem recursively. Let `solve`($x$) denote the number of ways we can form the sum $x$. For example, if `coins` $=$ {1,3,4}, then `solve`(5) $=$ 6 and the recursive formula is
+Again, we can solve the problem recursively. Let `solve`($x$) denote the number of ways we can form the sum $x$. For example, if `coins` $=$ {1,3,4}, then `solve`(5) $= 6$ and the recursive formula is
 
 `solve`($x) =$`solve`($x-1)+$
 
 `solve`($x-3)+$
 
-`solve`($x-$4).
+`solve`($x-4$).
 
 Then, the general recursive function is as follows:
 
@@ -2732,7 +2617,7 @@ for (int x = 1; x <= n; x++) {
 }
 ```
 
-Often the number of solutions is so large that it is not required to calculate the exact number but it is enough to give the answer modulo $m$ where, for example, $m = 10^9 +$7. This can be done by changing the code so that all calculations are done modulo $m$. In the above code, it suffices to add the line
+Often the number of solutions is so large that it is not required to calculate the exact number but it is enough to give the answer modulo $m$ where, for example, $m = 10^9+7$. This can be done by changing the code so that all calculations are done modulo $m$. In the above code, it suffices to add the line
 
 ```cpp
        count[x] %= m;
@@ -2760,57 +2645,57 @@ $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
 6 2 5 1 7 4 8 3
 
-Let `length`($k$) denote the length of the longest increasing subsequence that ends at position $k$. Thus, if we calculate all values of `length`($k$) where 0 $\le k \le n-$1, we will find out the length of the longest increasing subsequence. For example, the values of the function for the above array are as follows:
+Let `length`($k$) denote the length of the longest increasing subsequence that ends at position $k$. Thus, if we calculate all values of `length`($k$) where 0 $\le k \le n-1$, we will find out the length of the longest increasing subsequence. For example, the values of the function for the above array are as follows:
 
 ```cpp
                             length(0)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             length(1)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             length(2)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             length(3)
 ```
 
-$=$ 1
+$= 1$
 
 ```cpp
                             length(4)
 ```
 
-$=$ 3
+$= 3$
 
 ```cpp
                             length(5)
 ```
 
-$=$ 2
+$= 2$
 
 ```cpp
                             length(6)
 ```
 
-$=$ 4
+$= 4$
 
 ```cpp
                             length(7)
 ```
 
-$=$ 2
+$= 2$
 
-For example, `length`(6) $=$ 4, because the longest increasing subsequence that ends at position 6 consists of 4 elements.
+For example, `length`(6) $= 4$, because the longest increasing subsequence that ends at position 6 consists of 4 elements.
 
 <!-- PAGE 81 -->
 To calculate a value of `length`($k$), we should find a position $i < k$ for which `array`[$i] <$ `array`[$k$] and `length`($i$) is as large as possible. Then we know that `length`($k) =$ `length`($i) +$ 1, because this is an optimal way to add `array`[$k$] to a subsequence. However, if there is no such position $i$, then `length`($k) =$ 1, which means that the subsequence only contains `array`[$k$]. Since all values of the function can be calculated from its smaller values, we can use dynamic programming. In the following code, the values of the function will be stored in an array `length`.
@@ -2834,12 +2719,12 @@ Our next problem is to find a path from the upper-left corner to the lower-right
 
 ![Figure from page 81](figures/fig_p081_019.png)
 
-The sum of the values on the path is 67, and this is the largest possible sum on a path from the upper-left corner to the lower-right corner. Assume that the rows and columns of the grid are numbered from 1 to $n$, and `value`[$y][x$] equals the value of square ($y,x$). Let `sum`($y,x$) denote the maximum sum on a path from the upper-left corner to square ($y,x$). Now `sum`($n,n$) tells us the maximum sum from the upper-left corner to the lower-right corner. For example, in the above grid, `sum`(5,5) $=$ 67. We can recursively calculate the sums as follows:
+The sum of the values on the path is 67, and this is the largest possible sum on a path from the upper-left corner to the lower-right corner. Assume that the rows and columns of the grid are numbered from 1 to $n$, and `value`[$y][x$] equals the value of square ($y,x$). Let `sum`($y,x$) denote the maximum sum on a path from the upper-left corner to square ($y,x$). Now `sum`($n,n$) tells us the maximum sum from the upper-left corner to the lower-right corner. For example, in the above grid, `sum`(5,5) $= 67$. We can recursively calculate the sums as follows:
 
-`sum`($y,x) =$ max(`sum`($y,x-$1),`sum`($y-1,x))+$`value`[$y][x$]
+`sum`($y,x) =$ max(`sum`($y,x-1$),`sum`($y-1,x))+$`value`[$y][x$]
 
 <!-- PAGE 82 -->
-The recursive formula is based on the observation that a path that ends at square ($y,x$) can come either from square ($y,x-$1) or square ($y-1,x$):
+The recursive formula is based on the observation that a path that ends at square ($y,x$) can come either from square ($y,x-1$) or square ($y-1,x$):
 
 ![Figure from page 82](figures/fig_p082_020.png)
 
@@ -2869,10 +2754,10 @@ The term **knapsack** refers to problems where a set of objects is given, and su
 
 In this case, all sums between 0...12 are possible, except 2 and 10. For example, the sum 7 is possible because we can select the weights [1,3,3]. To solve the problem, we focus on subproblems where we only use the first $k$ weights to construct sums. Let `possible`($x,k) =$ true if we can construct a sum $x$ using the first $k$ weights, and otherwise `possible`($x,k) =$ false. The values of the function can be recursively calculated as follows:
 
-`possible`($x,k) =$ `possible`($x-w_k,k -1)∨$`possible`($x,k -$1)
+`possible`($x,k) =$ `possible`($x-w_k,k -1)∨$`possible`($x,k -1$)
 
 <!-- PAGE 83 -->
-The formula is based on the fact that we can either use or not use the weight $w_k$ in the sum. If we use $w_k$, the remaining task is to form the sum $x-w_k$ using the first $k-$1 weights, and if we do not use $w_k$, the remaining task is to form the sum $x$ using the first $k -$1 weights. As the base cases,
+The formula is based on the fact that we can either use or not use the weight $w_k$ in the sum. If we use $w_k$, the remaining task is to form the sum $x-w_k$ using the first $k-1$ weights, and if we do not use $w_k$, the remaining task is to form the sum $x$ using the first $k -1$ weights. As the base cases,
 
 $($ true $x =$ 0
 
@@ -2880,7 +2765,7 @@ $($ true $x =$ 0
 
 false $x ̸=$ 0
 
-because if no weights are used, we can only form the sum 0. The following table shows all values of the function for the weights [1,3,3,5] (the symbol ”X” indicates the true values):
+because if no weights are used, we can only form the sum 0. The following table shows all values of the function for the weights [1,3,3,5] (the symbol "X" indicates the true values):
 
 $k$\$x$ 0 1 2 3 4 5 6 7 8 9 10 11 12 0 X 1 X X 2 X X X X 3 X X X X X X 4 X X X X X X X X X X X
 
@@ -2920,21 +2805,21 @@ The **edit distance** or **Levenshtein distance**$^1$ is the minimum number of e
 
 • modify a character (e.g. `ABC` $\to$ `ADC`)
 
-For example, the edit distance between `LOVE` and `MOVIE` is 2, because we can first perform the operation `LOVE` $\to$ `MOVE` (modify) and then the operation `MOVE` $\to$ `MOVIE` (insert). This is the smallest possible number of operations, because it is clear that only one operation is not enough. Suppose that we are given a string `x` of length $n$ and a string `y` of length $m$, and we want to calculate the edit distance between `x` and `y`. To solve the problem, we define a function `distance`($a,b$) that gives the edit distance between prefixes `x`[0...$a$] and `y`[0...$b$]. Thus, using this function, the edit distance between `x` and `y` equals `distance`($n-1,m-$1). We can calculate values of `distance` as follows:
+For example, the edit distance between `LOVE` and `MOVIE` is 2, because we can first perform the operation `LOVE` $\to$ `MOVE` (modify) and then the operation `MOVE` $\to$ `MOVIE` (insert). This is the smallest possible number of operations, because it is clear that only one operation is not enough. Suppose that we are given a string `x` of length $n$ and a string `y` of length $m$, and we want to calculate the edit distance between `x` and `y`. To solve the problem, we define a function `distance`($a,b$) that gives the edit distance between prefixes `x`[0...$a$] and `y`[0...$b$]. Thus, using this function, the edit distance between `x` and `y` equals `distance`($n-1,m-1$). We can calculate values of `distance` as follows:
 
-`distance`($a,b) =$ min(`distance`($a,b -1)+$1,
+`distance`($a,b) =$ min(`distance`($a,b -1)+1$,
 
-`distance`($a-1,b)+$1,
+`distance`($a-1,b)+1$,
 
 `distance`($a-1,b -1)+$`cost`($a,b$)).
 
 Here `cost`($a,b) =$ 0 if `x`[$a] =$ `y`[$b$], and otherwise `cost`($a,b) =$ 1. The formula considers the following ways to edit the string `x`:
 
-• `distance`($a,b -$1): insert a character at the end of `x`
+• `distance`($a,b -1$): insert a character at the end of `x`
 
 • `distance`($a-1,b$): remove the last character from `x`
 
-• `distance`($a-1,b -$1): match or modify the last character of `x`
+• `distance`($a-1,b -1$): match or modify the last character of `x`
 
 In the two first cases, one editing operation is needed (insert or remove). In the last case, if `x`[$a] =$ `y`[$b$], we can match the last characters without editing, and otherwise one editing operation is needed (modify). The following table shows the values of `distance` in the example case:
 
@@ -2955,7 +2840,7 @@ In the two first cases, one editing operation is needed (insert or remove). In t
                         E
 ```
 
-$^1_{The distance is named after V. I. Levenshtein who studied it in connection with binary codes}$ $^{[49].}$
+> **[1]** The distance is named after V. I. Levenshtein who studied it in connection with binary codes [49].
 
 <!-- PAGE 85 -->
 The lower-right corner of the table tells us that the edit distance between `LOVE` and `MOVIE` is 2. The table also shows how to construct the shortest sequence of editing operations. In this case the path is as follows:
@@ -3006,13 +2891,13 @@ $^{\lceil}_{m/2}^{\rceil}$ $Y$
 
 $^{b=1}$ 4$\cdot$ (cos$^2 \pi a$
 
-$n+1 +$cos$^2$ $\pi b$ $m+$1)
+$n+1 +$cos$^2$ $\pi b$ $m+1$)
 
 $^{a=1}$
 
 This formula is very efficient, because it calculates the number of tilings in $O(nm)$ time, but since the answer is a product of real numbers, a problem when using the formula is how to store the intermediate results accurately.
 
-$^2_{Surprisingly, this formula was discovered in 1961 by two research teams [43, 67] that worked}$ $^{independently.}$
+> **[2]** Surprisingly, this formula was discovered in 1961 by two research teams [43, 67] that worked independently.
 
 <!-- PAGE 87 -->
 # Chapter 8
@@ -3081,7 +2966,7 @@ The running time of the algorithm is $O(n$log$n$), because it first sorts the ar
 
 Amortized analysis is often used to estimate the number of operations performed on a data structure. The operations may be distributed unevenly so that most operations occur during a certain phase of the algorithm, but the total number of the operations is limited. As an example, consider the problem of finding for each array element the **nearest smaller element**, i.e., the first smaller element that precedes the element in the array. It is possible that no such element exists, in which case the algorithm should report this. Next we will see how the problem can be efficiently solved using a stack structure. We go through the array from left to right and maintain a stack of array elements. At each array position, we remove elements from the stack until the top element is smaller than the current element, or the stack is empty. Then, we report that the top element is the nearest smaller element of the current element, or if the stack is empty, there is no such element. Finally, we add the current element to the stack. As an example, consider the following array:
 
-$^1_{For a long time, it was thought that solving the 3SUM problem more efficiently than in O(n}^2_)$ $^{time would not be possible. However, in 2014, it turned out [30] that this is not the case.}$
+> **[1]** For a long time, it was thought that solving the 3SUM problem more efficiently than in O(n}^2_)$ time would not be possible. However, in 2014, it turned out [30] that this is not the case.
 
 <!-- PAGE 90 -->
 1 3 4 2 5 3 4 2
@@ -3241,7 +3126,7 @@ where $S(X)$ denotes the sum of values in a rectangular subarray from the upperl
 
 ### Minimum queries
 
-Minimum queries are more difficult to process than sum queries. Still, there is a quite simple $O(n$log$n$) time preprocessing method after which we can answer any minimum query in $O$(1) time$^1$. Note that since minimum and maximum queries can be processed similarly, we can focus on minimum queries. The idea is to precalculate all values of min$_q(a,b)$ where $b -a+$1 (the length of the range) is a power of two. For example, for the array
+Minimum queries are more difficult to process than sum queries. Still, there is a quite simple $O(n$log$n$) time preprocessing method after which we can answer any minimum query in $O$(1) time$^1$. Note that since minimum and maximum queries can be processed similarly, we can focus on minimum queries. The idea is to precalculate all values of min$_q(a,b)$ where $b -a+1$ (the length of the range) is a power of two. For example, for the array
 
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
@@ -3259,14 +3144,14 @@ The number of precalculated values is $O(n$log$n$), because there are $O$(log$n$
 
 `min`$_q(a,b) =$ min(`min`$_q(a,a+ w-1)$,`min`$_q(a+ w,b)$),
 
-$^1_{This technique was introduced in [7] and sometimes called the sparse table method. There}$ $^{are also more sophisticated techniques [22] where the preprocessing time is only O(n), but such}$ $^{algorithms are not needed in competitive programming.}$
+> **[1]** This technique was introduced in [7] and sometimes called the sparse table method. There are also more sophisticated techniques [22] where the preprocessing time is only O(n), but such algorithms are not needed in competitive programming.
 
 <!-- PAGE 96 -->
-where $b-a+$1 is a power of two and $w = (b-a+1)$/2. Calculating all those values takes $O(n$log$n$) time. After this, any value of `min`$_q(a,b)$ can be calculated in $O$(1) time as a minimum of two precalculated values. Let $k$ be the largest power of two that does not exceed $b -a+$1. We can calculate the value of `min`$_q(a,b)$ using the formula
+where $b-a+1$ is a power of two and $w = (b-a+1)$/2. Calculating all those values takes $O(n$log$n$) time. After this, any value of `min`$_q(a,b)$ can be calculated in $O$(1) time as a minimum of two precalculated values. Let $k$ be the largest power of two that does not exceed $b -a+1$. We can calculate the value of `min`$_q(a,b)$ using the formula
 
 `min`$_q(a,b) =$ min(`min`$_q(a,a+ k -1)$,`min`$_q(b -k +1,b)$).
 
-In the above formula, the range [$a,b$] is represented as the union of the ranges [$a,a+ k -$1] and [$b -k +1,b$], both of length $k$. As an example, consider the range [1,6]:
+In the above formula, the range [$a,b$] is represented as the union of the ranges [$a,a+ k -1$] and [$b -k +1,b$], both of length $k$. As an example, consider the range [1,6]:
 
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
@@ -3294,7 +3179,7 @@ Even if the name of the structure is a binary indexed $tree$, it is usually repr
 
 `tree`[$k] =$ `sum`$_q(k -p(k)+1,k)$,
 
-$^2_{The binary indexed tree structure was presented by P. M. Fenwick in 1994 [21].}$
+> **[2]** The binary indexed tree structure was presented by P. M. Fenwick in 1994 [21].
 
 <!-- PAGE 97 -->
 i.e., each position $k$ contains the sum of values in a range of the original array whose length is $p(k)$ and that ends at position $k$. For example, since $p(6) =$ 2, `tree`[6] contains the value of `sum`$_q$(5,6). For example, consider the following array:
@@ -3330,7 +3215,7 @@ To calculate the value of `sum`$_q(a,b)$ where $a >$ 1, we can use the same tric
 `sum`$_q(a,b) =$ `sum`$_q(1,b)-$`sum`$_q(1,a-1)$.
 
 <!-- PAGE 98 -->
-Since we can calculate both `sum`$_q(1,b)$ and `sum`$_q(1,a-$1) in $O$(log$n$) time, the total time complexity is $O$(log$n$). Then, after updating a value in the original array, several values in the binary indexed tree should be updated. For example, if the value at position 3 changes, the sums of the following ranges change:
+Since we can calculate both `sum`$_q(1,b)$ and `sum`$_q(1,a-1$) in $O$(log$n$) time, the total time complexity is $O$(log$n$). Then, after updating a value in the original array, several values in the binary indexed tree should be updated. For example, if the value at position 3 changes, the sums of the following ranges change:
 
 $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$
 
@@ -3387,7 +3272,7 @@ The corresponding segment tree is as follows:
 
 Each internal tree node corresponds to an array range whose size is a power of two. In the above tree, the value of each internal node is the sum of the corresponding array values, and it can be calculated as the sum of the values of its left and right child node.
 
-$^3_{The bottom-up-implementation in this chapter corresponds to that in [62]. Similar structures}$ $^{were used in late 1970’s to solve geometric problems [9].}$ $^4_{In fact, using two binary indexed trees it is possible to support minimum queries [16], but}$ $^{this is more complicated than to use a segment tree.}$
+> **[3]** The bottom-up-implementation in this chapter corresponds to that in [62]. Similar structures were used in late 1970’s to solve geometric problems [9].> **[4]** In fact, using two binary indexed trees it is possible to support minimum queries [16], but this is more complicated than to use a segment tree.
 
 <!-- PAGE 100 -->
 It turns out that any range [$a,b$] can be divided into $O$(log$n$) ranges whose values are stored in tree nodes. For example, consider the range [2,7]:
@@ -3411,7 +3296,7 @@ The path from bottom to top always consists of $O$(log$n$) nodes, so each update
 We store a segment tree as an array of 2$n$ elements where $n$ is the size of the original array and a power of two. The tree nodes are stored from top to bottom:
 
 <!-- PAGE 101 -->
-`tree`[1] is the top node, `tree`[2] and `tree`[3] are its children, and so on. Finally, the values from `tree`[$n$] to `tree`[2$n-$1] correspond to the values of the original array on the bottom level of the tree. For example, the segment tree
+`tree`[1] is the top node, `tree`[2] and `tree`[3] are its children, and so on. Finally, the values from `tree`[$n$] to `tree`[2$n-1$] correspond to the values of the original array on the bottom level of the tree. For example, the segment tree
 
 ![Figure from page 101](figures/fig_p101_028.png)
 
@@ -3421,7 +3306,7 @@ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{
 
 39 22 17 13 9 9 8 5 8 6 3 2 7 2 6
 
-Using this representation, the parent of `tree`[$k$] is `tree`[$\lfloor k/2\rfloor$ ], and its children are `tree`[2$k$] and `tree`[2$k +$1]. Note that this implies that the position of a node is even if it is a left child and odd if it is a right child. The following function calculates the value of `sum`$_q(a,b)$:
+Using this representation, the parent of `tree`[$k$] is `tree`[$\lfloor k/2\rfloor$ ], and its children are `tree`[2$k$] and `tree`[2$k+1$]. Note that this implies that the position of a node is even if it is a left child and odd if it is a right child. The following function calculates the value of `sum`$_q(a,b)$:
 
 ```cpp
 int sum(int a, int b) {
@@ -3468,7 +3353,7 @@ In this case, every tree node contains the smallest value in the corresponding a
 
 A limitation in data structures that are built upon an array is that the elements are indexed using consecutive integers. Difficulties arise when large indices are needed. For example, if we wish to use the index 10$^9$, the array should contain 10$^9$ elements which would require too much memory. However, we can often bypass this limitation by using **index compression**, where the original indices are replaced with indices 1,2,3, etc. This can be done if we know all the indices needed during the algorithm beforehand. The idea is to replace each original index $x$ with $c(x)$ where $c$ is a function that compresses the indices. We require that the order of the indices does not change, so if $a < b$, then $c(a) < c(b)$. This allows us to conveniently perform queries even if the indices are compressed. For example, if the original indices are 555, 10$^9$ and 8, the new indices are:
 
-$c$(8) $=$ 1 $c$(555) $=$ 2 $c(10^9)$ $=$ 3
+$c$(8) $= 1$ $c$(555) $= 2$ $c(10^9)$ $= 3$
 
 ### Range updates
 
@@ -3482,16 +3367,16 @@ The difference array for the above array is as follows:
 
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
-3 0 $-$2 0 0 4 $-$3 0
+3 0 $-2$ 0 0 4 $-3$ 0
 
 For example, the value 2 at position 6 in the original array corresponds to the sum 3$-2+4-3 =$ 2 in the difference array. The advantage of the difference array is that we can update a range in the original array by changing just two elements in the difference array. For example, if we want to increase the original array values between positions 1 and 4 by 5, it suffices to increase the difference array value at position 1 by 5 and decrease the value at position 5 by 5. The result is as follows:
 
 <!-- PAGE 104 -->
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
-3 5 $-$2 0 0 $-1 -$3 0
+3 5 $-2$ 0 0 $-1-3$ 0
 
-More generally, to increase the values in range [$a,b$] by $x$, we increase the value at position $a$ by $x$ and decrease the value at position $b +$1 by $x$. Thus, it is only needed to update single values and process sum queries, so we can use a binary indexed tree or a segment tree. A more difficult problem is to support both range queries and range updates. In Chapter 28 we will see that even this is possible.
+More generally, to increase the values in range [$a,b$] by $x$, we increase the value at position $a$ by $x$ and decrease the value at position $b+1$ by $x$. Thus, it is only needed to update single values and process sum queries, so we can use a binary indexed tree or a segment tree. A more difficult problem is to support both range queries and range updates. In Chapter 28 we will see that even this is possible.
 
 <!-- PAGE 105 -->
 # Chapter 10
@@ -3512,12 +3397,12 @@ $b_k2^k +...+ b_22^2 + b_12^1 + b_02^0$.
 
 For example, 1$\cdot 2^5 +1\cdot 2^3 +1\cdot 2^1 +1\cdot 2^0 =$ 43.
 
-The bit representation of a number is either **signed** or **unsigned**. Usually a signed representation is used, which means that both negative and positive numbers can be represented. A signed variable of $n$ bits can contain any integer between $-2^{n-1}$ and 2$^{n-1} -$1. For example, the `int` type in C++ is a signed type, so an `int` variable can contain any integer between $-2^{31}$ and 2$^{31} -$1. The first bit in a signed representation is the sign of the number (0 for nonnegative numbers and 1 for negative numbers), and the remaining $n-$1 bits contain the magnitude of the number. **Two’s complement** is used, which means that the opposite number of a number is calculated by first inverting all the bits in the number, and then increasing the number by one. For example, the bit representation of the `int` number $-$43 is
+The bit representation of a number is either **signed** or **unsigned**. Usually a signed representation is used, which means that both negative and positive numbers can be represented. A signed variable of $n$ bits can contain any integer between $-2^{n-1}$ and 2$^{n-1}-1$. For example, the `int` type in C++ is a signed type, so an `int` variable can contain any integer between $-2^{31}$ and 2$^{31}-1$. The first bit in a signed representation is the sign of the number (0 for nonnegative numbers and 1 for negative numbers), and the remaining $n-1$ bits contain the magnitude of the number. **Two’s complement** is used, which means that the opposite number of a number is calculated by first inverting all the bits in the number, and then increasing the number by one. For example, the bit representation of the `int` number $-4$3 is
 
 11111111111111111111111111010101.
 
 <!-- PAGE 106 -->
-In an unsigned representation, only nonnegative numbers can be used, but the upper bound for the values is larger. An unsigned variable of $n$ bits can contain any integer between 0 and 2$^n -$1. For example, in C++, an `unsigned` `int` variable can contain any integer between 0 and 2$^{32} -$1. There is a connection between the representations: a signed number $-x$ equals an unsigned number 2$^n -x$. For example, the following code shows that the signed number $x = -$43 equals the unsigned number $y = 2^{32} -$43:
+In an unsigned representation, only nonnegative numbers can be used, but the upper bound for the values is larger. An unsigned variable of $n$ bits can contain any integer between 0 and 2$^n-1$. For example, in C++, an `unsigned int` variable can contain any integer between 0 and 2$^{32}-1$. There is a connection between the representations: a signed number $-x$ equals an unsigned number 2$^n -x$. For example, the following code shows that the signed number $x = -4$3 equals the unsigned number $y = 2^{32} -4$3:
 
 ```cpp
 int x = -43;
@@ -3526,7 +3411,7 @@ cout << x << "\n"; // -43
 cout << y << "\n"; // 4294967253
 ```
 
-If a number is larger than the upper bound of the bit representation, the number will overflow. In a signed representation, the next number after 2$^{n-1} -$1 is $-2^{n-1}$, and in an unsigned representation, the next number after 2$^n -$1 is 0. For example, consider the following code:
+If a number is larger than the upper bound of the bit representation, the number will overflow. In a signed representation, the next number after 2$^{n-1}-1$ is $-2^{n-1}$, and in an unsigned representation, the next number after 2$^n-1$ is 0. For example, consider the following code:
 
 ```cpp
 int x = 2147483647
@@ -3535,7 +3420,7 @@ x++;
 cout << x << "\n"; // -2147483648
 ```
 
-Initially, the value of $x$ is 2$^{31} -$1. This is the largest value that can be stored in an `int` variable, so the next number after 2$^{31} -$1 is $-2^{31}$.
+Initially, the value of $x$ is 2$^{31}-1$. This is the largest value that can be stored in an `int` variable, so the next number after 2$^{31}-1$ is $-2^{31}$.
 
 ### Bit operations
 
@@ -3545,7 +3430,7 @@ The **and** operation $x$ & $y$ produces a number that has one bits in positions
 
 10110 (22) & 11010 (26) = 10010 (18)
 
-Using the and operation, we can check if a number $x$ is even because $x$ & 1 = 0 if $x$ is even, and $x$ & 1 = 1 if $x$ is odd. More generally, $x$ is divisible by 2$^k$ exactly when $x$ & (2$^k -$1) = 0.
+Using the and operation, we can check if a number $x$ is even because $x$ & 1 = 0 if $x$ is even, and $x$ & 1 = 1 if $x$ is odd. More generally, $x$ is divisible by 2$^k$ exactly when $x$ & (2$^k-1$) = 0.
 
 ### Or operation
 
@@ -3619,11 +3504,11 @@ cout << __builtin_popcount(x) << "\n"; // 5
 cout << __builtin_parity(x) << "\n"; // 1
 ```
 
-While the above functions only support `int` numbers, there are also `long` `long` versions of the functions available with the suffix `ll`.
+While the above functions only support `int` numbers, there are also `long long` versions of the functions available with the suffix `ll`.
 
 ### Representing sets
 
-Every subset of a set {0,1,2,...,$n-$1} can be represented as an $n$ bit integer whose one bits indicate which elements belong to the subset. This is an efficient way to represent sets, because every element requires only one bit of memory, and set operations can be implemented as bit operations. For example, since `int` is a 32-bit type, an `int` number can represent any subset of the set {0,1,2,...,31}. The bit representation of the set {1,3,4,8} is
+Every subset of a set {0,1,2,...,$n-1$} can be represented as an $n$ bit integer whose one bits indicate which elements belong to the subset. This is an efficient way to represent sets, because every element requires only one bit of memory, and set operations can be implemented as bit operations. For example, since `int` is a 32-bit type, an `int` number can represent any subset of the set {0,1,2,...,31}. The bit representation of the set {1,3,4,8} is
 
 00000000000000000000000100011010,
 
@@ -3669,7 +3554,7 @@ cout << __builtin_popcount(z) << "\n"; // 6
 
 ### Iterating through subsets
 
-The following code goes through the subsets of {0,1,...,$n-$1}:
+The following code goes through the subsets of {0,1,...,$n-1$}:
 
 ```cpp
 for (int b = 0; b < (1<<n); b++) {
@@ -3705,11 +3590,11 @@ Many algorithms can be optimized using bit operations. Such optimizations do not
 
 The **Hamming distance** `hamming`($a,b$) between two strings $a$ and $b$ of equal length is the number of positions where the strings differ. For example,
 
-`hamming`(01101,11001) $=$ 2.
+`hamming`(01101,11001) $= 2$.
 
 Consider the following problem: Given a list of $n$ bit strings, each of length $k$, calculate the minimum Hamming distance between two strings in the list. For example, the answer for [00111,01101,11110] is 2, because
 
-• `hamming`(00111,01101) $=$ 2, • `hamming`(00111,11110) $=$ 3, and • `hamming`(01101,11110) $=$ 3.
+• `hamming`(00111,01101) $= 2$, • `hamming`(00111,11110) $= 3$, and • `hamming`(01101,11110) $= 3$.
 
 A straightforward way to solve the problem is to go through all pairs of strings and calculate their Hamming distances, which yields an $O(n^2k)$ time algorithm. The following function can be used to calculate distances:
 
@@ -3749,7 +3634,7 @@ for (int i = 0; i < n; i++) {
 }
 ```
 
-Then, those columns account for `count`(`count`$-$1)/2 subgrids with black corners, because we can choose any two of them to form a subgrid. To optimize this algorithm, we divide the grid into blocks of columns such that each block consists of $N$ consecutive columns. Then, each row is stored as a list of $N$-bit numbers that describe the colors of the squares. Now we can process $N$ columns at the same time using bit operations. In the following code, `color`[$y][k$] represents a block of $N$ colors as bits.
+Then, those columns account for `count`(`count`$-1$)/2 subgrids with black corners, because we can choose any two of them to form a subgrid. To optimize this algorithm, we divide the grid into blocks of columns such that each block consists of $N$ consecutive columns. Then, each row is stored as a list of $N$-bit numbers that describe the colors of the squares. Now we can process $N$ columns at the same time using bit operations. In the following code, `color`[$y][k$] represents a block of $N$ colors as bits.
 
 ```cpp
 int count = 0;
@@ -3758,7 +3643,7 @@ for (int i = 0; i <= n/N; i++) {
 }
 ```
 
-The resulting algorithm works in $O(n^3/N)$ time. We generated a random grid of size 2500$\times$ 2500 and compared the original and bit optimized implementation. While the original code took 29.6 seconds, the bit optimized version only took 3.1 seconds with $N =$ 32 (`int` numbers) and 1.7 seconds with $N =$ 64 (`long` `long` numbers).
+The resulting algorithm works in $O(n^3/N)$ time. We generated a random grid of size 2500$\times$ 2500 and compared the original and bit optimized implementation. While the original code took 29.6 seconds, the bit optimized version only took 3.1 seconds with $N =$ 32 (`int` numbers) and 1.7 seconds with $N =$ 64 (`long long` numbers).
 
 <!-- PAGE 112 -->
 ## Dynamic programming
@@ -3791,9 +3676,9 @@ product 1
 
 product 2
 
-Let `price`[$x][d$] denote the price of product $x$ on day $d$. For example, in the above scenario `price`[2][3] $=$ 7. Then, let `total`($S,d$) denote the minimum total price for buying a subset $S$ of products by day $d$. Using this function, the solution to the problem is `total`({0...$k -$1},$n-$1). First, `total`($;,d) =$ 0, because it does not cost anything to buy an empty set, and `total`({$x$},0) $=$ `price`[$x$][0], because there is one way to buy one product on the first day. Then, the following recurrence can be used:
+Let `price`[$x][d$] denote the price of product $x$ on day $d$. For example, in the above scenario `price`[2][3] $= 7$. Then, let `total`($S,d$) denote the minimum total price for buying a subset $S$ of products by day $d$. Using this function, the solution to the problem is `total`({0...$k -1$},$n-1$). First, `total`($;,d) =$ 0, because it does not cost anything to buy an empty set, and `total`({$x$},0) $=$ `price`[$x$][0], because there is one way to buy one product on the first day. Then, the following recurrence can be used:
 
-`total`($S,d) =$ min(`total`($S,d -$1),
+`total`($S,d) =$ min(`total`($S,d -1$),
 
 min $_{x\in S}$ (`total`($S$ \ $x,d -1)+$`price`[$x][d$]))
 
@@ -3838,14 +3723,14 @@ person weight 0 2 1 3 2 3 3 5 4 6
 
 In this case, the minimum number of rides is 2. One optimal order is {0,2,3,1,4}, which partitions the people into two rides: first {0,2,3} (total weight 10), and then {1,4} (total weight 9).
 
-$^1_{This technique was introduced in 1962 by M. Held and R. M. Karp [34].}$
+> **[1]** This technique was introduced in 1962 by M. Held and R. M. Karp [34].
 
 <!-- PAGE 114 -->
 The problem can be easily solved in $O(n$!$n$) time by testing all possible permutations of $n$ people. However, we can use dynamic programming to get a more efficient $O(2^nn)$ time algorithm. The idea is to calculate for each subset of people two values: the minimum number of rides needed and the minimum weight of people who ride in the last group. Let `weight`[$p$] denote the weight of person $p$. We define two functions: `rides`($S$) is the minimum number of rides for a subset $S$, and `last`($S$) is the minimum weight of the last ride. For example, in the above scenario
 
-`rides`({1,3,4}) $=$ 2 and `last`({1,3,4}) $=$ 5,
+`rides`({1,3,4}) $= 2$ and `last`({1,3,4}) $= 5$,
 
-because the optimal rides are {1,4} and {3}, and the second ride has weight 5. Of course, our final goal is to calculate the value of `rides`({0...$n-$1}). We can calculate the values of the functions recursively and then apply dynamic programming. The idea is to go through all people who belong to $S$ and optimally choose the last person $p$ who enters the elevator. Each such choice yields a subproblem for a smaller subset of people. If `last`($S$ \ $p)+$`weight`[$p] \le x$, we can add $p$ to the last ride. Otherwise, we have to reserve a new ride that initially only contains $p$. To implement dynamic programming, we declare an array
+because the optimal rides are {1,4} and {3}, and the second ride has weight 5. Of course, our final goal is to calculate the value of `rides`({0...$n-1$}). We can calculate the values of the functions recursively and then apply dynamic programming. The idea is to go through all people who belong to $S$ and optimally choose the last person $p$ who enters the elevator. Each such choice yields a subproblem for a smaller subset of people. If `last`($S$ \ $p)+$`weight`[$p] \le x$, we can add $p$ to the last ride. Otherwise, we have to reserve a new ride that initially only contains $p$. To implement dynamic programming, we declare an array
 
 ```cpp
 pair<int,int> best[1<<N];
@@ -3885,7 +3770,7 @@ Note that the above loop guarantees that for any two subsets $S_1$ and $S_2$ suc
 
 ### Counting subsets
 
-Our last problem in this chapter is as follows: Let $X =$ {0...$n-$1}, and each subset $S \subset X$ is assigned an integer `value`[$S$]. Our task is to calculate for each $S$
+Our last problem in this chapter is as follows: Let $X =$ {0...$n-1$}, and each subset $S \subset X$ is assigned an integer `value`[$S$]. Our task is to calculate for each $S$
 
 `sum`($S) =$ $X$
 
@@ -3895,19 +3780,19 @@ i.e., the sum of values of subsets of $S$. For example, suppose that $n =$ 3 and
 
 • `value`[$;] =$ 3
 
-• `value`[{2}] $=$ 5
+• `value`[{2}] $= 5$
 
-• `value`[{0}] $=$ 1
+• `value`[{0}] $= 1$
 
-• `value`[{0,2}] $=$ 1
+• `value`[{0,2}] $= 1$
 
-• `value`[{1}] $=$ 4
+• `value`[{1}] $= 4$
 
-• `value`[{1,2}] $=$ 3
+• `value`[{1,2}] $= 3$
 
-• `value`[{0,1}] $=$ 5
+• `value`[{0,1}] $= 5$
 
-• `value`[{0,1,2}] $=$ 3
+• `value`[{0,1,2}] $= 3$
 
 In this case, for example,
 
@@ -3921,7 +3806,7 @@ Because there are a total of 2$^n$ subsets, one possible solution is to go throu
 
 because we may only remove elements 0...1. We can calculate values of `sum` using values of `partial`, because
 
-`sum`($S) =$ `partial`($S,n-$1).
+`sum`($S) =$ `partial`($S,n-1$).
 
 The base cases for the function are
 
@@ -3929,11 +3814,11 @@ The base cases for the function are
 
 because in this case no elements can be removed from $S$. Then, in the general case we can use the following recurrence:
 
-$($ `partial`($S,k -$1) $k \notin S$
+$($ `partial`($S,k -1$) $k \notin S$
 
 `partial`($S,k) =$
 
-`partial`($S,k -1)+$`partial`($S$ \{$k$},$k -$1) $k \in S$
+`partial`($S,k -1)+$`partial`($S$ \{$k$},$k -1$) $k \in S$
 
 <!-- PAGE 116 -->
 Here we focus on the element $k$. If $k \in S$, we have two options: we may either keep $k$ in $S$ or remove it from $S$. There is a particularly clever way to implement the calculation of sums. We can declare an array
@@ -3960,7 +3845,7 @@ for (int k = 0; k < n; k++) {
 }
 ```
 
-This code calculates the values of `partial`($S,k$) for $k = 0...n-$1 to the array `sum`. Since `partial`($S,k$) is always based on `partial`($S,k -$1), we can reuse the array `sum`, which yields a very efficient implementation.
+This code calculates the values of `partial`($S,k$) for $k = 0...n-1$ to the array `sum`. Since `partial`($S,k$) is always based on `partial`($S,k -1$), we can reuse the array `sum`, which yields a very efficient implementation.
 
 <!-- PAGE 117 -->
 # Part II
@@ -4004,21 +3889,11 @@ The following graph is not connected, because it is not possible to get from nod
 
 The connected parts of a graph are called its **components**. For example, the following graph contains three components: {1, 2, 3}, {4, 5, 6, 7} and {8}.
 
-4 5
+![Figure from page 120](figures/fig_p120_auto1.png)
 
-1 2
+A **tree** is a connected graph that consists of $n$ nodes and $n-1$ edges. There is a unique path between any two nodes of a tree. For example, the following graph is a tree:
 
-8
-
-3 6 7
-
-A **tree** is a connected graph that consists of $n$ nodes and $n-$1 edges. There is a unique path between any two nodes of a tree. For example, the following graph is a tree:
-
-1 2
-
-5
-
-3 4
+![Figure from page 120](figures/fig_p120_auto2.png)
 
 ### Edge directions
 
@@ -4035,23 +3910,7 @@ The above graph contains a path 3 $\to 1 \to 2 \to$ 5 from node 3 to node 5, but
 
 In a **weighted** graph, each edge is assigned a **weight**. The weights are often interpreted as edge lengths. For example, the following graph is weighted:
 
-5
-
-1 2
-
-7
-
-6
-
-5
-
-1
-
-3
-
-3 4
-
-7
+![Figure from page 121](figures/fig_p121_auto1.png)
 
 The length of a path in a weighted graph is the sum of the edge weights on the path. For example, in the above graph, the length of the path 1 $\to 2 \to$ 5 is 12, and the length of the path 1 $\to 3 \to 4 \to$ 5 is 11. The latter path is the **shortest** path from node 1 to node 5.
 
@@ -4063,7 +3922,7 @@ Two nodes are **neighbors** or **adjacent** if there is an edge between them. Th
 
 5
 
-The sum of degrees in a graph is always 2$m$, where $m$ is the number of edges, because each edge increases the degree of exactly two nodes by one. For this reason, the sum of degrees is always even. A graph is **regular** if the degree of every node is a constant $d$. A graph is **complete** if the degree of every node is $n-$1, i.e., the graph contains all possible edges between the nodes. In a directed graph, the **indegree** of a node is the number of edges that end at the node, and the **outdegree** of a node is the number of edges that start at the node. For example, in the following graph, the indegree of node 2 is 2, and the outdegree of node 2 is 1.
+The sum of degrees in a graph is always 2$m$, where $m$ is the number of edges, because each edge increases the degree of exactly two nodes by one. For this reason, the sum of degrees is always even. A graph is **regular** if the degree of every node is a constant $d$. A graph is **complete** if the degree of every node is $n-1$, i.e., the graph contains all possible edges between the nodes. In a directed graph, the **indegree** of a node is the number of edges that end at the node, and the **outdegree** of a node is the number of edges that start at the node. For example, in the following graph, the indegree of node 2 is 2, and the outdegree of node 2 is 1.
 
 ![Figure from page 121](figures/fig_p121_039.png)
 
@@ -4147,13 +4006,7 @@ vector<pair<int,int>> adj[N];
 
 In this case, the adjacency list of node $a$ contains the pair ($b,w$) always when there is an edge from node $a$ to node $b$ with weight $w$. For example, the graph
 
-5 7
-
-1 2 3
-
-6 5 2
-
-4
+![Figure from page 123](figures/fig_p123_auto1.png)
 
 <!-- PAGE 124 -->
 can be stored as follows:
@@ -4190,54 +4043,16 @@ where each value `adj`[$a][b$] indicates whether the graph contains an edge from
 
 can be represented as follows:
 
-1 2 3 4
-
-0 1 0 0
-
-1
-
-0 0 1 1
-
-2
-
-3
-
-0 0 0 1
-
-1 0 0 0
-
-4
+![Figure from page 124](figures/fig_p124_auto1.png)
 
 If the graph is weighted, the adjacency matrix representation can be extended so that the matrix contains the weight of the edge if the edge exists. Using this representation, the graph
 
 <!-- PAGE 125 -->
-5 7
-
-1 2 3
-
-6 5 2
-
-4
+![Figure from page 125](figures/fig_p125_auto1.png)
 
 corresponds to the following matrix:
 
-1 2 3 4
-
-0 5 0 0
-
-1
-
-0 0 7 6
-
-2
-
-3
-
-0 0 0 5
-
-2 0 0 0
-
-4
+![Figure from page 125](figures/fig_p125_auto2.png)
 
 The drawback of the adjacency matrix representation is that the matrix contains $n^2$ elements, and usually most of them are zero. For this reason, the representation cannot be used if the graph is large.
 
@@ -4274,13 +4089,7 @@ vector<tuple<int,int,int>> edges;
 
 Each element in this list is of the form ($a,b,w$), which means that there is an edge from node $a$ to node $b$ with weight $w$. For example, the graph
 
-5 7
-
-1 2 3
-
-6 5 2
-
-4
+![Figure from page 126](figures/fig_p126_auto1.png)
 
 can be represented as follows$^1$:
 
@@ -4292,7 +4101,7 @@ edges.push_back({3,4,5});
 edges.push_back({4,1,2});
 ```
 
-$^1_{In some older compilers, the function}$ `make_tuple`$_{must be used instead of the braces (for}$ $^{example,}$ `make_tuple(1,2,5)`$^{instead of}$ `{1,2,5}`$^{).}$
+> **[1]** In some older compilers, the function`make_tuple` must be used instead of the braces (for example,`make_tuple(1,2,5)` instead of`{1,2,5}` ).
 
 <!-- PAGE 127 -->
 # Chapter 12
@@ -4309,36 +4118,20 @@ This chapter discusses two fundamental graph algorithms: depth-first search and 
 
 Let us consider how depth-first search processes the following graph:
 
-1 2
-
-3
-
-4 5
+![Figure from page 127](figures/fig_p127_auto1.png)
 
 We may begin the search at any node of the graph; now we will begin the search at node 1. The search first proceeds to node 2:
 
-1 2
-
-3
-
-4 5
+![Figure from page 127](figures/fig_p127_auto2.png)
 
 <!-- PAGE 128 -->
 After this, nodes 3 and 5 will be visited:
 
-1 2
-
-3
-
-4 5
+![Figure from page 128](figures/fig_p128_auto1.png)
 
 The neighbors of node 5 are 2 and 3, but the search has already visited both of them, so it is time to return to the previous nodes. Also the neighbors of nodes 3 and 2 have been visited, so we next move from node 1 to node 4:
 
-1 2
-
-3
-
-4 5
+![Figure from page 128](figures/fig_p128_auto2.png)
 
 After this, the search terminates because it has visited all nodes. The time complexity of depth-first search is $O(n+ m)$ where $n$ is the number of nodes and $m$ is the number of edges, because the algorithm processes each node and edge once.
 
@@ -4444,19 +4237,11 @@ Using the graph traversal algorithms, we can check many properties of graphs. Us
 
 A graph is connected if there is a path between any two nodes of the graph. Thus, we can check if a graph is connected by starting at an arbitrary node and finding out if we can reach all other nodes. For example, in the graph
 
-2 1
-
-3
-
-5 4
+![Figure from page 131](figures/fig_p131_auto1.png)
 
 a depth-first search from node 1 visits the following nodes:
 
-2 1
-
-3
-
-5 4
+![Figure from page 131](figures/fig_p131_auto2.png)
 
 Since the search did not visit all the nodes, we can conclude that the graph is not connected. In a similar way, we can also find all connected components of a graph by iterating through the nodes and always starting a new depth-first search if the current node does not belong to any component yet.
 
@@ -4471,25 +4256,17 @@ contains two cycles and we can find one of them as follows:
 <!-- PAGE 132 -->
 ![Figure from page 132](figures/fig_p132_046.png)
 
-After moving from node 2 to node 5 we notice that the neighbor 3 of node 5 has already been visited. Thus, the graph contains a cycle that goes through node 3, for example, 3 $\to 2 \to 5 \to$ 3. Another way to find out whether a graph contains a cycle is to simply calculate the number of nodes and edges in every component. If a component contains $c$ nodes and no cycle, it must contain exactly $c -$1 edges (so it has to be a tree). If there are $c$ or more edges, the component surely contains a cycle.
+After moving from node 2 to node 5 we notice that the neighbor 3 of node 5 has already been visited. Thus, the graph contains a cycle that goes through node 3, for example, 3 $\to 2 \to 5 \to$ 3. Another way to find out whether a graph contains a cycle is to simply calculate the number of nodes and edges in every component. If a component contains $c$ nodes and no cycle, it must contain exactly $c -1$ edges (so it has to be a tree). If there are $c$ or more edges, the component surely contains a cycle.
 
 ### Bipartiteness check
 
 A graph is bipartite if its nodes can be colored using two colors so that there are no adjacent nodes with the same color. It is surprisingly easy to check if a graph is bipartite using graph traversal algorithms. The idea is to color the starting node blue, all its neighbors red, all their neighbors blue, and so on. If at some point of the search we notice that two adjacent nodes have the same color, this means that the graph is not bipartite. Otherwise the graph is bipartite and one coloring has been found. For example, the graph
 
-2 1
-
-3
-
-5 4
+![Figure from page 132](figures/fig_p132_auto1.png)
 
 is not bipartite, because a search from node 1 proceeds as follows:
 
-2 1
-
-3
-
-5 4
+![Figure from page 132](figures/fig_p132_auto2.png)
 
 We notice that the color or both nodes 2 and 5 is red, while they are adjacent nodes in the graph. Thus, the graph is not bipartite. This algorithm always works, because when there are only two colors available, the color of the starting node in a component determines the colors of all other nodes in the component. It does not make any difference whether the starting node is red or blue. Note that in the general case, it is difficult to find out if the nodes in a graph can be colored using $k$ colors so that no adjacent nodes have the same color. Even when $k =$ 3, no efficient algorithm is known but the problem is NP-hard.
 
@@ -4520,7 +4297,7 @@ $\infty$
 
 2
 
-$^1_{The algorithm is named after R. E. Bellman and L. R. Ford who published it independently}$ $^{in 1958 and 1956, respectively [5, 24].}$
+> **[1]** The algorithm is named after R. E. Bellman and L. R. Ford who published it independently in 1958 and 1956, respectively [5, 24].
 
 <!-- PAGE 134 -->
 Each node of the graph is assigned a distance. Initially, the distance to the starting node is 0, and the distance to all other nodes is infinite. The algorithm searches for edges that reduce distances. First, all edges from node 1 reduce distances:
@@ -4545,15 +4322,7 @@ After this, edges 2 $\to$ 5 and 3 $\to$ 4 reduce distances:
 
 ![Figure from page 134](figures/fig_p134_049.png)
 
-2
-
-5
-
-7
-
-2
-
-3 4
+![Figure from page 134](figures/fig_p134_auto1.png)
 
 Finally, there is one more change:
 
@@ -4561,15 +4330,7 @@ Finally, there is one more change:
 
 ![Figure from page 134](figures/fig_p134_050.png)
 
-2
-
-5
-
-6
-
-2
-
-3 4
+![Figure from page 134](figures/fig_p134_auto2.png)
 
 After this, no edge can reduce any distance. This means that the distances are final, and we have successfully calculated the shortest distances from the starting node to all nodes of the graph. For example, the shortest distance 3 from node 1 to node 5 corresponds to the following path:
 
@@ -4577,20 +4338,12 @@ After this, no edge can reduce any distance. This means that the distances are f
 
 ![Figure from page 134](figures/fig_p134_051.png)
 
-2
-
-5
-
-6
-
-2
-
-3 4
+![Figure from page 134](figures/fig_p134_auto3.png)
 
 <!-- PAGE 135 -->
 ### Implementation
 
-The following implementation of the Bellman–Ford algorithm determines the shortest distances from a node $x$ to all nodes of the graph. The code assumes that the graph is stored as an edge list `edges` that consists of tuples of the form ($a,b,w$), meaning that there is an edge from node $a$ to node $b$ with weight $w$. The algorithm consists of $n-$1 rounds, and on each round the algorithm goes through all edges of the graph and tries to reduce the distances. The algorithm constructs an array `distance` that will contain the distances from $x$ to all nodes of the graph. The constant `INF` denotes an infinite distance.
+The following implementation of the Bellman–Ford algorithm determines the shortest distances from a node $x$ to all nodes of the graph. The code assumes that the graph is stored as an edge list `edges` that consists of tuples of the form ($a,b,w$), meaning that there is an edge from node $a$ to node $b$ with weight $w$. The algorithm consists of $n-1$ rounds, and on each round the algorithm goes through all edges of the graph and tries to reduce the distances. The algorithm constructs an array `distance` that will contain the distances from $x$ to all nodes of the graph. The constant `INF` denotes an infinite distance.
 
 ```cpp
 for (int i = 1; i <= n; i++) distance[i] = INF;
@@ -4604,7 +4357,7 @@ for (int i = 1; i <= n-1; i++) {
 }
 ```
 
-The time complexity of the algorithm is $O(nm)$, because the algorithm consists of $n-$1 rounds and iterates through all $m$ edges during a round. If there are no negative cycles in the graph, all distances are final after $n-$1 rounds, because each shortest path can contain at most $n-$1 edges. In practice, the final distances can usually be found faster than in $n-$1 rounds. Thus, a possible way to make the algorithm more efficient is to stop the algorithm if no distance can be reduced during a round.
+The time complexity of the algorithm is $O(nm)$, because the algorithm consists of $n-1$ rounds and iterates through all $m$ edges during a round. If there are no negative cycles in the graph, all distances are final after $n-1$ rounds, because each shortest path can contain at most $n-1$ edges. In practice, the final distances can usually be found faster than in $n-1$ rounds. Thus, a possible way to make the algorithm more efficient is to stop the algorithm if no distance can be reduced during a round.
 
 ### Negative cycles
 
@@ -4612,12 +4365,12 @@ The Bellman–Ford algorithm can also be used to check if the graph contains a c
 
 ![Figure from page 135](figures/fig_p135_052.png)
 
-contains a negative cycle 2 $\to 3 \to 4 \to$ 2 with length $-$4. If the graph contains a negative cycle, we can shorten infinitely many times any path that contains the cycle by repeating the cycle again and again. Thus, the concept of a shortest path is not meaningful in this situation. A negative cycle can be detected using the Bellman–Ford algorithm by running the algorithm for $n$ rounds. If the last round reduces any distance, the graph contains a negative cycle. Note that this algorithm can be used to search for a negative cycle in the whole graph regardless of the starting node.
+contains a negative cycle 2 $\to 3 \to 4 \to$ 2 with length $-4$. If the graph contains a negative cycle, we can shorten infinitely many times any path that contains the cycle by repeating the cycle again and again. Thus, the concept of a shortest path is not meaningful in this situation. A negative cycle can be detected using the Bellman–Ford algorithm by running the algorithm for $n$ rounds. If the last round reduces any distance, the graph contains a negative cycle. Note that this algorithm can be used to search for a negative cycle in the whole graph regardless of the starting node.
 
 <!-- PAGE 136 -->
 ### SPFA algorithm
 
-The **SPFA algorithm** (”Shortest Path Faster Algorithm”) [20] is a variant of the Bellman–Ford algorithm, that is often more efficient than the original algorithm. The SPFA algorithm does not go through all the edges on each round, but instead, it chooses the edges to be examined in a more intelligent way. The algorithm maintains a queue of nodes that might be used for reducing the distances. First, the algorithm adds the starting node $x$ to the queue. Then, the algorithm always processes the first node in the queue, and when an edge $a \to b$ reduces a distance, node $b$ is added to the queue. The efficiency of the SPFA algorithm depends on the structure of the graph: the algorithm is often efficient, but its worst case time complexity is still $O(nm)$ and it is possible to create inputs that make the algorithm as slow as the original Bellman–Ford algorithm.
+The **SPFA algorithm** ("Shortest Path Faster Algorithm") [20] is a variant of the Bellman–Ford algorithm, that is often more efficient than the original algorithm. The SPFA algorithm does not go through all the edges on each round, but instead, it chooses the edges to be examined in a more intelligent way. The algorithm maintains a queue of nodes that might be used for reducing the distances. First, the algorithm adds the starting node $x$ to the queue. Then, the algorithm always processes the first node in the queue, and when an edge $a \to b$ reduces a distance, node $b$ is added to the queue. The efficiency of the SPFA algorithm depends on the structure of the graph: the algorithm is often efficient, but its worst case time complexity is still $O(nm)$ and it is possible to create inputs that make the algorithm as slow as the original Bellman–Ford algorithm.
 
 ## Dijkstra’s algorithm
 
@@ -4629,17 +4382,7 @@ Let us consider how Dijkstra’s algorithm works in the following graph when the
 
 $\infty$ $\infty$
 
-6
-
-3 4
-
-2
-
-5
-
-9
-
-2
+![Figure from page 136](figures/fig_p136_auto1.png)
 
 $\infty$
 
@@ -4653,112 +4396,28 @@ $\infty$ 0
 
 Like in the Bellman–Ford algorithm, initially the distance to the starting node is 0 and the distance to all other nodes is infinite. At each step, Dijkstra’s algorithm selects a node that has not been processed yet and whose distance is as small as possible. The first such node is node 1 with distance 0.
 
-$^2_{E. W. Dijkstra published the algorithm in 1959 [14]; however, his original paper does not}$ $^{mention how to implement the algorithm efficiently.}$
+> **[2]** E. W. Dijkstra published the algorithm in 1959 [14]; however, his original paper does not mention how to implement the algorithm efficiently.
 
 <!-- PAGE 137 -->
 When a node is selected, the algorithm goes through all edges that start at the node and reduces the distances using them:
 
 $\infty$ 9
 
-6
-
-3 4
-
-2
-
-9
-
-5
-
-2
-
-1
-
-1
-
-2 1
-
-5
-
-5 0
+![Figure from page 137](figures/fig_p137_auto1.png)
 
 In this case, the edges from node 1 reduced the distances of nodes 2, 4 and 5, whose distances are now 5, 9 and 1. The next node to be processed is node 5 with distance 1. This reduces the distance to node 4 from 9 to 3:
 
 $\infty$ 3
 
-6
-
-3 4
-
-2
-
-9
-
-5
-
-2
-
-1
-
-1
-
-2 1
-
-5
-
-5 0
+![Figure from page 137](figures/fig_p137_auto2.png)
 
 After this, the next node is node 4, which reduces the distance to node 3 to 9:
 
-9 3
-
-6
-
-3 4
-
-2
-
-9
-
-5
-
-2
-
-1
-
-1
-
-2 1
-
-5
-
-5 0
+![Figure from page 137](figures/fig_p137_auto3.png)
 
 A remarkable property in Dijkstra’s algorithm is that whenever a node is selected, its distance is final. For example, at this point of the algorithm, the distances 0, 1 and 3 are the final distances to nodes 1, 5 and 4. After this, the algorithm processes the two remaining nodes, and the final distances are as follows:
 
-7 3
-
-6
-
-3 4
-
-2
-
-9
-
-5
-
-2
-
-1
-
-1
-
-2 1
-
-5
-
-5 0
+![Figure from page 137](figures/fig_p137_auto4.png)
 
 <!-- PAGE 138 -->
 ### Negative edges
@@ -4767,7 +4426,7 @@ The efficiency of Dijkstra’s algorithm is based on the fact that the graph doe
 
 ![Figure from page 138](figures/fig_p138_053.png)
 
-The shortest path from node 1 to node 4 is 1 $\to 3 \to$ 4 and its length is 1. However, Dijkstra’s algorithm finds the path 1 $\to 2 \to$ 4 by following the minimum weight edges. The algorithm does not take into account that on the other path, the weight $-$5 compensates the previous large weight 6.
+The shortest path from node 1 to node 4 is 1 $\to 3 \to$ 4 and its length is 1. However, Dijkstra’s algorithm finds the path 1 $\to 2 \to$ 4 by following the minimum weight edges. The algorithm does not take into account that on the other path, the weight $-5$ compensates the previous large weight 6.
 
 ### Implementation
 
@@ -4802,29 +4461,13 @@ The **Floyd–Warshall algorithm**$^4$ provides an alternative way to approach t
 
 Let us consider how the Floyd–Warshall algorithm works in the following graph:
 
-7
-
-3 4
-
-2
-
-5
-
-9
-
-2
-
-1
-
-2 1
-
-5
+![Figure from page 139](figures/fig_p139_auto1.png)
 
 Initially, the distance from each node to itself is 0, and the distance between nodes $a$ and $b$ is $x$ if there is an edge between nodes $a$ and $b$ with weight $x$. All other distances are infinite. In this graph, the initial array is as follows:
 
 1 2 3 4 5 1 0 5 $\infty$ 9 1 2 5 0 2 $\infty$ $\infty$ 3 $\infty$ 2 0 7 $\infty$ 4 9 $\infty$ 7 0 2 5 1 $\infty$ $\infty$ 2 0
 
-$^3_{Of course, we could also declare the priority queue as in Chapter 4.5 and use positive distances,}$ $^{but the implementation would be a bit longer.}$ $^4_{The algorithm is named after R. W. Floyd and S. Warshall who published it independently in}$ $^{1962 [23, 70].}$
+> **[3]** Of course, we could also declare the priority queue as in Chapter 4.5 and use positive distances, but the implementation would be a bit longer.> **[4]** The algorithm is named after R. W. Floyd and S. Warshall who published it independently in 1962 [23, 70].
 
 <!-- PAGE 140 -->
 The algorithm consists of consecutive rounds. On each round, the algorithm selects a new node that can act as an intermediate node in paths from now on, and distances are reduced using this node. On the first round, node 1 is the new intermediate node. There is a new path between nodes 2 and 4 with length 14, because node 1 connects them. There is also a new path between nodes 2 and 5 with length 6.
@@ -4846,23 +4489,7 @@ The algorithm continues like this, until all nodes have been appointed intermedi
 For example, the array tells us that the shortest distance between nodes 2 and 4 is 8. This corresponds to the following path:
 
 <!-- PAGE 141 -->
-7
-
-3 4
-
-2
-
-9
-
-5
-
-2
-
-1
-
-2 1
-
-5
+![Figure from page 141](figures/fig_p141_auto1.png)
 
 ### Implementation
 
@@ -4899,7 +4526,7 @@ The time complexity of the algorithm is $O(n^3)$, because it contains three nest
 
 ## Tree algorithms
 
-A **tree** is a connected, acyclic graph that consists of $n$ nodes and $n -$1 edges. Removing any edge from a tree divides it into two components, and adding any edge to a tree creates a cycle. Moreover, there is always a unique path between any two nodes of a tree. For example, the following tree consists of 8 nodes and 7 edges:
+A **tree** is a connected, acyclic graph that consists of $n$ nodes and $n -1$ edges. Removing any edge from a tree divides it into two components, and adding any edge to a tree creates a cycle. Moreover, there is always a unique path between any two nodes of a tree. For example, the following tree consists of 8 nodes and 7 edges:
 
 ![Figure from page 143](figures/fig_p143_054.png)
 
@@ -4918,11 +4545,7 @@ In a rooted tree, the **children** of a node are its lower neighbors, and the **
 <!-- PAGE 144 -->
 The structure of a rooted tree is *recursive*: each node of the tree acts as the root of a **subtree** that contains the node itself and all nodes that are in the subtrees of its children. For example, in the above tree, the subtree of node 2 consists of nodes 2, 5, 6 and 8:
 
-2
-
-5 6
-
-8
+![Figure from page 144](figures/fig_p144_auto1.png)
 
 ### Tree traversal
 
@@ -4998,7 +4621,7 @@ We calculate for each node $x$ two values:
 
 • `maxLength`($x$): the maximum length of a path whose highest point is $x$
 
-For example, in the above tree, `toLeaf`(1) $=$ 2, because there is a path 1 $\to 2 \to$ 6, and `maxLength`(1) $=$ 4, because there is a path 6 $\to 2 \to 1 \to 4 \to$ 7. In this case, `maxLength`(1) equals the diameter. Dynamic programming can be used to calculate the above values for all nodes in $O(n)$ time. First, to calculate `toLeaf`($x$), we go through the children of $x$, choose a child $c$ with maximum `toLeaf`($c$) and add one to this value. Then, to calculate `maxLength`($x$), we choose two distinct children $a$ and $b$ such that the sum `toLeaf`($a)+$`toLeaf`($b$) is maximum and add two to this sum.
+For example, in the above tree, `toLeaf`(1) $= 2$, because there is a path 1 $\to 2 \to$ 6, and `maxLength`(1) $= 4$, because there is a path 6 $\to 2 \to 1 \to 4 \to$ 7. In this case, `maxLength`(1) equals the diameter. Dynamic programming can be used to calculate the above values for all nodes in $O(n)$ time. First, to calculate `toLeaf`($x$), we go through the children of $x$, choose a child $c$ with maximum `toLeaf`($c$) and add one to this value. Then, to calculate `maxLength`($x$), we choose two distinct children $a$ and $b$ such that the sum `toLeaf`($a)+$`toLeaf`($b$) is maximum and add two to this sum.
 
 ### Algorithm 2
 
@@ -5017,15 +4640,7 @@ This is an elegant method, but why does it work? It helps to draw the tree diffe
 <!-- PAGE 147 -->
 $b$ $c$ $x$
 
-6
-
-7
-
-1 4 2
-
-5
-
-3
+![Figure from page 147](figures/fig_p147_auto1.png)
 
 $a$
 
@@ -5035,19 +4650,9 @@ Node $x$ indicates the place where the path from node $a$ joins the path that co
 
 Our next problem is to calculate for every node in the tree the maximum length of a path that begins at the node. This can be seen as a generalization of the tree diameter problem, because the largest of those lengths equals the diameter of the tree. Also this problem can be solved in $O(n)$ time. As an example, consider the following tree:
 
-3
+![Figure from page 147](figures/fig_p147_auto2.png)
 
-5
-
-1
-
-2
-
-6
-
-4
-
-Let `maxLength`($x$) denote the maximum length of a path that begins at node $x$. For example, in the above tree, `maxLength`(4) $=$ 3, because there is a path 4 $\to 1 \to 2 \to$ 6. Here is a complete table of the values:
+Let `maxLength`($x$) denote the maximum length of a path that begins at node $x$. For example, in the above tree, `maxLength`(4) $= 3$, because there is a path 4 $\to 1 \to 2 \to$ 6. Here is a complete table of the values:
 
 node $x$ 1 2 3 4 5 6
 
@@ -5080,7 +4685,7 @@ Still, we can solve the second part in $O(n)$ time by storing $two$ maximum leng
 
 • `maxLength`$_2(x)$ the maximum length of a path from $x$ in another direction than the first path
 
-For example, in the above graph, `maxLength`$_1(1) =$ 2 using the path 1 $\to 2 \to$ 5, and `maxLength`$_2(1) =$ 1 using the path 1 $\to$ 3. Finally, if the path that corresponds to `maxLength`$_1(p)$ goes through $x$, we conclude that the maximum length is `maxLength`$_2(p)+$1, and otherwise the maximum length is `maxLength`$_1(p)+$1.
+For example, in the above graph, `maxLength`$_1(1) =$ 2 using the path 1 $\to 2 \to$ 5, and `maxLength`$_2(1) =$ 1 using the path 1 $\to$ 3. Finally, if the path that corresponds to `maxLength`$_1(p)$ goes through $x$, we conclude that the maximum length is `maxLength`$_2(p)+1$, and otherwise the maximum length is `maxLength`$_1(p)+1$.
 
 <!-- PAGE 149 -->
 ## Binary trees
@@ -5099,13 +4704,7 @@ The nodes of a binary tree have three natural orderings that correspond to diffe
 
 For the above tree, the nodes in pre-order are [1,2,4,5,6,3,7], in in-order [4,2,6,5,1,3,7] and in post-order [4,6,5,2,7,3,1]. If we know the pre-order and in-order of a tree, we can reconstruct the exact structure of the tree. For example, the above tree is the only possible tree with pre-order [1,2,4,5,6,3,7] and in-order [4,2,6,5,1,3,7]. In a similar way, the post-order and in-order also determine the structure of a tree. However, the situation is different if we only know the pre-order and postorder of a tree. In this case, there may be more than one tree that match the orderings. For example, in both of the trees
 
-1
-
-1
-
-2
-
-2
+![Figure from page 149](figures/fig_p149_auto1.png)
 
 the pre-order is [1,2] and the post-order is [2,1], but the structures of the trees are different.
 
@@ -5117,86 +4716,20 @@ the pre-order is [1,2] and the post-order is [2,1], but the structures of the tr
 
 A **spanning tree** of a graph consists of all nodes of the graph and some of the edges of the graph so that there is a path between any two nodes. Like trees in general, spanning trees are connected and acyclic. Usually there are several ways to construct a spanning tree. For example, consider the following graph:
 
-5
-
-2 3
-
-3
-
-9
-
-6 3
-
-1
-
-4
-
-5
-
-7
-
-5 6
-
-2
+![Figure from page 151](figures/fig_p151_auto1.png)
 
 One spanning tree for the graph is as follows:
 
-5
-
-2 3
-
-3
-
-9
-
-3
-
-1
-
-4
-
-5 6
-
-2
+![Figure from page 151](figures/fig_p151_auto2.png)
 
 The weight of a spanning tree is the sum of its edge weights. For example, the weight of the above spanning tree is 3$+5+9+3+2 =$ 22. A **minimum spanning tree** is a spanning tree whose weight is as small as possible. The weight of a minimum spanning tree for the example graph is 20, and such a tree can be constructed as follows:
 
-2 3
-
-3
-
-3
-
-1
-
-4
-
-5
-
-7
-
-5 6
-
-2
+![Figure from page 151](figures/fig_p151_auto3.png)
 
 <!-- PAGE 152 -->
 In a similar way, a **maximum spanning tree** is a spanning tree whose weight is as large as possible. The weight of a maximum spanning tree for the example graph is 32:
 
-5
-
-2 3
-
-9
-
-6
-
-1
-
-4
-
-5 7
-
-5 6
+![Figure from page 152](figures/fig_p152_auto1.png)
 
 Note that a graph may have several minimum and maximum spanning trees, so the trees are not unique. It turns out that several greedy methods can be used to construct minimum and maximum spanning trees. In this chapter, we discuss two algorithms that process the edges of the graph ordered by their weights. We focus on finding minimum spanning trees, but the same algorithms can find maximum spanning trees by processing the edges in reverse order.
 
@@ -5208,95 +4741,33 @@ In **Kruskal’s algorithm**$^1$, the initial spanning tree only contains the no
 
 Let us consider how Kruskal’s algorithm processes the following graph:
 
-5
-
-2 3
-
-3
-
-9
-
-6 3
-
-1
-
-4
-
-5
-
-7
-
-5 6
-
-2
+![Figure from page 152](figures/fig_p152_auto2.png)
 
 The first step of the algorithm is to sort the edges in increasing order of their weights. The result is the following list:
 
-$^1_{The algorithm was published in 1956 by J. B. Kruskal [48].}$
+> **[1]** The algorithm was published in 1956 by J. B. Kruskal [48].
 
 <!-- PAGE 153 -->
 edge weight 5–6 2 1–2 3 3–6 3 1–5 5 2–3 5 2–5 6 4–6 7 3–4 9
 
 After this, the algorithm goes through the list and adds each edge to the tree if it joins two separate components. Initially, each node is in its own component:
 
-2 3
-
-1
-
-4
-
-5 6
+![Figure from page 153](figures/fig_p153_auto1.png)
 
 The first edge to be added to the tree is the edge 5–6 that creates a component {5,6} by joining the components {5} and {6}:
 
-2 3
-
-1
-
-4
-
-5 6 2
+![Figure from page 153](figures/fig_p153_auto2.png)
 
 After this, the edges 1–2, 3–6 and 1–5 are added in a similar way:
 
-2 3
-
-3
-
-3
-
-1
-
-4
-
-5
-
-5 6
-
-2
+![Figure from page 153](figures/fig_p153_auto3.png)
 
 After those steps, most components have been joined and there are two components in the tree: {1,2,3,5,6} and {4}. The next edge in the list is the edge 2–3, but it will not be included in the tree, because nodes 2 and 3 are already in the same component. For the same reason, the edge 2–5 will not be included in the tree.
 
 <!-- PAGE 154 -->
 Finally, the edge 4–6 will be included in the tree:
 
-2 3
-
-3
-
-3
-
-1
-
-4
-
-5
-
-7
-
-5 6
-
-2
+![Figure from page 154](figures/fig_p154_auto1.png)
 
 After this, the algorithm will not add any new edges, because the graph is connected and there is a path between any two nodes. The resulting graph is a minimum spanning tree with weight 2$+3+3+5+7 =$ 20.
 
@@ -5304,23 +4775,11 @@ After this, the algorithm will not add any new edges, because the graph is conne
 
 It is a good question why Kruskal’s algorithm works. Why does the greedy strategy guarantee that we will find a minimum spanning tree? Let us see what happens if the minimum weight edge of the graph is $not$ included in the spanning tree. For example, suppose that a spanning tree for the previous graph would not contain the minimum weight edge 5–6. We do not know the exact structure of such a spanning tree, but in any case it has to contain some edges. Assume that the tree would be as follows:
 
-2 3
-
-1
-
-4
-
-5 6
+![Figure from page 154](figures/fig_p154_auto2.png)
 
 However, it is not possible that the above tree would be a minimum spanning tree for the graph. The reason for this is that we can remove an edge from the tree and replace it with the minimum weight edge 5–6. This produces a spanning tree whose weight is *smaller*:
 
-2 3
-
-1
-
-4
-
-5 6 2
+![Figure from page 154](figures/fig_p154_auto3.png)
 
 For this reason, it is always optimal to include the minimum weight edge in the tree to produce a minimum spanning tree. Using a similar argument, we can show that it is also optimal to add the next edge in weight order to the tree, and so on. Hence, Kruskal’s algorithm works correctly and always produces a minimum spanning tree.
 
@@ -5345,38 +4804,14 @@ A **union-find structure** maintains a collection of sets. The sets are disjoint
 
 In a union-find structure, one element in each set is the representative of the set, and there is a chain from any other element of the set to the representative. For example, assume that the sets are {1,4,7}, {5} and {2,3,6,8}:
 
-4 5
+![Figure from page 155](figures/fig_p155_auto1.png)
 
-2
-
-7
-
-1
-
-3
-
-6
-
-8
-
-$^2_{The structure presented here was introduced in 1971 by J. D. Hopcroft and J. D. Ullman [38].}$ $^{Later, in 1975, R. E. Tarjan studied a more sophisticated variant of the structure [64] that is}$ $^{discussed in many algorithm textbooks nowadays.}$
+> **[2]** The structure presented here was introduced in 1971 by J. D. Hopcroft and J. D. Ullman [38]. Later, in 1975, R. E. Tarjan studied a more sophisticated variant of the structure [64] that is discussed in many algorithm textbooks nowadays.
 
 <!-- PAGE 156 -->
 In this case the representatives of the sets are 4, 5 and 2. We can find the representative of any element by following the chain that begins at the element. For example, the element 2 is the representative for the element 6, because we follow the chain 6 $\to 3 \to$ 2. Two elements belong to the same set exactly when their representatives are the same. Two sets can be joined by connecting the representative of one set to the representative of the other set. For example, the sets {1,4,7} and {2,3,6,8} can be joined as follows:
 
-4
-
-2
-
-7
-
-1
-
-3
-
-6
-
-8
+![Figure from page 156](figures/fig_p156_auto1.png)
 
 The resulting set contains the elements {1,2,3,4,6,7,8}. From this on, the element 2 is the representative for the entire set and the old representative 4 points to the element 2. The efficiency of the union-find structure depends on how the sets are joined. It turns out that we can follow a simple strategy: always connect the representative of the *smaller* set to the representative of the $larger$ set (or if the sets are of equal size, we can make an arbitrary choice). Using this strategy, the length of any chain will be $O$(log$n$), so we can find the representative of any element efficiently by following the corresponding chain.
 
@@ -5429,86 +4864,26 @@ The time complexity of the function `find` is $O$(log$n$) assuming that the leng
 
 Let us consider how Prim’s algorithm works in the following graph:
 
-5
+![Figure from page 157](figures/fig_p157_auto1.png)
 
-2 3
-
-3
-
-9
-
-6 3
-
-1
-
-4
-
-5
-
-7
-
-5 6
-
-2
-
-$^3_{The algorithm is named after R. C. Prim who published it in 1957 [54]. However, the same}$ $^{algorithm was discovered already in 1930 by V. Jarník.}$
+> **[3]** The algorithm is named after R. C. Prim who published it in 1957 [54]. However, the same algorithm was discovered already in 1930 by V. Jarník.
 
 <!-- PAGE 158 -->
 Initially, there are no edges between the nodes:
 
-2 3
-
-1
-
-4
-
-5 6
+![Figure from page 158](figures/fig_p158_auto1.png)
 
 An arbitrary node can be the starting node, so let us choose node 1. First, we add node 2 that is connected by an edge of weight 3:
 
-2 3
-
-3
-
-1
-
-4
-
-5 6
+![Figure from page 158](figures/fig_p158_auto2.png)
 
 After this, there are two edges with weight 5, so we can add either node 3 or node 5 to the tree. Let us add node 3 first:
 
-5
-
-2 3
-
-3
-
-1
-
-4
-
-5 6
+![Figure from page 158](figures/fig_p158_auto3.png)
 
 The process continues until all nodes have been included in the tree:
 
-5
-
-2 3
-
-3
-
-3
-
-1
-
-4
-
-7
-
-5 6
-
-2
+![Figure from page 158](figures/fig_p158_auto4.png)
 
 ### Implementation
 
@@ -5541,7 +4916,7 @@ one topological sort is [4,1,5,2,3,6]:
 
 An acyclic graph always has a topological sort. However, if the graph contains a cycle, it is not possible to form a topological sort, because no node of the cycle can appear before the other nodes of the cycle in the ordering. It turns out that depth-first search can be used to both check if a directed graph contains a cycle and, if it does not contain a cycle, to construct a topological sort.
 
-$^1_{Directed acyclic graphs are sometimes called DAGs.}$
+> **[1]** Directed acyclic graphs are sometimes called DAGs.
 
 <!-- PAGE 160 -->
 ### Algorithm
@@ -5630,7 +5005,7 @@ There are a total of three such paths:
 
 • 1 $\to 4 \to 5 \to 3 \to$ 6
 
-Let `paths`($x$) denote the number of paths from node 1 to node $x$. As a base case, `paths`(1) $=$ 1. Then, to calculate other values of `paths`($x$), we may use the recursion
+Let `paths`($x$) denote the number of paths from node 1 to node $x$. As a base case, `paths`(1) $= 1$. Then, to calculate other values of `paths`($x$), we may use the recursion
 
 `paths`($x) =$ `paths`($a_1)+$`paths`($a_2)+\cdot \cdot \cdot +$`paths`($a_k$)
 
@@ -5642,80 +5017,24 @@ where $a_1,a_2,...,a_k$ are the nodes from which there is an edge to $x$. Since 
 
 Hence, the numbers of paths are as follows:
 
-1 2 3
+![Figure from page 162](figures/fig_p162_auto1.png)
 
-1 2 3
-
-4 5 6
-
-1 1 3
-
-For example, to calculate the value of `paths`(3), we can use the formula `paths`(2)$+$`paths`(5), because there are edges from nodes 2 and 5 to node 3. Since `paths`(2) $=$ 2 and `paths`(5) $=$ 1, we conclude that `paths`(3) $=$ 3.
+For example, to calculate the value of `paths`(3), we can use the formula `paths`(2)$+$`paths`(5), because there are edges from nodes 2 and 5 to node 3. Since `paths`(2) $= 2$ and `paths`(5) $= 1$, we conclude that `paths`(3) $= 3$.
 
 <!-- PAGE 163 -->
 ### Extending Dijkstra’s algorithm
 
 A by-product of Dijkstra’s algorithm is a directed, acyclic graph that indicates for each node of the original graph the possible ways to reach the node using a shortest path from the starting node. Dynamic programming can be applied to that graph. For example, in the graph
 
-3
-
-1 2
-
-8
-
-2
-
-5 4
-
-5
-
-1
-
-3 4
-
-2
+![Figure from page 163](figures/fig_p163_auto1.png)
 
 the shortest paths from node 1 may use the following edges:
 
-3
-
-1 2
-
-2
-
-5 4
-
-5
-
-1
-
-3 4
-
-2
+![Figure from page 163](figures/fig_p163_auto2.png)
 
 Now we can, for example, calculate the number of shortest paths from node 1 to node 5 using dynamic programming:
 
-1 1
-
-3
-
-1 2
-
-2
-
-5 4
-
-5
-
-3
-
-1
-
-3 4
-
-2
-
-2 3
+![Figure from page 163](figures/fig_p163_auto3.png)
 
 ### Representing problems as graphs
 
@@ -5734,19 +5053,9 @@ $x$ 1 2 3 4 5 6 7 8 9 `succ`($x$) 3 5 7 6 2 2 1 6 3
 
 defines the following graph:
 
-9
+![Figure from page 164](figures/fig_p164_auto1.png)
 
-1 2 3
-
-5
-
-6 7
-
-8
-
-4
-
-Since each node of a successor graph has a unique successor, we can also define a function `succ`($x,k$) that gives the node that we will reach if we begin at node $x$ and walk $k$ steps forward. For example, in the above graph `succ`(4,6) $=$ 2, because we will reach node 2 by walking 6 steps from node 4:
+Since each node of a successor graph has a unique successor, we can also define a function `succ`($x,k$) that gives the node that we will reach if we begin at node $x$ and walk $k$ steps forward. For example, in the above graph `succ`(4,6) $= 2$, because we will reach node 2 by walking 6 steps from node 4:
 
 4 6 2 5 2 5 2
 
@@ -5763,13 +5072,13 @@ Precalculating the values takes $O(n$log$u$) time, because $O$(log$u$) values ar
 
 $x$ 1 2 3 4 5 6 7 8 9 `succ`($x$,1) 3 5 7 6 2 2 1 6 3 `succ`($x$,2) 7 2 1 2 5 5 3 2 7 `succ`($x$,4) 3 2 7 2 5 5 1 2 3 `succ`($x$,8) 7 2 1 2 5 5 3 2 7 $\cdot \cdot \cdot$
 
-After this, any value of `succ`($x,k$) can be calculated by presenting the number of steps $k$ as a sum of powers of two. For example, if we want to calculate the value of `succ`($x$,11), we first form the representation 11 $= 8+2+$1. Using that,
+After this, any value of `succ`($x,k$) can be calculated by presenting the number of steps $k$ as a sum of powers of two. For example, if we want to calculate the value of `succ`($x$,11), we first form the representation 11 $= 8+2+1$. Using that,
 
 `succ`($x,11) =$ `succ`(`succ`(`succ`($x$,8),2),1).
 
 For example, in the previous graph
 
-`succ`(4,11) $=$ `succ`(`succ`(`succ`(4,8),2),1) $=$ 5.
+`succ`(4,11) $=$ `succ`(`succ`(`succ`(4,8),2),1) $= 5$.
 
 Such a representation always consists of $O$(log$k$) parts, so calculating a value of `succ`($x,k$) takes $O$(log$k$) time.
 
@@ -5777,11 +5086,7 @@ Such a representation always consists of $O$(log$k$) parts, so calculating a val
 
 Consider a successor graph that only contains a path that ends in a cycle. We may ask the following questions: if we begin our walk at the starting node, what is the first node in the cycle and how many nodes does the cycle contain? For example, in the graph
 
-6
-
-3 2 1
-
-5 4
+![Figure from page 165](figures/fig_p165_auto1.png)
 
 we begin our walk at node 1, the first node that belongs to the cycle is node 4, and the cycle consists of three nodes (4, 5 and 6). A simple way to detect the cycle is to walk in the graph and keep track of all nodes that have been visited. Once a node is visited for the second time, we can conclude that the node is the first node in the cycle. This method works in $O(n)$ time and also uses $O(n)$ memory. However, there are better algorithms for cycle detection. The time complexity of such algorithms is still $O(n)$, but they only use $O$(1) memory. This is an important improvement if $n$ is large. Next we will discuss Floyd’s algorithm that achieves these properties.
 
@@ -5821,7 +5126,7 @@ while (a != b) {
 }
 ```
 
-$^2_{The idea of the algorithm is mentioned in [46] and attributed to R. W. Floyd; however, it is}$ $^{not known if Floyd actually discovered the algorithm.}$
+> **[2]** The idea of the algorithm is mentioned in [46] and attributed to R. W. Floyd; however, it is not known if Floyd actually discovered the algorithm.
 
 <!-- PAGE 167 -->
 # Chapter 17
@@ -5830,29 +5135,15 @@ $^2_{The idea of the algorithm is mentioned in [46] and attributed to R. W. Floy
 
 In a directed graph, the edges can be traversed in one direction only, so even if the graph is connected, this does not guarantee that there would be a path from a node to another node. For this reason, it is meaningful to define a new concept that requires more than connectivity. A graph is **strongly connected** if there is a path from any node to all other nodes in the graph. For example, in the following picture, the left graph is strongly connected while the right graph is not.
 
-1 2
-
-1 2
-
-3 4
-
-3 4
+![Figure from page 167](figures/fig_p167_auto1.png)
 
 The right graph is not strongly connected because, for example, there is no path from node 2 to node 1. The **strongly connected components** of a graph divide the graph into strongly connected parts that are as large as possible. The strongly connected components form an acyclic **component graph** that represents the deep structure of the original graph. For example, for the graph
 
-3 2 1
-
-7
-
-6 5 4
+![Figure from page 167](figures/fig_p167_auto2.png)
 
 the strongly connected components are as follows:
 
-3 2 1
-
-7
-
-6 5 4
+![Figure from page 167](figures/fig_p167_auto3.png)
 
 <!-- PAGE 168 -->
 The corresponding component graph is as follows:
@@ -5871,19 +5162,13 @@ The first phase of Kosaraju’s algorithm constructs a list of nodes in the orde
 
 1/8 2/7 9/14
 
-3 2 1
-
-10/13
-
-7
-
-6 5 4
+![Figure from page 168](figures/fig_p168_auto1.png)
 
 4/5 3/6 11/12
 
 The notation $x/y$ means that processing the node started at time $x$ and finished at time $y$. Thus, the corresponding list is as follows:
 
-$^1_{According to [1], S. R. Kosaraju invented this algorithm in 1978 but did not publish it. In}$ $^{1981, the same algorithm was rediscovered and published by M. Sharir [57].}$
+> **[1]** According to [1], S. R. Kosaraju invented this algorithm in 1978 but did not publish it. In 1981, the same algorithm was rediscovered and published by M. Sharir [57].
 
 <!-- PAGE 169 -->
 node processing time 4 5 5 6 2 7 1 8 6 12 7 13 3 14
@@ -5894,23 +5179,15 @@ The second phase of the algorithm forms the strongly connected components of the
 
 After reversing the edges, the example graph is as follows:
 
-3 2 1
-
-7
-
-6 5 4
+![Figure from page 169](figures/fig_p169_auto1.png)
 
 After this, the algorithm goes through the list of nodes created by the first search, in *reverse* order. If a node does not belong to a component, the algorithm creates a new component and starts a depth-first search that adds all new nodes found during the search to the new component.
 
 In the example graph, the first component begins at node 3:
 
-3 2 1
+![Figure from page 169](figures/fig_p169_auto2.png)
 
-7
-
-6 5 4
-
-Note that since all edges are reversed, the component does not ”leak” to other parts in the graph.
+Note that since all edges are reversed, the component does not "leak" to other parts in the graph.
 
 <!-- PAGE 170 -->
 
@@ -5982,7 +5259,7 @@ This chapter discusses techniques for processing queries on subtrees and paths o
 
 ### Finding ancestors
 
-The $k$th **ancestor** of a node $x$ in a rooted tree is the node that we will reach if we move $k$ levels up from $x$. Let `ancestor`($x,k$) denote the $k$th ancestor of a node $x$ (or 0 if there is no such an ancestor). For example, in the following tree, `ancestor`(2,1) $=$ 1 and `ancestor`(8,2) $=$ 4.
+The $k$th **ancestor** of a node $x$ in a rooted tree is the node that we will reach if we move $k$ levels up from $x$. Let `ancestor`($x,k$) denote the $k$th ancestor of a node $x$ (or 0 if there is no such an ancestor). For example, in the following tree, `ancestor`(2,1) $= 1$ and `ancestor`(8,2) $= 4$.
 
 ![Figure from page 173](figures/fig_p173_072.png)
 
@@ -6143,9 +5420,9 @@ Another way to solve the problem is based on a tree traversal array$^1$. Once ag
 
 ![Figure from page 178](figures/fig_p178_084.png)
 
-However, we use a different tree traversal array than before: we add each node to the array $always$ when the depth-first search walks through the node, and not only at the first visit. Hence, a node that has $k$ children appears $k +$1 times in the array and there are a total of 2$n-$1 nodes in the array.
+However, we use a different tree traversal array than before: we add each node to the array $always$ when the depth-first search walks through the node, and not only at the first visit. Hence, a node that has $k$ children appears $k+1$ times in the array and there are a total of 2$n-1$ nodes in the array.
 
-$^1_{This lowest common ancestor algorithm was presented in [7]. This technique is sometimes}$ $^{called the Euler tour technique [66].}$
+> **[1]** This lowest common ancestor algorithm was presented in [7]. This technique is sometimes called the Euler tour technique [66].
 
 <!-- PAGE 179 -->
 We store two values in the array: the identifier of the node and the depth of the node in the tree. The following array corresponds to the above tree:
@@ -6189,7 +5466,7 @@ where $c$ is the lowest common ancestor of $a$ and $b$ and `depth`($s$) denotes 
 8
 
 <!-- PAGE 180 -->
-The lowest common ancestor of nodes 5 and 8 is node 2. The depths of the nodes are `depth`(5) $=$ 3, `depth`(8) $=$ 4 and `depth`(2) $=$ 2, so the distance between nodes 5 and 8 is 3$+4-2\cdot 2 =$ 3.
+The lowest common ancestor of nodes 5 and 8 is node 2. The depths of the nodes are `depth`(5) $= 3$, `depth`(8) $= 4$ and `depth`(2) $= 2$, so the distance between nodes 5 and 8 is 3$+4-2\cdot 2 =$ 3.
 
 ## Offline algorithms
 
@@ -6197,7 +5474,7 @@ So far, we have discussed $online$ algorithms for tree queries. Those algorithms
 
 ### Merging data structures
 
-One method to construct an offline algorithm is to perform a depth-first tree traversal and maintain data structures in nodes. At each node $s$, we create a data structure `d`[$s$] that is based on the data structures of the children of $s$. Then, using this data structure, all queries related to $s$ are processed. As an example, consider the following problem: We are given a tree where each node has some value. Our task is to process queries of the form ”calculate the number of nodes with value $x$ in the subtree of node $s$”. For example, in the following tree, the subtree of node 4 contains two nodes whose value is 3.
+One method to construct an offline algorithm is to perform a depth-first tree traversal and maintain data structures in nodes. At each node $s$, we create a data structure `d`[$s$] that is based on the data structures of the children of $s$. Then, using this data structure, all queries related to $s$ are processed. As an example, consider the following problem: We are given a tree where each node has some value. Our task is to process queries of the form "calculate the number of nodes with value $x$ in the subtree of node $s$". For example, in the following tree, the subtree of node 4 contains two nodes whose value is 3.
 
 2
 
@@ -6232,7 +5509,7 @@ It is guaranteed that the above code works in constant time when $a$ and $b$ are
 
 There is also an offline algorithm for processing a set of lowest common ancestor queries$^2$. The algorithm is based on the union-find data structure (see Chapter 15.2), and the benefit of the algorithm is that it is easier to implement than the algorithms discussed earlier in this chapter. The algorithm is given as input a set of pairs of nodes, and it determines for each such pair the lowest common ancestor of the nodes. The algorithm performs a depth-first tree traversal and maintains disjoint sets of nodes. Initially, each node belongs to a separate set. For each set, we also store the highest node in the tree that belongs to the set. When the algorithm visits a node $x$, it goes through all nodes $y$ such that the lowest common ancestor of $x$ and $y$ has to be found. If $y$ has already been visited, the algorithm reports that the lowest common ancestor of $x$ and $y$ is the highest node in the set of $y$. Then, after processing node $x$, the algorithm joins the sets of $x$ and its parent.
 
-$^2_{This algorithm was published by R. E. Tarjan in 1979 [65].}$
+> **[2]** This algorithm was published by R. E. Tarjan in 1979 [65].
 
 <!-- PAGE 182 -->
 For example, suppose that we want to find the lowest common ancestors of node pairs (5,8) and (2,7) in the following tree:
@@ -6268,11 +5545,7 @@ While Eulerian and Hamiltonian paths look like similar concepts at first glance,
 
 An **Eulerian path**$^1$ is a path that goes exactly once through each edge of the graph. For example, the graph
 
-1 2
-
-3
-
-4 5
+![Figure from page 183](figures/fig_p183_auto1.png)
 
 has an Eulerian path from node 2 to node 5:
 
@@ -6294,16 +5567,12 @@ has an Eulerian path from node 2 to node 5:
 
 3.
 
-$^1_{L. Euler studied such paths in 1736 when he solved the famous Königsberg bridge problem.}$ $^{This was the birth of graph theory.}$
+> **[1]** L. Euler studied such paths in 1736 when he solved the famous Königsberg bridge problem. This was the birth of graph theory.
 
 <!-- PAGE 184 -->
 An **Eulerian circuit** is an Eulerian path that starts and ends at the same node. For example, the graph
 
-1 2
-
-3
-
-4 5
+![Figure from page 184](figures/fig_p184_auto1.png)
 
 has an Eulerian circuit that starts and ends at node 1:
 
@@ -6333,11 +5602,7 @@ The existence of Eulerian paths and circuits depends on the degrees of the nodes
 
 In the first case, each Eulerian path is also an Eulerian circuit. In the second case, the odd-degree nodes are the starting and ending nodes of an Eulerian path which is not an Eulerian circuit. For example, in the graph
 
-1 2
-
-3
-
-4 5
+![Figure from page 184](figures/fig_p184_auto2.png)
 
 nodes 1, 3 and 4 have a degree of 2, and nodes 2 and 5 have a degree of 3. Exactly two nodes have an odd degree, so there is an Eulerian path between nodes 2 and 5, but the graph does not contain an Eulerian circuit. In a directed graph, we focus on indegrees and outdegrees of the nodes. A directed graph contains an Eulerian path exactly when all the edges belong to the same connected component and
 
@@ -6348,11 +5613,7 @@ nodes 1, 3 and 4 have a degree of 2, and nodes 2 and 5 have a degree of 3. Exact
 
 In the first case, each Eulerian path is also an Eulerian circuit, and in the second case, the graph contains an Eulerian path that begins at the node whose outdegree is larger and ends at the node whose indegree is larger. For example, in the graph
 
-1 2
-
-3
-
-4 5
+![Figure from page 185](figures/fig_p185_auto1.png)
 
 nodes 1, 3 and 4 have both indegree 1 and outdegree 1, node 2 has indegree 1 and outdegree 2, and node 5 has indegree 2 and outdegree 1. Hence, the graph contains an Eulerian path from node 2 to node 5:
 
@@ -6376,7 +5637,7 @@ nodes 1, 3 and 4 have both indegree 1 and outdegree 1, node 2 has indegree 1 and
 
 **Hierholzer’s algorithm**$^2$ is an efficient method for constructing an Eulerian circuit. The algorithm consists of several rounds, each of which adds new edges to the circuit. Of course, we assume that the graph contains an Eulerian circuit; otherwise Hierholzer’s algorithm cannot find it. First, the algorithm constructs a circuit that contains some (not necessarily all) of the edges of the graph. After this, the algorithm extends the circuit step by step by adding subcircuits to it. The process continues until all edges have been added to the circuit. The algorithm extends the circuit by always finding a node $x$ that belongs to the circuit but has an outgoing edge that is not included in the circuit. The algorithm constructs a new path from node $x$ that only contains edges that are not yet in the circuit. Sooner or later, the path will return to node $x$, which creates a subcircuit. If the graph only contains an Eulerian path, we can still use Hierholzer’s algorithm to find it by adding an extra edge to the graph and removing the edge after the circuit has been constructed. For example, in an undirected graph, we add the extra edge between the two odd-degree nodes. Next we will see how Hierholzer’s algorithm constructs an Eulerian circuit for an undirected graph.
 
-$^2_{The algorithm was published in 1873 after Hierholzer’s death [35].}$
+> **[2]** The algorithm was published in 1873 after Hierholzer’s death [35].
 
 <!-- PAGE 186 -->
 
@@ -6404,11 +5665,7 @@ Now all edges are included in the circuit, so we have successfully constructed a
 
 A **Hamiltonian path** is a path that visits each node of the graph exactly once. For example, the graph
 
-1 2
-
-3
-
-4 5
+![Figure from page 187](figures/fig_p187_auto1.png)
 
 contains a Hamiltonian path from node 1 to node 3:
 
@@ -6459,13 +5716,13 @@ Since there is no efficient way to check if a Hamiltonian path exists, it is cle
 
 ### De Bruijn sequences
 
-A **De Bruijn sequence** is a string that contains every string of length $n$ exactly once as a substring, for a fixed alphabet of $k$ characters. The length of such a string is $k^n + n-$1 characters. For example, when $n =$ 3 and $k =$ 2, an example of a De Bruijn sequence is 0001011100.
+A **De Bruijn sequence** is a string that contains every string of length $n$ exactly once as a substring, for a fixed alphabet of $k$ characters. The length of such a string is $k^n + n-1$ characters. For example, when $n =$ 3 and $k =$ 2, an example of a De Bruijn sequence is 0001011100.
 
-The substrings of this string are all combinations of three bits: 000, 001, 010, 011, 100, 101, 110 and 111. It turns out that each De Bruijn sequence corresponds to an Eulerian path in a graph. The idea is to construct a graph where each node contains a string of $n-$1 characters and each edge adds one character to the string. The following graph corresponds to the above scenario:
+The substrings of this string are all combinations of three bits: 000, 001, 010, 011, 100, 101, 110 and 111. It turns out that each De Bruijn sequence corresponds to an Eulerian path in a graph. The idea is to construct a graph where each node contains a string of $n-1$ characters and each edge adds one character to the string. The following graph corresponds to the above scenario:
 
 ![Figure from page 188](figures/fig_p188_091.png)
 
-An Eulerian path in this graph corresponds to a string that contains all strings of length $n$. The string contains the characters of the starting node and all characters of the edges. The starting node has $n-$1 characters and there are $k^n$ characters in the edges, so the length of the string is $k^n + n-$1.
+An Eulerian path in this graph corresponds to a string that contains all strings of length $n$. The string contains the characters of the starting node and all characters of the edges. The starting node has $n-1$ characters and there are $k^n$ characters in the edges, so the length of the string is $k^n + n-1$.
 
 <!-- PAGE 189 -->
 ## Knight’s tours
@@ -6484,7 +5741,7 @@ A knight’s tour corresponds to a Hamiltonian path in a graph whose nodes repre
 
 In this situation, Warnsdorf’s rule moves the knight to square $a$, because after this choice, there is only a single possible move. The other choices would move the knight to squares where there would be three moves available.
 
-$^3_{This heuristic was proposed in Warnsdorf’s book [69] in 1823. There are also polynomial}$ $^{algorithms for finding knight’s tours [52], but they are more complicated.}$
+> **[3]** This heuristic was proposed in Warnsdorf’s book [69] in 1823. There are also polynomial algorithms for finding knight’s tours [52], but they are more complicated.
 
 <!-- PAGE 190 -->
 <!-- PAGE 191 -->
@@ -6500,68 +5757,22 @@ In this chapter, we focus on the following two problems:
 
 The input for both these problems is a directed, weighted graph that contains two special nodes: the $source$ is a node with no incoming edges, and the $sink$ is a node with no outgoing edges. As an example, we will use the following graph where node 1 is the source and node 6 is the sink:
 
-6
-
-2 3
-
-5
-
-5
-
-3 8
-
-6
-
-1
-
-4
-
-2
-
-4 5
-
-1
+![Example flow network with source node 1 and sink node 6](figures/fig_p191_example_graph.png)
 
 ### Maximum flow
 
 In the **maximum flow** problem, our task is to send as much flow as possible from the source to the sink. The weight of each edge is a capacity that restricts the flow that can go through the edge. In each intermediate node, the incoming and outgoing flow has to be equal. For example, the maximum size of a flow in the example graph is 7. The following picture shows how we can route the flow:
 
-6/6
-
-2 3
-
-3/5
-
-5/5
-
-6
-
-1
-
-3/3 1/8
-
-4/4
-
-2/2
-
-4 5
-
-1/1
+![Maximum flow of size 7 routed through the example network](figures/fig_p191_max_flow.png)
 
 <!-- PAGE 192 -->
-The notation $v/k$ means that a flow of $v$ units is routed through an edge whose capacity is $k$ units. The size of the flow is 7, because the source sends 3$+$4 units of flow and the sink receives 5$+$2 units of flow. It is easy see that this flow is maximum, because the total capacity of the edges leading to the sink is 7.
+The notation $v/k$ means that a flow of $v$ units is routed through an edge whose capacity is $k$ units. The size of the flow is 7, because the source sends 3$+4$ units of flow and the sink receives 5$+2$ units of flow. It is easy see that this flow is maximum, because the total capacity of the edges leading to the sink is 7.
 
 ### Minimum cut
 
 In the **minimum cut** problem, our task is to remove a set of edges from the graph such that there will be no path from the source to the sink after the removal and the total weight of the removed edges is minimum. The minimum size of a cut in the example graph is 7. It suffices to remove the edges 2 $\to$ 3 and 4 $\to$ 5:
 
-![Figure from page 192](figures/fig_p192_094.png)
-
-5
-
-1
-
-4
+![Minimum cut: removing edges 2→3 and 4→5 disconnects source from sink](figures/fig_p192_094.png)
 
 After removing the edges, there will be no path from the source to the sink. The size of the cut is 7, because the weights of the removed edges are 6 and 1. The cut is minimum, because there is no valid way to remove edges from the graph such that their total weight would be less than 7.
 
@@ -6574,186 +5785,30 @@ The **Ford–Fulkerson algorithm** [25] finds the maximum flow in a graph. The a
 <!-- PAGE 193 -->
 The new representation for the example graph is as follows:
 
-6
-
-2 3
-
-0 5
-
-5
-
-0
-
-0 4
-
-3 0 8 0
-
-6
-
-1
-
-2
-
-0 1
-
-0
-
-4 5
-
-0
+![Graph with each original edge paired with a zero-weight reverse edge](figures/fig_p193_reverse_edges.png)
 
 ### Algorithm description
 
 The Ford–Fulkerson algorithm consists of several rounds. On each round, the algorithm finds a path from the source to the sink such that each edge on the path has a positive weight. If there is more than one possible path available, we can choose any of them. For example, suppose we choose the following path:
 
-6
-
-2 3
-
-0 5
-
-5
-
-0
-
-0 4
-
-3 0 8 0
-
-6
-
-1
-
-2
-
-0 1
-
-0
-
-4 5
-
-0
+![First augmenting path 1→2→3→6 highlighted in red with min weight 2](figures/fig_p193_augmenting_path.png)
 
 After choosing the path, the flow increases by $x$ units, where $x$ is the smallest edge weight on the path. In addition, the weight of each edge on the path decreases by $x$ and the weight of each reverse edge increases by $x$. In the above path, the weights of the edges are 5, 6, 8 and 2. The smallest weight is 2, so the flow increases by 2 and the new graph is as follows:
 
-4
-
-2 3
-
-2 5
-
-3
-
-2
-
-0 4
-
-3 0 6 2
-
-6
-
-1
-
-0
-
-0 1
-
-2
-
-4 5
-
-0
+![Graph after augmenting along the first path by 2 units](figures/fig_p193_after_update.png)
 
 The idea is that increasing the flow decreases the amount of flow that can go through the edges in the future. On the other hand, it is possible to cancel flow later using the reverse edges of the graph if it turns out that it would be beneficial to route the flow in another way. The algorithm increases the flow as long as there is a path from the source to the sink through positive-weight edges. In the present example, our next path can be as follows:
 
 <!-- PAGE 194 -->
-4
-
-2 3
-
-2 5
-
-3
-
-2
-
-0 4
-
-3 0 6 2
-
-6
-
-1
-
-0
-
-0 1
-
-2
-
-4 5
-
-0
+![Second augmenting path 1→4→2→3→6 highlighted in red with min weight 3](figures/fig_p194_path2.png)
 
 The minimum edge weight on this path is 3, so the path increases the flow by 3, and the total flow after processing the path is 5. The new graph will be as follows:
 
-1
-
-2 3
-
-3
-
-5 2
-
-2
-
-3 1
-
-0 3 6 2
-
-6
-
-1
-
-0
-
-3 1
-
-2
-
-4 5
-
-0
+![Graph after augmenting along the second path by 3 units (total flow = 5)](figures/fig_p194_path3.png)
 
 We still need two more rounds before reaching the maximum flow. For example, we can choose the paths 1 $\to 2 \to 3 \to$ 6 and 1 $\to 4 \to 5 \to 3 \to$ 6. Both paths increase the flow by 1, and the final graph is as follows:
 
-0
-
-2 3
-
-6 0
-
-2
-
-3
-
-5 0
-
-6
-
-0 3 7 1
-
-1
-
-0
-
-4 0
-
-2
-
-4 5
-
-1
+![Graph after all four augmenting rounds — maximum flow is 7](figures/fig_p194_final_flow.png)
 
 It is not possible to increase the flow anymore, because there is no path from the source to the sink with positive edge weights. Hence, the algorithm terminates and the maximum flow is 7.
 
@@ -6768,37 +5823,11 @@ The **Edmonds–Karp algorithm** [18] chooses each path so that the number of ed
 
 It turns out that once the Ford–Fulkerson algorithm has found a maximum flow, it has also determined a minimum cut. Let $A$ be the set of nodes that can be reached from the source using positive-weight edges. In the example graph, $A$ contains nodes 1, 2 and 4:
 
-0
-
-2 3
-
-6 0
-
-2
-
-3
-
-5 0
-
-0 3 7 1
-
-6
-
-1
-
-0
-
-4 0
-
-2
-
-4 5
-
-1
+![Reachability set A (shaded) of nodes 1, 2, 4 after Ford–Fulkerson terminates](figures/fig_p195_min_cut_A.png)
 
 Now the minimum cut consists of the edges of the original graph that start at some node in $A$, end at some node outside $A$, and whose capacity is fully used in the maximum flow. In the above graph, such edges are 2 $\to$ 3 and 4 $\to$ 5, that correspond to the minimum cut 6$+1 =$ 7. Why is the flow produced by the algorithm maximum and why is the cut minimum? The reason is that a graph cannot contain a flow whose size is larger than the weight of any cut of the graph. Hence, always when a flow and a cut are equally large, they are a maximum flow and a minimum cut. Let us consider any cut of the graph such that the source belongs to $A$, the sink belongs to $B$ and there are some edges between the sets:
 
-$A$ $B$
+![Schematic cut between sets A (containing source) and B (containing sink)](figures/fig_p195_cut_illustration.png)
 
 <!-- PAGE 196 -->
 The size of the cut is the sum of the edges that go from $A$ to $B$. This is an upper bound for the flow in the graph, because the flow has to proceed from $A$ to $B$. Thus, the size of a maximum flow is smaller than or equal to the size of any cut in the graph. On the other hand, the Ford–Fulkerson algorithm produces a flow whose size is *exactly* as large as the size of a cut in the graph. Thus, the flow has to be a maximum flow and the cut has to be a minimum cut.
@@ -6811,15 +5840,11 @@ Many graph problems can be solved by reducing them to the maximum flow problem. 
 
 We will first focus on the problem of finding the maximum number of **edge- disjoint paths** from the source to the sink. This means that we should construct a set of paths such that each edge appears in at most one path. For example, consider the following graph:
 
-![Figure from page 196](figures/fig_p196_095.png)
-
-1
+![Directed graph from source 1 to sink 6 used as the edge-disjoint paths example](figures/fig_p196_095.png)
 
 In this graph, the maximum number of edge-disjoint paths is 2. We can choose the paths 1 $\to 2 \to 4 \to 3 \to$ 6 and 1 $\to 4 \to 5 \to$ 6 as follows:
 
-![Figure from page 196](figures/fig_p196_096.png)
-
-1
+![Same graph with two edge-disjoint paths highlighted from source to sink](figures/fig_p196_096.png)
 
 It turns out that the maximum number of edge-disjoint paths equals the maximum flow of the graph, assuming that the capacity of each edge is one. After the maximum flow has been constructed, the edge-disjoint paths can be found greedily by following paths from the source to the sink.
 
@@ -6830,9 +5855,7 @@ Let us now consider another problem: finding the maximum number of **node- disjo
 <!-- PAGE 197 -->
 for the source and sink, may appear in at most one path. The number of nodedisjoint paths may be smaller than the number of edge-disjoint paths. For example, in the previous graph, the maximum number of node-disjoint paths is 1:
 
-![Figure from page 197](figures/fig_p197_097.png)
-
-1
+![Maximum node-disjoint path (only one) from the source to the sink](figures/fig_p197_097.png)
 
 We can reduce also this problem to the maximum flow problem. Since each node can appear in at most one path, we have to limit the flow that goes through the nodes. A standard method for this is to divide each node into two nodes such that the first node has the incoming edges of the original node, the second node has the outgoing edges of the original node, and there is a new edge from the first node to the second node. In our example, the graph becomes as follows:
 
@@ -7040,7 +6063,7 @@ There are many *conjectures* involving primes. Most people think that the conjec
 
 • **Goldbach’s conjecture**: Each even integer $n >$ 2 can be represented as a sum $n = a+ b$ so that both $a$ and $b$ are primes.
 
-• **Twin prime conjecture**: There is an infinite number of pairs of the form {$p, p +$2}, where both $p$ and $p +$2 are primes.
+• **Twin prime conjecture**: There is an infinite number of pairs of the form {$p, p+2$}, where both $p$ and $p+2$ are primes.
 
 • **Legendre’s conjecture**: There is always a prime between numbers $n^2$
 
@@ -7108,7 +6131,7 @@ In fact, the algorithm is more efficient, because the inner loop will be execute
 
 ### Euclid’s algorithm
 
-The **greatest common divisor** of numbers $a$ and $b$, gcd($a,b$), is the greatest number that divides both $a$ and $b$, and the **least common multiple** of $a$ and $b$, lcm($a,b$), is the smallest number that is divisible by both $a$ and $b$. For example, gcd(24,36) $=$ 12 and lcm(24,36) $=$ 72. The greatest common divisor and the least common multiple are connected as follows:
+The **greatest common divisor** of numbers $a$ and $b$, gcd($a,b$), is the greatest number that divides both $a$ and $b$, and the **least common multiple** of $a$ and $b$, lcm($a,b$), is the smallest number that is divisible by both $a$ and $b$. For example, gcd(24,36) $= 12$ and lcm(24,36) $= 72$. The greatest common divisor and the least common multiple are connected as follows:
 
 lcm($a,b) =$ $ab$ gcd($a,b$)
 
@@ -7262,7 +6285,7 @@ A **Diophantine equation** is an equation of the form
 
 $ax+ by = c$,
 
-where $a$, $b$ and $c$ are constants and the values of $x$ and $y$ should be found. Each number in the equation has to be an integer. For example, one solution for the equation 5$x+2y =$ 11 is $x =$ 3 and $y = -$2. We can efficiently solve a Diophantine equation by using Euclid’s algorithm. It turns out that we can extend Euclid’s algorithm so that it will find numbers $x$ and $y$ that satisfy the following equation:
+where $a$, $b$ and $c$ are constants and the values of $x$ and $y$ should be found. Each number in the equation has to be an integer. For example, one solution for the equation 5$x+2y =$ 11 is $x =$ 3 and $y = -2$. We can efficiently solve a Diophantine equation by using Euclid’s algorithm. It turns out that we can extend Euclid’s algorithm so that it will find numbers $x$ and $y$ that satisfy the following equation:
 
 $ax+ by =$ gcd($a,b$)
 
@@ -7270,13 +6293,13 @@ A Diophantine equation can be solved if $c$ is divisible by gcd($a,b$), and othe
 
 39$x+15y =$ 12
 
-The equation can be solved, because gcd(39,15) $=$ 3 and 3 $|$ 12. When Euclid’s algorithm calculates the greatest common divisor of 39 and 15, it produces the following sequence of function calls:
+The equation can be solved, because gcd(39,15) $= 3$ and 3 $|$ 12. When Euclid’s algorithm calculates the greatest common divisor of 39 and 15, it produces the following sequence of function calls:
 
-gcd(39,15) $=$ gcd(15,9) $=$ gcd(9,6) $=$ gcd(6,3) $=$ gcd(3,0) $=$ 3
+gcd(39,15) $=$ gcd(15,9) $=$ gcd(9,6) $=$ gcd(6,3) $=$ gcd(3,0) $= 3$
 
 This corresponds to the following equations:
 
-39$-2\cdot$ 15 $=$ 9 15$-1\cdot$ 9 $=$ 6 9$-1\cdot$ 6 $=$ 3
+39$-2\cdot$ 15 $= 9$ 15$-1\cdot$ 9 $= 6$ 9$-1\cdot$ 6 $= 3$
 
 Using these equations, we can derive
 
@@ -7286,7 +6309,7 @@ and by multiplying this by 4, the result is
 
 39$\cdot 8+15\cdot (-20) =$ 12,
 
-so a solution to the equation is $x =$ 8 and $y = -$20. A solution to a Diophantine equation is not unique, because we can form an infinite number of solutions if we know one solution. If a pair ($x, y$) is a solution, then also all pairs
+so a solution to the equation is $x =$ 8 and $y = -2$0. A solution to a Diophantine equation is not unique, because we can form an infinite number of solutions if we know one solution. If a pair ($x, y$) is a solution, then also all pairs
 
 ($x+$ $kb$ gcd($a,b), y-$ $ka$ gcd($a,b$))
 
@@ -7390,19 +6413,19 @@ Hence, Wilson's theorem can be used to find out whether a number is prime. Howev
 
 **Combinatorics** studies methods for counting combinations of objects. Usually, the goal is to find a way to count the combinations efficiently without generating each combination separately. As an example, consider the problem of counting the number of ways to represent an integer $n$ as a sum of positive integers. For example, there are 8 representations for 4:
 
-• 2$+$2
+• 2$+2$
 
-• 1$+1+1+$1
+• 1$+1+1+1$
 
-• 3$+$1
+• 3$+1$
 
-• 1$+1+$2
+• 1$+1+2$
 
-• 1$+$3
+• 1$+3$
 
-• 1$+2+$1
+• 1$+2+1$
 
-• 2$+1+$1
+• 2$+1+1$
 
 • 4
 
@@ -7416,16 +6439,16 @@ $f (0)+ f (1)+\cdot \cdot \cdot + f (n-1)$ $n >$ 0
 
 The base case is $f (0) =$ 1, because the empty sum represents the number 0. Then, if $n >$ 0, we consider all ways to choose the first number of the sum. If the first number is $k$, there are $f (n-k)$ representations for the remaining part of the sum. Thus, we calculate the sum of all values of the form $f (n-k)$ where $k < n$. The first values for the function are:
 
-$f$ (0) $=$ 1 $f$ (1) $=$ 1 $f$ (2) $=$ 2 $f$ (3) $=$ 4 $f$ (4) $=$ 8
+$f$ (0) $= 1$ $f$ (1) $= 1$ $f$ (2) $= 2$ $f$ (3) $= 4$ $f$ (4) $= 8$
 
 Sometimes, a recursive formula can be replaced with a closed-form formula. In this problem, $f (n) = 2^{n-1}$,
 
 <!-- PAGE 218 -->
-which is based on the fact that there are $n-$1 possible positions for +-signs in the sum and we can choose any subset of them.
+which is based on the fact that there are $n-1$ possible positions for +-signs in the sum and we can choose any subset of them.
 
 ## Binomial coefficients
 
-The **binomial coefficient** $¡^n$ $^k$ $¢$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $¡^5$ $^3$ $¢$ $=$ 10, because the set {1,2,3,4,5} has 10 subsets of 3 elements:
+The **binomial coefficient** $¡^n$ $^k$ $¢$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $¡^5$ $^3$ $¢$ $= 10$, because the set {1,2,3,4,5} has 10 subsets of 3 elements:
 
 {1,2,3},{1,2,4},{1,2,5},{1,3,4},{1,3,5},{1,4,5},{2,3,4},{2,3,5},{2,4,5},{3,4,5}
 
@@ -7437,11 +6460,11 @@ $Ã$ $n$ $k$
 
 $!$
 
-$Ã$ $n-$1 $k -$1
+$Ã$ $n-1$ $k -1$
 
 $!$
 
-$Ã$ $n-$1 $k$
+$Ã$ $n-1$ $k$
 
 $!$
 
@@ -7449,7 +6472,7 @@ $=$
 
 $+$
 
-The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -$1 elements from $n-$1 elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-$1 elements. The base cases for the recursion are $Ã$ $n$ 0
+The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -1$ elements from $n-1$ elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-1$ elements. The base cases for the recursion are $Ã$ $n$ 0
 
 $!$
 
@@ -7459,7 +6482,7 @@ $!$
 
 $=$
 
-$=$ 1,
+$= 1$,
 
 because there is always exactly one way to construct an empty subset and a subset that contains all the elements.
 
@@ -7526,7 +6549,7 @@ In this scenario, the answer is directly the binomial coefficient $\binom{n}{k}$
 
 ![15 configurations of 2 balls in 5 boxes with any box able to hold multiple balls](figures/fig_p219_scenario2.png)
 <!-- PAGE 220 -->
-The process of placing the balls in the boxes can be represented as a string that consists of symbols ”o” and ”$\to$ ”. Initially, assume that we are standing at the leftmost box. The symbol ”o” means that we place a ball in the current box, and the symbol ”$\to$ ” means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol ”o” and $n-$1 times the symbol ”$\to$ ”. For example, the upper-right solution in the above picture corresponds to the string ”$\to \to$ o $\to$ o $\to$ ”. Thus, the number of solutions is $¡^{k+n-1}$ $^k$ $¢$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:
+The process of placing the balls in the boxes can be represented as a string that consists of symbols "o" and "$\to$ ". Initially, assume that we are standing at the leftmost box. The symbol "o" means that we place a ball in the current box, and the symbol "$\to$ " means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol "o" and $n-1$ times the symbol "$\to$ ". For example, the upper-right solution in the above picture corresponds to the string "$\to \to$ o $\to$ o $\to$ ". Thus, the number of solutions is $¡^{k+n-1}$ $^k$ $¢$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:
 
 ![Figure from page 220](figures/fig_p220_117.png)
 
@@ -7534,7 +6557,7 @@ The process of placing the balls in the boxes can be represented as a string tha
 
 ![Figure from page 220](figures/fig_p220_119.png)
 
-In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k +$1 such boxes and $k +$1 positions for them. Thus, using the formula of scenario 2, the number of solutions is $¡^{n-k+1}$ $^{n-2k+1}$ $¢$ .
+In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k+1$ such boxes and $k+1$ positions for them. Thus, using the formula of scenario 2, the number of solutions is $¡^{n-k+1}$ $^{n-2k+1}$ $¢$ .
 
 ### Multinomial coefficients
 
@@ -7579,7 +6602,7 @@ $C_n =$ $^{n-1}$ $X$
 
 $^{i=0}$ $C_iC_n^-_i^-_1$.
 
-The sum goes through the ways to divide the expression into two parts such that both parts are valid expressions and the first part is as short as possible but not empty. For any $i$, the first part contains $i +$1 pairs of parentheses and the number of expressions is the product of the following values:
+The sum goes through the ways to divide the expression into two parts such that both parts are valid expressions and the first part is as short as possible but not empty. For any $i$, the first part contains $i+1$ pairs of parentheses and the number of expressions is the product of the following values:
 
 • $C_i$: the number of ways to construct an expression using the parentheses of the first part, not counting the outermost parentheses
 
@@ -7595,7 +6618,7 @@ $Ã$ 2$n$ $n$
 
 $!$
 
-$C_n =$ 1 $n+$1
+$C_n =$ 1 $n+1$
 
 The formula can be explained as follows: There are a total of $¡^{2n}$ $^n$ $¢$ ways to construct a (not necessarily valid) parenthesis expression that contains $n$ left parentheses and $n$ right parentheses. Let us calculate the number of such expressions that are $not$ valid. If a parenthesis expression is not valid, it has to contain a prefix where the number of right parentheses exceeds the number of left parentheses. The
 
@@ -7671,7 +6694,7 @@ $$n! - |X_1 \cup X_2 \cup \cdots \cup X_n|,$$
 <!-- PAGE 224 -->
 so it suffices to calculate the size of the union. Using inclusion-exclusion, this reduces to calculating sizes of intersections which can be done efficiently. For example, when $n =$ 3, the size of $|X_1 \cup X_2 \cup X_3|$ is
 
-$|X_1|+|X_2|+|X_3|-|X_1 \cap X_2|-|X_1 \cap X_3|-|X_2 \cap X_3|+|X_1 \cap X_2 \cap X_3|$ $=$ 2$+2+2-1-1-1+$1 $=$ 4,
+$|X_1|+|X_2|+|X_3|-|X_1 \cap X_2|-|X_1 \cap X_3|-|X_2 \cap X_3|+|X_1 \cap X_2 \cap X_3|$ $= 2$$+2+2-1-1-1+1$ $= 4$,
 
 so the number of solutions is 3!$-4 =$ 2. It turns out that the problem can also be solved without using inclusionexclusion. Let $f (n)$ denote the number of derangements for {1,2,...,$n$}. We can use the following recursive formula:
 
@@ -7687,7 +6710,7 @@ $$ $$ $$
 
 ($n-1)(f (n-2)+ f (n-1)$) $n >$ 2
 
-The formula can be derived by considering the possibilities how the element 1 changes in the derangement. There are $n-$1 ways to choose an element $x$ that replaces the element 1. In each such choice, there are two options: *Option 1:* We also replace the element $x$ with the element 1. After this, the remaining task is to construct a derangement of $n-$2 elements. *Option 2:* We replace the element $x$ with some other element than 1. Now we have to construct a derangement of $n-$1 element, because we cannot replace the element $x$ with the element 1, and all other elements must be changed.
+The formula can be derived by considering the possibilities how the element 1 changes in the derangement. There are $n-1$ ways to choose an element $x$ that replaces the element 1. In each such choice, there are two options: *Option 1:* We also replace the element $x$ with the element 1. After this, the remaining task is to construct a derangement of $n-2$ elements. *Option 2:* We replace the element $x$ with some other element than 1. Now we have to construct a derangement of $n-1$ element, because we cannot replace the element $x$ with the element 1, and all other elements must be changed.
 
 ## Burnside’s lemma
 
@@ -7735,29 +6758,17 @@ Next we will see how Cayley's formula can be derived using Prüfer codes.
 <!-- PAGE 226 -->
 ### Prüfer code
 
-A **Prüfer code** is a sequence of $n-$2 numbers that describes a labeled tree. The code is constructed by following a process that removes $n-$2 leaves from the tree. At each step, the leaf with the smallest label is removed, and the label of its only neighbor is added to the code. For example, let us calculate the Prüfer code of the following graph:
+A **Prüfer code** is a sequence of $n-2$ numbers that describes a labeled tree. The code is constructed by following a process that removes $n-2$ leaves from the tree. At each step, the leaf with the smallest label is removed, and the label of its only neighbor is added to the code. For example, let us calculate the Prüfer code of the following graph:
 
-1 2
-
-5
-
-3 4
+![Figure from page 226](figures/fig_p226_auto1.png)
 
 First we remove node 1 and add node 4 to the code:
 
-2
-
-5
-
-3 4
+![Figure from page 226](figures/fig_p226_auto2.png)
 
 Then we remove node 3 and add node 4 to the code:
 
-2
-
-5
-
-4
+![Figure from page 226](figures/fig_p226_auto3.png)
 
 Finally we remove node 4 and add node 2 to the code:
 
@@ -7980,13 +6991,7 @@ $$\begin{bmatrix} f(n) \\ f(n+1) \\ \vdots \\ f(n+k-1) \end{bmatrix} = X^n \cdot
 
 The powers of an adjacency matrix of a graph have an interesting property. When $V$ is an adjacency matrix of an unweighted graph, the matrix $V^n$ contains the numbers of paths of $n$ edges between the nodes in the graph. For example, for the graph
 
-2 3
-
-1
-
-5 6
-
-4
+![Figure from page 232](figures/fig_p232_auto1.png)
 
 the adjacency matrix is
 
@@ -8095,7 +7100,7 @@ $$\det\left(\begin{bmatrix} n-1 & -1 & \cdots & -1 \\ -1 & n-1 & \cdots & -1 \\ 
 
 A **probability** is a real number between 0 and 1 that indicates how probable an event is. If an event is certain to happen, its probability is 1, and if an event is impossible, its probability is 0. The probability of an event is denoted $P(\cdot \cdot \cdot )$ where the three dots describe the event. For example, when throwing a dice, the outcome is an integer between 1 and 6, and the probability of each outcome is 1/6. For example, we can calculate the following probabilities:
 
-• $P$(”the outcome is 4”) $=$ 1/6 • $P$(”the outcome is not 6”) $=$ 5/6 • $P$(”the outcome is even”) $=$ 1/2
+• $P$("the outcome is 4") $= 1$/6 • $P$("the outcome is not 6") $= 5$/6 • $P$("the outcome is even") $= 1$/2
 
 ### Calculation
 
@@ -8124,7 +7129,7 @@ Another way to calculate the probability is to simulate the process that generat
 
 51 $\cdot$  2
 
-50 $=$ 1 425.
+50 $= 1$ 425.
 
 ### Events
 
@@ -8136,7 +7141,7 @@ where $X$ contains all possible outcomes and $A$ is a subset of outcomes. For ex
 
 $X =$ {1,2,3,4,5,6}.
 
-Now, for example, the event ”the outcome is even” corresponds to the set
+Now, for example, the event "the outcome is even" corresponds to the set
 
 $A =$ {2,4,6}.
 
@@ -8144,17 +7149,17 @@ Each outcome $x$ is assigned a probability $p(x)$. Then, the probability $P(A)$ 
 
 $^{x\in A}$ $p(x)$.
 
-For example, when throwing a dice, $p(x) =$ 1/6 for each outcome $x$, so the probability of the event ”the outcome is even” is
+For example, when throwing a dice, $p(x) =$ 1/6 for each outcome $x$, so the probability of the event "the outcome is even" is
 
 $p(2)+ p(4)+ p(6) =$ 1/2.
 
 The total probability of the outcomes in $X$ must be 1, i.e., $P(X) =$ 1. Since the events in probability theory are sets, we can manipulate them using standard set operations:
 
-• The **complement** ¯$A$ means ”$A$ does not happen”. For example, when throwing a dice, the complement of $A =$ {2,4,6} is ¯$A =$ {1,3,5}.
+• The **complement** ¯$A$ means "$A$ does not happen". For example, when throwing a dice, the complement of $A =$ {2,4,6} is ¯$A =$ {1,3,5}.
 
-• The **union** $A \cup B$ means ”$A$ or $B$ happen”. For example, the union of $A =$ {2,5} and $B =$ {4,5,6} is $A \cup B =$ {2,4,5,6}.
+• The **union** $A \cup B$ means "$A$ or $B$ happen". For example, the union of $A =$ {2,5} and $B =$ {4,5,6} is $A \cup B =$ {2,4,5,6}.
 
-• The **intersection** $A \cap B$ means ”$A$ and $B$ happen”. For example, the intersection of $A =$ {2,5} and $B =$ {4,5,6} is $A \cap B =$ {5}.
+• The **intersection** $A \cap B$ means "$A$ and $B$ happen". For example, the intersection of $A =$ {2,5} and $B =$ {4,5,6} is $A \cap B =$ {5}.
 
 <!-- PAGE 237 -->
 ### Complement
@@ -8175,11 +7180,11 @@ $P(A \cup B) = P(A)+ P(B)-P(A \cap B)$.
 
 For example, when throwing a dice, the union of the events
 
-$A =$ ”the outcome is even”
+$A =$ "the outcome is even"
 
-and $B =$ ”the outcome is less than 4”
+and $B =$ "the outcome is less than 4"
 
-is $A \cup B =$ ”the outcome is even or less than 4”,
+is $A \cup B =$ "the outcome is even or less than 4",
 
 and its probability is
 
@@ -8218,15 +7223,15 @@ $P(A \cap B) = P(A)P(B)$.
 
 For example, when drawing a card from a deck, the events
 
-$A =$ ”the suit is clubs”
+$A =$ "the suit is clubs"
 
 and
 
-$B =$ ”the value is four”
+$B =$ "the value is four"
 
 are independent. Hence the event
 
-$A \cap B =$ ”the card is the four of clubs”
+$A \cap B =$ "the card is the four of clubs"
 
 happens with probability
 
@@ -8236,7 +7241,7 @@ $P(A \cap B) = P(A)P(B) = 1/4\cdot 1/13 =$ 1/52.
 
 A **random variable** is a value that is generated by a random process. For example, when throwing two dice, a possible random variable is
 
-$X =$ ”the sum of the outcomes”.
+$X =$ "the sum of the outcomes".
 
 For example, if the outcomes are [4,6] (meaning that we first throw a four and then a six), then the value of $X$ is 10. We denote $P(X = x)$ the probability that the value of a random variable $X$ is $x$. For example, when throwing two dice, $P(X = 10) =$ 3/36, because the total number of outcomes is 36 and there are three possible ways to obtain the sum 10: [4,6], [5,5] and [6,4].
 
@@ -8261,15 +7266,15 @@ Let us now consider a problem where $n$ balls are randomly placed in $n$ boxes, 
 
 In this case, the expected number of empty boxes is
 
-0$+0+1+$1
+0$+0+1+1$
 
-4 $=$ 1
+4 $= 1$
 
 2.
 
 In the general case, the probability that a single box is empty is
 
-$³n-$1
+$³n-1$
 
 $´^n$ ,
 
@@ -8277,7 +7282,7 @@ $n$
 
 because no ball should be placed in it. Hence, using linearity, the expected number of empty boxes is
 
-$n\cdot$ $³n-$1
+$n\cdot$ $³n-1$
 
 $´^n$ .
 
@@ -8396,7 +7401,7 @@ Our next problem is to $verify$ if $AB = C$ holds when $A, B$ and $C$ are matric
 
 whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$.
 
-$^1_{In 1961, C. A. R. Hoare published two algorithms that are efficient on average: quicksort}$ $^{[36] for sorting arrays and quickselect [37] for finding order statistics.}$ $^2_{R. M. Freivalds published this algorithm in 1977 [26], and it is sometimes called Freivalds’}$ $^{algorithm.}$
+> **[1]** In 1961, C. A. R. Hoare published two algorithms that are efficient on average: quicksort [36] for sorting arrays and quickselect [37] for finding order statistics.> **[2]** R. M. Freivalds published this algorithm in 1977 [26], and it is sometimes called Freivalds’ algorithm.
 
 <!-- PAGE 243 -->
 The time complexity of the algorithm is $O(n^2)$, because we can calculate the matrices $ABX$ and $CX$ in $O(n^2)$ time. We can calculate the matrix $ABX$ efficiently by using the representation $A(BX)$, so only two multiplications of $n\times n$ and $n\times$ 1 size matrices are needed. The drawback of the algorithm is that there is a small chance that the algorithm makes a mistake when it reports that $AB = C$. For example,
@@ -8537,7 +7542,7 @@ In this case, the heap with 10 sticks is the only heap that has a one bit at the
                                     0011
 ```
 
-$^1_{The optimal strategy for nim was published in 1901 by C. L. Bouton [10].}$
+> **[1]** The optimal strategy for nim was published in 1901 by C. L. Bouton [10].
 
 <!-- PAGE 248 -->
 The new size of the heap has to be 10$⊕3 =$ 9, so we will remove just one stick. After this, the state will be [9,12,5], which is a losing state:
@@ -8584,10 +7589,10 @@ The **Grundy number** of a game state is
 
 mex({$g_1, g_2,..., g_n$}),
 
-$^2_{The theorem was independently discovered by R. Sprague [61] and P. M. Grundy [31].}$
+> **[2]** The theorem was independently discovered by R. Sprague [61] and P. M. Grundy [31].
 
 <!-- PAGE 249 -->
-where $g_1, g_2,..., g_n$ are the Grundy numbers of the states to which we can move, and the mex function gives the smallest nonnegative number that is not in the set. For example, mex({0,1,3}) $=$ 2. If there are no possible moves in a state, its Grundy number is 0, because mex($;) =$ 0. For example, in the state graph
+where $g_1, g_2,..., g_n$ are the Grundy numbers of the states to which we can move, and the mex function gives the smallest nonnegative number that is not in the set. For example, mex({0,1,3}) $= 2$. If there are no possible moves in a state, its Grundy number is 0, because mex($;) =$ 0. For example, in the state graph
 
 ![Figure from page 249](figures/fig_p249_126.png)
 
@@ -8601,7 +7606,7 @@ the Grundy numbers are as follows:
 
 2
 
-The Grundy number of a losing state is 0, and the Grundy number of a winning state is a positive number. The Grundy number of a state corresponds to the number of sticks in a nim heap. If the Grundy number is 0, we can only move to states whose Grundy numbers are positive, and if the Grundy number is $x >$ 0, we can move to states whose Grundy numbers include all numbers 0,1,...,$x-$1. As an example, consider a game where the players move a figure in a maze. Each square in the maze is either floor or wall. On each turn, the player has to move the figure some number of steps left or up. The winner of the game is the player who makes the last move. The following picture shows a possible initial state of the game, where @ denotes the figure and * denotes a square where it can move.
+The Grundy number of a losing state is 0, and the Grundy number of a winning state is a positive number. The Grundy number of a state corresponds to the number of sticks in a nim heap. If the Grundy number is 0, we can only move to states whose Grundy numbers are positive, and if the Grundy number is $x >$ 0, we can move to states whose Grundy numbers include all numbers 0,1,...,$x-1$. As an example, consider a game where the players move a figure in a maze. Each square in the maze is either floor or wall. On each turn, the player has to move the figure some number of steps left or up. The winner of the game is the player who makes the last move. The following picture shows a possible initial state of the game, where @ denotes the figure and * denotes a square where it can move.
 
 ![Figure from page 249](figures/fig_p249_129.png)
 
@@ -8635,15 +7640,15 @@ where $n$ is the number of possible moves and
 
 $g_k = a_{k,1} ⊕a_{k,2} ⊕...⊕a_{k,m}$,
 
-where move $k$ generates subgames with Grundy numbers $a_{k,1},a_{k,2},...,a_{k,m}$. An example of such a game is **Grundy’s game**. Initially, there is a single heap that contains $n$ sticks. On each turn, the player chooses a heap and divides it into two nonempty heaps such that the heaps are of different size. The player who makes the last move wins the game. Let $f (n)$ be the Grundy number of a heap that contains $n$ sticks. The Grundy number can be calculated by going through all ways to divide the heap into two heaps. For example, when $n =$ 8, the possibilities are 1$+7, 2+$6 and 3$+$5, so
+where move $k$ generates subgames with Grundy numbers $a_{k,1},a_{k,2},...,a_{k,m}$. An example of such a game is **Grundy’s game**. Initially, there is a single heap that contains $n$ sticks. On each turn, the player chooses a heap and divides it into two nonempty heaps such that the heaps are of different size. The player who makes the last move wins the game. Let $f (n)$ be the Grundy number of a heap that contains $n$ sticks. The Grundy number can be calculated by going through all ways to divide the heap into two heaps. For example, when $n =$ 8, the possibilities are 1$+7, 2+6$ and 3$+5$, so
 
 $f (8) =$ mex({$f (1)⊕f (7), f (2)⊕f (6), f (3)⊕f$ (5)}).
 
 In this game, the value of $f (n)$ is based on the values of $f (1),..., f (n-1)$. The base cases are $f (1) = f (2) =$ 0, because it is not possible to divide the heaps of 1 and 2 sticks. The first Grundy numbers are:
 
-$f$ (1) $=$ 0 $f$ (2) $=$ 0 $f$ (3) $=$ 1 $f$ (4) $=$ 0 $f$ (5) $=$ 2 $f$ (6) $=$ 1 $f$ (7) $=$ 0 $f$ (8) $=$ 2
+$f$ (1) $= 0$ $f$ (2) $= 0$ $f$ (3) $= 1$ $f$ (4) $= 0$ $f$ (5) $= 2$ $f$ (6) $= 1$ $f$ (7) $= 0$ $f$ (8) $= 2$
 
-The Grundy number for $n =$ 8 is 2, so it is possible to win the game. The winning move is to create heaps 1$+$7, because $f (1)⊕f (7) =$ 0.
+The Grundy number for $n =$ 8 is 2, so it is possible to win the game. The winning move is to create heaps 1$+7$, because $f (1)⊕f (7) =$ 0.
 
 <!-- PAGE 252 -->
 <!-- PAGE 253 -->
@@ -8655,7 +7660,7 @@ This chapter deals with efficient algorithms for string processing. Many string 
 
 ### String terminology
 
-Throughout the chapter, we assume that zero-based indexing is used in strings. Thus, a string `s` of length $n$ consists of characters `s`[0],`s`[1],...,`s`[$n-$1]. The set of characters that may appear in strings is called an **alphabet**. For example, the alphabet {`A`,`B`,...,`Z`} consists of the capital letters of English. A **substring** is a sequence of consecutive characters in a string. We use the notation `s`[$a...b$] to refer to a substring of `s` that begins at position $a$ and ends at position $b$. A string of length $n$ has $n(n +1)$/2 substrings. For example, the substrings of `ABCD` are `A`, `B`, `C`, `D`, `AB`, `BC`, `CD`, `ABC`, `BCD` and `ABCD`. A **subsequence** is a sequence of (not necessarily consecutive) characters in a string in their original order. A string of length $n$ has 2$^n -$1 subsequences. For example, the subsequences of `ABCD` are `A`, `B`, `C`, `D`, `AB`, `AC`, `AD`, `BC`, `BD`, `CD`, `ABC`, `ABD`,
+Throughout the chapter, we assume that zero-based indexing is used in strings. Thus, a string `s` of length $n$ consists of characters `s`[0],`s`[1],...,`s`[$n-1$]. The set of characters that may appear in strings is called an **alphabet**. For example, the alphabet {`A`,`B`,...,`Z`} consists of the capital letters of English. A **substring** is a sequence of consecutive characters in a string. We use the notation `s`[$a...b$] to refer to a substring of `s` that begins at position $a$ and ends at position $b$. A string of length $n$ has $n(n +1)$/2 substrings. For example, the substrings of `ABCD` are `A`, `B`, `C`, `D`, `AB`, `BC`, `CD`, `ABC`, `BCD` and `ABCD`. A **subsequence** is a sequence of (not necessarily consecutive) characters in a string in their original order. A string of length $n$ has 2$^n-1$ subsequences. For example, the subsequences of `ABCD` are `A`, `B`, `C`, `D`, `AB`, `AC`, `AD`, `BC`, `BD`, `CD`, `ABC`, `ABD`,
 
 ```cpp
 ACD, BCD and ABCD.
@@ -8717,7 +7722,7 @@ A **hash value** of a string is a number that is calculated from the characters 
 
 (`s`[0]$A^{n-1} +$`s`[1]$A^{n-2} +\cdot \cdot \cdot +$`s`[$n-1]A^0$) mod $B$,
 
-where $s[0],s[1],...,s[n-$1] are interpreted as the codes of the characters of `s`, and $A$ and $B$ are pre-chosen constants. For example, the codes of the characters of `ALLEY` are:
+where $s[0],s[1],...,s[n-1$] are interpreted as the codes of the characters of `s`, and $A$ and $B$ are pre-chosen constants. For example, the codes of the characters of `ALLEY` are:
 
 ```cpp
                             A
@@ -8731,7 +7736,7 @@ where $s[0],s[1],...,s[n-$1] are interpreted as the codes of the characters of `
 
 Thus, if $A =$ 3 and $B =$ 97, the hash value of `ALLEY` is
 
-(65$\cdot 3^4 +76\cdot 3^3 +76\cdot 3^2 +69\cdot 3^1 +89\cdot 3^0$) mod 97 $=$ 52.
+(65$\cdot 3^4 +76\cdot 3^3 +76\cdot 3^2 +69\cdot 3^1 +89\cdot 3^0$) mod 97 $= 52$.
 
 ### Preprocessing
 
@@ -8741,14 +7746,14 @@ Using polynomial hashing, we can calculate the hash value of any substring of a 
 
 In addition, we construct an array `p` where `p`[$k] = A^k$ mod $B$:
 
-`p`[0] $=$ 1 `p`[$k$] $=$ (`p`[$k -1]A$) mod $B$.
+`p`[0] $= 1$ `p`[$k$] $=$ (`p`[$k -1]A$) mod $B$.
 
-$^1_{The technique was popularized by the Karp–Rabin pattern matching algorithm [42].}$
+> **[1]** The technique was popularized by the Karp–Rabin pattern matching algorithm [42].
 
 <!-- PAGE 256 -->
 Constructing these arrays takes $O(n)$ time. After this, the hash value of any substring `s`[$a...b$] can be calculated in $O$(1) time using the formula
 
-(`h`[$b]-$`h`[$a-$1]`p`[$b -a+$1]) mod $B$
+(`h`[$b]-$`h`[$a-1$]`p`[$b -a+1$]) mod $B$
 
 assuming that $a >$ 0. If $a =$ 0, the hash value is simply `h`[$b$].
 
@@ -8760,9 +7765,9 @@ We can efficiently compare strings using hash values. Instead of comparing the i
 
 An evident risk when comparing hash values is a **collision**, which means that two strings have different contents but equal hash values. In this case, an algorithm that relies on the hash values concludes that the strings are equal, but in reality they are not, and the algorithm may give incorrect results. Collisions are always possible, because the number of different strings is larger than the number of different hash values. However, the probability of a collision is small if the constants $A$ and $B$ are carefully chosen. A usual way is to choose random constants near 10$^9$, for example as follows:
 
-$A$ $=$ 911382323 $B$ $=$ 972663749
+$A$ $= 911382323$ $B$ $= 972663749$
 
-Using such constants, the `long` `long` type can be used when calculating hash values, because the products $AB$ and $BB$ will fit in `long` `long`. But is it enough to have about 10$^9$ different hash values? Let us consider three scenarios where hashing can be used:
+Using such constants, the `long long` type can be used when calculating hash values, because the products $AB$ and $BB$ will fit in `long long`. But is it enough to have about 10$^9$ different hash values? Let us consider three scenarios where hashing can be used:
 
 <!-- PAGE 257 -->
 *Scenario 1:* Strings $x$ and $y$ are compared with each other. The probability of a collision is 1/$B$ assuming that all hash values are equally probable. *Scenario 2:* A string $x$ is compared with strings $y_1, y_2,..., y_n$. The probability of one or more collisions is
@@ -8785,10 +7790,10 @@ The table shows that in scenario 1, the probability of a collision is negligible
 
 ### Z-algorithm
 
-The **Z-array** `z` of a string `s` of length $n$ contains for each $k = 0,1,...,n -$1 the length of the longest substring of `s` that begins at position $k$ and is a prefix of
+The **Z-array** `z` of a string `s` of length $n$ contains for each $k = 0,1,...,n -1$ the length of the longest substring of `s` that begins at position $k$ and is a prefix of
 
 <!-- PAGE 258 -->
-`s`. Thus, `z`[$k] =$ $p$ tells us that `s`[0... $p -$1] equals `s`[$k...k + p -$1]. Many string processing problems can be efficiently solved using the Z-array. For example, the Z-array of `ACBACDACBACBACDA` is as follows:
+`s`. Thus, `z`[$k] =$ $p$ tells us that `s`[0... $p -1$] equals `s`[$k...k + p -1$]. Many string processing problems can be efficiently solved using the Z-array. For example, the Z-array of `ACBACDACBACBACDA` is as follows:
 
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
 
@@ -8813,11 +7818,11 @@ $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}
 
 – 0 0 2 0 0 5 0 0 7 0 0 2 0 0 1
 
-In this case, for example, `z`[6] $=$ 5, because the substring `ACBAC` of length 5 is a prefix of `s`, but the substring `ACBACB` of length 6 is not a prefix of `s`.
+In this case, for example, `z`[6] $= 5$, because the substring `ACBAC` of length 5 is a prefix of `s`, but the substring `ACBACB` of length 6 is not a prefix of `s`.
 
 ### Algorithm description
 
-Next we describe an algorithm, called the **Z-algorithm**$^2$, that efficiently constructs the Z-array in $O(n)$ time. The algorithm calculates the Z-array values from left to right by both using information already stored in the Z-array and comparing substrings character by character. To efficiently calculate the Z-array values, the algorithm maintains a range [$x, y$] such that `s`[$x... y$] is a prefix of `s` and $y$ is as large as possible. Since we know that `s`[0... $y-x$] and `s`[$x... y$] are equal, we can use this information when calculating Z-values for positions $x+1,x+2,..., y$. At each position $k$, we first check the value of `z`[$k -x$]. If $k +$`z`[$k -x] < y$, we know that `z`[$k] =$ `z`[$k -x$]. However, if $k +$`z`[$k -x] \ge y$, `s`[0... $y-k$] equals `s`[$k... y$], and to determine the value of `z`[$k$] we need to compare the substrings character by character. Still, the algorithm works in $O(n)$ time, because we start comparing at positions $y-k +$1 and $y+$1. For example, let us construct the following Z-array:
+Next we describe an algorithm, called the **Z-algorithm**$^2$, that efficiently constructs the Z-array in $O(n)$ time. The algorithm calculates the Z-array values from left to right by both using information already stored in the Z-array and comparing substrings character by character. To efficiently calculate the Z-array values, the algorithm maintains a range [$x, y$] such that `s`[$x... y$] is a prefix of `s` and $y$ is as large as possible. Since we know that `s`[0... $y-x$] and `s`[$x... y$] are equal, we can use this information when calculating Z-values for positions $x+1,x+2,..., y$. At each position $k$, we first check the value of `z`[$k -x$]. If $k +$`z`[$k -x] < y$, we know that `z`[$k] =$ `z`[$k -x$]. However, if $k +$`z`[$k -x] \ge y$, `s`[0... $y-k$] equals `s`[$k... y$], and to determine the value of `z`[$k$] we need to compare the substrings character by character. Still, the algorithm works in $O(n)$ time, because we start comparing at positions $y-k+1$ and $y+1$. For example, let us construct the following Z-array:
 
 $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}$ $^{14}$ $^{15}$
 
@@ -8825,7 +7830,7 @@ A C B A C D A C B A C B A C D A
 
 – ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
 
-After calculating the value `z`[6] $=$ 5, the current [$x, y$] range is [6,10]:
+After calculating the value `z`[6] $= 5$, the current [$x, y$] range is [6,10]:
 
 $x$ $y$
 
@@ -8835,9 +7840,9 @@ A C B A C D A C B A C B A C D A
 
 – 0 0 2 0 0 5 ? ? ? ? ? ? ? ? ?
 
-Now we can calculate subsequent Z-array values efficiently, because we know that `s`[0...4] and `s`[6...10] are equal. First, since `z`[1] $=$ `z`[2] $=$ 0, we immediately know that also `z`[7] $=$ `z`[8] $=$ 0:
+Now we can calculate subsequent Z-array values efficiently, because we know that `s`[0...4] and `s`[6...10] are equal. First, since `z`[1] $=$ `z`[2] $= 0$, we immediately know that also `z`[7] $=$ `z`[8] $= 0$:
 
-$^2_{The Z-algorithm was presented in [32] as the simplest known method for linear-time pattern}$ $^{matching, and the original idea was attributed to [50].}$
+> **[2]** The Z-algorithm was presented in [32] as the simplest known method for linear-time pattern matching, and the original idea was attributed to [50].
 
 <!-- PAGE 259 -->
 $x$ $y$
@@ -8846,7 +7851,7 @@ $^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$ $^8$ $^9$ $^{10}$ $^{11}$ $^{12}$ $^{13}
 
 ![Figure from page 259](figures/fig_p259_134.png)
 
-Then, since `z`[3] $=$ 2, we know that `z`[9] $\ge$ 2:
+Then, since `z`[3] $= 2$, we know that `z`[9] $\ge$ 2:
 
 $x$ $y$
 
@@ -8864,7 +7869,7 @@ A C B A C D A C B A C B A C D A
 
 – 0 0 2 0 0 5 0 0 ? ? ? ? ? ? ?
 
-It turns out that `z`[9] $=$ 7, so the new [$x, y$] range is [9,15]:
+It turns out that `z`[9] $= 7$, so the new [$x, y$] range is [9,15]:
 
 $x$ $y$
 
@@ -8923,7 +7928,7 @@ vector<int> z(string s) {
 
 ## Square root algorithms
 
-A **square root algorithm** is an algorithm that has a square root in its time complexity. A square root can be seen as a ”poor man’s logarithm”: the complexity $O(pn)$ is better than $O(n)$ but worse than $O$(log$n$). In any case, many square root algorithms are fast and usable in practice. As an example, consider the problem of creating a data structure that supports two operations on an array: modifying an element at a given position and calculating the sum of elements in the given range. We have previously solved the problem using binary indexed and segment trees, that support both operations in $O$(log$n$) time. However, now we will solve the problem in another way using a square root structure that allows us to modify elements in $O$(1) time and calculate sums in $O(pn)$ time. The idea is to divide the array into $blocks$ of size $pn$ so that each block contains the sum of elements inside the block. For example, an array of 16 elements will be divided into blocks of 4 elements as follows:
+A **square root algorithm** is an algorithm that has a square root in its time complexity. A square root can be seen as a "poor man’s logarithm": the complexity $O(pn)$ is better than $O(n)$ but worse than $O$(log$n$). In any case, many square root algorithms are fast and usable in practice. As an example, consider the problem of creating a data structure that supports two operations on an array: modifying an element at a given position and calculating the sum of elements in the given range. We have previously solved the problem using binary indexed and segment trees, that support both operations in $O$(log$n$) time. However, now we will solve the problem in another way using a square root structure that allows us to modify elements in $O$(1) time and calculate sums in $O(pn)$ time. The idea is to divide the array into $blocks$ of size $pn$ so that each block contains the sum of elements inside the block. For example, an array of 16 elements will be divided into blocks of 4 elements as follows:
 
 21 17 20 13
 
@@ -8989,7 +7994,7 @@ However, we can *combine* the two algorithms and use different algorithms for di
 
 ### Batch processing
 
-Our next problem also deals with a two-dimensional grid that contains $n$ cells. Initially, each cell except one is white. We perform $n-$1 operations, each of which first calculates the minimum distance from a given white cell to a black cell, and then paints the white cell black. For example, consider the following operation:
+Our next problem also deals with a two-dimensional grid that contains $n$ cells. Initially, each cell except one is white. We perform $n-1$ operations, each of which first calculates the minimum distance from a given white cell to a black cell, and then paints the white cell black. For example, consider the following operation:
 
 *
 
@@ -9029,7 +8034,7 @@ Given a string `s` of length $n$ and a set of strings $D$ whose total length is 
 • AB+AB
 ```
 
-We can solve the problem using dynamic programming: Let `count`($k$) denote the number of ways to construct the prefix `s`[0...$k$] using the strings in $D$. Now `count`($n -$1) gives the answer to the problem, and we can solve the problem in $O(n^2)$ time using a trie structure. However, we can solve the problem more efficiently by using string hashing and the fact that there are at most $O(pm)$ distinct string lengths in $D$. First, we construct a set $H$ that contains all hash values of the strings in $D$. Then, when calculating a value of `count`($k$), we go through all values of $p$ such that there is a string of length $p$ in $D$, calculate the hash value of `s`[$k -p +1...k$] and check if it belongs to $H$. Since there are at most $O(pm)$ distinct string lengths, this results in an algorithm whose running time is $O(npm)$.
+We can solve the problem using dynamic programming: Let `count`($k$) denote the number of ways to construct the prefix `s`[0...$k$] using the strings in $D$. Now `count`($n -1$) gives the answer to the problem, and we can solve the problem in $O(n^2)$ time using a trie structure. However, we can solve the problem more efficiently by using string hashing and the fact that there are at most $O(pm)$ distinct string lengths in $D$. First, we construct a set $H$ that contains all hash values of the strings in $D$. Then, when calculating a value of `count`($k$), we go through all values of $p$ such that there is a string of length $p$ in $D$, calculate the hash value of `s`[$k -p +1...k$] and check if it belongs to $H$. Since there are at most $O(pm)$ distinct string lengths, this results in an algorithm whose running time is $O(npm)$.
 
 ## Mo’s algorithm
 
@@ -9039,7 +8044,7 @@ We can solve the problem using dynamic programming: Let `count`($k$) denote the 
 
 • $\lfloor a_1/k\rfloor = \lfloor a_2/k\rfloor$ and $b_1 < b_2$.
 
-$^1_{According to [12], this algorithm is named after Mo Tao, a Chinese competitive programmer,}$ $^{but the technique has appeared earlier in the literature [44].}$
+> **[1]** According to [12], this algorithm is named after Mo Tao, a Chinese competitive programmer, but the technique has appeared earlier in the literature [44].
 
 <!-- PAGE 266 -->
 Thus, all queries whose left endpoints are in a certain block are processed one after another sorted according to their right endpoints. Using this order, the algorithm only performs $O(npn)$ operations, because the left endpoint moves $O(n)$ times $O(pn)$ steps, and the right endpoint moves $O(pn)$ times $O(n)$ steps. Thus, both endpoints move a total of $O(npn)$ steps during the algorithm.
@@ -9096,7 +8101,7 @@ Now we can calculate any value of `sum`$_q(a,b)$ (the sum of array values in ran
 int s = sum(a, b, 1, 0, n-1);
 ```
 
-The parameter $k$ indicates the current position in `tree`. Initially $k$ equals 1, because we begin at the root of the tree. The range [$x, y$] corresponds to $k$ and is initially [0,$n-$1]. When calculating the sum, if [$x, y$] is outside [$a,b$], the sum is 0, and if [$x, y$] is completely inside [$a,b$], the sum can be found in `tree`. If [$x, y$] is partially inside [$a,b$], the search continues recursively to the left and right half of [$x, y$]. The left half is [$x,d$] and the right half is [$d +1, y$] where $d = \lfloor ^{x+y}$
+The parameter $k$ indicates the current position in `tree`. Initially $k$ equals 1, because we begin at the root of the tree. The range [$x, y$] corresponds to $k$ and is initially [0,$n-1$]. When calculating the sum, if [$x, y$] is outside [$a,b$], the sum is 0, and if [$x, y$] is completely inside [$a,b$], the sum can be found in `tree`. If [$x, y$] is partially inside [$a,b$], the search continues recursively to the left and right half of [$x, y$]. The left half is [$x,d$] and the right half is [$d +1, y$] where $d = \lfloor ^{x+y}$
 
 $_2 \rfloor$ . The following picture shows how the search proceeds when calculating the value of `sum`$_q(a,b)$. The gray nodes indicate nodes where the recursion stops and the sum can be found in `tree`.
 
@@ -9142,7 +8147,7 @@ Lazy updates can be generalized so that it is possible to update ranges using po
 
 $p(u) = t_ku^k + t_k^-_1u^{k-1} +\cdot \cdot \cdot + t_0$.
 
-In this case, the update for a value at position $i$ in [$a,b$] is $p(i -a)$. For example, adding the polynomial $p(u) = u +$1 to [$a,b$] means that the value at position $a$ increases by 1, the value at position $a+$1 increases by 2, and so on. To support polynomial updates, each node is assigned $k +$2 values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1,..., z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range [$x, y$] equals
+In this case, the update for a value at position $i$ in [$a,b$] is $p(i -a)$. For example, adding the polynomial $p(u) = u+1$ to [$a,b$] means that the value at position $a$ increases by 1, the value at position $a+1$ increases by 2, and so on. To support polynomial updates, each node is assigned $k+2$ values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1,..., z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range [$x, y$] equals
 
 $^{y-x}$ $X$
 
@@ -9153,7 +8158,7 @@ $s+$
 <!-- PAGE 271 -->
 The value of such a sum can be efficiently calculated using sum formulas. For example, the term $z_0$ corresponds to the sum ($y-x+1)z_0$, and the term $z_1u$ corresponds to the sum
 
-$z_1(0+1+\cdot \cdot \cdot + y-x) = z_1$ ($y-x)(y-x+$1)
+$z_1(0+1+\cdot \cdot \cdot + y-x) = z_1$ ($y-x)(y-x+1$)
 
 2 .
 
@@ -9185,7 +8190,7 @@ x->value = 5;
 
 ### Sparse segment trees
 
-A dynamic segment tree is useful when the underlying array is $sparse$, i.e., the range [0,$n-$1] of allowed indices is large, but most array values are zeros. While an ordinary segment tree uses $O(n)$ memory, a dynamic segment tree only uses $O(k$log$n$) memory, where $k$ is the number of operations performed. A **sparse segment tree** initially has only one node [0,$n -$1] whose value is zero, which means that every array value is zero. After updates, new nodes are dynamically added to the tree. For example, if $n =$ 16 and the elements in positions 3 and 10 have been modified, the tree contains the following nodes:
+A dynamic segment tree is useful when the underlying array is $sparse$, i.e., the range [0,$n-1$] of allowed indices is large, but most array values are zeros. While an ordinary segment tree uses $O(n)$ memory, a dynamic segment tree only uses $O(k$log$n$) memory, where $k$ is the number of operations performed. A **sparse segment tree** initially has only one node [0,$n -1$] whose value is zero, which means that every array value is zero. After updates, new nodes are dynamically added to the tree. For example, if $n =$ 16 and the elements in positions 3 and 10 have been modified, the tree contains the following nodes:
 
 <!-- PAGE 272 -->
 ![Figure from page 272](figures/fig_p272_141.png)
@@ -9213,7 +8218,7 @@ The structure of each previous tree can be reconstructed by following the pointe
 
 ### Data structures
 
-Instead of single values, nodes in a segment tree can also contain *data structures* that maintain information about the corresponding ranges. In such a tree, the operations take $O(f (n)$log$n$) time, where $f (n)$ is the time needed for processing a single node during an operation. As an example, consider a segment tree that supports queries of the form ”how many times does an element $x$ appear in the range [$a,b$]?” For example, the element 1 appears three times in the following range:
+Instead of single values, nodes in a segment tree can also contain *data structures* that maintain information about the corresponding ranges. In such a tree, the operations take $O(f (n)$log$n$) time, where $f (n)$ is the time needed for processing a single node during an operation. As an example, consider a segment tree that supports queries of the form "how many times does an element $x$ appear in the range [$a,b$]?" For example, the element 1 appears three times in the following range:
 
 3 1 2 3 1 1 1 2
 
@@ -9228,13 +8233,7 @@ We can build the tree so that each node contains a `map` structure. In this case
 
 A **two-dimensional segment tree** supports queries related to rectangular subarrays of a two-dimensional array. Such a tree can be implemented as nested segment trees: a big tree corresponds to the rows of the array, and each node contains a small tree that corresponds to a column. For example, in the array
 
-7 6 1 6
-
-8 7 5 2
-
-3 9 7 1
-
-8 5 3 8
+![Figure from page 274](figures/fig_p274_auto1.png)
 
 the sum of any subarray can be calculated from the following segment tree:
 
@@ -9270,7 +8269,7 @@ that calculates the area of a quadrilateral whose vertices are ($x_1, y_1), (x_2
 
 A **complex number** is a number of the form $x+ yi$, where $i =$ $p$
 
-$-$1 is the **imagi- nary unit**. A geometric interpretation of a complex number is that it represents a two-dimensional point ($x, y$) or a vector from the origin to a point ($x, y$). For example, 4$+2i$ corresponds to the following point and vector:
+$-1$ is the **imagi- nary unit**. A geometric interpretation of a complex number is that it represents a two-dimensional point ($x, y$) or a vector from the origin to a point ($x, y$). For example, 4$+2i$ corresponds to the following point and vector:
 
 (4,2)
 
@@ -9300,13 +8299,13 @@ P s = v+u;
 cout << s.X << " " << s.Y << "\n"; // 5 3
 ```
 
-In practice, an appropriate coordinate type is usually `long` `long` (integer) or `long` `double` (real number). It is a good idea to use integer whenever possible, because calculations with integers are exact. If real numbers are needed, precision errors should be taken into account when comparing numbers. A safe way to check if real numbers $a$ and $b$ are equal is to compare them using $|a-b| < ϵ$, where $ϵ$ is a small number (for example, $ϵ = 10^{-9}$).
+In practice, an appropriate coordinate type is usually `long long` (integer) or `long double` (real number). It is a good idea to use integer whenever possible, because calculations with integers are exact. If real numbers are needed, precision errors should be taken into account when comparing numbers. A safe way to check if real numbers $a$ and $b$ are equal is to compare them using $|a-b| < ϵ$, where $ϵ$ is a small number (for example, $ϵ = 10^{-9}$).
 
 ### Functions
 
-In the following examples, the coordinate type is `long` `double`. The function `abs`($v$) calculates the length $|v|$ of a vector $v = (x, y)$ using the formula $p$
+In the following examples, the coordinate type is `long double`. The function `abs`($v$) calculates the length $|v|$ of a vector $v = (x, y)$ using the formula $p$
 
-$x^2 + y^2$. The function can also be used for calculating the distance between points ($x_1, y_1$) and ($x_2, y_2$), because that distance equals the length of the vector ($x_2 -x_1, y_2 -y_1$). The following code calculates the distance between points (4,2) and (3,$-$1):
+$x^2 + y^2$. The function can also be used for calculating the distance between points ($x_1, y_1$) and ($x_2, y_2$), because that distance equals the length of the vector ($x_2 -x_1, y_2 -y_1$). The following code calculates the distance between points (4,2) and (3,$-1$):
 
 ```cpp
 P a = {4,2};
@@ -9344,7 +8343,7 @@ $a\times b =$ 6
 
 $a\times b =$ 0
 
-$a\times b = -$8
+$a\times b = -8$
 
 For example, in the first case $a =$ (4,2) and $b =$ (1,2). The following code calculates the cross product using the class `complex`:
 
@@ -9458,7 +8457,7 @@ Note that the absolute value of the sum is taken, because the value of the sum m
 
 **Pick’s theorem** provides another way to calculate the area of a polygon provided that all vertices of the polygon have integer coordinates. According to Pick’s theorem, the area of the polygon is
 
-$a+ b/2-$1,
+$a+ b/2-1$,
 
 where $a$ is the number of integer points inside the polygon and $b$ is the number of integer points on the boundary of the polygon. For example, the area of the polygon
 
@@ -9579,11 +8578,7 @@ It is easy to solve the problem in $O(n^2)$ time, because we can go through all 
 <!-- PAGE 287 -->
 The following events correspond to the example:
 
-1 2
-
-1 2 3 3
-
-1 2
+![Figure from page 287](figures/fig_p287_auto1.png)
 
 We go through the events from left to right and use a data structure that maintains a set of y coordinates where there is an active horizontal segment. At event 1, we add the y coordinate of the segment to the set, and at event 2, we remove the y coordinate from the set. Intersection points are calculated at event 3. When there is a vertical segment between points $y_1$ and $y_2$, we count the number of active horizontal segments whose y coordinate is between $y_1$ and $y_2$, and add this number to the total number of intersection points. To store y coordinates of horizontal segments, we can use a binary indexed or segment tree, possibly with index compression. When such structures are used, processing each event takes $O$(log$n$) time, so the total running time of the algorithm is $O(n$log$n$).
 
@@ -9599,7 +8594,7 @@ we should find the following points:
 
 This is another example of a problem that can be solved in $O(n$log$n$) time using a sweep line algorithm$^1$. We go through the points from left to right and maintain a value $d$: the minimum distance between two points seen so far. At
 
-$^1_{Besides this approach, there is also an O(nlogn) time divide-and-conquer algorithm [56] that}$ $^{divides the points into two sets and recursively solves the problem for both sets.}$
+> **[1]** Besides this approach, there is also an O(nlogn) time divide-and-conquer algorithm [56] that divides the points into two sets and recursively solves the problem for both sets.
 
 <!-- PAGE 288 -->
 each point, we find the nearest point to the left. If the distance is less than $d$, it is the new minimum distance and we update the value of $d$. If the current point is ($x, y$) and there is a point to the left within a distance of less than $d$, the x coordinate of such a point must be between [$x-d,x$] and the y coordinate must be between [$y-d, y+ d$]. Thus, it suffices to only consider points that are located in those ranges, which makes the algorithm efficient. For example, in the following picture, the region marked with dashed lines contains the points that can be within a distance of $d$ from the active point:
@@ -9658,7 +8653,7 @@ the convex hull is as follows:
 [12] Codeforces:
 
 ```cpp
-               On ”Mo’s algorithm”, http://codeforces.com/blog/entry/
+               On "Mo's algorithm", http://codeforces.com/blog/entry/
 20032
 ```
 
