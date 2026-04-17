@@ -12,42 +12,43 @@ interface BadgeProps {
   children: React.ReactNode;
 }
 
-const variantStyles: Record<BadgeVariant, string> = {
-  default: 'bg-[#f0f1f3] text-[#626975] border-[#e4e6ea]',
-  blue:    'bg-[#e8f0fe] text-[#1865f2] border-[#a8c4f8]',
-  green:   'bg-[#e6f4ea] text-[#1fab54] border-[#a8d5b5]',
-  yellow:  'bg-[#fef9e7] text-[#f5a623] border-[#fdd8a0]',
-  red:     'bg-[#fce8e6] text-[#d92916] border-[#f5c6c0]',
-  purple:  'bg-[#f3effe] text-[#9059ff] border-[#d4bcf8]',
-  muted:   'bg-[#f7f8fa] text-[#9299a5] border-transparent',
-};
+/**
+ * Badge — Apple treatment.
+ *
+ * Monochromatic by default: `default` and `muted` use luminance grey + accent.
+ * Semantic variants (blue/green/yellow/red/purple) stay but desaturated to iOS
+ * system hues with 12% tint backgrounds and no hard borders — glyph-first,
+ * color-muted so text content carries the meaning.
+ */
 
-const dotColors: Record<BadgeVariant, string> = {
-  default: 'bg-[#9299a5]',
-  blue:    'bg-[#1865f2]',
-  green:   'bg-[#1fab54]',
-  yellow:  'bg-[#f5a623]',
-  red:     'bg-[#d92916]',
-  purple:  'bg-[#9059ff]',
-  muted:   'bg-[#9299a5]',
+// Each variant: [bg tint (rgba), fg solid, dot solid]
+const VARIANTS: Record<BadgeVariant, { bg: string; fg: string; dot: string }> = {
+  default: { bg: 'var(--eureka-accent-tint)',       fg: 'var(--eureka-accent)', dot: 'var(--eureka-accent)' },
+  blue:    { bg: 'rgba(10,132,255,0.12)',  fg: '#0a84ff', dot: '#0a84ff' },
+  green:   { bg: 'rgba(48,209,88,0.12)',   fg: '#30a14c', dot: '#30d158' },
+  yellow:  { bg: 'rgba(255,159,10,0.14)',  fg: '#b76d07', dot: '#ff9f0a' },
+  red:     { bg: 'rgba(255,55,95,0.12)',   fg: '#d1365c', dot: '#ff375f' },
+  purple:  { bg: 'rgba(191,90,242,0.12)',  fg: '#8a44c2', dot: '#bf5af2' },
+  muted:   { bg: 'rgba(0,0,0,0.05)',       fg: '#6e6e73', dot: '#86868b' },
 };
 
 const sizeStyles = {
-  sm: 'text-[10px] px-1.5 py-0.5 rounded',
+  sm: 'text-[10px] px-1.5 py-0.5 rounded-md',
   md: 'text-[11px] px-2   py-0.5 rounded-md',
 };
 
 export function Badge({ variant = 'default', size = 'md', dot = false, className, children }: BadgeProps) {
+  const v = VARIANTS[variant];
   return (
     <span
       className={clsx(
-        'inline-flex items-center gap-1 font-semibold border whitespace-nowrap',
-        variantStyles[variant],
+        'inline-flex items-center gap-1 font-semibold tracking-tight whitespace-nowrap',
         sizeStyles[size],
         className,
       )}
+      style={{ background: v.bg, color: v.fg }}
     >
-      {dot && <span className={clsx('w-1.5 h-1.5 rounded-full shrink-0', dotColors[variant])} />}
+      {dot && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: v.dot }} />}
       {children}
     </span>
   );
