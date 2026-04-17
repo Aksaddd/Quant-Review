@@ -20,7 +20,6 @@ export default function LoginPage() {
     const supabase = getSupabase();
 
     if (!supabase) {
-      /* Guest / demo mode — skip auth */
       toast.success('Continuing as guest');
       router.push('/dashboard');
       return;
@@ -44,54 +43,77 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--surface-0)] flex items-center justify-center p-4">
-      {/* Glow */}
+    <div
+      className="eureka-active min-h-screen flex items-center justify-center p-4"
+      style={{ background: '#ffffff' }}
+    >
+      {/* Accent halo */}
       <div
         aria-hidden
-        className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] pointer-events-none
-          bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.06)_0%,transparent_60%)]"
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at top, var(--eureka-accent-tint-strong) 0%, transparent 60%)',
+        }}
       />
 
       <div className="w-full max-w-md relative animate-fade-up">
-        {/* Card */}
-        <div className="
-          bg-[var(--surface-2)] border border-[var(--surface-border-strong)]
-          rounded-2xl px-6 pt-8 pb-7 shadow-[var(--shadow-lg)]
-        ">
+        <div
+          className="px-6 pt-8 pb-7"
+          style={{
+            background: 'var(--material-regular-light)',
+            backdropFilter: 'var(--material-blur-strong)',
+            WebkitBackdropFilter: 'var(--material-blur-strong)',
+            border: '0.5px solid rgba(0,0,0,0.06)',
+            borderRadius: 22,
+            boxShadow: 'var(--shadow-hud)',
+          }}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 mb-8 w-fit">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-brand-500/10 border border-brand-500/20">
-              <Sparkles size={16} className="text-brand-400" />
+            <div
+              className="w-8 h-8 flex items-center justify-center"
+              style={{
+                borderRadius: 10,
+                background: 'var(--eureka-accent)',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+              }}
+            >
+              <Sparkles size={16} className="text-white" />
             </div>
-            <span className="font-bold text-sm text-[var(--text-primary)]">Quant Review</span>
+            <span className="font-semibold text-[14px] text-[#1d1d1f] tracking-tight">Quant Review</span>
           </Link>
 
-          <h1 className="text-xl font-bold text-[var(--text-primary)] mb-1">Welcome back</h1>
-          <p className="text-sm text-[var(--text-muted)] mb-7">
+          <h1 className="text-[24px] font-semibold tracking-[-0.02em] text-[#1d1d1f] mb-1 leading-tight">
+            Welcome back
+          </h1>
+          <p className="text-[13px] text-[#6e6e73] mb-7">
             Sign in to sync your progress across devices.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
+              <label className="block text-[11px] font-medium text-[#6e6e73] mb-1.5 tracking-tight">
                 Email
               </label>
               <div className="relative">
-                <Mail size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+                <Mail size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#86868b]" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="
-                    w-full pl-9 pr-4 py-2.5 text-sm rounded-xl
-                    bg-[var(--surface-3)] border border-[var(--surface-border-strong)]
-                    text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
-                    focus:outline-none focus:border-brand-500/60 focus:ring-1 focus:ring-brand-500/30
-                    transition-colors
-                  "
+                  className="w-full pl-9 pr-4 py-2.5 text-[13px] transition-colors duration-200"
+                  style={{
+                    borderRadius: 12,
+                    background: '#ffffff',
+                    border: '0.5px solid rgba(0,0,0,0.12)',
+                    color: '#1d1d1f',
+                    outline: 'none',
+                    transitionTimingFunction: 'var(--ease-standard)',
+                  }}
                 />
               </div>
             </div>
@@ -99,31 +121,38 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-medium text-[var(--text-secondary)]">Password</label>
-                <Link href="/auth/reset" className="text-xs text-brand-400 hover:text-brand-300 transition-colors">
+                <label className="text-[11px] font-medium text-[#6e6e73] tracking-tight">Password</label>
+                <Link
+                  href="/auth/reset"
+                  className="text-[11px] hover:underline transition-colors duration-200"
+                  style={{ color: 'var(--eureka-accent)' }}
+                >
                   Forgot password?
                 </Link>
               </div>
               <div className="relative">
-                <Lock size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+                <Lock size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#86868b]" />
                 <input
                   type={showPw ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="
-                    w-full pl-9 pr-10 py-2.5 text-sm rounded-xl
-                    bg-[var(--surface-3)] border border-[var(--surface-border-strong)]
-                    text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
-                    focus:outline-none focus:border-brand-500/60 focus:ring-1 focus:ring-brand-500/30
-                    transition-colors
-                  "
+                  className="w-full pl-9 pr-10 py-2.5 text-[13px] transition-colors duration-200"
+                  style={{
+                    borderRadius: 12,
+                    background: '#ffffff',
+                    border: '0.5px solid rgba(0,0,0,0.12)',
+                    color: '#1d1d1f',
+                    outline: 'none',
+                    transitionTimingFunction: 'var(--ease-standard)',
+                  }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#424245] transition-colors duration-200"
+                  style={{ transitionTimingFunction: 'var(--ease-standard)' }}
                 >
                   {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -144,26 +173,34 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-5">
-            <span className="flex-1 h-px bg-[var(--surface-border)]" />
-            <span className="text-xs text-[var(--text-muted)]">or</span>
-            <span className="flex-1 h-px bg-[var(--surface-border)]" />
+            <span className="flex-1 h-px" style={{ background: 'rgba(0,0,0,0.08)' }} />
+            <span className="text-[11px] text-[#86868b] tracking-tight">or</span>
+            <span className="flex-1 h-px" style={{ background: 'rgba(0,0,0,0.08)' }} />
           </div>
 
           <button
             onClick={continueAsGuest}
-            className="
-              w-full py-2.5 rounded-xl text-sm font-medium
-              border border-[var(--surface-border-strong)]
-              text-[var(--text-secondary)] hover:text-[var(--text-primary)]
-              hover:bg-white/4 transition-all
-            "
+            className="w-full py-2.5 text-[13px] font-medium tracking-tight transition-all duration-200 active:scale-[0.99]"
+            style={{
+              borderRadius: 12,
+              background: '#ffffff',
+              border: '0.5px solid rgba(0,0,0,0.1)',
+              color: '#424245',
+              transitionTimingFunction: 'var(--ease-standard)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0,0,0,0.03)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#ffffff')}
           >
             Continue as Guest
           </button>
 
-          <p className="text-center text-xs text-[var(--text-muted)] mt-5">
-            Don't have an account?{' '}
-            <Link href="/signup" className="text-brand-400 font-medium hover:text-brand-300 transition-colors">
+          <p className="text-center text-[11px] text-[#86868b] mt-5">
+            Don&apos;t have an account?{' '}
+            <Link
+              href="/signup"
+              className="font-semibold hover:underline transition-colors duration-200"
+              style={{ color: 'var(--eureka-accent)' }}
+            >
               Sign up free
             </Link>
           </p>
