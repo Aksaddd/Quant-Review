@@ -48,20 +48,31 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="
-      hidden lg:flex flex-col
-      w-64 shrink-0 h-screen sticky top-0
-      bg-white border-r border-[#e4e6ea]
-    ">
+    <aside
+      className="hidden lg:flex flex-col w-64 shrink-0 h-screen sticky top-0"
+      style={{
+        background: 'var(--material-thin-light)',
+        backdropFilter: 'var(--material-blur)',
+        WebkitBackdropFilter: 'var(--material-blur)',
+        borderRight: '0.5px solid rgba(0,0,0,0.06)',
+      }}
+    >
       {/* Logo */}
-      <div className="px-5 py-4 border-b border-[#e4e6ea] shrink-0">
+      <div className="px-5 py-4 shrink-0" style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}>
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-[var(--ka-blue)] flex items-center justify-center">
-            <span className="text-white font-bold text-sm">Q</span>
+          <div
+            className="w-8 h-8 flex items-center justify-center transition-transform duration-200 ease-standard group-hover:scale-[1.04]"
+            style={{
+              borderRadius: 10,
+              background: 'var(--eureka-accent)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
+            }}
+          >
+            <span className="text-white font-semibold text-sm tracking-tight">Q</span>
           </div>
           <div>
-            <p className="font-bold text-[13px] text-[#21242c] leading-tight">Quant Review</p>
-            <p className="text-[10px] text-[#9299a5]">Zhou's Guide</p>
+            <p className="font-semibold text-[13px] text-[#1d1d1f] leading-tight tracking-tight">Quant Review</p>
+            <p className="text-[10px] text-[#86868b]">Zhou's Guide</p>
           </div>
         </Link>
       </div>
@@ -79,7 +90,10 @@ export default function Sidebar() {
               <Icon size={16} className="shrink-0" />
               <span className="flex-1">{label}</span>
               {label === 'Flashcards' && (reviewDue.length + newCardsQueue.length) > 0 && (
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[var(--ka-blue)] text-white">
+                <span
+                  className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full text-white"
+                  style={{ background: 'var(--eureka-accent)' }}
+                >
                   {reviewDue.length + newCardsQueue.length}
                 </span>
               )}
@@ -111,7 +125,7 @@ export default function Sidebar() {
                 href={`/read/chapter-1#ch1-0${i + 1}-${['broad-knowledge','practice-skills','listen-carefully','speak-your-mind','reasonable-assumptions'][i]}`}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
               >
-                <span className="w-4 h-4 rounded-full bg-[var(--ka-blue)] text-white flex items-center justify-center text-[9px] font-bold shrink-0">
+                <span className="w-4 h-4 rounded-full text-white flex items-center justify-center text-[9px] font-semibold shrink-0" style={{ background: 'var(--eureka-accent)' }}>
                   {i + 1}
                 </span>
                 <span className="flex-1 text-[13px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors truncate">
@@ -135,18 +149,29 @@ export default function Sidebar() {
         {chapOpen && (
           <div className="mb-3 space-y-0.5">
             {/* Overall progress */}
-            <div className="mx-1 mb-3 p-3 rounded-lg bg-[#f7f8fa] border border-[#e4e6ea]">
+            <div
+              className="mx-1 mb-3 p-3"
+              style={{
+                borderRadius: 12,
+                background: 'rgba(0,0,0,0.025)',
+                border: '0.5px solid rgba(0,0,0,0.05)',
+              }}
+            >
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[11px] font-semibold text-[#626975]">Overall Progress</span>
-                <span className="text-[11px] font-bold text-[var(--ka-blue)]">{pct}%</span>
+                <span className="text-[11px] font-medium text-[#6e6e73] tracking-tight">Overall Progress</span>
+                <span className="text-[11px] font-semibold tabular-nums" style={{ color: 'var(--eureka-accent)' }}>{pct}%</span>
               </div>
-              <div className="h-2 bg-[#e4e6ea] rounded-full overflow-hidden">
+              <div className="h-[3px] bg-[rgba(0,0,0,0.06)] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[var(--ka-blue)] rounded-full transition-all duration-500"
-                  style={{ width: `${pct}%` }}
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${pct}%`,
+                    background: 'var(--eureka-accent)',
+                    transition: 'width 500ms var(--ease-standard)',
+                  }}
                 />
               </div>
-              <p className="text-[10px] text-[#9299a5] mt-1.5">{totalSolved}/{totalProblems} problems</p>
+              <p className="text-[10px] text-[#86868b] mt-1.5 tabular-nums">{totalSolved} / {totalProblems} problems</p>
             </div>
 
             {/* Section list with expandable problems */}
