@@ -76,7 +76,14 @@ export default function SolutionReveal({
 
       {/* Hints — only visible after scratchpad submission (or if already solved) */}
       {(scratchpadSubmitted || currentStatus === 'solved') && hints.length > 0 && (
-        <div className="p-4 rounded-lg bg-[#fef9e7] border border-[#fdd8a0]">
+        <div
+          className="p-4"
+          style={{
+            borderRadius: 14,
+            background: 'rgba(255,159,10,0.08)',
+            border: '0.5px solid rgba(255,159,10,0.2)',
+          }}
+        >
           <HintStep hints={hints} onRevealCount={handleHintRevealed} />
         </div>
       )}
@@ -87,21 +94,43 @@ export default function SolutionReveal({
           {!showSolution ? (
             <button
               onClick={handleReveal}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg
-                border border-[var(--ka-blue)] text-[var(--ka-blue)] text-sm font-semibold
-                hover:bg-[var(--ka-blue)] hover:text-white transition-all duration-150"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 text-[13px] font-semibold tracking-tight transition-all duration-200"
+              style={{
+                borderRadius: 12,
+                background: 'var(--eureka-accent-tint)',
+                color: 'var(--eureka-accent)',
+                border: '0.5px solid rgba(0,0,0,0.06)',
+                transitionTimingFunction: 'var(--ease-standard)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--eureka-accent)';
+                e.currentTarget.style.color = '#ffffff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'var(--eureka-accent-tint)';
+                e.currentTarget.style.color = 'var(--eureka-accent)';
+              }}
             >
               <ChevronDown size={15} />
               Show solution
             </button>
           ) : (
-            <div className="reading-card border rounded-lg overflow-hidden animate-fade-up">
+            <div
+              className="reading-card overflow-hidden animate-fade-up"
+              style={{
+                borderRadius: 14,
+                border: '0.5px solid rgba(0,0,0,0.06)',
+              }}
+            >
               {/* Solution header */}
-              <div className="reading-card-header flex items-center justify-between px-4 py-2.5 border-b">
-                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--rt-text-secondary)' }}>Solution</span>
+              <div
+                className="reading-card-header flex items-center justify-between px-4 py-2.5"
+                style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}
+              >
+                <span className="text-[10px] font-semibold uppercase tracking-[0.06em]" style={{ color: 'var(--rt-text-secondary)' }}>Solution</span>
                 <button
                   onClick={() => setShowSolution(false)}
-                  className="text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                  className="text-[11px] text-[#86868b] hover:text-[#424245] transition-colors"
                 >
                   Hide
                 </button>
@@ -113,10 +142,13 @@ export default function SolutionReveal({
               </div>
 
               {/* Footer */}
-              <div className="reading-card-header px-4 py-3 border-t flex items-center justify-between gap-3">
+              <div
+                className="reading-card-header px-4 py-3 flex items-center justify-between gap-3"
+                style={{ borderTop: '0.5px solid rgba(0,0,0,0.06)' }}
+              >
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-1.5 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                  className="flex items-center gap-1.5 text-[11px] text-[#86868b] hover:text-[#424245] transition-colors"
                 >
                   <RotateCcw size={12} />
                   Reset
@@ -125,7 +157,13 @@ export default function SolutionReveal({
                 {currentStatus !== 'solved' ? (
                   <button
                     onClick={() => onSolved?.(hintsRevealedRef.current)}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1fab54] text-white text-sm font-semibold hover:bg-[#17944a] transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97]"
+                    style={{
+                      borderRadius: 10,
+                      background: '#30d158',
+                      color: '#ffffff',
+                      transitionTimingFunction: 'var(--ease-standard)',
+                    }}
                   >
                     <CheckCircle2 size={15} />
                     Mark as solved
@@ -134,14 +172,14 @@ export default function SolutionReveal({
                   <div className="flex items-center gap-3">
                     <button
                       onClick={onUndoSolved}
-                      className="flex items-center gap-1.5 text-xs text-[#9299a5] hover:text-[#626975] transition-colors"
+                      className="flex items-center gap-1.5 text-[11px] text-[#86868b] hover:text-[#424245] transition-colors"
                     >
                       <Undo2 size={12} />
                       Undo solved
                     </button>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 size={14} className="text-[#1fab54]" />
-                      <span className="text-xs font-semibold text-[#1fab54]">Solved</span>
+                      <CheckCircle2 size={14} style={{ color: '#30d158' }} />
+                      <span className="text-[11px] font-semibold tracking-tight" style={{ color: '#1f9b46' }}>Solved</span>
                     </div>
                   </div>
                 )}
