@@ -9,6 +9,11 @@ Cleans up:
   - Unicode entity GIFs (U21D2.GIF) -> actual characters
   - Case-mangled words from stripped inline tags (tHRows -> throws, etc.)
   - TOC pixel.gif clutter -> clean bullet list
+  - Orphan image refs (point at a non-existent _assets/ folder)
+  - Stripped-tag artifacts: `<c>X<d>` -> `X`, `<i>X<d>` -> *X*, `<$nopage>`
+  - Mangled index entry links (broken nested-link patterns)
+  - Dead `index_X.html` "See" refs -> plain text
+  - Cover/title metadata broken pipe-table -> clean prose
 """
 
 from __future__ import annotations
@@ -166,8 +171,12 @@ def fence_code_blocks(lines: list[str]) -> list[str]:
                     break
                 i += 1
             continue
+        # CommonMark: an indented code block requires a blank line
+        # immediately before it. Otherwise it's a paragraph continuation
+        # (e.g. an index entry under a parent term that ends with `  \n`).
+        prev_blank = not out or out[-1].strip() == ""
         # Detect start of a 4-space-indented code block.
-        if line.startswith("    ") and line.strip() != "":
+        if prev_blank and line.startswith("    ") and line.strip() != "":
             # Determine base indent (4 or 8 = list-nested).
             stripped_so_far = line.rstrip()
             base_indent = len(line) - len(line.lstrip(" "))
@@ -309,13 +318,202 @@ def clean_toc(lines: list[str]) -> list[str]:
     return out
 
 
+# --- 8a. Strip orphan image refs ---------------------------------------------
+
+ORPHAN_IMG_RE = re.compile(
+    r"!\[[^\]]*\]\([^\n]*?_assets/[^\n]*?\.(?:jpg|jpeg|gif|png)\)",
+    re.IGNORECASE,
+)
+
+
+def strip_orphan_images(text: str) -> str:
+    """Remove image refs that point at the missing CHM `_assets/` folder.
+
+    They render as broken images. Stripping them also keeps the
+    fence-builder from absorbing them into surrounding code blocks.
+    """
+    return ORPHAN_IMG_RE.sub("", text)
+
+
+# --- 8b. Strip stripped-tag artifacts ----------------------------------------
+
+def fix_tag_artifacts(text: str) -> str:
+    # `<$nopage>` was an indexer hint; it adds nothing in markdown.
+    text = text.replace("<$nopage>", "")
+    # `<c>X<d>` was `<code>X</code>` -> use backticks. Bound the body to one
+    # line and to characters that wouldn't reasonably contain a `<` or `>`.
+    text = re.sub(r"<c>([^<>\n]{1,80}?)<d>", r"`\1`", text)
+    # `<i>X<d>` was `<i>X</i>` italic -> use *X*.
+    text = re.sub(r"<i>([^<>\n]{1,80}?)<d>", r"*\1*", text)
+    return text
+
+
+# --- 8c. Repair mangled index entry links ------------------------------------
+
+# Two-line pattern:
+#     <indent>label[parent  \n
+#         [ label]](<#anchor>)<trailing>
+# becomes:
+#     [label](<#anchor>)<trailing>
+# The inner `[parent` text may include spaces (e.g. `[include directives`).
+TWO_LINE_INDEX_RE = re.compile(
+    r"^[ \t]*([^\[\n]+?)\[[^\[\]\n]+?[ \t]*\n"
+    r"[ \t]+\[ ?\1 ?\]\]\((<[^>\n]+>)\)([^\n]*)$",
+    re.MULTILINE,
+)
+
+# Same shape but the inner `[ <inner> ]` text is just whitespace - a CHM
+# source artifact where the index sub-entry was literally empty. We use the
+# *outer* label as the link text instead of the missing inner.
+TWO_LINE_INDEX_EMPTY_INNER_RE = re.compile(
+    r"^[ \t]*([^\[\n]+?)\[[^\[\]\n]+?[ \t]*\n"
+    r"[ \t]+\[\s*\]\]\((<[^>\n]+>)\)([^\n]*)$",
+    re.MULTILINE,
+)
+
+# CHM-extractor leftover where the link text was lost and replaced with the
+# literal placeholder `aaa`. The label is the parent term on the line above.
+#     <parent>  \n
+#     [ aaa]](<#anchor>)<trailing>
+# becomes:
+#     [<parent>](<#anchor>)<trailing>
+TWO_LINE_INDEX_AAA_RE = re.compile(
+    r"^([^\[\n]+?)[ \t]*\n"
+    r"[ \t]+\[ aaa\]\]\((<[^>\n]+>)\)([^\n]*)$",
+    re.MULTILINE,
+)
+
+# Same `aaa]]` pattern but the parent line above is itself a link, e.g.
+#     [ casting](<#anchorA>)[ 2nd](<#anchorB>)  \n
+#         [ aaa]](<#anchorC>) [See also ...]
+# We keep the parent line and re-use its label for the sub-entry.
+TWO_LINE_INDEX_AAA_LINKED_PARENT_RE = re.compile(
+    r"^(\[ ([^\]\n]+?)\]\(<[^>]+>\)[^\n]*)\n"
+    r"([ \t]+)\[ aaa\]\]\((<[^>\n]+>)\)([^\n]*)$",
+    re.MULTILINE,
+)
+
+# One-line pattern: `[ outer[inner]](<#anchor>)` -> `[outer](<#anchor>)`.
+ONE_LINE_INDEX_RE = re.compile(
+    r"\[\s*([^\[\]\n]+?)\[[^\[\]\n]+?\]\]\((<[^>\n]+>)\)"
+)
+
+
+def repair_index_links(text: str) -> str:
+    # Drop the original leading indent. The parent term above ends with a
+    # markdown soft-break (`  \n`) so we don't need extra spaces.
+    text = TWO_LINE_INDEX_RE.sub(r"[\1](\2)\3", text)
+    text = TWO_LINE_INDEX_EMPTY_INNER_RE.sub(r"[\1](\2)\3", text)
+    text = TWO_LINE_INDEX_AAA_LINKED_PARENT_RE.sub(
+        r"\1\n\3[\2](\4)\5", text
+    )
+    text = TWO_LINE_INDEX_AAA_RE.sub(r"[\1](\2)\3", text)
+    text = ONE_LINE_INDEX_RE.sub(r"[\1](\2)", text)
+    return text
+
+
+# --- 8d. Convert dead `index_X.html` See refs to plain text ------------------
+
+SEE_REF_RE = re.compile(
+    r"\[See( also)?\s+\[([^\]\n]+?)\]\(<index_[A-Z]\.html[^>]*>\)\]"
+)
+BARE_INDEX_LINK_RE = re.compile(
+    r"\[([^\]\n]+?)\]\(<index_[A-Z]+(?:-[A-Za-z]+)?\.html[^>]*>\)"
+)
+
+
+def neutralize_dead_index_refs(text: str) -> str:
+    def see_sub(m: re.Match) -> str:
+        also = m.group(1) or ""
+        target = m.group(2).strip()
+        return f"(see{also} {target})"
+
+    text = SEE_REF_RE.sub(see_sub, text)
+    # Any remaining bare links to `index_X.html` -> plain text.
+    text = BARE_INDEX_LINK_RE.sub(r"\1", text)
+    return text
+
+
+# --- 8e. Clean up the broken cover/title metadata block ----------------------
+
+# strip_orphan_images() runs before this, so any leading book-cover image
+# has already been removed; the cover block now begins with `| | **<title>**`.
+COVER_BLOCK_RE = re.compile(
+    r"\| \| \*\*(?P<title>[^*\n]+)\*\*[ \t]*\n"
+    r"---[ \t]*\n"
+    r"By (?P<author>[^\n]+?)[ \t]*\n"
+    r"\.+[ \t]*\n"
+    r"Publisher: \*\*(?P<publisher>[^*\n]+)\*\*[ \t]*\n"
+    r"Pub Date: \*\*(?P<date>[^*\n]+)\*\*[ \t]*\n"
+    r"Print ISBN: \*\*(?P<isbn>[^*\n]+)\*\*[ \t]*\n"
+    r"Pages: \*\*(?P<pages>[^*\n]+)\*\*[ \t]*\n"
+    r"\|[ \t]+\n[ \t]*\n"
+    r"\[Table of Contents\]\(<(?P<toc>[^>]+)>[^)]*\)[ \t]+\| \[Index\]\(<(?P<idx>[^>]+)>[^)]*\)\|[ \t]+\|[ \t]*\n"
+    r"---\|---\|---[ \t]*\n",
+    re.MULTILINE,
+)
+
+# After orphan-image stripping, the linked cover image becomes `[](<#anchor>)`.
+LINKED_COVER_BLOCK_RE = re.compile(
+    r"\[\]\(<[^>]+>\)\| \| \*\*[^*\n]+\*\*[ \t]*\n"
+    r"---[ \t]*\n"
+    r"By [^\n]+[ \t]*\n"
+    r"\.+[ \t]*\n"
+    r"Publisher: \*\*[^*\n]+\*\*[ \t]*\n"
+    r"Pub Date: \*\*[^*\n]+\*\*[ \t]*\n"
+    r"Print ISBN: \*\*[^*\n]+\*\*[ \t]*\n"
+    r"Pages: \*\*[^*\n]+\*\*[ \t]*\n"
+    r"\|[ \t]+\n[ \t]*\n"
+    r"\[Table of Contents\]\(<[^>]+>[^)]*\)[ \t]+\| \[Index\]\(<[^>]+>[^)]*\)\|[ \t]+\|[ \t]*\n"
+    r"---\|---\|---[ \t]*\n",
+    re.MULTILINE,
+)
+
+
+def clean_cover_block(text: str) -> str:
+    """The first cover block (right after the # title heading) keeps
+    metadata; the duplicate one above the TOC is just stripped.
+
+    Must run AFTER strip_orphan_images() so the leading book-cover image
+    has already been removed.
+    """
+
+    def replace(m: re.Match) -> str:
+        return (
+            f"By **{m.group('author').strip()}**  \n"
+            f"Publisher: {m.group('publisher').strip()}  \n"
+            f"Pub Date: {m.group('date').strip()}  \n"
+            f"Print ISBN: {m.group('isbn').strip()}  \n"
+            f"Pages: {m.group('pages').strip()}\n\n"
+            f"[Table of Contents](<{m.group('toc')}>) | "
+            f"[Index](<{m.group('idx')}>)\n"
+        )
+
+    text = COVER_BLOCK_RE.sub(replace, text, count=1)
+    text = LINKED_COVER_BLOCK_RE.sub("", text)
+    # The "Overview" banner: the original was `![Overview](...)  \n---  \n`.
+    # strip_orphan_images() killed the image, leaving `<spaces>  \n---  \n`.
+    # Turn that pair into a proper `## Overview` heading.
+    text = re.sub(
+        r"^[ \t]*\n---  \n",
+        "\n## Overview\n\n",
+        text,
+        count=1,
+        flags=re.MULTILINE,
+    )
+    return text
+
+
 # --- 9. Drop standalone TOC asset cells & decorative table fragments ----------
 
 def strip_misc_noise(lines: list[str]) -> list[str]:
     """Drop assorted clutter that adds nothing to the rendered document."""
     INDEX_HEADING_RE = re.compile(r"^#{3,6}\s+Index\s*$")
+    # The per-letter alphabet bar appears at the top of every index page.
+    # After link rewriting/neutralization the SYMBOL link may or may not
+    # still carry a URL, so accept both forms.
     INDEX_LETTER_BAR_RE = re.compile(
-        r"^\s*\[\[SYMBOL\].*\[\[Z\]\([^)]+\)\].*$"
+        r"^\s*\[?\[SYMBOL[^\n]*\[A\][^\n]*\[Z\]\]?\s*$"
     )
     out: list[str] = []
     for line in lines:
@@ -341,14 +539,24 @@ def main() -> None:
     raw = SRC.read_bytes()
     text = raw.decode("utf-8")
     text = re.sub(r"\r+\n?", "\n", text)
+    # The CHM source sprinkles non-breaking spaces (U+00A0) through the
+    # cover panel and inline. They render the same as a normal space but
+    # break naive regex matching.
+    text = text.replace("\u00a0", " ")
 
     # Order matters: do textual fixes first, then line-oriented passes.
     text = replace_unicode_ent_gifs(text)
     text = fix_case_mangling(text)
     text = fix_item_headings(text)
+    text = strip_orphan_images(text)
+    text = fix_tag_artifacts(text)
 
     anchors = build_anchor_map(text)
     text = rewrite_html_links(text, anchors)
+
+    text = repair_index_links(text)
+    text = neutralize_dead_index_refs(text)
+    text = clean_cover_block(text)
 
     lines = text.splitlines()
     lines = strip_nav_chrome(lines)
