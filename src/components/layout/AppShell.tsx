@@ -12,6 +12,8 @@ import SessionNudge from '@/components/gamification/SessionNudge';
 import FocusModeToggle from '@/components/layout/FocusModeToggle';
 import { useSessionStore } from '@/stores/useSessionStore';
 import { useIdleChrome } from '@/hooks/useIdleChrome';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import CommandBar from '@/components/layout/CommandBar';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -23,6 +25,7 @@ const CHROME_SPRING = { type: 'spring' as const, stiffness: 380, damping: 32, ma
 export default function AppShell({ children, pageTitle }: AppShellProps) {
   const focusModeActive = useSessionStore((s) => s.focusModeActive);
   const { visible: chromeVisible } = useIdleChrome();
+  useKeyboardShortcuts();
 
   // Chrome is shown when: focus mode off AND (auto-hide off OR user active)
   const showChrome = !focusModeActive && chromeVisible;
@@ -86,6 +89,9 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
 
         {/* Focus mode toggle — always visible */}
         <FocusModeToggle />
+
+        {/* Command bar (⌘K) */}
+        <CommandBar />
 
         {/* Gamification overlays */}
         <XPToast />
