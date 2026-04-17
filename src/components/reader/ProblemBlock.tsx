@@ -72,46 +72,67 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
     }
   }, [problem, setProblemStatus, awardXP, triggerFiero]);
 
+  const solved = status === 'solved';
+  const attempted = status === 'attempted';
+
   return (
     <div
       ref={ref}
       id={problem.id}
-      className={`reading-card border rounded-lg overflow-hidden scroll-mt-16 transition-colors
-        ${status === 'solved' ? 'border-[#a8d5b5]' : ''}`}
+      className="reading-card overflow-hidden scroll-mt-16 transition-all duration-300"
+      style={{
+        borderRadius: 20,
+        border: solved ? '0.5px solid rgba(48,209,88,0.35)' : '0.5px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+        transitionTimingFunction: 'var(--ease-standard)',
+      }}
     >
       {/* Problem header */}
-      <div className={`reading-card-header px-5 pt-4 pb-3 border-b ${status === 'solved' ? 'border-[#a8d5b5] !bg-[#f6fef9]' : ''}`}>
+      <div
+        className="reading-card-header px-5 pt-4 pb-3"
+        style={{
+          borderBottom: '0.5px solid rgba(0,0,0,0.06)',
+          background: solved ? 'rgba(48,209,88,0.04)' : undefined,
+        }}
+      >
         <div className="flex items-start gap-3">
           {/* Number */}
           <span
-            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5
-              ${status === 'solved'
-                ? 'bg-[#1fab54] text-white'
-                : 'bg-[#f0f1f3] text-[#9299a5] border border-[#e4e6ea]'
-              }`}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 mt-0.5 tracking-tight"
+            style={
+              solved
+                ? { background: '#30d158', color: '#ffffff' }
+                : { background: 'rgba(0,0,0,0.05)', color: '#86868b', border: '0.5px solid rgba(0,0,0,0.08)' }
+            }
           >
             {index}
           </span>
 
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-[10px] font-bold text-[#9299a5] uppercase tracking-wider">{problem.section}</span>
+              <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-[0.06em]">{problem.section}</span>
               <DifficultyBadge difficulty={problem.difficulty} />
-              {status === 'solved' && (
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e6f4ea] text-[#1fab54] border border-[#a8d5b5]">
+              {solved && (
+                <span
+                  className="px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-tight"
+                  style={{ background: 'rgba(48,209,88,0.14)', color: '#1f9b46' }}
+                >
                   ✓ Solved
                 </span>
               )}
-              {status === 'attempted' && (
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#fef9e7] text-[#f5a623] border border-[#fdd8a0]">
+              {attempted && (
+                <span
+                  className="px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-tight"
+                  style={{ background: 'rgba(255,159,10,0.14)', color: '#b76d07' }}
+                >
                   In progress
                 </span>
               )}
             </div>
-            <h3 className="text-base font-bold text-[#21242c]">{problem.title}</h3>
+            <h3 className="text-[15px] font-semibold text-[#1d1d1f] tracking-tight">{problem.title}</h3>
             {problem.keyTechnique && (
-              <p className="text-xs text-[#9299a5] mt-0.5">
-                <span className="font-semibold text-[#626975]">Technique:</span> {problem.keyTechnique}
+              <p className="text-[11px] text-[#86868b] mt-0.5">
+                <span className="font-semibold text-[#6e6e73]">Technique:</span> {problem.keyTechnique}
               </p>
             )}
           </div>
@@ -120,7 +141,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
 
       {/* Problem setup */}
       <div className="px-5 py-4">
-        <div className="prose-reading text-[#21242c]">
+        <div className="prose-reading text-[#1d1d1f]">
           <MarkdownRenderer content={problem.setup} />
         </div>
       </div>
