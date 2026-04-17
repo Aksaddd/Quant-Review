@@ -91,7 +91,7 @@ export const DEFAULT_READING_SETTINGS: ReadingSettingsData = {
   textContrast: 'normal',
   accent: 'teal',
   focusMode: false,
-  chromeAutoHide: true,
+  chromeAutoHide: false,
   hapticsEnabled: true,
 };
 
@@ -131,13 +131,22 @@ export const useReadingSettingsStore = create<ReadingSettingsState>()(
     }),
     {
       name: 'qr:settings',
-      version: 3,
+      version: 4,
       // Merge with defaults so new fields (accent, focusMode, ...) backfill
       // for users restoring v1/v2 data.
       merge: (persisted, current) => ({
         ...current,
         ...(persisted as Partial<ReadingSettingsData>),
       }),
+      // v4 resets chromeAutoHide — prior default of `true` caused the sidebar
+      // to vanish after 2.5s of inactivity on every page.
+      migrate: (persisted, version) => {
+        const state = (persisted ?? {}) as Partial<ReadingSettingsData>;
+        if (version < 4) {
+          return { ...state, chromeAutoHide: false };
+        }
+        return state;
+      },
     }
   )
 );
