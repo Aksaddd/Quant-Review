@@ -7,12 +7,12 @@ import { flashcardsById } from '@/data/flashcards';
 import { problemsById } from '@/data/problems';
 import type { ReviewGrade } from '@/lib/types';
 
-const GRADE_META: Record<ReviewGrade, { label: string; color: string; bg: string; border: string }> = {
-  blackout: { label: 'Blackout', color: '#d92916', bg: '#fce8e6', border: '#f5c6c0' },
-  again:    { label: 'Wrong',    color: '#e8591a', bg: '#fef0e7', border: '#fbc8a0' },
-  hard:     { label: 'Hard',     color: '#f5a623', bg: '#fef9e7', border: '#fdd8a0' },
-  good:     { label: 'Good',     color: '#1865f2', bg: '#e8f0fe', border: '#a8c4f8' },
-  easy:     { label: 'Easy',     color: '#1fab54', bg: '#e6f4ea', border: '#a8d5b5' },
+const GRADE_META: Record<ReviewGrade, { label: string; color: string; bg: string }> = {
+  blackout: { label: 'Blackout', color: '#ff453a', bg: 'rgba(255,69,58,0.12)' },
+  again:    { label: 'Wrong',    color: '#ff6a37', bg: 'rgba(255,106,55,0.12)' },
+  hard:     { label: 'Hard',     color: '#b76d07', bg: 'rgba(255,159,10,0.14)' },
+  good:     { label: 'Good',     color: 'var(--eureka-accent)', bg: 'var(--eureka-accent-tint)' },
+  easy:     { label: 'Easy',     color: '#1f9b46', bg: 'rgba(48,209,88,0.14)' },
 };
 
 export default function FlashcardGradeHistory() {
@@ -28,10 +28,11 @@ export default function FlashcardGradeHistory() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-[#21242c]">Flashcard Ratings</h2>
+        <h2 className="text-[17px] font-semibold tracking-tight text-[#1d1d1f]">Flashcard Ratings</h2>
         <Link
           href="/flashcards"
-          className="text-sm font-semibold text-[var(--ka-blue)] hover:underline flex items-center gap-1"
+          className="text-[13px] font-semibold hover:underline flex items-center gap-1"
+          style={{ color: 'var(--eureka-accent)' }}
         >
           Review cards
         </Link>
@@ -53,30 +54,41 @@ export default function FlashcardGradeHistory() {
           return (
             <div
               key={sm2.cardId}
-              className="flex items-center gap-3 px-4 py-2.5 bg-white border border-[#e4e6ea] rounded-lg"
+              className="flex items-center gap-3 px-4 py-2.5"
+              style={{
+                background: '#ffffff',
+                border: '0.5px solid rgba(0,0,0,0.06)',
+                borderRadius: 12,
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              }}
             >
-              {/* Grade badge */}
+              {/* Grade badge — tint only, no border */}
               <span
-                className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full border"
-                style={{ color: meta.color, backgroundColor: meta.bg, borderColor: meta.border }}
+                className="shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-md tracking-tight"
+                style={{ color: meta.color, background: meta.bg }}
               >
                 {meta.label}
               </span>
 
-              {/* Card title */}
-              <p className="flex-1 text-sm text-[#21242c] truncate">{title}</p>
+              <p className="flex-1 text-[13px] text-[#1d1d1f] truncate tracking-tight">{title}</p>
 
-              {/* Section */}
-              <span className="text-[10px] font-mono text-[#9299a5] shrink-0">{card.section}</span>
+              <span className="text-[10px] font-mono text-[#86868b] shrink-0 tabular-nums">{card.section}</span>
             </div>
           );
         })}
       </div>
 
       {reviewed.length === 0 && (
-        <div className="text-center py-10 bg-white border border-[#e4e6ea] rounded-lg">
-          <Brain size={24} className="text-[#9299a5] mx-auto mb-2" />
-          <p className="text-sm text-[#626975]">No cards reviewed yet.</p>
+        <div
+          className="text-center py-10"
+          style={{
+            background: '#ffffff',
+            border: '0.5px solid rgba(0,0,0,0.06)',
+            borderRadius: 16,
+          }}
+        >
+          <Brain size={24} className="text-[#86868b] mx-auto mb-2" />
+          <p className="text-[13px] text-[#6e6e73]">No cards reviewed yet.</p>
         </div>
       )}
     </div>
