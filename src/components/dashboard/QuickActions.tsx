@@ -9,41 +9,57 @@ const ACTIONS = [
     label: 'Continue reading',
     description: 'Chapter 2: Brain Teasers',
     href: '/read/chapter-2',
-    color: 'var(--ka-blue)',
-    bg: 'var(--ka-blue-light)',
-    border: '#a8c4f8',
+    color: 'var(--eureka-accent)',
+    tint: 'var(--eureka-accent-tint)',
   },
   {
     icon: Layers,
     label: 'Practice flashcards',
     description: 'Spaced repetition review',
     href: '/flashcards',
-    color: '#1fab54',
-    bg: '#e6f4ea',
-    border: '#a8d5b5',
+    color: '#30d158',
+    tint: 'rgba(48,209,88,0.12)',
   },
 ];
 
 export default function QuickActions() {
   return (
     <div className="grid sm:grid-cols-2 gap-3">
-      {ACTIONS.map(({ icon: Icon, label, description, href, color, bg, border }) => (
+      {ACTIONS.map(({ icon: Icon, label, description, href, color, tint }) => (
         <Link
           key={href}
           href={href}
-          className="group flex items-center gap-4 p-4 bg-white border border-[#e4e6ea] rounded-lg hover:border-[#c8ccd4] hover:shadow-sm transition-all duration-150"
+          className="group flex items-center gap-4 p-4 transition-all duration-200"
+          style={{
+            background: '#ffffff',
+            border: '0.5px solid rgba(0,0,0,0.06)',
+            borderRadius: 16,
+            boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+            transitionTimingFunction: 'var(--ease-standard)',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-1px)')}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
         >
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border"
-            style={{ backgroundColor: bg, borderColor: border }}
+            className="w-10 h-10 flex items-center justify-center shrink-0"
+            style={{
+              background: tint,
+              borderRadius: 12,
+              border: '0.5px solid rgba(0,0,0,0.04)',
+            }}
           >
             <Icon size={18} style={{ color }} />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-semibold text-[#21242c] group-hover:text-[var(--ka-blue)] transition-colors">{label}</p>
-            <p className="text-xs text-[#9299a5]">{description}</p>
+            <p className="text-[14px] font-semibold tracking-tight text-[#1d1d1f] group-hover:text-[color:var(--eureka-accent)] transition-colors duration-200"
+               style={{ transitionTimingFunction: 'var(--ease-standard)' }}>{label}</p>
+            <p className="text-[11px] text-[#86868b]">{description}</p>
           </div>
-          <ArrowRight size={15} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] group-hover:translate-x-0.5 transition-all shrink-0" />
+          <ArrowRight
+            size={15}
+            className="text-[#86868b] group-hover:translate-x-0.5 transition-all duration-200 shrink-0"
+            style={{ transitionTimingFunction: 'var(--ease-standard)' }}
+          />
         </Link>
       ))}
     </div>
