@@ -3980,38 +3980,26 @@ The **Bellman–Ford algorithm**$^1$ finds shortest paths from a starting node t
 
 Let us consider how the Bellman–Ford algorithm works in the following graph:
 
-0 $\infty$
-
-![Figure from page 133](figures/fig_p133_047.png)
-
-$\infty$
+![Starting graph for Bellman-Ford example with all distances infinite except node 1 (distance 0)](figures/fig_p133_047.png)
 
 > **[1]** The algorithm is named after R. E. Bellman and L. R. Ford who published it independently in 1958 and 1956, respectively [5, 24].
 
 <!-- PAGE 134 -->
 Each node of the graph is assigned a distance. Initially, the distance to the starting node is 0, and the distance to all other nodes is infinite. The algorithm searches for edges that reduce distances. First, all edges from node 1 reduce distances:
 
-![Figure from page 134](figures/fig_p134_048.png)
-
-$\infty$
+![Bellman-Ford after relaxing all edges from node 1](figures/fig_p134_048.png)
 
 After this, edges 2 $\to$ 5 and 3 $\to$ 4 reduce distances:
 
-![Figure from page 134](figures/fig_p134_049.png)
-
-![Figure from page 134](figures/fig_p134_auto1.png)
+![Bellman-Ford after relaxing edges 2→5 and 3→4](figures/fig_p134_auto1.png)
 
 Finally, there is one more change:
 
-![Figure from page 134](figures/fig_p134_050.png)
-
-![Figure from page 134](figures/fig_p134_auto2.png)
+![Bellman-Ford after one more relaxation round](figures/fig_p134_auto2.png)
 
 After this, no edge can reduce any distance. This means that the distances are final, and we have successfully calculated the shortest distances from the starting node to all nodes of the graph. For example, the shortest distance 3 from node 1 to node 5 corresponds to the following path:
 
-![Figure from page 134](figures/fig_p134_051.png)
-
-![Figure from page 134](figures/fig_p134_auto3.png)
+![Shortest path 1→3→4→5 highlighted in red](figures/fig_p134_auto3.png)
 
 <!-- PAGE 135 -->
 ### Implementation
@@ -5936,7 +5924,7 @@ which is based on the fact that there are $n-1$ possible positions for +-signs i
 
 ## Binomial coefficients
 
-The **binomial coefficient** $¡^n$ $^k$ $¢$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $¡^5$ $^3$ $¢$ $= 10$, because the set {1,2,3,4,5} has 10 subsets of 3 elements:
+The **binomial coefficient** $\binom{n}{k}$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $\binom{5}{3}$ $= 10$, because the set {1,2,3,4,5} has 10 subsets of 3 elements:
 
 {1,2,3},{1,2,4},{1,2,5},{1,3,4},{1,3,5},{1,4,5},{2,3,4},{2,3,5},{2,4,5},{3,4,5}
 
@@ -5944,33 +5932,9 @@ The **binomial coefficient** $¡^n$ $^k$ $¢$ equals the number of ways we can c
 
 Binomial coefficients can be recursively calculated as follows:
 
-$Ã$ $n$ $k$
+$$\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.$$
 
-$!$
-
-$Ã$ $n-1$ $k -1$
-
-$!$
-
-$Ã$ $n-1$ $k$
-
-$!$
-
-$=$
-
-$+$
-
-The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -1$ elements from $n-1$ elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-1$ elements. The base cases for the recursion are $Ã$ $n$ 0
-
-$!$
-
-$Ã$ $n$ $n$
-
-$!$
-
-$=$
-
-$= 1$,
+The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -1$ elements from $n-1$ elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-1$ elements. The base cases for the recursion are $$\binom{n}{0} = \binom{n}{n} = 1,$$
 
 because there is always exactly one way to construct an empty subset and a subset that contains all the elements.
 
@@ -5978,27 +5942,15 @@ because there is always exactly one way to construct an empty subset and a subse
 
 Another way to calculate binomial coefficients is as follows:
 
-$Ã$ $n$ $k$
-
-$!$
-
-$=$ $n$! $k$!($n-k$)!.
+$$\binom{n}{k} = \frac{n!}{k!(n-k)!}.$$
 
 There are $n$! permutations of $n$ elements. We go through all permutations and always include the first $k$ elements of the permutation in the subset. Since the order of the elements in the subset and outside the subset does not matter, the result is divided by $k$! and ($n-k$)!
 
 ### Properties
 
-For binomial coefficients, $Ã$ $n$ $k$
+For binomial coefficients,
 
-$!$
-
-$Ã$ $n$ $n-k$
-
-$!$
-
-$=$
-
-,
+$$\binom{n}{k} = \binom{n}{n-k},$$
 
 <!-- PAGE 219 -->
 
@@ -6037,7 +5989,7 @@ In this scenario, the answer is directly the binomial coefficient $\binom{n}{k}$
 
 ![15 configurations of 2 balls in 5 boxes with any box able to hold multiple balls](figures/fig_p219_scenario2.png)
 <!-- PAGE 220 -->
-The process of placing the balls in the boxes can be represented as a string that consists of symbols "o" and "$\to$ ". Initially, assume that we are standing at the leftmost box. The symbol "o" means that we place a ball in the current box, and the symbol "$\to$ " means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol "o" and $n-1$ times the symbol "$\to$ ". For example, the upper-right solution in the above picture corresponds to the string "$\to \to$ o $\to$ o $\to$ ". Thus, the number of solutions is $¡^{k+n-1}$ $^k$ $¢$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:
+The process of placing the balls in the boxes can be represented as a string that consists of symbols "o" and "$\to$ ". Initially, assume that we are standing at the leftmost box. The symbol "o" means that we place a ball in the current box, and the symbol "$\to$ " means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol "o" and $n-1$ times the symbol "$\to$ ". For example, the upper-right solution in the above picture corresponds to the string "$\to \to$ o $\to$ o $\to$ ". Thus, the number of solutions is $\binom{k+n-1}{k}$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:
 
 ![Figure from page 220](figures/fig_p220_117.png)
 
@@ -6045,15 +5997,13 @@ The process of placing the balls in the boxes can be represented as a string tha
 
 ![Figure from page 220](figures/fig_p220_119.png)
 
-In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k+1$ such boxes and $k+1$ positions for them. Thus, using the formula of scenario 2, the number of solutions is $¡^{n-k+1}$ $^{n-2k+1}$ $¢$ .
+In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k+1$ such boxes and $k+1$ positions for them. Thus, using the formula of scenario 2, the number of solutions is $\binom{n-k+1}{n-2k+1}$ .
 
 ### Multinomial coefficients
 
-The **multinomial coefficient** $Ã$ $n$ $k_1,k_2,...,k_m$
+The **multinomial coefficient**
 
-$!$
-
-$=$ $n$! $k_1$!$k_2$!$\cdot \cdot \cdot k_m$!,
+$$\binom{n}{k_1, k_2, \ldots, k_m} = \frac{n!}{k_1!\, k_2! \cdots k_m!},$$
 
 equals the number of ways we can divide $n$ elements into subsets of sizes $k_1,k_2,...,k_m$, where $k_1 +k_2 +\cdot \cdot \cdot +k_m = n$. Multinomial coefficients can be seen as a generalization of binomial cofficients; if $m =$ 2, the above formula corresponds to the binomial coefficient formula.
 
@@ -6086,15 +6036,13 @@ Another way to characterize valid parenthesis expressions is that if we choose a
 
 Catalan numbers can be calculated using the formula
 
-$C_n =$ $^{n-1}$ $X$
-
-$^{i=0}$ $C_iC_n^-_i^-_1$.
+$$C_n = \sum_{i=0}^{n-1} C_i \, C_{n-i-1}.$$
 
 The sum goes through the ways to divide the expression into two parts such that both parts are valid expressions and the first part is as short as possible but not empty. For any $i$, the first part contains $i+1$ pairs of parentheses and the number of expressions is the product of the following values:
 
 • $C_i$: the number of ways to construct an expression using the parentheses of the first part, not counting the outermost parentheses
 
-• $C_n^-_i^-_1$: the number of ways to construct an expression using the parentheses of the second part
+- $C_{n-i-1}$: the number of ways to construct an expression using the parentheses of the second part
 
 The base case is $C_0 =$ 1, because we can construct an empty parenthesis expression using zero pairs of parentheses.
 
@@ -6102,13 +6050,9 @@ The base case is $C_0 =$ 1, because we can construct an empty parenthesis expres
 
 Catalan numbers can also be calculated using binomial coefficients:
 
-$Ã$ 2$n$ $n$
+$$C_n = \frac{1}{n+1} \binom{2n}{n}.$$
 
-$!$
-
-$C_n =$ 1 $n+1$
-
-The formula can be explained as follows: There are a total of $¡^{2n}$ $^n$ $¢$ ways to construct a (not necessarily valid) parenthesis expression that contains $n$ left parentheses and $n$ right parentheses. Let us calculate the number of such expressions that are $not$ valid. If a parenthesis expression is not valid, it has to contain a prefix where the number of right parentheses exceeds the number of left parentheses. The
+The formula can be explained as follows: There are a total of $\binom{2n}{n}$ ways to construct a (not necessarily valid) parenthesis expression that contains $n$ left parentheses and $n$ right parentheses. Let us calculate the number of such expressions that are $not$ valid. If a parenthesis expression is not valid, it has to contain a prefix where the number of right parentheses exceeds the number of left parentheses. The
 
 <!-- PAGE 222 -->
 
@@ -6561,22 +6505,16 @@ number of desired outcomes
 
 total number of outcomes .
 
-In this problem, the desired outcomes are those in which the value of each card is the same. There are 13 $¡^4$ $^3$ $¢$ such outcomes, because there are 13 possibilities for the value of the cards and $¡^4$ $^3$ $¢$ ways to choose 3 suits from 4 possible suits. There are a total of $¡^{52}$ $^3$ $¢$ outcomes, because we choose 3 cards from 52 cards. Thus, the probability of the event is
+In this problem, the desired outcomes are those in which the value of each card is the same. There are $13\binom{4}{3}$ such outcomes, because there are 13 possibilities for the value of the cards and $\binom{4}{3}$ ways to choose 3 suits from 4 possible suits. There are a total of $\binom{52}{3}$ outcomes, because we choose 3 cards from 52 cards. Thus, the probability of the event is
 
-13 $¡^4$ $^3$ $¢$
-
-$¡^{52}$ $^3$ $¢ =$ 1 425.
+$$\frac{13 \binom{4}{3}}{\binom{52}{3}} = \frac{1}{425}.$$
 
 <!-- PAGE 236 -->
 ### Method 2
 
 Another way to calculate the probability is to simulate the process that generates the event. In this example, we draw three cards, so the process consists of three steps. We require that each step of the process is successful. Drawing the first card certainly succeeds, because there are no restrictions. The second step succeeds with probability 3/51, because there are 51 cards left and 3 of them have the same value as the first card. In a similar way, the third step succeeds with probability 2/50. The probability that the entire process succeeds is
 
-1$\cdot$  3
-
-51 $\cdot$  2
-
-50 $= 1$ 425.
+$$1 \cdot \frac{3}{51} \cdot \frac{2}{50} = \frac{1}{425}.$$
 
 ### Events
 
@@ -6711,48 +6649,34 @@ Let us now consider a problem where $n$ balls are randomly placed in $n$ boxes, 
 
 In this case, the expected number of empty boxes is
 
-0$+0+1+1$
-
-4 $= 1$
-
-2.
+$$\frac{0 + 0 + 1 + 1}{4} = \frac{1}{2}.$$
 
 In the general case, the probability that a single box is empty is
 
-$³n-1$
-
-$´^n$ ,
-
-$n$
+$$\left(\frac{n-1}{n}\right)^n,$$
 
 because no ball should be placed in it. Hence, using linearity, the expected number of empty boxes is
 
-$n\cdot$ $³n-1$
-
-$´^n$ .
-
-$n$
+$$n \cdot \left(\frac{n-1}{n}\right)^n.$$
 
 ### Distributions
 
 The **distribution** of a random variable $X$ shows the probability of each value that $X$ may have. The distribution consists of values $P(X = x)$. For example, when throwing two dice, the distribution for their sum is:
 
-$x$ 2 3 4 5 6 7 8 9 10 11 12 $P(X = x)$ 1/36 2/36 3/36 4/36 5/36 6/36 5/36 4/36 3/36 2/36 1/36
+| $x$ | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $P(X = x)$ | 1/36 | 2/36 | 3/36 | 4/36 | 5/36 | 6/36 | 5/36 | 4/36 | 3/36 | 2/36 | 1/36 |
 
 <!-- PAGE 240 -->
-In a **uniform distribution**, the random variable $X$ has $n$ possible values $a,a+1,...,b$ and the probability of each value is 1/$n$. For example, when throwing a dice, $a =$ 1, $b =$ 6 and $P(X = x) =$ 1/6 for each value $x$. The expected value of $X$ in a uniform distribution is
+In a **uniform distribution**, the random variable $X$ has $n$ possible values $a, a+1, \ldots, b$ and the probability of each value is $1/n$. For example, when throwing a dice, $a = 1$, $b = 6$ and $P(X = x) = 1/6$ for each value $x$. The expected value of $X$ in a uniform distribution is
 
-$E[X] =$ $a+ b$
+$$E[X] = \frac{a + b}{2}.$$
 
 In a **binomial distribution**, $n$ attempts are made and the probability that a single attempt succeeds is $p$. The random variable $X$ counts the number of successful attempts, and the probability of a value $x$ is
 
-$!$
+$$P(X = x) = p^x (1-p)^{n-x} \binom{n}{x},$$
 
-$P(X = x) = p^x(1-p)^{n-x}$ $Ã$ $n$ $x$
-
-,
-
-where $p^x$ and (1$-p)^{n-x}$ correspond to successful and unsuccessful attemps, and $¡^n$ $^x$ $¢$ is the number of ways we can choose the order of the attempts. For example, when throwing a dice ten times, the probability of throwing a six exactly three times is (1/6)$^3(5/6)^7¡^{10}$ $^3$ $¢$ . The expected value of $X$ in a binomial distribution is
+where $p^x$ and $(1-p)^{n-x}$ correspond to successful and unsuccessful attempts, and $\binom{n}{x}$ is the number of ways we can choose the order of the attempts. For example, when throwing a dice ten times, the probability of throwing a six exactly three times is $(1/6)^3 (5/6)^7 \binom{10}{3}$. The expected value of $X$ in a binomial distribution is
 
 $E[X] = pn$.
 
@@ -6760,11 +6684,9 @@ In a **geometric distribution**, the probability that an attempt succeeds is $p$
 
 $P(X = x) = (1-p)^{x-1}p$,
 
-where (1$-p)^{x-1}$ corresponds to the unsuccessful attemps and $p$ corresponds to the first successful attempt. For example, if we throw a dice until we throw a six, the probability that the number of throws is exactly 4 is (5/6)$^3$1/6. The expected value of $X$ in a geometric distribution is
+where $(1-p)^{x-1}$ corresponds to the unsuccessful attempts and $p$ corresponds to the first successful attempt. For example, if we throw a dice until we throw a six, the probability that the number of throws is exactly 4 is $(5/6)^3 \cdot 1/6$. The expected value of $X$ in a geometric distribution is
 
-$E[X] =$ 1
-
-$p$.
+$$E[X] = \frac{1}{p}.$$
 
 ### Markov chains
 
@@ -7305,41 +7227,16 @@ In this section we discuss two square root algorithms that are based on combinin
 
 ### Case processing
 
-Suppose that we are given a two-dimensional grid that contains $n$ cells. Each cell is assigned a letter, and our task is to find two cells with the same letter whose distance is minimum, where the distance between cells ($x_1, y_1$) and ($x_2, y_2$) is $|x_1 -x_2|+|y_1 -y_2|$. For example, consider the following grid:
+Suppose that we are given a two-dimensional grid that contains $n$ cells. Each cell is assigned a letter, and our task is to find two cells with the same letter whose distance is minimum, where the distance between cells $(x_1, y_1)$ and $(x_2, y_2)$ is $|x_1 - x_2| + |y_1 - y_2|$. For example, consider the following grid:
 
-A
+```
+A F B A
+C G E E
+B D A F
+C A B D
+```
 
-F
-
-B
-
-A
-
-C
-
-G
-
-E
-
-E
-
-B
-
-D
-
-A
-
-F
-
-C
-
-A
-
-B
-
-D
-
-In this case, the minimum distance is 2 between the two ’E’ letters. We can solve the problem by considering each letter separately. Using this approach, the new problem is to calculate the minimum distance between two cells with a *fixed* letter $c$. We focus on two algorithms for this: *Algorithm 1:* Go through all pairs of cells with letter $c$, and calculate the minimum distance between such cells. This will take $O(k^2)$ time where $k$ is the number of cells with letter $c$. *Algorithm 2:* Perform a breadth-first search that simultaneously starts at each cell with letter $c$. The minimum distance between two cells with letter $c$ will be calculated in $O(n)$ time. One way to solve the problem is to choose either of the algorithms and use it for all letters. If we use Algorithm 1, the running time is $O(n^2)$, because all cells may contain the same letter, and in this case $k = n$. Also if we use Algorithm 2, the running time is $O(n^2)$, because all cells may have different letters, and in this case $n$ searches are needed.
+In this case, the minimum distance is 2 between the two 'E' letters. We can solve the problem by considering each letter separately. Using this approach, the new problem is to calculate the minimum distance between two cells with a *fixed* letter $c$. We focus on two algorithms for this: *Algorithm 1:* Go through all pairs of cells with letter $c$, and calculate the minimum distance between such cells. This will take $O(k^2)$ time where $k$ is the number of cells with letter $c$. *Algorithm 2:* Perform a breadth-first search that simultaneously starts at each cell with letter $c$. The minimum distance between two cells with letter $c$ will be calculated in $O(n)$ time. One way to solve the problem is to choose either of the algorithms and use it for all letters. If we use Algorithm 1, the running time is $O(n^2)$, because all cells may contain the same letter, and in this case $k = n$. Also if we use Algorithm 2, the running time is $O(n^2)$, because all cells may have different letters, and in this case $n$ searches are needed.
 
 <!-- PAGE 263 -->
 However, we can *combine* the two algorithms and use different algorithms for different letters depending on how many times each letter appears in the grid. Assume that a letter $c$ appears $k$ times. If $k \le pn$, we use Algorithm 1, and if $k > pn$, we use Algorithm 2. It turns out that by doing this, the total running time of the algorithm is only $O(npn)$. First, suppose that we use Algorithm 1 for a letter $c$. Since $c$ appears at most $pn$ times in the grid, we compare each cell with letter *c O*($pn$) times with other cells. Thus, the time used for processing all such cells is $O(npn)$. Then, suppose that we use Algorithm 2 for a letter $c$. There are at most $pn$ such letters, so processing those letters also takes $O(npn)$ time.
@@ -7491,20 +7388,16 @@ Note that sometimes it is needed to combine lazy updates. This happens when a no
 
 Lazy updates can be generalized so that it is possible to update ranges using polynomials of the form
 
-$p(u) = t_ku^k + t_k^-_1u^{k-1} +\cdot \cdot \cdot + t_0$.
+$$p(u) = t_k u^k + t_{k-1} u^{k-1} + \cdots + t_0.$$
 
-In this case, the update for a value at position $i$ in [$a,b$] is $p(i -a)$. For example, adding the polynomial $p(u) = u+1$ to [$a,b$] means that the value at position $a$ increases by 1, the value at position $a+1$ increases by 2, and so on. To support polynomial updates, each node is assigned $k+2$ values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1,..., z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range [$x, y$] equals
+In this case, the update for a value at position $i$ in $[a, b]$ is $p(i - a)$. For example, adding the polynomial $p(u) = u + 1$ to $[a, b]$ means that the value at position $a$ increases by 1, the value at position $a + 1$ increases by 2, and so on. To support polynomial updates, each node is assigned $k + 2$ values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1, \ldots, z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range $[x, y]$ equals
 
-$^{y-x}$ $X$
-
-$^{u=0}$ $z_ku^k + z_k^-_1u^{k-1} +\cdot \cdot \cdot + z_0$.
-
-$s+$
+$$s + \sum_{u=0}^{y-x} \left( z_k u^k + z_{k-1} u^{k-1} + \cdots + z_0 \right).$$
 
 <!-- PAGE 271 -->
 The value of such a sum can be efficiently calculated using sum formulas. For example, the term $z_0$ corresponds to the sum ($y-x+1)z_0$, and the term $z_1u$ corresponds to the sum
 
-$z_1(0+1+\cdot \cdot \cdot + y-x) = z_1$ ($y-x)(y-x+1$)
+$$z_1 (0 + 1 + \cdots + (y - x)) = z_1 \cdot \frac{(y - x)(y - x + 1)}{2}.$$
 
 When propagating an update in the tree, the indices of $p(u)$ change, because in each range [$x, y$], the values are calculated for $u = 0,1,..., y-x$. However, this is not a problem, because $p^′(u) = p(u + h)$ is a polynomial of equal degree as $p(u)$. For example, if $p(u) = t_2u^2 + t_1u -t_0$, then
 

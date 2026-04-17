@@ -7490,158 +7490,146 @@
       },
       {
         "order": 3,
-        "text": "0 $\\infty$"
-      },
-      {
-        "order": 4,
-        "text": "$\\infty$"
-      },
-      {
-        "order": 5,
         "text": "Each node of the graph is assigned a distance. Initially, the distance to the starting node is 0, and the distance to all other nodes is infinite. The algorithm searches for edges that reduce distances. First, all edges from node 1 reduce distances:"
       },
       {
-        "order": 6,
-        "text": "$\\infty$"
-      },
-      {
-        "order": 7,
+        "order": 4,
         "text": "After this, edges 2 $\\to$ 5 and 3 $\\to$ 4 reduce distances:"
       },
       {
-        "order": 8,
+        "order": 5,
         "text": "Finally, there is one more change:"
       },
       {
-        "order": 9,
+        "order": 6,
         "text": "After this, no edge can reduce any distance. This means that the distances are final, and we have successfully calculated the shortest distances from the starting node to all nodes of the graph. For example, the shortest distance 3 from node 1 to node 5 corresponds to the following path:"
       },
       {
-        "order": 10,
+        "order": 7,
         "text": "The following implementation of the Bellman–Ford algorithm determines the shortest distances from a node $x$ to all nodes of the graph. The code assumes that the graph is stored as an edge list `edges` that consists of tuples of the form ($a,b,w$), meaning that there is an edge from node $a$ to node $b$ with weight $w$. The algorithm consists of $n-1$ rounds, and on each round the algorithm goes through all edges of the graph and tries to reduce the distances. The algorithm constructs an array `distance` that will contain the distances from $x$ to all nodes of the graph. The constant `INF` denotes an infinite distance."
       },
       {
-        "order": 11,
+        "order": 8,
         "text": "The time complexity of the algorithm is $O(nm)$, because the algorithm consists of $n-1$ rounds and iterates through all $m$ edges during a round. If there are no negative cycles in the graph, all distances are final after $n-1$ rounds, because each shortest path can contain at most $n-1$ edges. In practice, the final distances can usually be found faster than in $n-1$ rounds. Thus, a possible way to make the algorithm more efficient is to stop the algorithm if no distance can be reduced during a round."
       },
       {
-        "order": 12,
+        "order": 9,
         "text": "The Bellman–Ford algorithm can also be used to check if the graph contains a cycle with negative length. For example, the graph"
       },
       {
-        "order": 13,
+        "order": 10,
         "text": "contains a negative cycle 2 $\\to 3 \\to 4 \\to$ 2 with length $-4$. If the graph contains a negative cycle, we can shorten infinitely many times any path that contains the cycle by repeating the cycle again and again. Thus, the concept of a shortest path is not meaningful in this situation. A negative cycle can be detected using the Bellman–Ford algorithm by running the algorithm for $n$ rounds. If the last round reduces any distance, the graph contains a negative cycle. Note that this algorithm can be used to search for a negative cycle in the whole graph regardless of the starting node."
       },
       {
-        "order": 14,
+        "order": 11,
         "text": "The **SPFA algorithm** (\"Shortest Path Faster Algorithm\") [20] is a variant of the Bellman–Ford algorithm, that is often more efficient than the original algorithm. The SPFA algorithm does not go through all the edges on each round, but instead, it chooses the edges to be examined in a more intelligent way. The algorithm maintains a queue of nodes that might be used for reducing the distances. First, the algorithm adds the starting node $x$ to the queue. Then, the algorithm always processes the first node in the queue, and when an edge $a \\to b$ reduces a distance, node $b$ is added to the queue. The efficiency of the SPFA algorithm depends on the structure of the graph: the algorithm is often efficient, but its worst case time complexity is still $O(nm)$ and it is possible to create inputs that make the algorithm as slow as the original Bellman–Ford algorithm."
       },
       {
-        "order": 15,
+        "order": 12,
         "text": "**Dijkstra’s algorithm**$^2$ finds shortest paths from the starting node to all nodes of the graph, like the Bellman–Ford algorithm. The benefit of Dijsktra’s algorithm is that it is more efficient and can be used for processing large graphs. However, the algorithm requires that there are no negative weight edges in the graph. Like the Bellman–Ford algorithm, Dijkstra’s algorithm maintains distances to the nodes and reduces them during the search. Dijkstra’s algorithm is efficient, because it only processes each edge in the graph once, using the fact that there are no negative edges."
       },
       {
-        "order": 16,
+        "order": 13,
         "text": "Let us consider how Dijkstra’s algorithm works in the following graph when the starting node is node 1:"
       },
       {
-        "order": 17,
+        "order": 14,
         "text": "$\\infty$ $\\infty$"
       },
       {
-        "order": 18,
+        "order": 15,
         "text": "$\\infty$"
       },
       {
-        "order": 19,
+        "order": 16,
         "text": "$\\infty$ 0"
       },
       {
-        "order": 20,
+        "order": 17,
         "text": "Like in the Bellman–Ford algorithm, initially the distance to the starting node is 0 and the distance to all other nodes is infinite. At each step, Dijkstra’s algorithm selects a node that has not been processed yet and whose distance is as small as possible. The first such node is node 1 with distance 0."
       },
       {
-        "order": 21,
+        "order": 18,
         "text": "When a node is selected, the algorithm goes through all edges that start at the node and reduces the distances using them:"
       },
       {
-        "order": 22,
+        "order": 19,
         "text": "$\\infty$ 9"
       },
       {
-        "order": 23,
+        "order": 20,
         "text": "In this case, the edges from node 1 reduced the distances of nodes 2, 4 and 5, whose distances are now 5, 9 and 1. The next node to be processed is node 5 with distance 1. This reduces the distance to node 4 from 9 to 3:"
       },
       {
-        "order": 24,
+        "order": 21,
         "text": "$\\infty$ 3"
       },
       {
-        "order": 25,
+        "order": 22,
         "text": "After this, the next node is node 4, which reduces the distance to node 3 to 9:"
       },
       {
-        "order": 26,
+        "order": 23,
         "text": "A remarkable property in Dijkstra’s algorithm is that whenever a node is selected, its distance is final. For example, at this point of the algorithm, the distances 0, 1 and 3 are the final distances to nodes 1, 5 and 4. After this, the algorithm processes the two remaining nodes, and the final distances are as follows:"
       },
       {
-        "order": 27,
+        "order": 24,
         "text": "The efficiency of Dijkstra’s algorithm is based on the fact that the graph does not contain negative edges. If there is a negative edge, the algorithm may give incorrect results. As an example, consider the following graph:"
       },
       {
-        "order": 28,
+        "order": 25,
         "text": "The shortest path from node 1 to node 4 is 1 $\\to 3 \\to$ 4 and its length is 1. However, Dijkstra’s algorithm finds the path 1 $\\to 2 \\to$ 4 by following the minimum weight edges. The algorithm does not take into account that on the other path, the weight $-5$ compensates the previous large weight 6."
       },
       {
-        "order": 29,
+        "order": 26,
         "text": "The following implementation of Dijkstra’s algorithm calculates the minimum distances from a node $x$ to other nodes of the graph. The graph is stored as adjacency lists so that `adj[`$a$`]` contains a pair ($b,w$) always when there is an edge from node $a$ to node $b$ with weight $w$. An efficient implementation of Dijkstra’s algorithm requires that it is possible to efficiently find the minimum distance node that has not been processed. An appropriate data structure for this is a priority queue that contains the nodes ordered by their distances. Using a priority queue, the next node to be processed can be retrieved in logarithmic time. In the following code, the priority queue `q` contains pairs of the form ($-d,x$), meaning that the current distance to node $x$ is $d$. The array `distance` contains the distance to each node, and the array `processed` indicates whether a node has been processed. Initially the distance is 0 to $x$ and $\\infty$ to all other nodes."
       },
       {
-        "order": 30,
+        "order": 27,
         "text": "Note that the priority queue contains *negative* distances to nodes. The reason for this is that the default version of the C++ priority queue finds maximum elements, while we want to find minimum elements. By using negative distances, we can directly use the default priority queue$^3$. Also note that there may be several instances of the same node in the priority queue; however, only the instance with the minimum distance will be processed. The time complexity of the above implementation is $O(n+ m$log$m$), because the algorithm goes through all nodes of the graph and adds for each edge at most one distance to the priority queue."
       },
       {
-        "order": 31,
+        "order": 28,
         "text": "The **Floyd–Warshall algorithm**$^4$ provides an alternative way to approach the problem of finding shortest paths. Unlike the other algorithms of this chapter, it finds all shortest paths between the nodes in a single run. The algorithm maintains a two-dimensional array that contains distances between the nodes. First, distances are calculated only using direct edges between the nodes, and after this, the algorithm reduces distances by using intermediate nodes in paths."
       },
       {
-        "order": 32,
+        "order": 29,
         "text": "Let us consider how the Floyd–Warshall algorithm works in the following graph:"
       },
       {
-        "order": 33,
+        "order": 30,
         "text": "Initially, the distance from each node to itself is 0, and the distance between nodes $a$ and $b$ is $x$ if there is an edge between nodes $a$ and $b$ with weight $x$. All other distances are infinite. In this graph, the initial array is as follows:"
       },
       {
-        "order": 34,
+        "order": 31,
         "text": "The algorithm consists of consecutive rounds. On each round, the algorithm selects a new node that can act as an intermediate node in paths from now on, and distances are reduced using this node. On the first round, node 1 is the new intermediate node. There is a new path between nodes 2 and 4 with length 14, because node 1 connects them. There is also a new path between nodes 2 and 5 with length 6."
       },
       {
-        "order": 35,
+        "order": 32,
         "text": "On the second round, node 2 is the new intermediate node. This creates new paths between nodes 1 and 3 and between nodes 3 and 5:"
       },
       {
-        "order": 36,
+        "order": 33,
         "text": "On the third round, node 3 is the new intermediate round. There is a new path between nodes 2 and 4:"
       },
       {
-        "order": 37,
+        "order": 34,
         "text": "The algorithm continues like this, until all nodes have been appointed intermediate nodes. After the algorithm has finished, the array contains the minimum distances between any two nodes:"
       },
       {
-        "order": 38,
+        "order": 35,
         "text": "For example, the array tells us that the shortest distance between nodes 2 and 4 is 8. This corresponds to the following path:"
       },
       {
-        "order": 39,
+        "order": 36,
         "text": "The advantage of the Floyd–Warshall algorithm that it is easy to implement. The following code constructs a distance matrix where `distance`[$a][b$] is the shortest distance between nodes $a$ and $b$. First, the algorithm initializes `distance` using the adjacency matrix `adj` of the graph:"
       },
       {
-        "order": 40,
+        "order": 37,
         "text": "After this, the shortest distances can be found as follows:"
       },
       {
-        "order": 41,
+        "order": 38,
         "text": "The time complexity of the algorithm is $O(n^3)$, because it contains three nested loops that go through the nodes of the graph. Since the implementation of the Floyd–Warshall algorithm is simple, the algorithm can be a good choice even if it is only needed to find a single shortest path in the graph. However, the algorithm can only be used when the graph is so small that a cubic time complexity is fast enough."
       }
     ],
@@ -7650,39 +7638,39 @@
         "order": 0,
         "language": "cpp",
         "code": "for (int i = 1; i <= n; i++) distance[i] = INF;\ndistance[x] = 0;\nfor (int i = 1; i <= n-1; i++) {\n   for (auto e : edges) {\n       int a, b, w;\n       tie(a, b, w) = e;\n       distance[b] = min(distance[b], distance[a]+w);\n   }\n}",
-        "preceding_paragraph_order": 10,
+        "preceding_paragraph_order": 7,
         "explanatory_paragraphs": [
-          11,
-          12
+          8,
+          9
         ]
       },
       {
         "order": 1,
         "language": "cpp",
         "code": "for (int i = 1; i <= n; i++) distance[i] = INF;\ndistance[x] = 0;\nq.push({0,x});\nwhile (!q.empty()) {\n   int a = q.top().second; q.pop();\n   if (processed[a]) continue;\n   processed[a] = true;\n   for (auto u : adj[a]) {\n       int b = u.first, w = u.second;\n       if (distance[a]+w < distance[b]) {\n          distance[b] = distance[a]+w;\n          q.push({-distance[b],b});\n       }\n   }\n}",
-        "preceding_paragraph_order": 29,
+        "preceding_paragraph_order": 26,
         "explanatory_paragraphs": [
-          30,
-          31
+          27,
+          28
         ]
       },
       {
         "order": 2,
         "language": "cpp",
         "code": "for (int i = 1; i <= n; i++) {\n   for (int j = 1; j <= n; j++) {\n       if (i == j) distance[i][j] = 0;\n       else if (adj[i][j]) distance[i][j] = adj[i][j];\n       else distance[i][j] = INF;\n   }\n}",
-        "preceding_paragraph_order": 39,
+        "preceding_paragraph_order": 36,
         "explanatory_paragraphs": [
-          40,
-          41
+          37,
+          38
         ]
       },
       {
         "order": 3,
         "language": "cpp",
         "code": "for (int k = 1; k <= n; k++) {\n   for (int i = 1; i <= n; i++) {\n       for (int j = 1; j <= n; j++) {\n          distance[i][j] = min(distance[i][j],\n                                distance[i][k]+distance[k][j]);\n       }\n   }\n}",
-        "preceding_paragraph_order": 40,
+        "preceding_paragraph_order": 37,
         "explanatory_paragraphs": [
-          41
+          38
         ]
       }
     ],
@@ -7700,175 +7688,160 @@
         "title": "Example",
         "paragraph_range": [
           2,
-          9
+          6
         ]
       },
       {
         "level": 3,
         "title": "Implementation",
         "paragraph_range": [
-          10,
-          11
+          7,
+          8
         ]
       },
       {
         "level": 3,
         "title": "Negative cycles",
         "paragraph_range": [
-          12,
-          13
+          9,
+          10
         ]
       },
       {
         "level": 3,
         "title": "SPFA algorithm",
         "paragraph_range": [
-          14,
-          14
+          11,
+          11
         ]
       },
       {
         "level": 2,
         "title": "Dijkstra’s algorithm",
         "paragraph_range": [
-          15,
-          15
+          12,
+          12
         ]
       },
       {
         "level": 3,
         "title": "Example",
         "paragraph_range": [
-          16,
-          26
+          13,
+          23
         ]
       },
       {
         "level": 3,
         "title": "Negative edges",
         "paragraph_range": [
-          27,
-          28
+          24,
+          25
         ]
       },
       {
         "level": 3,
         "title": "Implementation",
         "paragraph_range": [
-          29,
-          30
+          26,
+          27
         ]
       },
       {
         "level": 3,
         "title": "Floyd–Warshall algorithm",
         "paragraph_range": [
-          31,
-          31
+          28,
+          28
         ]
       },
       {
         "level": 3,
         "title": "Example",
         "paragraph_range": [
-          32,
-          38
+          29,
+          35
         ]
       },
       {
         "level": 3,
         "title": "Implementation",
         "paragraph_range": [
-          39,
-          41
+          36,
+          38
         ]
       }
     ],
     "figures": [
       {
         "src": "/cp-handbook/figures/fig_p133_047.png",
-        "alt": "Figure from page 133",
-        "preceding_paragraph_order": 3
+        "alt": "Starting graph for Bellman-Ford example with all distances infinite except node 1 (distance 0)",
+        "preceding_paragraph_order": 2
       },
       {
         "src": "/cp-handbook/figures/fig_p134_048.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 5
-      },
-      {
-        "src": "/cp-handbook/figures/fig_p134_049.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 7
+        "alt": "Bellman-Ford after relaxing all edges from node 1",
+        "preceding_paragraph_order": 3
       },
       {
         "src": "/cp-handbook/figures/fig_p134_auto1.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 7
-      },
-      {
-        "src": "/cp-handbook/figures/fig_p134_050.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 8
+        "alt": "Bellman-Ford after relaxing edges 2→5 and 3→4",
+        "preceding_paragraph_order": 4
       },
       {
         "src": "/cp-handbook/figures/fig_p134_auto2.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 8
-      },
-      {
-        "src": "/cp-handbook/figures/fig_p134_051.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 9
+        "alt": "Bellman-Ford after one more relaxation round",
+        "preceding_paragraph_order": 5
       },
       {
         "src": "/cp-handbook/figures/fig_p134_auto3.png",
-        "alt": "Figure from page 134",
-        "preceding_paragraph_order": 9
+        "alt": "Shortest path 1→3→4→5 highlighted in red",
+        "preceding_paragraph_order": 6
       },
       {
         "src": "/cp-handbook/figures/fig_p135_052.png",
         "alt": "Figure from page 135",
-        "preceding_paragraph_order": 12
+        "preceding_paragraph_order": 9
       },
       {
         "src": "/cp-handbook/figures/fig_p136_auto1.png",
         "alt": "Figure from page 136",
-        "preceding_paragraph_order": 17
+        "preceding_paragraph_order": 14
       },
       {
         "src": "/cp-handbook/figures/fig_p137_auto1.png",
         "alt": "Figure from page 137",
-        "preceding_paragraph_order": 22
+        "preceding_paragraph_order": 19
       },
       {
         "src": "/cp-handbook/figures/fig_p137_auto2.png",
         "alt": "Figure from page 137",
-        "preceding_paragraph_order": 24
+        "preceding_paragraph_order": 21
       },
       {
         "src": "/cp-handbook/figures/fig_p137_auto3.png",
         "alt": "Figure from page 137",
-        "preceding_paragraph_order": 25
+        "preceding_paragraph_order": 22
       },
       {
         "src": "/cp-handbook/figures/fig_p137_auto4.png",
         "alt": "Figure from page 137",
-        "preceding_paragraph_order": 26
+        "preceding_paragraph_order": 23
       },
       {
         "src": "/cp-handbook/figures/fig_p138_053.png",
         "alt": "Figure from page 138",
-        "preceding_paragraph_order": 27
+        "preceding_paragraph_order": 24
       },
       {
         "src": "/cp-handbook/figures/fig_p139_auto1.png",
         "alt": "Figure from page 139",
-        "preceding_paragraph_order": 32
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p141_auto1.png",
         "alt": "Figure from page 141",
-        "preceding_paragraph_order": 38
+        "preceding_paragraph_order": 35
       }
     ],
     "footnotes": [
@@ -11770,7 +11743,7 @@
       },
       {
         "order": 17,
-        "text": "The **binomial coefficient** $¡^n$ $^k$ $¢$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $¡^5$ $^3$ $¢$ $= 10$, because the set {1,2,3,4,5} has 10 subsets of 3 elements:"
+        "text": "The **binomial coefficient** $\\binom{n}{k}$ equals the number of ways we can choose a subset of $k$ elements from a set of $n$ elements. For example, $\\binom{5}{3}$ $= 10$, because the set {1,2,3,4,5} has 10 subsets of 3 elements:"
       },
       {
         "order": 18,
@@ -11782,434 +11755,346 @@
       },
       {
         "order": 20,
-        "text": "$Ã$ $n$ $k$"
+        "text": "$$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}.$$"
       },
       {
         "order": 21,
-        "text": "$!$"
+        "text": "The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -1$ elements from $n-1$ elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-1$ elements. The base cases for the recursion are $$\\binom{n}{0} = \\binom{n}{n} = 1,$$"
       },
       {
         "order": 22,
-        "text": "$Ã$ $n-1$ $k -1$"
-      },
-      {
-        "order": 23,
-        "text": "$!$"
-      },
-      {
-        "order": 24,
-        "text": "$Ã$ $n-1$ $k$"
-      },
-      {
-        "order": 25,
-        "text": "$!$"
-      },
-      {
-        "order": 26,
-        "text": "$=$"
-      },
-      {
-        "order": 27,
-        "text": "$+$"
-      },
-      {
-        "order": 28,
-        "text": "The idea is to fix an element $x$ in the set. If $x$ is included in the subset, we have to choose $k -1$ elements from $n-1$ elements, and if $x$ is not included in the subset, we have to choose $k$ elements from $n-1$ elements. The base cases for the recursion are $Ã$ $n$ 0"
-      },
-      {
-        "order": 29,
-        "text": "$!$"
-      },
-      {
-        "order": 30,
-        "text": "$Ã$ $n$ $n$"
-      },
-      {
-        "order": 31,
-        "text": "$!$"
-      },
-      {
-        "order": 32,
-        "text": "$=$"
-      },
-      {
-        "order": 33,
-        "text": "$= 1$,"
-      },
-      {
-        "order": 34,
         "text": "because there is always exactly one way to construct an empty subset and a subset that contains all the elements."
       },
       {
-        "order": 35,
+        "order": 23,
         "text": "Another way to calculate binomial coefficients is as follows:"
       },
       {
-        "order": 36,
-        "text": "$Ã$ $n$ $k$"
+        "order": 24,
+        "text": "$$\\binom{n}{k} = \\frac{n!}{k!(n-k)!}.$$"
       },
       {
-        "order": 37,
-        "text": "$!$"
-      },
-      {
-        "order": 38,
-        "text": "$=$ $n$! $k$!($n-k$)!."
-      },
-      {
-        "order": 39,
+        "order": 25,
         "text": "There are $n$! permutations of $n$ elements. We go through all permutations and always include the first $k$ elements of the permutation in the subset. Since the order of the elements in the subset and outside the subset does not matter, the result is divided by $k$! and ($n-k$)!"
       },
       {
-        "order": 40,
-        "text": "For binomial coefficients, $Ã$ $n$ $k$"
+        "order": 26,
+        "text": "For binomial coefficients,"
       },
       {
-        "order": 41,
-        "text": "$!$"
+        "order": 27,
+        "text": "$$\\binom{n}{k} = \\binom{n}{n-k},$$"
       },
       {
-        "order": 42,
-        "text": "$Ã$ $n$ $n-k$"
-      },
-      {
-        "order": 43,
-        "text": "$!$"
-      },
-      {
-        "order": 44,
-        "text": "$=$"
-      },
-      {
-        "order": 45,
-        "text": ","
-      },
-      {
-        "order": 46,
+        "order": 28,
         "text": "because we actually divide a set of $n$ elements into two subsets: the first contains $k$ elements and the second contains $n - k$ elements."
       },
       {
-        "order": 47,
+        "order": 29,
         "text": "The sum of binomial coefficients is"
       },
       {
-        "order": 48,
+        "order": 30,
         "text": "$$\\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2} + \\ldots + \\binom{n}{n} = 2^n.$$"
       },
       {
-        "order": 49,
+        "order": 31,
         "text": "The reason for the name \"binomial coefficient\" can be seen when the binomial $(a + b)$ is raised to the $n$th power:"
       },
       {
-        "order": 50,
+        "order": 32,
         "text": "$$(a + b)^n = \\binom{n}{0} a^n b^0 + \\binom{n}{1} a^{n-1} b^1 + \\ldots + \\binom{n}{n-1} a^1 b^{n-1} + \\binom{n}{n} a^0 b^n.$$"
       },
       {
-        "order": 51,
+        "order": 33,
         "text": "Binomial coefficients also appear in **Pascal's triangle** where each value equals the sum of two above values:"
       },
       {
-        "order": 52,
+        "order": 34,
         "text": "$$\\begin{array}{ccccccccc} & & & & 1 & & & & \\\\ & & & 1 & & 1 & & & \\\\ & & 1 & & 2 & & 1 & & \\\\ & 1 & & 3 & & 3 & & 1 & \\\\ 1 & & 4 & & 6 & & 4 & & 1 \\\\ \\cdots & & \\cdots & & \\cdots & & \\cdots & & \\cdots \\end{array}$$"
       },
       {
-        "order": 53,
+        "order": 35,
         "text": "\"Boxes and balls\" is a useful model, where we count the ways to place $k$ balls in $n$ boxes. Let us consider three scenarios:"
       },
       {
-        "order": 54,
+        "order": 36,
         "text": "*Scenario 1*: Each box can contain at most one ball. For example, when $n = 5$ and $k = 2$, there are 10 solutions:"
       },
       {
-        "order": 55,
+        "order": 37,
         "text": "In this scenario, the answer is directly the binomial coefficient $\\binom{n}{k}$."
       },
       {
-        "order": 56,
+        "order": 38,
         "text": "*Scenario 2*: A box can contain multiple balls. For example, when $n = 5$ and $k = 2$, there are 15 solutions:"
       },
       {
-        "order": 57,
-        "text": "The process of placing the balls in the boxes can be represented as a string that consists of symbols \"o\" and \"$\\to$ \". Initially, assume that we are standing at the leftmost box. The symbol \"o\" means that we place a ball in the current box, and the symbol \"$\\to$ \" means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol \"o\" and $n-1$ times the symbol \"$\\to$ \". For example, the upper-right solution in the above picture corresponds to the string \"$\\to \\to$ o $\\to$ o $\\to$ \". Thus, the number of solutions is $¡^{k+n-1}$ $^k$ $¢$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:"
+        "order": 39,
+        "text": "The process of placing the balls in the boxes can be represented as a string that consists of symbols \"o\" and \"$\\to$ \". Initially, assume that we are standing at the leftmost box. The symbol \"o\" means that we place a ball in the current box, and the symbol \"$\\to$ \" means that we move to the next box to the right. Using this notation, each solution is a string that contains $k$ times the symbol \"o\" and $n-1$ times the symbol \"$\\to$ \". For example, the upper-right solution in the above picture corresponds to the string \"$\\to \\to$ o $\\to$ o $\\to$ \". Thus, the number of solutions is $\\binom{k+n-1}{k}$ . *Scenario 3*: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a ball. For example, when $n =$ 5 and $k =$ 2, there are 6 solutions:"
       },
       {
-        "order": 58,
-        "text": "In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k+1$ such boxes and $k+1$ positions for them. Thus, using the formula of scenario 2, the number of solutions is $¡^{n-k+1}$ $^{n-2k+1}$ $¢$ ."
+        "order": 40,
+        "text": "In this scenario, we can assume that $k$ balls are initially placed in boxes and there is an empty box between each two adjacent boxes. The remaining task is to choose the positions for the remaining empty boxes. There are $n-2k+1$ such boxes and $k+1$ positions for them. Thus, using the formula of scenario 2, the number of solutions is $\\binom{n-k+1}{n-2k+1}$ ."
       },
       {
-        "order": 59,
-        "text": "The **multinomial coefficient** $Ã$ $n$ $k_1,k_2,...,k_m$"
+        "order": 41,
+        "text": "The **multinomial coefficient**"
       },
       {
-        "order": 60,
-        "text": "$!$"
+        "order": 42,
+        "text": "$$\\binom{n}{k_1, k_2, \\ldots, k_m} = \\frac{n!}{k_1!\\, k_2! \\cdots k_m!},$$"
       },
       {
-        "order": 61,
-        "text": "$=$ $n$! $k_1$!$k_2$!$\\cdot \\cdot \\cdot k_m$!,"
-      },
-      {
-        "order": 62,
+        "order": 43,
         "text": "equals the number of ways we can divide $n$ elements into subsets of sizes $k_1,k_2,...,k_m$, where $k_1 +k_2 +\\cdot \\cdot \\cdot +k_m = n$. Multinomial coefficients can be seen as a generalization of binomial cofficients; if $m =$ 2, the above formula corresponds to the binomial coefficient formula."
       },
       {
-        "order": 63,
+        "order": 44,
         "text": "The **Catalan number** $C_n$ equals the number of valid parenthesis expressions that consist of $n$ left parentheses and $n$ right parentheses. For example, $C_3 =$ 5, because we can construct the following parenthesis expressions using three left and right parentheses:"
       },
       {
-        "order": 64,
+        "order": 45,
         "text": "What is exactly a $valid$ *parenthesis expression*? The following rules precisely define all valid parenthesis expressions:"
       },
       {
-        "order": 65,
+        "order": 46,
         "text": "• An empty parenthesis expression is valid."
       },
       {
-        "order": 66,
+        "order": 47,
         "text": "• If an expression $A$ is valid, then also the expression `(`$A$`)` is valid."
       },
       {
-        "order": 67,
+        "order": 48,
         "text": "• If expressions $A$ and $B$ are valid, then also the expression $AB$ is valid."
       },
       {
-        "order": 68,
+        "order": 49,
         "text": "Another way to characterize valid parenthesis expressions is that if we choose any prefix of such an expression, it has to contain at least as many left parentheses as right parentheses. In addition, the complete expression has to contain an equal number of left and right parentheses."
       },
       {
-        "order": 69,
+        "order": 50,
         "text": "Catalan numbers can be calculated using the formula"
       },
       {
-        "order": 70,
-        "text": "$C_n =$ $^{n-1}$ $X$"
+        "order": 51,
+        "text": "$$C_n = \\sum_{i=0}^{n-1} C_i \\, C_{n-i-1}.$$"
       },
       {
-        "order": 71,
-        "text": "$^{i=0}$ $C_iC_n^-_i^-_1$."
-      },
-      {
-        "order": 72,
+        "order": 52,
         "text": "The sum goes through the ways to divide the expression into two parts such that both parts are valid expressions and the first part is as short as possible but not empty. For any $i$, the first part contains $i+1$ pairs of parentheses and the number of expressions is the product of the following values:"
       },
       {
-        "order": 73,
+        "order": 53,
         "text": "• $C_i$: the number of ways to construct an expression using the parentheses of the first part, not counting the outermost parentheses"
       },
       {
-        "order": 74,
-        "text": "• $C_n^-_i^-_1$: the number of ways to construct an expression using the parentheses of the second part"
+        "order": 54,
+        "text": "- $C_{n-i-1}$: the number of ways to construct an expression using the parentheses of the second part"
       },
       {
-        "order": 75,
+        "order": 55,
         "text": "The base case is $C_0 =$ 1, because we can construct an empty parenthesis expression using zero pairs of parentheses."
       },
       {
-        "order": 76,
+        "order": 56,
         "text": "Catalan numbers can also be calculated using binomial coefficients:"
       },
       {
-        "order": 77,
-        "text": "$Ã$ 2$n$ $n$"
+        "order": 57,
+        "text": "$$C_n = \\frac{1}{n+1} \\binom{2n}{n}.$$"
       },
       {
-        "order": 78,
-        "text": "$!$"
+        "order": 58,
+        "text": "The formula can be explained as follows: There are a total of $\\binom{2n}{n}$ ways to construct a (not necessarily valid) parenthesis expression that contains $n$ left parentheses and $n$ right parentheses. Let us calculate the number of such expressions that are $not$ valid. If a parenthesis expression is not valid, it has to contain a prefix where the number of right parentheses exceeds the number of left parentheses. The"
       },
       {
-        "order": 79,
-        "text": "$C_n =$ 1 $n+1$"
-      },
-      {
-        "order": 80,
-        "text": "The formula can be explained as follows: There are a total of $¡^{2n}$ $^n$ $¢$ ways to construct a (not necessarily valid) parenthesis expression that contains $n$ left parentheses and $n$ right parentheses. Let us calculate the number of such expressions that are $not$ valid. If a parenthesis expression is not valid, it has to contain a prefix where the number of right parentheses exceeds the number of left parentheses. The"
-      },
-      {
-        "order": 81,
+        "order": 59,
         "text": "idea is to reverse each parenthesis that belongs to such a prefix. For example, the expression `())()(` contains a prefix `())`, and after reversing the prefix, the expression becomes `)((()(`."
       },
       {
-        "order": 82,
+        "order": 60,
         "text": "The resulting expression consists of $n + 1$ left parentheses and $n - 1$ right parentheses. The number of such expressions is $\\binom{2n}{n+1}$, which equals the number of non-valid parenthesis expressions. Thus, the number of valid parenthesis expressions can be calculated using the formula"
       },
       {
-        "order": 83,
+        "order": 61,
         "text": "$$\\binom{2n}{n} - \\binom{2n}{n+1} = \\binom{2n}{n} - \\frac{n}{n+1} \\binom{2n}{n} = \\frac{1}{n+1} \\binom{2n}{n}.$$"
       },
       {
-        "order": 84,
+        "order": 62,
         "text": "Catalan numbers are also related to trees:"
       },
       {
-        "order": 85,
+        "order": 63,
         "text": "- there are $C_n$ binary trees of $n$ nodes - there are $C_{n-1}$ rooted trees of $n$ nodes"
       },
       {
-        "order": 86,
+        "order": 64,
         "text": "For example, for $C_3 = 5$, the binary trees are"
       },
       {
-        "order": 87,
+        "order": 65,
         "text": "and the rooted trees are"
       },
       {
-        "order": 88,
+        "order": 66,
         "text": "**Inclusion-exclusion** is a technique that can be used for counting the size of a union of sets when the sizes of the intersections are known, and vice versa. A simple example of the technique is the formula"
       },
       {
-        "order": 89,
+        "order": 67,
         "text": "$$|A \\cup B| = |A| + |B| - |A \\cap B|,$$"
       },
       {
-        "order": 90,
+        "order": 68,
         "text": "where $A$ and $B$ are sets and $|X|$ denotes the size of $X$. The formula can be illustrated as follows:"
       },
       {
-        "order": 91,
+        "order": 69,
         "text": "Our goal is to calculate the size of the union $A \\cup B$ that corresponds to the area of the region that belongs to at least one circle. The picture shows that we can calculate the area of $A \\cup B$ by first summing the areas of $A$ and $B$ and then subtracting the area of $A \\cap B$."
       },
       {
-        "order": 92,
+        "order": 70,
         "text": "The same idea can be applied when the number of sets is larger. When there are three sets, the inclusion-exclusion formula is"
       },
       {
-        "order": 93,
+        "order": 71,
         "text": "$$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$$"
       },
       {
-        "order": 94,
+        "order": 72,
         "text": "and the corresponding picture is"
       },
       {
-        "order": 95,
+        "order": 73,
         "text": "In the general case, the size of the union $X_1 \\cup X_2 \\cup \\cdots \\cup X_n$ can be calculated by going through all possible intersections that contain some of the sets $X_1, X_2, \\ldots, X_n$. If the intersection contains an odd number of sets, its size is added to the answer, and otherwise its size is subtracted from the answer."
       },
       {
-        "order": 96,
+        "order": 74,
         "text": "Note that there are similar formulas for calculating the size of an intersection from the sizes of unions. For example,"
       },
       {
-        "order": 97,
+        "order": 75,
         "text": "$$|A \\cap B| = |A| + |B| - |A \\cup B|$$"
       },
       {
-        "order": 98,
+        "order": 76,
         "text": "and"
       },
       {
-        "order": 99,
+        "order": 77,
         "text": "$$|A \\cap B \\cap C| = |A| + |B| + |C| - |A \\cup B| - |A \\cup C| - |B \\cup C| + |A \\cup B \\cup C|.$$"
       },
       {
-        "order": 100,
+        "order": 78,
         "text": "As an example, let us count the number of **derangements** of elements $\\{1, 2, \\ldots, n\\}$, i.e., permutations where no element remains in its original place. For example, when $n = 3$, there are two derangements: $(2, 3, 1)$ and $(3, 1, 2)$."
       },
       {
-        "order": 101,
+        "order": 79,
         "text": "One approach for solving the problem is to use inclusion-exclusion. Let $X_k$ be the set of permutations that contain the element $k$ at position $k$. For example, when $n = 3$, the sets are as follows:"
       },
       {
-        "order": 102,
+        "order": 80,
         "text": "$$\\begin{aligned} X_1 &= \\{(1,2,3), (1,3,2)\\} \\\\ X_2 &= \\{(1,2,3), (3,2,1)\\} \\\\ X_3 &= \\{(1,2,3), (2,1,3)\\} \\end{aligned}$$"
       },
       {
-        "order": 103,
+        "order": 81,
         "text": "Using these sets, the number of derangements equals"
       },
       {
-        "order": 104,
+        "order": 82,
         "text": "$$n! - |X_1 \\cup X_2 \\cup \\cdots \\cup X_n|,$$ so it suffices to calculate the size of the union. Using inclusion-exclusion, this reduces to calculating sizes of intersections which can be done efficiently. For example, when $n =$ 3, the size of $|X_1 \\cup X_2 \\cup X_3|$ is"
       },
       {
-        "order": 105,
+        "order": 83,
         "text": "$|X_1|+|X_2|+|X_3|-|X_1 \\cap X_2|-|X_1 \\cap X_3|-|X_2 \\cap X_3|+|X_1 \\cap X_2 \\cap X_3|$ $= 2$$+2+2-1-1-1+1$ $= 4$,"
       },
       {
-        "order": 106,
+        "order": 84,
         "text": "so the number of solutions is 3!$-4 =$ 2. It turns out that the problem can also be solved without using inclusionexclusion. Let $f (n)$ denote the number of derangements for {1,2,...,$n$}. We can use the following recursive formula:"
       },
       {
-        "order": 107,
+        "order": 85,
         "text": "$$f(n) = \\begin{cases} 0 & n = 1 \\\\ 1 & n = 2 \\\\ (n-1)\\bigl(f(n-2) + f(n-1)\\bigr) & n > 2 \\end{cases}$$"
       },
       {
-        "order": 108,
+        "order": 86,
         "text": "The formula can be derived by considering the possibilities how the element 1 changes in the derangement. There are $n-1$ ways to choose an element $x$ that replaces the element 1. In each such choice, there are two options: *Option 1:* We also replace the element $x$ with the element 1. After this, the remaining task is to construct a derangement of $n-2$ elements. *Option 2:* We replace the element $x$ with some other element than 1. Now we have to construct a derangement of $n-1$ element, because we cannot replace the element $x$ with the element 1, and all other elements must be changed."
       },
       {
-        "order": 109,
+        "order": 87,
         "text": "**Burnside’s lemma** can be used to count the number of combinations so that only one representative is counted for each group of symmetric combinations. Burnside’s lemma states that the number of combinations is"
       },
       {
-        "order": 110,
+        "order": 88,
         "text": "$$\\sum_{k=1}^{n} \\frac{c(k)}{n},$$"
       },
       {
-        "order": 111,
+        "order": 89,
         "text": "where there are $n$ ways to change the position of a combination, and there are $c(k)$ combinations that remain unchanged when the $k$th way is applied. As an example, let us calculate the number of necklaces of $n$ pearls, where each pearl has $m$ possible colors. Two necklaces are symmetric if they are similar after rotating them. For example, the necklace"
       },
       {
-        "order": 112,
+        "order": 90,
         "text": "has the following symmetric necklaces:"
       },
       {
-        "order": 113,
+        "order": 91,
         "text": "There are $n$ ways to change the position of a necklace, because we can rotate it $0, 1, \\ldots, n - 1$ steps clockwise. If the number of steps is 0, all $m^n$ necklaces remain the same, and if the number of steps is 1, only the $m$ necklaces where each pearl has the same color remain the same."
       },
       {
-        "order": 114,
+        "order": 92,
         "text": "More generally, when the number of steps is $k$, a total of"
       },
       {
-        "order": 115,
+        "order": 93,
         "text": "$$m^{\\gcd(k, n)}$$"
       },
       {
-        "order": 116,
+        "order": 94,
         "text": "necklaces remain the same, where $\\gcd(k, n)$ is the greatest common divisor of $k$ and $n$. The reason for this is that blocks of pearls of size $\\gcd(k, n)$ will replace each other. Thus, according to Burnside's lemma, the number of necklaces is"
       },
       {
-        "order": 117,
+        "order": 95,
         "text": "$$\\sum_{i=0}^{n-1} \\frac{m^{\\gcd(i, n)}}{n}.$$"
       },
       {
-        "order": 118,
+        "order": 96,
         "text": "For example, the number of necklaces of length 4 with 3 colors is"
       },
       {
-        "order": 119,
+        "order": 97,
         "text": "$$\\frac{3^4 + 3 + 3^2 + 3}{4} = 24.$$"
       },
       {
-        "order": 120,
+        "order": 98,
         "text": "**Cayley's formula** states that there are $n^{n-2}$ labeled trees that contain $n$ nodes. The nodes are labeled $1, 2, \\ldots, n$, and two trees are different if either their structure or labeling is different."
       },
       {
-        "order": 121,
+        "order": 99,
         "text": "For example, when $n = 4$, the number of labeled trees is $4^{4-2} = 16$:"
       },
       {
-        "order": 122,
+        "order": 100,
         "text": "Next we will see how Cayley's formula can be derived using Prüfer codes."
       },
       {
-        "order": 123,
+        "order": 101,
         "text": "A **Prüfer code** is a sequence of $n-2$ numbers that describes a labeled tree. The code is constructed by following a process that removes $n-2$ leaves from the tree. At each step, the leaf with the smallest label is removed, and the label of its only neighbor is added to the code. For example, let us calculate the Prüfer code of the following graph:"
       },
       {
-        "order": 124,
+        "order": 102,
         "text": "First we remove node 1 and add node 4 to the code:"
       },
       {
-        "order": 125,
+        "order": 103,
         "text": "Then we remove node 3 and add node 4 to the code:"
       },
       {
-        "order": 126,
+        "order": 104,
         "text": "Finally we remove node 4 and add node 2 to the code:"
       },
       {
-        "order": 127,
+        "order": 105,
         "text": "Thus, the Prüfer code of the graph is [4,4,2]. We can construct a Prüfer code for any tree, and more importantly, the original tree can be reconstructed from a Prüfer code. Hence, the number of labeled trees of $n$ nodes equals $n^{n-2}$, the number of Prüfer codes of size $n$."
       }
     ],
@@ -12218,10 +12103,10 @@
         "order": 0,
         "language": "cpp",
         "code": "• ()()()\n• (())()\n• ()(())\n• ((()))\n• (()())",
-        "preceding_paragraph_order": 63,
+        "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
-          64,
-          65
+          45,
+          46
         ]
       }
     ],
@@ -12239,119 +12124,119 @@
         "title": "Formula 1",
         "paragraph_range": [
           19,
-          34
+          22
         ]
       },
       {
         "level": 3,
         "title": "Formula 2",
         "paragraph_range": [
-          35,
-          39
+          23,
+          25
         ]
       },
       {
         "level": 3,
         "title": "Properties",
         "paragraph_range": [
-          40,
-          52
+          26,
+          34
         ]
       },
       {
         "level": 3,
         "title": "Boxes and balls",
         "paragraph_range": [
-          53,
-          58
+          35,
+          40
         ]
       },
       {
         "level": 3,
         "title": "Multinomial coefficients",
         "paragraph_range": [
-          59,
-          62
+          41,
+          43
         ]
       },
       {
         "level": 3,
         "title": "Catalan numbers",
         "paragraph_range": [
-          63,
-          63
+          44,
+          44
         ]
       },
       {
         "level": 3,
         "title": "Parenthesis expressions",
         "paragraph_range": [
-          64,
-          68
+          45,
+          49
         ]
       },
       {
         "level": 3,
         "title": "Formula 1",
         "paragraph_range": [
-          69,
-          75
+          50,
+          55
         ]
       },
       {
         "level": 3,
         "title": "Formula 2",
         "paragraph_range": [
-          76,
-          83
+          56,
+          61
         ]
       },
       {
         "level": 3,
         "title": "Counting trees",
         "paragraph_range": [
-          84,
-          87
+          62,
+          65
         ]
       },
       {
         "level": 2,
         "title": "Inclusion-exclusion",
         "paragraph_range": [
-          88,
-          99
+          66,
+          77
         ]
       },
       {
         "level": 3,
         "title": "Derangements",
         "paragraph_range": [
-          100,
-          108
+          78,
+          86
         ]
       },
       {
         "level": 2,
         "title": "Burnside’s lemma",
         "paragraph_range": [
-          109,
-          119
+          87,
+          97
         ]
       },
       {
         "level": 3,
         "title": "Cayley's formula",
         "paragraph_range": [
-          120,
-          122
+          98,
+          100
         ]
       },
       {
         "level": 3,
         "title": "Prüfer code",
         "paragraph_range": [
-          123,
-          127
+          101,
+          105
         ]
       }
     ],
@@ -12359,72 +12244,72 @@
       {
         "src": "/cp-handbook/figures/fig_p219_scenario1.png",
         "alt": "10 configurations of 2 balls in 5 boxes with each box holding at most one ball",
-        "preceding_paragraph_order": 54
+        "preceding_paragraph_order": 36
       },
       {
         "src": "/cp-handbook/figures/fig_p219_scenario2.png",
         "alt": "15 configurations of 2 balls in 5 boxes with any box able to hold multiple balls",
-        "preceding_paragraph_order": 56
+        "preceding_paragraph_order": 38
       },
       {
         "src": "/cp-handbook/figures/fig_p220_117.png",
         "alt": "Figure from page 220",
-        "preceding_paragraph_order": 57
+        "preceding_paragraph_order": 39
       },
       {
         "src": "/cp-handbook/figures/fig_p220_118.png",
         "alt": "Figure from page 220",
-        "preceding_paragraph_order": 57
+        "preceding_paragraph_order": 39
       },
       {
         "src": "/cp-handbook/figures/fig_p220_119.png",
         "alt": "Figure from page 220",
-        "preceding_paragraph_order": 57
+        "preceding_paragraph_order": 39
       },
       {
         "src": "/cp-handbook/figures/fig_p222_binary_trees.png",
         "alt": "Five distinct binary trees with 3 nodes each",
-        "preceding_paragraph_order": 86
+        "preceding_paragraph_order": 64
       },
       {
         "src": "/cp-handbook/figures/fig_p222_rooted_trees.png",
         "alt": "Five distinct rooted trees with 3 nodes each",
-        "preceding_paragraph_order": 87
+        "preceding_paragraph_order": 65
       },
       {
         "src": "/cp-handbook/figures/fig_p222_venn_AB.png",
         "alt": "Two-circle Venn diagram showing sets A, B and their intersection",
-        "preceding_paragraph_order": 90
+        "preceding_paragraph_order": 68
       },
       {
         "src": "/cp-handbook/figures/fig_p223_venn_ABC.png",
         "alt": "Three-circle Venn diagram showing A, B, C with labeled intersection regions",
-        "preceding_paragraph_order": 94
+        "preceding_paragraph_order": 72
       },
       {
         "src": "/cp-handbook/figures/fig_p225_necklaces.png",
         "alt": "Four colored-pearl necklaces showing rotation equivalences",
-        "preceding_paragraph_order": 112
+        "preceding_paragraph_order": 90
       },
       {
         "src": "/cp-handbook/figures/fig_p225_labeled_trees.png",
         "alt": "Sixteen different labeled trees with 4 nodes each",
-        "preceding_paragraph_order": 121
+        "preceding_paragraph_order": 99
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto1.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 123
+        "preceding_paragraph_order": 101
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto2.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 124
+        "preceding_paragraph_order": 102
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto3.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 125
+        "preceding_paragraph_order": 103
       }
     ],
     "footnotes": [],
@@ -13002,478 +12887,430 @@
       },
       {
         "order": 6,
-        "text": "In this problem, the desired outcomes are those in which the value of each card is the same. There are 13 $¡^4$ $^3$ $¢$ such outcomes, because there are 13 possibilities for the value of the cards and $¡^4$ $^3$ $¢$ ways to choose 3 suits from 4 possible suits. There are a total of $¡^{52}$ $^3$ $¢$ outcomes, because we choose 3 cards from 52 cards. Thus, the probability of the event is"
+        "text": "In this problem, the desired outcomes are those in which the value of each card is the same. There are $13\\binom{4}{3}$ such outcomes, because there are 13 possibilities for the value of the cards and $\\binom{4}{3}$ ways to choose 3 suits from 4 possible suits. There are a total of $\\binom{52}{3}$ outcomes, because we choose 3 cards from 52 cards. Thus, the probability of the event is"
       },
       {
         "order": 7,
-        "text": "13 $¡^4$ $^3$ $¢$"
+        "text": "$$\\frac{13 \\binom{4}{3}}{\\binom{52}{3}} = \\frac{1}{425}.$$"
       },
       {
         "order": 8,
-        "text": "$¡^{52}$ $^3$ $¢ =$ 1 425."
-      },
-      {
-        "order": 9,
         "text": "Another way to calculate the probability is to simulate the process that generates the event. In this example, we draw three cards, so the process consists of three steps. We require that each step of the process is successful. Drawing the first card certainly succeeds, because there are no restrictions. The second step succeeds with probability 3/51, because there are 51 cards left and 3 of them have the same value as the first card. In a similar way, the third step succeeds with probability 2/50. The probability that the entire process succeeds is"
       },
       {
+        "order": 9,
+        "text": "$$1 \\cdot \\frac{3}{51} \\cdot \\frac{2}{50} = \\frac{1}{425}.$$"
+      },
+      {
         "order": 10,
-        "text": "1$\\cdot$  3"
-      },
-      {
-        "order": 11,
-        "text": "51 $\\cdot$  2"
-      },
-      {
-        "order": 12,
-        "text": "50 $= 1$ 425."
-      },
-      {
-        "order": 13,
         "text": "An event in probability theory can be represented as a set"
       },
       {
-        "order": 14,
+        "order": 11,
         "text": "$A \\subset X$,"
       },
       {
-        "order": 15,
+        "order": 12,
         "text": "where $X$ contains all possible outcomes and $A$ is a subset of outcomes. For example, when drawing a dice, the outcomes are"
       },
       {
-        "order": 16,
+        "order": 13,
         "text": "$X =$ {1,2,3,4,5,6}."
       },
       {
-        "order": 17,
+        "order": 14,
         "text": "Now, for example, the event \"the outcome is even\" corresponds to the set"
       },
       {
-        "order": 18,
+        "order": 15,
         "text": "$A =$ {2,4,6}."
       },
       {
-        "order": 19,
+        "order": 16,
         "text": "Each outcome $x$ is assigned a probability $p(x)$. Then, the probability $P(A)$ of an event $A$ can be calculated as a sum of probabilities of outcomes using the formula $P(A) =$ $X$"
       },
       {
-        "order": 20,
+        "order": 17,
         "text": "$^{x\\in A}$ $p(x)$."
       },
       {
-        "order": 21,
+        "order": 18,
         "text": "For example, when throwing a dice, $p(x) =$ 1/6 for each outcome $x$, so the probability of the event \"the outcome is even\" is"
       },
       {
-        "order": 22,
+        "order": 19,
         "text": "$p(2)+ p(4)+ p(6) =$ 1/2."
       },
       {
-        "order": 23,
+        "order": 20,
         "text": "The total probability of the outcomes in $X$ must be 1, i.e., $P(X) =$ 1. Since the events in probability theory are sets, we can manipulate them using standard set operations:"
       },
       {
-        "order": 24,
+        "order": 21,
         "text": "• The **complement** ¯$A$ means \"$A$ does not happen\". For example, when throwing a dice, the complement of $A =$ {2,4,6} is ¯$A =$ {1,3,5}."
       },
       {
-        "order": 25,
+        "order": 22,
         "text": "• The **union** $A \\cup B$ means \"$A$ or $B$ happen\". For example, the union of $A =$ {2,5} and $B =$ {4,5,6} is $A \\cup B =$ {2,4,5,6}."
       },
       {
-        "order": 26,
+        "order": 23,
         "text": "• The **intersection** $A \\cap B$ means \"$A$ and $B$ happen\". For example, the intersection of $A =$ {2,5} and $B =$ {4,5,6} is $A \\cap B =$ {5}."
       },
       {
-        "order": 27,
+        "order": 24,
         "text": "The probability of the complement ¯$A$ is calculated using the formula"
       },
       {
-        "order": 28,
+        "order": 25,
         "text": "$P$( ¯$A) = 1-P(A$)."
       },
       {
-        "order": 29,
+        "order": 26,
         "text": "Sometimes, we can solve a problem easily using complements by solving the opposite problem. For example, the probability of getting at least one six when throwing a dice ten times is 1$-(5/6)^{10}$."
       },
       {
-        "order": 30,
+        "order": 27,
         "text": "Here 5/6 is the probability that the outcome of a single throw is not six, and (5/6)$^{10}$ is the probability that none of the ten throws is a six. The complement of this is the answer to the problem."
       },
       {
-        "order": 31,
+        "order": 28,
         "text": "The probability of the union $A \\cup B$ is calculated using the formula"
       },
       {
-        "order": 32,
+        "order": 29,
         "text": "$P(A \\cup B) = P(A)+ P(B)-P(A \\cap B)$."
       },
       {
-        "order": 33,
+        "order": 30,
         "text": "For example, when throwing a dice, the union of the events"
       },
       {
-        "order": 34,
+        "order": 31,
         "text": "$A =$ \"the outcome is even\""
       },
       {
-        "order": 35,
+        "order": 32,
         "text": "and $B =$ \"the outcome is less than 4\""
       },
       {
-        "order": 36,
+        "order": 33,
         "text": "is $A \\cup B =$ \"the outcome is even or less than 4\","
       },
       {
-        "order": 37,
+        "order": 34,
         "text": "and its probability is"
       },
       {
-        "order": 38,
+        "order": 35,
         "text": "$P(A \\cup B) = P(A)+ P(B)-P(A \\cap B) = 1/2+1/2-1/6 =$ 5/6."
       },
       {
-        "order": 39,
+        "order": 36,
         "text": "If the events $A$ and $B$ are **disjoint**, i.e., $A \\cap B$ is empty, the probability of the event $A \\cup B$ is simply"
       },
       {
-        "order": 40,
+        "order": 37,
         "text": "$P(A \\cup B) = P(A)+ P(B)$."
       },
       {
-        "order": 41,
+        "order": 38,
         "text": "The **conditional probability**"
       },
       {
-        "order": 42,
+        "order": 39,
         "text": "$P(A|B) =$ $P(A \\cap B)$"
       },
       {
-        "order": 43,
+        "order": 40,
         "text": "$P(B)$"
       },
       {
-        "order": 44,
+        "order": 41,
         "text": "is the probability of $A$ assuming that $B$ happens. Hence, when calculating the probability of $A$, we only consider the outcomes that also belong to $B$. Using the previous sets, $P(A|B) =$ 1/3,"
       },
       {
-        "order": 45,
+        "order": 42,
         "text": "because the outcomes of $B$ are {1,2,3}, and one of them is even. This is the probability of an even outcome if we know that the outcome is between 1...3."
       },
       {
-        "order": 46,
+        "order": 43,
         "text": "Using conditional probability, the probability of the intersection $A \\cap B$ can be calculated using the formula"
       },
       {
-        "order": 47,
+        "order": 44,
         "text": "$P(A \\cap B) = P(A)P(B|A)$."
       },
       {
-        "order": 48,
+        "order": 45,
         "text": "Events $A$ and $B$ are **independent** if"
       },
       {
-        "order": 49,
+        "order": 46,
         "text": "$P(A|B) = P(A)$ and $P(B|A) = P(B)$,"
       },
       {
-        "order": 50,
+        "order": 47,
         "text": "which means that the fact that $B$ happens does not change the probability of $A$, and vice versa. In this case, the probability of the intersection is"
       },
       {
-        "order": 51,
+        "order": 48,
         "text": "$P(A \\cap B) = P(A)P(B)$."
       },
       {
-        "order": 52,
+        "order": 49,
         "text": "For example, when drawing a card from a deck, the events"
       },
       {
-        "order": 53,
+        "order": 50,
         "text": "$A =$ \"the suit is clubs\""
       },
       {
-        "order": 54,
+        "order": 51,
         "text": "and"
       },
       {
-        "order": 55,
+        "order": 52,
         "text": "$B =$ \"the value is four\""
       },
       {
-        "order": 56,
+        "order": 53,
         "text": "are independent. Hence the event"
       },
       {
-        "order": 57,
+        "order": 54,
         "text": "$A \\cap B =$ \"the card is the four of clubs\""
       },
       {
-        "order": 58,
+        "order": 55,
         "text": "happens with probability"
       },
       {
-        "order": 59,
+        "order": 56,
         "text": "$P(A \\cap B) = P(A)P(B) = 1/4\\cdot 1/13 =$ 1/52."
       },
       {
-        "order": 60,
+        "order": 57,
         "text": "A **random variable** is a value that is generated by a random process. For example, when throwing two dice, a possible random variable is"
       },
       {
-        "order": 61,
+        "order": 58,
         "text": "$X =$ \"the sum of the outcomes\"."
       },
       {
-        "order": 62,
+        "order": 59,
         "text": "For example, if the outcomes are [4,6] (meaning that we first throw a four and then a six), then the value of $X$ is 10. We denote $P(X = x)$ the probability that the value of a random variable $X$ is $x$. For example, when throwing two dice, $P(X = 10) =$ 3/36, because the total number of outcomes is 36 and there are three possible ways to obtain the sum 10: [4,6], [5,5] and [6,4]."
       },
       {
-        "order": 63,
+        "order": 60,
         "text": "The **expected value** $E[X]$ indicates the average value of a random variable $X$. The expected value can be calculated as the sum"
       },
       {
-        "order": 64,
+        "order": 61,
         "text": "$$E[X] = \\sum_{x} P(X = x) \\cdot x,$$"
       },
       {
-        "order": 65,
+        "order": 62,
         "text": "where $x$ goes through all possible values of $X$. For example, when throwing a dice, the expected outcome is"
       },
       {
-        "order": 66,
+        "order": 63,
         "text": "1/6$\\cdot 1+1/6\\cdot 2+1/6\\cdot 3+1/6\\cdot 4+1/6\\cdot 5+1/6\\cdot 6 =$ 7/2."
       },
       {
-        "order": 67,
+        "order": 64,
         "text": "A useful property of expected values is **linearity**. It means that the sum $E[X_1 + X_2 + \\cdot \\cdot \\cdot + X_n]$ always equals the sum $E[X_1] + E[X_2] + \\cdot \\cdot \\cdot + E[X_n]$. This formula holds even if random variables depend on each other. For example, when throwing two dice, the expected sum is"
       },
       {
-        "order": 68,
+        "order": 65,
         "text": "$E[X_1 + X_2] = E[X_1]+ E[X_2] = 7/2+7/2 =$ 7."
       },
       {
-        "order": 69,
+        "order": 66,
         "text": "Let us now consider a problem where $n$ balls are randomly placed in $n$ boxes, and our task is to calculate the expected number of empty boxes. Each ball has an equal probability to be placed in any of the boxes. For example, if $n =$ 2, the possibilities are as follows:"
       },
       {
-        "order": 70,
+        "order": 67,
         "text": "In this case, the expected number of empty boxes is"
       },
       {
-        "order": 71,
-        "text": "0$+0+1+1$"
+        "order": 68,
+        "text": "$$\\frac{0 + 0 + 1 + 1}{4} = \\frac{1}{2}.$$"
       },
       {
-        "order": 72,
-        "text": "4 $= 1$"
-      },
-      {
-        "order": 73,
-        "text": "2."
-      },
-      {
-        "order": 74,
+        "order": 69,
         "text": "In the general case, the probability that a single box is empty is"
       },
       {
-        "order": 75,
-        "text": "$³n-1$"
+        "order": 70,
+        "text": "$$\\left(\\frac{n-1}{n}\\right)^n,$$"
       },
       {
-        "order": 76,
-        "text": "$´^n$ ,"
-      },
-      {
-        "order": 77,
-        "text": "$n$"
-      },
-      {
-        "order": 78,
+        "order": 71,
         "text": "because no ball should be placed in it. Hence, using linearity, the expected number of empty boxes is"
       },
       {
-        "order": 79,
-        "text": "$n\\cdot$ $³n-1$"
+        "order": 72,
+        "text": "$$n \\cdot \\left(\\frac{n-1}{n}\\right)^n.$$"
       },
       {
-        "order": 80,
-        "text": "$´^n$ ."
-      },
-      {
-        "order": 81,
-        "text": "$n$"
-      },
-      {
-        "order": 82,
+        "order": 73,
         "text": "The **distribution** of a random variable $X$ shows the probability of each value that $X$ may have. The distribution consists of values $P(X = x)$. For example, when throwing two dice, the distribution for their sum is:"
       },
       {
-        "order": 83,
-        "text": "$x$ 2 3 4 5 6 7 8 9 10 11 12 $P(X = x)$ 1/36 2/36 3/36 4/36 5/36 6/36 5/36 4/36 3/36 2/36 1/36"
+        "order": 74,
+        "text": "| $x$ | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | | $P(X = x)$ | 1/36 | 2/36 | 3/36 | 4/36 | 5/36 | 6/36 | 5/36 | 4/36 | 3/36 | 2/36 | 1/36 |"
       },
       {
-        "order": 84,
-        "text": "In a **uniform distribution**, the random variable $X$ has $n$ possible values $a,a+1,...,b$ and the probability of each value is 1/$n$. For example, when throwing a dice, $a =$ 1, $b =$ 6 and $P(X = x) =$ 1/6 for each value $x$. The expected value of $X$ in a uniform distribution is"
+        "order": 75,
+        "text": "In a **uniform distribution**, the random variable $X$ has $n$ possible values $a, a+1, \\ldots, b$ and the probability of each value is $1/n$. For example, when throwing a dice, $a = 1$, $b = 6$ and $P(X = x) = 1/6$ for each value $x$. The expected value of $X$ in a uniform distribution is"
       },
       {
-        "order": 85,
-        "text": "$E[X] =$ $a+ b$"
+        "order": 76,
+        "text": "$$E[X] = \\frac{a + b}{2}.$$"
       },
       {
-        "order": 86,
+        "order": 77,
         "text": "In a **binomial distribution**, $n$ attempts are made and the probability that a single attempt succeeds is $p$. The random variable $X$ counts the number of successful attempts, and the probability of a value $x$ is"
       },
       {
-        "order": 87,
-        "text": "$!$"
+        "order": 78,
+        "text": "$$P(X = x) = p^x (1-p)^{n-x} \\binom{n}{x},$$"
       },
       {
-        "order": 88,
-        "text": "$P(X = x) = p^x(1-p)^{n-x}$ $Ã$ $n$ $x$"
+        "order": 79,
+        "text": "where $p^x$ and $(1-p)^{n-x}$ correspond to successful and unsuccessful attempts, and $\\binom{n}{x}$ is the number of ways we can choose the order of the attempts. For example, when throwing a dice ten times, the probability of throwing a six exactly three times is $(1/6)^3 (5/6)^7 \\binom{10}{3}$. The expected value of $X$ in a binomial distribution is"
       },
       {
-        "order": 89,
-        "text": ","
-      },
-      {
-        "order": 90,
-        "text": "where $p^x$ and (1$-p)^{n-x}$ correspond to successful and unsuccessful attemps, and $¡^n$ $^x$ $¢$ is the number of ways we can choose the order of the attempts. For example, when throwing a dice ten times, the probability of throwing a six exactly three times is (1/6)$^3(5/6)^7¡^{10}$ $^3$ $¢$ . The expected value of $X$ in a binomial distribution is"
-      },
-      {
-        "order": 91,
+        "order": 80,
         "text": "$E[X] = pn$."
       },
       {
-        "order": 92,
+        "order": 81,
         "text": "In a **geometric distribution**, the probability that an attempt succeeds is $p$, and we continue until the first success happens. The random variable $X$ counts the number of attempts needed, and the probability of a value $x$ is"
       },
       {
-        "order": 93,
+        "order": 82,
         "text": "$P(X = x) = (1-p)^{x-1}p$,"
       },
       {
-        "order": 94,
-        "text": "where (1$-p)^{x-1}$ corresponds to the unsuccessful attemps and $p$ corresponds to the first successful attempt. For example, if we throw a dice until we throw a six, the probability that the number of throws is exactly 4 is (5/6)$^3$1/6. The expected value of $X$ in a geometric distribution is"
+        "order": 83,
+        "text": "where $(1-p)^{x-1}$ corresponds to the unsuccessful attempts and $p$ corresponds to the first successful attempt. For example, if we throw a dice until we throw a six, the probability that the number of throws is exactly 4 is $(5/6)^3 \\cdot 1/6$. The expected value of $X$ in a geometric distribution is"
       },
       {
-        "order": 95,
-        "text": "$E[X] =$ 1"
+        "order": 84,
+        "text": "$$E[X] = \\frac{1}{p}.$$"
       },
       {
-        "order": 96,
-        "text": "$p$."
-      },
-      {
-        "order": 97,
+        "order": 85,
         "text": "A **Markov chain** is a random process that consists of states and transitions between them. For each state, we know the probabilities for moving to other states. A Markov chain can be represented as a graph whose nodes are states and edges are transitions. As an example, consider a problem where we are in floor 1 in an $n$ floor building. At each step, we randomly walk either one floor up or one floor down, except that we always walk one floor up from floor 1 and one floor down from floor $n$. What is the probability of being in floor $m$ after $k$ steps? In this problem, each floor of the building corresponds to a state in a Markov chain. For example, if $n =$ 5, the graph is as follows:"
       },
       {
-        "order": 98,
+        "order": 86,
         "text": "1 1/2 1/2 1/2"
       },
       {
-        "order": 99,
+        "order": 87,
         "text": "1 1/2 1/2 1/2"
       },
       {
-        "order": 100,
+        "order": 88,
         "text": "The probability distribution of a Markov chain is a vector [$p_1, p_2,..., p_n$], where $p_k$ is the probability that the current state is $k$. The formula $p_1 + p_2 +\\cdot \\cdot \\cdot +$ $p_n =$ 1 always holds. In the above scenario, the initial distribution is [1,0,0,0,0], because we always begin in floor 1. The next distribution is [0,1,0,0,0], because we can only move from floor 1 to floor 2. After this, we can either move one floor up or one floor down, so the next distribution is [1/2,0,1/2,0,0], and so on. An efficient way to simulate the walk in a Markov chain is to use dynamic programming. The idea is to maintain the probability distribution, and at each step go through all possibilities how we can move. Using this method, we can simulate a walk of $m$ steps in $O(n^2m)$ time. The transitions of a Markov chain can also be represented as a matrix that updates the probability distribution. In the above scenario, the matrix is"
       },
       {
-        "order": 101,
+        "order": 89,
         "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 102,
+        "order": 90,
         "text": "When we multiply a probability distribution by this matrix, we get the new distribution after moving one step. For example, we can move from the distribution [1,0,0,0,0] to the distribution [0,1,0,0,0] as follows:"
       },
       {
-        "order": 103,
+        "order": 91,
         "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix} \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 104,
+        "order": 92,
         "text": "By calculating matrix powers efficiently, we can calculate the distribution after $m$ steps in $O(n^3$log$m$) time."
       },
       {
-        "order": 105,
+        "order": 93,
         "text": "Sometimes we can use randomness for solving a problem, even if the problem is not related to probabilities. A **randomized algorithm** is an algorithm that is based on randomness. A **Monte Carlo algorithm** is a randomized algorithm that may sometimes give a wrong answer. For such an algorithm to be useful, the probability of a wrong answer should be small."
       },
       {
-        "order": 106,
+        "order": 94,
         "text": "A **Las Vegas algorithm** is a randomized algorithm that always gives the correct answer, but its running time varies randomly. The goal is to design an algorithm that is efficient with high probability. Next we will go through three example problems that can be solved using randomness."
       },
       {
-        "order": 107,
+        "order": 95,
         "text": "The $kth$ **order statistic** of an array is the element at position $k$ after sorting the array in increasing order. It is easy to calculate any order statistic in $O(n$log$n$) time by first sorting the array, but is it really needed to sort the entire array just to find one element? It turns out that we can find order statistics using a randomized algorithm without sorting the array. The algorithm, called **quickselect**$^1$, is a Las Vegas algorithm: its running time is usually $O(n)$ but $O(n^2)$ in the worst case. The algorithm chooses a random element $x$ of the array, and moves elements smaller than $x$ to the left part of the array, and all other elements to the right part of the array. This takes $O(n)$ time when there are $n$ elements. Assume that the left part contains $a$ elements and the right part contains $b$ elements. If $a = k$, element $x$ is the $k$th order statistic. Otherwise, if $a > k$, we recursively find the $k$th order statistic for the left part, and if $a < k$, we recursively find the $r$th order statistic for the right part where $r = k -a$. The search continues in a similar way, until the element has been found. When each element $x$ is randomly chosen, the size of the array about halves at each step, so the time complexity for finding the $k$th order statistic is about"
       },
       {
-        "order": 108,
+        "order": 96,
         "text": "$n+ n/2+ n/4+ n/8+\\cdot \\cdot \\cdot < 2n = O(n)$."
       },
       {
-        "order": 109,
+        "order": 97,
         "text": "The worst case of the algorithm requires still $O(n^2)$ time, because it is possible that $x$ is always chosen in such a way that it is one of the smallest or largest elements in the array and $O(n)$ steps are needed. However, the probability for this is so small that this never happens in practice."
       },
       {
-        "order": 110,
+        "order": 98,
         "text": "Our next problem is to $verify$ if $AB = C$ holds when $A, B$ and $C$ are matrices of size $n \\times n$. Of course, we can solve the problem by calculating the product $AB$ again (in $O(n^3)$ time using the basic algorithm), but one could hope that verifying the answer would by easier than to calculate it from scratch. It turns out that we can solve the problem using a Monte Carlo algorithm$^2$"
       },
       {
-        "order": 111,
+        "order": 99,
         "text": "whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$."
       },
       {
-        "order": 112,
+        "order": 100,
         "text": "The time complexity of the algorithm is $O(n^2)$, because we can calculate the matrices $ABX$ and $CX$ in $O(n^2)$ time. We can calculate the matrix $ABX$ efficiently by using the representation $A(BX)$, so only two multiplications of $n\\times n$ and $n\\times$ 1 size matrices are needed. The drawback of the algorithm is that there is a small chance that the algorithm makes a mistake when it reports that $AB = C$. For example,"
       },
       {
-        "order": 113,
+        "order": 101,
         "text": "$\\cdot$ 6 8 1 3"
       },
       {
-        "order": 114,
+        "order": 102,
         "text": "$̸=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 115,
+        "order": 103,
         "text": ","
       },
       {
-        "order": 116,
+        "order": 104,
         "text": "but $\\cdot$ 6 8 1 3"
       },
       {
-        "order": 117,
+        "order": 105,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 118,
+        "order": 106,
         "text": "$=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 119,
+        "order": 107,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 120,
+        "order": 108,
         "text": "."
       },
       {
-        "order": 121,
+        "order": 109,
         "text": "However, in practice, the probability that the algorithm makes a mistake is small, and we can decrease the probability by verifying the result using multiple random vectors $X$ before reporting that $AB = C$."
       },
       {
-        "order": 122,
+        "order": 110,
         "text": "Given a graph that contains $n$ nodes and $m$ edges, our task is to find a way to color the nodes of the graph using two colors so that for at least $m$/2 edges, the endpoints have different colors. For example, in the graph"
       },
       {
-        "order": 123,
+        "order": 111,
         "text": "a valid coloring is as follows:"
       },
       {
-        "order": 124,
+        "order": 112,
         "text": "The above graph contains 7 edges, and for 5 of them, the endpoints have different colors, so the coloring is valid. The problem can be solved using a Las Vegas algorithm that generates random colorings until a valid coloring has been found. In a random coloring, the color of each node is independently chosen so that the probability of both colors is 1/2. In a random coloring, the probability that the endpoints of a single edge have different colors is 1/2. Hence, the expected number of edges whose endpoints have different colors is $m$/2. Since it is expected that a random coloring is valid, we will quickly find a valid coloring in practice."
       }
     ],
@@ -13492,119 +13329,119 @@
         "title": "Method 1",
         "paragraph_range": [
           3,
-          8
+          7
         ]
       },
       {
         "level": 3,
         "title": "Method 2",
         "paragraph_range": [
-          9,
-          12
+          8,
+          9
         ]
       },
       {
         "level": 3,
         "title": "Events",
         "paragraph_range": [
-          13,
-          26
+          10,
+          23
         ]
       },
       {
         "level": 3,
         "title": "Complement",
         "paragraph_range": [
-          27,
-          30
+          24,
+          27
         ]
       },
       {
         "level": 3,
         "title": "Union",
         "paragraph_range": [
-          31,
-          40
+          28,
+          37
         ]
       },
       {
         "level": 3,
         "title": "Conditional probability",
         "paragraph_range": [
-          41,
-          45
+          38,
+          42
         ]
       },
       {
         "level": 3,
         "title": "Intersection",
         "paragraph_range": [
-          46,
-          59
+          43,
+          56
         ]
       },
       {
         "level": 3,
         "title": "Random variables",
         "paragraph_range": [
-          60,
-          62
+          57,
+          59
         ]
       },
       {
         "level": 3,
         "title": "Expected value",
         "paragraph_range": [
-          63,
-          81
+          60,
+          72
         ]
       },
       {
         "level": 3,
         "title": "Distributions",
         "paragraph_range": [
-          82,
-          96
+          73,
+          84
         ]
       },
       {
         "level": 3,
         "title": "Markov chains",
         "paragraph_range": [
-          97,
-          104
+          85,
+          92
         ]
       },
       {
         "level": 3,
         "title": "Randomized algorithms",
         "paragraph_range": [
-          105,
-          106
+          93,
+          94
         ]
       },
       {
         "level": 3,
         "title": "Order statistics",
         "paragraph_range": [
-          107,
-          109
+          95,
+          97
         ]
       },
       {
         "level": 3,
         "title": "Verifying matrix multiplication",
         "paragraph_range": [
-          110,
-          121
+          98,
+          109
         ]
       },
       {
         "level": 3,
         "title": "Graph coloring",
         "paragraph_range": [
-          122,
-          124
+          110,
+          112
         ]
       }
     ],
@@ -13612,12 +13449,12 @@
       {
         "src": "/cp-handbook/figures/fig_p243_123.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 122
+        "preceding_paragraph_order": 110
       },
       {
         "src": "/cp-handbook/figures/fig_p243_124.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 123
+        "preceding_paragraph_order": 111
       }
     ],
     "footnotes": [
@@ -14582,174 +14419,120 @@
       },
       {
         "order": 5,
-        "text": "Suppose that we are given a two-dimensional grid that contains $n$ cells. Each cell is assigned a letter, and our task is to find two cells with the same letter whose distance is minimum, where the distance between cells ($x_1, y_1$) and ($x_2, y_2$) is $|x_1 -x_2|+|y_1 -y_2|$. For example, consider the following grid:"
+        "text": "Suppose that we are given a two-dimensional grid that contains $n$ cells. Each cell is assigned a letter, and our task is to find two cells with the same letter whose distance is minimum, where the distance between cells $(x_1, y_1)$ and $(x_2, y_2)$ is $|x_1 - x_2| + |y_1 - y_2|$. For example, consider the following grid:"
       },
       {
         "order": 6,
-        "text": "A"
+        "text": "In this case, the minimum distance is 2 between the two 'E' letters. We can solve the problem by considering each letter separately. Using this approach, the new problem is to calculate the minimum distance between two cells with a *fixed* letter $c$. We focus on two algorithms for this: *Algorithm 1:* Go through all pairs of cells with letter $c$, and calculate the minimum distance between such cells. This will take $O(k^2)$ time where $k$ is the number of cells with letter $c$. *Algorithm 2:* Perform a breadth-first search that simultaneously starts at each cell with letter $c$. The minimum distance between two cells with letter $c$ will be calculated in $O(n)$ time. One way to solve the problem is to choose either of the algorithms and use it for all letters. If we use Algorithm 1, the running time is $O(n^2)$, because all cells may contain the same letter, and in this case $k = n$. Also if we use Algorithm 2, the running time is $O(n^2)$, because all cells may have different letters, and in this case $n$ searches are needed."
       },
       {
         "order": 7,
-        "text": "F"
-      },
-      {
-        "order": 8,
-        "text": "B"
-      },
-      {
-        "order": 9,
-        "text": "A"
-      },
-      {
-        "order": 10,
-        "text": "C"
-      },
-      {
-        "order": 11,
-        "text": "G"
-      },
-      {
-        "order": 12,
-        "text": "E"
-      },
-      {
-        "order": 13,
-        "text": "E"
-      },
-      {
-        "order": 14,
-        "text": "B"
-      },
-      {
-        "order": 15,
-        "text": "D"
-      },
-      {
-        "order": 16,
-        "text": "A"
-      },
-      {
-        "order": 17,
-        "text": "F"
-      },
-      {
-        "order": 18,
-        "text": "C"
-      },
-      {
-        "order": 19,
-        "text": "A"
-      },
-      {
-        "order": 20,
-        "text": "B"
-      },
-      {
-        "order": 21,
-        "text": "D"
-      },
-      {
-        "order": 22,
-        "text": "In this case, the minimum distance is 2 between the two ’E’ letters. We can solve the problem by considering each letter separately. Using this approach, the new problem is to calculate the minimum distance between two cells with a *fixed* letter $c$. We focus on two algorithms for this: *Algorithm 1:* Go through all pairs of cells with letter $c$, and calculate the minimum distance between such cells. This will take $O(k^2)$ time where $k$ is the number of cells with letter $c$. *Algorithm 2:* Perform a breadth-first search that simultaneously starts at each cell with letter $c$. The minimum distance between two cells with letter $c$ will be calculated in $O(n)$ time. One way to solve the problem is to choose either of the algorithms and use it for all letters. If we use Algorithm 1, the running time is $O(n^2)$, because all cells may contain the same letter, and in this case $k = n$. Also if we use Algorithm 2, the running time is $O(n^2)$, because all cells may have different letters, and in this case $n$ searches are needed."
-      },
-      {
-        "order": 23,
         "text": "However, we can *combine* the two algorithms and use different algorithms for different letters depending on how many times each letter appears in the grid. Assume that a letter $c$ appears $k$ times. If $k \\le pn$, we use Algorithm 1, and if $k > pn$, we use Algorithm 2. It turns out that by doing this, the total running time of the algorithm is only $O(npn)$. First, suppose that we use Algorithm 1 for a letter $c$. Since $c$ appears at most $pn$ times in the grid, we compare each cell with letter *c O*($pn$) times with other cells. Thus, the time used for processing all such cells is $O(npn)$. Then, suppose that we use Algorithm 2 for a letter $c$. There are at most $pn$ such letters, so processing those letters also takes $O(npn)$ time."
       },
       {
-        "order": 24,
+        "order": 8,
         "text": "Our next problem also deals with a two-dimensional grid that contains $n$ cells. Initially, each cell except one is white. We perform $n-1$ operations, each of which first calculates the minimum distance from a given white cell to a black cell, and then paints the white cell black. For example, consider the following operation:"
       },
       {
-        "order": 25,
+        "order": 9,
         "text": "*"
       },
       {
-        "order": 26,
+        "order": 10,
         "text": "First, we calculate the minimum distance from the white cell marked with * to a black cell. The minimum distance is 2, because we can move two steps left to a black cell. Then, we paint the white cell black:"
       },
       {
-        "order": 27,
+        "order": 11,
         "text": "Consider the following two algorithms: *Algorithm 1:* Use breadth-first search to calculate for each white cell the distance to the nearest black cell. This takes $O(n)$ time, and after the search, we can find the minimum distance from any white cell to a black cell in $O$(1) time. *Algorithm 2:* Maintain a list of cells that have been painted black, go through this list at each operation and then add a new cell to the list. An operation takes $O(k)$ time where $k$ is the length of the list. We combine the above algorithms by dividing the operations into $O(pn)$ *batches*, each of which consists of $O(pn)$ operations. At the beginning of each batch, we perform Algorithm 1. Then, we use Algorithm 2 to process the operations in the batch. We clear the list of Algorithm 2 between the batches. At each"
       },
       {
-        "order": 28,
+        "order": 12,
         "text": "operation, the minimum distance to a black cell is either the distance calculated by Algorithm 1 or the distance calculated by Algorithm 2. The resulting algorithm works in $O(npn)$ time. First, Algorithm 1 is performed $O(pn)$ times, and each search works in $O(n)$ time. Second, when using Algorithm 2 in a batch, the list contains $O(pn)$ cells (because we clear the list between the batches) and each operation takes $O(pn)$ time."
       },
       {
-        "order": 29,
+        "order": 13,
         "text": "Some square root algorithms are based on the following observation: if a positive integer $n$ is represented as a sum of positive integers, such a sum always contains at most $O(pn)$ *distinct* numbers. The reason for this is that to construct a sum that contains a maximum number of distinct numbers, we should choose $small$ numbers. If we choose the numbers 1,2,...,$k$, the resulting sum is"
       },
       {
-        "order": 30,
+        "order": 14,
         "text": "$k(k +1)$"
       },
       {
-        "order": 31,
+        "order": 15,
         "text": "Thus, the maximum amount of distinct numbers is $k = O(pn)$. Next we will discuss two problems that can be solved efficiently using this observation."
       },
       {
-        "order": 32,
+        "order": 16,
         "text": "Suppose that we are given a list of integer weights whose sum is $n$. Our task is to find out all sums that can be formed using a subset of the weights. For example, if the weights are {1,3,3}, the possible sums are as follows:"
       },
       {
-        "order": 33,
+        "order": 17,
         "text": "• 0 (empty set) • 1 • 3 • 1$+3 =$ 4 • 3$+3 =$ 6 • 1$+3+3 =$ 7"
       },
       {
-        "order": 34,
+        "order": 18,
         "text": "Using the standard knapsack approach (see Chapter 7.4), the problem can be solved as follows: we define a function `possible`($x,k$) whose value is 1 if the sum $x$ can be formed using the first $k$ weights, and 0 otherwise. Since the sum of the weights is $n$, there are at most $n$ weights and all values of the function can be calculated in $O(n^2)$ time using dynamic programming. However, we can make the algorithm more efficient by using the fact that there are at most $O(pn)$ *distinct* weights. Thus, we can process the weights in groups that consists of similar weights. We can process each group in $O(n)$ time, which yields an $O(npn)$ time algorithm. The idea is to use an array that records the sums of weights that can be formed using the groups processed so far. The array contains $n$ elements: element $k$ is 1 if the sum $k$ can be formed and 0 otherwise. To process a group of weights, we scan the array from left to right and record the new sums of weights that can be formed using this group and the previous groups."
       },
       {
-        "order": 35,
+        "order": 19,
         "text": "Given a string `s` of length $n$ and a set of strings $D$ whose total length is $m$, consider the problem of counting the number of ways `s` can be formed as a concatenation of strings in $D$. For example, if `s` $=$ `ABAB` and $D =$ {`A`,`B`,`AB`}, there are 4 ways:"
       },
       {
-        "order": 36,
+        "order": 20,
         "text": "• `A`$+$`B`$+$`A`$+$`B` • `AB`$+$`A`$+$`B` • `A`$+$`B`$+$`AB`"
       },
       {
-        "order": 37,
+        "order": 21,
         "text": "We can solve the problem using dynamic programming: Let `count`($k$) denote the number of ways to construct the prefix `s`[0...$k$] using the strings in $D$. Now `count`($n -1$) gives the answer to the problem, and we can solve the problem in $O(n^2)$ time using a trie structure. However, we can solve the problem more efficiently by using string hashing and the fact that there are at most $O(pm)$ distinct string lengths in $D$. First, we construct a set $H$ that contains all hash values of the strings in $D$. Then, when calculating a value of `count`($k$), we go through all values of $p$ such that there is a string of length $p$ in $D$, calculate the hash value of `s`[$k -p +1...k$] and check if it belongs to $H$. Since there are at most $O(pm)$ distinct string lengths, this results in an algorithm whose running time is $O(npm)$."
       },
       {
-        "order": 38,
+        "order": 22,
         "text": "**Mo’s algorithm**$^1$ can be used in many problems that require processing range queries in a $static$ array, i.e., the array values do not change between the queries. In each query, we are given a range [$a,b$], and we should calculate a value based on the array elements between positions $a$ and $b$. Since the array is static, the queries can be processed in any order, and Mo’s algorithm processes the queries in a special order which guarantees that the algorithm works efficiently. Mo’s algorithm maintains an $active$ $range$ of the array, and the answer to a query concerning the active range is known at each moment. The algorithm processes the queries one by one, and always moves the endpoints of the active range by inserting and removing elements. The time complexity of the algorithm is $O(npnf (n))$ where the array contains $n$ elements, there are $n$ queries and each insertion and removal of an element takes $O(f (n))$ time. The trick in Mo’s algorithm is the order in which the queries are processed: The array is divided into blocks of $k = O(pn)$ elements, and a query [$a_1,b_1$] is processed before a query [$a_2,b_2$] if either"
       },
       {
-        "order": 39,
+        "order": 23,
         "text": "• $\\lfloor a_1/k\\rfloor < \\lfloor a_2/k\\rfloor$ or"
       },
       {
-        "order": 40,
+        "order": 24,
         "text": "• $\\lfloor a_1/k\\rfloor = \\lfloor a_2/k\\rfloor$ and $b_1 < b_2$."
       },
       {
-        "order": 41,
+        "order": 25,
         "text": "Thus, all queries whose left endpoints are in a certain block are processed one after another sorted according to their right endpoints. Using this order, the algorithm only performs $O(npn)$ operations, because the left endpoint moves $O(n)$ times $O(pn)$ steps, and the right endpoint moves $O(pn)$ times $O(n)$ steps. Thus, both endpoints move a total of $O(npn)$ steps during the algorithm."
       },
       {
-        "order": 42,
+        "order": 26,
         "text": "As an example, consider a problem where we are given a set of queries, each of them corresponding to a range in an array, and our task is to calculate for each query the number of *distinct* elements in the range. In Mo’s algorithm, the queries are always sorted in the same way, but it depends on the problem how the answer to the query is maintained. In this problem, we can maintain an array `count` where `count`[$x$] indicates the number of times an element $x$ occurs in the active range. When we move from one query to another query, the active range changes. For example, if the current range is"
       },
       {
-        "order": 43,
+        "order": 27,
         "text": "and the next range is"
       },
       {
-        "order": 44,
+        "order": 28,
         "text": "there will be three steps: the left endpoint moves one step to the right, and the right endpoint moves two steps to the right. After each step, the array `count` needs to be updated. After adding an element $x$, we increase the value of `count`[$x$] by 1, and if `count`[$x] =$ 1 after this, we also increase the answer to the query by 1. Similarly, after removing an element $x$, we decrease the value of `count`[$x$] by 1, and if `count`[$x] =$ 0 after this, we also decrease the answer to the query by 1. In this problem, the time needed to perform each step is $O$(1), so the total time complexity of the algorithm is $O(npn)$."
       }
     ],
     "code_examples": [
       {
         "order": 0,
+        "language": "text",
+        "code": "A F B A\nC G E E\nB D A F\nC A B D",
+        "preceding_paragraph_order": 5,
+        "explanatory_paragraphs": [
+          6,
+          7
+        ]
+      },
+      {
+        "order": 1,
         "language": "cpp",
         "code": "• AB+AB",
-        "preceding_paragraph_order": 36,
+        "preceding_paragraph_order": 20,
         "explanatory_paragraphs": [
-          37,
-          38
+          21,
+          22
         ]
       }
     ],
@@ -14767,55 +14550,55 @@
         "title": "Case processing",
         "paragraph_range": [
           5,
-          23
+          7
         ]
       },
       {
         "level": 3,
         "title": "Batch processing",
         "paragraph_range": [
-          24,
-          28
+          8,
+          12
         ]
       },
       {
         "level": 3,
         "title": "Integer partitions",
         "paragraph_range": [
-          29,
-          31
+          13,
+          15
         ]
       },
       {
         "level": 3,
         "title": "Knapsack",
         "paragraph_range": [
-          32,
-          34
+          16,
+          18
         ]
       },
       {
         "level": 3,
         "title": "String construction",
         "paragraph_range": [
-          35,
-          37
+          19,
+          21
         ]
       },
       {
         "level": 2,
         "title": "Mo’s algorithm",
         "paragraph_range": [
-          38,
-          41
+          22,
+          25
         ]
       },
       {
         "level": 3,
         "title": "Example",
         "paragraph_range": [
-          42,
-          44
+          26,
+          28
         ]
       }
     ],
@@ -14937,94 +14720,86 @@
       },
       {
         "order": 18,
-        "text": "$p(u) = t_ku^k + t_k^-_1u^{k-1} +\\cdot \\cdot \\cdot + t_0$."
+        "text": "$$p(u) = t_k u^k + t_{k-1} u^{k-1} + \\cdots + t_0.$$"
       },
       {
         "order": 19,
-        "text": "In this case, the update for a value at position $i$ in [$a,b$] is $p(i -a)$. For example, adding the polynomial $p(u) = u+1$ to [$a,b$] means that the value at position $a$ increases by 1, the value at position $a+1$ increases by 2, and so on. To support polynomial updates, each node is assigned $k+2$ values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1,..., z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range [$x, y$] equals"
+        "text": "In this case, the update for a value at position $i$ in $[a, b]$ is $p(i - a)$. For example, adding the polynomial $p(u) = u + 1$ to $[a, b]$ means that the value at position $a$ increases by 1, the value at position $a + 1$ increases by 2, and so on. To support polynomial updates, each node is assigned $k + 2$ values, where $k$ equals the degree of the polynomial. The value $s$ is the sum of the elements in the range, and the values $z_0, z_1, \\ldots, z_k$ are the coefficients of a polynomial that corresponds to a lazy update. Now, the sum of values in a range $[x, y]$ equals"
       },
       {
         "order": 20,
-        "text": "$^{y-x}$ $X$"
+        "text": "$$s + \\sum_{u=0}^{y-x} \\left( z_k u^k + z_{k-1} u^{k-1} + \\cdots + z_0 \\right).$$"
       },
       {
         "order": 21,
-        "text": "$^{u=0}$ $z_ku^k + z_k^-_1u^{k-1} +\\cdot \\cdot \\cdot + z_0$."
-      },
-      {
-        "order": 22,
-        "text": "$s+$"
-      },
-      {
-        "order": 23,
         "text": "The value of such a sum can be efficiently calculated using sum formulas. For example, the term $z_0$ corresponds to the sum ($y-x+1)z_0$, and the term $z_1u$ corresponds to the sum"
       },
       {
-        "order": 24,
-        "text": "$z_1(0+1+\\cdot \\cdot \\cdot + y-x) = z_1$ ($y-x)(y-x+1$)"
+        "order": 22,
+        "text": "$$z_1 (0 + 1 + \\cdots + (y - x)) = z_1 \\cdot \\frac{(y - x)(y - x + 1)}{2}.$$"
       },
       {
-        "order": 25,
+        "order": 23,
         "text": "When propagating an update in the tree, the indices of $p(u)$ change, because in each range [$x, y$], the values are calculated for $u = 0,1,..., y-x$. However, this is not a problem, because $p^′(u) = p(u + h)$ is a polynomial of equal degree as $p(u)$. For example, if $p(u) = t_2u^2 + t_1u -t_0$, then"
       },
       {
-        "order": 26,
+        "order": 24,
         "text": "$p^′(u) = t_2(u + h)^2 + t_1(u + h)-t_0 = t_2u^2 +(2ht_2 + t_1)u + t_2h^2 + t_1h-t_0$."
       },
       {
-        "order": 27,
+        "order": 25,
         "text": "An ordinary segment tree is static, which means that each node has a fixed position in the array and the tree requires a fixed amount of memory. In a **dynamic segment tree**, memory is allocated only for nodes that are actually accessed during the algorithm, which can save a large amount of memory. The nodes of a dynamic tree can be represented as structs:"
       },
       {
-        "order": 28,
+        "order": 26,
         "text": "Here `value` is the value of the node, [`x`,`y`] is the corresponding range, and `left` and `right` point to the left and right subtree. After this, nodes can be created as follows:"
       },
       {
-        "order": 29,
+        "order": 27,
         "text": "A dynamic segment tree is useful when the underlying array is $sparse$, i.e., the range [0,$n-1$] of allowed indices is large, but most array values are zeros. While an ordinary segment tree uses $O(n)$ memory, a dynamic segment tree only uses $O(k$log$n$) memory, where $k$ is the number of operations performed. A **sparse segment tree** initially has only one node [0,$n -1$] whose value is zero, which means that every array value is zero. After updates, new nodes are dynamically added to the tree. For example, if $n =$ 16 and the elements in positions 3 and 10 have been modified, the tree contains the following nodes:"
       },
       {
-        "order": 30,
+        "order": 28,
         "text": "Any path from the root node to a leaf contains $O$(log$n$) nodes, so each operation adds at most $O$(log$n$) new nodes to the tree. Thus, after $k$ operations, the tree contains at most $O(k$log$n$) nodes. Note that if we know all elements to be updated at the beginning of the algorithm, a dynamic segment tree is not necessary, because we can use an ordinary segment tree with index compression (Chapter 9.4). However, this is not possible when the indices are generated during the algorithm."
       },
       {
-        "order": 31,
+        "order": 29,
         "text": "Using a dynamic implementation, it is also possible to create a **persistent segment tree** that stores the *modification history* of the tree. In such an implementation, we can efficiently access all versions of the tree that have existed during the algorithm. When the modification history is available, we can perform queries in any previous tree like in an ordinary segment tree, because the full structure of each tree is stored. We can also create new trees based on previous trees and modify them independently. Consider the following sequence of updates, where red nodes change and other nodes remain the same:"
       },
       {
-        "order": 32,
+        "order": 30,
         "text": "step 1 step 2 step 3"
       },
       {
-        "order": 33,
+        "order": 31,
         "text": "After each update, most nodes of the tree remain the same, so an efficient way to store the modification history is to represent each tree in the history as a"
       },
       {
-        "order": 34,
+        "order": 32,
         "text": "The structure of each previous tree can be reconstructed by following the pointers starting at the corresponding root node. Since each operation adds only $O$(log$n$) new nodes to the tree, it is possible to store the full modification history of the tree."
       },
       {
-        "order": 35,
+        "order": 33,
         "text": "Instead of single values, nodes in a segment tree can also contain *data structures* that maintain information about the corresponding ranges. In such a tree, the operations take $O(f (n)$log$n$) time, where $f (n)$ is the time needed for processing a single node during an operation. As an example, consider a segment tree that supports queries of the form \"how many times does an element $x$ appear in the range [$a,b$]?\" For example, the element 1 appears three times in the following range:"
       },
       {
-        "order": 36,
+        "order": 34,
         "text": "To support such queries, we build a segment tree where each node is assigned a data structure that can be asked how many times any element $x$ appears in the corresponding range. Using this tree, the answer to a query can be calculated by combining the results from the nodes that belong to the range. For example, the following segment tree corresponds to the above array:"
       },
       {
-        "order": 37,
+        "order": 35,
         "text": "We can build the tree so that each node contains a `map` structure. In this case, the time needed for processing each node is $O$(log$n$), so the total time complexity of a query is $O$(log$^2$ $n$). The tree uses $O(n$log$n$) memory, because there are $O$(log$n$) levels and each level contains $O(n)$ elements."
       },
       {
-        "order": 38,
+        "order": 36,
         "text": "A **two-dimensional segment tree** supports queries related to rectangular subarrays of a two-dimensional array. Such a tree can be implemented as nested segment trees: a big tree corresponds to the rows of the array, and each node contains a small tree that corresponds to a column. For example, in the array"
       },
       {
-        "order": 39,
+        "order": 37,
         "text": "the sum of any subarray can be calculated from the following segment tree:"
       },
       {
-        "order": 40,
+        "order": 38,
         "text": "The operations of a two-dimensional segment tree take $O$(log$^2$ $n$) time, because the big tree and each small tree consist of $O$(log$n$) levels. The tree requires $O(n^2)$ memory, because each small tree contains $O(n)$ values."
       }
     ],
@@ -15063,20 +14838,20 @@
         "order": 3,
         "language": "cpp",
         "code": "struct node {\n   int value;\n   int x, y;\n   node *left, *right;\n   node(int v, int x, int y) : value(v), x(x), y(y) {}\n};",
-        "preceding_paragraph_order": 27,
+        "preceding_paragraph_order": 25,
         "explanatory_paragraphs": [
-          28,
-          29
+          26,
+          27
         ]
       },
       {
         "order": 4,
         "language": "cpp",
         "code": "// create new node\nnode *x = new node(0, 0, 15);\n// change value\nx->value = 5;",
-        "preceding_paragraph_order": 28,
+        "preceding_paragraph_order": 26,
         "explanatory_paragraphs": [
-          29,
-          30
+          27,
+          28
         ]
       }
     ],
@@ -15102,12 +14877,20 @@
         "title": "Polynomial updates",
         "paragraph_range": [
           17,
-          26
+          24
         ]
       },
       {
         "level": 3,
         "title": "Dynamic trees",
+        "paragraph_range": [
+          25,
+          26
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Sparse segment trees",
         "paragraph_range": [
           27,
           28
@@ -15115,34 +14898,26 @@
       },
       {
         "level": 3,
-        "title": "Sparse segment trees",
-        "paragraph_range": [
-          29,
-          30
-        ]
-      },
-      {
-        "level": 3,
         "title": "Persistent segment trees",
         "paragraph_range": [
-          31,
-          34
+          29,
+          32
         ]
       },
       {
         "level": 3,
         "title": "Data structures",
         "paragraph_range": [
-          35,
-          37
+          33,
+          35
         ]
       },
       {
         "level": 3,
         "title": "Two-dimensionality",
         "paragraph_range": [
-          38,
-          40
+          36,
+          38
         ]
       }
     ],
@@ -15170,42 +14945,42 @@
       {
         "src": "/cp-handbook/figures/fig_p272_141.png",
         "alt": "Figure from page 272",
-        "preceding_paragraph_order": 29
+        "preceding_paragraph_order": 27
       },
       {
         "src": "/cp-handbook/figures/fig_p272_142.png",
         "alt": "Figure from page 272",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p272_143.png",
         "alt": "Figure from page 272",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p272_144.png",
         "alt": "Figure from page 272",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p273_145.png",
         "alt": "Figure from page 273",
-        "preceding_paragraph_order": 33
+        "preceding_paragraph_order": 31
       },
       {
         "src": "/cp-handbook/figures/fig_p273_146.png",
         "alt": "Figure from page 273",
-        "preceding_paragraph_order": 36
+        "preceding_paragraph_order": 34
       },
       {
         "src": "/cp-handbook/figures/fig_p274_auto1.png",
         "alt": "Figure from page 274",
-        "preceding_paragraph_order": 38
+        "preceding_paragraph_order": 36
       },
       {
         "src": "/cp-handbook/figures/fig_p274_147.png",
         "alt": "Figure from page 274",
-        "preceding_paragraph_order": 39
+        "preceding_paragraph_order": 37
       }
     ],
     "footnotes": [],
