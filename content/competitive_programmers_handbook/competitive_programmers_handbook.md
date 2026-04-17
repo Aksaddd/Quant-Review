@@ -6293,51 +6293,36 @@ Thus, the Prüfer code of the graph is [4,4,2]. We can construct a Prüfer code 
 
 A **matrix** is a mathematical concept that corresponds to a two-dimensional array in programming. For example,
 
-$$ 6 13 7 4 7 0 8 2 9 5 4 18
-
-$$
-
-$$
-
-$A =$
-
-$$
+$$A = \begin{bmatrix}
+6 & 13 & 7 & 4 \\
+7 & 0 & 8 & 2 \\
+9 & 5 & 4 & 18
+\end{bmatrix}$$
 
 is a matrix of size 3$\times$ 4, i.e., it has 3 rows and 4 columns. The notation [$i, j$] refers to the element in row $i$ and column $j$ in a matrix. For example, in the above matrix, $A[2,3] =$ 8 and $A[3,1] =$ 9. A special case of a matrix is a **vector** that is a one-dimensional matrix of size $n\times$ 1. For example,
 
-$$ 4 7 5
-
-$$
-
-$$
-
-$V =$
-
-$$
+$$V = \begin{bmatrix}
+4 \\
+7 \\
+5
+\end{bmatrix}$$
 
 is a vector that contains three elements. The **transpose** $A^T$ of a matrix $A$ is obtained when the rows and columns of $A$ are swapped, i.e., $A^T[i, j] = A[j, i]$:
 
-$$
-
-$$
-
-$A^T =$
-
-$$
-
-$$
+$$A^T = \begin{bmatrix}
+6 & 7 & 9 \\
+13 & 0 & 5 \\
+7 & 8 & 4 \\
+4 & 2 & 18
+\end{bmatrix}$$
 
 A matrix is a **square matrix** if it has the same number of rows and columns. For example, the following matrix is a square matrix:
 
-$$ 3 12 4 5 9 15 0 2 4
-
-$$
-
-$$
-
-$S =$
-
-$$
+$$S = \begin{bmatrix}
+3 & 12 & 4 \\
+5 & 9 & 15 \\
+0 & 2 & 4
+\end{bmatrix}$$
 
 ### Operations
 
@@ -6501,29 +6486,25 @@ The powers of an adjacency matrix of a graph have an interesting property. When 
 
 the adjacency matrix is
 
-$$
-
-$$
-
-$$
-
-$$
-
-$V =$
-
-.
+$$V = \begin{bmatrix}
+0 & 0 & 0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 & 0
+\end{bmatrix}.$$
 
 Now, for example, the matrix
 
-$$
-
-$$
-
-$$
-
-$$
-
-$V^4 =$
+$$V^4 = \begin{bmatrix}
+0 & 0 & 1 & 1 & 1 & 0 \\
+2 & 0 & 0 & 0 & 2 & 2 \\
+0 & 2 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 1 & 0
+\end{bmatrix}$$
 
 contains the numbers of paths of 4 edges between the nodes. For example, $V^4[2,5] =$ 2, because there are two paths of 4 edges from node 2 to node 5: 2 $\to 1 \to 4 \to 2 \to$ 5 and 2 $\to 6 \to 3 \to 2 \to$ 5.
 
@@ -6834,43 +6815,26 @@ A **Markov chain** is a random process that consists of states and transitions b
 
 The probability distribution of a Markov chain is a vector [$p_1, p_2,..., p_n$], where $p_k$ is the probability that the current state is $k$. The formula $p_1 + p_2 +\cdot \cdot \cdot +$ $p_n =$ 1 always holds. In the above scenario, the initial distribution is [1,0,0,0,0], because we always begin in floor 1. The next distribution is [0,1,0,0,0], because we can only move from floor 1 to floor 2. After this, we can either move one floor up or one floor down, so the next distribution is [1/2,0,1/2,0,0], and so on. An efficient way to simulate the walk in a Markov chain is to use dynamic programming. The idea is to maintain the probability distribution, and at each step go through all possibilities how we can move. Using this method, we can simulate a walk of $m$ steps in $O(n^2m)$ time. The transitions of a Markov chain can also be represented as a matrix that updates the probability distribution. In the above scenario, the matrix is
 
-$$
-
-$$
-
-0 1/2 0 0 0 1 0 1/2 0 0 0 1/2 0 1/2 0 0 0 1/2 0 1 0 0 0 1/2 0
-
-$$
-
-$$ .
+$$\begin{bmatrix}
+0 & 1/2 & 0 & 0 & 0 \\
+1 & 0 & 1/2 & 0 & 0 \\
+0 & 1/2 & 0 & 1/2 & 0 \\
+0 & 0 & 1/2 & 0 & 1 \\
+0 & 0 & 0 & 1/2 & 0
+\end{bmatrix}.$$
 
 When we multiply a probability distribution by this matrix, we get the new distribution after moving one step. For example, we can move from the distribution [1,0,0,0,0] to the distribution [0,1,0,0,0] as follows:
 
-$$
-
-$$
-
-$$
-
-$$
-
-$$
-
-$$
-
-0 1/2 0 0 0 1 0 1/2 0 0 0 1/2 0 1/2 0 0 0 1/2 0 1 0 0 0 1/2 0
-
-$$
-
-$$
-
-$$
-
-$$ $=$
-
-$$
-
-$$ .
+$$\begin{bmatrix}
+0 & 1/2 & 0 & 0 & 0 \\
+1 & 0 & 1/2 & 0 & 0 \\
+0 & 1/2 & 0 & 1/2 & 0 \\
+0 & 0 & 1/2 & 0 & 1 \\
+0 & 0 & 0 & 1/2 & 0
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+=
+\begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}.$$
 
 By calculating matrix powers efficiently, we can calculate the distribution after $m$ steps in $O(n^3$log$m$) time.
 

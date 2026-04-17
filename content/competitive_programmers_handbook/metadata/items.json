@@ -12549,478 +12549,378 @@
       },
       {
         "order": 1,
-        "text": "$$ 6 13 7 4 7 0 8 2 9 5 4 18"
+        "text": "$$A = \\begin{bmatrix} 6 & 13 & 7 & 4 \\\\ 7 & 0 & 8 & 2 \\\\ 9 & 5 & 4 & 18 \\end{bmatrix}$$"
       },
       {
         "order": 2,
-        "text": "$$"
-      },
-      {
-        "order": 3,
-        "text": "$$"
-      },
-      {
-        "order": 4,
-        "text": "$A =$"
-      },
-      {
-        "order": 5,
-        "text": "$$"
-      },
-      {
-        "order": 6,
         "text": "is a matrix of size 3$\\times$ 4, i.e., it has 3 rows and 4 columns. The notation [$i, j$] refers to the element in row $i$ and column $j$ in a matrix. For example, in the above matrix, $A[2,3] =$ 8 and $A[3,1] =$ 9. A special case of a matrix is a **vector** that is a one-dimensional matrix of size $n\\times$ 1. For example,"
       },
       {
-        "order": 7,
-        "text": "$$ 4 7 5"
+        "order": 3,
+        "text": "$$V = \\begin{bmatrix} 4 \\\\ 7 \\\\ 5 \\end{bmatrix}$$"
       },
       {
-        "order": 8,
-        "text": "$$"
-      },
-      {
-        "order": 9,
-        "text": "$$"
-      },
-      {
-        "order": 10,
-        "text": "$V =$"
-      },
-      {
-        "order": 11,
-        "text": "$$"
-      },
-      {
-        "order": 12,
+        "order": 4,
         "text": "is a vector that contains three elements. The **transpose** $A^T$ of a matrix $A$ is obtained when the rows and columns of $A$ are swapped, i.e., $A^T[i, j] = A[j, i]$:"
       },
       {
-        "order": 13,
-        "text": "$$"
+        "order": 5,
+        "text": "$$A^T = \\begin{bmatrix} 6 & 7 & 9 \\\\ 13 & 0 & 5 \\\\ 7 & 8 & 4 \\\\ 4 & 2 & 18 \\end{bmatrix}$$"
       },
       {
-        "order": 14,
-        "text": "$$"
-      },
-      {
-        "order": 15,
-        "text": "$A^T =$"
-      },
-      {
-        "order": 16,
-        "text": "$$"
-      },
-      {
-        "order": 17,
-        "text": "$$"
-      },
-      {
-        "order": 18,
+        "order": 6,
         "text": "A matrix is a **square matrix** if it has the same number of rows and columns. For example, the following matrix is a square matrix:"
       },
       {
-        "order": 19,
-        "text": "$$ 3 12 4 5 9 15 0 2 4"
+        "order": 7,
+        "text": "$$S = \\begin{bmatrix} 3 & 12 & 4 \\\\ 5 & 9 & 15 \\\\ 0 & 2 & 4 \\end{bmatrix}$$"
       },
       {
-        "order": 20,
-        "text": "$$"
-      },
-      {
-        "order": 21,
-        "text": "$$"
-      },
-      {
-        "order": 22,
-        "text": "$S =$"
-      },
-      {
-        "order": 23,
-        "text": "$$"
-      },
-      {
-        "order": 24,
+        "order": 8,
         "text": "The sum $A + B$ of matrices $A$ and $B$ is defined if the matrices are of the same size. The result is a matrix where each element is the sum of the corresponding elements in $A$ and $B$."
       },
       {
-        "order": 25,
+        "order": 9,
         "text": "For example,"
       },
       {
-        "order": 26,
+        "order": 10,
         "text": "$$\\begin{bmatrix} 6 & 1 & 4 \\\\ 3 & 9 & 2 \\end{bmatrix} + \\begin{bmatrix} 4 & 9 & 3 \\\\ 8 & 1 & 3 \\end{bmatrix} = \\begin{bmatrix} 6+4 & 1+9 & 4+3 \\\\ 3+8 & 9+1 & 2+3 \\end{bmatrix} = \\begin{bmatrix} 10 & 10 & 7 \\\\ 11 & 10 & 5 \\end{bmatrix}.$$"
       },
       {
-        "order": 27,
+        "order": 11,
         "text": "Multiplying a matrix $A$ by a value $x$ means that each element of $A$ is multiplied by $x$. For example,"
       },
       {
-        "order": 28,
+        "order": 12,
         "text": "$$2 \\cdot \\begin{bmatrix} 6 & 1 & 4 \\\\ 3 & 9 & 2 \\end{bmatrix} = \\begin{bmatrix} 2 \\cdot 6 & 2 \\cdot 1 & 2 \\cdot 4 \\\\ 2 \\cdot 3 & 2 \\cdot 9 & 2 \\cdot 2 \\end{bmatrix} = \\begin{bmatrix} 12 & 2 & 8 \\\\ 6 & 18 & 4 \\end{bmatrix}.$$"
       },
       {
-        "order": 29,
+        "order": 13,
         "text": "The product $AB$ of matrices $A$ and $B$ is defined if $A$ is of size $a \\times n$ and $B$ is of size $n \\times b$, i.e., the width of $A$ equals the height of $B$. The result is a matrix of size $a \\times b$ whose elements are calculated using the formula"
       },
       {
-        "order": 30,
+        "order": 14,
         "text": "$$AB[i, j] = \\sum_{k=1}^{n} A[i, k] \\cdot B[k, j].$$"
       },
       {
-        "order": 31,
+        "order": 15,
         "text": "The idea is that each element of $AB$ is a sum of products of elements of $A$ and $B$ according to the following picture:"
       },
       {
-        "order": 32,
+        "order": 16,
         "text": "For example,"
       },
       {
-        "order": 33,
+        "order": 17,
         "text": "$$\\begin{bmatrix} 1 & 4 \\\\ 3 & 9 \\\\ 8 & 6 \\end{bmatrix} \\cdot \\begin{bmatrix} 1 & 6 \\\\ 2 & 9 \\end{bmatrix} = \\begin{bmatrix} 1 \\cdot 1 + 4 \\cdot 2 & 1 \\cdot 6 + 4 \\cdot 9 \\\\ 3 \\cdot 1 + 9 \\cdot 2 & 3 \\cdot 6 + 9 \\cdot 9 \\\\ 8 \\cdot 1 + 6 \\cdot 2 & 8 \\cdot 6 + 6 \\cdot 9 \\end{bmatrix} = \\begin{bmatrix} 9 & 42 \\\\ 21 & 99 \\\\ 20 & 102 \\end{bmatrix}.$$"
       },
       {
-        "order": 34,
+        "order": 18,
         "text": "Matrix multiplication is associative, so $A(BC) = (AB)C$ holds, but it is not commutative, so $AB = BA$ does not usually hold."
       },
       {
-        "order": 35,
+        "order": 19,
         "text": "An **identity matrix** is a square matrix where each element on the diagonal is 1 and all other elements are 0. For example, the following matrix is the $3 \\times 3$ identity matrix:"
       },
       {
-        "order": 36,
+        "order": 20,
         "text": "$$I = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$$"
       },
       {
-        "order": 37,
+        "order": 21,
         "text": "Multiplying a matrix by an identity matrix does not change it. For example,"
       },
       {
-        "order": 38,
+        "order": 22,
         "text": "$$\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} \\cdot \\begin{bmatrix} 1 & 4 \\\\ 3 & 9 \\\\ 8 & 6 \\end{bmatrix} = \\begin{bmatrix} 1 & 4 \\\\ 3 & 9 \\\\ 8 & 6 \\end{bmatrix} \\quad \\text{and} \\quad \\begin{bmatrix} 1 & 4 \\\\ 3 & 9 \\\\ 8 & 6 \\end{bmatrix} \\cdot \\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix} = \\begin{bmatrix} 1 & 4 \\\\ 3 & 9 \\\\ 8 & 6 \\end{bmatrix}.$$"
       },
       {
-        "order": 39,
+        "order": 23,
         "text": "Using a straightforward algorithm, we can calculate the product of two $n \\times n$ matrices in $O(n^3)$ time. There are also more efficient algorithms for matrix multiplication[^matmul], but they are mostly of theoretical interest and such algorithms are not necessary in competitive programming."
       },
       {
-        "order": 40,
+        "order": 24,
         "text": "The power $A^k$ of a matrix $A$ is defined if $A$ is a square matrix. The definition is based on matrix multiplication:"
       },
       {
-        "order": 41,
+        "order": 25,
         "text": "$$A^k = \\underbrace{A \\cdot A \\cdot A \\cdots A}_{k \\text{ times}}$$"
       },
       {
-        "order": 42,
+        "order": 26,
         "text": "For example,"
       },
       {
-        "order": 43,
+        "order": 27,
         "text": "$$\\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix}^3 = \\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix} \\cdot \\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix} \\cdot \\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix} = \\begin{bmatrix} 48 & 165 \\\\ 33 & 114 \\end{bmatrix}.$$"
       },
       {
-        "order": 44,
+        "order": 28,
         "text": "In addition, $A^0$ is an identity matrix. For example,"
       },
       {
-        "order": 45,
+        "order": 29,
         "text": "$$\\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix}^0 = \\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}.$$"
       },
       {
-        "order": 46,
+        "order": 30,
         "text": "The matrix $A^k$ can be efficiently calculated in $O(n^3 \\log k)$ time using the algorithm in Chapter 21.2. For example,"
       },
       {
-        "order": 47,
+        "order": 31,
         "text": "$$\\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix}^8 = \\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix}^4 \\cdot \\begin{bmatrix} 2 & 5 \\\\ 1 & 4 \\end{bmatrix}^4.$$"
       },
       {
-        "order": 48,
+        "order": 32,
         "text": "The **determinant** $\\det(A)$ of a matrix $A$ is defined if $A$ is a square matrix. If $A$ is of size $1 \\times 1$, then $\\det(A) = A[1, 1]$. The determinant of a larger matrix is calculated recursively using the formula"
       },
       {
-        "order": 49,
+        "order": 33,
         "text": "$$\\det(A) = \\sum_{j=1}^{n} A[1, j] C[1, j],$$"
       },
       {
-        "order": 50,
+        "order": 34,
         "text": "where $C[i, j]$ is the **cofactor** of $A$ at $[i, j]$. The cofactor is calculated using the formula"
       },
       {
-        "order": 51,
+        "order": 35,
         "text": "$$C[i, j] = (-1)^{i+j} \\det(M[i, j]),$$"
       },
       {
-        "order": 52,
+        "order": 36,
         "text": "[^matmul]: The first such algorithm was Strassen's algorithm, published in 1969 [63], whose time complexity is $O(n^{2.80735})$; the best current algorithm [27] works in $O(n^{2.37286})$ time."
       },
       {
-        "order": 53,
+        "order": 37,
         "text": "where $M[i, j]$ is obtained by removing row $i$ and column $j$ from $A$. Due to the coefficient $(-1)^{i+j}$ in the cofactor, every other determinant is positive and negative. For example,"
       },
       {
-        "order": 54,
+        "order": 38,
         "text": "$$\\det\\left(\\begin{bmatrix} 3 & 4 \\\\ 1 & 6 \\end{bmatrix}\\right) = 3 \\cdot 6 - 4 \\cdot 1 = 14$$"
       },
       {
-        "order": 55,
+        "order": 39,
         "text": "and"
       },
       {
-        "order": 56,
+        "order": 40,
         "text": "$$\\det\\left(\\begin{bmatrix} 2 & 4 & 3 \\\\ 5 & 1 & 6 \\\\ 7 & 2 & 4 \\end{bmatrix}\\right) = 2 \\cdot \\det\\left(\\begin{bmatrix} 1 & 6 \\\\ 2 & 4 \\end{bmatrix}\\right) - 4 \\cdot \\det\\left(\\begin{bmatrix} 5 & 6 \\\\ 7 & 4 \\end{bmatrix}\\right) + 3 \\cdot \\det\\left(\\begin{bmatrix} 5 & 1 \\\\ 7 & 2 \\end{bmatrix}\\right) = 81.$$"
       },
       {
-        "order": 57,
+        "order": 41,
         "text": "The determinant of $A$ tells us whether there is an **inverse matrix** $A^{-1}$ such that $A \\cdot A^{-1} = I$, where $I$ is an identity matrix. It turns out that $A^{-1}$ exists exactly when $\\det(A) \\neq 0$, and it can be calculated using the formula"
       },
       {
-        "order": 58,
+        "order": 42,
         "text": "$$A^{-1}[i, j] = \\frac{C[j, i]}{\\det(A)}.$$"
       },
       {
-        "order": 59,
+        "order": 43,
         "text": "For example,"
       },
       {
-        "order": 60,
+        "order": 44,
         "text": "$$\\underbrace{\\begin{bmatrix} 2 & 4 & 3 \\\\ 5 & 1 & 6 \\\\ 7 & 2 & 4 \\end{bmatrix}}_{A} \\cdot \\underbrace{\\frac{1}{81} \\begin{bmatrix} -8 & -10 & 21 \\\\ 22 & -13 & 3 \\\\ 3 & 24 & -18 \\end{bmatrix}}_{A^{-1}} = \\underbrace{\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}}_{I}.$$"
       },
       {
-        "order": 61,
+        "order": 45,
         "text": "A **linear recurrence** is a function $f(n)$ whose initial values are $f(0), f(1), \\ldots, f(k-1)$ and larger values are calculated recursively using the formula"
       },
       {
-        "order": 62,
+        "order": 46,
         "text": "$$f(n) = c_1 f(n-1) + c_2 f(n-2) + \\ldots + c_k f(n-k),$$"
       },
       {
-        "order": 63,
+        "order": 47,
         "text": "where $c_1, c_2, \\ldots, c_k$ are constant coefficients."
       },
       {
-        "order": 64,
+        "order": 48,
         "text": "Dynamic programming can be used to calculate any value of $f(n)$ in $O(kn)$ time by calculating all values of $f(0), f(1), \\ldots, f(n)$ one after another. However, if $k$ is small, it is possible to calculate $f(n)$ much more efficiently in $O(k^3 \\log n)$ time using matrix operations."
       },
       {
-        "order": 65,
+        "order": 49,
         "text": "A simple example of a linear recurrence is the following function that defines the Fibonacci numbers:"
       },
       {
-        "order": 66,
+        "order": 50,
         "text": "$$\\begin{aligned} f(0) &= 0 \\\\ f(1) &= 1 \\\\ f(n) &= f(n-1) + f(n-2) \\end{aligned}$$"
       },
       {
-        "order": 67,
+        "order": 51,
         "text": "In this case, $k = 2$ and $c_1 = c_2 = 1$."
       },
       {
-        "order": 68,
+        "order": 52,
         "text": "To efficiently calculate Fibonacci numbers, we represent the Fibonacci formula as a square matrix $X$ of size $2 \\times 2$, for which the following holds:"
       },
       {
-        "order": 69,
+        "order": 53,
         "text": "$$X \\cdot \\begin{bmatrix} f(i) \\\\ f(i+1) \\end{bmatrix} = \\begin{bmatrix} f(i+1) \\\\ f(i+2) \\end{bmatrix}$$"
       },
       {
-        "order": 70,
+        "order": 54,
         "text": "Thus, values $f(i)$ and $f(i+1)$ are given as \"input\" for $X$, and $X$ calculates values $f(i+1)$ and $f(i+2)$ from them. It turns out that such a matrix is"
       },
       {
-        "order": 71,
+        "order": 55,
         "text": "$$X = \\begin{bmatrix} 0 & 1 \\\\ 1 & 1 \\end{bmatrix}.$$"
       },
       {
-        "order": 72,
+        "order": 56,
         "text": "For example,"
       },
       {
-        "order": 73,
+        "order": 57,
         "text": "$$\\begin{bmatrix} 0 & 1 \\\\ 1 & 1 \\end{bmatrix} \\cdot \\begin{bmatrix} f(5) \\\\ f(6) \\end{bmatrix} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 1 \\end{bmatrix} \\cdot \\begin{bmatrix} 5 \\\\ 8 \\end{bmatrix} = \\begin{bmatrix} 8 \\\\ 13 \\end{bmatrix} = \\begin{bmatrix} f(6) \\\\ f(7) \\end{bmatrix}.$$"
       },
       {
-        "order": 74,
+        "order": 58,
         "text": "Thus, we can calculate $f(n)$ using the formula"
       },
       {
-        "order": 75,
+        "order": 59,
         "text": "$$\\begin{bmatrix} f(n) \\\\ f(n+1) \\end{bmatrix} = X^n \\cdot \\begin{bmatrix} f(0) \\\\ f(1) \\end{bmatrix} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 1 \\end{bmatrix}^n \\cdot \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}.$$"
       },
       {
-        "order": 76,
+        "order": 60,
         "text": "The value of $X^n$ can be calculated in $O(\\log n)$ time, so the value of $f(n)$ can also be calculated in $O(\\log n)$ time."
       },
       {
-        "order": 77,
+        "order": 61,
         "text": "Let us now consider the general case where $f(n)$ is any linear recurrence. Again, our goal is to construct a matrix $X$ for which"
       },
       {
-        "order": 78,
+        "order": 62,
         "text": "$$X \\cdot \\begin{bmatrix} f(i) \\\\ f(i+1) \\\\ \\vdots \\\\ f(i+k-1) \\end{bmatrix} = \\begin{bmatrix} f(i+1) \\\\ f(i+2) \\\\ \\vdots \\\\ f(i+k) \\end{bmatrix}.$$"
       },
       {
-        "order": 79,
+        "order": 63,
         "text": "Such a matrix is"
       },
       {
-        "order": 80,
+        "order": 64,
         "text": "$$X = \\begin{bmatrix} 0 & 1 & 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & 1 & 0 & \\cdots & 0 \\\\ 0 & 0 & 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & 0 & 0 & \\cdots & 1 \\\\ c_k & c_{k-1} & c_{k-2} & c_{k-3} & \\cdots & c_1 \\end{bmatrix}.$$"
       },
       {
-        "order": 81,
+        "order": 65,
         "text": "In the first $k - 1$ rows, each element is 0 except that one element is 1. These rows replace $f(i)$ with $f(i+1)$, $f(i+1)$ with $f(i+2)$, and so on. The last row contains the coefficients of the recurrence to calculate the new value $f(i+k)$."
       },
       {
-        "order": 82,
+        "order": 66,
         "text": "Now, $f(n)$ can be calculated in $O(k^3 \\log n)$ time using the formula"
       },
       {
-        "order": 83,
+        "order": 67,
         "text": "$$\\begin{bmatrix} f(n) \\\\ f(n+1) \\\\ \\vdots \\\\ f(n+k-1) \\end{bmatrix} = X^n \\cdot \\begin{bmatrix} f(0) \\\\ f(1) \\\\ \\vdots \\\\ f(k-1) \\end{bmatrix}.$$"
       },
       {
-        "order": 84,
+        "order": 68,
         "text": "The powers of an adjacency matrix of a graph have an interesting property. When $V$ is an adjacency matrix of an unweighted graph, the matrix $V^n$ contains the numbers of paths of $n$ edges between the nodes in the graph. For example, for the graph"
       },
       {
-        "order": 85,
+        "order": 69,
         "text": "the adjacency matrix is"
       },
       {
-        "order": 86,
-        "text": "$$"
+        "order": 70,
+        "text": "$$V = \\begin{bmatrix} 0 & 0 & 0 & 1 & 0 & 0 \\\\ 1 & 0 & 0 & 0 & 1 & 1 \\\\ 0 & 1 & 0 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 & 0 & 0 \\\\ 0 & 0 & 1 & 0 & 1 & 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 87,
-        "text": "$$"
-      },
-      {
-        "order": 88,
-        "text": "$$"
-      },
-      {
-        "order": 89,
-        "text": "$$"
-      },
-      {
-        "order": 90,
-        "text": "$V =$"
-      },
-      {
-        "order": 91,
-        "text": "."
-      },
-      {
-        "order": 92,
+        "order": 71,
         "text": "Now, for example, the matrix"
       },
       {
-        "order": 93,
-        "text": "$$"
+        "order": 72,
+        "text": "$$V^4 = \\begin{bmatrix} 0 & 0 & 1 & 1 & 1 & 0 \\\\ 2 & 0 & 0 & 0 & 2 & 2 \\\\ 0 & 2 & 0 & 0 & 0 & 0 \\\\ 0 & 2 & 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 & 0 & 0 \\\\ 0 & 0 & 1 & 1 & 1 & 0 \\end{bmatrix}$$"
       },
       {
-        "order": 94,
-        "text": "$$"
-      },
-      {
-        "order": 95,
-        "text": "$$"
-      },
-      {
-        "order": 96,
-        "text": "$$"
-      },
-      {
-        "order": 97,
-        "text": "$V^4 =$"
-      },
-      {
-        "order": 98,
+        "order": 73,
         "text": "contains the numbers of paths of 4 edges between the nodes. For example, $V^4[2,5] =$ 2, because there are two paths of 4 edges from node 2 to node 5: 2 $\\to 1 \\to 4 \\to 2 \\to$ 5 and 2 $\\to 6 \\to 3 \\to 2 \\to$ 5."
       },
       {
-        "order": 99,
+        "order": 74,
         "text": "Using a similar idea in a weighted graph, we can calculate for each pair of nodes the minimum length of a path between them that contains exactly $n$ edges. To calculate this, we have to define matrix multiplication in a new way, so that we do not calculate the numbers of paths but minimize the lengths of paths."
       },
       {
-        "order": 100,
+        "order": 75,
         "text": "As an example, consider the following graph:"
       },
       {
-        "order": 101,
+        "order": 76,
         "text": "Let us construct an adjacency matrix where $\\infty$ means that an edge does not exist, and other values correspond to edge weights. The matrix is"
       },
       {
-        "order": 102,
+        "order": 77,
         "text": "$$V = \\begin{bmatrix} \\infty & \\infty & \\infty & 4 & \\infty & \\infty \\\\ 2 & \\infty & \\infty & \\infty & 1 & 2 \\\\ \\infty & 4 & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & 1 & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & \\infty & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & \\infty & 3 & \\infty & 2 & \\infty \\end{bmatrix}.$$"
       },
       {
-        "order": 103,
+        "order": 78,
         "text": "Instead of the formula"
       },
       {
-        "order": 104,
+        "order": 79,
         "text": "$$AB[i, j] = \\sum_{k=1}^{n} A[i, k] \\cdot B[k, j]$$"
       },
       {
-        "order": 105,
+        "order": 80,
         "text": "we now use the formula"
       },
       {
-        "order": 106,
+        "order": 81,
         "text": "$$AB[i, j] = \\min_{k=1}^{n} A[i, k] + B[k, j]$$"
       },
       {
-        "order": 107,
+        "order": 82,
         "text": "for matrix multiplication, so we calculate a minimum instead of a sum, and a sum of elements instead of a product. After this modification, matrix powers correspond to shortest paths in the graph."
       },
       {
-        "order": 108,
+        "order": 83,
         "text": "For example, as"
       },
       {
-        "order": 109,
+        "order": 84,
         "text": "$$V^4 = \\begin{bmatrix} \\infty & \\infty & 10 & 11 & 9 & \\infty \\\\ 9 & \\infty & \\infty & \\infty & 8 & 9 \\\\ \\infty & 11 & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & 8 & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & \\infty & \\infty & \\infty & \\infty & \\infty \\\\ \\infty & \\infty & 12 & 13 & 11 & \\infty \\end{bmatrix},$$"
       },
       {
-        "order": 110,
+        "order": 85,
         "text": "we can conclude that the minimum length of a path of 4 edges from node 2 to node 5 is 8. Such a path is $2 \\to 1 \\to 4 \\to 2 \\to 5$."
       },
       {
-        "order": 111,
+        "order": 86,
         "text": "**Kirchhoff's theorem** provides a way to calculate the number of spanning trees of a graph as a determinant of a special matrix. For example, the graph"
       },
       {
-        "order": 112,
+        "order": 87,
         "text": "has three spanning trees:"
       },
       {
-        "order": 113,
+        "order": 88,
         "text": "To calculate the number of spanning trees, we construct a **Laplacean matrix** $L$, where $L[i, i]$ is the degree of node $i$ and $L[i, j] = -1$ if there is an edge between nodes $i$ and $j$, and otherwise $L[i, j] = 0$. The Laplacean matrix for the above graph is as follows:"
       },
       {
-        "order": 114,
+        "order": 89,
         "text": "$$L = \\begin{bmatrix} 3 & -1 & -1 & -1 \\\\ -1 & 1 & 0 & 0 \\\\ -1 & 0 & 2 & -1 \\\\ -1 & 0 & -1 & 2 \\end{bmatrix}$$"
       },
       {
-        "order": 115,
+        "order": 90,
         "text": "It can be shown that the number of spanning trees equals the determinant of a matrix that is obtained when we remove any row and any column from $L$. For example, if we remove the first row and column, the result is"
       },
       {
-        "order": 116,
+        "order": 91,
         "text": "$$\\det\\left(\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & -1 \\\\ 0 & -1 & 2 \\end{bmatrix}\\right) = 3.$$"
       },
       {
-        "order": 117,
+        "order": 92,
         "text": "The determinant is always the same, regardless of which row and column we remove from $L$."
       },
       {
-        "order": 118,
+        "order": 93,
         "text": "Note that Cayley's formula in Chapter 22.5 is a special case of Kirchhoff's theorem, because in a complete graph of $n$ nodes"
       },
       {
-        "order": 119,
+        "order": 94,
         "text": "$$\\det\\left(\\begin{bmatrix} n-1 & -1 & \\cdots & -1 \\\\ -1 & n-1 & \\cdots & -1 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ -1 & -1 & \\cdots & n-1 \\end{bmatrix}\\right) = n^{n-2}.$$"
       }
     ],
@@ -13030,88 +12930,88 @@
         "level": 3,
         "title": "Operations",
         "paragraph_range": [
-          24,
-          28
+          8,
+          12
         ]
       },
       {
         "level": 3,
         "title": "Matrix multiplication",
         "paragraph_range": [
-          29,
-          39
+          13,
+          23
         ]
       },
       {
         "level": 3,
         "title": "Matrix power",
         "paragraph_range": [
-          40,
-          47
+          24,
+          31
         ]
       },
       {
         "level": 3,
         "title": "Determinant",
         "paragraph_range": [
-          48,
-          60
+          32,
+          44
         ]
       },
       {
         "level": 2,
         "title": "Linear recurrences",
         "paragraph_range": [
-          61,
-          64
+          45,
+          48
         ]
       },
       {
         "level": 3,
         "title": "Fibonacci numbers",
         "paragraph_range": [
-          65,
-          76
+          49,
+          60
         ]
       },
       {
         "level": 3,
         "title": "General case",
         "paragraph_range": [
-          77,
-          83
+          61,
+          67
         ]
       },
       {
         "level": 2,
         "title": "Graphs and matrices",
         "paragraph_range": [
-          84,
-          83
+          68,
+          67
         ]
       },
       {
         "level": 3,
         "title": "Counting paths",
         "paragraph_range": [
-          84,
-          98
+          68,
+          73
         ]
       },
       {
         "level": 3,
         "title": "Shortest paths",
         "paragraph_range": [
-          99,
-          110
+          74,
+          85
         ]
       },
       {
         "level": 3,
         "title": "Kirchhoff's theorem",
         "paragraph_range": [
-          111,
-          119
+          86,
+          94
         ]
       }
     ],
@@ -13119,27 +13019,27 @@
       {
         "src": "/cp-handbook/figures/fig_p228_matmul_diagram.png",
         "alt": "Matrix multiplication diagram: row of A times column of B produces one element of AB",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 15
       },
       {
         "src": "/cp-handbook/figures/fig_p232_auto1.png",
         "alt": "Figure from page 232",
-        "preceding_paragraph_order": 84
+        "preceding_paragraph_order": 68
       },
       {
         "src": "/cp-handbook/figures/fig_p233_weighted_graph.png",
         "alt": "Weighted directed graph with 6 nodes and edges labeled with weights",
-        "preceding_paragraph_order": 100
+        "preceding_paragraph_order": 75
       },
       {
         "src": "/cp-handbook/figures/fig_p233_kirchhoff_graph.png",
         "alt": "Simple undirected graph with 4 nodes used for Kirchhoff's theorem example",
-        "preceding_paragraph_order": 111
+        "preceding_paragraph_order": 86
       },
       {
         "src": "/cp-handbook/figures/fig_p234_spanning_trees.png",
         "alt": "Three spanning trees of the 4-node graph, each shown side by side",
-        "preceding_paragraph_order": 112
+        "preceding_paragraph_order": 87
       }
     ],
     "footnotes": [],
@@ -13582,162 +13482,98 @@
       },
       {
         "order": 102,
-        "text": "$$"
+        "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix}.$$"
       },
       {
         "order": 103,
-        "text": "$$"
-      },
-      {
-        "order": 104,
-        "text": "0 1/2 0 0 0 1 0 1/2 0 0 0 1/2 0 1/2 0 0 0 1/2 0 1 0 0 0 1/2 0"
-      },
-      {
-        "order": 105,
-        "text": "$$"
-      },
-      {
-        "order": 106,
-        "text": "$$ ."
-      },
-      {
-        "order": 107,
         "text": "When we multiply a probability distribution by this matrix, we get the new distribution after moving one step. For example, we can move from the distribution [1,0,0,0,0] to the distribution [0,1,0,0,0] as follows:"
       },
       {
-        "order": 108,
-        "text": "$$"
+        "order": 104,
+        "text": "$$\\begin{bmatrix} 0 & 1/2 & 0 & 0 & 0 \\\\ 1 & 0 & 1/2 & 0 & 0 \\\\ 0 & 1/2 & 0 & 1/2 & 0 \\\\ 0 & 0 & 1/2 & 0 & 1 \\\\ 0 & 0 & 0 & 1/2 & 0 \\end{bmatrix} \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{bmatrix}.$$"
       },
       {
-        "order": 109,
-        "text": "$$"
-      },
-      {
-        "order": 110,
-        "text": "$$"
-      },
-      {
-        "order": 111,
-        "text": "$$"
-      },
-      {
-        "order": 112,
-        "text": "$$"
-      },
-      {
-        "order": 113,
-        "text": "$$"
-      },
-      {
-        "order": 114,
-        "text": "0 1/2 0 0 0 1 0 1/2 0 0 0 1/2 0 1/2 0 0 0 1/2 0 1 0 0 0 1/2 0"
-      },
-      {
-        "order": 115,
-        "text": "$$"
-      },
-      {
-        "order": 116,
-        "text": "$$"
-      },
-      {
-        "order": 117,
-        "text": "$$"
-      },
-      {
-        "order": 118,
-        "text": "$$ $=$"
-      },
-      {
-        "order": 119,
-        "text": "$$"
-      },
-      {
-        "order": 120,
-        "text": "$$ ."
-      },
-      {
-        "order": 121,
+        "order": 105,
         "text": "By calculating matrix powers efficiently, we can calculate the distribution after $m$ steps in $O(n^3$log$m$) time."
       },
       {
-        "order": 122,
+        "order": 106,
         "text": "Sometimes we can use randomness for solving a problem, even if the problem is not related to probabilities. A **randomized algorithm** is an algorithm that is based on randomness. A **Monte Carlo algorithm** is a randomized algorithm that may sometimes give a wrong answer. For such an algorithm to be useful, the probability of a wrong answer should be small."
       },
       {
-        "order": 123,
+        "order": 107,
         "text": "A **Las Vegas algorithm** is a randomized algorithm that always gives the correct answer, but its running time varies randomly. The goal is to design an algorithm that is efficient with high probability. Next we will go through three example problems that can be solved using randomness."
       },
       {
-        "order": 124,
+        "order": 108,
         "text": "The $kth$ **order statistic** of an array is the element at position $k$ after sorting the array in increasing order. It is easy to calculate any order statistic in $O(n$log$n$) time by first sorting the array, but is it really needed to sort the entire array just to find one element? It turns out that we can find order statistics using a randomized algorithm without sorting the array. The algorithm, called **quickselect**$^1$, is a Las Vegas algorithm: its running time is usually $O(n)$ but $O(n^2)$ in the worst case. The algorithm chooses a random element $x$ of the array, and moves elements smaller than $x$ to the left part of the array, and all other elements to the right part of the array. This takes $O(n)$ time when there are $n$ elements. Assume that the left part contains $a$ elements and the right part contains $b$ elements. If $a = k$, element $x$ is the $k$th order statistic. Otherwise, if $a > k$, we recursively find the $k$th order statistic for the left part, and if $a < k$, we recursively find the $r$th order statistic for the right part where $r = k -a$. The search continues in a similar way, until the element has been found. When each element $x$ is randomly chosen, the size of the array about halves at each step, so the time complexity for finding the $k$th order statistic is about"
       },
       {
-        "order": 125,
+        "order": 109,
         "text": "$n+ n/2+ n/4+ n/8+\\cdot \\cdot \\cdot < 2n = O(n)$."
       },
       {
-        "order": 126,
+        "order": 110,
         "text": "The worst case of the algorithm requires still $O(n^2)$ time, because it is possible that $x$ is always chosen in such a way that it is one of the smallest or largest elements in the array and $O(n)$ steps are needed. However, the probability for this is so small that this never happens in practice."
       },
       {
-        "order": 127,
+        "order": 111,
         "text": "Our next problem is to $verify$ if $AB = C$ holds when $A, B$ and $C$ are matrices of size $n \\times n$. Of course, we can solve the problem by calculating the product $AB$ again (in $O(n^3)$ time using the basic algorithm), but one could hope that verifying the answer would by easier than to calculate it from scratch. It turns out that we can solve the problem using a Monte Carlo algorithm$^2$"
       },
       {
-        "order": 128,
+        "order": 112,
         "text": "whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$."
       },
       {
-        "order": 129,
+        "order": 113,
         "text": "The time complexity of the algorithm is $O(n^2)$, because we can calculate the matrices $ABX$ and $CX$ in $O(n^2)$ time. We can calculate the matrix $ABX$ efficiently by using the representation $A(BX)$, so only two multiplications of $n\\times n$ and $n\\times$ 1 size matrices are needed. The drawback of the algorithm is that there is a small chance that the algorithm makes a mistake when it reports that $AB = C$. For example,"
       },
       {
-        "order": 130,
+        "order": 114,
         "text": "$\\cdot$ 6 8 1 3"
       },
       {
-        "order": 131,
+        "order": 115,
         "text": "$̸=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 132,
+        "order": 116,
         "text": ","
       },
       {
-        "order": 133,
+        "order": 117,
         "text": "but $\\cdot$ 6 8 1 3"
       },
       {
-        "order": 134,
+        "order": 118,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 135,
+        "order": 119,
         "text": "$=$ $\\cdot$ 8 7 3 2"
       },
       {
-        "order": 136,
+        "order": 120,
         "text": "$¸\\cdot$ 3 6"
       },
       {
-        "order": 137,
+        "order": 121,
         "text": "."
       },
       {
-        "order": 138,
+        "order": 122,
         "text": "However, in practice, the probability that the algorithm makes a mistake is small, and we can decrease the probability by verifying the result using multiple random vectors $X$ before reporting that $AB = C$."
       },
       {
-        "order": 139,
+        "order": 123,
         "text": "Given a graph that contains $n$ nodes and $m$ edges, our task is to find a way to color the nodes of the graph using two colors so that for at least $m$/2 edges, the endpoints have different colors. For example, in the graph"
       },
       {
-        "order": 140,
+        "order": 124,
         "text": "a valid coloring is as follows:"
       },
       {
-        "order": 141,
+        "order": 125,
         "text": "The above graph contains 7 edges, and for 5 of them, the endpoints have different colors, so the coloring is valid. The problem can be solved using a Las Vegas algorithm that generates random colorings until a valid coloring has been found. In a random coloring, the color of each node is independently chosen so that the probability of both colors is 1/2. In a random coloring, the probability that the endpoints of a single edge have different colors is 1/2. Hence, the expected number of edges whose endpoints have different colors is $m$/2. Since it is expected that a random coloring is valid, we will quickly find a valid coloring in practice."
       }
     ],
@@ -13836,39 +13672,39 @@
         "title": "Markov chains",
         "paragraph_range": [
           98,
-          121
+          105
         ]
       },
       {
         "level": 3,
         "title": "Randomized algorithms",
         "paragraph_range": [
-          122,
-          123
+          106,
+          107
         ]
       },
       {
         "level": 3,
         "title": "Order statistics",
         "paragraph_range": [
-          124,
-          126
+          108,
+          110
         ]
       },
       {
         "level": 3,
         "title": "Verifying matrix multiplication",
         "paragraph_range": [
-          127,
-          138
+          111,
+          122
         ]
       },
       {
         "level": 3,
         "title": "Graph coloring",
         "paragraph_range": [
-          139,
-          141
+          123,
+          125
         ]
       }
     ],
@@ -13876,12 +13712,12 @@
       {
         "src": "/cp-handbook/figures/fig_p243_123.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 139
+        "preceding_paragraph_order": 123
       },
       {
         "src": "/cp-handbook/figures/fig_p243_124.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 140
+        "preceding_paragraph_order": 124
       }
     ],
     "footnotes": [
