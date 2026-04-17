@@ -3501,7 +3501,6 @@ Neither of these approaches — using type-safe containers or moving virtual fun
 
 One thing you definitely want to avoid is designs that involve cascading `dynamic_cast`s, i.e., anything that looks like this:
 
-*[Figure omitted]*
 
 ```cpp
 class Window { ... };
@@ -4414,7 +4413,7 @@ void someFunc()
 ```
 the statement reading into `x` refers to the local variable `x` instead of the global variable `x`, because names in inner scopes hide ("shadow") names in outer scopes. We can visualize the scope situation this way:
 
-*[Figure omitted]*
+![Scope visualization: someFunc's scope sits inside the global scope, hiding any outer `x`](/ecpp/figures/ecpp_item33_scope.png)
 
 When compilers are in `someFunc`'s scope and they encounter the name `x`, they look in the local scope to see if there is something with that name. Because there is, they never examine any other scope. In this case, `someFunc`'s `x` is of type `double` and the global `x` is of type `int`, but that doesn't matter. C++'s name-hiding rules do just that: hide names. Whether the names correspond to the same or different types is immaterial. In this case, a `double` named `x` hides an `int` named `x`.
 
@@ -5603,7 +5602,6 @@ You come to discover that `PersonInfo` was designed to facilitate printing datab
 ```
 In recognition of the fact that square brackets are not universally desired by clients of `PersonInfo`, the virtual functions `valueDelimOpen` and `valueDelimClose` allow derived classes to specify their own opening and closing delimiter strings. The implementations of `PersonInfo`'s member functions call these virtual functions to add the appropriate delimiters to the values they return. Using `PersonInfo::theName` as an example, the code looks like this:
 
-*[Figure omitted]*
 
 ```cpp
 const char * PersonInfo::valueDelimOpen() const
@@ -5683,7 +5681,7 @@ private:                                                // redefinitions of
 ```
 In UML, the design looks like this:
 
-*[Figure omitted]*
+![UML: CPerson inherits publicly from IPerson and privately from PersonInfo](/ecpp/figures/ecpp_item40_uml.png)
 
 This example demonstrates that MI can be both useful and comprehensible.
 
@@ -6181,7 +6179,6 @@ So far, so good, but there's a sticky issue we haven't addressed yet. How does `
 
 An alternative is to have `SquareMatrixBase` store a pointer to the memory for the matrix values. And as long as it's storing that, it might as well store the matrix size, too. The resulting design looks like this:
 
-*[Figure omitted]*
 
 ```cpp
 template<typename T>
@@ -7135,7 +7132,6 @@ It's not quite that simple, however, because `operator new` actually tries to al
 
 Curiously, C++ requires that `operator new` return a legitimate pointer even when zero bytes are requested. (Requiring this odd-sounding behavior simplifies things elsewhere in the language.) That being the case, pseudocode for a non-member `operator new` looks like this:
 
-*[Figure omitted]*
 
 ```cpp
 void * operator new(std::size_t size) throw(std::bad_alloc)
@@ -7286,7 +7282,6 @@ This design is problematic, but before we see why, we need to make a brief termi
 
 When an `operator new` function takes extra parameters (other than the mandatory `size_t` argument), that function is known as a placement version of `new`. The `operator new` above is thus a placement version. A particularly useful placement `new` is the one that takes a pointer specifying where an object should be constructed. That `operator new` looks like this:
 
-*[Figure omitted]*
 
 ```cpp
 void* operator new(std::size_t, void *pMemory) throw();   // "placement

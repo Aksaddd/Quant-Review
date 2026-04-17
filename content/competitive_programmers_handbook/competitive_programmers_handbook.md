@@ -1020,7 +1020,6 @@ the first round of bubble sort swaps elements as follows:
 Bubble sort is an example of a sorting algorithm that always swaps *consecutive* elements in the array. It turns out that the time complexity of such an algorithm is $always$ at least $O(n^2)$, because in the worst case, $O(n^2)$ swaps are required for sorting the array. A useful concept when analyzing sorting algorithms is an **inversion**: a pair of array elements (`array`[$a$],`array`[$b$]) such that $a < b$ and `array`[$a] >$ `array`[$b$], i.e., the elements are in the wrong order. For example, the array
 
 <!-- PAGE 37 -->
-1 2 2 6 3 5 9 8
 
 has three inversions: (6,3), (6,5) and (9,8). The number of inversions indicates how much work is needed to sort the array. An array is completely sorted when there are no inversions. On the other hand, if the array elements are in the reverse order, the number of inversions is the largest possible:
 
@@ -2178,8 +2177,6 @@ character codeword
 
 This is a **constant-length** code which means that the length of each codeword is the same. For example, we can compress the string `AABACDACA` as follows:
 
-000001001011001000
-
 Using this code, the length of the compressed string is 18 bits. However, we can compress the string better if we use a **variable-length** code where codewords may have different lengths. Then we can give short codewords for characters that appear often and long codewords for characters that appear rarely. It turns out that an **optimal** code for the above string is as follows:
 
 character codeword
@@ -2669,8 +2666,6 @@ The time complexity of the algorithm is $O(n^2)$.
 
 The term **knapsack** refers to problems where a set of objects is given, and subsets with some properties have to be found. Knapsack problems can often be solved using dynamic programming. In this section, we focus on the following problem: Given a list of weights [$w_1,w_2,...,w_n$], determine all sums that can be constructed using the weights. For example, if the weights are [1,3,3,5], the following sums are possible:
 
-0 1 2 3 4 5 6 7 8 9 10 11 12 X X X X X X X X X X X
-
 In this case, all sums between 0...12 are possible, except 2 and 10. For example, the sum 7 is possible because we can select the weights [1,3,3]. To solve the problem, we focus on subproblems where we only use the first $k$ weights to construct sums. Let `possible`($x,k) =$ true if we can construct a sum $x$ using the first $k$ weights, and otherwise `possible`($x,k) =$ false. The values of the function can be recursively calculated as follows:
 
 `possible`($x,k) =$ `possible`($x-w_k,k -1)∨$`possible`($x,k -1$)
@@ -2855,7 +2850,6 @@ Another problem that can be solved using the two pointers method is the followin
 The initial positions of the pointers are as follows. The sum of the values is 1$+10 =$ 11 that is smaller than $x$.
 
 <!-- PAGE 89 -->
-1 4 5 6 7 9 9 10
 
 Then the left pointer moves one step to the right. The right pointer moves three steps to the left, and the sum becomes 4$+7 =$ 11.
 
@@ -2870,7 +2864,6 @@ Amortized analysis is often used to estimate the number of operations performed 
 > **[1]** For a long time, it was thought that solving the 3SUM problem more efficiently than in O(n}^2_)$ time would not be possible. However, in 2014, it turned out [30] that this is not the case.
 
 <!-- PAGE 90 -->
-1 3 4 2 5 3 4 2
 
 First, the elements 1, 3 and 4 are added to the stack, because each element is larger than the previous element. Thus, the nearest smaller element of 4 is 3, and the nearest smaller element of 3 is 1.
 
@@ -3157,7 +3150,6 @@ The difference array for the above array is as follows:
 For example, the value 2 at position 6 in the original array corresponds to the sum 3$-2+4-3 =$ 2 in the difference array. The advantage of the difference array is that we can update a range in the original array by changing just two elements in the difference array. For example, if we want to increase the original array values between positions 1 and 4 by 5, it suffices to increase the difference array value at position 1 by 5 and decrease the value at position 5 by 5. The result is as follows:
 
 <!-- PAGE 104 -->
-$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$
 
 3 5 $-2$ 0 0 $-1-3$ 0
 
@@ -3173,8 +3165,6 @@ All data in computer programs is internally stored as bits, i.e., as numbers 0 a
 ### Bit representation
 
 In programming, an $n$ bit integer is internally stored as a binary number that consists of $n$ bits. For example, the C++ type `int` is a 32-bit type, which means that every `int` number consists of 32 bits. Here is the bit representation of the `int` number 43:
-
-00000000000000000000000000101011
 
 The bits in the representation are indexed from right to left. To convert a bit representation $b_k \cdot \cdot \cdot b_2b_1b_0$ into a number, we can use the formula
 
@@ -4164,22 +4154,14 @@ Let us consider how the Floyd–Warshall algorithm works in the following graph:
 
 Initially, the distance from each node to itself is 0, and the distance between nodes $a$ and $b$ is $x$ if there is an edge between nodes $a$ and $b$ with weight $x$. All other distances are infinite. In this graph, the initial array is as follows:
 
-1 2 3 4 5 1 0 5 $\infty$ 9 1 2 5 0 2 $\infty$ $\infty$ 3 $\infty$ 2 0 7 $\infty$ 4 9 $\infty$ 7 0 2 5 1 $\infty$ $\infty$ 2 0
-
 > **[3]** Of course, we could also declare the priority queue as in Chapter 4.5 and use positive distances, but the implementation would be a bit longer.> **[4]** The algorithm is named after R. W. Floyd and S. Warshall who published it independently in 1962 [23, 70].
 
 <!-- PAGE 140 -->
 The algorithm consists of consecutive rounds. On each round, the algorithm selects a new node that can act as an intermediate node in paths from now on, and distances are reduced using this node. On the first round, node 1 is the new intermediate node. There is a new path between nodes 2 and 4 with length 14, because node 1 connects them. There is also a new path between nodes 2 and 5 with length 6.
 
-1 2 3 4 5 1 0 5 $\infty$ 9 1 2 5 0 2 **14 6** 3 $\infty$ 2 0 7 $\infty$ 4 9 **14** 7 0 2 5 1 **6** $\infty$ 2 0
-
 On the second round, node 2 is the new intermediate node. This creates new paths between nodes 1 and 3 and between nodes 3 and 5:
 
-1 2 3 4 5 1 0 5 **7** 9 1 2 5 0 2 14 6 3 **7** 2 0 7 **8** 4 9 14 7 0 2 5 1 6 **8** 2 0
-
 On the third round, node 3 is the new intermediate round. There is a new path between nodes 2 and 4:
-
-1 2 3 4 5 1 0 5 7 9 1 2 5 0 2 **9** 6 3 7 2 0 7 8 4 9 **9** 7 0 2 5 1 6 8 2 0
 
 The algorithm continues like this, until all nodes have been appointed intermediate nodes. After the algorithm has finished, the array contains the minimum distances between any two nodes:
 
@@ -4317,7 +4299,6 @@ $b$
 This is an elegant method, but why does it work? It helps to draw the tree differently so that the path that corresponds to the diameter is horizontal, and all other nodes hang from it:
 
 <!-- PAGE 147 -->
-$b$ $c$ $x$
 
 ![Figure from page 147](figures/fig_p147_auto1.png)
 
@@ -4920,8 +4901,6 @@ $x$ 1 2 3 4 5 6 7 8
 ```cpp
                ancestor(x,4)
 ```
-
-0 0 0 0 0 0 0 0 $\cdot \cdot \cdot$
 
 The preprocessing takes $O(n$log$n$) time, because $O$(log$n$) values are calculated for each node. After this, any value of `ancestor`($x,k$) can be calculated in $O$(log$k$) time by representing $k$ as a sum where each term is a power of two.
 

@@ -1608,254 +1608,250 @@
       },
       {
         "order": 10,
-        "text": "1 2 2 6 3 5 9 8"
-      },
-      {
-        "order": 11,
         "text": "has three inversions: (6,3), (6,5) and (9,8). The number of inversions indicates how much work is needed to sort the array. An array is completely sorted when there are no inversions. On the other hand, if the array elements are in the reverse order, the number of inversions is the largest possible:"
       },
       {
-        "order": 12,
+        "order": 11,
         "text": "1$+2+\\cdot \\cdot \\cdot +(n-1) =$ $n(n-1)$"
       },
       {
-        "order": 13,
+        "order": 12,
         "text": "2 $= O(n^2)$"
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "Swapping a pair of consecutive elements that are in the wrong order removes exactly one inversion from the array. Hence, if a sorting algorithm can only swap consecutive elements, each swap removes at most one inversion, and the time complexity of the algorithm is at least $O(n^2)$."
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "It is possible to sort an array efficiently in $O(n$log$n$) time using algorithms that are not limited to swapping consecutive elements. One such algorithm is **merge sort**$^1$, which is based on recursion. Merge sort sorts a subarray `array`[$a...b$] as follows:"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "1. If $a = b$, do not do anything, because the subarray is already sorted."
       },
       {
-        "order": 17,
+        "order": 16,
         "text": "2. Calculate the position of the middle element: $k = \\lfloor (a+ b)/2\\rfloor$ ."
       },
       {
-        "order": 18,
+        "order": 17,
         "text": "3. Recursively sort the subarray `array`[$a...k$]."
       },
       {
-        "order": 19,
+        "order": 18,
         "text": "4. Recursively sort the subarray `array`[$k +1...b$]."
       },
       {
-        "order": 20,
+        "order": 19,
         "text": "5. $Merge$ the sorted subarrays `array`[$a...k$] and `array`[$k +1...b$] into a sorted subarray `array`[$a...b$]."
       },
       {
-        "order": 21,
+        "order": 20,
         "text": "Merge sort is an efficient algorithm, because it halves the size of the subarray at each step. The recursion consists of $O$(log$n$) levels, and processing each level takes $O(n)$ time. Merging the subarrays `array`[$a...k$] and `array`[$k + 1...b$] is possible in linear time, because they are already sorted. For example, consider sorting the following array:"
       },
       {
-        "order": 22,
+        "order": 21,
         "text": "The array will be divided into two subarrays as follows:"
       },
       {
-        "order": 23,
+        "order": 22,
         "text": "Then, the subarrays will be sorted recursively as follows:"
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "Finally, the algorithm merges the sorted subarrays and creates the final sorted array:"
       },
       {
-        "order": 25,
+        "order": 24,
         "text": "Is it possible to sort an array faster than in $O(n$log$n$) time? It turns out that this is $not$ possible when we restrict ourselves to sorting algorithms that are based on comparing array elements. The lower bound for the time complexity can be proved by considering sorting as a process where each comparison of two elements gives more information about the contents of the array. The process creates the following tree:"
       },
       {
-        "order": 26,
+        "order": 25,
         "text": "Here \"$x < y$?\" means that some elements $x$ and $y$ are compared. If $x < y$, the process continues to the left, and otherwise to the right. The results of the process are the possible ways to sort the array, a total of $n$! ways. For this reason, the height of the tree must be at least"
       },
       {
-        "order": 27,
+        "order": 26,
         "text": "log$_2(n$!) $=$ log$_2(1)+$log$_2(2)+\\cdot \\cdot \\cdot +$log$_2(n)$."
       },
       {
-        "order": 28,
+        "order": 27,
         "text": "We get a lower bound for this sum by choosing the last $n$/2 elements and changing the value of each element to log$_2(n/2)$. This yields an estimate"
       },
       {
-        "order": 29,
+        "order": 28,
         "text": "log$_2(n$!) $\\ge (n/2)\\cdot$ log$_2(n/2)$,"
       },
       {
-        "order": 30,
+        "order": 29,
         "text": "so the height of the tree and the minimum possible number of steps in a sorting algorithm in the worst case is at least $n$log$n$."
       },
       {
-        "order": 31,
+        "order": 30,
         "text": "The lower bound $n$log$n$ does not apply to algorithms that do not compare array elements but use some other information. An example of such an algorithm is **counting sort** that sorts an array in $O(n)$ time assuming that every element in the array is an integer between 0... $c$ and $c = O(n)$. The algorithm creates a *bookkeeping* array, whose indices are elements of the original array. The algorithm iterates through the original array and calculates how many times each element appears in the array."
       },
       {
-        "order": 32,
+        "order": 31,
         "text": "For example, the array"
       },
       {
-        "order": 33,
+        "order": 32,
         "text": "corresponds to the following bookkeeping array:"
       },
       {
-        "order": 34,
+        "order": 33,
         "text": "For example, the value at position 3 in the bookkeeping array is 2, because the element 3 appears 2 times in the original array. Construction of the bookkeeping array takes $O(n)$ time. After this, the sorted array can be created in $O(n)$ time because the number of occurrences of each element can be retrieved from the bookkeeping array. Thus, the total time complexity of counting sort is $O(n)$. Counting sort is a very efficient algorithm but it can only be used when the constant $c$ is small enough, so that the array elements can be used as indices in the bookkeeping array."
       },
       {
-        "order": 35,
+        "order": 34,
         "text": "It is almost never a good idea to use a home-made sorting algorithm in a contest, because there are good implementations available in programming languages. For example, the C++ standard library contains the function `sort` that can be easily used for sorting arrays and other data structures. There are many benefits in using a library function. First, it saves time because there is no need to implement the function. Second, the library implementation is certainly correct and efficient: it is not probable that a home-made sorting function would be better. In this section we will see how to use the C++ `sort` function. The following code sorts a vector in increasing order:"
       },
       {
-        "order": 36,
+        "order": 35,
         "text": "After the sorting, the contents of the vector will be [2,3,3,4,5,5,8]. The default sorting order is increasing, but a reverse order is possible as follows:"
       },
       {
-        "order": 37,
+        "order": 36,
         "text": "An ordinary array can be sorted as follows:"
       },
       {
-        "order": 38,
+        "order": 37,
         "text": "The following code sorts the string `s`:"
       },
       {
-        "order": 39,
+        "order": 38,
         "text": "Sorting a string means that the characters of the string are sorted. For example, the string \"monkey\" becomes \"ekmnoy\"."
       },
       {
-        "order": 40,
+        "order": 39,
         "text": "The function `sort` requires that a **comparison operator** is defined for the data type of the elements to be sorted. When sorting, this operator will be used whenever it is necessary to find out the order of two elements. Most C++ data types have a built-in comparison operator, and elements of those types can be sorted automatically. For example, numbers are sorted according to their values and strings are sorted in alphabetical order. Pairs (`pair`) are sorted primarily according to their first elements (`first`). However, if the first elements of two pairs are equal, they are sorted according to their second elements (`second`):"
       },
       {
-        "order": 41,
+        "order": 40,
         "text": "After this, the order of the pairs is (1,2), (1,5) and (2,3). In a similar way, tuples (`tuple`) are sorted primarily by the first element, secondarily by the second element, etc.$^2$:"
       },
       {
-        "order": 42,
+        "order": 41,
         "text": "After this, the order of the tuples is (1,5,3), (2,1,3) and (2,1,4)."
       },
       {
-        "order": 43,
+        "order": 42,
         "text": "User-defined structs do not have a comparison operator automatically. The operator should be defined inside the struct as a function `operator<`, whose parameter is another element of the same type. The operator should return `true` if the element is smaller than the parameter, and `false` otherwise. For example, the following struct `P` contains the x and y coordinates of a point. The comparison operator is defined so that the points are sorted primarily by the"
       },
       {
-        "order": 44,
+        "order": 43,
         "text": "x coordinate and secondarily by the y coordinate."
       },
       {
-        "order": 45,
+        "order": 44,
         "text": "It is also possible to give an external **comparison function** to the `sort` function as a callback function. For example, the following comparison function `comp` sorts strings primarily by length and secondarily by alphabetical order:"
       },
       {
-        "order": 46,
+        "order": 45,
         "text": "Now a vector of strings can be sorted as follows:"
       },
       {
-        "order": 47,
+        "order": 46,
         "text": "A general method for searching for an element in an array is to use a `for` loop that iterates through the elements of the array. For example, the following code searches for an element $x$ in an array:"
       },
       {
-        "order": 48,
+        "order": 47,
         "text": "The time complexity of this approach is $O(n)$, because in the worst case, it is necessary to check all elements of the array. If the order of the elements is arbitrary, this is also the best possible approach, because there is no additional information available where in the array we should search for the element $x$. However, if the array is $sorted$, the situation is different. In this case it is possible to perform the search much faster, because the order of the elements in the array guides the search. The following **binary search** algorithm efficiently searches for an element in a sorted array in $O$(log$n$) time."
       },
       {
-        "order": 49,
+        "order": 48,
         "text": "The usual way to implement binary search resembles looking for a word in a dictionary. The search maintains an active region in the array, which initially contains all array elements. Then, a number of steps is performed, each of which halves the size of the region. At each step, the search checks the middle element of the active region. If the middle element is the target element, the search terminates. Otherwise, the search recursively continues to the left or right half of the region, depending on the value of the middle element. The above idea can be implemented as follows:"
       },
       {
-        "order": 50,
+        "order": 49,
         "text": "In this implementation, the active region is $a...b$, and initially the region is 0...$n-1$. The algorithm halves the size of the region at each step, so the time complexity is $O$(log$n$)."
       },
       {
-        "order": 51,
+        "order": 50,
         "text": "An alternative method to implement binary search is based on an efficient way to iterate through the elements of the array. The idea is to make jumps and slow the speed when we get closer to the target element. The search goes through the array from left to right, and the initial jump length is $n$/2. At each step, the jump length will be halved: first $n$/4, then $n$/8, $n$/16, etc., until finally the length is 1. After the jumps, either the target element has been found or we know that it does not appear in the array. The following code implements the above idea:"
       },
       {
-        "order": 52,
+        "order": 51,
         "text": "During the search, the variable $b$ contains the current jump length. The time complexity of the algorithm is $O$(log$n$), because the code in the `while` loop is performed at most twice for each jump length."
       },
       {
-        "order": 53,
+        "order": 52,
         "text": "The C++ standard library contains the following functions that are based on binary search and work in logarithmic time:"
       },
       {
-        "order": 54,
+        "order": 53,
         "text": "• `lower_bound` returns a pointer to the first array element whose value is at least $x$."
       },
       {
-        "order": 55,
+        "order": 54,
         "text": "• `upper_bound` returns a pointer to the first array element whose value is larger than $x$."
       },
       {
-        "order": 56,
+        "order": 55,
         "text": "• `equal_range` returns both above pointers."
       },
       {
-        "order": 57,
+        "order": 56,
         "text": "The functions assume that the array is sorted. If there is no such element, the pointer points to the element after the last array element. For example, the following code finds out whether an array contains an element with value $x$:"
       },
       {
-        "order": 58,
+        "order": 57,
         "text": "Then, the following code counts the number of elements whose value is $x$:"
       },
       {
-        "order": 59,
+        "order": 58,
         "text": "Using `equal_range`, the code becomes shorter:"
       },
       {
-        "order": 60,
+        "order": 59,
         "text": "An important use for binary search is to find the position where the value of a *function* changes. Suppose that we wish to find the smallest value $k$ that is a valid solution for a problem. We are given a function `ok`($x$) that returns `true` if $x$ is a valid solution and `false` otherwise. In addition, we know that `ok`($x$) is `false` when $x < k$ and `true` when $x \\ge k$. The situation looks as follows:"
       },
       {
-        "order": 61,
+        "order": 60,
         "text": "$x$ 0 1 $\\cdot \\cdot \\cdot$ $k -1$ $k$ $k+1$ $\\cdot \\cdot \\cdot$ `ok`($x$)"
       },
       {
-        "order": 62,
+        "order": 61,
         "text": "false false"
       },
       {
-        "order": 63,
+        "order": 62,
         "text": "$\\cdot \\cdot \\cdot$"
       },
       {
-        "order": 64,
+        "order": 63,
         "text": "false true true"
       },
       {
-        "order": 65,
+        "order": 64,
         "text": "$\\cdot \\cdot \\cdot$"
       },
       {
-        "order": 66,
+        "order": 65,
         "text": "Now, the value of $k$ can be found using binary search:"
       },
       {
-        "order": 67,
+        "order": 66,
         "text": "The search finds the largest value of $x$ for which `ok`($x$) is `false`. Thus, the next value $k = x+1$ is the smallest possible value for which `ok`($k$) is `true`. The initial jump length $z$ has to be large enough, for example some value for which we know beforehand that `ok`($z$) is `true`. The algorithm calls the function `ok` $O$(log $z$) times, so the total time complexity depends on the function `ok`. For example, if the function works in $O(n)$ time, the total time complexity is $O(n$log $z$)."
       },
       {
-        "order": 68,
+        "order": 67,
         "text": "Binary search can also be used to find the maximum value for a function that is first increasing and then decreasing. Our task is to find a position $k$ such that"
       },
       {
-        "order": 69,
+        "order": 68,
         "text": "• $f (x) < f (x+1$) when $x < k$, and"
       },
       {
-        "order": 70,
+        "order": 69,
         "text": "• $f (x) > f (x+1$) when $x \\ge k$."
       },
       {
-        "order": 71,
+        "order": 70,
         "text": "The idea is to use binary search for finding the largest value of $x$ for which $f (x) < f (x+1)$. This implies that $k = x+1$ because $f (x+1) > f (x+2)$. The following code implements the search:"
       },
       {
-        "order": 72,
+        "order": 71,
         "text": "Note that unlike in the ordinary binary search, here it is not allowed that consecutive values of the function are equal. In this case it would not be possible to know how to continue the search."
       }
     ],
@@ -1874,6 +1870,16 @@
         "order": 1,
         "language": "cpp",
         "code": "vector<int> v = {4,2,5,3,5,8,3};\nsort(v.begin(),v.end());",
+        "preceding_paragraph_order": 34,
+        "explanatory_paragraphs": [
+          35,
+          36
+        ]
+      },
+      {
+        "order": 2,
+        "language": "cpp",
+        "code": "sort(v.rbegin(),v.rend());",
         "preceding_paragraph_order": 35,
         "explanatory_paragraphs": [
           36,
@@ -1881,9 +1887,9 @@
         ]
       },
       {
-        "order": 2,
+        "order": 3,
         "language": "cpp",
-        "code": "sort(v.rbegin(),v.rend());",
+        "code": "int n = 7; // array size\nint a[] = {4,2,5,3,5,8,3};\nsort(a,a+n);",
         "preceding_paragraph_order": 36,
         "explanatory_paragraphs": [
           37,
@@ -1891,9 +1897,9 @@
         ]
       },
       {
-        "order": 3,
+        "order": 4,
         "language": "cpp",
-        "code": "int n = 7; // array size\nint a[] = {4,2,5,3,5,8,3};\nsort(a,a+n);",
+        "code": "string s = \"monkey\";\nsort(s.begin(), s.end());",
         "preceding_paragraph_order": 37,
         "explanatory_paragraphs": [
           38,
@@ -1901,19 +1907,19 @@
         ]
       },
       {
-        "order": 4,
-        "language": "cpp",
-        "code": "string s = \"monkey\";\nsort(s.begin(), s.end());",
-        "preceding_paragraph_order": 38,
-        "explanatory_paragraphs": [
-          39,
-          40
-        ]
-      },
-      {
         "order": 5,
         "language": "cpp",
         "code": "vector<pair<int,int>> v;\nv.push_back({1,5});\nv.push_back({2,3});\nv.push_back({1,2});\nsort(v.begin(), v.end());",
+        "preceding_paragraph_order": 39,
+        "explanatory_paragraphs": [
+          40,
+          41
+        ]
+      },
+      {
+        "order": 6,
+        "language": "cpp",
+        "code": "vector<tuple<int,int,int>> v;\nv.push_back({2,1,4});\nv.push_back({1,5,3});\nv.push_back({2,1,3});\nsort(v.begin(), v.end());",
         "preceding_paragraph_order": 40,
         "explanatory_paragraphs": [
           41,
@@ -1921,19 +1927,19 @@
         ]
       },
       {
-        "order": 6,
-        "language": "cpp",
-        "code": "vector<tuple<int,int,int>> v;\nv.push_back({2,1,4});\nv.push_back({1,5,3});\nv.push_back({2,1,3});\nsort(v.begin(), v.end());",
-        "preceding_paragraph_order": 41,
-        "explanatory_paragraphs": [
-          42,
-          43
-        ]
-      },
-      {
         "order": 7,
         "language": "cpp",
         "code": "struct P {\n   int x, y;\n   bool operator<(const P &p) {\n       if (x != p.x) return x < p.x;\n       else return y < p.y;\n   }\n};",
+        "preceding_paragraph_order": 43,
+        "explanatory_paragraphs": [
+          44,
+          45
+        ]
+      },
+      {
+        "order": 8,
+        "language": "cpp",
+        "code": "bool comp(string a, string b) {\n   if (a.size() != b.size()) return a.size() < b.size();\n   return a < b;\n}",
         "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
           45,
@@ -1941,9 +1947,9 @@
         ]
       },
       {
-        "order": 8,
+        "order": 9,
         "language": "cpp",
-        "code": "bool comp(string a, string b) {\n   if (a.size() != b.size()) return a.size() < b.size();\n   return a < b;\n}",
+        "code": "sort(v.begin(), v.end(), comp);",
         "preceding_paragraph_order": 45,
         "explanatory_paragraphs": [
           46,
@@ -1951,9 +1957,9 @@
         ]
       },
       {
-        "order": 9,
+        "order": 10,
         "language": "cpp",
-        "code": "sort(v.begin(), v.end(), comp);",
+        "code": "for (int i = 0; i < n; i++) {\n   if (array[i] == x) {\n       // x found at index i\n   }\n}",
         "preceding_paragraph_order": 46,
         "explanatory_paragraphs": [
           47,
@@ -1961,39 +1967,39 @@
         ]
       },
       {
-        "order": 10,
-        "language": "cpp",
-        "code": "for (int i = 0; i < n; i++) {\n   if (array[i] == x) {\n       // x found at index i\n   }\n}",
-        "preceding_paragraph_order": 47,
-        "explanatory_paragraphs": [
-          48,
-          49
-        ]
-      },
-      {
         "order": 11,
         "language": "cpp",
         "code": "int a = 0, b = n-1;\nwhile (a <= b) {\n   int k = (a+b)/2;\n   if (array[k] == x) {\n       // x found at index k\n   }\n   if (array[k] > x) b = k-1;\n   else a = k+1;\n}",
-        "preceding_paragraph_order": 49,
+        "preceding_paragraph_order": 48,
         "explanatory_paragraphs": [
-          50,
-          51
+          49,
+          50
         ]
       },
       {
         "order": 12,
         "language": "cpp",
         "code": "int k = 0;\nfor (int b = n/2; b >= 1; b /= 2) {\n   while (k+b < n && array[k+b] <= x) k += b;\n}\nif (array[k] == x) {\n   // x found at index k\n}",
-        "preceding_paragraph_order": 51,
+        "preceding_paragraph_order": 50,
         "explanatory_paragraphs": [
-          52,
-          53
+          51,
+          52
         ]
       },
       {
         "order": 13,
         "language": "cpp",
         "code": "auto k = lower_bound(array,array+n,x)-array;\nif (k < n && array[k] == x) {\n   // x found at index k\n}",
+        "preceding_paragraph_order": 56,
+        "explanatory_paragraphs": [
+          57,
+          58
+        ]
+      },
+      {
+        "order": 14,
+        "language": "cpp",
+        "code": "auto a = lower_bound(array, array+n, x);\nauto b = upper_bound(array, array+n, x);\ncout << b-a << \"\\n\";",
         "preceding_paragraph_order": 57,
         "explanatory_paragraphs": [
           58,
@@ -2001,9 +2007,9 @@
         ]
       },
       {
-        "order": 14,
+        "order": 15,
         "language": "cpp",
-        "code": "auto a = lower_bound(array, array+n, x);\nauto b = upper_bound(array, array+n, x);\ncout << b-a << \"\\n\";",
+        "code": "auto r = equal_range(array, array+n, x);\ncout << r.second-r.first << \"\\n\";",
         "preceding_paragraph_order": 58,
         "explanatory_paragraphs": [
           59,
@@ -2011,32 +2017,22 @@
         ]
       },
       {
-        "order": 15,
-        "language": "cpp",
-        "code": "auto r = equal_range(array, array+n, x);\ncout << r.second-r.first << \"\\n\";",
-        "preceding_paragraph_order": 59,
-        "explanatory_paragraphs": [
-          60,
-          61
-        ]
-      },
-      {
         "order": 16,
         "language": "cpp",
         "code": "int x = -1;\nfor (int b = z; b >= 1; b /= 2) {\n   while (!ok(x+b)) x += b;\n}\nint k = x+1;",
-        "preceding_paragraph_order": 66,
+        "preceding_paragraph_order": 65,
         "explanatory_paragraphs": [
-          67,
-          68
+          66,
+          67
         ]
       },
       {
         "order": 17,
         "language": "cpp",
         "code": "int x = -1;\nfor (int b = z; b >= 1; b /= 2) {\n   while (f(x+b) < f(x+b+1)) x += b;\n}\nint k = x+1;",
-        "preceding_paragraph_order": 71,
+        "preceding_paragraph_order": 70,
         "explanatory_paragraphs": [
-          72
+          71
         ]
       }
     ],
@@ -2062,111 +2058,111 @@
         "title": "Inversions",
         "paragraph_range": [
           9,
-          14
+          13
         ]
       },
       {
         "level": 3,
         "title": "O(nlogn) algorithms",
         "paragraph_range": [
-          15,
-          24
+          14,
+          23
         ]
       },
       {
         "level": 3,
         "title": "Sorting lower bound",
         "paragraph_range": [
-          25,
-          30
+          24,
+          29
         ]
       },
       {
         "level": 3,
         "title": "Counting sort",
         "paragraph_range": [
-          31,
-          34
+          30,
+          33
         ]
       },
       {
         "level": 3,
         "title": "Sorting in C++",
         "paragraph_range": [
-          35,
-          39
+          34,
+          38
         ]
       },
       {
         "level": 3,
         "title": "Comparison operators",
         "paragraph_range": [
-          40,
-          42
+          39,
+          41
         ]
       },
       {
         "level": 3,
         "title": "User-defined structs",
         "paragraph_range": [
-          43,
-          44
+          42,
+          43
         ]
       },
       {
         "level": 3,
         "title": "Comparison functions",
         "paragraph_range": [
-          45,
-          46
+          44,
+          45
         ]
       },
       {
         "level": 3,
         "title": "Binary search",
         "paragraph_range": [
-          47,
-          48
+          46,
+          47
         ]
       },
       {
         "level": 3,
         "title": "Method 1",
         "paragraph_range": [
-          49,
-          50
+          48,
+          49
         ]
       },
       {
         "level": 3,
         "title": "Method 2",
         "paragraph_range": [
-          51,
-          52
+          50,
+          51
         ]
       },
       {
         "level": 3,
         "title": "C++ functions",
         "paragraph_range": [
-          53,
-          59
+          52,
+          58
         ]
       },
       {
         "level": 3,
         "title": "Finding the smallest solution",
         "paragraph_range": [
-          60,
-          67
+          59,
+          66
         ]
       },
       {
         "level": 3,
         "title": "Finding the maximum value",
         "paragraph_range": [
-          68,
-          72
+          67,
+          71
         ]
       }
     ],
@@ -2179,7 +2175,7 @@
       {
         "src": "/cp-handbook/figures/fig_p038_002.png",
         "alt": "Figure from page 38",
-        "preceding_paragraph_order": 25
+        "preceding_paragraph_order": 24
       }
     ],
     "footnotes": [
@@ -3694,58 +3690,54 @@
       },
       {
         "order": 43,
-        "text": "000001001011001000"
-      },
-      {
-        "order": 44,
         "text": "Using this code, the length of the compressed string is 18 bits. However, we can compress the string better if we use a **variable-length** code where codewords may have different lengths. Then we can give short codewords for characters that appear often and long codewords for characters that appear rarely. It turns out that an **optimal** code for the above string is as follows:"
       },
       {
-        "order": 45,
+        "order": 44,
         "text": "character codeword"
       },
       {
-        "order": 46,
+        "order": 45,
         "text": "An optimal code produces a compressed string that is as short as possible. In this case, the compressed string using the optimal code is"
       },
       {
-        "order": 47,
+        "order": 46,
         "text": "001100101110100,"
       },
       {
-        "order": 48,
+        "order": 47,
         "text": "so only 15 bits are needed instead of 18 bits. Thus, thanks to a better code it was possible to save 3 bits in the compressed string. We require that no codeword is a prefix of another codeword. For example, it is not allowed that a code would contain both codewords 10 and 1011. The reason for this is that we want to be able to generate the original string from the compressed string. If a codeword could be a prefix of another codeword, this would not always be possible. For example, the following code is $not$ valid:"
       },
       {
-        "order": 49,
+        "order": 48,
         "text": "character codeword"
       },
       {
-        "order": 50,
+        "order": 49,
         "text": "Using this code, it would not be possible to know if the compressed string 1011 corresponds to the string `AB` or the string `C`."
       },
       {
-        "order": 51,
+        "order": 50,
         "text": "**Huffman coding**$^2$ is a greedy algorithm that constructs an optimal code for compressing a given string. The algorithm builds a binary tree based on the frequencies of the characters in the string, and each character’s codeword can be read by following a path from the root to the corresponding node. A move to the left corresponds to bit 0, and a move to the right corresponds to bit 1. Initially, each character of the string is represented by a node whose weight is the number of times the character occurs in the string. Then at each step two nodes with minimum weights are combined by creating a new node whose weight is the sum of the weights of the original nodes. The process continues until all nodes have been combined. Next we will see how Huffman coding creates the optimal code for the string `AABACDACA`. Initially, there are four nodes that correspond to the characters of the string:"
       },
       {
-        "order": 52,
+        "order": 51,
         "text": "The node that represents character `A` has weight 5 because character `A` appears 5 times in the string. The other weights have been calculated in the same way. The first step is to combine the nodes that correspond to characters `B` and `D`, both with weight 1. The result is:"
       },
       {
-        "order": 53,
+        "order": 52,
         "text": "After this, the nodes with weight 2 are combined:"
       },
       {
-        "order": 54,
+        "order": 53,
         "text": "Finally, the two remaining nodes are combined:"
       },
       {
-        "order": 55,
+        "order": 54,
         "text": "Now all nodes are in the tree, so the code is ready. The following codewords can be read from the tree:"
       },
       {
-        "order": 56,
+        "order": 55,
         "text": "character codeword"
       }
     ],
@@ -3794,86 +3786,96 @@
         "order": 4,
         "language": "cpp",
         "code": "                                  A",
-        "preceding_paragraph_order": 45,
+        "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
-          46,
-          47
+          45,
+          46
         ]
       },
       {
         "order": 5,
         "language": "cpp",
         "code": "                                  B",
-        "preceding_paragraph_order": 45,
+        "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
-          46,
-          47
+          45,
+          46
         ]
       },
       {
         "order": 6,
         "language": "cpp",
         "code": "                                  C",
-        "preceding_paragraph_order": 45,
+        "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
-          46,
-          47
+          45,
+          46
         ]
       },
       {
         "order": 7,
         "language": "cpp",
         "code": "                                  D",
-        "preceding_paragraph_order": 45,
+        "preceding_paragraph_order": 44,
         "explanatory_paragraphs": [
-          46,
-          47
+          45,
+          46
         ]
       },
       {
         "order": 8,
         "language": "cpp",
         "code": "                                  A",
-        "preceding_paragraph_order": 49,
+        "preceding_paragraph_order": 48,
         "explanatory_paragraphs": [
-          50,
-          51
+          49,
+          50
         ]
       },
       {
         "order": 9,
         "language": "cpp",
         "code": "                                  B",
-        "preceding_paragraph_order": 49,
+        "preceding_paragraph_order": 48,
         "explanatory_paragraphs": [
-          50,
-          51
+          49,
+          50
         ]
       },
       {
         "order": 10,
         "language": "cpp",
         "code": "                                  C",
-        "preceding_paragraph_order": 49,
+        "preceding_paragraph_order": 48,
         "explanatory_paragraphs": [
-          50,
-          51
+          49,
+          50
         ]
       },
       {
         "order": 11,
         "language": "cpp",
         "code": "                                  D",
-        "preceding_paragraph_order": 49,
+        "preceding_paragraph_order": 48,
         "explanatory_paragraphs": [
-          50,
-          51
+          49,
+          50
         ]
       },
       {
         "order": 12,
         "language": "cpp",
         "code": "                    A\n                              B\n                                         C\n                                                   D",
+        "preceding_paragraph_order": 50,
+        "explanatory_paragraphs": [
+          51,
+          52
+        ]
+      },
+      {
+        "order": 13,
+        "language": "cpp",
+        "code": "                    A\n                              C\n                                         B\n                                                   D",
         "preceding_paragraph_order": 51,
         "explanatory_paragraphs": [
           52,
@@ -3881,9 +3883,9 @@
         ]
       },
       {
-        "order": 13,
+        "order": 14,
         "language": "cpp",
-        "code": "                    A\n                              C\n                                         B\n                                                   D",
+        "code": "                                      B\n                                                D\n                       A",
         "preceding_paragraph_order": 52,
         "explanatory_paragraphs": [
           53,
@@ -3891,9 +3893,9 @@
         ]
       },
       {
-        "order": 14,
+        "order": 15,
         "language": "cpp",
-        "code": "                                      B\n                                                D\n                       A",
+        "code": "                                    B\n                                              D",
         "preceding_paragraph_order": 53,
         "explanatory_paragraphs": [
           54,
@@ -3901,41 +3903,31 @@
         ]
       },
       {
-        "order": 15,
-        "language": "cpp",
-        "code": "                                    B\n                                              D",
-        "preceding_paragraph_order": 54,
-        "explanatory_paragraphs": [
-          55,
-          56
-        ]
-      },
-      {
         "order": 16,
         "language": "cpp",
         "code": "                                  A",
-        "preceding_paragraph_order": 56,
+        "preceding_paragraph_order": 55,
         "explanatory_paragraphs": []
       },
       {
         "order": 17,
         "language": "cpp",
         "code": "                                  B",
-        "preceding_paragraph_order": 56,
+        "preceding_paragraph_order": 55,
         "explanatory_paragraphs": []
       },
       {
         "order": 18,
         "language": "cpp",
         "code": "                                  C",
-        "preceding_paragraph_order": 56,
+        "preceding_paragraph_order": 55,
         "explanatory_paragraphs": []
       },
       {
         "order": 19,
         "language": "cpp",
         "code": "                                  D",
-        "preceding_paragraph_order": 56,
+        "preceding_paragraph_order": 55,
         "explanatory_paragraphs": []
       }
     ],
@@ -4033,15 +4025,15 @@
         "title": "Data compression",
         "paragraph_range": [
           40,
-          50
+          49
         ]
       },
       {
         "level": 3,
         "title": "Huffman coding",
         "paragraph_range": [
-          51,
-          56
+          50,
+          55
         ]
       }
     ],
@@ -4089,17 +4081,17 @@
       {
         "src": "/cp-handbook/figures/fig_p073_auto1.png",
         "alt": "Figure from page 73",
-        "preceding_paragraph_order": 52
+        "preceding_paragraph_order": 51
       },
       {
         "src": "/cp-handbook/figures/fig_p074_017.png",
         "alt": "Figure from page 74",
-        "preceding_paragraph_order": 53
+        "preceding_paragraph_order": 52
       },
       {
         "src": "/cp-handbook/figures/fig_p074_018.png",
         "alt": "Figure from page 74",
-        "preceding_paragraph_order": 54
+        "preceding_paragraph_order": 53
       }
     ],
     "footnotes": [
@@ -4468,166 +4460,162 @@
       },
       {
         "order": 82,
-        "text": "0 1 2 3 4 5 6 7 8 9 10 11 12 X X X X X X X X X X X"
-      },
-      {
-        "order": 83,
         "text": "In this case, all sums between 0...12 are possible, except 2 and 10. For example, the sum 7 is possible because we can select the weights [1,3,3]. To solve the problem, we focus on subproblems where we only use the first $k$ weights to construct sums. Let `possible`($x,k) =$ true if we can construct a sum $x$ using the first $k$ weights, and otherwise `possible`($x,k) =$ false. The values of the function can be recursively calculated as follows:"
       },
       {
-        "order": 84,
+        "order": 83,
         "text": "`possible`($x,k) =$ `possible`($x-w_k,k -1)∨$`possible`($x,k -1$)"
       },
       {
-        "order": 85,
+        "order": 84,
         "text": "The formula is based on the fact that we can either use or not use the weight $w_k$ in the sum. If we use $w_k$, the remaining task is to form the sum $x-w_k$ using the first $k-1$ weights, and if we do not use $w_k$, the remaining task is to form the sum $x$ using the first $k -1$ weights. As the base cases,"
       },
       {
-        "order": 86,
+        "order": 85,
         "text": "$($ true $x =$ 0"
       },
       {
-        "order": 87,
+        "order": 86,
         "text": "`possible`($x,0) =$"
       },
       {
-        "order": 88,
+        "order": 87,
         "text": "false $x ̸=$ 0"
       },
       {
-        "order": 89,
+        "order": 88,
         "text": "because if no weights are used, we can only form the sum 0. The following table shows all values of the function for the weights [1,3,3,5] (the symbol \"X\" indicates the true values):"
       },
       {
-        "order": 90,
+        "order": 89,
         "text": "$k$\\$x$ 0 1 2 3 4 5 6 7 8 9 10 11 12 0 X 1 X X 2 X X X X 3 X X X X X X 4 X X X X X X X X X X X"
       },
       {
-        "order": 91,
+        "order": 90,
         "text": "After calculating those values, `possible`($x,n$) tells us whether we can construct a sum $x$ using $all$ weights. Let $W$ denote the total sum of the weights. The following $O(nW)$ time dynamic programming solution corresponds to the recursive function:"
       },
       {
-        "order": 92,
+        "order": 91,
         "text": "However, here is a better implementation that only uses a one-dimensional array `possible`[$x$] that indicates whether we can construct a subset with sum $x$. The trick is to update the array from right to left for each new weight:"
       },
       {
-        "order": 93,
+        "order": 92,
         "text": "Note that the general idea presented here can be used in many knapsack problems. For example, if we are given objects with weights and values, we can determine for each weight sum the maximum value sum of a subset."
       },
       {
-        "order": 94,
+        "order": 93,
         "text": "The **edit distance** or **Levenshtein distance**$^1$ is the minimum number of editing operations needed to transform a string into another string. The allowed editing operations are as follows:"
       },
       {
-        "order": 95,
+        "order": 94,
         "text": "• insert a character (e.g. `ABC` $\\to$ `ABCA`)"
       },
       {
-        "order": 96,
+        "order": 95,
         "text": "• remove a character (e.g. `ABC` $\\to$ `AC`)"
       },
       {
-        "order": 97,
+        "order": 96,
         "text": "• modify a character (e.g. `ABC` $\\to$ `ADC`)"
       },
       {
-        "order": 98,
+        "order": 97,
         "text": "For example, the edit distance between `LOVE` and `MOVIE` is 2, because we can first perform the operation `LOVE` $\\to$ `MOVE` (modify) and then the operation `MOVE` $\\to$ `MOVIE` (insert). This is the smallest possible number of operations, because it is clear that only one operation is not enough. Suppose that we are given a string `x` of length $n$ and a string `y` of length $m$, and we want to calculate the edit distance between `x` and `y`. To solve the problem, we define a function `distance`($a,b$) that gives the edit distance between prefixes `x`[0...$a$] and `y`[0...$b$]. Thus, using this function, the edit distance between `x` and `y` equals `distance`($n-1,m-1$). We can calculate values of `distance` as follows:"
       },
       {
-        "order": 99,
+        "order": 98,
         "text": "`distance`($a,b) =$ min(`distance`($a,b -1)+1$,"
       },
       {
-        "order": 100,
+        "order": 99,
         "text": "`distance`($a-1,b)+1$,"
       },
       {
-        "order": 101,
+        "order": 100,
         "text": "`distance`($a-1,b -1)+$`cost`($a,b$))."
       },
       {
-        "order": 102,
+        "order": 101,
         "text": "Here `cost`($a,b) =$ 0 if `x`[$a] =$ `y`[$b$], and otherwise `cost`($a,b) =$ 1. The formula considers the following ways to edit the string `x`:"
       },
       {
-        "order": 103,
+        "order": 102,
         "text": "• `distance`($a,b -1$): insert a character at the end of `x`"
       },
       {
-        "order": 104,
+        "order": 103,
         "text": "• `distance`($a-1,b$): remove the last character from `x`"
       },
       {
-        "order": 105,
+        "order": 104,
         "text": "• `distance`($a-1,b -1$): match or modify the last character of `x`"
       },
       {
-        "order": 106,
+        "order": 105,
         "text": "In the two first cases, one editing operation is needed (insert or remove). In the last case, if `x`[$a] =$ `y`[$b$], we can match the last characters without editing, and otherwise one editing operation is needed (modify). The following table shows the values of `distance` in the example case:"
       },
       {
-        "order": 107,
+        "order": 106,
         "text": "The lower-right corner of the table tells us that the edit distance between `LOVE` and `MOVIE` is 2. The table also shows how to construct the shortest sequence of editing operations. In this case the path is as follows:"
       },
       {
-        "order": 108,
+        "order": 107,
         "text": "The last characters of `LOVE` and `MOVIE` are equal, so the edit distance between them equals the edit distance between `LOV` and `MOVI`. We can use one editing operation to remove the character `I` from `MOVI`. Thus, the edit distance is one larger than the edit distance between `LOV` and `MOV`, etc."
       },
       {
-        "order": 109,
+        "order": 108,
         "text": "Sometimes the states of a dynamic programming solution are more complex than fixed combinations of numbers. As an example, consider the problem of calculating the number of distinct ways to fill an $n\\times m$ grid using 1$\\times$ 2 and 2$\\times$ 1 size tiles. For example, one valid solution for the 4$\\times$ 7 grid is"
       },
       {
-        "order": 110,
+        "order": 109,
         "text": "and the total number of solutions is 781. The problem can be solved using dynamic programming by going through the grid row by row. Each row in a solution can be represented as a string that contains $m$ characters from the set {$⊓,⊔$,⊏,⊐}. For example, the above solution consists of four rows that correspond to the following strings:"
       },
       {
-        "order": 111,
+        "order": 110,
         "text": "• $⊓$⊏⊐$⊓$⊏⊐$⊓$"
       },
       {
-        "order": 112,
+        "order": 111,
         "text": "• $⊔$⊏⊐$⊔⊓⊓⊔$"
       },
       {
-        "order": 113,
+        "order": 112,
         "text": "• ⊏⊐⊏⊐$⊔⊔⊓$"
       },
       {
-        "order": 114,
+        "order": 113,
         "text": "• ⊏⊐⊏⊐⊏⊐$⊔$"
       },
       {
-        "order": 115,
+        "order": 114,
         "text": "Let `count`($k,x$) denote the number of ways to construct a solution for rows 1...$k$ of the grid such that string $x$ corresponds to row $k$. It is possible to use dynamic programming here, because the state of a row is constrained only by the state of the previous row."
       },
       {
-        "order": 116,
+        "order": 115,
         "text": "A solution is valid if row 1 does not contain the character $⊔$, row $n$ does not contain the character $⊓$, and all consecutive rows are *compatible*. For example, the rows $⊔$⊏⊐$⊔⊓⊓⊔$and ⊏⊐⊏⊐$⊔⊔⊓$are compatible, while the rows $⊓$⊏⊐$⊓$⊏⊐$⊓$ and ⊏⊐⊏⊐⊏⊐$⊔$are not compatible. Since a row consists of $m$ characters and there are four choices for each character, the number of distinct rows is at most 4$^m$. Thus, the time complexity of the solution is $O(n4^{2m})$ because we can go through the $O(4^m)$ possible states for each row, and for each state, there are $O(4^m)$ possible states for the previous row. In practice, it is a good idea to rotate the grid so that the shorter side has length $m$, because the factor 4$^{2m}$ dominates the time complexity. It is possible to make the solution more efficient by using a more compact representation for the rows. It turns out that it is sufficient to know which columns of the previous row contain the upper square of a vertical tile. Thus, we can represent a row using only characters $⊓$and □, where □is a combination of characters $⊔$, ⊏and ⊐. Using this representation, there are only 2$^m$ distinct rows and the time complexity is $O(n2^{2m})$. As a final note, there is also a surprising direct formula for calculating the number of tilings$^2$:"
       },
       {
-        "order": 117,
+        "order": 116,
         "text": "$^{\\lceil}_{n/2}^{\\rceil}$ $Y$"
       },
       {
-        "order": 118,
+        "order": 117,
         "text": "$^{\\lceil}_{m/2}^{\\rceil}$ $Y$"
       },
       {
-        "order": 119,
+        "order": 118,
         "text": "$^{b=1}$ 4$\\cdot$ (cos$^2 \\pi a$"
       },
       {
-        "order": 120,
+        "order": 119,
         "text": "$n+1 +$cos$^2$ $\\pi b$ $m+1$)"
       },
       {
-        "order": 121,
+        "order": 120,
         "text": "$^{a=1}$"
       },
       {
-        "order": 122,
+        "order": 121,
         "text": "This formula is very efficient, because it calculates the number of tilings in $O(nm)$ time, but since the answer is a product of real numbers, a problem when using the formula is how to store the intermediate results accurately."
       }
     ],
@@ -4946,6 +4934,16 @@
         "order": 31,
         "language": "cpp",
         "code": "possible[0][0] = true;\nfor (int k = 1; k <= n; k++) {\n   for (int x = 0; x <= W; x++) {\n       if (x-w[k] >= 0) possible[x][k] |= possible[x-w[k]][k-1];\n       possible[x][k] |= possible[x][k-1];\n   }\n}",
+        "preceding_paragraph_order": 90,
+        "explanatory_paragraphs": [
+          91,
+          92
+        ]
+      },
+      {
+        "order": 32,
+        "language": "cpp",
+        "code": "possible[0] = true;\nfor (int k = 1; k <= n; k++) {\n   for (int x = W; x >= 0; x--) {\n       if (possible[x]) possible[x+w[k]] = true;\n   }\n}",
         "preceding_paragraph_order": 91,
         "explanatory_paragraphs": [
           92,
@@ -4953,29 +4951,29 @@
         ]
       },
       {
-        "order": 32,
-        "language": "cpp",
-        "code": "possible[0] = true;\nfor (int k = 1; k <= n; k++) {\n   for (int x = W; x >= 0; x--) {\n       if (possible[x]) possible[x+w[k]] = true;\n   }\n}",
-        "preceding_paragraph_order": 92,
-        "explanatory_paragraphs": [
-          93,
-          94
-        ]
-      },
-      {
         "order": 33,
         "language": "cpp",
         "code": "                                M\n                                   O\n                                       V\n                                           I\n                                              E",
-        "preceding_paragraph_order": 106,
+        "preceding_paragraph_order": 105,
         "explanatory_paragraphs": [
-          107,
-          108
+          106,
+          107
         ]
       },
       {
         "order": 34,
         "language": "cpp",
         "code": "                        L\n                        O\n                        V\n                        E",
+        "preceding_paragraph_order": 105,
+        "explanatory_paragraphs": [
+          106,
+          107
+        ]
+      },
+      {
+        "order": 35,
+        "language": "cpp",
+        "code": "                                M\n                                   O\n                                       V\n                                           I\n                                              E",
         "preceding_paragraph_order": 106,
         "explanatory_paragraphs": [
           107,
@@ -4983,23 +4981,13 @@
         ]
       },
       {
-        "order": 35,
-        "language": "cpp",
-        "code": "                                M\n                                   O\n                                       V\n                                           I\n                                              E",
-        "preceding_paragraph_order": 107,
-        "explanatory_paragraphs": [
-          108,
-          109
-        ]
-      },
-      {
         "order": 36,
         "language": "cpp",
         "code": "                        L\n                        O\n                        V\n                        E",
-        "preceding_paragraph_order": 107,
+        "preceding_paragraph_order": 106,
         "explanatory_paragraphs": [
-          108,
-          109
+          107,
+          108
         ]
       }
     ],
@@ -5065,23 +5053,23 @@
         "title": "Knapsack problems",
         "paragraph_range": [
           81,
-          93
+          92
         ]
       },
       {
         "level": 2,
         "title": "Edit distance",
         "paragraph_range": [
-          94,
-          108
+          93,
+          107
         ]
       },
       {
         "level": 3,
         "title": "Counting tilings",
         "paragraph_range": [
-          109,
-          122
+          108,
+          121
         ]
       }
     ],
@@ -5099,17 +5087,17 @@
       {
         "src": "/cp-handbook/figures/fig_p084_021.png",
         "alt": "Figure from page 84",
-        "preceding_paragraph_order": 106
+        "preceding_paragraph_order": 105
       },
       {
         "src": "/cp-handbook/figures/fig_p085_022.png",
         "alt": "Figure from page 85",
-        "preceding_paragraph_order": 107
+        "preceding_paragraph_order": 106
       },
       {
         "src": "/cp-handbook/figures/fig_p085_023.png",
         "alt": "Figure from page 85",
-        "preceding_paragraph_order": 109
+        "preceding_paragraph_order": 108
       }
     ],
     "footnotes": [
@@ -5199,78 +5187,70 @@
       },
       {
         "order": 12,
-        "text": "1 4 5 6 7 9 9 10"
-      },
-      {
-        "order": 13,
         "text": "Then the left pointer moves one step to the right. The right pointer moves three steps to the left, and the sum becomes 4$+7 =$ 11."
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "After this, the left pointer moves one step to the right again. The right pointer does not move, and a solution 5$+7 =$ 12 has been found."
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "The running time of the algorithm is $O(n$log$n$), because it first sorts the array in $O(n$log$n$) time, and then both pointers move $O(n)$ steps. Note that it is possible to solve the problem in another way in $O(n$log$n$) time using binary search. In such a solution, we iterate through the array and for each array value, we try to find another value that yields the sum $x$. This can be done by performing $n$ binary searches, each of which takes $O$(log$n$) time. A more difficult problem is the **3SUM problem** that asks to find $three$ array values whose sum is $x$. Using the idea of the above algorithm, this problem can be solved in $O(n^2)$ time$^1$. Can you see how?"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "Amortized analysis is often used to estimate the number of operations performed on a data structure. The operations may be distributed unevenly so that most operations occur during a certain phase of the algorithm, but the total number of the operations is limited. As an example, consider the problem of finding for each array element the **nearest smaller element**, i.e., the first smaller element that precedes the element in the array. It is possible that no such element exists, in which case the algorithm should report this. Next we will see how the problem can be efficiently solved using a stack structure. We go through the array from left to right and maintain a stack of array elements. At each array position, we remove elements from the stack until the top element is smaller than the current element, or the stack is empty. Then, we report that the top element is the nearest smaller element of the current element, or if the stack is empty, there is no such element. Finally, we add the current element to the stack. As an example, consider the following array:"
       },
       {
-        "order": 17,
-        "text": "1 3 4 2 5 3 4 2"
-      },
-      {
-        "order": 18,
+        "order": 16,
         "text": "First, the elements 1, 3 and 4 are added to the stack, because each element is larger than the previous element. Thus, the nearest smaller element of 4 is 3, and the nearest smaller element of 3 is 1."
       },
       {
-        "order": 19,
+        "order": 17,
         "text": "The next element 2 is smaller than the two top elements in the stack. Thus, the elements 3 and 4 are removed from the stack, and then the element 2 is added to the stack. Its nearest smaller element is 1:"
       },
       {
-        "order": 20,
+        "order": 18,
         "text": "Then, the element 5 is larger than the element 2, so it will be added to the stack, and its nearest smaller element is 2:"
       },
       {
-        "order": 21,
+        "order": 19,
         "text": "After this, the element 5 is removed from the stack and the elements 3 and 4 are added to the stack:"
       },
       {
-        "order": 22,
+        "order": 20,
         "text": "Finally, all elements except 1 are removed from the stack and the last element 2 is added to the stack:"
       },
       {
-        "order": 23,
+        "order": 21,
         "text": "The efficiency of the algorithm depends on the total number of stack operations. If the current element is larger than the top element in the stack, it is directly added to the stack, which is efficient. However, sometimes the stack can contain several larger elements and it takes time to remove them. Still, each element is added *exactly* $once$ to the stack and removed $at$ $most$ $once$ from the stack. Thus, each element causes $O$(1) stack operations, and the algorithm works in $O(n)$ time."
       },
       {
-        "order": 24,
+        "order": 22,
         "text": "A **sliding window** is a constant-size subarray that moves from left to right through the array. At each window position, we want to calculate some information about the elements inside the window. In this section, we focus on the problem of maintaining the **sliding window minimum**, which means that we should report the smallest value inside each window. The sliding window minimum can be calculated using a similar idea that we used to calculate the nearest smaller elements. We maintain a queue where each element is larger than the previous element, and the first element always corresponds to the minimum element inside the window. After each window move, we remove elements from the end of the queue until the last queue element is smaller than the new window element, or the queue becomes empty. We also remove the first queue element if it is not inside the window anymore. Finally, we add the new window element to the end of the queue. As an example, consider the following array:"
       },
       {
-        "order": 25,
+        "order": 23,
         "text": "Suppose that the size of the sliding window is 4. At the first window position, the smallest value is 1:"
       },
       {
-        "order": 26,
+        "order": 24,
         "text": "Then the window moves one step right. The new element 3 is smaller than the elements 4 and 5 in the queue, so the elements 4 and 5 are removed from the queue and the element 3 is added to the queue. The smallest value is still 1."
       },
       {
-        "order": 27,
+        "order": 25,
         "text": "After this, the window moves again, and the smallest element 1 does not belong to the window anymore. Thus, it is removed from the queue and the smallest value is now 3. Also the new element 4 is added to the queue."
       },
       {
-        "order": 28,
+        "order": 26,
         "text": "The next new element 1 is smaller than all elements in the queue. Thus, all elements are removed from the queue and it will only contain the element 1:"
       },
       {
-        "order": 29,
+        "order": 27,
         "text": "Finally the window reaches its last position. The element 2 is added to the queue, but the smallest value inside the window is still 1."
       },
       {
-        "order": 30,
+        "order": 28,
         "text": "Since each array element is added to the queue exactly once and removed from the queue at most once, the algorithm works in $O(n)$ time."
       }
     ],
@@ -5297,23 +5277,23 @@
         "title": "2SUM problem",
         "paragraph_range": [
           10,
-          15
+          14
         ]
       },
       {
         "level": 3,
         "title": "Nearest smaller elements",
         "paragraph_range": [
-          16,
-          23
+          15,
+          21
         ]
       },
       {
         "level": 2,
         "title": "Sliding window minimum",
         "paragraph_range": [
-          24,
-          30
+          22,
+          28
         ]
       }
     ],
@@ -5628,14 +5608,10 @@
       },
       {
         "order": 70,
-        "text": "$^0$ $^1$ $^2$ $^3$ $^4$ $^5$ $^6$ $^7$"
-      },
-      {
-        "order": 71,
         "text": "3 5 $-2$ 0 0 $-1-3$ 0"
       },
       {
-        "order": 72,
+        "order": 71,
         "text": "More generally, to increase the values in range [$a,b$] by $x$, we increase the value at position $a$ by $x$ and decrease the value at position $b+1$ by $x$. Thus, it is only needed to update single values and process sum queries, so we can use a binary indexed tree or a segment tree. A more difficult problem is to support both range queries and range updates. In Chapter 28 we will see that even this is possible."
       }
     ],
@@ -5793,7 +5769,7 @@
         "title": "Range updates",
         "paragraph_range": [
           66,
-          72
+          71
         ]
       }
     ],
@@ -5884,430 +5860,426 @@
       },
       {
         "order": 2,
-        "text": "00000000000000000000000000101011"
-      },
-      {
-        "order": 3,
         "text": "The bits in the representation are indexed from right to left. To convert a bit representation $b_k \\cdot \\cdot \\cdot b_2b_1b_0$ into a number, we can use the formula"
       },
       {
-        "order": 4,
+        "order": 3,
         "text": "$b_k2^k +...+ b_22^2 + b_12^1 + b_02^0$."
       },
       {
-        "order": 5,
+        "order": 4,
         "text": "For example, 1$\\cdot 2^5 +1\\cdot 2^3 +1\\cdot 2^1 +1\\cdot 2^0 =$ 43."
       },
       {
-        "order": 6,
+        "order": 5,
         "text": "The bit representation of a number is either **signed** or **unsigned**. Usually a signed representation is used, which means that both negative and positive numbers can be represented. A signed variable of $n$ bits can contain any integer between $-2^{n-1}$ and 2$^{n-1}-1$. For example, the `int` type in C++ is a signed type, so an `int` variable can contain any integer between $-2^{31}$ and 2$^{31}-1$. The first bit in a signed representation is the sign of the number (0 for nonnegative numbers and 1 for negative numbers), and the remaining $n-1$ bits contain the magnitude of the number. **Two’s complement** is used, which means that the opposite number of a number is calculated by first inverting all the bits in the number, and then increasing the number by one. For example, the bit representation of the `int` number $-4$3 is"
       },
       {
-        "order": 7,
+        "order": 6,
         "text": "11111111111111111111111111010101."
       },
       {
-        "order": 8,
+        "order": 7,
         "text": "In an unsigned representation, only nonnegative numbers can be used, but the upper bound for the values is larger. An unsigned variable of $n$ bits can contain any integer between 0 and 2$^n-1$. For example, in C++, an `unsigned int` variable can contain any integer between 0 and 2$^{32}-1$. There is a connection between the representations: a signed number $-x$ equals an unsigned number 2$^n -x$. For example, the following code shows that the signed number $x = -4$3 equals the unsigned number $y = 2^{32} -4$3:"
       },
       {
-        "order": 9,
+        "order": 8,
         "text": "If a number is larger than the upper bound of the bit representation, the number will overflow. In a signed representation, the next number after 2$^{n-1}-1$ is $-2^{n-1}$, and in an unsigned representation, the next number after 2$^n-1$ is 0. For example, consider the following code:"
       },
       {
-        "order": 10,
+        "order": 9,
         "text": "Initially, the value of $x$ is 2$^{31}-1$. This is the largest value that can be stored in an `int` variable, so the next number after 2$^{31}-1$ is $-2^{31}$."
       },
       {
-        "order": 11,
+        "order": 10,
         "text": "The **and** operation $x$ & $y$ produces a number that has one bits in positions where both $x$ and $y$ have one bits. For example, 22 & 26 = 18, because"
       },
       {
-        "order": 12,
+        "order": 11,
         "text": "10110 (22) & 11010 (26) = 10010 (18)"
       },
       {
-        "order": 13,
+        "order": 12,
         "text": "Using the and operation, we can check if a number $x$ is even because $x$ & 1 = 0 if $x$ is even, and $x$ & 1 = 1 if $x$ is odd. More generally, $x$ is divisible by 2$^k$ exactly when $x$ & (2$^k-1$) = 0."
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "The **or** operation $x$ | $y$ produces a number that has one bits in positions where at least one of $x$ and $y$ have one bits. For example, 22 | 26 = 30, because"
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "10110 (22) | 11010 (26) = 11110 (30)"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "The **xor** operation $x \\mathbin{\\hat{}} y$ produces a number that has one bits in positions where exactly one of $x$ and $y$ have one bits. For example, $22 \\mathbin{\\hat{}} 26 = 12$, because"
       },
       {
-        "order": 17,
+        "order": 16,
         "text": "The **not** operation `~x` produces a number where all the bits of $x$ have been inverted. The formula $\\texttt{\\~}x = -x - 1$ holds, for example, $\\texttt{\\~}29 = -30$."
       },
       {
-        "order": 18,
+        "order": 17,
         "text": "The result of the not operation at the bit level depends on the length of the bit representation, because the operation inverts all bits. For example, if the numbers are 32-bit `int` numbers, the result is as follows:"
       },
       {
-        "order": 19,
+        "order": 18,
         "text": "The left bit shift $x \\ll k$ appends $k$ zero bits to the number, and the right bit shift $x \\gg k$ removes the $k$ last bits from the number. For example, $14 \\ll 2 = 56$, because 14 and 56 correspond to 1110 and 111000. Similarly, $49 \\gg 3 = 6$, because 49 and 6 correspond to 110001 and 110."
       },
       {
-        "order": 20,
+        "order": 19,
         "text": "Note that $x \\ll k$ corresponds to multiplying $x$ by $2^k$, and $x \\gg k$ corresponds to dividing $x$ by $2^k$ rounded down to an integer."
       },
       {
-        "order": 21,
+        "order": 20,
         "text": "A number of the form $1 \\ll k$ has a one bit in position $k$ and all other bits are zero, so we can use such numbers to access single bits of numbers. In particular, the $k$th bit of a number is one exactly when $x \\mathbin{\\&} (1 \\ll k)$ is not zero. The following code prints the bit representation of an `int` number $x$:"
       },
       {
-        "order": 22,
+        "order": 21,
         "text": "It is also possible to modify single bits of numbers using similar ideas. For example, the formula $x \\mathbin{|} (1 \\ll k)$ sets the $k$th bit of $x$ to one, the formula $x \\mathbin{\\&} \\texttt{\\~}(1 \\ll k)$ sets the $k$th bit of $x$ to zero, and the formula $x \\mathbin{\\hat{}} (1 \\ll k)$ inverts the $k$th bit of $x$."
       },
       {
-        "order": 23,
+        "order": 22,
         "text": "The formula $x \\mathbin{\\&} (x - 1)$ sets the last one bit of $x$ to zero, and the formula $x \\mathbin{\\&} -x$ sets all the one bits to zero, except for the last one bit. The formula $x \\mathbin{|} (x - 1)$ inverts all the bits after the last one bit. Also note that a positive number $x$ is a power of two exactly when $x \\mathbin{\\&} (x - 1) = 0$."
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "The g++ compiler provides the following functions for counting bits:"
       },
       {
-        "order": 25,
+        "order": 24,
         "text": "• `__builtin_clz`($x$): the number of zeros at the beginning of the number"
       },
       {
-        "order": 26,
+        "order": 25,
         "text": "• `__builtin_ctz`($x$): the number of zeros at the end of the number"
       },
       {
-        "order": 27,
+        "order": 26,
         "text": "• `__builtin_popcount`($x$): the number of ones in the number"
       },
       {
-        "order": 28,
+        "order": 27,
         "text": "• `__builtin_parity`($x$): the parity (even or odd) of the number of ones"
       },
       {
-        "order": 29,
+        "order": 28,
         "text": "The functions can be used as follows:"
       },
       {
-        "order": 30,
+        "order": 29,
         "text": "While the above functions only support `int` numbers, there are also `long long` versions of the functions available with the suffix `ll`."
       },
       {
-        "order": 31,
+        "order": 30,
         "text": "Every subset of a set {0,1,2,...,$n-1$} can be represented as an $n$ bit integer whose one bits indicate which elements belong to the subset. This is an efficient way to represent sets, because every element requires only one bit of memory, and set operations can be implemented as bit operations. For example, since `int` is a 32-bit type, an `int` number can represent any subset of the set {0,1,2,...,31}. The bit representation of the set {1,3,4,8} is"
       },
       {
-        "order": 32,
+        "order": 31,
         "text": "00000000000000000000000100011010,"
       },
       {
-        "order": 33,
+        "order": 32,
         "text": "which corresponds to the number 2$^8 +2^4 +2^3 +2^1 =$ 282."
       },
       {
-        "order": 34,
+        "order": 33,
         "text": "The following code declares an `int` variable $x$ that can contain a subset of {0,1,2,...,31}. After this, the code adds the elements 1, 3, 4 and 8 to the set and prints the size of the set."
       },
       {
-        "order": 35,
+        "order": 34,
         "text": "Then, the following code prints all elements that belong to the set:"
       },
       {
-        "order": 36,
+        "order": 35,
         "text": "Set operations can be implemented as follows as bit operations:"
       },
       {
-        "order": 37,
+        "order": 36,
         "text": "set syntax bit syntax intersection $a\\cap b$ $a$ & $b$ union $a\\cup b$ $a$ | $b$ complement ¯$a$ ~$a$ difference $a$\\ $b$ $a$ & (~$b$)"
       },
       {
-        "order": 38,
+        "order": 37,
         "text": "For example, the following code first constructs the sets $x =$ {1,3,4,8} and $y =$ {3,6,8,9}, and then constructs the set $z = x\\cup y =$ {1,3,4,6,8,9}:"
       },
       {
-        "order": 39,
+        "order": 38,
         "text": "The following code goes through the subsets of {0,1,...,$n-1$}:"
       },
       {
-        "order": 40,
+        "order": 39,
         "text": "The following code goes through the subsets with exactly $k$ elements:"
       },
       {
-        "order": 41,
+        "order": 40,
         "text": "The following code goes through the subsets of a set $x$:"
       },
       {
-        "order": 42,
+        "order": 41,
         "text": "Many algorithms can be optimized using bit operations. Such optimizations do not change the time complexity of the algorithm, but they may have a large impact on the actual running time of the code. In this section we discuss examples of such situations."
       },
       {
-        "order": 43,
+        "order": 42,
         "text": "The **Hamming distance** `hamming`($a,b$) between two strings $a$ and $b$ of equal length is the number of positions where the strings differ. For example,"
       },
       {
-        "order": 44,
+        "order": 43,
         "text": "`hamming`(01101,11001) $= 2$."
       },
       {
-        "order": 45,
+        "order": 44,
         "text": "Consider the following problem: Given a list of $n$ bit strings, each of length $k$, calculate the minimum Hamming distance between two strings in the list. For example, the answer for [00111,01101,11110] is 2, because"
       },
       {
-        "order": 46,
+        "order": 45,
         "text": "• `hamming`(00111,01101) $= 2$, • `hamming`(00111,11110) $= 3$, and • `hamming`(01101,11110) $= 3$."
       },
       {
-        "order": 47,
+        "order": 46,
         "text": "A straightforward way to solve the problem is to go through all pairs of strings and calculate their Hamming distances, which yields an $O(n^2k)$ time algorithm. The following function can be used to calculate distances:"
       },
       {
-        "order": 48,
+        "order": 47,
         "text": "However, if $k$ is small, we can optimize the code by storing the bit strings as integers and calculating the Hamming distances using bit operations. In particular, if $k \\le$ 32, we can just store the strings as `int` values and use the following function to calculate distances:"
       },
       {
-        "order": 49,
+        "order": 48,
         "text": "In the above function, the xor operation constructs a bit string that has one bits in positions where $a$ and $b$ differ. Then, the number of bits is calculated using the `__builtin_popcount` function. To compare the implementations, we generated a list of 10000 random bit strings of length 30. Using the first approach, the search took 13.5 seconds, and after the bit optimization, it only took 0.5 seconds. Thus, the bit optimized code was almost 30 times faster than the original code."
       },
       {
-        "order": 50,
+        "order": 49,
         "text": "As another example, consider the following problem: Given an $n\\times n$ grid whose each square is either black (1) or white (0), calculate the number of subgrids whose all corners are black. For example, the grid"
       },
       {
-        "order": 51,
+        "order": 50,
         "text": "contains two such subgrids:"
       },
       {
-        "order": 52,
+        "order": 51,
         "text": "There is an $O(n^3)$ time algorithm for solving the problem: go through all $O(n^2)$ pairs of rows and for each pair ($a,b$) calculate the number of columns that contain a black square in both rows in $O(n)$ time. The following code assumes that `color`[$y][x$] denotes the color in row $y$ and column $x$:"
       },
       {
-        "order": 53,
+        "order": 52,
         "text": "Then, those columns account for `count`(`count`$-1$)/2 subgrids with black corners, because we can choose any two of them to form a subgrid. To optimize this algorithm, we divide the grid into blocks of columns such that each block consists of $N$ consecutive columns. Then, each row is stored as a list of $N$-bit numbers that describe the colors of the squares. Now we can process $N$ columns at the same time using bit operations. In the following code, `color`[$y][k$] represents a block of $N$ colors as bits."
       },
       {
-        "order": 54,
+        "order": 53,
         "text": "The resulting algorithm works in $O(n^3/N)$ time. We generated a random grid of size 2500$\\times$ 2500 and compared the original and bit optimized implementation. While the original code took 29.6 seconds, the bit optimized version only took 3.1 seconds with $N =$ 32 (`int` numbers) and 1.7 seconds with $N =$ 64 (`long long` numbers)."
       },
       {
-        "order": 55,
+        "order": 54,
         "text": "Bit operations provide an efficient and convenient way to implement dynamic programming algorithms whose states contain subsets of elements, because such states can be stored as integers. Next we discuss examples of combining bit operations and dynamic programming."
       },
       {
-        "order": 56,
+        "order": 55,
         "text": "As a first example, consider the following problem: We are given the prices of $k$ products over $n$ days, and we want to buy each product exactly once. However, we are allowed to buy at most one product in a day. What is the minimum total price? For example, consider the following scenario ($k =$ 3 and $n =$ 8):"
       },
       {
-        "order": 57,
+        "order": 56,
         "text": "product 0"
+      },
+      {
+        "order": 57,
+        "text": "product 1"
       },
       {
         "order": 58,
-        "text": "product 1"
+        "text": "product 2"
       },
       {
         "order": 59,
-        "text": "product 2"
-      },
-      {
-        "order": 60,
         "text": "In this scenario, the minimum total price is 5:"
       },
       {
-        "order": 61,
+        "order": 60,
         "text": "product 0"
       },
       {
-        "order": 62,
+        "order": 61,
         "text": "product 1"
       },
       {
-        "order": 63,
+        "order": 62,
         "text": "product 2"
       },
       {
-        "order": 64,
+        "order": 63,
         "text": "Let `price`[$x][d$] denote the price of product $x$ on day $d$. For example, in the above scenario `price`[2][3] $= 7$. Then, let `total`($S,d$) denote the minimum total price for buying a subset $S$ of products by day $d$. Using this function, the solution to the problem is `total`({0...$k -1$},$n-1$). First, `total`($;,d) =$ 0, because it does not cost anything to buy an empty set, and `total`({$x$},0) $=$ `price`[$x$][0], because there is one way to buy one product on the first day. Then, the following recurrence can be used:"
       },
       {
-        "order": 65,
+        "order": 64,
         "text": "`total`($S,d) =$ min(`total`($S,d -1$),"
       },
       {
-        "order": 66,
+        "order": 65,
         "text": "min $_{x\\in S}$ (`total`($S$ \\ $x,d -1)+$`price`[$x][d$]))"
       },
       {
-        "order": 67,
+        "order": 66,
         "text": "This means that we either do not buy any product on day $d$ or buy a product $x$ that belongs to $S$. In the latter case, we remove $x$ from $S$ and add the price of $x$ to the total price. The next step is to calculate the values of the function using dynamic programming. To store the function values, we declare an array"
       },
       {
-        "order": 68,
+        "order": 67,
         "text": "where $K$ and $N$ are suitably large constants. The first dimension of the array corresponds to a bit representation of a subset. First, the cases where $d =$ 0 can be processed as follows:"
       },
       {
-        "order": 69,
+        "order": 68,
         "text": "Then, the recurrence translates into the following code:"
       },
       {
-        "order": 70,
+        "order": 69,
         "text": "The time complexity of the algorithm is $O(n2^kk)$."
       },
       {
-        "order": 71,
+        "order": 70,
         "text": "Using dynamic programming, it is often possible to change an iteration over permutations into an iteration over subsets$^1$. The benefit of this is that $n$!, the number of permutations, is much larger than 2$^n$, the number of subsets. For example, if $n =$ 20, then $n$! $≈2.4\\cdot 10^{18}$ and 2$^n ≈10^6$. Thus, for certain values of $n$, we can efficiently go through the subsets but not through the permutations. As an example, consider the following problem: There is an elevator with maximum weight $x$, and $n$ people with known weights who want to get from the ground floor to the top floor. What is the minimum number of rides needed if the people enter the elevator in an optimal order? For example, suppose that $x =$ 10, $n =$ 5 and the weights are as follows:"
       },
       {
-        "order": 72,
+        "order": 71,
         "text": "person weight 0 2 1 3 2 3 3 5 4 6"
       },
       {
-        "order": 73,
+        "order": 72,
         "text": "In this case, the minimum number of rides is 2. One optimal order is {0,2,3,1,4}, which partitions the people into two rides: first {0,2,3} (total weight 10), and then {1,4} (total weight 9)."
       },
       {
-        "order": 74,
+        "order": 73,
         "text": "The problem can be easily solved in $O(n$!$n$) time by testing all possible permutations of $n$ people. However, we can use dynamic programming to get a more efficient $O(2^nn)$ time algorithm. The idea is to calculate for each subset of people two values: the minimum number of rides needed and the minimum weight of people who ride in the last group. Let `weight`[$p$] denote the weight of person $p$. We define two functions: `rides`($S$) is the minimum number of rides for a subset $S$, and `last`($S$) is the minimum weight of the last ride. For example, in the above scenario"
       },
       {
-        "order": 75,
+        "order": 74,
         "text": "`rides`({1,3,4}) $= 2$ and `last`({1,3,4}) $= 5$,"
       },
       {
-        "order": 76,
+        "order": 75,
         "text": "because the optimal rides are {1,4} and {3}, and the second ride has weight 5. Of course, our final goal is to calculate the value of `rides`({0...$n-1$}). We can calculate the values of the functions recursively and then apply dynamic programming. The idea is to go through all people who belong to $S$ and optimally choose the last person $p$ who enters the elevator. Each such choice yields a subproblem for a smaller subset of people. If `last`($S$ \\ $p)+$`weight`[$p] \\le x$, we can add $p$ to the last ride. Otherwise, we have to reserve a new ride that initially only contains $p$. To implement dynamic programming, we declare an array"
       },
       {
-        "order": 77,
+        "order": 76,
         "text": "that contains for each subset $S$ a pair (`rides`($S$),`last`($S$)). We set the value for an empty group as follows:"
       },
       {
-        "order": 78,
+        "order": 77,
         "text": "Then, we can fill the array as follows:"
       },
       {
-        "order": 79,
+        "order": 78,
         "text": "Note that the above loop guarantees that for any two subsets $S_1$ and $S_2$ such that $S_1 \\subset S_2$, we process $S_1$ before $S_2$. Thus, the dynamic programming values are calculated in the correct order."
       },
       {
-        "order": 80,
+        "order": 79,
         "text": "Our last problem in this chapter is as follows: Let $X =$ {0...$n-1$}, and each subset $S \\subset X$ is assigned an integer `value`[$S$]. Our task is to calculate for each $S$"
       },
       {
-        "order": 81,
+        "order": 80,
         "text": "`sum`($S) =$ $X$"
       },
       {
-        "order": 82,
+        "order": 81,
         "text": "$^{A\\subset S}$ `value`[$A$],"
       },
       {
-        "order": 83,
+        "order": 82,
         "text": "i.e., the sum of values of subsets of $S$. For example, suppose that $n =$ 3 and the values are as follows:"
       },
       {
-        "order": 84,
+        "order": 83,
         "text": "• `value`[$;] =$ 3"
       },
       {
-        "order": 85,
+        "order": 84,
         "text": "• `value`[{2}] $= 5$"
       },
       {
-        "order": 86,
+        "order": 85,
         "text": "• `value`[{0}] $= 1$"
       },
       {
-        "order": 87,
+        "order": 86,
         "text": "• `value`[{0,2}] $= 1$"
       },
       {
-        "order": 88,
+        "order": 87,
         "text": "• `value`[{1}] $= 4$"
       },
       {
-        "order": 89,
+        "order": 88,
         "text": "• `value`[{1,2}] $= 3$"
       },
       {
-        "order": 90,
+        "order": 89,
         "text": "• `value`[{0,1}] $= 5$"
       },
       {
-        "order": 91,
+        "order": 90,
         "text": "• `value`[{0,1,2}] $= 3$"
       },
       {
-        "order": 92,
+        "order": 91,
         "text": "In this case, for example,"
       },
       {
-        "order": 93,
+        "order": 92,
         "text": "`sum`({0,2}) $=$ `value`[$;]+$`value`[{0}]$+$`value`[{2}]$+$`value`[{0,2}]"
       },
       {
-        "order": 94,
+        "order": 93,
         "text": "$= 3+1+5+1 =$ 10."
       },
       {
-        "order": 95,
+        "order": 94,
         "text": "Because there are a total of 2$^n$ subsets, one possible solution is to go through all pairs of subsets in $O(2^{2n})$ time. However, using dynamic programming, we can solve the problem in $O(2^nn)$ time. The idea is to focus on sums where the elements that may be removed from $S$ are restricted. Let `partial`($S,k$) denote the sum of values of subsets of $S$ with the restriction that only elements 0...$k$ may be removed from $S$. For example,"
       },
       {
-        "order": 96,
+        "order": 95,
         "text": "`partial`({0,2},1) $=$ `value`[{2}]$+$`value`[{0,2}],"
       },
       {
-        "order": 97,
+        "order": 96,
         "text": "because we may only remove elements 0...1. We can calculate values of `sum` using values of `partial`, because"
       },
       {
-        "order": 98,
+        "order": 97,
         "text": "`sum`($S) =$ `partial`($S,n-1$)."
       },
       {
-        "order": 99,
+        "order": 98,
         "text": "The base cases for the function are"
       },
       {
-        "order": 100,
+        "order": 99,
         "text": "`partial`($S,-1) =$ `value`[$S$],"
       },
       {
-        "order": 101,
+        "order": 100,
         "text": "because in this case no elements can be removed from $S$. Then, in the general case we can use the following recurrence:"
       },
       {
-        "order": 102,
+        "order": 101,
         "text": "$($ `partial`($S,k -1$) $k \\notin S$"
       },
       {
-        "order": 103,
+        "order": 102,
         "text": "`partial`($S,k) =$"
       },
       {
-        "order": 104,
+        "order": 103,
         "text": "`partial`($S,k -1)+$`partial`($S$ \\{$k$},$k -1$) $k \\in S$"
       },
       {
-        "order": 105,
+        "order": 104,
         "text": "Here we focus on the element $k$. If $k \\in S$, we have two options: we may either keep $k$ in $S$ or remove it from $S$. There is a particularly clever way to implement the calculation of sums. We can declare an array"
       },
       {
-        "order": 106,
+        "order": 105,
         "text": "that will contain the sum of each subset. The array is initialized as follows:"
       },
       {
-        "order": 107,
+        "order": 106,
         "text": "Then, we can fill the array as follows:"
       },
       {
-        "order": 108,
+        "order": 107,
         "text": "This code calculates the values of `partial`($S,k$) for $k = 0...n-1$ to the array `sum`. Since `partial`($S,k$) is always based on `partial`($S,k -1$), we can reuse the array `sum`, which yields a very efficient implementation."
       }
     ],
@@ -6316,6 +6288,16 @@
         "order": 0,
         "language": "cpp",
         "code": "int x = -43;\nunsigned int y = x;\ncout << x << \"\\n\"; // -43\ncout << y << \"\\n\"; // 4294967253",
+        "preceding_paragraph_order": 7,
+        "explanatory_paragraphs": [
+          8,
+          9
+        ]
+      },
+      {
+        "order": 1,
+        "language": "cpp",
+        "code": "int x = 2147483647\ncout << x << \"\\n\"; // 2147483647\nx++;\ncout << x << \"\\n\"; // -2147483648",
         "preceding_paragraph_order": 8,
         "explanatory_paragraphs": [
           9,
@@ -6323,59 +6305,59 @@
         ]
       },
       {
-        "order": 1,
-        "language": "cpp",
-        "code": "int x = 2147483647\ncout << x << \"\\n\"; // 2147483647\nx++;\ncout << x << \"\\n\"; // -2147483648",
-        "preceding_paragraph_order": 9,
-        "explanatory_paragraphs": [
-          10,
-          11
-        ]
-      },
-      {
         "order": 2,
         "language": "text",
         "code": "    10110   (22)\n  ^ 11010   (26)\n  = 01100   (12)",
-        "preceding_paragraph_order": 16,
+        "preceding_paragraph_order": 15,
         "explanatory_paragraphs": [
-          17,
-          18
+          16,
+          17
         ]
       },
       {
         "order": 3,
         "language": "text",
         "code": " x = 29   00000000000000000000000000011101\n~x = -30  11111111111111111111111111100010",
-        "preceding_paragraph_order": 18,
+        "preceding_paragraph_order": 17,
         "explanatory_paragraphs": [
-          19,
-          20
+          18,
+          19
         ]
       },
       {
         "order": 4,
         "language": "cpp",
         "code": "for (int i = 31; i >= 0; i--) {\n    if (x&(1<<i)) cout << \"1\";\n    else cout << \"0\";\n}",
-        "preceding_paragraph_order": 21,
+        "preceding_paragraph_order": 20,
         "explanatory_paragraphs": [
-          22,
-          23
+          21,
+          22
         ]
       },
       {
         "order": 5,
         "language": "cpp",
         "code": "int x = 5328; // 00000000000000000001010011010000\ncout << __builtin_clz(x) << \"\\n\"; // 19\ncout << __builtin_ctz(x) << \"\\n\"; // 4\ncout << __builtin_popcount(x) << \"\\n\"; // 5\ncout << __builtin_parity(x) << \"\\n\"; // 1",
-        "preceding_paragraph_order": 29,
+        "preceding_paragraph_order": 28,
         "explanatory_paragraphs": [
-          30,
-          31
+          29,
+          30
         ]
       },
       {
         "order": 6,
         "language": "cpp",
         "code": "int x = 0;\nx |= (1<<1);\nx |= (1<<3);\nx |= (1<<4);\nx |= (1<<8);\ncout << __builtin_popcount(x) << \"\\n\"; // 4",
+        "preceding_paragraph_order": 33,
+        "explanatory_paragraphs": [
+          34,
+          35
+        ]
+      },
+      {
+        "order": 7,
+        "language": "cpp",
+        "code": "for (int i = 0; i < 32; i++) {\n   if (x&(1<<i)) cout << i << \" \";\n}\n// output: 1 3 4 8",
         "preceding_paragraph_order": 34,
         "explanatory_paragraphs": [
           35,
@@ -6383,19 +6365,19 @@
         ]
       },
       {
-        "order": 7,
-        "language": "cpp",
-        "code": "for (int i = 0; i < 32; i++) {\n   if (x&(1<<i)) cout << i << \" \";\n}\n// output: 1 3 4 8",
-        "preceding_paragraph_order": 35,
-        "explanatory_paragraphs": [
-          36,
-          37
-        ]
-      },
-      {
         "order": 8,
         "language": "cpp",
         "code": "int x = (1<<1)|(1<<3)|(1<<4)|(1<<8);\nint y = (1<<3)|(1<<6)|(1<<8)|(1<<9);\nint z = x|y;\ncout << __builtin_popcount(z) << \"\\n\"; // 6",
+        "preceding_paragraph_order": 37,
+        "explanatory_paragraphs": [
+          38,
+          39
+        ]
+      },
+      {
+        "order": 9,
+        "language": "cpp",
+        "code": "for (int b = 0; b < (1<<n); b++) {\n   // process subset b\n}",
         "preceding_paragraph_order": 38,
         "explanatory_paragraphs": [
           39,
@@ -6403,9 +6385,9 @@
         ]
       },
       {
-        "order": 9,
+        "order": 10,
         "language": "cpp",
-        "code": "for (int b = 0; b < (1<<n); b++) {\n   // process subset b\n}",
+        "code": "for (int b = 0; b < (1<<n); b++) {\n   if (__builtin_popcount(b) == k) {\n       // process subset b\n   }\n}",
         "preceding_paragraph_order": 39,
         "explanatory_paragraphs": [
           40,
@@ -6413,9 +6395,9 @@
         ]
       },
       {
-        "order": 10,
+        "order": 11,
         "language": "cpp",
-        "code": "for (int b = 0; b < (1<<n); b++) {\n   if (__builtin_popcount(b) == k) {\n       // process subset b\n   }\n}",
+        "code": "int b = 0;\ndo {\n   // process subset b\n} while (b=(b-x)&x);",
         "preceding_paragraph_order": 40,
         "explanatory_paragraphs": [
           41,
@@ -6423,19 +6405,19 @@
         ]
       },
       {
-        "order": 11,
-        "language": "cpp",
-        "code": "int b = 0;\ndo {\n   // process subset b\n} while (b=(b-x)&x);",
-        "preceding_paragraph_order": 41,
-        "explanatory_paragraphs": [
-          42,
-          43
-        ]
-      },
-      {
         "order": 12,
         "language": "cpp",
         "code": "int hamming(string a, string b) {\n   int d = 0;\n   for (int i = 0; i < k; i++) {\n       if (a[i] != b[i]) d++;\n   }\n   return d;\n}",
+        "preceding_paragraph_order": 46,
+        "explanatory_paragraphs": [
+          47,
+          48
+        ]
+      },
+      {
+        "order": 13,
+        "language": "cpp",
+        "code": "int hamming(int a, int b) {\n   return __builtin_popcount(a^b);\n}",
         "preceding_paragraph_order": 47,
         "explanatory_paragraphs": [
           48,
@@ -6443,19 +6425,19 @@
         ]
       },
       {
-        "order": 13,
-        "language": "cpp",
-        "code": "int hamming(int a, int b) {\n   return __builtin_popcount(a^b);\n}",
-        "preceding_paragraph_order": 48,
-        "explanatory_paragraphs": [
-          49,
-          50
-        ]
-      },
-      {
         "order": 14,
         "language": "cpp",
         "code": "int count = 0;\nfor (int i = 0; i < n; i++) {\n   if (color[a][i] == 1 && color[b][i] == 1) count++;\n}",
+        "preceding_paragraph_order": 51,
+        "explanatory_paragraphs": [
+          52,
+          53
+        ]
+      },
+      {
+        "order": 15,
+        "language": "cpp",
+        "code": "int count = 0;\nfor (int i = 0; i <= n/N; i++) {\n   count += __builtin_popcount(color[a][i]&color[b][i]);\n}",
         "preceding_paragraph_order": 52,
         "explanatory_paragraphs": [
           53,
@@ -6463,19 +6445,19 @@
         ]
       },
       {
-        "order": 15,
-        "language": "cpp",
-        "code": "int count = 0;\nfor (int i = 0; i <= n/N; i++) {\n   count += __builtin_popcount(color[a][i]&color[b][i]);\n}",
-        "preceding_paragraph_order": 53,
-        "explanatory_paragraphs": [
-          54,
-          55
-        ]
-      },
-      {
         "order": 16,
         "language": "cpp",
         "code": "int total[1<<K][N];",
+        "preceding_paragraph_order": 66,
+        "explanatory_paragraphs": [
+          67,
+          68
+        ]
+      },
+      {
+        "order": 17,
+        "language": "cpp",
+        "code": "for (int x = 0; x < k; x++) {\n   total[1<<x][0] = price[x][0];\n}",
         "preceding_paragraph_order": 67,
         "explanatory_paragraphs": [
           68,
@@ -6483,9 +6465,9 @@
         ]
       },
       {
-        "order": 17,
+        "order": 18,
         "language": "cpp",
-        "code": "for (int x = 0; x < k; x++) {\n   total[1<<x][0] = price[x][0];\n}",
+        "code": "for (int d = 1; d < n; d++) {\n   for (int s = 0; s < (1<<k); s++) {\n       total[s][d] = total[s][d-1];\n       for (int x = 0; x < k; x++) {\n          if (s&(1<<x)) {\n              total[s][d] = min(total[s][d],\n                                 total[s^(1<<x)][d-1]+price[x][d]);\n          }\n       }\n   }\n}",
         "preceding_paragraph_order": 68,
         "explanatory_paragraphs": [
           69,
@@ -6493,19 +6475,19 @@
         ]
       },
       {
-        "order": 18,
-        "language": "cpp",
-        "code": "for (int d = 1; d < n; d++) {\n   for (int s = 0; s < (1<<k); s++) {\n       total[s][d] = total[s][d-1];\n       for (int x = 0; x < k; x++) {\n          if (s&(1<<x)) {\n              total[s][d] = min(total[s][d],\n                                 total[s^(1<<x)][d-1]+price[x][d]);\n          }\n       }\n   }\n}",
-        "preceding_paragraph_order": 69,
-        "explanatory_paragraphs": [
-          70,
-          71
-        ]
-      },
-      {
         "order": 19,
         "language": "cpp",
         "code": "pair<int,int> best[1<<N];",
+        "preceding_paragraph_order": 75,
+        "explanatory_paragraphs": [
+          76,
+          77
+        ]
+      },
+      {
+        "order": 20,
+        "language": "cpp",
+        "code": "best[0] = {1,0};",
         "preceding_paragraph_order": 76,
         "explanatory_paragraphs": [
           77,
@@ -6513,9 +6495,9 @@
         ]
       },
       {
-        "order": 20,
+        "order": 21,
         "language": "cpp",
-        "code": "best[0] = {1,0};",
+        "code": "for (int s = 1; s < (1<<n); s++) {\n   // initial value: n+1 rides are needed\n   best[s] = {n+1,0};\n   for (int p = 0; p < n; p++) {\n       if (s&(1<<p)) {\n          auto option = best[s^(1<<p)];\n          if (option.second+weight[p] <= x) {\n              // add p to an existing ride\n              option.second += weight[p];\n          } else {\n              // reserve a new ride for p\n              option.first++;\n              option.second = weight[p];\n          }\n          best[s] = min(best[s], option);\n       }\n   }\n}",
         "preceding_paragraph_order": 77,
         "explanatory_paragraphs": [
           78,
@@ -6523,19 +6505,19 @@
         ]
       },
       {
-        "order": 21,
-        "language": "cpp",
-        "code": "for (int s = 1; s < (1<<n); s++) {\n   // initial value: n+1 rides are needed\n   best[s] = {n+1,0};\n   for (int p = 0; p < n; p++) {\n       if (s&(1<<p)) {\n          auto option = best[s^(1<<p)];\n          if (option.second+weight[p] <= x) {\n              // add p to an existing ride\n              option.second += weight[p];\n          } else {\n              // reserve a new ride for p\n              option.first++;\n              option.second = weight[p];\n          }\n          best[s] = min(best[s], option);\n       }\n   }\n}",
-        "preceding_paragraph_order": 78,
-        "explanatory_paragraphs": [
-          79,
-          80
-        ]
-      },
-      {
         "order": 22,
         "language": "cpp",
         "code": "int sum[1<<N];",
+        "preceding_paragraph_order": 104,
+        "explanatory_paragraphs": [
+          105,
+          106
+        ]
+      },
+      {
+        "order": 23,
+        "language": "cpp",
+        "code": "for (int s = 0; s < (1<<n); s++) {\n   sum[s] = value[s];\n}",
         "preceding_paragraph_order": 105,
         "explanatory_paragraphs": [
           106,
@@ -6543,22 +6525,12 @@
         ]
       },
       {
-        "order": 23,
-        "language": "cpp",
-        "code": "for (int s = 0; s < (1<<n); s++) {\n   sum[s] = value[s];\n}",
-        "preceding_paragraph_order": 106,
-        "explanatory_paragraphs": [
-          107,
-          108
-        ]
-      },
-      {
         "order": 24,
         "language": "cpp",
         "code": "for (int k = 0; k < n; k++) {\n   for (int s = 0; s < (1<<n); s++) {\n       if (s&(1<<k)) sum[s] += sum[s^(1<<k)];\n   }\n}",
-        "preceding_paragraph_order": 107,
+        "preceding_paragraph_order": 106,
         "explanatory_paragraphs": [
-          108
+          107
         ]
       }
     ],
@@ -6568,159 +6540,159 @@
         "title": "Bit representation",
         "paragraph_range": [
           1,
-          10
+          9
         ]
       },
       {
         "level": 3,
         "title": "Bit operations",
         "paragraph_range": [
-          11,
-          10
+          10,
+          9
         ]
       },
       {
         "level": 3,
         "title": "And operation",
         "paragraph_range": [
-          11,
-          13
+          10,
+          12
         ]
       },
       {
         "level": 3,
         "title": "Or operation",
         "paragraph_range": [
-          14,
-          15
+          13,
+          14
         ]
       },
       {
         "level": 3,
         "title": "Xor operation",
         "paragraph_range": [
-          16,
-          16
+          15,
+          15
         ]
       },
       {
         "level": 3,
         "title": "Not operation",
         "paragraph_range": [
-          17,
-          18
+          16,
+          17
         ]
       },
       {
         "level": 3,
         "title": "Bit shifts",
         "paragraph_range": [
-          19,
-          20
+          18,
+          19
         ]
       },
       {
         "level": 3,
         "title": "Applications",
         "paragraph_range": [
-          21,
-          23
+          20,
+          22
         ]
       },
       {
         "level": 3,
         "title": "Additional functions",
         "paragraph_range": [
-          24,
-          30
+          23,
+          29
         ]
       },
       {
         "level": 3,
         "title": "Representing sets",
         "paragraph_range": [
-          31,
-          33
+          30,
+          32
         ]
       },
       {
         "level": 3,
         "title": "Set implementation",
         "paragraph_range": [
-          34,
-          35
+          33,
+          34
         ]
       },
       {
         "level": 3,
         "title": "Set operations",
         "paragraph_range": [
-          36,
-          38
+          35,
+          37
         ]
       },
       {
         "level": 3,
         "title": "Iterating through subsets",
         "paragraph_range": [
-          39,
-          41
+          38,
+          40
         ]
       },
       {
         "level": 2,
         "title": "Bit optimizations",
         "paragraph_range": [
-          42,
-          42
+          41,
+          41
         ]
       },
       {
         "level": 3,
         "title": "Hamming distances",
         "paragraph_range": [
-          43,
-          49
+          42,
+          48
         ]
       },
       {
         "level": 3,
         "title": "Counting subgrids",
         "paragraph_range": [
-          50,
-          54
+          49,
+          53
         ]
       },
       {
         "level": 2,
         "title": "Dynamic programming",
         "paragraph_range": [
-          55,
-          55
+          54,
+          54
         ]
       },
       {
         "level": 3,
         "title": "Optimal selection",
         "paragraph_range": [
-          56,
-          70
+          55,
+          69
         ]
       },
       {
         "level": 3,
         "title": "From permutations to subsets",
         "paragraph_range": [
-          71,
-          79
+          70,
+          78
         ]
       },
       {
         "level": 3,
         "title": "Counting subsets",
         "paragraph_range": [
-          80,
-          108
+          79,
+          107
         ]
       }
     ],
@@ -6728,12 +6700,12 @@
       {
         "src": "/cp-handbook/figures/fig_p112_031.png",
         "alt": "Figure from page 112",
-        "preceding_paragraph_order": 56
+        "preceding_paragraph_order": 55
       },
       {
         "src": "/cp-handbook/figures/fig_p112_032.png",
         "alt": "Figure from page 112",
-        "preceding_paragraph_order": 60
+        "preceding_paragraph_order": 59
       }
     ],
     "footnotes": [
@@ -7702,50 +7674,34 @@
       },
       {
         "order": 34,
-        "text": "1 2 3 4 5 1 0 5 $\\infty$ 9 1 2 5 0 2 $\\infty$ $\\infty$ 3 $\\infty$ 2 0 7 $\\infty$ 4 9 $\\infty$ 7 0 2 5 1 $\\infty$ $\\infty$ 2 0"
-      },
-      {
-        "order": 35,
         "text": "The algorithm consists of consecutive rounds. On each round, the algorithm selects a new node that can act as an intermediate node in paths from now on, and distances are reduced using this node. On the first round, node 1 is the new intermediate node. There is a new path between nodes 2 and 4 with length 14, because node 1 connects them. There is also a new path between nodes 2 and 5 with length 6."
       },
       {
-        "order": 36,
-        "text": "1 2 3 4 5 1 0 5 $\\infty$ 9 1 2 5 0 2 **14 6** 3 $\\infty$ 2 0 7 $\\infty$ 4 9 **14** 7 0 2 5 1 **6** $\\infty$ 2 0"
-      },
-      {
-        "order": 37,
+        "order": 35,
         "text": "On the second round, node 2 is the new intermediate node. This creates new paths between nodes 1 and 3 and between nodes 3 and 5:"
       },
       {
-        "order": 38,
-        "text": "1 2 3 4 5 1 0 5 **7** 9 1 2 5 0 2 14 6 3 **7** 2 0 7 **8** 4 9 14 7 0 2 5 1 6 **8** 2 0"
-      },
-      {
-        "order": 39,
+        "order": 36,
         "text": "On the third round, node 3 is the new intermediate round. There is a new path between nodes 2 and 4:"
       },
       {
-        "order": 40,
-        "text": "1 2 3 4 5 1 0 5 7 9 1 2 5 0 2 **9** 6 3 7 2 0 7 8 4 9 **9** 7 0 2 5 1 6 8 2 0"
-      },
-      {
-        "order": 41,
+        "order": 37,
         "text": "The algorithm continues like this, until all nodes have been appointed intermediate nodes. After the algorithm has finished, the array contains the minimum distances between any two nodes:"
       },
       {
-        "order": 42,
+        "order": 38,
         "text": "For example, the array tells us that the shortest distance between nodes 2 and 4 is 8. This corresponds to the following path:"
       },
       {
-        "order": 43,
+        "order": 39,
         "text": "The advantage of the Floyd–Warshall algorithm that it is easy to implement. The following code constructs a distance matrix where `distance`[$a][b$] is the shortest distance between nodes $a$ and $b$. First, the algorithm initializes `distance` using the adjacency matrix `adj` of the graph:"
       },
       {
-        "order": 44,
+        "order": 40,
         "text": "After this, the shortest distances can be found as follows:"
       },
       {
-        "order": 45,
+        "order": 41,
         "text": "The time complexity of the algorithm is $O(n^3)$, because it contains three nested loops that go through the nodes of the graph. Since the implementation of the Floyd–Warshall algorithm is simple, the algorithm can be a good choice even if it is only needed to find a single shortest path in the graph. However, the algorithm can only be used when the graph is so small that a cubic time complexity is fast enough."
       }
     ],
@@ -7774,19 +7730,19 @@
         "order": 2,
         "language": "cpp",
         "code": "for (int i = 1; i <= n; i++) {\n   for (int j = 1; j <= n; j++) {\n       if (i == j) distance[i][j] = 0;\n       else if (adj[i][j]) distance[i][j] = adj[i][j];\n       else distance[i][j] = INF;\n   }\n}",
-        "preceding_paragraph_order": 43,
+        "preceding_paragraph_order": 39,
         "explanatory_paragraphs": [
-          44,
-          45
+          40,
+          41
         ]
       },
       {
         "order": 3,
         "language": "cpp",
         "code": "for (int k = 1; k <= n; k++) {\n   for (int i = 1; i <= n; i++) {\n       for (int j = 1; j <= n; j++) {\n          distance[i][j] = min(distance[i][j],\n                                distance[i][k]+distance[k][j]);\n       }\n   }\n}",
-        "preceding_paragraph_order": 44,
+        "preceding_paragraph_order": 40,
         "explanatory_paragraphs": [
-          45
+          41
         ]
       }
     ],
@@ -7876,15 +7832,15 @@
         "title": "Example",
         "paragraph_range": [
           32,
-          42
+          38
         ]
       },
       {
         "level": 3,
         "title": "Implementation",
         "paragraph_range": [
-          43,
-          45
+          39,
+          41
         ]
       }
     ],
@@ -7972,7 +7928,7 @@
       {
         "src": "/cp-handbook/figures/fig_p141_auto1.png",
         "alt": "Figure from page 141",
-        "preceding_paragraph_order": 42
+        "preceding_paragraph_order": 38
       }
     ],
     "footnotes": [
@@ -8096,86 +8052,82 @@
       },
       {
         "order": 21,
-        "text": "$b$ $c$ $x$"
-      },
-      {
-        "order": 22,
         "text": "$a$"
       },
       {
-        "order": 23,
+        "order": 22,
         "text": "Node $x$ indicates the place where the path from node $a$ joins the path that corresponds to the diameter. The farthest node from $a$ is node $b$, node $c$ or some other node that is at least as far from node $x$. Thus, this node is always a valid choice for an endpoint of a path that corresponds to the diameter."
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "Our next problem is to calculate for every node in the tree the maximum length of a path that begins at the node. This can be seen as a generalization of the tree diameter problem, because the largest of those lengths equals the diameter of the tree. Also this problem can be solved in $O(n)$ time. As an example, consider the following tree:"
       },
       {
-        "order": 25,
+        "order": 24,
         "text": "Let `maxLength`($x$) denote the maximum length of a path that begins at node $x$. For example, in the above tree, `maxLength`(4) $= 3$, because there is a path 4 $\\to 1 \\to 2 \\to$ 6. Here is a complete table of the values:"
       },
       {
-        "order": 26,
+        "order": 25,
         "text": "node $x$ 1 2 3 4 5 6"
       },
       {
-        "order": 27,
+        "order": 26,
         "text": "Also in this problem, a good starting point for solving the problem is to root the tree arbitrarily:"
       },
       {
-        "order": 28,
+        "order": 27,
         "text": "The first part of the problem is to calculate for every node $x$ the maximum length of a path that goes through a child of $x$. For example, the longest path from node 1 goes through its child 2:"
       },
       {
-        "order": 29,
+        "order": 28,
         "text": "This part is easy to solve in $O(n)$ time, because we can use dynamic programming as we have done previously. Then, the second part of the problem is to calculate for every node $x$ the maximum length of a path through its parent $p$. For example, the longest path from node 3 goes through its parent 1:"
       },
       {
-        "order": 30,
+        "order": 29,
         "text": "At first glance, it seems that we should choose the longest path from $p$. However, this $does$ $not$ always work, because the longest path from $p$ may go through $x$. Here is an example of this situation:"
       },
       {
-        "order": 31,
+        "order": 30,
         "text": "Still, we can solve the second part in $O(n)$ time by storing $two$ maximum lengths for each node $x$:"
       },
       {
-        "order": 32,
+        "order": 31,
         "text": "• `maxLength`$_1(x)$: the maximum length of a path from $x$"
       },
       {
-        "order": 33,
+        "order": 32,
         "text": "• `maxLength`$_2(x)$ the maximum length of a path from $x$ in another direction than the first path"
       },
       {
-        "order": 34,
+        "order": 33,
         "text": "For example, in the above graph, `maxLength`$_1(1) =$ 2 using the path 1 $\\to 2 \\to$ 5, and `maxLength`$_2(1) =$ 1 using the path 1 $\\to$ 3. Finally, if the path that corresponds to `maxLength`$_1(p)$ goes through $x$, we conclude that the maximum length is `maxLength`$_2(p)+1$, and otherwise the maximum length is `maxLength`$_1(p)+1$."
       },
       {
-        "order": 35,
+        "order": 34,
         "text": "A **binary tree** is a rooted tree where each node has a left and right subtree. It is possible that a subtree of a node is empty. Thus, every node in a binary tree has zero, one or two children. For example, the following tree is a binary tree:"
       },
       {
-        "order": 36,
+        "order": 35,
         "text": "The nodes of a binary tree have three natural orderings that correspond to different ways to recursively traverse the tree:"
       },
       {
-        "order": 37,
+        "order": 36,
         "text": "• **pre-order**: first process the root, then traverse the left subtree, then traverse the right subtree"
       },
       {
-        "order": 38,
+        "order": 37,
         "text": "• **in-order**: first traverse the left subtree, then process the root, then traverse the right subtree"
       },
       {
-        "order": 39,
+        "order": 38,
         "text": "• **post-order**: first traverse the left subtree, then traverse the right subtree, then process the root"
       },
       {
-        "order": 40,
+        "order": 39,
         "text": "For the above tree, the nodes in pre-order are [1,2,4,5,6,3,7], in in-order [4,2,6,5,1,3,7] and in post-order [4,6,5,2,7,3,1]. If we know the pre-order and in-order of a tree, we can reconstruct the exact structure of the tree. For example, the above tree is the only possible tree with pre-order [1,2,4,5,6,3,7] and in-order [4,2,6,5,1,3,7]. In a similar way, the post-order and in-order also determine the structure of a tree. However, the situation is different if we only know the pre-order and postorder of a tree. In this case, there may be more than one tree that match the orderings. For example, in both of the trees"
       },
       {
-        "order": 41,
+        "order": 40,
         "text": "the pre-order is [1,2] and the post-order is [2,1], but the structures of the trees are different."
       }
     ],
@@ -8214,10 +8166,10 @@
         "order": 3,
         "language": "cpp",
         "code": "                   maxLength(x)",
-        "preceding_paragraph_order": 26,
+        "preceding_paragraph_order": 25,
         "explanatory_paragraphs": [
-          27,
-          28
+          26,
+          27
         ]
       }
     ],
@@ -8259,23 +8211,23 @@
         "title": "Algorithm 2",
         "paragraph_range": [
           18,
-          23
+          22
         ]
       },
       {
         "level": 3,
         "title": "All longest paths",
         "paragraph_range": [
-          24,
-          34
+          23,
+          33
         ]
       },
       {
         "level": 2,
         "title": "Binary trees",
         "paragraph_range": [
-          35,
-          41
+          34,
+          40
         ]
       }
     ],
@@ -8318,42 +8270,42 @@
       {
         "src": "/cp-handbook/figures/fig_p147_auto1.png",
         "alt": "Figure from page 147",
-        "preceding_paragraph_order": 21
+        "preceding_paragraph_order": 20
       },
       {
         "src": "/cp-handbook/figures/fig_p147_auto2.png",
         "alt": "Figure from page 147",
-        "preceding_paragraph_order": 24
+        "preceding_paragraph_order": 23
       },
       {
         "src": "/cp-handbook/figures/fig_p147_060.png",
         "alt": "Figure from page 147",
-        "preceding_paragraph_order": 27
+        "preceding_paragraph_order": 26
       },
       {
         "src": "/cp-handbook/figures/fig_p148_061.png",
         "alt": "Figure from page 148",
-        "preceding_paragraph_order": 28
+        "preceding_paragraph_order": 27
       },
       {
         "src": "/cp-handbook/figures/fig_p148_062.png",
         "alt": "Figure from page 148",
-        "preceding_paragraph_order": 29
+        "preceding_paragraph_order": 28
       },
       {
         "src": "/cp-handbook/figures/fig_p148_063.png",
         "alt": "Figure from page 148",
-        "preceding_paragraph_order": 30
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p149_064.png",
         "alt": "Figure from page 149",
-        "preceding_paragraph_order": 35
+        "preceding_paragraph_order": 34
       },
       {
         "src": "/cp-handbook/figures/fig_p149_auto1.png",
         "alt": "Figure from page 149",
-        "preceding_paragraph_order": 40
+        "preceding_paragraph_order": 39
       }
     ],
     "footnotes": [],
@@ -9517,254 +9469,250 @@
       },
       {
         "order": 9,
-        "text": "0 0 0 0 0 0 0 0 $\\cdot \\cdot \\cdot$"
-      },
-      {
-        "order": 10,
         "text": "The preprocessing takes $O(n$log$n$) time, because $O$(log$n$) values are calculated for each node. After this, any value of `ancestor`($x,k$) can be calculated in $O$(log$k$) time by representing $k$ as a sum where each term is a power of two."
       },
       {
-        "order": 11,
+        "order": 10,
         "text": "A **tree traversal array** contains the nodes of a rooted tree in the order in which a depth-first search from the root node visits them. For example, in the tree"
       },
       {
-        "order": 12,
+        "order": 11,
         "text": "a depth-first search proceeds as follows:"
       },
       {
-        "order": 13,
+        "order": 12,
         "text": "Hence, the corresponding tree traversal array is as follows:"
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "Each subtree of a tree corresponds to a subarray of the tree traversal array such that the first element of the subarray is the root node. For example, the following subarray contains the nodes of the subtree of node 4:"
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "Using this fact, we can efficiently process queries that are related to subtrees of a tree. As an example, consider a problem where each node is assigned a value, and our task is to support the following queries:"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "• update the value of a node"
       },
       {
-        "order": 17,
+        "order": 16,
         "text": "• calculate the sum of values in the subtree of a node"
       },
       {
-        "order": 18,
+        "order": 17,
         "text": "Consider the following tree where the blue numbers are the values of the nodes. For example, the sum of the subtree of node 4 is 3$+4+3+1 =$ 11."
       },
       {
-        "order": 19,
+        "order": 18,
         "text": "The idea is to construct a tree traversal array that contains three values for each node: the identifier of the node, the size of the subtree, and the value of the node. For example, the array for the above tree is as follows:"
       },
       {
-        "order": 20,
+        "order": 19,
         "text": "node id"
+      },
+      {
+        "order": 20,
+        "text": "subtree size"
       },
       {
         "order": 21,
-        "text": "subtree size"
+        "text": "node value"
       },
       {
         "order": 22,
-        "text": "node value"
-      },
-      {
-        "order": 23,
         "text": "Using this array, we can calculate the sum of values in any subtree by first finding out the size of the subtree and then the values of the corresponding nodes. For example, the values in the subtree of node 4 can be found as follows:"
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "node id"
+      },
+      {
+        "order": 24,
+        "text": "subtree size"
       },
       {
         "order": 25,
-        "text": "subtree size"
-      },
-      {
-        "order": 26,
         "text": "node value"
       },
       {
-        "order": 27,
+        "order": 26,
         "text": "To answer the queries efficiently, it suffices to store the values of the nodes in a binary indexed or segment tree. After this, we can both update a value and calculate the sum of values in $O$(log$n$) time."
       },
       {
-        "order": 28,
+        "order": 27,
         "text": "Using a tree traversal array, we can also efficiently calculate sums of values on paths from the root node to any node of the tree. Consider a problem where our task is to support the following queries:"
       },
       {
-        "order": 29,
+        "order": 28,
         "text": "• change the value of a node"
       },
       {
-        "order": 30,
+        "order": 29,
         "text": "• calculate the sum of values on a path from the root to a node"
       },
       {
-        "order": 31,
+        "order": 30,
         "text": "For example, in the following tree, the sum of values from the root node to node 7 is 4$+5+5 =$ 14:"
       },
       {
-        "order": 32,
+        "order": 31,
         "text": "We can solve this problem like before, but now each value in the last row of the array is the sum of values on a path from the root to the node. For example, the following array corresponds to the above tree:"
       },
       {
-        "order": 33,
+        "order": 32,
         "text": "node id"
+      },
+      {
+        "order": 33,
+        "text": "subtree size"
       },
       {
         "order": 34,
-        "text": "subtree size"
+        "text": "path sum"
       },
       {
         "order": 35,
-        "text": "path sum"
-      },
-      {
-        "order": 36,
         "text": "When the value of a node increases by $x$, the sums of all nodes in its subtree increase by $x$. For example, if the value of node 4 increases by 1, the array changes as follows:"
       },
       {
-        "order": 37,
+        "order": 36,
         "text": "node id"
       },
       {
-        "order": 38,
+        "order": 37,
         "text": "subtree size"
       },
       {
-        "order": 39,
+        "order": 38,
         "text": "path sum"
       },
       {
-        "order": 40,
+        "order": 39,
         "text": "Thus, to support both the operations, we should be able to increase all values in a range and retrieve a single value. This can be done in $O$(log$n$) time using a binary indexed or segment tree (see Chapter 9.4)."
       },
       {
-        "order": 41,
+        "order": 40,
         "text": "The **lowest common ancestor** of two nodes of a rooted tree is the lowest node whose subtree contains both the nodes. A typical problem is to efficiently process queries that ask to find the lowest common ancestor of two nodes. For example, in the following tree, the lowest common ancestor of nodes 5 and 8 is node 2:"
       },
       {
-        "order": 42,
+        "order": 41,
         "text": "Next we will discuss two efficient techniques for finding the lowest common ancestor of two nodes."
       },
       {
-        "order": 43,
+        "order": 42,
         "text": "One way to solve the problem is to use the fact that we can efficiently find the $k$th ancestor of any node in the tree. Using this, we can divide the problem of finding the lowest common ancestor into two parts. We use two pointers that initially point to the two nodes whose lowest common ancestor we should find. First, we move one of the pointers upwards so that both pointers point to nodes at the same level. In the example scenario, we move the second pointer one level up so that it points to node 6 which is at the same level with node 5:"
       },
       {
-        "order": 44,
+        "order": 43,
         "text": "After this, we determine the minimum number of steps needed to move both pointers upwards so that they will point to the same node. The node to which the pointers point after this is the lowest common ancestor. In the example scenario, it suffices to move both pointers one step upwards to node 2, which is the lowest common ancestor:"
       },
       {
-        "order": 45,
+        "order": 44,
         "text": "Since both parts of the algorithm can be performed in $O$(log$n$) time using precomputed information, we can find the lowest common ancestor of any two nodes in $O$(log$n$) time."
       },
       {
-        "order": 46,
+        "order": 45,
         "text": "Another way to solve the problem is based on a tree traversal array$^1$. Once again, the idea is to traverse the nodes using a depth-first search:"
       },
       {
-        "order": 47,
+        "order": 46,
         "text": "However, we use a different tree traversal array than before: we add each node to the array $always$ when the depth-first search walks through the node, and not only at the first visit. Hence, a node that has $k$ children appears $k+1$ times in the array and there are a total of 2$n-1$ nodes in the array."
       },
       {
-        "order": 48,
+        "order": 47,
         "text": "We store two values in the array: the identifier of the node and the depth of the node in the tree. The following array corresponds to the above tree:"
       },
       {
-        "order": 49,
+        "order": 48,
         "text": "node id"
+      },
+      {
+        "order": 49,
+        "text": "depth"
       },
       {
         "order": 50,
-        "text": "depth"
-      },
-      {
-        "order": 51,
         "text": "Now we can find the lowest common ancestor of nodes $a$ and $b$ by finding the node with the *minimum* depth between nodes $a$ and $b$ in the array. For example, the lowest common ancestor of nodes 5 and 8 can be found as follows:"
       },
       {
-        "order": 52,
+        "order": 51,
         "text": "node id"
       },
       {
-        "order": 53,
+        "order": 52,
         "text": "depth"
       },
       {
-        "order": 54,
+        "order": 53,
         "text": "$↑$"
       },
       {
-        "order": 55,
+        "order": 54,
         "text": "Node 5 is at position 2, node 8 is at position 5, and the node with minimum depth between positions 2...5 is node 2 at position 3 whose depth is 2. Thus, the lowest common ancestor of nodes 5 and 8 is node 2. Thus, to find the lowest common ancestor of two nodes it suffices to process a range minimum query. Since the array is static, we can process such queries in $O$(1) time after an $O(n$log$n$) time preprocessing."
       },
       {
-        "order": 56,
+        "order": 55,
         "text": "The distance between nodes $a$ and $b$ equals the length of the path from $a$ to $b$. It turns out that the problem of calculating the distance between nodes reduces to finding their lowest common ancestor. First, we root the tree arbitrarily. After this, the distance of nodes $a$ and $b$ can be calculated using the formula"
       },
       {
-        "order": 57,
+        "order": 56,
         "text": "`depth`($a)+$`depth`($b)-2\\cdot$ `depth`($c$),"
       },
       {
-        "order": 58,
+        "order": 57,
         "text": "where $c$ is the lowest common ancestor of $a$ and $b$ and `depth`($s$) denotes the depth of node $s$. For example, consider the distance of nodes 5 and 8:"
       },
       {
-        "order": 59,
+        "order": 58,
         "text": "The lowest common ancestor of nodes 5 and 8 is node 2. The depths of the nodes are `depth`(5) $= 3$, `depth`(8) $= 4$ and `depth`(2) $= 2$, so the distance between nodes 5 and 8 is 3$+4-2\\cdot 2 =$ 3."
       },
       {
-        "order": 60,
+        "order": 59,
         "text": "So far, we have discussed $online$ algorithms for tree queries. Those algorithms are able to process queries one after another so that each query is answered before receiving the next query. However, in many problems, the online property is not necessary. In this section, we focus on *offline* algorithms. Those algorithms are given a set of queries which can be answered in any order. It is often easier to design an offline algorithm compared to an online algorithm."
       },
       {
-        "order": 61,
+        "order": 60,
         "text": "One method to construct an offline algorithm is to perform a depth-first tree traversal and maintain data structures in nodes. At each node $s$, we create a data structure `d`[$s$] that is based on the data structures of the children of $s$. Then, using this data structure, all queries related to $s$ are processed. As an example, consider the following problem: We are given a tree where each node has some value. Our task is to process queries of the form \"calculate the number of nodes with value $x$ in the subtree of node $s$\". For example, in the following tree, the subtree of node 4 contains two nodes whose value is 3."
       },
       {
-        "order": 62,
+        "order": 61,
         "text": "In this problem, we can use map structures to answer the queries. For example, the maps for node 4 and its children are as follows:"
       },
       {
-        "order": 63,
+        "order": 62,
         "text": "If we create such a data structure for each node, we can easily process all given queries, because we can handle all queries related to a node immediately after creating its data structure. For example, the above map structure for node 4 tells us that its subtree contains two nodes whose value is 3. However, it would be too slow to create all data structures from scratch. Instead, at each node $s$, we create an initial data structure `d`[$s$] that only contains the value of $s$. After this, we go through the children of $s$ and $merge$ `d`[$s$] and all data structures `d`[$u$] where $u$ is a child of $s$. For example, in the above tree, the map for node 4 is created by merging the following maps:"
       },
       {
-        "order": 64,
+        "order": 63,
         "text": "$^4$ $^1$"
       },
       {
-        "order": 65,
+        "order": 64,
         "text": "$^3$ $^1$"
       },
       {
-        "order": 66,
+        "order": 65,
         "text": "Here the first map is the initial data structure for node 4, and the other three maps correspond to nodes 7, 8 and 9. The merging at node $s$ can be done as follows: We go through the children of $s$ and at each child $u$ merge `d`[$s$] and `d`[$u$]. We always copy the contents from `d`[$u$] to `d`[$s$]. However, before this, we $swap$ the contents of `d`[$s$] and `d`[$u$] if `d`[$s$] is smaller than `d`[$u$]. By doing this, each value is copied only $O$(log$n$) times during the tree traversal, which ensures that the algorithm is efficient. To swap the contents of two data structures $a$ and $b$ efficiently, we can just use the following code:"
       },
       {
-        "order": 67,
+        "order": 66,
         "text": "It is guaranteed that the above code works in constant time when $a$ and $b$ are C++ standard library data structures."
       },
       {
-        "order": 68,
+        "order": 67,
         "text": "There is also an offline algorithm for processing a set of lowest common ancestor queries$^2$. The algorithm is based on the union-find data structure (see Chapter 15.2), and the benefit of the algorithm is that it is easier to implement than the algorithms discussed earlier in this chapter. The algorithm is given as input a set of pairs of nodes, and it determines for each such pair the lowest common ancestor of the nodes. The algorithm performs a depth-first tree traversal and maintains disjoint sets of nodes. Initially, each node belongs to a separate set. For each set, we also store the highest node in the tree that belongs to the set. When the algorithm visits a node $x$, it goes through all nodes $y$ such that the lowest common ancestor of $x$ and $y$ has to be found. If $y$ has already been visited, the algorithm reports that the lowest common ancestor of $x$ and $y$ is the highest node in the set of $y$. Then, after processing node $x$, the algorithm joins the sets of $x$ and its parent."
       },
       {
-        "order": 69,
+        "order": 68,
         "text": "For example, suppose that we want to find the lowest common ancestors of node pairs (5,8) and (2,7) in the following tree:"
       },
       {
-        "order": 70,
+        "order": 69,
         "text": "In the following trees, gray nodes denote visited nodes and dashed groups of nodes belong to the same set. When the algorithm visits node 8, it notices that node 5 has been visited and the highest node in its set is 2. Thus, the lowest common ancestor of nodes 5 and 8 is 2:"
       },
       {
-        "order": 71,
+        "order": 70,
         "text": "Later, when visiting node 7, the algorithm determines that the lowest common ancestor of nodes 2 and 7 is 1:"
       }
     ],
@@ -9803,10 +9751,10 @@
         "order": 3,
         "language": "cpp",
         "code": "swap(a,b);",
-        "preceding_paragraph_order": 66,
+        "preceding_paragraph_order": 65,
         "explanatory_paragraphs": [
-          67,
-          68
+          66,
+          67
         ]
       }
     ],
@@ -9816,87 +9764,87 @@
         "title": "Finding ancestors",
         "paragraph_range": [
           5,
-          10
+          9
         ]
       },
       {
         "level": 3,
         "title": "Subtrees and paths",
         "paragraph_range": [
-          11,
-          13
+          10,
+          12
         ]
       },
       {
         "level": 3,
         "title": "Subtree queries",
         "paragraph_range": [
-          14,
-          27
+          13,
+          26
         ]
       },
       {
         "level": 3,
         "title": "Path queries",
         "paragraph_range": [
-          28,
-          40
+          27,
+          39
         ]
       },
       {
         "level": 2,
         "title": "Lowest common ancestor",
         "paragraph_range": [
-          41,
-          42
+          40,
+          41
         ]
       },
       {
         "level": 3,
         "title": "Method 1",
         "paragraph_range": [
-          43,
-          45
+          42,
+          44
         ]
       },
       {
         "level": 3,
         "title": "Method 2",
         "paragraph_range": [
-          46,
-          55
+          45,
+          54
         ]
       },
       {
         "level": 3,
         "title": "Distances of nodes",
         "paragraph_range": [
-          56,
-          59
+          55,
+          58
         ]
       },
       {
         "level": 2,
         "title": "Offline algorithms",
         "paragraph_range": [
-          60,
-          60
+          59,
+          59
         ]
       },
       {
         "level": 3,
         "title": "Merging data structures",
         "paragraph_range": [
-          61,
-          67
+          60,
+          66
         ]
       },
       {
         "level": 3,
         "title": "Lowest common ancestors",
         "paragraph_range": [
-          68,
-          71
+          67,
+          70
         ]
       }
     ],
@@ -9909,92 +9857,92 @@
       {
         "src": "/cp-handbook/figures/fig_p174_073.png",
         "alt": "Figure from page 174",
-        "preceding_paragraph_order": 11
+        "preceding_paragraph_order": 10
       },
       {
         "src": "/cp-handbook/figures/fig_p174_074.png",
         "alt": "Figure from page 174",
-        "preceding_paragraph_order": 12
+        "preceding_paragraph_order": 11
       },
       {
         "src": "/cp-handbook/figures/fig_p175_075.png",
         "alt": "Figure from page 175",
-        "preceding_paragraph_order": 18
+        "preceding_paragraph_order": 17
       },
       {
         "src": "/cp-handbook/figures/fig_p175_076.png",
         "alt": "Figure from page 175",
-        "preceding_paragraph_order": 19
+        "preceding_paragraph_order": 18
       },
       {
         "src": "/cp-handbook/figures/fig_p175_077.png",
         "alt": "Figure from page 175",
-        "preceding_paragraph_order": 23
+        "preceding_paragraph_order": 22
       },
       {
         "src": "/cp-handbook/figures/fig_p176_078.png",
         "alt": "Figure from page 176",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 30
       },
       {
         "src": "/cp-handbook/figures/fig_p176_079.png",
         "alt": "Figure from page 176",
-        "preceding_paragraph_order": 32
+        "preceding_paragraph_order": 31
       },
       {
         "src": "/cp-handbook/figures/fig_p176_080.png",
         "alt": "Figure from page 176",
-        "preceding_paragraph_order": 36
+        "preceding_paragraph_order": 35
       },
       {
         "src": "/cp-handbook/figures/fig_p177_081.png",
         "alt": "Figure from page 177",
-        "preceding_paragraph_order": 41
+        "preceding_paragraph_order": 40
       },
       {
         "src": "/cp-handbook/figures/fig_p177_082.png",
         "alt": "Figure from page 177",
-        "preceding_paragraph_order": 43
+        "preceding_paragraph_order": 42
       },
       {
         "src": "/cp-handbook/figures/fig_p178_083.png",
         "alt": "Figure from page 178",
-        "preceding_paragraph_order": 44
+        "preceding_paragraph_order": 43
       },
       {
         "src": "/cp-handbook/figures/fig_p178_084.png",
         "alt": "Figure from page 178",
-        "preceding_paragraph_order": 46
+        "preceding_paragraph_order": 45
       },
       {
         "src": "/cp-handbook/figures/fig_p179_085.png",
         "alt": "Figure from page 179",
-        "preceding_paragraph_order": 58
+        "preceding_paragraph_order": 57
       },
       {
         "src": "/cp-handbook/figures/fig_p180_086.png",
         "alt": "Figure from page 180",
-        "preceding_paragraph_order": 61
+        "preceding_paragraph_order": 60
       },
       {
         "src": "/cp-handbook/figures/fig_p180_087.png",
         "alt": "Figure from page 180",
-        "preceding_paragraph_order": 62
+        "preceding_paragraph_order": 61
       },
       {
         "src": "/cp-handbook/figures/fig_p182_088.png",
         "alt": "Figure from page 182",
-        "preceding_paragraph_order": 69
+        "preceding_paragraph_order": 68
       },
       {
         "src": "/cp-handbook/figures/fig_p182_089.png",
         "alt": "Figure from page 182",
-        "preceding_paragraph_order": 70
+        "preceding_paragraph_order": 69
       },
       {
         "src": "/cp-handbook/figures/fig_p182_090.png",
         "alt": "Figure from page 182",
-        "preceding_paragraph_order": 71
+        "preceding_paragraph_order": 70
       }
     ],
     "footnotes": [

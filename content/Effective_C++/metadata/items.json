@@ -5034,14 +5034,10 @@
       },
       {
         "order": 31,
-        "text": "*[Figure omitted]*"
-      },
-      {
-        "order": 32,
         "text": "Such C++ generates code that's big and slow, plus it's brittle, because every time the `Window` class hierarchy changes, all such code has to be examined to see if it needs to be updated. (For example, if a new derived class gets added, a new conditional branch probably needs to be added to the above cascade.) Code that looks like this should almost always be replaced with something based on virtual function calls."
       },
       {
-        "order": 33,
+        "order": 32,
         "text": "Good C++ uses very few casts, but it's generally not practical to get rid of all of them. The cast from `int` to `double` on page 118, for example, is a reasonable use of a cast, though it's not strictly necessary. (The code could be rewritten to declare a new variable of type `double` that's initialized with `x`'s value.) Like most suspicious constructs, casts should be isolated as much as possible, typically hidden inside functions whose interfaces shield callers from the grubby work being done inside."
       }
     ],
@@ -5160,10 +5156,10 @@
         "order": 11,
         "language": "cpp",
         "code": "class Window { ... };\n\n...                                     // derived classes are defined here\n\ntypedef std::vector<std::tr1::shared_ptr<Window> > VPW;\n\nVPW winPtrs;\n\n...\n\nfor (VPW::iterator iter = winPtrs.begin(); iter != winPtrs.end(); ++iter)\n{\n  if (SpecialWindow1 *psw1 =\n       dynamic_cast<SpecialWindow1*>(iter->get())) { ... }\n\n  else if (SpecialWindow2 *psw2 =\n            dynamic_cast<SpecialWindow2*>(iter->get())) { ... }\n\n  else if (SpecialWindow3 *psw3 =\n            dynamic_cast<SpecialWindow3*>(iter->get())) { ... }\n\n  ...\n}",
-        "preceding_paragraph_order": 31,
+        "preceding_paragraph_order": 30,
         "explanatory_paragraphs": [
-          32,
-          33
+          31,
+          32
         ]
       }
     ],
@@ -5187,7 +5183,7 @@
         "anchor": "0321334876ch03lev1sec1html-item-13-use-objects-to-manage-resources"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "intermediate",
     "prerequisites": [
       3,
@@ -6452,7 +6448,7 @@
       },
       {
         "order": 3,
-        "text": "*[Figure omitted]*"
+        "text": "![Scope visualization: someFunc's scope sits inside the global scope, hiding any outer `x`](/ecpp/figures/ecpp_item33_scope.png)"
       },
       {
         "order": 4,
@@ -6624,7 +6620,7 @@
         "anchor": "0321334876ch07lev1sec3html-item-43-know-how-to-access-names-in-templatized-base-classes"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "intermediate",
     "prerequisites": [
       32,
@@ -8030,42 +8026,38 @@
       },
       {
         "order": 19,
-        "text": "*[Figure omitted]*"
-      },
-      {
-        "order": 20,
         "text": "One might question the antiquated design of `PersonInfo::theName` (especially the use of a fixed-size static buffer, something that's rife for both overrun and threading problems — see also [Item21](<#0321334876ch04lev1sec4html-item-21-dont-try-to-return-a-reference-when-you-must-return-an-object>)), but set such questions aside and focus instead on this: `theName` calls `valueDelimOpen` to generate the opening delimiter of the string it will return, then it generates the name value itself, then it calls `valueDelimClose`."
       },
       {
-        "order": 21,
+        "order": 20,
         "text": "Because `valueDelimOpen` and `valueDelimClose` are virtual functions, the result returned by `theName` is dependent not only on `PersonInfo` but also on the classes derived from `PersonInfo`."
       },
       {
-        "order": 22,
+        "order": 21,
         "text": "As the implementer of `CPerson`, that's good news, because while perusing the fine print in the `IPerson` documentation, you discover that `name` and `birthDate` are required to return unadorned values, i.e., no delimiters are allowed. That is, if a person is named Homer, a call to that person's `name` function should return \"Homer\", not \"[Homer]\"."
       },
       {
-        "order": 23,
+        "order": 22,
         "text": "The relationship between `CPerson` and `PersonInfo` is that `PersonInfo` happens to have some functions that would make `CPerson` easier to implement. That's all. Their relationship is thus is-implemented-in-terms-of, and we know that can be represented in two ways: via composition (see [Item 38](<#0321334876ch06lev1sec7html-item-38-model-has-a-or-is-implemented-in-terms-of-through-composition>)) and via private inheritance (see [Item 39](<#0321334876ch06lev1sec8html-item-39-use-private-inheritance-judiciously>)). [Item 39](<#0321334876ch06lev1sec8html-item-39-use-private-inheritance-judiciously>) points out that composition is the generally preferred approach, but inheritance is necessary if virtual functions are to be redefined. In this case, `CPerson` needs to redefine `valueDelimOpen` and `valueDelimClose`, so simple composition won't do. The most straightforward solution is to have `CPerson` privately inherit from `PersonInfo`, though [Item 39](<#0321334876ch06lev1sec8html-item-39-use-private-inheritance-judiciously>) explains that with a bit more work, `CPerson` could also use a combination of composition and inheritance to effectively redefine `PersonInfo`'s virtuals. Here, we'll use private inheritance."
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "But `CPerson` must also implement the `IPerson` interface, and that calls for public inheritance. This leads to one reasonable application of multiple inheritance: combine public inheritance of an interface with private inheritance of an implementation:"
       },
       {
-        "order": 25,
+        "order": 24,
         "text": "In UML, the design looks like this:"
       },
       {
-        "order": 26,
-        "text": "*[Figure omitted]*"
+        "order": 25,
+        "text": "![UML: CPerson inherits publicly from IPerson and privately from PersonInfo](/ecpp/figures/ecpp_item40_uml.png)"
       },
       {
-        "order": 27,
+        "order": 26,
         "text": "This example demonstrates that MI can be both useful and comprehensible."
       },
       {
-        "order": 28,
+        "order": 27,
         "text": "At the end of the day, multiple inheritance is just another tool in the object-oriented toolbox. Compared to single inheritance, it's typically more complicated to use and more complicated to understand, so if you've got an SI design that's more or less equivalent to an MI design, the SI design is almost certainly preferable. If the only design you can come up with involves MI, you should think a little harder — there's almost certainly some way to make SI work. At the same time, MI is sometimes the clearest, most maintainable, most reasonable way to get the job done. When that's the case, don't be afraid to use it. Just be sure to use it judiciously."
       }
     ],
@@ -8154,20 +8146,20 @@
         "order": 8,
         "language": "cpp",
         "code": "const char * PersonInfo::valueDelimOpen() const\n{\n  return \"[\";                       // default opening delimiter\n}\n\nconst char * PersonInfo::valueDelimClose() const\n{\n  return \"]\";                       // default closing delimiter\n}\n\nconst char * PersonInfo::theName() const\n{\n  // reserve buffer for return value; because this is\n  // static, it's automatically initialized to all zeros\n  static char value[Max_Formatted_Field_Value_Length];\n\n  // write opening delimiter\n  std::strcpy(value, valueDelimOpen());\n\n  append to the string in value this object's   name field (being careful\n  to avoid buffer overruns!)\n\n  // write closing delimiter\n  std::strcat(value, valueDelimClose());\n\n  return value;\n}",
-        "preceding_paragraph_order": 19,
+        "preceding_paragraph_order": 18,
         "explanatory_paragraphs": [
-          20,
-          21
+          19,
+          20
         ]
       },
       {
         "order": 9,
         "language": "cpp",
         "code": "class IPerson {                            // this class specifies the\npublic:                                    // interface to be implemented\n  virtual ~IPerson();\n\n  virtual std::string name() const = 0;\n  virtual std::string birthDate() const = 0;\n};\n\nclass DatabaseID { ... };                  // used below; details are\n                                           // unimportant\n\nclass PersonInfo {                         // this class has functions\npublic:                                    // useful in implementing\n  explicit PersonInfo(DatabaseID pid);     // the IPerson interface\n  virtual ~PersonInfo();\n\n  virtual const char * theName() const;\n  virtual const char * theBirthDate() const;\n\n  virtual const char * valueDelimOpen() const;\n  virtual const char * valueDelimClose() const;\n  ...\n};\nclass CPerson: public IPerson, private PersonInfo {     // note use of MI\npublic:\n  explicit CPerson(    DatabaseID pid): PersonInfo(pid) {}\n  virtual std::string name() const                      // implementations\n  { return PersonInfo::theName(); }                     // of the required\n                                                        // IPerson member\n  virtual std::string birthDate() const                 // functions\n  { return PersonInfo::theBirthDate(); }\nprivate:                                                // redefinitions of\n  const char * valueDelimOpen() const { return \"\"; }    // inherited virtual\n  const char * valueDelimClose() const { return \"\"; }   // delimiter\n};                                                      // functions",
-        "preceding_paragraph_order": 24,
+        "preceding_paragraph_order": 23,
         "explanatory_paragraphs": [
-          25,
-          26
+          24,
+          25
         ]
       }
     ],
@@ -8191,7 +8183,7 @@
         "anchor": "0321334876ch06lev1sec8html-item-39-use-private-inheritance-judiciously"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "intermediate",
     "prerequisites": [
       31,
@@ -8856,34 +8848,30 @@
       },
       {
         "order": 13,
-        "text": "*[Figure omitted]*"
-      },
-      {
-        "order": 14,
         "text": "This lets derived classes decide how to allocate the memory. Some implementations might decide to store the matrix data right inside the `SquareMatrix` object:"
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "Objects of such types have no need for dynamic memory allocation, but the objects themselves could be very large. An alternative would be to put the data for each matrix on the heap:"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "Regardless of where the data is stored, the key result from a bloat point of view is that now many — maybe all — of `SquareMatrix`'s member functions can be simple inline calls to base class versions that are shared with all other matrices holding the same type of data, regardless of their size. At the same time, `SquareMatrix` objects of different sizes are distinct types, so even though, e.g., `SquareMatrix<double, 5>` and `SquareMatrix<double, 10>` objects use the same member functions in `SquareMatrixBase<double>`, there's no chance of passing a `SquareMatrix<double, 5> object` to a function expecting a `SquareMatrix<double, 10>`. Nice, no?"
       },
       {
-        "order": 17,
+        "order": 16,
         "text": "Nice, yes, but not free. The versions of `invert` with the matrix sizes hardwired into them are likely to generate better code than the shared version where the size is passed as a function parameter or is stored in the object. For example, in the size-specific versions, the sizes would be compile-time constants, hence eligible for such optimizations as constant propagation, including their being folded into the generated instructions as immediate operands. That can't be done in the size-independent version."
       },
       {
-        "order": 18,
+        "order": 17,
         "text": "On the other hand, having only one version of `invert` for multiple matrix sizes decreases the size of the executable, and that could reduce the program's working set size and improve locality of reference in the instruction cache. Those things could make the program run faster, more than compensating for any lost optimizations in size-specific versions of `invert`. Which effect would dominate? The only way to know is to try it both ways and observe the behavior on your particular platform and on representative data sets."
       },
       {
-        "order": 19,
+        "order": 18,
         "text": "Another efficiency consideration concerns the sizes of objects. If you're not careful, moving size-independent versions of functions up into a base class can increase the overall size of each object. For example, in the code I just showed, each `SquareMatrix` object has a pointer to its data in the `SquareMatrixBase` class, even though each derived class already has a way to get to the data. This increases the size of each `SquareMatrix` object by at least the size of a pointer. It's possible to modify the design so that these pointers are unnecessary, but, again, there are trade-offs. For example, having the base class store a `protected` pointer to the matrix data leads to the loss of encapsulation described in [Item 22](<#0321334876ch04lev1sec5html-item-22-declare-data-members-private>). It can also lead to resource management complications: if the base class stores a pointer to the matrix data, but that data may have been either dynamically allocated or physically stored inside the derived class object (as we saw), how will it be determined whether the pointer should be deleted? Such questions have answers, but the more sophisticated you try to be about them, the more complicated things become. At some point, a little code replication begins to look like a mercy."
       },
       {
-        "order": 20,
+        "order": 19,
         "text": "This Item has discussed only bloat due to non-type template parameters, but type parameters can lead to bloat, too. For example, on many platforms, `int` and `long` have the same binary representation, so the member functions for, say, `vector<int>` and `vector<long>` would likely be identical — the very definition of bloat. Some linkers will merge identical function implementations, but some will not, and that means that some templates instantiated on both `int` and `long` could cause code bloat in some environments. Similarly, on most platforms, all pointer types have the same binary representation, so templates holding pointer types (e.g., `list<int*>`, `list<const int*>`, `list<SquareMatrix<long, 3>*>`, etc.) should often be able to use a single underlying implementation for each member function. Typically, this means implementing member functions that work with strongly typed pointers (i.e., `T*` pointers) by having them call functions that work with untyped pointers (i.e., `void*` pointers). Some implementations of the standard C++ library do this for templates like `vector`, `deque`, and `list`. If you're concerned about code bloat arising in your templates, you'll probably want to develop templates that do the same thing."
       }
     ],
@@ -8922,6 +8910,16 @@
         "order": 3,
         "language": "cpp",
         "code": "template<typename T>\nclass SquareMatrixBase {\nprotected:\n  SquareMatrixBase(std::size_t n, T *pMem)     // store matrix size and a\n  : size(n), pData(pMem) {}                    // ptr to matrix values\n\n  void setDataPtr(T *ptr) { pData = ptr; }     // reassign pData\n  ...\n\nprivate:\n  std::size_t size;                            // size of matrix\n\n  T *pData;                                    // pointer to matrix values\n};",
+        "preceding_paragraph_order": 12,
+        "explanatory_paragraphs": [
+          13,
+          14
+        ]
+      },
+      {
+        "order": 4,
+        "language": "cpp",
+        "code": "template<typename T, std::size_t n>\nclass SquareMatrix: private SquareMatrixBase<T> {\npublic:\n  SquareMatrix()                             // send matrix size and\n  : SquareMatrixBase<T>(n, data) {}          // data ptr to base class\n  ...\n\nprivate:\n  T data[n*n];\n};",
         "preceding_paragraph_order": 13,
         "explanatory_paragraphs": [
           14,
@@ -8929,23 +8927,13 @@
         ]
       },
       {
-        "order": 4,
+        "order": 5,
         "language": "cpp",
-        "code": "template<typename T, std::size_t n>\nclass SquareMatrix: private SquareMatrixBase<T> {\npublic:\n  SquareMatrix()                             // send matrix size and\n  : SquareMatrixBase<T>(n, data) {}          // data ptr to base class\n  ...\n\nprivate:\n  T data[n*n];\n};",
+        "code": "template<typename T, std::size_t n>\nclass SquareMatrix: private SquareMatrixBase<T> {\npublic:\n  SquareMatrix()                          // set base class data ptr to null,\n  : SquareMatrixBase<T>(n, 0),            // allocate memory for matrix\n    pData(new T[n*n])                     // values, save a ptr to the\n  { this->setDataPtr(pData.get()); }      // memory, and give a copy of it\n  ...                                     // to the base class\n\nprivate:\n  boost::scoped_array<T> pData;           // see Item 13 for info on\n};                                        // boost::scoped_array",
         "preceding_paragraph_order": 14,
         "explanatory_paragraphs": [
           15,
           16
-        ]
-      },
-      {
-        "order": 5,
-        "language": "cpp",
-        "code": "template<typename T, std::size_t n>\nclass SquareMatrix: private SquareMatrixBase<T> {\npublic:\n  SquareMatrix()                          // set base class data ptr to null,\n  : SquareMatrixBase<T>(n, 0),            // allocate memory for matrix\n    pData(new T[n*n])                     // values, save a ptr to the\n  { this->setDataPtr(pData.get()); }      // memory, and give a copy of it\n  ...                                     // to the base class\n\nprivate:\n  boost::scoped_array<T> pData;           // see Item 13 for info on\n};                                        // boost::scoped_array",
-        "preceding_paragraph_order": 15,
-        "explanatory_paragraphs": [
-          16,
-          17
         ]
       }
     ],
@@ -8973,7 +8961,7 @@
         "anchor": "0321334876ch04lev1sec5html-item-22-declare-data-members-private"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "advanced",
     "prerequisites": [
       22,
@@ -10359,46 +10347,42 @@
       },
       {
         "order": 5,
-        "text": "*[Figure omitted]*"
-      },
-      {
-        "order": 6,
         "text": "The trick of treating requests for zero bytes as if they were really requests for one byte looks slimy, but it's simple, it's legal, it works, and how often do you expect to be asked for zero bytes, anyway?"
       },
       {
-        "order": 7,
+        "order": 6,
         "text": "You may also look askance at the place in the pseudocode where the new-handling function pointer is set to null, then promptly reset to what it was originally. Unfortunately, there is no way to get at the new-handling function pointer directly, so you have to call `set_new_handler` to find out what it is. Crude, yes, but also effective, at least for single-threaded code. In a multithreaded environment, you'll probably need some kind of lock to safely manipulate the (global) data structures behind the new-handling function. [Item 49](<#0321334876ch08lev1sec1html-item-49-understand-the-behavior-of-the-new-handler>) remarks that `operator new` contains an infinite loop, and the code above shows that loop explicitly; \"`while (true)`\" is about as infinite as it gets. The only way out of the loop is for memory to be successfully allocated or for the new-handling function to do one of the things described in [Item 49](<#0321334876ch08lev1sec1html-item-49-understand-the-behavior-of-the-new-handler>): make more memory available, install a different new-handler, deinstall the new-handler, throw an exception of or derived from `bad_alloc`, or fail to return. It should now be clear why the new-handler must do one of those things. If it doesn't, the loop inside `operator new` will never terminate."
       },
       {
-        "order": 8,
+        "order": 7,
         "text": "Many people don't realize that `operator new` member functions are inherited by derived classes. That can lead to some interesting complications. In the pseudocode for `operator new` above, notice that the function tries to allocate `size` bytes (unless `size` is zero). That makes perfect sense, because that's the argument that was passed to the function. However, as [Item 50](<#0321334876ch08lev1sec2html-item-50-understand-when-it-makes-sense-to-replace-new-and-delete>) explains, one of the most common reasons for writing a custom memory manager is to optimize allocation for objects of a specific class, not for a class or any of its derived classes. That is, given an `operator new` for a class `X`, the behavior of that function is typically tuned for objects of size `sizeof(X)`—nothing larger and nothing smaller. Because of inheritance, however, it is possible that the `operator new` in a base class will be called to allocate memory for an object of a derived class:"
       },
       {
-        "order": 9,
+        "order": 8,
         "text": "If `Base`'s class-specific `operator new` wasn't designed to cope with this — and chances are that it wasn't — the best way for it to handle the situation is to slough off calls requesting the \"wrong\" amount of memory to the standard `operator new`, like this:"
       },
       {
-        "order": 10,
+        "order": 9,
         "text": "\"Hold on!\" I hear you cry, \"You forgot to check for the pathological-but-nevertheless-possible case where `size` is zero!\" Actually, I didn't, and please stop using hyphens when you cry out. The test is still there, it's just been incorporated into the test of `size` against `sizeof(Base)`. C++ works in some mysterious ways, and one of those ways is to decree that all freestanding objects have non-zero size (see [Item 39](<#0321334876ch06lev1sec8html-item-39-use-private-inheritance-judiciously>)). By definition, `sizeof(Base)` can never be zero, so if `size` is zero, the request will be forwarded to `::operator new`, and it will become that function's responsibility to treat the request in a reasonable fashion."
       },
       {
-        "order": 11,
+        "order": 10,
         "text": "If you'd like to control memory allocation for arrays on a per-class basis, you need to implement `operator new`'s array-specific cousin, `operator new[]`. (This function is usually called \"array new,\" because it's hard to figure out how to pronounce \"`operator new[]`\".) If you decide to write `operator new[]`, remember that all you're doing is allocating a chunk of raw memory — you can't do anything to the as-yet-nonexistent objects in the array. In fact, you can't even figure out how many objects will be in the array. First, you don't know how big each object is. After all, a base class's `operator new[]` might, through inheritance, be called to allocate memory for an array of derived class objects, and derived class objects are usually bigger than base class objects."
       },
       {
-        "order": 12,
+        "order": 11,
         "text": "Hence, you can't assume inside `Base::operator new[]` that the size of each object going into the array is `sizeof(Base)`, and that means you can't assume that the number of objects in the array is `(``bytes requested``)/sizeof(Base)`. Second, the `size_t` parameter passed to `operator new[]` may be for more memory than will be filled with objects, because, as [Item 16](<#0321334876ch03lev1sec4html-item-16-use-the-same-form-in-corresponding-uses-of-new-and-delete>) explains, dynamically allocated arrays may include extra space to store the number of array elements."
       },
       {
-        "order": 13,
+        "order": 12,
         "text": "So much for the conventions you need to follow when writing `operator new`. For `operator delete`, things are simpler. About all you need to remember is that C++ guarantees it's always safe to delete the null pointer, so you need to honor that guarantee. Here's pseudocode for a non-member `operator delete`:"
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "The member version of this function is simple, too, except you've got to be sure to check the size of what's being deleted. Assuming your class-specific `operator new` forwards requests of the \"wrong\" size to `::operator new`, you've got to forward \"wrongly sized\" deletion requests to `::operator delete`:"
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "Interestingly, the `size_t` value C++ passes to `operator delete` may be incorrect if the object being deleted was derived from a base class lacking a virtual destructor. This is reason enough for making sure your base classes have virtual destructors, but [Item 7](<#0321334876ch02lev1sec3html-item-7-declare-destructors-virtual-in-polymorphic-base-classes>) describes a second, arguably better reason. For now, simply note that if you omit virtual destructors in base classes, `operator delete` functions may not work correctly."
       }
     ],
@@ -10407,16 +10391,26 @@
         "order": 0,
         "language": "cpp",
         "code": "void * operator new(std::size_t size) throw(std::bad_alloc)\n{                                      // your operator new might\n  using namespace std;                 // take additional params\n\n  if (size == 0) {                     // handle 0-byte requests\n    size = 1;                          // by treating them as\n  }                                    // 1-byte requests\n\n  while (true) {\n   attempt to allocate size bytes;\n    if (the allocation was successful)\n       return (a pointer to the memory);\n\n    // allocation was unsuccessful; find out what the\n    // current new-handling function is (see below)\n    new_handler globalHandler = set_new_handler(0);\n    set_new_handler(globalHandler);\n\n    if (globalHandler) (*globalHandler)();\n    else throw std::bad_alloc();\n  }\n}",
-        "preceding_paragraph_order": 5,
+        "preceding_paragraph_order": 4,
         "explanatory_paragraphs": [
-          6,
-          7
+          5,
+          6
         ]
       },
       {
         "order": 1,
         "language": "cpp",
         "code": "class Base {\npublic:\n  static void * operator new(std::size_t size) throw(std::bad_alloc);\n  ...\n};\n\nclass Derived: public Base                // Derived doesn't declare\n{ ... };                                  // operator new\n\nDerived *p = new Derived;                 // calls Base::operator new!",
+        "preceding_paragraph_order": 7,
+        "explanatory_paragraphs": [
+          8,
+          9
+        ]
+      },
+      {
+        "order": 2,
+        "language": "cpp",
+        "code": "void * Base::operator new(std::size_t size) throw(std::bad_alloc)\n{\n  if (size != sizeof(Base))               // if size is \"wrong,\"\n     return ::operator new(size);         // have standard operator\n                                          // new handle the request\n\n  ...                                     // otherwise handle\n                                          // the request here\n}",
         "preceding_paragraph_order": 8,
         "explanatory_paragraphs": [
           9,
@@ -10424,32 +10418,22 @@
         ]
       },
       {
-        "order": 2,
-        "language": "cpp",
-        "code": "void * Base::operator new(std::size_t size) throw(std::bad_alloc)\n{\n  if (size != sizeof(Base))               // if size is \"wrong,\"\n     return ::operator new(size);         // have standard operator\n                                          // new handle the request\n\n  ...                                     // otherwise handle\n                                          // the request here\n}",
-        "preceding_paragraph_order": 9,
-        "explanatory_paragraphs": [
-          10,
-          11
-        ]
-      },
-      {
         "order": 3,
         "language": "cpp",
         "code": "void operator delete(void *rawMemory) throw()\n{\n  if (rawMemory == 0) return;            // do nothing if the null\n                                         // pointer is being deleted\n\n  deallocate the memory pointed to by rawMemory;\n}",
-        "preceding_paragraph_order": 13,
+        "preceding_paragraph_order": 12,
         "explanatory_paragraphs": [
-          14,
-          15
+          13,
+          14
         ]
       },
       {
         "order": 4,
         "language": "cpp",
         "code": "class Base {                            // same as before, but now\npublic:                                 // operator delete is declared\n\n  static void * operator new(std::size_t size) throw(std::bad_alloc);\n  static void operator delete(void *rawMemory, std::size_t size) throw();\n  ...\n};\nvoid Base::operator delete(void *rawMemory, std::size_t size) throw()\n{\n  if (rawMemory == 0) return;           // check for null pointer\n\n  if (size != sizeof(Base)) {           // if size is \"wrong,\"\n     ::operator delete(rawMemory);      // have standard operator\n     return;                            // delete handle the request\n  }\n  deallocate the memory pointed to by rawMemory;\n  return;\n}",
-        "preceding_paragraph_order": 14,
+        "preceding_paragraph_order": 13,
         "explanatory_paragraphs": [
-          15
+          14
         ]
       }
     ],
@@ -10484,7 +10468,7 @@
         "anchor": "0321334876ch02lev1sec3html-item-7-declare-destructors-virtual-in-polymorphic-base-classes"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "advanced",
     "prerequisites": [
       7,
@@ -10546,66 +10530,62 @@
       },
       {
         "order": 9,
-        "text": "*[Figure omitted]*"
-      },
-      {
-        "order": 10,
         "text": "This version of `new` is part of C++'s standard library, and you have access to it whenever you `#include <new>`. Among other things, this `new` is used inside `vector` to create objects in the vector's unused capacity. It's also the original placement `new`. In fact, that's how this function is known: as placement `new`. Which means that the term \"placement `new`\" is overloaded. Most of the time when people talk about placement `new`, they're talking about this specific function, the `operator new` taking a single extra argument of type `void*`. Less commonly, they're talking about any version of `operator new` that takes extra arguments. Context generally clears up any ambiguity, but it's important to understand that the general term \"placement `new`\" means any version of `new` taking extra arguments, because the phrase \"placement `delete`\" (which we'll encounter in a moment) derives directly from it."
       },
       {
-        "order": 11,
+        "order": 10,
         "text": "But let's get back to the declaration of the `Widget` class, the one whose design I said was problematic. The difficulty is that this class will give rise to subtle memory leaks. Consider this client code, which logs allocation information to `cerr` when dynamically creating a `Widget`:"
       },
       {
-        "order": 12,
+        "order": 11,
         "text": "Once again, if memory allocation succeeds and the `Widget` constructor throws an exception, the runtime system is responsible for undoing the allocation that `operator new` performed. However, the runtime system can't really understand how the called version of `operator new` works, so it can't undo the allocation itself. Instead, the runtime system looks for a version of `operator delete` that takes the same number and types of extra arguments as `operator new`, and, if it finds it, that's the one it calls. In this case, `operator new` takes an extra argument of type `ostream&`, so the corresponding `operator delete` would have this signature:"
       },
       {
-        "order": 13,
+        "order": 12,
         "text": "By analogy with placement versions of `new`, versions of `operator delete` that take extra parameters are known as placement `delete`s. In this case, `Widget` declares no placement version of `operator delete`, so the runtime system doesn't know how to undo what the call to placement `new` does. As a result, it does nothing. In this example, no `operator delete` is called if the `Widget` constructor throws an exception!"
       },
       {
-        "order": 14,
+        "order": 13,
         "text": "The rule is simple: if an `operator new` with extra parameters isn't matched by an `operator delete` with the same extra parameters, no `operator delete` will be called if a memory allocation by the `new` needs to be undone. To eliminate the memory leak in the code above, `Widget` needs to declare a placement `delete` that corresponds to the logging placement `new`:"
       },
       {
-        "order": 15,
+        "order": 14,
         "text": "With this change, if an exception is thrown from the `Widget` constructor in this statement,"
       },
       {
-        "order": 16,
+        "order": 15,
         "text": "the corresponding placement `delete` is automatically invoked, and that allows `Widget` to ensure that no memory is leaked. However, consider what happens if no exception is thrown (which will usually be the case) and we get to a `delete` in client code:"
       },
       {
-        "order": 17,
+        "order": 16,
         "text": "As the comment indicates, this calls the normal `operator delete`, not the placement version. Placement `delete` is called only if an exception arises from a constructor call that's coupled to a call to a placement `new`. Applying `delete` to a pointer (such as `pw` above) never yields a call to a placement version of `delete`. Never."
       },
       {
-        "order": 18,
+        "order": 17,
         "text": "This means that to forestall all memory leaks associated with placement versions of `new`, you must provide both the normal `operator delete` (for when no exception is thrown during construction) and a placement version that takes the same extra arguments as `operator new` does (for when one is). Do that, and you'll never lose sleep over subtle memory leaks again. Well, at least not these subtle memory leaks."
       },
       {
-        "order": 19,
+        "order": 18,
         "text": "Incidentally, because member function names hide functions with the same names in outer scopes (see [Item 33](<#0321334876ch06lev1sec2html-item-33-avoid-hiding-inherited-names>)), you need to be careful to avoid having class-specific `new`s hide other `new`s (including the normal versions) that your clients expect. For example, if you have a base class that declares only a placement version of `operator new`, clients will find that the normal form of `new` is unavailable to them:"
       },
       {
-        "order": 20,
+        "order": 19,
         "text": "Similarly, `operator new`s in derived classes hide both global and inherited versions of `operator new`:"
       },
       {
-        "order": 21,
+        "order": 20,
         "text": "[Item 33](<#0321334876ch06lev1sec2html-item-33-avoid-hiding-inherited-names>) discusses this kind of name hiding in considerable detail, but for purposes of writing memory allocation functions, what you need to remember is that by default, C++ offers the following forms of `operator new` at global scope:"
       },
       {
-        "order": 22,
+        "order": 21,
         "text": "If you declare any `operator new`s in a class, you'll hide all these standard forms. Unless you mean to prevent class clients from using these forms, be sure to make them available in addition to any custom `operator new` forms you create. For each `operator new` you make available, of course, be sure to offer the corresponding `operator delete`, too. If you want these functions to behave in the usual way, just have your class-specific versions call the global versions."
       },
       {
-        "order": 23,
+        "order": 22,
         "text": "An easy way to do this is to create a base class containing all the normal forms of `new` and `delete`:"
       },
       {
-        "order": 24,
+        "order": 23,
         "text": "Clients who want to augment the standard forms with custom forms can then just use inheritance and `using` declarations (see [Item 33](<#0321334876ch06lev1sec2html-item-33-avoid-hiding-inherited-names>)) to get the standard forms:"
       }
     ],
@@ -10654,16 +10634,26 @@
         "order": 4,
         "language": "cpp",
         "code": "void* operator new(std::size_t, void *pMemory) throw();   // \"placement\n                                                          // new\"",
-        "preceding_paragraph_order": 9,
+        "preceding_paragraph_order": 8,
         "explanatory_paragraphs": [
-          10,
-          11
+          9,
+          10
         ]
       },
       {
         "order": 5,
         "language": "cpp",
         "code": "Widget *pw = new (std::cerr) Widget; // call operator new, passing cerr as\n                                     // the ostream; this leaks memory\n                                     // if the Widget constructor throws",
+        "preceding_paragraph_order": 10,
+        "explanatory_paragraphs": [
+          11,
+          12
+        ]
+      },
+      {
+        "order": 6,
+        "language": "cpp",
+        "code": "void operator delete(void *, std::ostream&) throw();",
         "preceding_paragraph_order": 11,
         "explanatory_paragraphs": [
           12,
@@ -10671,19 +10661,19 @@
         ]
       },
       {
-        "order": 6,
-        "language": "cpp",
-        "code": "void operator delete(void *, std::ostream&) throw();",
-        "preceding_paragraph_order": 12,
-        "explanatory_paragraphs": [
-          13,
-          14
-        ]
-      },
-      {
         "order": 7,
         "language": "cpp",
         "code": "class Widget {\npublic:\n  ...\n  static void* operator new(std::size_t size, std::ostream& logStream)\n    throw(std::bad_alloc);\n  static void operator delete(void *pMemory) throw();\n\n  static void operator delete(void *pMemory, std::ostream& logStream)\n    throw();\n  ...\n};",
+        "preceding_paragraph_order": 13,
+        "explanatory_paragraphs": [
+          14,
+          15
+        ]
+      },
+      {
+        "order": 8,
+        "language": "cpp",
+        "code": "Widget *pw = new (std::cerr) Widget;   // as before, but no leak this time",
         "preceding_paragraph_order": 14,
         "explanatory_paragraphs": [
           15,
@@ -10691,9 +10681,9 @@
         ]
       },
       {
-        "order": 8,
+        "order": 9,
         "language": "cpp",
-        "code": "Widget *pw = new (std::cerr) Widget;   // as before, but no leak this time",
+        "code": "delete pw;                            // invokes the normal\n                                      // operator delete",
         "preceding_paragraph_order": 15,
         "explanatory_paragraphs": [
           16,
@@ -10701,19 +10691,19 @@
         ]
       },
       {
-        "order": 9,
-        "language": "cpp",
-        "code": "delete pw;                            // invokes the normal\n                                      // operator delete",
-        "preceding_paragraph_order": 16,
-        "explanatory_paragraphs": [
-          17,
-          18
-        ]
-      },
-      {
         "order": 10,
         "language": "cpp",
         "code": "class Base {\npublic:\n  ...\n\n  static void* operator new(std::size_t size,           // this new hides\n                            std::ostream& logStream)    // the normal\n    throw(std::bad_alloc);                              // global forms\n  ...\n};\nBase *pb = new Base;                        // error! the normal form of\n                                            // operator new is hidden\n\nBase *pb = new (std::cerr) Base;            // fine, calls Base's\n                                            // placement new",
+        "preceding_paragraph_order": 18,
+        "explanatory_paragraphs": [
+          19,
+          20
+        ]
+      },
+      {
+        "order": 11,
+        "language": "cpp",
+        "code": "class Derived: public Base {                   // inherits from Base above\npublic:\n  ...\n\n  static void* operator new(std::size_t size)  // redeclares the normal\n      throw(std::bad_alloc);                   // form of new\n  ...\n};\nDerived *pd = new (std::clog) Derived;         // error! Base's placement\n                                               // new is hidden\n\nDerived *pd = new Derived;                     // fine, calls Derived's\n                                               // operator new",
         "preceding_paragraph_order": 19,
         "explanatory_paragraphs": [
           20,
@@ -10721,9 +10711,9 @@
         ]
       },
       {
-        "order": 11,
+        "order": 12,
         "language": "cpp",
-        "code": "class Derived: public Base {                   // inherits from Base above\npublic:\n  ...\n\n  static void* operator new(std::size_t size)  // redeclares the normal\n      throw(std::bad_alloc);                   // form of new\n  ...\n};\nDerived *pd = new (std::clog) Derived;         // error! Base's placement\n                                               // new is hidden\n\nDerived *pd = new Derived;                     // fine, calls Derived's\n                                               // operator new",
+        "code": "void* operator new(std::size_t) throw(std::bad_alloc);      // normal new\n\nvoid* operator new(std::size_t, void*) throw();             // placement new\n\nvoid* operator new(std::size_t,                             // nothrow new —\n                   const std::nothrow_t&) throw();          // see Item 49",
         "preceding_paragraph_order": 20,
         "explanatory_paragraphs": [
           21,
@@ -10731,29 +10721,19 @@
         ]
       },
       {
-        "order": 12,
-        "language": "cpp",
-        "code": "void* operator new(std::size_t) throw(std::bad_alloc);      // normal new\n\nvoid* operator new(std::size_t, void*) throw();             // placement new\n\nvoid* operator new(std::size_t,                             // nothrow new —\n                   const std::nothrow_t&) throw();          // see Item 49",
-        "preceding_paragraph_order": 21,
-        "explanatory_paragraphs": [
-          22,
-          23
-        ]
-      },
-      {
         "order": 13,
         "language": "cpp",
         "code": "class StandardNewDeleteForms {\npublic:\n  // normal new/delete\n  static void* operator new(std::size_t size) throw(std::bad_alloc)\n  { return ::operator new(size); }\n  static void operator delete(void *pMemory) throw()\n  { ::operator delete(pMemory); }\n\n  // placement new/delete\n  static void* operator new(std::size_t size, void *ptr) throw()\n  { return ::operator new(size, ptr); }\n  static void operator delete(void *pMemory, void *ptr) throw()\n  { return ::operator delete(pMemory, ptr); }\n\n  // nothrow new/delete\n  static void* operator new(std::size_t size, const std::nothrow_t& nt) throw()\n  { return ::operator new(size, nt); }\n  static void operator delete(void *pMemory, const std::nothrow_t&) throw()\n  { ::operator delete(pMemory); }\n};",
-        "preceding_paragraph_order": 23,
+        "preceding_paragraph_order": 22,
         "explanatory_paragraphs": [
-          24
+          23
         ]
       },
       {
         "order": 14,
         "language": "cpp",
         "code": "class Widget: public StandardNewDeleteForms {           // inherit std forms\npublic:\n   using StandardNewDeleteForms::operator new;          // make those\n   using StandardNewDeleteForms::operator delete;       // forms visible\n\n   static void* operator new(std::size_t size,          // add a custom\n                             std::ostream& logStream)   // placement new\n     throw(std::bad_alloc);\n\n   static void operator delete(void *pMemory,           // add the corres-\n                               std::ostream& logStream) // ponding place-\n    throw();                                            // ment delete\n  ...\n};",
-        "preceding_paragraph_order": 24,
+        "preceding_paragraph_order": 23,
         "explanatory_paragraphs": []
       }
     ],
@@ -10768,7 +10748,7 @@
         "anchor": "0321334876ch06lev1sec2html-item-33-avoid-hiding-inherited-names"
       }
     ],
-    "has_missing_figure": true,
+    "has_missing_figure": false,
     "difficulty": "advanced",
     "prerequisites": [
       33
