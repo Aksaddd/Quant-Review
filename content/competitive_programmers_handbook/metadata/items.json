@@ -4216,382 +4216,346 @@
       },
       {
         "order": 23,
-        "text": "$$ $$ $$ $$"
+        "text": "$$\\operatorname{solve}(x) = \\begin{cases} \\infty & x < 0 \\\\ 0 & x = 0 \\\\ \\displaystyle\\min_{c \\in \\text{coins}} \\operatorname{solve}(x-c) + 1 & x > 0 \\end{cases}$$"
       },
       {
         "order": 24,
-        "text": "$\\infty$ $x <$ 0"
-      },
-      {
-        "order": 25,
-        "text": "`solve`($x) =$"
-      },
-      {
-        "order": 26,
-        "text": "0 $x =$ 0"
-      },
-      {
-        "order": 27,
-        "text": "$$ $$ $$"
-      },
-      {
-        "order": 28,
-        "text": "min$_c^{\\in}_{coins}$`solve`($x-c)+1$ $x >$ 0"
-      },
-      {
-        "order": 29,
         "text": "First, if $x <$ 0, the value is $\\infty$ , because it is impossible to form a negative sum of money. Then, if $x =$ 0, the value is 0, because no coins are needed to form an"
       },
       {
-        "order": 30,
+        "order": 25,
         "text": "empty sum. Finally, if $x >$ 0, the variable $c$ goes through all possibilities how to choose the first coin of the sum. Once a recursive function that solves the problem has been found, we can directly implement a solution in C++ (the constant `INF` denotes infinity):"
       },
       {
-        "order": 31,
+        "order": 26,
         "text": "Still, this function is not efficient, because there may be an exponential number of ways to construct the sum. However, next we will see how to make the function efficient using a technique called memoization."
       },
       {
-        "order": 32,
+        "order": 27,
         "text": "The idea of dynamic programming is to use **memoization** to efficiently calculate values of a recursive function. This means that the values of the function are stored in an array after calculating them. For each parameter, the value of the function is calculated recursively only once, and after this, the value can be directly retrieved from the array. In this problem, we use arrays"
       },
       {
-        "order": 33,
+        "order": 28,
         "text": "where `ready`[$x$] indicates whether the value of `solve`($x$) has been calculated, and if it is, `value`[$x$] contains this value. The constant $N$ has been chosen so that all required values fit in the arrays. Now the function can be efficiently implemented as follows:"
       },
       {
-        "order": 34,
+        "order": 29,
         "text": "The function handles the base cases $x <$ 0 and $x =$ 0 as previously. Then the function checks from `ready`[$x$] if `solve`($x$) has already been stored in `value`[$x$], and if it is, the function directly returns it. Otherwise the function calculates the value of `solve`($x$) recursively and stores it in `value`[$x$]. This function works efficiently, because the answer for each parameter $x$ is calculated recursively only once. After a value of `solve`($x$) has been stored in `value`[$x$], it can be efficiently retrieved whenever the function will be called again with the parameter $x$. The time complexity of the algorithm is $O(nk)$, where $n$ is the target sum and $k$ is the number of coins. Note that we can also *iteratively* construct the array `value` using a loop that simply calculates all the values of `solve` for parameters 0...$n$:"
       },
       {
-        "order": 35,
+        "order": 30,
         "text": "In fact, most competitive programmers prefer this implementation, because it is shorter and has lower constant factors. From now on, we also use iterative implementations in our examples. Still, it is often easier to think about dynamic programming solutions in terms of recursive functions."
       },
       {
-        "order": 36,
+        "order": 31,
         "text": "Sometimes we are asked both to find the value of an optimal solution and to give an example how such a solution can be constructed. In the coin problem, for example, we can declare another array that indicates for each sum of money the first coin in an optimal solution:"
       },
       {
-        "order": 37,
+        "order": 32,
         "text": "Then, we can modify the algorithm as follows:"
       },
       {
-        "order": 38,
+        "order": 33,
         "text": "After this, the following code can be used to print the coins that appear in an optimal solution for the sum $n$:"
       },
       {
-        "order": 39,
+        "order": 34,
         "text": "Let us now consider another version of the coin problem where our task is to calculate the total number of ways to produce a sum $x$ using the coins. For example, if `coins` $=$ {1,3,4} and $x =$ 5, there are a total of 6 ways:"
       },
       {
-        "order": 40,
+        "order": 35,
         "text": "• 1$+1+1+1+1$"
       },
       {
-        "order": 41,
+        "order": 36,
         "text": "• 3$+1+1$"
       },
       {
-        "order": 42,
+        "order": 37,
         "text": "• 1$+1+3$"
       },
       {
-        "order": 43,
+        "order": 38,
         "text": "• 1$+4$"
       },
       {
-        "order": 44,
+        "order": 39,
         "text": "• 1$+3+1$"
       },
       {
-        "order": 45,
+        "order": 40,
         "text": "• 4$+1$"
       },
       {
-        "order": 46,
+        "order": 41,
         "text": "Again, we can solve the problem recursively. Let `solve`($x$) denote the number of ways we can form the sum $x$. For example, if `coins` $=$ {1,3,4}, then `solve`(5) $= 6$ and the recursive formula is"
       },
       {
-        "order": 47,
+        "order": 42,
         "text": "`solve`($x) =$`solve`($x-1)+$"
       },
       {
-        "order": 48,
+        "order": 43,
         "text": "`solve`($x-3)+$"
       },
       {
-        "order": 49,
+        "order": 44,
         "text": "`solve`($x-4$)."
       },
       {
-        "order": 50,
+        "order": 45,
         "text": "Then, the general recursive function is as follows:"
       },
       {
-        "order": 51,
-        "text": "$$ $$ $$ $$"
+        "order": 46,
+        "text": "$$\\operatorname{solve}(x) = \\begin{cases} 0 & x < 0 \\\\ 1 & x = 0 \\\\ \\displaystyle\\sum_{c \\in \\text{coins}} \\operatorname{solve}(x-c) & x > 0 \\end{cases}$$"
       },
       {
-        "order": 52,
-        "text": "0 $x <$ 0"
-      },
-      {
-        "order": 53,
-        "text": "`solve`($x) =$"
-      },
-      {
-        "order": 54,
-        "text": "1 $x =$ 0 $P$ $_c^{\\in}_{coins}$`solve`($x-c$) $x >$ 0"
-      },
-      {
-        "order": 55,
-        "text": "$$ $$ $$"
-      },
-      {
-        "order": 56,
+        "order": 47,
         "text": "If $x <$ 0, the value is 0, because there are no solutions. If $x =$ 0, the value is 1, because there is only one way to form an empty sum. Otherwise we calculate the sum of all values of the form `solve`($x-c$) where $c$ is in `coins`. The following code constructs an array `count` such that `count`[$x$] equals the value of `solve`($x$) for 0 $\\le x \\le n$:"
       },
       {
-        "order": 57,
+        "order": 48,
         "text": "Often the number of solutions is so large that it is not required to calculate the exact number but it is enough to give the answer modulo $m$ where, for example, $m = 10^9+7$. This can be done by changing the code so that all calculations are done modulo $m$. In the above code, it suffices to add the line"
       },
       {
-        "order": 58,
+        "order": 49,
         "text": "after the line"
       },
       {
-        "order": 59,
+        "order": 50,
         "text": "Now we have discussed all basic ideas of dynamic programming. Since dynamic programming can be used in many different situations, we will now go through a set of problems that show further examples about the possibilities of dynamic programming."
       },
       {
-        "order": 60,
+        "order": 51,
         "text": "Our first problem is to find the **longest increasing subsequence** in an array of $n$ elements. This is a maximum-length sequence of array elements that goes from left to right, and each element in the sequence is larger than the previous element. For example, in the array"
       },
       {
-        "order": 61,
+        "order": 52,
         "text": "the longest increasing subsequence contains 4 elements:"
       },
       {
-        "order": 62,
+        "order": 53,
         "text": "Let `length`($k$) denote the length of the longest increasing subsequence that ends at position $k$. Thus, if we calculate all values of `length`($k$) where 0 $\\le k \\le n-1$, we will find out the length of the longest increasing subsequence. For example, the values of the function for the above array are as follows:"
       },
       {
-        "order": 63,
+        "order": 54,
         "text": "$= 1$"
       },
       {
-        "order": 64,
+        "order": 55,
         "text": "$= 1$"
       },
       {
-        "order": 65,
+        "order": 56,
         "text": "$= 2$"
       },
       {
-        "order": 66,
+        "order": 57,
         "text": "$= 1$"
       },
       {
-        "order": 67,
+        "order": 58,
         "text": "$= 3$"
       },
       {
-        "order": 68,
+        "order": 59,
         "text": "$= 2$"
       },
       {
-        "order": 69,
+        "order": 60,
         "text": "$= 4$"
       },
       {
-        "order": 70,
+        "order": 61,
         "text": "$= 2$"
       },
       {
-        "order": 71,
+        "order": 62,
         "text": "For example, `length`(6) $= 4$, because the longest increasing subsequence that ends at position 6 consists of 4 elements."
       },
       {
-        "order": 72,
+        "order": 63,
         "text": "To calculate a value of `length`($k$), we should find a position $i < k$ for which `array`[$i] <$ `array`[$k$] and `length`($i$) is as large as possible. Then we know that `length`($k) =$ `length`($i) +$ 1, because this is an optimal way to add `array`[$k$] to a subsequence. However, if there is no such position $i$, then `length`($k) =$ 1, which means that the subsequence only contains `array`[$k$]. Since all values of the function can be calculated from its smaller values, we can use dynamic programming. In the following code, the values of the function will be stored in an array `length`."
       },
       {
-        "order": 73,
+        "order": 64,
         "text": "This code works in $O(n^2)$ time, because it consists of two nested loops. However, it is also possible to implement the dynamic programming calculation more efficiently in $O(n$log$n$) time. Can you find a way to do this?"
       },
       {
-        "order": 74,
+        "order": 65,
         "text": "Our next problem is to find a path from the upper-left corner to the lower-right corner of an $n \\times n$ grid, such that we only move down and right. Each square contains a positive integer, and the path should be constructed so that the sum of the values along the path is as large as possible. The following picture shows an optimal path in a grid:"
       },
       {
-        "order": 75,
+        "order": 66,
         "text": "The sum of the values on the path is 67, and this is the largest possible sum on a path from the upper-left corner to the lower-right corner. Assume that the rows and columns of the grid are numbered from 1 to $n$, and `value`[$y][x$] equals the value of square ($y,x$). Let `sum`($y,x$) denote the maximum sum on a path from the upper-left corner to square ($y,x$). Now `sum`($n,n$) tells us the maximum sum from the upper-left corner to the lower-right corner. For example, in the above grid, `sum`(5,5) $= 67$. We can recursively calculate the sums as follows:"
       },
       {
-        "order": 76,
+        "order": 67,
         "text": "`sum`($y,x) =$ max(`sum`($y,x-1$),`sum`($y-1,x))+$`value`[$y][x$]"
       },
       {
-        "order": 77,
+        "order": 68,
         "text": "The recursive formula is based on the observation that a path that ends at square ($y,x$) can come either from square ($y,x-1$) or square ($y-1,x$):"
       },
       {
-        "order": 78,
+        "order": 69,
         "text": "Thus, we select the direction that maximizes the sum. We assume that `sum`($y,x) =$ 0 if $y =$ 0 or $x =$ 0 (because no such paths exist), so the recursive formula also works when $y =$ 1 or $x =$ 1. Since the function `sum` has two parameters, the dynamic programming array also has two dimensions. For example, we can use an array"
       },
       {
-        "order": 79,
+        "order": 70,
         "text": "and calculate the sums as follows:"
       },
       {
-        "order": 80,
+        "order": 71,
         "text": "The time complexity of the algorithm is $O(n^2)$."
       },
       {
-        "order": 81,
+        "order": 72,
         "text": "The term **knapsack** refers to problems where a set of objects is given, and subsets with some properties have to be found. Knapsack problems can often be solved using dynamic programming. In this section, we focus on the following problem: Given a list of weights [$w_1,w_2,...,w_n$], determine all sums that can be constructed using the weights. For example, if the weights are [1,3,3,5], the following sums are possible:"
       },
       {
-        "order": 82,
+        "order": 73,
         "text": "In this case, all sums between 0...12 are possible, except 2 and 10. For example, the sum 7 is possible because we can select the weights [1,3,3]. To solve the problem, we focus on subproblems where we only use the first $k$ weights to construct sums. Let `possible`($x,k) =$ true if we can construct a sum $x$ using the first $k$ weights, and otherwise `possible`($x,k) =$ false. The values of the function can be recursively calculated as follows:"
       },
       {
-        "order": 83,
+        "order": 74,
         "text": "`possible`($x,k) =$ `possible`($x-w_k,k -1)∨$`possible`($x,k -1$)"
       },
       {
-        "order": 84,
+        "order": 75,
         "text": "The formula is based on the fact that we can either use or not use the weight $w_k$ in the sum. If we use $w_k$, the remaining task is to form the sum $x-w_k$ using the first $k-1$ weights, and if we do not use $w_k$, the remaining task is to form the sum $x$ using the first $k -1$ weights. As the base cases,"
       },
       {
-        "order": 85,
+        "order": 76,
         "text": "$($ true $x =$ 0"
       },
       {
-        "order": 86,
+        "order": 77,
         "text": "`possible`($x,0) =$"
       },
       {
-        "order": 87,
+        "order": 78,
         "text": "false $x ̸=$ 0"
       },
       {
-        "order": 88,
+        "order": 79,
         "text": "because if no weights are used, we can only form the sum 0. The following table shows all values of the function for the weights [1,3,3,5] (the symbol \"X\" indicates the true values):"
       },
       {
-        "order": 89,
+        "order": 80,
         "text": "$k$\\$x$ 0 1 2 3 4 5 6 7 8 9 10 11 12 0 X 1 X X 2 X X X X 3 X X X X X X 4 X X X X X X X X X X X"
       },
       {
-        "order": 90,
+        "order": 81,
         "text": "After calculating those values, `possible`($x,n$) tells us whether we can construct a sum $x$ using $all$ weights. Let $W$ denote the total sum of the weights. The following $O(nW)$ time dynamic programming solution corresponds to the recursive function:"
       },
       {
-        "order": 91,
+        "order": 82,
         "text": "However, here is a better implementation that only uses a one-dimensional array `possible`[$x$] that indicates whether we can construct a subset with sum $x$. The trick is to update the array from right to left for each new weight:"
       },
       {
-        "order": 92,
+        "order": 83,
         "text": "Note that the general idea presented here can be used in many knapsack problems. For example, if we are given objects with weights and values, we can determine for each weight sum the maximum value sum of a subset."
       },
       {
-        "order": 93,
+        "order": 84,
         "text": "The **edit distance** or **Levenshtein distance**$^1$ is the minimum number of editing operations needed to transform a string into another string. The allowed editing operations are as follows:"
       },
       {
-        "order": 94,
+        "order": 85,
         "text": "• insert a character (e.g. `ABC` $\\to$ `ABCA`)"
       },
       {
-        "order": 95,
+        "order": 86,
         "text": "• remove a character (e.g. `ABC` $\\to$ `AC`)"
       },
       {
-        "order": 96,
+        "order": 87,
         "text": "• modify a character (e.g. `ABC` $\\to$ `ADC`)"
       },
       {
-        "order": 97,
+        "order": 88,
         "text": "For example, the edit distance between `LOVE` and `MOVIE` is 2, because we can first perform the operation `LOVE` $\\to$ `MOVE` (modify) and then the operation `MOVE` $\\to$ `MOVIE` (insert). This is the smallest possible number of operations, because it is clear that only one operation is not enough. Suppose that we are given a string `x` of length $n$ and a string `y` of length $m$, and we want to calculate the edit distance between `x` and `y`. To solve the problem, we define a function `distance`($a,b$) that gives the edit distance between prefixes `x`[0...$a$] and `y`[0...$b$]. Thus, using this function, the edit distance between `x` and `y` equals `distance`($n-1,m-1$). We can calculate values of `distance` as follows:"
       },
       {
-        "order": 98,
+        "order": 89,
         "text": "`distance`($a,b) =$ min(`distance`($a,b -1)+1$,"
       },
       {
-        "order": 99,
+        "order": 90,
         "text": "`distance`($a-1,b)+1$,"
       },
       {
-        "order": 100,
+        "order": 91,
         "text": "`distance`($a-1,b -1)+$`cost`($a,b$))."
       },
       {
-        "order": 101,
+        "order": 92,
         "text": "Here `cost`($a,b) =$ 0 if `x`[$a] =$ `y`[$b$], and otherwise `cost`($a,b) =$ 1. The formula considers the following ways to edit the string `x`:"
       },
       {
-        "order": 102,
+        "order": 93,
         "text": "• `distance`($a,b -1$): insert a character at the end of `x`"
       },
       {
-        "order": 103,
+        "order": 94,
         "text": "• `distance`($a-1,b$): remove the last character from `x`"
       },
       {
-        "order": 104,
+        "order": 95,
         "text": "• `distance`($a-1,b -1$): match or modify the last character of `x`"
       },
       {
-        "order": 105,
+        "order": 96,
         "text": "In the two first cases, one editing operation is needed (insert or remove). In the last case, if `x`[$a] =$ `y`[$b$], we can match the last characters without editing, and otherwise one editing operation is needed (modify). The following table shows the values of `distance` in the example case:"
       },
       {
-        "order": 106,
+        "order": 97,
         "text": "The lower-right corner of the table tells us that the edit distance between `LOVE` and `MOVIE` is 2. The table also shows how to construct the shortest sequence of editing operations. In this case the path is as follows:"
       },
       {
-        "order": 107,
+        "order": 98,
         "text": "The last characters of `LOVE` and `MOVIE` are equal, so the edit distance between them equals the edit distance between `LOV` and `MOVI`. We can use one editing operation to remove the character `I` from `MOVI`. Thus, the edit distance is one larger than the edit distance between `LOV` and `MOV`, etc."
       },
       {
-        "order": 108,
+        "order": 99,
         "text": "Sometimes the states of a dynamic programming solution are more complex than fixed combinations of numbers. As an example, consider the problem of calculating the number of distinct ways to fill an $n\\times m$ grid using 1$\\times$ 2 and 2$\\times$ 1 size tiles. For example, one valid solution for the 4$\\times$ 7 grid is"
       },
       {
-        "order": 109,
+        "order": 100,
         "text": "and the total number of solutions is 781. The problem can be solved using dynamic programming by going through the grid row by row. Each row in a solution can be represented as a string that contains $m$ characters from the set {$⊓,⊔$,⊏,⊐}. For example, the above solution consists of four rows that correspond to the following strings:"
       },
       {
-        "order": 110,
+        "order": 101,
         "text": "• $⊓$⊏⊐$⊓$⊏⊐$⊓$"
       },
       {
-        "order": 111,
+        "order": 102,
         "text": "• $⊔$⊏⊐$⊔⊓⊓⊔$"
       },
       {
-        "order": 112,
+        "order": 103,
         "text": "• ⊏⊐⊏⊐$⊔⊔⊓$"
       },
       {
-        "order": 113,
+        "order": 104,
         "text": "• ⊏⊐⊏⊐⊏⊐$⊔$"
       },
       {
-        "order": 114,
+        "order": 105,
         "text": "Let `count`($k,x$) denote the number of ways to construct a solution for rows 1...$k$ of the grid such that string $x$ corresponds to row $k$. It is possible to use dynamic programming here, because the state of a row is constrained only by the state of the previous row."
       },
       {
-        "order": 115,
+        "order": 106,
         "text": "A solution is valid if row 1 does not contain the character $⊔$, row $n$ does not contain the character $⊓$, and all consecutive rows are *compatible*. For example, the rows $⊔$⊏⊐$⊔⊓⊓⊔$and ⊏⊐⊏⊐$⊔⊔⊓$are compatible, while the rows $⊓$⊏⊐$⊓$⊏⊐$⊓$ and ⊏⊐⊏⊐⊏⊐$⊔$are not compatible. Since a row consists of $m$ characters and there are four choices for each character, the number of distinct rows is at most 4$^m$. Thus, the time complexity of the solution is $O(n4^{2m})$ because we can go through the $O(4^m)$ possible states for each row, and for each state, there are $O(4^m)$ possible states for the previous row. In practice, it is a good idea to rotate the grid so that the shorter side has length $m$, because the factor 4$^{2m}$ dominates the time complexity. It is possible to make the solution more efficient by using a more compact representation for the rows. It turns out that it is sufficient to know which columns of the previous row contain the upper square of a vertical tile. Thus, we can represent a row using only characters $⊓$and □, where □is a combination of characters $⊔$, ⊏and ⊐. Using this representation, there are only 2$^m$ distinct rows and the time complexity is $O(n2^{2m})$. As a final note, there is also a surprising direct formula for calculating the number of tilings$^2$:"
       },
       {
-        "order": 116,
+        "order": 107,
         "text": "$$\\prod_{a=1}^{\\lceil n/2 \\rceil} \\prod_{b=1}^{\\lceil m/2 \\rceil} 4 \\cdot \\left(\\cos^2 \\frac{\\pi a}{n+1} + \\cos^2 \\frac{\\pi b}{m+1}\\right)$$"
       },
       {
-        "order": 117,
+        "order": 108,
         "text": "This formula is very efficient, because it calculates the number of tilings in $O(nm)$ time, but since the answer is a product of real numbers, a problem when using the formula is how to store the intermediate results accurately."
       }
     ],
@@ -4700,16 +4664,56 @@
         "order": 10,
         "language": "cpp",
         "code": "int solve(int x) {\n   if (x < 0) return INF;\n   if (x == 0) return 0;\n   int best = INF;\n   for (auto c : coins) {\n       best = min(best, solve(x-c)+1);\n   }\n   return best;\n}",
-        "preceding_paragraph_order": 30,
+        "preceding_paragraph_order": 25,
         "explanatory_paragraphs": [
-          31,
-          32
+          26,
+          27
         ]
       },
       {
         "order": 11,
         "language": "cpp",
         "code": "bool ready[N];\nint value[N];",
+        "preceding_paragraph_order": 27,
+        "explanatory_paragraphs": [
+          28,
+          29
+        ]
+      },
+      {
+        "order": 12,
+        "language": "cpp",
+        "code": "int solve(int x) {\n   if (x < 0) return INF;\n   if (x == 0) return 0;\n   if (ready[x]) return value[x];\n   int best = INF;\n   for (auto c : coins) {\n       best = min(best, solve(x-c)+1);\n   }\n   value[x] = best;\n   ready[x] = true;\n   return best;\n}",
+        "preceding_paragraph_order": 28,
+        "explanatory_paragraphs": [
+          29,
+          30
+        ]
+      },
+      {
+        "order": 13,
+        "language": "cpp",
+        "code": "value[0] = 0;\nfor (int x = 1; x <= n; x++) {\n   value[x] = INF;\n   for (auto c : coins) {\n       if (x-c >= 0) {\n          value[x] = min(value[x], value[x-c]+1);\n       }\n   }\n}",
+        "preceding_paragraph_order": 29,
+        "explanatory_paragraphs": [
+          30,
+          31
+        ]
+      },
+      {
+        "order": 14,
+        "language": "cpp",
+        "code": "int first[N];",
+        "preceding_paragraph_order": 31,
+        "explanatory_paragraphs": [
+          32,
+          33
+        ]
+      },
+      {
+        "order": 15,
+        "language": "cpp",
+        "code": "value[0] = 0;\nfor (int x = 1; x <= n; x++) {\n   value[x] = INF;\n   for (auto c : coins) {\n       if (x-c >= 0 && value[x-c]+1 < value[x]) {\n          value[x] = value[x-c]+1;\n          first[x] = c;\n       }\n   }\n}",
         "preceding_paragraph_order": 32,
         "explanatory_paragraphs": [
           33,
@@ -4717,9 +4721,9 @@
         ]
       },
       {
-        "order": 12,
+        "order": 16,
         "language": "cpp",
-        "code": "int solve(int x) {\n   if (x < 0) return INF;\n   if (x == 0) return 0;\n   if (ready[x]) return value[x];\n   int best = INF;\n   for (auto c : coins) {\n       best = min(best, solve(x-c)+1);\n   }\n   value[x] = best;\n   ready[x] = true;\n   return best;\n}",
+        "code": "while (n > 0) {\n   cout << first[n] << \"\\n\";\n   n -= first[n];\n}",
         "preceding_paragraph_order": 33,
         "explanatory_paragraphs": [
           34,
@@ -4727,49 +4731,69 @@
         ]
       },
       {
-        "order": 13,
-        "language": "cpp",
-        "code": "value[0] = 0;\nfor (int x = 1; x <= n; x++) {\n   value[x] = INF;\n   for (auto c : coins) {\n       if (x-c >= 0) {\n          value[x] = min(value[x], value[x-c]+1);\n       }\n   }\n}",
-        "preceding_paragraph_order": 34,
-        "explanatory_paragraphs": [
-          35,
-          36
-        ]
-      },
-      {
-        "order": 14,
-        "language": "cpp",
-        "code": "int first[N];",
-        "preceding_paragraph_order": 36,
-        "explanatory_paragraphs": [
-          37,
-          38
-        ]
-      },
-      {
-        "order": 15,
-        "language": "cpp",
-        "code": "value[0] = 0;\nfor (int x = 1; x <= n; x++) {\n   value[x] = INF;\n   for (auto c : coins) {\n       if (x-c >= 0 && value[x-c]+1 < value[x]) {\n          value[x] = value[x-c]+1;\n          first[x] = c;\n       }\n   }\n}",
-        "preceding_paragraph_order": 37,
-        "explanatory_paragraphs": [
-          38,
-          39
-        ]
-      },
-      {
-        "order": 16,
-        "language": "cpp",
-        "code": "while (n > 0) {\n   cout << first[n] << \"\\n\";\n   n -= first[n];\n}",
-        "preceding_paragraph_order": 38,
-        "explanatory_paragraphs": [
-          39,
-          40
-        ]
-      },
-      {
         "order": 17,
         "language": "cpp",
         "code": "count[0] = 1;\nfor (int x = 1; x <= n; x++) {\n   for (auto c : coins) {\n       if (x-c >= 0) {\n          count[x] += count[x-c];\n       }\n   }\n}",
+        "preceding_paragraph_order": 47,
+        "explanatory_paragraphs": [
+          48,
+          49
+        ]
+      },
+      {
+        "order": 18,
+        "language": "cpp",
+        "code": "       count[x] %= m;",
+        "preceding_paragraph_order": 48,
+        "explanatory_paragraphs": [
+          49,
+          50
+        ]
+      },
+      {
+        "order": 19,
+        "language": "cpp",
+        "code": "       count[x] += count[x-c];",
+        "preceding_paragraph_order": 49,
+        "explanatory_paragraphs": [
+          50,
+          51
+        ]
+      },
+      {
+        "order": 20,
+        "language": "cpp",
+        "code": "                            length(0)",
+        "preceding_paragraph_order": 53,
+        "explanatory_paragraphs": [
+          54,
+          55
+        ]
+      },
+      {
+        "order": 21,
+        "language": "cpp",
+        "code": "                            length(1)",
+        "preceding_paragraph_order": 54,
+        "explanatory_paragraphs": [
+          55,
+          56
+        ]
+      },
+      {
+        "order": 22,
+        "language": "cpp",
+        "code": "                            length(2)",
+        "preceding_paragraph_order": 55,
+        "explanatory_paragraphs": [
+          56,
+          57
+        ]
+      },
+      {
+        "order": 23,
+        "language": "cpp",
+        "code": "                            length(3)",
         "preceding_paragraph_order": 56,
         "explanatory_paragraphs": [
           57,
@@ -4777,9 +4801,9 @@
         ]
       },
       {
-        "order": 18,
+        "order": 24,
         "language": "cpp",
-        "code": "       count[x] %= m;",
+        "code": "                            length(4)",
         "preceding_paragraph_order": 57,
         "explanatory_paragraphs": [
           58,
@@ -4787,9 +4811,9 @@
         ]
       },
       {
-        "order": 19,
+        "order": 25,
         "language": "cpp",
-        "code": "       count[x] += count[x-c];",
+        "code": "                            length(5)",
         "preceding_paragraph_order": 58,
         "explanatory_paragraphs": [
           59,
@@ -4797,19 +4821,29 @@
         ]
       },
       {
-        "order": 20,
+        "order": 26,
         "language": "cpp",
-        "code": "                            length(0)",
-        "preceding_paragraph_order": 62,
+        "code": "                            length(6)",
+        "preceding_paragraph_order": 59,
         "explanatory_paragraphs": [
-          63,
-          64
+          60,
+          61
         ]
       },
       {
-        "order": 21,
+        "order": 27,
         "language": "cpp",
-        "code": "                            length(1)",
+        "code": "                            length(7)",
+        "preceding_paragraph_order": 60,
+        "explanatory_paragraphs": [
+          61,
+          62
+        ]
+      },
+      {
+        "order": 28,
+        "language": "cpp",
+        "code": "for (int k = 0; k < n; k++) {\n   length[k] = 1;\n   for (int i = 0; i < k; i++) {\n       if (array[i] < array[k]) {\n          length[k] = max(length[k],length[i]+1);\n       }\n   }\n}",
         "preceding_paragraph_order": 63,
         "explanatory_paragraphs": [
           64,
@@ -4817,59 +4851,9 @@
         ]
       },
       {
-        "order": 22,
+        "order": 29,
         "language": "cpp",
-        "code": "                            length(2)",
-        "preceding_paragraph_order": 64,
-        "explanatory_paragraphs": [
-          65,
-          66
-        ]
-      },
-      {
-        "order": 23,
-        "language": "cpp",
-        "code": "                            length(3)",
-        "preceding_paragraph_order": 65,
-        "explanatory_paragraphs": [
-          66,
-          67
-        ]
-      },
-      {
-        "order": 24,
-        "language": "cpp",
-        "code": "                            length(4)",
-        "preceding_paragraph_order": 66,
-        "explanatory_paragraphs": [
-          67,
-          68
-        ]
-      },
-      {
-        "order": 25,
-        "language": "cpp",
-        "code": "                            length(5)",
-        "preceding_paragraph_order": 67,
-        "explanatory_paragraphs": [
-          68,
-          69
-        ]
-      },
-      {
-        "order": 26,
-        "language": "cpp",
-        "code": "                            length(6)",
-        "preceding_paragraph_order": 68,
-        "explanatory_paragraphs": [
-          69,
-          70
-        ]
-      },
-      {
-        "order": 27,
-        "language": "cpp",
-        "code": "                            length(7)",
+        "code": "int sum[N][N];",
         "preceding_paragraph_order": 69,
         "explanatory_paragraphs": [
           70,
@@ -4877,93 +4861,73 @@
         ]
       },
       {
-        "order": 28,
-        "language": "cpp",
-        "code": "for (int k = 0; k < n; k++) {\n   length[k] = 1;\n   for (int i = 0; i < k; i++) {\n       if (array[i] < array[k]) {\n          length[k] = max(length[k],length[i]+1);\n       }\n   }\n}",
-        "preceding_paragraph_order": 72,
-        "explanatory_paragraphs": [
-          73,
-          74
-        ]
-      },
-      {
-        "order": 29,
-        "language": "cpp",
-        "code": "int sum[N][N];",
-        "preceding_paragraph_order": 78,
-        "explanatory_paragraphs": [
-          79,
-          80
-        ]
-      },
-      {
         "order": 30,
         "language": "cpp",
         "code": "for (int y = 1; y <= n; y++) {\n   for (int x = 1; x <= n; x++) {\n       sum[y][x] = max(sum[y][x-1],sum[y-1][x])+value[y][x];\n   }\n}",
-        "preceding_paragraph_order": 79,
+        "preceding_paragraph_order": 70,
         "explanatory_paragraphs": [
-          80,
-          81
+          71,
+          72
         ]
       },
       {
         "order": 31,
         "language": "cpp",
         "code": "possible[0][0] = true;\nfor (int k = 1; k <= n; k++) {\n   for (int x = 0; x <= W; x++) {\n       if (x-w[k] >= 0) possible[x][k] |= possible[x-w[k]][k-1];\n       possible[x][k] |= possible[x][k-1];\n   }\n}",
-        "preceding_paragraph_order": 90,
+        "preceding_paragraph_order": 81,
         "explanatory_paragraphs": [
-          91,
-          92
+          82,
+          83
         ]
       },
       {
         "order": 32,
         "language": "cpp",
         "code": "possible[0] = true;\nfor (int k = 1; k <= n; k++) {\n   for (int x = W; x >= 0; x--) {\n       if (possible[x]) possible[x+w[k]] = true;\n   }\n}",
-        "preceding_paragraph_order": 91,
+        "preceding_paragraph_order": 82,
         "explanatory_paragraphs": [
-          92,
-          93
+          83,
+          84
         ]
       },
       {
         "order": 33,
         "language": "cpp",
         "code": "                                M\n                                   O\n                                       V\n                                           I\n                                              E",
-        "preceding_paragraph_order": 105,
+        "preceding_paragraph_order": 96,
         "explanatory_paragraphs": [
-          106,
-          107
+          97,
+          98
         ]
       },
       {
         "order": 34,
         "language": "cpp",
         "code": "                        L\n                        O\n                        V\n                        E",
-        "preceding_paragraph_order": 105,
+        "preceding_paragraph_order": 96,
         "explanatory_paragraphs": [
-          106,
-          107
+          97,
+          98
         ]
       },
       {
         "order": 35,
         "language": "cpp",
         "code": "                                M\n                                   O\n                                       V\n                                           I\n                                              E",
-        "preceding_paragraph_order": 106,
+        "preceding_paragraph_order": 97,
         "explanatory_paragraphs": [
-          107,
-          108
+          98,
+          99
         ]
       },
       {
         "order": 36,
         "language": "cpp",
         "code": "                        L\n                        O\n                        V\n                        E",
-        "preceding_paragraph_order": 106,
+        "preceding_paragraph_order": 97,
         "explanatory_paragraphs": [
-          107,
-          108
+          98,
+          99
         ]
       }
     ],
@@ -4981,71 +4945,71 @@
         "title": "Recursive formulation",
         "paragraph_range": [
           5,
-          31
+          26
         ]
       },
       {
         "level": 3,
         "title": "Using memoization",
         "paragraph_range": [
-          32,
-          35
+          27,
+          30
         ]
       },
       {
         "level": 3,
         "title": "Constructing a solution",
         "paragraph_range": [
-          36,
-          38
+          31,
+          33
         ]
       },
       {
         "level": 3,
         "title": "Counting the number of solutions",
         "paragraph_range": [
-          39,
-          59
+          34,
+          50
         ]
       },
       {
         "level": 3,
         "title": "Longest increasing subsequence",
         "paragraph_range": [
-          60,
-          73
+          51,
+          64
         ]
       },
       {
         "level": 3,
         "title": "Paths in a grid",
         "paragraph_range": [
-          74,
-          80
+          65,
+          71
         ]
       },
       {
         "level": 3,
         "title": "Knapsack problems",
         "paragraph_range": [
-          81,
-          92
+          72,
+          83
         ]
       },
       {
         "level": 2,
         "title": "Edit distance",
         "paragraph_range": [
-          93,
-          107
+          84,
+          98
         ]
       },
       {
         "level": 3,
         "title": "Counting tilings",
         "paragraph_range": [
-          108,
-          117
+          99,
+          108
         ]
       }
     ],
@@ -5053,27 +5017,27 @@
       {
         "src": "/cp-handbook/figures/fig_p081_019.png",
         "alt": "Figure from page 81",
-        "preceding_paragraph_order": 74
+        "preceding_paragraph_order": 65
       },
       {
         "src": "/cp-handbook/figures/fig_p082_020.png",
         "alt": "Figure from page 82",
-        "preceding_paragraph_order": 77
+        "preceding_paragraph_order": 68
       },
       {
         "src": "/cp-handbook/figures/fig_p084_021.png",
         "alt": "Figure from page 84",
-        "preceding_paragraph_order": 105
+        "preceding_paragraph_order": 96
       },
       {
         "src": "/cp-handbook/figures/fig_p085_022.png",
         "alt": "Figure from page 85",
-        "preceding_paragraph_order": 106
+        "preceding_paragraph_order": 97
       },
       {
         "src": "/cp-handbook/figures/fig_p085_023.png",
         "alt": "Figure from page 85",
-        "preceding_paragraph_order": 108
+        "preceding_paragraph_order": 99
       }
     ],
     "footnotes": [
@@ -12166,106 +12130,86 @@
       },
       {
         "order": 107,
-        "text": "$$ $$ $$ $$"
+        "text": "$$f(n) = \\begin{cases} 0 & n = 1 \\\\ 1 & n = 2 \\\\ (n-1)\\bigl(f(n-2) + f(n-1)\\bigr) & n > 2 \\end{cases}$$"
       },
       {
         "order": 108,
-        "text": "0 $n =$ 1"
-      },
-      {
-        "order": 109,
-        "text": "$f (n) =$"
-      },
-      {
-        "order": 110,
-        "text": "1 $n =$ 2"
-      },
-      {
-        "order": 111,
-        "text": "$$ $$ $$"
-      },
-      {
-        "order": 112,
-        "text": "($n-1)(f (n-2)+ f (n-1)$) $n >$ 2"
-      },
-      {
-        "order": 113,
         "text": "The formula can be derived by considering the possibilities how the element 1 changes in the derangement. There are $n-1$ ways to choose an element $x$ that replaces the element 1. In each such choice, there are two options: *Option 1:* We also replace the element $x$ with the element 1. After this, the remaining task is to construct a derangement of $n-2$ elements. *Option 2:* We replace the element $x$ with some other element than 1. Now we have to construct a derangement of $n-1$ element, because we cannot replace the element $x$ with the element 1, and all other elements must be changed."
       },
       {
-        "order": 114,
+        "order": 109,
         "text": "**Burnside’s lemma** can be used to count the number of combinations so that only one representative is counted for each group of symmetric combinations. Burnside’s lemma states that the number of combinations is"
       },
       {
-        "order": 115,
+        "order": 110,
         "text": "$$\\sum_{k=1}^{n} \\frac{c(k)}{n},$$"
       },
       {
-        "order": 116,
+        "order": 111,
         "text": "where there are $n$ ways to change the position of a combination, and there are $c(k)$ combinations that remain unchanged when the $k$th way is applied. As an example, let us calculate the number of necklaces of $n$ pearls, where each pearl has $m$ possible colors. Two necklaces are symmetric if they are similar after rotating them. For example, the necklace"
       },
       {
-        "order": 117,
+        "order": 112,
         "text": "has the following symmetric necklaces:"
       },
       {
-        "order": 118,
+        "order": 113,
         "text": "There are $n$ ways to change the position of a necklace, because we can rotate it $0, 1, \\ldots, n - 1$ steps clockwise. If the number of steps is 0, all $m^n$ necklaces remain the same, and if the number of steps is 1, only the $m$ necklaces where each pearl has the same color remain the same."
       },
       {
-        "order": 119,
+        "order": 114,
         "text": "More generally, when the number of steps is $k$, a total of"
       },
       {
-        "order": 120,
+        "order": 115,
         "text": "$$m^{\\gcd(k, n)}$$"
       },
       {
-        "order": 121,
+        "order": 116,
         "text": "necklaces remain the same, where $\\gcd(k, n)$ is the greatest common divisor of $k$ and $n$. The reason for this is that blocks of pearls of size $\\gcd(k, n)$ will replace each other. Thus, according to Burnside's lemma, the number of necklaces is"
       },
       {
-        "order": 122,
+        "order": 117,
         "text": "$$\\sum_{i=0}^{n-1} \\frac{m^{\\gcd(i, n)}}{n}.$$"
       },
       {
-        "order": 123,
+        "order": 118,
         "text": "For example, the number of necklaces of length 4 with 3 colors is"
       },
       {
-        "order": 124,
+        "order": 119,
         "text": "$$\\frac{3^4 + 3 + 3^2 + 3}{4} = 24.$$"
       },
       {
-        "order": 125,
+        "order": 120,
         "text": "**Cayley's formula** states that there are $n^{n-2}$ labeled trees that contain $n$ nodes. The nodes are labeled $1, 2, \\ldots, n$, and two trees are different if either their structure or labeling is different."
       },
       {
-        "order": 126,
+        "order": 121,
         "text": "For example, when $n = 4$, the number of labeled trees is $4^{4-2} = 16$:"
       },
       {
-        "order": 127,
+        "order": 122,
         "text": "Next we will see how Cayley's formula can be derived using Prüfer codes."
       },
       {
-        "order": 128,
+        "order": 123,
         "text": "A **Prüfer code** is a sequence of $n-2$ numbers that describes a labeled tree. The code is constructed by following a process that removes $n-2$ leaves from the tree. At each step, the leaf with the smallest label is removed, and the label of its only neighbor is added to the code. For example, let us calculate the Prüfer code of the following graph:"
       },
       {
-        "order": 129,
+        "order": 124,
         "text": "First we remove node 1 and add node 4 to the code:"
       },
       {
-        "order": 130,
+        "order": 125,
         "text": "Then we remove node 3 and add node 4 to the code:"
       },
       {
-        "order": 131,
+        "order": 126,
         "text": "Finally we remove node 4 and add node 2 to the code:"
       },
       {
-        "order": 132,
+        "order": 127,
         "text": "Thus, the Prüfer code of the graph is [4,4,2]. We can construct a Prüfer code for any tree, and more importantly, the original tree can be reconstructed from a Prüfer code. Hence, the number of labeled trees of $n$ nodes equals $n^{n-2}$, the number of Prüfer codes of size $n$."
       }
     ],
@@ -12383,31 +12327,31 @@
         "title": "Derangements",
         "paragraph_range": [
           100,
-          113
+          108
         ]
       },
       {
         "level": 2,
         "title": "Burnside’s lemma",
         "paragraph_range": [
-          114,
-          124
+          109,
+          119
         ]
       },
       {
         "level": 3,
         "title": "Cayley's formula",
         "paragraph_range": [
-          125,
-          127
+          120,
+          122
         ]
       },
       {
         "level": 3,
         "title": "Prüfer code",
         "paragraph_range": [
-          128,
-          132
+          123,
+          127
         ]
       }
     ],
@@ -12460,27 +12404,27 @@
       {
         "src": "/cp-handbook/figures/fig_p225_necklaces.png",
         "alt": "Four colored-pearl necklaces showing rotation equivalences",
-        "preceding_paragraph_order": 117
+        "preceding_paragraph_order": 112
       },
       {
         "src": "/cp-handbook/figures/fig_p225_labeled_trees.png",
         "alt": "Sixteen different labeled trees with 4 nodes each",
-        "preceding_paragraph_order": 126
+        "preceding_paragraph_order": 121
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto1.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 128
+        "preceding_paragraph_order": 123
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto2.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 129
+        "preceding_paragraph_order": 124
       },
       {
         "src": "/cp-handbook/figures/fig_p226_auto3.png",
         "alt": "Figure from page 226",
-        "preceding_paragraph_order": 130
+        "preceding_paragraph_order": 125
       }
     ],
     "footnotes": [],

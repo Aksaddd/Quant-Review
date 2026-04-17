@@ -2380,17 +2380,11 @@ The base case of the recursion is `solve`(0) $= 0$, because no coins are needed 
 
 Now we are ready to give a general recursive function that calculates the minimum number of coins needed to form a sum $x$:
 
-$$ $$ $$ $$
-
-$\infty$ $x <$ 0
-
-`solve`($x) =$
-
-0 $x =$ 0
-
-$$ $$ $$
-
-min$_c^{\in}_{coins}$`solve`($x-c)+1$ $x >$ 0
+$$\operatorname{solve}(x) = \begin{cases}
+\infty & x < 0 \\
+0 & x = 0 \\
+\displaystyle\min_{c \in \text{coins}} \operatorname{solve}(x-c) + 1 & x > 0
+\end{cases}$$
 
 First, if $x <$ 0, the value is $\infty$ , because it is impossible to form a negative sum of money. Then, if $x =$ 0, the value is 0, because no coins are needed to form an
 
@@ -2513,15 +2507,11 @@ Again, we can solve the problem recursively. Let `solve`($x$) denote the number 
 
 Then, the general recursive function is as follows:
 
-$$ $$ $$ $$
-
-0 $x <$ 0
-
-`solve`($x) =$
-
-1 $x =$ 0 $P$ $_c^{\in}_{coins}$`solve`($x-c$) $x >$ 0
-
-$$ $$ $$
+$$\operatorname{solve}(x) = \begin{cases}
+0 & x < 0 \\
+1 & x = 0 \\
+\displaystyle\sum_{c \in \text{coins}} \operatorname{solve}(x-c) & x > 0
+\end{cases}$$
 
 If $x <$ 0, the value is 0, because there are no solutions. If $x =$ 0, the value is 1, because there is only one way to form an empty sum. Otherwise we calculate the sum of all values of the form `solve`($x-c$) where $c$ is in `coins`. The following code constructs an array `count` such that `count`[$x$] equals the value of `solve`($x$) for 0 $\le x \le n$:
 
@@ -6196,17 +6186,11 @@ $|X_1|+|X_2|+|X_3|-|X_1 \cap X_2|-|X_1 \cap X_3|-|X_2 \cap X_3|+|X_1 \cap X_2 \c
 
 so the number of solutions is 3!$-4 =$ 2. It turns out that the problem can also be solved without using inclusionexclusion. Let $f (n)$ denote the number of derangements for {1,2,...,$n$}. We can use the following recursive formula:
 
-$$ $$ $$ $$
-
-0 $n =$ 1
-
-$f (n) =$
-
-1 $n =$ 2
-
-$$ $$ $$
-
-($n-1)(f (n-2)+ f (n-1)$) $n >$ 2
+$$f(n) = \begin{cases}
+0 & n = 1 \\
+1 & n = 2 \\
+(n-1)\bigl(f(n-2) + f(n-1)\bigr) & n > 2
+\end{cases}$$
 
 The formula can be derived by considering the possibilities how the element 1 changes in the derangement. There are $n-1$ ways to choose an element $x$ that replaces the element 1. In each such choice, there are two options: *Option 1:* We also replace the element $x$ with the element 1. After this, the remaining task is to construct a derangement of $n-2$ elements. *Option 2:* We replace the element $x$ with some other element than 1. Now we have to construct a derangement of $n-1$ element, because we cannot replace the element $x$ with the element 1, and all other elements must be changed.
 
