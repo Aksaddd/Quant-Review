@@ -13,13 +13,17 @@ interface ProgressBarProps {
   className?: string;
 }
 
-const barHeights = { xs: 'h-1', sm: 'h-1.5', md: 'h-2.5' };
+const barHeights = { xs: 'h-[2px]', sm: 'h-[3px]', md: 'h-[5px]' };
 
-const barColors = {
-  brand:   'bg-brand-500',
-  success: 'bg-[var(--success)]',
-  error:   'bg-[var(--error)]',
-  info:    'bg-[var(--info)]',
+/**
+ * Color maps to Apple/iOS system hues or the user's accent.
+ * `brand` follows --eureka-accent so bars retint with the store.
+ */
+const BAR_COLORS: Record<NonNullable<ProgressBarProps['color']>, string> = {
+  brand:   'var(--eureka-accent)',
+  success: '#30d158',
+  error:   '#ff375f',
+  info:    '#0a84ff',
 };
 
 export function ProgressBar({
@@ -36,28 +40,26 @@ export function ProgressBar({
   return (
     <div className={clsx('w-full', className)}>
       {showLabel && (
-        <div className="flex justify-between text-xs text-[var(--text-muted)] mb-1.5">
+        <div className="flex justify-between text-[11px] text-[#86868b] mb-1 tabular-nums tracking-tight">
           <span>{value}</span>
           <span>{max}</span>
         </div>
       )}
       <div
-        className={clsx(
-          'w-full rounded-full bg-[var(--surface-4)] overflow-hidden',
-          barHeights[size]
-        )}
+        className={clsx('w-full rounded-full overflow-hidden', barHeights[size])}
+        style={{ background: 'rgba(0,0,0,0.06)' }}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
       >
         <div
-          className={clsx(
-            'h-full rounded-full',
-            barColors[color],
-            animated && 'transition-[width] duration-500 ease-out'
-          )}
-          style={{ width: `${pct}%` }}
+          className="h-full rounded-full"
+          style={{
+            width: `${pct}%`,
+            background: BAR_COLORS[color],
+            transition: animated ? 'width 500ms var(--ease-standard)' : 'none',
+          }}
         />
       </div>
     </div>
@@ -78,9 +80,9 @@ interface ProgressRingProps {
 export function ProgressRing({
   value,
   size = 80,
-  strokeWidth = 6,
-  color = 'var(--brand-500)',
-  trackColor = 'var(--surface-4)',
+  strokeWidth = 4,
+  color = 'var(--eureka-accent)',
+  trackColor = 'rgba(0,0,0,0.08)',
   label,
   className,
 }: ProgressRingProps) {
@@ -92,16 +94,7 @@ export function ProgressRing({
   return (
     <div className={clsx('relative inline-flex items-center justify-center', className)}>
       <svg width={size} height={size} className="-rotate-90">
-        {/* Track */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          stroke={trackColor}
-          strokeWidth={strokeWidth}
-        />
-        {/* Fill */}
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={trackColor} strokeWidth={strokeWidth} />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -112,11 +105,11 @@ export function ProgressRing({
           strokeLinecap="round"
           strokeDasharray={circ}
           strokeDashoffset={offset}
-          className="transition-[stroke-dashoffset] duration-700 ease-out"
+          style={{ transition: 'stroke-dashoffset 700ms var(--ease-standard)' }}
         />
       </svg>
       {label && (
-        <span className="absolute inset-0 flex items-center justify-center">
+        <span className="absolute inset-0 flex items-center justify-center tracking-tight">
           {label}
         </span>
       )}
