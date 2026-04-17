@@ -11,11 +11,12 @@ interface XPNotification {
   detail?: string;
 }
 
+const SPRING = { type: 'spring' as const, stiffness: 380, damping: 28, mass: 0.9 };
+
 export default function XPToast() {
   const [notifications, setNotifications] = useState<XPNotification[]>([]);
   const events = useXPStore((s) => s.events);
 
-  // Watch for new XP events
   const lastEventRef = useCallback(() => {
     return events.length > 0 ? events[events.length - 1] : null;
   }, [events]);
@@ -43,18 +44,27 @@ export default function XPToast() {
         {notifications.map((n) => (
           <motion.div
             key={n.id}
-            initial={{ opacity: 0, x: 40, scale: 0.9 }}
+            initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 40, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-amber-50 to-amber-100 border border-amber-200 shadow-lg shadow-amber-100/50"
+            exit={{ opacity: 0, x: 40, scale: 0.96 }}
+            transition={SPRING}
+            className="flex items-center gap-2 px-4 py-2.5"
+            style={{
+              background: 'var(--material-thin-light)',
+              backdropFilter: 'var(--material-blur)',
+              WebkitBackdropFilter: 'var(--material-blur)',
+              border: '0.5px solid rgba(0,0,0,0.06)',
+              borderRadius: 14,
+              boxShadow: 'var(--shadow-hud)',
+              color: '#1d1d1f',
+            }}
           >
-            <Star size={16} className="text-amber-500 shrink-0" />
-            <span className="text-sm font-extrabold text-amber-700">
+            <Star size={16} style={{ color: '#ff9f0a' }} className="shrink-0" />
+            <span className="text-[14px] font-semibold tracking-tight tabular-nums text-[#1d1d1f]">
               +{n.xp} XP
             </span>
             {n.detail && (
-              <span className="text-xs text-amber-600">{n.detail}</span>
+              <span className="text-[11px] text-[#6e6e73]">{n.detail}</span>
             )}
           </motion.div>
         ))}
