@@ -104,6 +104,54 @@
   --reading-font-size:      17px;
   --reading-line-height:    1.85;
   --reading-letter-spacing: 0.01em;
+
+  /* ── Apple / Eureka tokens ──────────────────────────────────────────── */
+  /* Accent (set by ReadingSettingsSync from the store) */
+  --eureka-accent:              #0D9488;
+  --eureka-accent-tint:         color-mix(in oklch, #0D9488 8%,  transparent);
+  --eureka-accent-tint-strong:  color-mix(in oklch, #0D9488 14%, transparent);
+
+  /* SF-style materials (backdrop-filter target) */
+  --material-ultrathin-light: rgba(255,255,255,0.55);
+  --material-thin-light:      rgba(255,255,255,0.72);
+  --material-regular-light:   rgba(255,255,255,0.82);
+  --material-thick-light:     rgba(255,255,255,0.92);
+  --material-ultrathin-dark:  rgba(28,28,30,0.55);
+  --material-thin-dark:       rgba(28,28,30,0.72);
+  --material-regular-dark:    rgba(28,28,30,0.82);
+  --material-thick-dark:      rgba(28,28,30,0.92);
+  --material-blur:            blur(30px) saturate(180%);
+  --material-blur-strong:     blur(40px) saturate(180%);
+
+  /* Apple luminance greys */
+  --apple-grey-50:  #fafafa;
+  --apple-grey-100: #f5f5f7;
+  --apple-grey-200: #e8e8ed;
+  --apple-grey-300: #d2d2d7;
+  --apple-grey-400: #a1a1a6;
+  --apple-grey-500: #86868b;
+  --apple-grey-600: #6e6e73;
+  --apple-grey-700: #424245;
+  --apple-grey-800: #1d1d1f;
+
+  /* Spring / ease curves */
+  --ease-standard:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-soft:       cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Durations */
+  --dur-micro:   120ms;
+  --dur-short:   220ms;
+  --dur-medium:  320ms;
+  --dur-long:    480ms;
+
+  /* Continuous-corner radii (Apple prefers larger, smoother) */
+  --radius-hud: 20px;
+  --radius-pill: 9999px;
+
+  /* HUD shadow — flat, scoped to floating surfaces only */
+  --shadow-hud:      0 0 0 0.5px rgba(0,0,0,0.08),   0 10px 40px -12px rgba(0,0,0,0.25);
+  --shadow-hud-dark: 0 0 0 0.5px rgba(255,255,255,0.08), 0 10px 40px -12px rgba(0,0,0,0.6);
 }
 
 /* Reading themes */
