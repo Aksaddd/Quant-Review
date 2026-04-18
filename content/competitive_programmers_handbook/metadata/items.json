@@ -4436,7 +4436,7 @@
       },
       {
         "order": 78,
-        "text": "false $x ̸=$ 0"
+        "text": "false $x \\ne$ 0"
       },
       {
         "order": 79,
@@ -10993,7 +10993,7 @@
       },
       {
         "order": 36,
-        "text": "The **sieve of Eratosthenes** is a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2...$n$ is prime and, if it is not, find one prime factor of the number. The algorithm builds an array `sieve` whose positions 2,3,...,$n$ are used. The value `sieve`[$k] =$ 0 means that $k$ is prime, and the value `sieve`[$k] ̸=$ 0 means that $k$ is not a prime and one of its prime factors is `sieve`[$k$]. The algorithm iterates through the numbers 2...$n$ one by one. Always when a new prime $x$ is found, the algorithm records that the multiples of $x (2x,3x,4x,...)$ are not primes, because the number $x$ divides them. For example, if $n =$ 20, the array is as follows:"
+        "text": "The **sieve of Eratosthenes** is a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2...$n$ is prime and, if it is not, find one prime factor of the number. The algorithm builds an array `sieve` whose positions 2,3,...,$n$ are used. The value `sieve`[$k] =$ 0 means that $k$ is prime, and the value `sieve`[$k] \\ne$ 0 means that $k$ is not a prime and one of its prime factors is `sieve`[$k$]. The algorithm iterates through the numbers 2...$n$ one by one. Always when a new prime $x$ is found, the algorithm records that the multiples of $x (2x,3x,4x,...)$ are not primes, because the number $x$ divides them. For example, if $n =$ 20, the array is as follows:"
       },
       {
         "order": 37,
@@ -13259,7 +13259,7 @@
       },
       {
         "order": 99,
-        "text": "whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$."
+        "text": "whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB \\ne C$."
       },
       {
         "order": 100,
@@ -13267,50 +13267,30 @@
       },
       {
         "order": 101,
-        "text": "$\\cdot$ 6 8 1 3"
+        "text": "$$\\begin{bmatrix} 6 & 8 \\\\ 1 & 3 \\end{bmatrix} \\ne \\begin{bmatrix} 8 & 7 \\\\ 3 & 2 \\end{bmatrix},$$"
       },
       {
         "order": 102,
-        "text": "$̸=$ $\\cdot$ 8 7 3 2"
+        "text": "but"
       },
       {
         "order": 103,
-        "text": ","
+        "text": "$$\\begin{bmatrix} 6 & 8 \\\\ 1 & 3 \\end{bmatrix} \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 8 & 7 \\\\ 3 & 2 \\end{bmatrix} \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix}.$$"
       },
       {
         "order": 104,
-        "text": "but $\\cdot$ 6 8 1 3"
-      },
-      {
-        "order": 105,
-        "text": "$¸\\cdot$ 3 6"
-      },
-      {
-        "order": 106,
-        "text": "$=$ $\\cdot$ 8 7 3 2"
-      },
-      {
-        "order": 107,
-        "text": "$¸\\cdot$ 3 6"
-      },
-      {
-        "order": 108,
-        "text": "."
-      },
-      {
-        "order": 109,
         "text": "However, in practice, the probability that the algorithm makes a mistake is small, and we can decrease the probability by verifying the result using multiple random vectors $X$ before reporting that $AB = C$."
       },
       {
-        "order": 110,
+        "order": 105,
         "text": "Given a graph that contains $n$ nodes and $m$ edges, our task is to find a way to color the nodes of the graph using two colors so that for at least $m$/2 edges, the endpoints have different colors. For example, in the graph"
       },
       {
-        "order": 111,
+        "order": 106,
         "text": "a valid coloring is as follows:"
       },
       {
-        "order": 112,
+        "order": 107,
         "text": "The above graph contains 7 edges, and for 5 of them, the endpoints have different colors, so the coloring is valid. The problem can be solved using a Las Vegas algorithm that generates random colorings until a valid coloring has been found. In a random coloring, the color of each node is independently chosen so that the probability of both colors is 1/2. In a random coloring, the probability that the endpoints of a single edge have different colors is 1/2. Hence, the expected number of edges whose endpoints have different colors is $m$/2. Since it is expected that a random coloring is valid, we will quickly find a valid coloring in practice."
       }
     ],
@@ -13433,15 +13413,15 @@
         "title": "Verifying matrix multiplication",
         "paragraph_range": [
           98,
-          109
+          104
         ]
       },
       {
         "level": 3,
         "title": "Graph coloring",
         "paragraph_range": [
-          110,
-          112
+          105,
+          107
         ]
       }
     ],
@@ -13449,12 +13429,12 @@
       {
         "src": "/cp-handbook/figures/fig_p243_123.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 110
+        "preceding_paragraph_order": 105
       },
       {
         "src": "/cp-handbook/figures/fig_p243_124.png",
         "alt": "Figure from page 243",
-        "preceding_paragraph_order": 111
+        "preceding_paragraph_order": 106
       }
     ],
     "footnotes": [
@@ -13916,7 +13896,7 @@
       },
       {
         "order": 3,
-        "text": "A **period** is a prefix of a string such that the string can be constructed by repeating the period. The last repetition may be partial and contain only a prefix of the period. For example, the shortest period of `ABCABCA` is `ABC`. A **border** is a string that is both a prefix and a suffix of a string. For example, the borders of `ABACABA` are `A`, `ABA` and `ABACABA`. Strings are compared using the **lexicographical order** (which corresponds to the alphabetical order). It means that $x < y$ if either $x ̸= y$ and $x$ is a prefix of $y$, or there is a position $k$ such that $x[i] = y[i]$ when $i < k$ and $x[k] < y[k]$."
+        "text": "A **period** is a prefix of a string such that the string can be constructed by repeating the period. The last repetition may be partial and contain only a prefix of the period. For example, the shortest period of `ABCABCA` is `ABC`. A **border** is a string that is both a prefix and a suffix of a string. For example, the borders of `ABACABA` are `A`, `ABA` and `ABACABA`. Strings are compared using the **lexicographical order** (which corresponds to the alphabetical order). It means that $x < y$ if either $x \\ne y$ and $x$ is a prefix of $y$, or there is a position $k$ such that $x[i] = y[i]$ when $i < k$ and $x[k] < y[k]$."
       },
       {
         "order": 4,

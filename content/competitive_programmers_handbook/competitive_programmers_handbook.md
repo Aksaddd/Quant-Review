@@ -2663,7 +2663,7 @@ $($ true $x =$ 0
 
 `possible`($x,0) =$
 
-false $x ̸=$ 0
+false $x \ne$ 0
 
 because if no weights are used, we can only form the sum 0. The following table shows all values of the function for the weights [1,3,3,5] (the symbol "X" indicates the true values):
 
@@ -5586,7 +5586,7 @@ Note that each prime factor appears in the vector as many times as it divides th
 
 ### Sieve of Eratosthenes
 
-The **sieve of Eratosthenes** is a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2...$n$ is prime and, if it is not, find one prime factor of the number. The algorithm builds an array `sieve` whose positions 2,3,...,$n$ are used. The value `sieve`[$k] =$ 0 means that $k$ is prime, and the value `sieve`[$k] ̸=$ 0 means that $k$ is not a prime and one of its prime factors is `sieve`[$k$]. The algorithm iterates through the numbers 2...$n$ one by one. Always when a new prime $x$ is found, the algorithm records that the multiples of $x (2x,3x,4x,...)$ are not primes, because the number $x$ divides them. For example, if $n =$ 20, the array is as follows:
+The **sieve of Eratosthenes** is a preprocessing algorithm that builds an array using which we can efficiently check if a given number between 2...$n$ is prime and, if it is not, find one prime factor of the number. The algorithm builds an array `sieve` whose positions 2,3,...,$n$ are used. The value `sieve`[$k] =$ 0 means that $k$ is prime, and the value `sieve`[$k] \ne$ 0 means that $k$ is not a prime and one of its prime factors is `sieve`[$k$]. The algorithm iterates through the numbers 2...$n$ one by one. Always when a new prime $x$ is found, the algorithm records that the multiples of $x (2x,3x,4x,...)$ are not primes, because the number $x$ divides them. For example, if $n =$ 20, the array is as follows:
 
 The following code implements the sieve of Eratosthenes. The code assumes that each element of `sieve` is initially zero.
 
@@ -6741,28 +6741,18 @@ The worst case of the algorithm requires still $O(n^2)$ time, because it is poss
 
 Our next problem is to $verify$ if $AB = C$ holds when $A, B$ and $C$ are matrices of size $n \times n$. Of course, we can solve the problem by calculating the product $AB$ again (in $O(n^3)$ time using the basic algorithm), but one could hope that verifying the answer would by easier than to calculate it from scratch. It turns out that we can solve the problem using a Monte Carlo algorithm$^2$
 
-whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB ̸= C$.
+whose time complexity is only $O(n^2)$. The idea is simple: we choose a random vector $X$ of $n$ elements, and calculate the matrices $ABX$ and $CX$. If $ABX = CX$, we report that $AB = C$, and otherwise we report that $AB \ne C$.
 
 > **[1]** In 1961, C. A. R. Hoare published two algorithms that are efficient on average: quicksort [36] for sorting arrays and quickselect [37] for finding order statistics.> **[2]** R. M. Freivalds published this algorithm in 1977 [26], and it is sometimes called Freivalds’ algorithm.
 
 <!-- PAGE 243 -->
 The time complexity of the algorithm is $O(n^2)$, because we can calculate the matrices $ABX$ and $CX$ in $O(n^2)$ time. We can calculate the matrix $ABX$ efficiently by using the representation $A(BX)$, so only two multiplications of $n\times n$ and $n\times$ 1 size matrices are needed. The drawback of the algorithm is that there is a small chance that the algorithm makes a mistake when it reports that $AB = C$. For example,
 
-$\cdot$ 6 8 1 3
+$$\begin{bmatrix} 6 & 8 \\ 1 & 3 \end{bmatrix} \ne \begin{bmatrix} 8 & 7 \\ 3 & 2 \end{bmatrix},$$
 
-$̸=$ $\cdot$ 8 7 3 2
+but
 
-,
-
-but $\cdot$ 6 8 1 3
-
-$¸\cdot$ 3 6
-
-$=$ $\cdot$ 8 7 3 2
-
-$¸\cdot$ 3 6
-
-.
+$$\begin{bmatrix} 6 & 8 \\ 1 & 3 \end{bmatrix} \begin{bmatrix} 3 \\ 6 \end{bmatrix} = \begin{bmatrix} 8 & 7 \\ 3 & 2 \end{bmatrix} \begin{bmatrix} 3 \\ 6 \end{bmatrix}.$$
 
 However, in practice, the probability that the algorithm makes a mistake is small, and we can decrease the probability by verifying the result using multiple random vectors $X$ before reporting that $AB = C$.
 
@@ -6973,7 +6963,7 @@ A **prefix** is a substring that starts at the beginning of a string, and a **su
 are ABCD, BCDA, CDAB and DABC.
 ```
 
-A **period** is a prefix of a string such that the string can be constructed by repeating the period. The last repetition may be partial and contain only a prefix of the period. For example, the shortest period of `ABCABCA` is `ABC`. A **border** is a string that is both a prefix and a suffix of a string. For example, the borders of `ABACABA` are `A`, `ABA` and `ABACABA`. Strings are compared using the **lexicographical order** (which corresponds to the alphabetical order). It means that $x < y$ if either $x ̸= y$ and $x$ is a prefix of $y$, or there is a position $k$ such that $x[i] = y[i]$ when $i < k$ and $x[k] < y[k]$.
+A **period** is a prefix of a string such that the string can be constructed by repeating the period. The last repetition may be partial and contain only a prefix of the period. For example, the shortest period of `ABCABCA` is `ABC`. A **border** is a string that is both a prefix and a suffix of a string. For example, the borders of `ABACABA` are `A`, `ABA` and `ABACABA`. Strings are compared using the **lexicographical order** (which corresponds to the alphabetical order). It means that $x < y$ if either $x \ne y$ and $x$ is a prefix of $y$, or there is a position $k$ such that $x[i] = y[i]$ when $i < k$ and $x[k] < y[k]$.
 
 ### Trie structure
 
