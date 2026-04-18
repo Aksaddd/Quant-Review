@@ -21,6 +21,9 @@ import AddToSetButton from '@/components/flashcards/AddToSetButton';
 import { TypeBadge, DifficultyBadge } from '@/components/ui/Badge';
 import { problemsById, SECTIONS } from '@/data/problems';
 import { textbookChapters } from '@/data/chapters';
+import { effectiveCppItems } from '@/data/effective-cpp';
+import { cpHandbookChapters } from '@/data/competitive-programmers-handbook';
+import Link from 'next/link';
 import type { ReviewGrade, Flashcard } from '@/lib/types';
 import { resolveState, isMastered, isDue } from '@/lib/sm2';
 
@@ -37,8 +40,52 @@ const CH3PLUS_SECTIONS = textbookChapters.flatMap((ch) =>
   ch.sections.map((sec) => ({ id: sec.id, title: sec.title })),
 );
 
-const ALL_SECTIONS = [...CH1_SECTIONS, ...SECTIONS, ...CH3PLUS_SECTIONS];
+// Effective C++ — one virtual "section" per Item, keyed by ecpp-ch{chapter}
+// (one entry per Item since Item is the routable page, but displayed text is
+// the chapter title shared across items in that chapter).
+const ECPP_SECTIONS = Array.from(
+  new Map(effectiveCppItems.map((it) => [`ecpp-ch${it.chapter.number}`, it.chapter.title])),
+).map(([id, title]) => ({ id, title: `Effective C++ · ${title}` }));
+
+// CP Handbook — one "section" per chapter, keyed by cph-ch{N}
+const CPH_SECTIONS = cpHandbookChapters.map((c) => ({
+  id: `cph-ch${c.chapter}`,
+  title: `CP Handbook · ${c.title}`,
+}));
+
+const ALL_SECTIONS = [
+  ...CH1_SECTIONS,
+  ...SECTIONS,
+  ...CH3PLUS_SECTIONS,
+  ...ECPP_SECTIONS,
+  ...CPH_SECTIONS,
+];
 const SECTION_MAP = Object.fromEntries(ALL_SECTIONS.map((s) => [s.id, s.title]));
+
+/** Route a card's section id to its source reading page (if any). */
+function sourceHrefForCard(card: Flashcard): string | null {
+  if (card.section.startsWith('ecpp-ch')) {
+    // Effective C++ cards carry a `ecpp-item-N` tag identifying the specific item.
+    const itemTag = card.tags?.find((t) => t.startsWith('ecpp-item-'));
+    if (itemTag) {
+      const n = itemTag.replace('ecpp-item-', '');
+      return `/read/effective-cpp/${n}`;
+    }
+  }
+  if (card.section.startsWith('cph-ch')) {
+    const chTag = card.tags?.find((t) => t.startsWith('cph-chapter-'));
+    if (chTag) {
+      const n = chTag.replace('cph-chapter-', '');
+      return `/read/competitive-programmers-handbook/${n}`;
+    }
+  }
+  // Quant-book sections render on /read/chapter-N with hash anchors
+  const m = card.section.match(/^(\d)\./);
+  if (m) {
+    return `/read/chapter-${m[1]}#section-${card.section}`;
+  }
+  return null;
+}
 
 function cardTitle(card: Flashcard): string {
   const problem = card.type === 'problem' && card.problemId ? problemsById[card.problemId] : null;
@@ -274,13 +321,35 @@ export default function FlashcardsPage() {
 
             {/* Section + status pills */}
             <div className="flex flex-wrap items-center gap-2 mb-5 self-start">
-              {/* Section — most prominent */}
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]">
-                <BookOpen size={12} className="text-[#9299a5]" />
-                <span className="text-[11px] font-bold text-[#626975]">{card.section}</span>
-                <span className="text-[#c8ccd4]">·</span>
-                <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
-              </div>
+              {/* Section — clickable link to the source reading page (if available) */}
+              {(() => {
+                const href = sourceHrefForCard(card);
+                const label = (
+                  <>
+                    <BookOpen size={12} className="text-[#9299a5]" />
+                    <span className="text-[11px] font-bold text-[#626975]">{card.section}</span>
+                    {secTitle && (
+                      <>
+                        <span className="text-[#c8ccd4]">·</span>
+                        <span className="text-[11px] font-semibold text-[#21242c]">{secTitle}</span>
+                      </>
+                    )}
+                  </>
+                );
+                const cls =
+                  'flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#e4e6ea]';
+                return href ? (
+                  <Link
+                    href={href}
+                    title="Open source chapter"
+                    className={`${cls} hover:bg-[#f0f1f3] hover:border-[#c8ccd4] transition-colors`}
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <div className={cls}>{label}</div>
+                );
+              })()}
               {/* New / Review status */}
               {isNewCard ? (
                 <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#fef9e7] text-[#f5a623] border border-[#fdd8a0]">
