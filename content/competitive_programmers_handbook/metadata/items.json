@@ -13843,17 +13843,12 @@
       },
       {
         "src": "/cp-handbook/figures/fig_p249_126.png",
-        "alt": "Figure from page 249",
-        "preceding_paragraph_order": 20
-      },
-      {
-        "src": "/cp-handbook/figures/fig_p249_127.png",
-        "alt": "Figure from page 249",
+        "alt": "State graph example (unlabeled)",
         "preceding_paragraph_order": 20
       },
       {
         "src": "/cp-handbook/figures/fig_p249_128.png",
-        "alt": "Figure from page 249",
+        "alt": "Same state graph with Grundy numbers labeling each node",
         "preceding_paragraph_order": 21
       },
       {
@@ -15091,318 +15086,274 @@
       },
       {
         "order": 19,
-        "text": "The **cross product** $a\\times b$ of vectors $a = (x_1, y_1)$ and $b = (x_2, y_2)$ is calculated using the formula $x_1y_2 -x_2y_1$. The cross product tells us whether $b$ turns left (positive value), does not turn (zero) or turns right (negative value) when it is placed directly after $a$. The following picture illustrates the above cases:"
+        "text": "The **cross product** $a \\times b$ of vectors $a = (x_1, y_1)$ and $b = (x_2, y_2)$ is calculated using the formula $x_1 y_2 - x_2 y_1$. The cross product tells us whether $b$ turns left (positive value), does not turn (zero) or turns right (negative value) when it is placed directly after $a$. The following picture illustrates the above cases:"
       },
       {
         "order": 20,
-        "text": "$b$"
+        "text": "| | left turn | no turn | right turn | | --- | --- | --- | --- | | $a \\times b$ | $6$ | $0$ | $-8$ |"
       },
       {
         "order": 21,
-        "text": "$b$"
-      },
-      {
-        "order": 22,
-        "text": "$b$"
-      },
-      {
-        "order": 23,
-        "text": "$a$"
-      },
-      {
-        "order": 24,
-        "text": "$a$"
-      },
-      {
-        "order": 25,
-        "text": "$a$"
-      },
-      {
-        "order": 26,
-        "text": "$a\\times b =$ 6"
-      },
-      {
-        "order": 27,
-        "text": "$a\\times b =$ 0"
-      },
-      {
-        "order": 28,
-        "text": "$a\\times b = -8$"
-      },
-      {
-        "order": 29,
         "text": "For example, in the first case $a =$ (4,2) and $b =$ (1,2). The following code calculates the cross product using the class `complex`:"
       },
       {
-        "order": 30,
+        "order": 22,
         "text": "The above code works, because the function `conj` negates the y coordinate of a vector, and when the vectors ($x_1,-y_1$) and ($x_2, y_2$) are multiplied together, the y coordinate of the result is $x_1y_2 -x_2y_1$."
       },
       {
-        "order": 31,
+        "order": 23,
         "text": "Cross products can be used to test whether a point is located on the left or right side of a line. Assume that the line goes through points $s_1$ and $s_2$, we are looking from $s_1$ to $s_2$ and the point is $p$. For example, in the following picture, $p$ is on the left side of the line:"
       },
       {
-        "order": 32,
+        "order": 24,
         "text": "The cross product ($p -s_1)\\times (p -s_2$) tells us the location of the point $p$. If the cross product is positive, $p$ is located on the left side, and if the cross product is negative, $p$ is located on the right side. Finally, if the cross product is zero, points $s_1$, $s_2$ and $p$ are on the same line."
       },
       {
-        "order": 33,
+        "order": 25,
         "text": "Next we consider the problem of testing whether two line segments $ab$ and $cd$ intersect. The possible cases are: *Case 1:* The line segments are on the same line and they overlap each other. In this case, there is an infinite number of intersection points. For example, in the following picture, all points between $c$ and $b$ are intersection points:"
       },
       {
-        "order": 34,
+        "order": 26,
         "text": "$a$"
       },
       {
-        "order": 35,
+        "order": 27,
         "text": "In this case, we can use cross products to check if all points are on the same line. After this, we can sort the points and check whether the line segments overlap each other. *Case 2:* The line segments have a common vertex that is the only intersection point. For example, in the following picture the intersection point is $b = c$:"
       },
       {
-        "order": 36,
+        "order": 28,
         "text": "$b = c$"
       },
       {
-        "order": 37,
+        "order": 29,
         "text": "This case is easy to check, because there are only four possibilities for the intersection point: $a = c, a = d$, $b = c$ and $b = d$. *Case 3:* There is exactly one intersection point that is not a vertex of any line segment. In the following picture, the point $p$ is the intersection point:"
       },
       {
-        "order": 38,
+        "order": 30,
         "text": "$b$"
       },
       {
-        "order": 39,
+        "order": 31,
         "text": "In this case, the line segments intersect exactly when both points $c$ and $d$ are on different sides of a line through $a$ and $b$, and points $a$ and $b$ are on different sides of a line through $c$ and $d$. We can use cross products to check this."
       },
       {
-        "order": 40,
+        "order": 32,
         "text": "Another feature of cross products is that the area of a triangle can be calculated using the formula $|(a-c)\\times (b -c)|$"
       },
       {
-        "order": 41,
+        "order": 33,
         "text": "2 ,"
       },
       {
-        "order": 42,
+        "order": 34,
         "text": "where $a$, $b$ and $c$ are the vertices of the triangle. Using this fact, we can derive a formula for calculating the shortest distance between a point and a line. For example, in the following picture $d$ is the shortest distance between the point $p$ and the line that is defined by the points $s_1$ and $s_2$:"
       },
       {
-        "order": 43,
+        "order": 35,
         "text": "The area of the triangle whose vertices are $s_1$, $s_2$ and $p$ can be calculated in two ways: it is both$^1$"
       },
       {
-        "order": 44,
+        "order": 36,
         "text": "$_2|s_2 -s_1|d$ and$^1$"
       },
       {
-        "order": 45,
+        "order": 37,
         "text": "$_2((s_1 -p)\\times (s_2 -p))$. Thus, the shortest distance is"
       },
       {
-        "order": 46,
+        "order": 38,
         "text": "$d = (s_1 -p)\\times (s_2 -p)$"
       },
       {
-        "order": 47,
+        "order": 39,
         "text": "$|s_2 -s_1|$ ."
       },
       {
-        "order": 48,
+        "order": 40,
         "text": "Let us now consider the problem of testing whether a point is located inside or outside a polygon. For example, in the following picture point $a$ is inside the polygon and point $b$ is outside the polygon."
       },
       {
-        "order": 49,
+        "order": 41,
         "text": "A convenient way to solve the problem is to send a $ray$ from the point to an arbitrary direction and calculate the number of times it touches the boundary of the polygon. If the number is odd, the point is inside the polygon, and if the number is even, the point is outside the polygon. For example, we could send the following rays:"
       },
       {
-        "order": 50,
+        "order": 42,
         "text": "The rays from $a$ touch 1 and 3 times the boundary of the polygon, so $a$ is inside the polygon. Correspondingly, the rays from $b$ touch 0 and 2 times the boundary of the polygon, so $b$ is outside the polygon."
       },
       {
-        "order": 51,
+        "order": 43,
         "text": "A general formula for calculating the area of a polygon, sometimes called the **shoelace formula**, is as follows:"
       },
       {
-        "order": 52,
+        "order": 44,
         "text": "$$\\frac{1}{2} \\left| \\sum_{i=1}^{n-1} (p_i \\times p_{i+1}) \\right| = \\frac{1}{2} \\left| \\sum_{i=1}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) \\right|,$$"
       },
       {
-        "order": 53,
+        "order": 45,
         "text": "Here the vertices are $p_1 = (x_1, y_1)$, $p_2 = (x_2, y_2)$, $\\ldots$, $p_n = (x_n, y_n)$ in such an order that $p_i$ and $p_{i+1}$ are adjacent vertices on the boundary of the polygon, and the first and last vertex is the same, i.e., $p_1 = p_n$."
       },
       {
-        "order": 54,
+        "order": 46,
         "text": "For example, the area of the polygon"
       },
       {
-        "order": 55,
+        "order": 47,
         "text": "is"
       },
       {
-        "order": 56,
+        "order": 48,
         "text": "$$\\frac{|(2 \\cdot 5 - 5 \\cdot 4) + (5 \\cdot 3 - 7 \\cdot 5) + (7 \\cdot 1 - 4 \\cdot 3) + (4 \\cdot 3 - 4 \\cdot 1) + (4 \\cdot 4 - 2 \\cdot 3)|}{2} = 17/2.$$"
       },
       {
-        "order": 57,
+        "order": 49,
         "text": "The idea of the formula is to go through trapezoids whose one side is a side of the polygon, and another side lies on the horizontal line $y = 0$. For example:"
       },
       {
-        "order": 58,
+        "order": 50,
         "text": "The area of such a trapezoid is"
       },
       {
-        "order": 59,
+        "order": 51,
         "text": "$$(x_{i+1} - x_i) \\frac{y_i + y_{i+1}}{2},$$"
       },
       {
-        "order": 60,
+        "order": 52,
         "text": "where the vertices of the polygon are $p_i$ and $p_{i+1}$. If $x_{i+1} > x_i$, the area is positive, and if $x_{i+1} < x_i$, the area is negative."
       },
       {
-        "order": 61,
+        "order": 53,
         "text": "The area of the polygon is the sum of areas of all such trapezoids, which yields the formula"
       },
       {
-        "order": 62,
+        "order": 54,
         "text": "$$\\left| \\sum_{i=1}^{n-1} (x_{i+1} - x_i) \\frac{y_i + y_{i+1}}{2} \\right| = \\frac{1}{2} \\left| \\sum_{i=1}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) \\right|.$$"
       },
       {
-        "order": 63,
+        "order": 55,
         "text": "Note that the absolute value of the sum is taken, because the value of the sum may be positive or negative, depending on whether we walk clockwise or counterclockwise along the boundary of the polygon."
       },
       {
-        "order": 64,
+        "order": 56,
         "text": "**Pick’s theorem** provides another way to calculate the area of a polygon provided that all vertices of the polygon have integer coordinates. According to Pick’s theorem, the area of the polygon is"
       },
       {
-        "order": 65,
+        "order": 57,
         "text": "$a+ b/2-1$,"
       },
       {
-        "order": 66,
-        "text": "where $a$ is the number of integer points inside the polygon and $b$ is the number of integer points on the boundary of the polygon. For example, the area of the polygon"
+        "order": 58,
+        "text": "where $a$ is the number of integer points inside the polygon and $b$ is the number of integer points on the boundary of the polygon. For example, the area of the polygon with vertices $(2,4)$, $(5,5)$, $(7,3)$, $(4,1)$, $(4,3)$ below"
       },
       {
-        "order": 67,
-        "text": "(5,5)"
+        "order": 59,
+        "text": "is $6 + 7/2 - 1 = 17/2$."
       },
       {
-        "order": 68,
-        "text": "(7,3)"
-      },
-      {
-        "order": 69,
-        "text": "(4,1)"
-      },
-      {
-        "order": 70,
-        "text": "is 6$+7/2-1 =$ 17/2."
-      },
-      {
-        "order": 71,
+        "order": 60,
         "text": "A **distance function** defines the distance between two points. The usual distance function is the **Euclidean distance** where the distance between points ($x_1, y_1$) and ($x_2, y_2$) is $q$"
       },
       {
-        "order": 72,
+        "order": 61,
         "text": "($x_2 -x_1)^2 +(y_2 -y_1)^2$."
       },
       {
-        "order": 73,
+        "order": 62,
         "text": "An alternative distance function is the **Manhattan distance** where the distance between points ($x_1, y_1$) and ($x_2, y_2$) is"
       },
       {
-        "order": 74,
+        "order": 63,
         "text": "$|x_1 -x_2|+|y_1 -y_2|$."
       },
       {
-        "order": 75,
+        "order": 64,
         "text": "For example, consider the following picture:"
       },
       {
-        "order": 76,
+        "order": 65,
         "text": "(5,2)"
       },
       {
-        "order": 77,
+        "order": 66,
         "text": "(5,2)"
       },
       {
-        "order": 78,
+        "order": 67,
         "text": "(2,1)"
       },
       {
-        "order": 79,
+        "order": 68,
         "text": "(2,1)"
       },
       {
-        "order": 80,
+        "order": 69,
         "text": "Euclidean distance Manhattan distance"
       },
       {
-        "order": 81,
+        "order": 70,
         "text": "The Euclidean distance between the points is $p$"
       },
       {
-        "order": 82,
+        "order": 71,
         "text": "(5$-2)^2 +(2-1)^2 =$ $p$"
       },
       {
-        "order": 83,
+        "order": 72,
         "text": "and the Manhattan distance is"
       },
       {
-        "order": 84,
+        "order": 73,
         "text": "$|5-2|+|2-1| =$ 4."
       },
       {
-        "order": 85,
+        "order": 74,
         "text": "The following picture shows regions that are within a distance of 1 from the center point, using the Euclidean and Manhattan distances:"
       },
       {
-        "order": 86,
+        "order": 75,
         "text": "Euclidean distance Manhattan distance"
       },
       {
-        "order": 87,
+        "order": 76,
         "text": "Some problems are easier to solve if Manhattan distances are used instead of Euclidean distances. As an example, consider a problem where we are given $n$ points in the two-dimensional plane and our task is to calculate the maximum Manhattan distance between any two points. For example, consider the following set of points:"
       },
       {
-        "order": 88,
+        "order": 77,
         "text": "The maximum Manhattan distance is 5 between points $B$ and $C$:"
       },
       {
-        "order": 89,
+        "order": 78,
         "text": "A useful technique related to Manhattan distances is to rotate all coordinates 45 degrees so that a point ($x, y$) becomes ($x+ y, y-x$). For example, after rotating the above points, the result is:"
       },
       {
-        "order": 90,
+        "order": 79,
         "text": "And the maximum distance is as follows:"
       },
       {
-        "order": 91,
+        "order": 80,
         "text": "Consider two points $p_1 = (x_1, y_1)$ and $p_2 = (x_2, y_2)$ whose rotated coordinates are $p_1' = (x_1', y_1')$ and $p_2' = (x_2', y_2')$. Now there are two ways to express the Manhattan distance between $p_1$ and $p_2$:"
       },
       {
-        "order": 92,
+        "order": 81,
         "text": "$$|x_1 - x_2| + |y_1 - y_2| = \\max(|x_1' - x_2'|, |y_1' - y_2'|)$$"
       },
       {
-        "order": 93,
+        "order": 82,
         "text": "For example, if $p_1 = (1, 0)$ and $p_2 = (3, 3)$, the rotated coordinates are $p_1' = (1, -1)$ and $p_2' = (6, 0)$ and the Manhattan distance is"
       },
       {
-        "order": 94,
+        "order": 83,
         "text": "$$|1 - 3| + |0 - 3| = \\max(|1 - 6|, |-1 - 0|) = 5.$$"
       },
       {
-        "order": 95,
+        "order": 84,
         "text": "The rotated coordinates provide a simple way to operate with Manhattan distances, because we can consider x and y coordinates separately. To maximize the Manhattan distance between two points, we should find two points whose rotated coordinates maximize the value of"
       },
       {
-        "order": 96,
+        "order": 85,
         "text": "$$\\max(|x_1' - x_2'|, |y_1' - y_2'|).$$"
       },
       {
-        "order": 97,
+        "order": 86,
         "text": "This is easy, because either the horizontal or vertical difference of the rotated coordinates has to be maximum."
       }
     ],
@@ -15461,10 +15412,10 @@
         "order": 5,
         "language": "cpp",
         "code": "P a = {4,2};\nP b = {1,2};\nC p = (conj(a)*b).Y; // 6",
-        "preceding_paragraph_order": 29,
+        "preceding_paragraph_order": 21,
         "explanatory_paragraphs": [
-          30,
-          31
+          22,
+          23
         ]
       }
     ],
@@ -15490,144 +15441,149 @@
         "title": "Points and lines",
         "paragraph_range": [
           19,
-          30
+          22
         ]
       },
       {
         "level": 3,
         "title": "Point location",
         "paragraph_range": [
-          31,
-          32
+          23,
+          24
         ]
       },
       {
         "level": 3,
         "title": "Line segment intersection",
         "paragraph_range": [
-          33,
-          39
+          25,
+          31
         ]
       },
       {
         "level": 3,
         "title": "Point distance from a line",
         "paragraph_range": [
-          40,
-          47
+          32,
+          39
         ]
       },
       {
         "level": 3,
         "title": "Point inside a polygon",
         "paragraph_range": [
-          48,
-          50
+          40,
+          42
         ]
       },
       {
         "level": 3,
         "title": "Polygon area",
         "paragraph_range": [
-          51,
-          63
+          43,
+          55
         ]
       },
       {
         "level": 3,
         "title": "Pick’s theorem",
         "paragraph_range": [
-          64,
-          70
+          56,
+          59
         ]
       },
       {
         "level": 3,
         "title": "Distance functions",
         "paragraph_range": [
-          71,
-          86
+          60,
+          75
         ]
       },
       {
         "level": 3,
         "title": "Rotating coordinates",
         "paragraph_range": [
-          87,
-          97
+          76,
+          86
         ]
       }
     ],
     "figures": [
       {
+        "src": "/cp-handbook/figures/fig_p278_cross_product.png",
+        "alt": "Three vector pairs: b turning left of a (a×b=6), b continuing straight along a (a×b=0), and b turning right of a (a×b=−8)",
+        "preceding_paragraph_order": 19
+      },
+      {
         "src": "/cp-handbook/figures/fig_p278_148.png",
         "alt": "Figure from page 278",
-        "preceding_paragraph_order": 31
+        "preceding_paragraph_order": 23
       },
       {
         "src": "/cp-handbook/figures/fig_p279_149.png",
         "alt": "Figure from page 279",
-        "preceding_paragraph_order": 33
+        "preceding_paragraph_order": 25
       },
       {
         "src": "/cp-handbook/figures/fig_p279_150.png",
         "alt": "Figure from page 279",
-        "preceding_paragraph_order": 36
+        "preceding_paragraph_order": 28
       },
       {
         "src": "/cp-handbook/figures/fig_p279_151.png",
         "alt": "Figure from page 279",
-        "preceding_paragraph_order": 37
+        "preceding_paragraph_order": 29
       },
       {
         "src": "/cp-handbook/figures/fig_p280_152.png",
         "alt": "Figure from page 280",
-        "preceding_paragraph_order": 42
+        "preceding_paragraph_order": 34
       },
       {
         "src": "/cp-handbook/figures/fig_p280_153.png",
         "alt": "Figure from page 280",
-        "preceding_paragraph_order": 48
+        "preceding_paragraph_order": 40
       },
       {
         "src": "/cp-handbook/figures/fig_p280_154.png",
         "alt": "Figure from page 280",
-        "preceding_paragraph_order": 49
+        "preceding_paragraph_order": 41
       },
       {
         "src": "/cp-handbook/figures/fig_p281_polygon.png",
         "alt": "Polygon with vertices (2,4), (5,5), (7,3), (4,1), (4,3)",
-        "preceding_paragraph_order": 54
+        "preceding_paragraph_order": 46
       },
       {
         "src": "/cp-handbook/figures/fig_p281_trapezoid.png",
         "alt": "Polygon with a shaded trapezoid from one edge down to the horizontal axis",
-        "preceding_paragraph_order": 57
+        "preceding_paragraph_order": 49
       },
       {
         "src": "/cp-handbook/figures/fig_p282_157.png",
-        "alt": "Figure from page 282",
-        "preceding_paragraph_order": 67
+        "alt": "Polygon with vertices (2,4), (5,5), (7,3), (4,1), (4,3) on an integer grid, showing 6 interior lattice points and 7 boundary lattice points",
+        "preceding_paragraph_order": 58
       },
       {
         "src": "/cp-handbook/figures/fig_p283_158.png",
         "alt": "Figure from page 283",
-        "preceding_paragraph_order": 87
+        "preceding_paragraph_order": 76
       },
       {
         "src": "/cp-handbook/figures/fig_p283_159.png",
         "alt": "Figure from page 283",
-        "preceding_paragraph_order": 88
+        "preceding_paragraph_order": 77
       },
       {
         "src": "/cp-handbook/figures/fig_p283_160.png",
         "alt": "Figure from page 283",
-        "preceding_paragraph_order": 89
+        "preceding_paragraph_order": 78
       },
       {
         "src": "/cp-handbook/figures/fig_p284_manhattan_grid.png",
         "alt": "Grid diagram with points A, B, C, D and red path connecting B to peak to C",
-        "preceding_paragraph_order": 90
+        "preceding_paragraph_order": 79
       }
     ],
     "footnotes": [],

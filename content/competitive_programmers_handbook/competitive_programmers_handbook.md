@@ -7558,25 +7558,13 @@ cout << arg(v) << "\n"; // 0.963648
 
 ### Points and lines
 
-The **cross product** $a\times b$ of vectors $a = (x_1, y_1)$ and $b = (x_2, y_2)$ is calculated using the formula $x_1y_2 -x_2y_1$. The cross product tells us whether $b$ turns left (positive value), does not turn (zero) or turns right (negative value) when it is placed directly after $a$. The following picture illustrates the above cases:
+The **cross product** $a \times b$ of vectors $a = (x_1, y_1)$ and $b = (x_2, y_2)$ is calculated using the formula $x_1 y_2 - x_2 y_1$. The cross product tells us whether $b$ turns left (positive value), does not turn (zero) or turns right (negative value) when it is placed directly after $a$. The following picture illustrates the above cases:
 
-$b$
+![Three vector pairs: b turning left of a (a×b=6), b continuing straight along a (a×b=0), and b turning right of a (a×b=−8)](figures/fig_p278_cross_product.png)
 
-$b$
-
-$b$
-
-$a$
-
-$a$
-
-$a$
-
-$a\times b =$ 6
-
-$a\times b =$ 0
-
-$a\times b = -8$
+| | left turn | no turn | right turn |
+| --- | --- | --- | --- |
+| $a \times b$ | $6$ | $0$ | $-8$ |
 
 For example, in the first case $a =$ (4,2) and $b =$ (1,2). The following code calculates the cross product using the class `complex`:
 
@@ -7692,17 +7680,11 @@ Note that the absolute value of the sum is taken, because the value of the sum m
 
 $a+ b/2-1$,
 
-where $a$ is the number of integer points inside the polygon and $b$ is the number of integer points on the boundary of the polygon. For example, the area of the polygon
+where $a$ is the number of integer points inside the polygon and $b$ is the number of integer points on the boundary of the polygon. For example, the area of the polygon with vertices $(2,4)$, $(5,5)$, $(7,3)$, $(4,1)$, $(4,3)$ below
 
-(5,5)
+![Polygon with vertices (2,4), (5,5), (7,3), (4,1), (4,3) on an integer grid, showing 6 interior lattice points and 7 boundary lattice points](figures/fig_p282_157.png)
 
-![Figure from page 282](figures/fig_p282_157.png)
-
-(7,3)
-
-(4,1)
-
-is 6$+7/2-1 =$ 17/2.
+is $6 + 7/2 - 1 = 17/2$.
 
 ### Distance functions
 
