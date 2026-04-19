@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ListOrdered, Link as LinkIcon } from 'lucide-react';
 import { clsx } from 'clsx';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
+import RecallMask from '@/components/study-overlay/RecallMask';
+import RecallQueue, { type RecallPrompt } from '@/components/study-overlay/RecallQueue';
+import StudyOverlayBar from '@/components/study-overlay/StudyOverlayBar';
 import {
   effectiveCppItemByNumber,
   effectiveCppItems,
@@ -73,6 +76,21 @@ export default async function EffectiveCppItemPage({
   const d = DIFFICULTY_STYLES[item.difficulty] ?? DIFFICULTY_STYLES.intermediate;
   const segments = weaveSegments(item);
 
+  /* Priming cues surfaced at the top when the recall overlay is on. Subsections
+   * make the strongest cues (each is a self-contained sub-topic); when an item
+   * has none, we fall back to the Things-to-Remember count as a single prompt. */
+  const recallPrompts: RecallPrompt[] = item.subsections.length > 0
+    ? item.subsections.map((s, i) => ({
+        anchorId: `ecpp-sub-${item.item}-${i}`,
+        label: s.title,
+      }))
+    : item.things_to_remember.length > 0
+      ? [{
+          anchorId: `ecpp-ttr-${item.item}`,
+          label: `Recall all ${item.things_to_remember.length} "Things to Remember" for this item.`,
+        }]
+      : [];
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       {/* Breadcrumb */}
@@ -114,6 +132,9 @@ export default async function EffectiveCppItemPage({
         )}
       </header>
 
+      {/* Recall queue (hidden unless overlay is on) */}
+      <RecallQueue heading="Subsections in this item" prompts={recallPrompts} />
+
       {/* Prose + code */}
       <article className="space-y-5">
         {segments.map((seg) =>
@@ -123,19 +144,28 @@ export default async function EffectiveCppItemPage({
               content={rewriteCrossRefs(seg.text)}
             />
           ) : (
-            <pre
+            <RecallMask
               key={`c-${seg.order}`}
-              className="bg-[#1d1d1f] text-[#f6f7f8] rounded-lg px-4 py-3 overflow-x-auto text-[13px] leading-relaxed font-mono"
+              id={`ecpp-${item.item}-code-${seg.order}`}
+              kind="Code example"
+              prompt="What does the code demonstrated here look like? Sketch it mentally — types, qualifiers, structure — before revealing."
             >
-              <code>{seg.code}</code>
-            </pre>
+              <pre
+                className="bg-[#1d1d1f] text-[#f6f7f8] rounded-lg px-4 py-3 overflow-x-auto text-[13px] leading-relaxed font-mono"
+              >
+                <code>{seg.code}</code>
+              </pre>
+            </RecallMask>
           ),
         )}
       </article>
 
       {/* Things to Remember */}
       {item.things_to_remember.length > 0 && (
-        <aside className="mt-12 p-5 rounded-xl bg-[#f6faff] border border-[#d8e6ff]">
+        <aside
+          id={`ecpp-ttr-${item.item}`}
+          className="mt-12 p-5 rounded-xl bg-[#f6faff] border border-[#d8e6ff]"
+        >
           <h2 className="flex items-center gap-2 text-[13px] font-semibold text-[#1d1d1f] mb-3 uppercase tracking-wider">
             <ListOrdered size={14} />
             Things to Remember
@@ -146,7 +176,15 @@ export default async function EffectiveCppItemPage({
                 <span className="w-5 h-5 rounded-full bg-[#1865f2] text-white text-[11px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <MarkdownRenderer content={bullet} className="ecpp-bullet-prose" />
+                <div className="flex-1 min-w-0">
+                  <RecallMask
+                    id={`ecpp-${item.item}-ttr-${i}`}
+                    kind={`Key point ${i + 1} of ${item.things_to_remember.length}`}
+                    prompt="Try to recall this point in your own words first, then reveal to verify."
+                  >
+                    <MarkdownRenderer content={bullet} className="ecpp-bullet-prose" />
+                  </RecallMask>
+                </div>
               </li>
             ))}
           </ul>
@@ -213,6 +251,8 @@ export default async function EffectiveCppItemPage({
           <span />
         )}
       </nav>
+
+      <StudyOverlayBar />
     </div>
   );
 }
