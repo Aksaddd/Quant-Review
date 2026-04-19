@@ -1,18 +1,21 @@
 'use client';
 
-import { Brain, RotateCcw } from 'lucide-react';
+import { Brain, RotateCcw, Eye, EyeOff } from 'lucide-react';
 import { useStudyOverlayStore } from '@/stores/useStudyOverlayStore';
 
 /**
  * Floating overlay control: toggles active-recall mode for the current page
- * and surfaces a tiny session HUD (got / partial / blank). Intentionally
- * minimal — the overlay's whole value is the per-block mask; the bar is just
- * the on/off lever plus lightweight metacognitive feedback.
+ * and surfaces a tiny session HUD (got / partial / blank). When recall mode is
+ * on, exposes two extra controls: Hide-answers toggle (lets you peek at all
+ * masked content without leaving recall mode) and Reset (clears session counts
+ * AND re-hides every mask on the page so you can re-do retrieval cold).
  */
 export default function StudyOverlayBar() {
   const enabled = useStudyOverlayStore((s) => s.enabled);
+  const masksOn = useStudyOverlayStore((s) => s.masksOn);
   const counts = useStudyOverlayStore((s) => s.counts);
   const toggle = useStudyOverlayStore((s) => s.toggle);
+  const toggleMasks = useStudyOverlayStore((s) => s.toggleMasks);
   const resetSession = useStudyOverlayStore((s) => s.resetSession);
 
   const total = counts.got + counts.partial + counts.blank;
@@ -33,16 +36,36 @@ export default function StudyOverlayBar() {
           <span className="text-[#a21f1f]">− {counts.blank}</span>
           <span className="text-[#9299a5]">·</span>
           <span className="text-[#626975]">{accuracy}% recalled</span>
-          <button
-            type="button"
-            onClick={resetSession}
-            title="Reset session counts"
-            className="ml-1 text-[#9299a5] hover:text-[#21242c] transition-colors"
-          >
-            <RotateCcw size={12} />
-          </button>
         </div>
       )}
+
+      {enabled && (
+        <button
+          type="button"
+          onClick={toggleMasks}
+          title={masksOn ? 'Show all answers (disable masks)' : 'Hide answers again (re-enable masks)'}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-white/90 backdrop-blur border border-[#e4e6ea] shadow-sm text-[12px] font-medium text-[#21242c] hover:bg-white transition-colors"
+          style={{ backdropFilter: 'saturate(180%) blur(16px)' }}
+          aria-pressed={!masksOn}
+        >
+          {masksOn ? <EyeOff size={13} /> : <Eye size={13} />}
+          {masksOn ? 'Hide answers' : 'Answers shown'}
+        </button>
+      )}
+
+      {enabled && (
+        <button
+          type="button"
+          onClick={resetSession}
+          title="Reset session counts and re-hide every answer on this page"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-white/90 backdrop-blur border border-[#e4e6ea] shadow-sm text-[12px] font-medium text-[#21242c] hover:bg-white transition-colors"
+          style={{ backdropFilter: 'saturate(180%) blur(16px)' }}
+        >
+          <RotateCcw size={13} />
+          Reset
+        </button>
+      )}
+
       <button
         type="button"
         onClick={toggle}

@@ -20,16 +20,21 @@ export type RecallOutcome = 'got' | 'partial' | 'blank';
 
 interface StudyOverlayState {
   enabled: boolean;
+  /** When false, masks pass-through even if overlay is enabled (peek mode). */
+  masksOn: boolean;
   /** ISO timestamp of the current session's first recall — null if none yet. */
   sessionStartedAt: string | null;
   counts: { got: number; partial: number; blank: number };
   /** Mask ids already revealed in the current session (prevents double-counting). */
   revealed: string[];
+  /** Incremented on resetSession so <RecallMask/> can clear its local state. */
+  resetToken: number;
 }
 
 interface StudyOverlayActions {
   toggle: () => void;
   setEnabled: (enabled: boolean) => void;
+  toggleMasks: () => void;
   markRevealed: (id: string, outcome: RecallOutcome) => void;
   resetSession: () => void;
 }
@@ -38,12 +43,15 @@ export const useStudyOverlayStore = create<StudyOverlayState & StudyOverlayActio
   persist(
     (set, get) => ({
       enabled: false,
+      masksOn: true,
       sessionStartedAt: null,
       counts: { got: 0, partial: 0, blank: 0 },
       revealed: [],
+      resetToken: 0,
 
       toggle: () => set({ enabled: !get().enabled }),
       setEnabled: (enabled) => set({ enabled }),
+      toggleMasks: () => set({ masksOn: !get().masksOn }),
 
       markRevealed: (id, outcome) => {
         const s = get();
@@ -60,13 +68,14 @@ export const useStudyOverlayStore = create<StudyOverlayState & StudyOverlayActio
           sessionStartedAt: null,
           counts: { got: 0, partial: 0, blank: 0 },
           revealed: [],
+          resetToken: get().resetToken + 1,
         }),
     }),
     {
       name: 'qr:study-overlay',
-      // Only persist the toggle across reloads; session counts stay in-memory
-      // so each study session is a clean retrieval round.
-      partialize: (s) => ({ enabled: s.enabled }),
+      // Persist toggles across reloads; session counts stay in-memory so each
+      // study session is a clean retrieval round.
+      partialize: (s) => ({ enabled: s.enabled, masksOn: s.masksOn }),
     },
   ),
 );

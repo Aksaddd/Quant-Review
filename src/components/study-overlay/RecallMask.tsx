@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Eye, Check, CircleDashed, Minus } from 'lucide-react';
 import { useStudyOverlayStore, type RecallOutcome } from '@/stores/useStudyOverlayStore';
 import { useXPStore } from '@/stores/useXPStore';
@@ -34,12 +34,23 @@ const XP_BY_OUTCOME: Record<RecallOutcome, number> = {
  */
 export default function RecallMask({ id, prompt, kind, children }: RecallMaskProps) {
   const enabled = useStudyOverlayStore((s) => s.enabled);
+  const masksOn = useStudyOverlayStore((s) => s.masksOn);
+  const resetToken = useStudyOverlayStore((s) => s.resetToken);
   const markRevealed = useStudyOverlayStore((s) => s.markRevealed);
   const awardXP = useXPStore((s) => s.awardXP);
   const [revealed, setRevealed] = useState(false);
   const [rated, setRated] = useState<RecallOutcome | null>(null);
 
-  if (!enabled) return <>{children}</>;
+  // When the user hits Reset on the overlay bar, re-hide every mask and clear
+  // its local rating so the next retrieval round starts cold.
+  useEffect(() => {
+    if (resetToken === 0) return;
+    setRevealed(false);
+    setRated(null);
+  }, [resetToken]);
+
+  // Overlay off, or user toggled "Hide answers" off → render inline, no gate.
+  if (!enabled || !masksOn) return <>{children}</>;
 
   const handleReveal = () => setRevealed(true);
 
