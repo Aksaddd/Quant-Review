@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ListOrdered, Link as LinkIcon } from 'lucide-react';
 import { clsx } from 'clsx';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
+import RecallMask from '@/components/study-overlay/RecallMask';
+import RecallQueue, { type RecallPrompt } from '@/components/study-overlay/RecallQueue';
+import StudyOverlayBar from '@/components/study-overlay/StudyOverlayBar';
 import {
   cpHandbookChapterByNumber,
   cpHandbookChapters,
@@ -87,6 +90,19 @@ export default async function CpHandbookChapterPage({
   const d = DIFFICULTY_STYLES[chapter.difficulty] ?? DIFFICULTY_STYLES.intermediate;
   const segments = weaveSegments(chapter);
 
+  /* CP chapters are long; subsection titles are the natural retrieval cues.
+   * Clicking a cue jumps to the heading's anchor in the article below. */
+  const subsectionAnchorId = (i: number) => `cph-sub-${chapter.chapter}-${i}`;
+  const recallPrompts: RecallPrompt[] = chapter.subsections.map((s, i) => ({
+    anchorId: subsectionAnchorId(i),
+    label: s.title,
+  }));
+
+  /* Map subhead segments to their chapter-level subsection index so the ids
+   * match the queue's anchors. */
+  const subheadIndexByTitle = new Map<string, number>();
+  chapter.subsections.forEach((s, i) => subheadIndexByTitle.set(s.title, i));
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       {/* Breadcrumb */}
@@ -128,6 +144,9 @@ export default async function CpHandbookChapterPage({
         )}
       </header>
 
+      {/* Recall queue (hidden unless overlay is on) */}
+      <RecallQueue heading="Subsections in this chapter" prompts={recallPrompts} />
+
       {/* Weaved prose + code + figures + subheadings */}
       <article className="space-y-5">
         {segments.map((seg, idx) => {
@@ -141,12 +160,18 @@ export default async function CpHandbookChapterPage({
           }
           if (seg.kind === 'code') {
             return (
-              <pre
+              <RecallMask
                 key={`c-${seg.order}-${idx}`}
-                className="bg-[#1d1d1f] text-[#f6f7f8] rounded-lg px-4 py-3 overflow-x-auto text-[13px] leading-relaxed font-mono"
+                id={`cph-${chapter.chapter}-code-${seg.order}-${idx}`}
+                kind="Code example"
+                prompt="Before revealing, sketch the algorithm or data structure in your head — names, loops, recurrence — then check yourself."
               >
-                <code>{seg.code}</code>
-              </pre>
+                <pre
+                  className="bg-[#1d1d1f] text-[#f6f7f8] rounded-lg px-4 py-3 overflow-x-auto text-[13px] leading-relaxed font-mono"
+                >
+                  <code>{seg.code}</code>
+                </pre>
+              </RecallMask>
             );
           }
           if (seg.kind === 'figure') {
@@ -174,10 +199,12 @@ export default async function CpHandbookChapterPage({
             const Tag = seg.level === 2 ? 'h2' : 'h3';
             const cls =
               seg.level === 2
-                ? 'text-[18px] font-semibold text-[#1d1d1f] tracking-tight mt-6'
-                : 'text-[15px] font-semibold text-[#21242c] tracking-tight mt-4';
+                ? 'text-[18px] font-semibold text-[#1d1d1f] tracking-tight mt-6 scroll-mt-16'
+                : 'text-[15px] font-semibold text-[#21242c] tracking-tight mt-4 scroll-mt-16';
+            const subIdx = subheadIndexByTitle.get(seg.title);
+            const id = subIdx !== undefined ? subsectionAnchorId(subIdx) : undefined;
             return (
-              <Tag key={`h-${idx}`} className={cls}>
+              <Tag key={`h-${idx}`} id={id} className={cls}>
                 {seg.title}
               </Tag>
             );
@@ -266,6 +293,8 @@ export default async function CpHandbookChapterPage({
           <span />
         )}
       </nav>
+
+      <StudyOverlayBar />
     </div>
   );
 }
