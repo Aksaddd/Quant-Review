@@ -20,7 +20,7 @@ export default function StudyOverlayBar() {
 
   return (
     <div
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2"
+      className="fixed bottom-[148px] lg:bottom-[76px] right-6 z-40 flex items-center gap-2"
       aria-label="Active recall overlay controls"
     >
       {enabled && total > 0 && (
