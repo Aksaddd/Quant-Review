@@ -1,0 +1,30 @@
+# Contents
+
+- **1. Exponents and Logarithms** — *p. 1*
+  - 1.1 Integer Exponents — *p. 1*
+  - 1.2 Fractional Exponents — *p. 3*
+  - 1.3 Simplifying Radical Expressions — *p. 5*
+  - 1.4 Rationalizing Denominators — *p. 7*
+  - 1.5 Logarithms — *p. 10*
+- **2. Complex Numbers** — *p. 13*
+  - 2.1 The Square Root of $-1$ — *p. 13*
+  - 2.2 Complex Number Operations — *p. 13*
+- **3. Linear Equations** — *p. 17*
+  - 3.1 What is a Linear Equation? — *p. 17*
+  - 3.2 One Equation, One Variable — *p. 17*
+  - 3.3 Two Equations, Two Variables — *p. 19*
+  - 3.4 Word Problems — *p. 22*
+- **4. Proportions** — *p. 28*
+  - 4.1 Direct and Inverse — *p. 28*
+  - 4.2 Manipulating Proportions — *p. 30*
+  - 4.3 Conversion Factors — *p. 31*
+  - 4.4 Percent — *p. 33*
+- **5. Using the Integers** — *p. 39*
+  - 5.1 Divisibility — *p. 39*
+  - 5.2 Number Bases — *p. 39*
+  - 5.3 The Last Digit — *p. 42*
+  - 5.4 Modular Arithmetic — *p. 42*
+  - 5.5 Tricks — *p. 45*
+  - 5.6 Primes — *p. 47*
+  - 5.7 Common and Uncommon Factors — *p. 48*
+- **6. Quadratic Equations** — *p. 52*

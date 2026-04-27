@@ -1,0 +1,30 @@
+  - 25.1 What's to Learn? — *p. 221*
+  - 25.2 Multiplication — *p. 221*
+  - 25.3 Example: The Number of Divisors — *p. 223*
+  - 25.4 Restrictions on Multiplication — *p. 223*
+  - 25.5 Permutations, Arrangements, and ! — *p. 225*
+  - 25.6 Mixing it Up — *p. 227*
+  - 25.7 Counting the Wrong Thing, Part I — *p. 228*
+  - 25.8 Counting the Wrong Thing, Part II — *p. 229*
+  - 25.9 Doing it Another Way — *p. 232*
+  - 25.10 The Binomial Theorem — *p. 232*
+- **26. Statistics and Probability** — *p. 236*
+  - 26.1 Statistics — *p. 236*
+  - 26.2 Probability and Common Sense — *p. 238*
+  - 26.3 Multiplying Probabilities — *p. 240*
+  - 26.4 Casework — *p. 241*
+  - 26.5 Odds — *p. 242*
+  - 26.6 What Did You Expect? — *p. 242*
+- **27. Sets** — *p. 246*
+  - 27.1 Some Definitions — *p. 246*
+  - 27.2 Operating on Sets — *p. 247*
+  - 27.3 Venn Diagrams — *p. 248*
+  - 27.4 Subsets — *p. 249*
+- **28. Prove It** — *p. 252*
+  - 28.1 Words, Words, Words — *p. 252*
+  - 28.2 Contradiction — *p. 254*
+  - 28.3 Converses Aren't Necessarily True — *p. 255*
+  - 28.4 Mathematical Induction — *p. 256*
+  - 28.5 Shooting Holes in Pigeons — *p. 257*
+  - 28.6 Convincing But Wrong — *p. 258*
+- **29. Parting Shots** — *p. 262*

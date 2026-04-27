@@ -1,0 +1,9 @@
+### the BIG PICTURE
+
+One of the most interesting aspects of the world of mathematics is the existence of **conjectures**, assertions which many think may be true but which no one is able to prove—or disprove. Many famous conjectures are or were in the realm of number theory.
+
+An early instance was the conjecture of Mersenne in the mid-1600's that all integers of the form $2^{2^n} + 1$, called **Mersenne numbers**, are prime. It looks true for the first few $n$: $n = 1$ yields 5; $n = 2$ yields 17; $n = 3$, 257. (Can you verify that 257 is prime?) The fourth Mersenne number, $2^{16} + 1$, is also prime; with no computers to do the complicated calculations, this was as high as anyone could go. However, in the mid-1700's Leonhard Euler was able to find an explicit factor of $2^{32} + 1$, the fifth Mersenne number, and the conjecture was proved false.
+
+Other conjectures were more fortunate; many live on to this day. Christian Goldbach conjectured in the early 1700's that every even integer greater than 4 could be written as the sum of two primes. (For example, $6 = 3 + 3$, $8 = 5 + 3$, $36 = 19 + 17$, and $200 = 97 + 103$.) **Goldbach's conjecture**, as it has come to be called, is to this day an open question. The most powerful computers have been unable to find a counterexample, and the best mathematicians have been unable to prove it. Steps have been made toward a proof, and some feel it is in sight, but that is as far as it goes.
+
+The most famous conjecture of all time was also in the field of number theory. **Fermat's Last Theorem** haunted mathematicians (and amateur solvers, who have flooded publications with bogus "proofs") for centuries. In 1993, Andrew Wiles, a professor at Princeton University, finally finished the theorem off, but he required seven years' unremitting labor, as well as a very large body of supporting work by others, to do it. Old conjectures die hard.

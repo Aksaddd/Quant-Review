@@ -1,0 +1,36 @@
+  - 6.1 What's a Quadratic? — *p. 52*
+  - 6.2 Factoring Quadratics — *p. 52*
+  - 6.3 The Quadratic Formula — *p. 56*
+  - 6.4 Variations on a Theme — *p. 59*
+    - 6.4.1 Rearrangements — *p. 59*
+    - 6.4.2 Substitutions — *p. 60*
+  - 6.5 Square Roots of Irrationals and Imaginaries — *p. 61*
+  - 6.6 Beyond Quadratics — *p. 63*
+- **7. Special Factorizations and Clever Manipulations** — *p. 67*
+  - 7.1 Factorizations — *p. 67*
+  - 7.2 Manipulations — *p. 70*
+- **8. What Numbers Really Are** — *p. 75*
+  - 8.1 Integers and Rationals — *p. 75*
+  - 8.2 Lowest Terms and Irrationals — *p. 77*
+  - 8.3 Complex and Beyond — *p. 79*
+- **9. An Introduction to Circles** — *p. 81*
+- **10. Angles** — *p. 84*
+  - 10.1 Lines, Rays, and Segments — *p. 84*
+  - 10.2 Classification and Measurement — *p. 84*
+  - 10.3 Angles and Parallel Lines — *p. 86*
+  - 10.4 Arcs, Segments, Sectors, and Angles — *p. 87*
+  - 10.5 Angles Formed by Lines Intersecting a Circle — *p. 87*
+  - 10.6 The Burden of Proof — *p. 90*
+- **11. Triangles, a.k.a. Geometry** — *p. 93*
+  - 11.1 Classifying Triangles — *p. 93*
+  - 11.2 Parts of a Triangle — *p. 94*
+  - 11.3 The Triangle Inequality — *p. 96*
+  - 11.4 The Pythagorean Theorem — *p. 97*
+  - 11.5 Congruent Triangles — *p. 99*
+  - 11.6 Similar Triangles — *p. 102*
+  - 11.7 Introduction to Trigonometry — *p. 104*
+  - 11.8 Area of a Triangle — *p. 109*
+  - 11.9 A Handful of Helpful Hints — *p. 112*
+- **12. Quadrilaterals** — *p. 118*
+  - 12.1 The Fundamentals — *p. 118*
+  - 12.2 Trapezoids — *p. 118*

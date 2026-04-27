@@ -1,0 +1,35 @@
+  - 12.3 Parallelograms — *p. 120*
+  - 12.4 Rhombuses (Rhombi?) — *p. 121*
+  - 12.5 Rectangles and Squares — *p. 122*
+  - 12.6 Hints and Problems — *p. 123*
+- **13. Polygons** — *p. 127*
+  - 13.1 Types of Polygons — *p. 127*
+  - 13.2 Angles in a Polygon — *p. 128*
+  - 13.3 Regular Polygons — *p. 128*
+  - 13.4 Regular Hexagons — *p. 130*
+- **14. Angle Chasing** — *p. 133*
+- **15. Areas** — *p. 136*
+  - 15.1 Similar Figures — *p. 136*
+  - 15.2 Same Base/Same Altitude — *p. 137*
+  - 15.3 Complicated Figures — *p. 138*
+- **16. The Power of Coordinates** — *p. 143*
+  - 16.1 Labelling the Plane — *p. 143*
+  - 16.2 What's it Good For? — *p. 144*
+  - 16.3 Straight and Narrow — *p. 145*
+  - 16.4 Plotting a Line — *p. 148*
+  - 16.5 The Distance Formula and Circles — *p. 149*
+  - 16.6 Went Down to the Crossroads — *p. 151*
+  - 16.7 ...Fell Down on My Knees — *p. 152*
+- **17. Power of a Point** — *p. 155*
+  - 17.1 Introduction — *p. 155*
+  - 17.2 Power of a Point Proofs — *p. 157*
+- **18. Three Dimensional Geometry** — *p. 160*
+  - 18.1 Planes, Surface Area, and Volume — *p. 160*
+  - 18.2 Spheres — *p. 161*
+  - 18.3 Cubes and Boxes — *p. 162*
+  - 18.4 Prisms and Cylinders — *p. 165*
+  - 18.5 Pyramids and Cones — *p. 166*
+  - 18.6 Polyhedra — *p. 168*
+  - 18.7 How to Solve 3D Problems — *p. 169*
+- **19. Shifts, Turns, Flips, Stretches, and Squeezes** — *p. 173*
+  - 19.1 Translation — *p. 173*

@@ -1,0 +1,35 @@
+  - 19.2 Rotation — *p. 174*
+  - 19.3 Reflection — *p. 175*
+  - 19.4 Distortion — *p. 176*
+  - 19.5 Dilation — *p. 177*
+  - 19.6 The More Things Change... — *p. 178*
+  - 19.7 Transformation Proofs — *p. 178*
+- **20. A Potpourri of Geometry** — *p. 181*
+- **21. Functions** — *p. 187*
+  - 21.1 Welcome to the Machine — *p. 187*
+  - 21.2 Graphing Functions — *p. 188*
+  - 21.3 Inputs and Outputs — *p. 189*
+  - 21.4 Even and Odd — *p. 190*
+  - 21.5 Some Special Functions — *p. 191*
+    - 21.5.1 Absolute Values — *p. 191*
+    - 21.5.2 Floored — *p. 192*
+    - 21.5.3 Split Up — *p. 193*
+  - 21.6 Transforming a Function — *p. 194*
+- **22. Inequalities** — *p. 197*
+  - 22.1 What They Do — *p. 197*
+  - 22.2 Linear Inequalities — *p. 198*
+  - 22.3 Quadratic Inequalities — *p. 199*
+  - 22.4 Absolute Value Inequalities — *p. 202*
+  - 22.5 A Trivial Inequality — *p. 203*
+- **23. Operations and Relations** — *p. 206*
+  - 23.1 What is an Operation? — *p. 206*
+  - 23.2 Properties of Operations — *p. 207*
+  - 23.3 Relations — *p. 209*
+- **24. Sequences and Series** — *p. 211*
+  - 24.1 Arithmetic Series — *p. 211*
+  - 24.2 Geometric Series — *p. 212*
+  - 24.3 Infinite Series — *p. 213*
+  - 24.4 $\sum_{i=1}^{n}$ — *p. 215*
+  - 24.5 Sequences — *p. 216*
+  - 24.6 Sequences and Means — *p. 217*
+- **25. Learning to Count** — *p. 221*
