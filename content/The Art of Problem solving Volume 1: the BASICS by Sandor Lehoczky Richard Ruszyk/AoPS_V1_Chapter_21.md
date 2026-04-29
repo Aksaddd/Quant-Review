@@ -49,7 +49,7 @@ The "machine," given by $\tfrac{3}{4}x + 3$, is called a **function**. A functio
 
 When we wish to treat an equation as a function, we no longer write it using $x$ and $y$, which seems to imply a parallelism between the two variables. Instead, we give the machine part a name of its own, like $f$. To show that $f$ is a function of the variable $x$, we usually write it as $f(x)$, which is pronounced "$f$ of $x$." We would thus rewrite our line equation as
 
-$$f(x) = \tfrac{3}{4}x + 3. \tag{21.1}$$
+$$f(x) = \tfrac{3}{4}x + 3. \quad (21.1)$$
 
 > **Exercise 21-2.** Which of the following are functions?
 >
@@ -148,11 +148,11 @@ Some functions have certain kinds of symmetry which make them easier to work wit
 
 > **Exercise 21-14.** Show that symmetry of the graph of a function $f(x)$ about the $y$-axis is equivalent to $f(x)$ satisfying the identity
 >
-> $$f(x) = f(-x). \tag{21.2}$$
+> $$f(x) = f(-x). \quad (21.2)$$
 
 > **Exercise 21-15.** What type of symmetry has the graph of a function $f(x)$ which satisfies the identity
 >
-> $$f(x) = -f(-x)? \tag{21.3}$$
+> $$f(x) = -f(-x)? \quad (21.3)$$
 
 Functions with symmetry about the $y$-axis, or equivalently which satisfy (21.2), are called **even**. Similarly, functions which map to themselves when rotated $180°$ about the origin (those which satisfy (21.3)) are called **odd**.
 

@@ -103,7 +103,7 @@ Any line which is not vertical must intersect the $y$-axis at some point. The po
 
 Starting with the $y$-intercept $(0, b)$, the equation must be of the form
 
-$$y = mx + b \tag{16.1}$$
+$$y = mx + b \quad (16.1)$$
 
 for some $m$. What does $m$ signify? Consider starting at $(0, b)$ and moving over by 4. Equation (16.1) becomes $y = 4m + b$. So as $x$ increases by 4, $y$ increases by $4m$.
 
@@ -298,7 +298,7 @@ $$\sqrt{(x - p)^2 + (y - q)^2} = R,$$
 
 or the more preferred
 
-$$\boxed{(x - p)^2 + (y - q)^2 = R^2.} \tag{16.2}$$
+$$\boxed{(x - p)^2 + (y - q)^2 = R^2.} \quad (16.2)$$
 
 ---
 
@@ -315,7 +315,7 @@ $$\boxed{(x - p)^2 + (y - q)^2 = R^2.} \tag{16.2}$$
 
 A more general form of the circle equation is
 
-$$x^2 + y^2 + Ax + By + C = 0. \tag{16.3}$$
+$$x^2 + y^2 + Ax + By + C = 0. \quad (16.3)$$
 
 This is not a form we would willingly use because the relevant information (center, radius) is hard to see. To convert back to (16.2), we use **completing the square** — twice, once on $x$ and once on $y$.
 
@@ -424,7 +424,7 @@ cx + (2b - a) y &= bc \\
 
 Solving the first two simultaneously gives the intersection $\left(\dfrac{a + b}{3}, \dfrac{c}{3}\right)$. Plugging into the third equation, it is indeed satisfied. Thus the single point
 
-$$\left(\frac{a + b}{3}, \frac{c}{3}\right) \tag{16.4}$$
+$$\left(\frac{a + b}{3}, \frac{c}{3}\right) \quad (16.4)$$
 
 lies on all three medians — this is the **centroid**. $\blacksquare$
 

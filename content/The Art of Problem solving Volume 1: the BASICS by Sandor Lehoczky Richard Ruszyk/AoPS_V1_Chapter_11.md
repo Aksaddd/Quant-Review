@@ -472,7 +472,7 @@ $$\tan A = \cot(90° - A), \qquad \sec A = \csc(90° - A).$$
 
 The most common and useful trigonometric identity is
 
-$$\sin^2 A + \cos^2 A = 1. \tag{11.1}$$
+$$\sin^2 A + \cos^2 A = 1. \quad (11.1)$$
 
 This follows directly from the Pythagorean Theorem:
 

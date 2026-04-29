@@ -18,7 +18,7 @@ The study of complex numbers begins when we are bold enough to ask a very childi
 
 Historically, people were led to write $\sqrt{-1}$ by the quest to solve equations. Clearly, an equation like
 
-$$x^2 + 1 = 0 \tag{2.1}$$
+$$x^2 + 1 = 0 \quad (2.1)$$
 
 has only the solutions $x = \pm \sqrt{-1}$. In order to be able to solve *all* equations, it was decided to accept $\sqrt{-1}$ as a legitimate number.
 
