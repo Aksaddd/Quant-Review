@@ -424,7 +424,6 @@
       "chapter": 11,
       "page": 107,
       "bookPage": 93,
-      "format": "png",
       "caption": "Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications.",
       "bbox": [
         80,
@@ -438,7 +437,6 @@
       "chapter": 11,
       "page": 108,
       "bookPage": 94,
-      "format": "png",
       "caption": "Triangle ABC with medians AE, BF, CD meeting at centroid G.",
       "bbox": [
         475,
@@ -452,7 +450,6 @@
       "chapter": 11,
       "page": 108,
       "bookPage": 94,
-      "format": "png",
       "caption": "Triangle ABC with angle bisectors AD, BE, CF meeting at incenter I.",
       "bbox": [
         60,
@@ -466,7 +463,6 @@
       "chapter": 11,
       "page": 108,
       "bookPage": 94,
-      "format": "png",
       "caption": "Triangle ABC with inscribed circle of radius r centered at incenter I.",
       "bbox": [
         535,
@@ -480,7 +476,6 @@
       "chapter": 11,
       "page": 109,
       "bookPage": 95,
-      "format": "png",
       "caption": "Three circumcircles for acute, right, and obtuse triangles.",
       "bbox": [
         70,
@@ -494,7 +489,6 @@
       "chapter": 11,
       "page": 109,
       "bookPage": 95,
-      "format": "png",
       "caption": "Obtuse triangle with altitude AD drawn to the extension of side BC.",
       "bbox": [
         505,
@@ -508,7 +502,6 @@
       "chapter": 11,
       "page": 110,
       "bookPage": 96,
-      "format": "png",
       "caption": "Right triangle ABC inscribed in a circle with center O at midpoint of hypotenuse AB.",
       "bbox": [
         535,
@@ -522,7 +515,6 @@
       "chapter": 11,
       "page": 111,
       "bookPage": 97,
-      "format": "png",
       "caption": "Right triangle ABC with legs a, b and hypotenuse c.",
       "bbox": [
         535,
@@ -536,7 +528,6 @@
       "chapter": 11,
       "page": 113,
       "bookPage": 99,
-      "format": "png",
       "caption": "Two congruent triangles ABC and DEF with corresponding parts equal.",
       "bbox": [
         75,
@@ -550,7 +541,6 @@
       "chapter": 11,
       "page": 113,
       "bookPage": 99,
-      "format": "png",
       "caption": "SSS — two triangles with all three corresponding sides marked equal.",
       "bbox": [
         575,
@@ -564,7 +554,6 @@
       "chapter": 11,
       "page": 113,
       "bookPage": 99,
-      "format": "png",
       "caption": "SAS — two triangles with two equal sides and the included angle equal.",
       "bbox": [
         70,
@@ -578,7 +567,6 @@
       "chapter": 11,
       "page": 114,
       "bookPage": 100,
-      "format": "png",
       "caption": "ASA — two triangles with one matching side and the angles at its endpoints equal.",
       "bbox": [
         75,
@@ -592,7 +580,6 @@
       "chapter": 11,
       "page": 114,
       "bookPage": 100,
-      "format": "png",
       "caption": "HL and LL — right-triangle congruency theorems.",
       "bbox": [
         530,
@@ -606,7 +593,6 @@
       "chapter": 11,
       "page": 115,
       "bookPage": 101,
-      "format": "png",
       "caption": "Kite ABCD with triangles ABC and BAD congruent; angles 70° and 60° marked.",
       "bbox": [
         535,
@@ -620,7 +606,6 @@
       "chapter": 11,
       "page": 115,
       "bookPage": 101,
-      "format": "png",
       "caption": "Isosceles triangle ABC with altitude AX to base BC.",
       "bbox": [
         505,
@@ -634,7 +619,6 @@
       "chapter": 11,
       "page": 116,
       "bookPage": 102,
-      "format": "png",
       "caption": "Two similar triangles ABC and DEF with sides labeled a, b, c and d, e, f.",
       "bbox": [
         510,
@@ -648,7 +632,6 @@
       "chapter": 11,
       "page": 116,
       "bookPage": 102,
-      "format": "png",
       "caption": "Triangle ABC with smaller similar triangle ADE inside (SAS similarity).",
       "bbox": [
         510,
@@ -662,7 +645,6 @@
       "chapter": 11,
       "page": 117,
       "bookPage": 103,
-      "format": "png",
       "caption": "Triangle ABC with DE parallel to BC creating similar triangle ADE.",
       "bbox": [
         60,
@@ -676,7 +658,6 @@
       "chapter": 11,
       "page": 117,
       "bookPage": 103,
-      "format": "png",
       "caption": "Right triangle ACB with altitude CD splitting it into similar sub-triangles.",
       "bbox": [
         510,
@@ -690,7 +671,6 @@
       "chapter": 11,
       "page": 117,
       "bookPage": 103,
-      "format": "png",
       "caption": "Triangle ABC with angle bisector AX extended to E with BE parallel to AC.",
       "bbox": [
         495,
@@ -704,7 +684,6 @@
       "chapter": 11,
       "page": 117,
       "bookPage": 103,
-      "format": "png",
       "caption": "Triangle ABC with angle bisectors AX and BY meeting at incenter I.",
       "bbox": [
         505,
@@ -718,7 +697,6 @@
       "chapter": 11,
       "page": 117,
       "bookPage": 103,
-      "format": "png",
       "caption": "Configuration for Example 11-15 with auxiliary BH parallel to DE.",
       "bbox": [
         505,
@@ -732,7 +710,6 @@
       "chapter": 11,
       "page": 119,
       "bookPage": 105,
-      "format": "png",
       "caption": "Right triangle ABC with right angle at C; sides a, b, c labeled for sin/cos/tan definitions.",
       "bbox": [
         555,
@@ -746,7 +723,6 @@
       "chapter": 11,
       "page": 120,
       "bookPage": 106,
-      "format": "png",
       "caption": "45-45-90 isosceles right triangle with legs a and hypotenuse a√2.",
       "bbox": [
         550,
@@ -760,7 +736,6 @@
       "chapter": 11,
       "page": 120,
       "bookPage": 106,
-      "format": "png",
       "caption": "30-60-90 triangle with sides in ratio 1 : √3 : 2.",
       "bbox": [
         550,
@@ -774,7 +749,6 @@
       "chapter": 11,
       "page": 123,
       "bookPage": 109,
-      "format": "png",
       "caption": "Isosceles triangle ABC with AB=AC=50, base BC=80, altitude AX bisecting BC.",
       "bbox": [
         555,
@@ -788,7 +762,6 @@
       "chapter": 11,
       "page": 124,
       "bookPage": 110,
-      "format": "png",
       "caption": "Rectangle ABCD split into two congruent right triangles by a diagonal.",
       "bbox": [
         535,
@@ -802,7 +775,6 @@
       "chapter": 11,
       "page": 124,
       "bookPage": 110,
-      "format": "png",
       "caption": "Acute triangle ABC with altitude AX dividing into two right triangles ABX and ACX.",
       "bbox": [
         555,
@@ -816,7 +788,6 @@
       "chapter": 11,
       "page": 125,
       "bookPage": 111,
-      "format": "png",
       "caption": "Triangle ABC with incircle and inradii to tangent points; incenter I connected to vertices.",
       "bbox": [
         535,
@@ -830,7 +801,6 @@
       "chapter": 11,
       "page": 126,
       "bookPage": 112,
-      "format": "png",
       "caption": "Pythagorean Theorem proof: large square with side c containing four right triangles around inner tilted square.",
       "bbox": [
         600,
@@ -844,7 +814,6 @@
       "chapter": 11,
       "page": 127,
       "bookPage": 113,
-      "format": "png",
       "caption": "Two lines with a transversal; angles α, β, θ, φ marked at the intersections.",
       "bbox": [
         555,
@@ -858,7 +827,6 @@
       "chapter": 11,
       "page": 128,
       "bookPage": 114,
-      "format": "png",
       "caption": "Triangle ABC with E on AB, D on BC, and F at intersection of AD and CE (Example 11-25 setup).",
       "bbox": [
         575,
@@ -872,7 +840,6 @@
       "chapter": 11,
       "page": 128,
       "bookPage": 114,
-      "format": "png",
       "caption": "Same configuration with auxiliary DH parallel to EA added for the similar-triangles solution.",
       "bbox": [
         575,

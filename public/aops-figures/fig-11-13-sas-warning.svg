@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 100" width="270" height="100">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="45" y1="30" x2="90" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="90" y1="80" x2="15" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="45" y1="30" x2="15" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="190" y1="30" x2="235" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="235" y1="80" x2="160" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="190" y1="30" x2="160" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="71.21647073123583" y1="51.65517634188775" x2="63.78352926876417" y2="58.34482365811225" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="216.21647073123583" y1="51.65517634188775" x2="208.78352926876417" y2="58.34482365811225" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="35.316456139417774" y1="55.85749292571254" x2="26.741526882292334" y2="50.712535371437276" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="33.258473117707666" y1="59.287464628562724" x2="24.683543860582226" y2="54.14250707428746" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="180.3164561394178" y1="55.85749292571254" x2="171.74152688229233" y2="50.712535371437276" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="178.25847311770767" y1="59.287464628562724" x2="169.6835438605822" y2="54.14250707428746" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 38.83 40.29 A 12 12 0 0 0 53.03 38.92" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 183.83 40.29 A 12 12 0 0 0 198.03 38.92" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

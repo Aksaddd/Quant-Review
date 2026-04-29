@@ -947,6 +947,849 @@ def fig_10_10_arc_sector() -> str:
 # Registry + main
 # ─────────────────────────────────────────────
 
+# ─────────────────────────────────────────────
+# Chapter 11 figures
+# ─────────────────────────────────────────────
+
+def fig_11_1_six_triangles_classification() -> str:
+    """Six small triangles: acute, right, obtuse, scalene, isosceles, equilateral."""
+    W, H = 620, 130
+    body = []
+    # Acute
+    body += [segment(40, 100, 130, 100), segment(40, 100, 85, 30), segment(85, 30, 130, 100),
+             text(85, 122, "acute", italic=True)]
+    # Right
+    body += [segment(155, 100, 245, 100), segment(155, 100, 155, 30), segment(155, 30, 245, 100),
+             right_angle_mark(155, 100, (165, 100), (155, 90), size=8),
+             text(200, 122, "right", italic=True)]
+    # Obtuse
+    body += [segment(265, 100, 410, 100), segment(265, 100, 350, 50), segment(350, 50, 410, 100),
+             text(335, 122, "obtuse", italic=True)]
+    # Scalene
+    body += [segment(440, 100, 530, 100), segment(440, 100, 470, 35), segment(470, 35, 530, 100),
+             text(485, 122, "scalene", italic=True)]
+    # Isosceles
+    body += [segment(545, 100, 600, 100), segment(545, 100, 572, 35), segment(572, 35, 600, 100),
+             text(572, 122, "isosceles", italic=True)]
+    # Equilateral
+    body += [segment(615, 100, 685, 100), segment(615, 100, 650, 40), segment(650, 40, 685, 100),
+             text(650, 122, "equilateral", italic=True)]
+    # Reposition: above coordinates exceed W. Rebuild with proper spacing.
+    body = []
+    width_per = W / 6
+    items = [("acute", False, False),
+             ("right", True, False),
+             ("obtuse", False, True),
+             ("scalene", False, False),
+             ("isosceles", False, False),
+             ("equilateral", False, False)]
+    for i, (label, is_right, is_obtuse) in enumerate(items):
+        cx0 = i * width_per + 18
+        if is_right:
+            body += [segment(cx0, 90, cx0 + 70, 90),
+                     segment(cx0, 90, cx0, 30), segment(cx0, 30, cx0 + 70, 90),
+                     right_angle_mark(cx0, 90, (cx0 + 8, 90), (cx0, 82), size=8)]
+        elif is_obtuse:
+            body += [segment(cx0, 90, cx0 + 90, 90),
+                     segment(cx0, 90, cx0 + 65, 50),
+                     segment(cx0 + 65, 50, cx0 + 90, 90)]
+        elif label == "isosceles":
+            body += [segment(cx0, 90, cx0 + 60, 90),
+                     segment(cx0, 90, cx0 + 30, 35),
+                     segment(cx0 + 30, 35, cx0 + 60, 90)]
+        elif label == "equilateral":
+            body += [segment(cx0, 90, cx0 + 60, 90),
+                     segment(cx0, 90, cx0 + 30, 90 - 60 * 0.866),
+                     segment(cx0 + 30, 90 - 60 * 0.866, cx0 + 60, 90)]
+        elif label == "scalene":
+            body += [segment(cx0, 90, cx0 + 75, 90),
+                     segment(cx0, 90, cx0 + 22, 35),
+                     segment(cx0 + 22, 35, cx0 + 75, 90)]
+        else:  # acute
+            body += [segment(cx0, 90, cx0 + 70, 90),
+                     segment(cx0, 90, cx0 + 35, 30),
+                     segment(cx0 + 35, 30, cx0 + 70, 90)]
+        body += [text(cx0 + 35, 115, label, italic=True, size=12)]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_11_8_pythagorean_setup() -> str:
+    """Right triangle ABC with right angle at C; sides a (BC), b (AC), c (AB)."""
+    W, H = 220, 180
+    A = (40, 40); B = (180, 140); C = (40, 140)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(C[0], C[1], (C[0]+10, C[1]), (C[0], C[1]-10), size=8),
+        text((A[0]+C[0])/2 - 8, (A[1]+C[1])/2 + 4, "b", italic=True, anchor="end"),
+        text((B[0]+C[0])/2, C[1] + 16, "a", italic=True),
+        text((A[0]+B[0])/2 + 5, (A[1]+B[1])/2 - 6, "c", italic=True, anchor="start"),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "right"),
+        point(*C, "C", "below-left"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_11_congruent_triangles_intro() -> str:
+    """Two congruent triangles ABC and DEF with hash marks on corresponding sides."""
+    W, H = 280, 100
+    # Left triangle ABC
+    A = (50, 20); B = (90, 80); C = (15, 80)
+    # Right triangle DEF (congruent, same shape)
+    D = (200, 20); E = (240, 80); F = (165, 80)
+    # Hash marks helper
+    def hash_mark(p1, p2, n=1, size=5):
+        # Place n short hash strokes near midpoint of segment, perpendicular to it
+        mx, my = (p1[0]+p2[0])/2, (p1[1]+p2[1])/2
+        dx, dy = p2[0]-p1[0], p2[1]-p1[1]
+        L = (dx*dx + dy*dy)**0.5
+        ux, uy = dx/L, dy/L
+        # perpendicular
+        px, py = -uy, ux
+        out = []
+        for i in range(n):
+            o = (i - (n-1)/2) * 4
+            sx, sy = mx + ux*o, my + uy*o
+            out.append(segment(sx - px*size, sy - py*size, sx + px*size, sy + py*size))
+        return "\n".join(out)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*D, *F),
+        hash_mark(A, B, 1), hash_mark(D, E, 1),
+        hash_mark(B, C, 2), hash_mark(E, F, 2),
+        hash_mark(A, C, 3), hash_mark(D, F, 3),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*D, "D", "above-left", italic=True),
+        point(*E, "E", "below-right", italic=True),
+        point(*F, "F", "below-left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def _hash_mark(p1, p2, n=1, size=5):
+    """Helper: hash marks (tick marks for equal sides) on segment p1-p2."""
+    mx, my = (p1[0]+p2[0])/2, (p1[1]+p2[1])/2
+    dx, dy = p2[0]-p1[0], p2[1]-p1[1]
+    L = (dx*dx + dy*dy)**0.5
+    ux, uy = dx/L, dy/L
+    px, py = -uy, ux
+    out = []
+    for i in range(n):
+        o = (i - (n-1)/2) * 4
+        sx, sy = mx + ux*o, my + uy*o
+        out.append(segment(sx - px*size, sy - py*size, sx + px*size, sy + py*size))
+    return "\n".join(out)
+
+
+def _arc_mark(vx, vy, p1, p2, n=1, r=14):
+    """Helper: angle arcs at vertex (vx,vy) between rays to p1 and p2.
+    n controls number of nested arcs (for marking different equal-angle sets)."""
+    out = []
+    for i in range(n):
+        out.append(angle_mark(vx, vy, p1, p2, r=r + i * 4))
+    return "\n".join(out)
+
+
+def fig_11_12_sss_theorem() -> str:
+    """Two triangles with all three sides marked equal — SSS."""
+    W, H = 240, 90
+    A = (40, 25); B = (75, 75); C = (10, 75)
+    D = (175, 25); E = (210, 75); F = (145, 75)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*D, *F),
+        _hash_mark(A, B, 1), _hash_mark(D, E, 1),
+        _hash_mark(B, C, 2), _hash_mark(E, F, 2),
+        _hash_mark(A, C, 3), _hash_mark(D, F, 3),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_13_sas_warning() -> str:
+    """SAS — two triangles with two equal sides + included angle equal."""
+    W, H = 270, 100
+    A = (45, 30); B = (90, 80); C = (15, 80)
+    D = (190, 30); E = (235, 80); F = (160, 80)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*D, *F),
+        _hash_mark(A, B, 1), _hash_mark(D, E, 1),
+        _hash_mark(A, C, 2), _hash_mark(D, F, 2),
+        _arc_mark(A[0], A[1], B, C, n=1, r=12),
+        _arc_mark(D[0], D[1], E, F, n=1, r=12),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_14_asa_theorem() -> str:
+    """ASA — two triangles with one matching side and adjacent angles equal."""
+    W, H = 260, 100
+    A = (40, 30); B = (80, 80); C = (15, 80)
+    D = (180, 30); E = (220, 80); F = (155, 80)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*D, *F),
+        # matching side BC ≅ EF
+        _hash_mark(B, C, 1), _hash_mark(E, F, 1),
+        # angles at B & C / E & F
+        _arc_mark(B[0], B[1], A, C, n=1, r=12),
+        _arc_mark(E[0], E[1], D, F, n=1, r=12),
+        _arc_mark(C[0], C[1], A, B, n=2, r=10),
+        _arc_mark(F[0], F[1], D, E, n=2, r=10),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_15_hl_ll_right_triangles() -> str:
+    """HL and LL — pair of right-triangle congruency theorems."""
+    W, H = 240, 160
+    body = []
+    # HL pair (top)
+    A = (40, 20); B = (95, 70); C = (40, 70)
+    D = (155, 20); E = (210, 70); F = (155, 70)
+    body += [segment(*A, *B), segment(*B, *C), segment(*A, *C),
+             segment(*D, *E), segment(*E, *F), segment(*D, *F),
+             right_angle_mark(C[0], C[1], B, A, size=7),
+             right_angle_mark(F[0], F[1], E, D, size=7),
+             _hash_mark(A, B, 1), _hash_mark(D, E, 1),  # hypotenuse
+             _hash_mark(B, C, 2), _hash_mark(E, F, 2)]  # leg
+    # LL pair (bottom)
+    A2 = (15, 100); B2 = (15, 145); C2 = (75, 145)
+    D2 = (165, 100); E2 = (165, 145); F2 = (225, 145)
+    body += [segment(*A2, *B2), segment(*B2, *C2), segment(*A2, *C2),
+             segment(*D2, *E2), segment(*E2, *F2), segment(*D2, *F2),
+             right_angle_mark(B2[0], B2[1], A2, C2, size=7),
+             right_angle_mark(E2[0], E2[1], D2, F2, size=7),
+             _hash_mark(A2, B2, 1), _hash_mark(D2, E2, 1),
+             _hash_mark(B2, C2, 2), _hash_mark(E2, F2, 2)]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_11_16_example_11_9_kite() -> str:
+    """Kite ABCD with congruent triangles ABC and BAD; angles 70° and 60°."""
+    W, H = 220, 200
+    # Kite: A and B at top, C and D at sides
+    A = (75, 50); D = (175, 30)
+    B = (155, 130); C = (35, 130)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *A),
+        segment(*A, *D), segment(*D, *B),
+        text(A[0] + 8, A[1] + 14, "70°", italic=False, size=10),
+        text(B[0] - 6, B[1] - 6, "60°", italic=False, size=10),
+        point(*A, "A", "left", italic=True),
+        point(*B, "B", "below", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*D, "D", "right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_17_example_11_10_isosceles_altitude() -> str:
+    """Isosceles ABC with altitude AX from apex to base BC."""
+    W, H = 220, 180
+    A = (110, 25); B = (185, 155); C = (35, 155)
+    X = ((B[0]+C[0])/2, B[1])
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *X),
+        right_angle_mark(X[0], X[1], (X[0]+10, X[1]), (X[0], X[1]-10), size=8),
+        _hash_mark(A, B, 1), _hash_mark(A, C, 1),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*X, "X", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_18_similar_triangles_intro() -> str:
+    """Two similar triangles ABC and DEF (same shape, different size)."""
+    W, H = 280, 160
+    # Larger ABC on left
+    A = (75, 25); B = (140, 130); C = (10, 130)
+    # Smaller DEF on right (similar, scaled ~0.5)
+    D = (215, 60); E = (255, 130); F = (175, 130)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*D, *F),
+        # side labels
+        text((B[0]+C[0])/2, C[1] + 16, "a", italic=True),
+        text((A[0]+C[0])/2 - 8, (A[1]+C[1])/2 + 4, "b", italic=True, anchor="end"),
+        text((A[0]+B[0])/2 + 8, (A[1]+B[1])/2 - 4, "c", italic=True, anchor="start"),
+        text((E[0]+F[0])/2, F[1] + 16, "d", italic=True),
+        text((D[0]+F[0])/2 - 6, (D[1]+F[1])/2 + 4, "e", italic=True, anchor="end"),
+        text((D[0]+E[0])/2 + 6, (D[1]+E[1])/2 - 4, "f", italic=True, anchor="start"),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*D, "D", "above", italic=True),
+        point(*E, "E", "below-right", italic=True),
+        point(*F, "F", "below-left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_19_sas_similarity() -> str:
+    """Triangle ABC with smaller similar ADE inside (D on AB, E on AC)."""
+    W, H = 220, 180
+    A = (110, 20); B = (185, 155); C = (35, 155)
+    # D and E partway down (50%)
+    D = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    E = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*D, "D", "right", italic=True),
+        point(*E, "E", "left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_20_example_11_11() -> str:
+    """Triangle ABC with DE parallel to BC (D on AB, E on AC)."""
+    W, H = 200, 180
+    A = (100, 25); B = (170, 155); C = (30, 155)
+    # D at 1/3 down AB, E at 1/3 down AC
+    D = (A[0] + (B[0]-A[0])/3, A[1] + (B[1]-A[1])/3)
+    E = (A[0] + (C[0]-A[0])/3, A[1] + (C[1]-A[1])/3)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*D, "D", "right", italic=True),
+        point(*E, "E", "left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_9_altitude_to_hypotenuse() -> str:
+    """Right triangle ACB with altitude CD drawn to hypotenuse AB."""
+    W, H = 240, 180
+    A = (15, 150); B = (220, 150); C = (90, 30)
+    # Foot of altitude D on AB (perpendicular from C)
+    # Since AB horizontal, D is (C[0], B[1]); but check that it's between A and B
+    D = (C[0], B[1])
+    body = "\n".join([
+        segment(*A, *B), segment(*A, *C), segment(*B, *C),
+        segment(*C, *D),
+        right_angle_mark(C[0], C[1], A, B, size=8),
+        right_angle_mark(D[0], D[1], (D[0]+10, D[1]), (D[0], D[1]-10), size=7),
+        point(*A, "A", "below-left", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "above", italic=True),
+        point(*D, "D", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_10_angle_bisector_theorem() -> str:
+    """Triangle ABC with angle bisector AX extended to E where BE parallel to AC."""
+    W, H = 220, 240
+    A = (110, 25); B = (200, 165); C = (15, 165)
+    # X on BC: angle bisector divides BC in ratio AB:AC
+    import math as m
+    AB = m.dist(A, B); AC = m.dist(A, C)
+    t = AC / (AB + AC)  # X = C + t*(B-C)
+    X = (C[0] + t*(B[0]-C[0]), C[1] + t*(B[1]-C[1]))
+    # E on extension of AX such that BE || AC
+    # Parametric: E = A + s*(X-A) with BE parallel to AC
+    # AC direction: (C[0]-A[0], C[1]-A[1])
+    # BE direction = E - B; require this is parallel to AC vector
+    # E = A + s*(X-A) so E - B = (A + s*(X-A)) - B
+    # Solve for s: (E-B) cross (C-A) = 0
+    Ax, Ay = A; Bx, By = B; Cx, Cy = C; Xx, Xy = X
+    # ((Ax + s*(Xx-Ax)) - Bx) * (Cy-Ay) - ((Ay + s*(Xy-Ay)) - By) * (Cx-Ax) = 0
+    # Let dx = Xx-Ax, dy = Xy-Ay, vx = Cx-Ax, vy = Cy-Ay
+    dx = Xx-Ax; dy = Xy-Ay; vx = Cx-Ax; vy = Cy-Ay
+    # ((Ax-Bx) + s*dx)*vy - ((Ay-By) + s*dy)*vx = 0
+    # s*(dx*vy - dy*vx) = -(Ax-Bx)*vy + (Ay-By)*vx
+    denom = dx*vy - dy*vx
+    s = ((Ay-By)*vx - (Ax-Bx)*vy) / denom if denom else 1.5
+    E = (Ax + s*dx, Ay + s*dy)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *E),  # angle bisector AX extended to E
+        segment(*B, *E),  # BE
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*X, "X", "above-right", italic=True),
+        point(*E, "E", "below-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_21_example_11_14() -> str:
+    """Triangle ABC with angle bisectors AX and BY meeting at incenter I."""
+    W, H = 220, 180
+    A = (110, 25); B = (190, 155); C = (30, 155)
+    import math as m
+    a = m.dist(B, C); b = m.dist(A, C); c = m.dist(A, B)
+    Ix = (a*A[0] + b*B[0] + c*C[0]) / (a+b+c)
+    Iy = (a*A[1] + b*B[1] + c*C[1]) / (a+b+c)
+    # X on BC, Y on AC
+    def line_intersect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if d == 0: return None
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    X = line_intersect(A, (Ix, Iy), B, C)
+    Y = line_intersect(B, (Ix, Iy), A, C)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *X), segment(*B, *Y),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*X, "X", "below", italic=True),
+        point(*Y, "Y", "left", italic=True),
+        point(Ix, Iy, "I", "right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_22_example_11_15() -> str:
+    """Configuration with D on AB, E off the line; auxiliary BH parallel to DE."""
+    W, H = 220, 180
+    A = (30, 30); D = (90, 100); B = (160, 170)
+    E = (180, 35); C = (200, 80)
+    H_pt = (210, 115)  # auxiliary
+    body = "\n".join([
+        segment(*A, *D), segment(*D, *B),  # AD-DB collinear
+        segment(*A, *E), segment(*D, *E),  # right angle at E
+        segment(*E, *C),
+        # auxiliary BH parallel to DE
+        f'<line x1="{B[0]}" y1="{B[1]}" x2="{H_pt[0]}" y2="{H_pt[1]}" stroke="#1d1d1f" stroke-width="1.4" stroke-dasharray="3,3" fill="none"/>',
+        right_angle_mark(E[0], E[1], A, D, size=7),
+        point(*A, "A", "left", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*E, "E", "above-right", italic=True),
+        point(*C, "C", "right", italic=True),
+        point(*H_pt, "H", "right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_23_trig_right_triangle() -> str:
+    """Right triangle ABC for sin/cos/tan definitions; sides a, b, c."""
+    W, H = 220, 160
+    A = (30, 30); B = (190, 130); C = (30, 130)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(C[0], C[1], B, A, size=8),
+        text(C[0] - 12, (A[1]+C[1])/2 + 4, "b", italic=True, anchor="end"),
+        text((B[0]+C[0])/2, C[1] + 16, "a", italic=True),
+        text((A[0]+B[0])/2 + 6, (A[1]+B[1])/2 - 4, "c", italic=True, anchor="start"),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_24_45_45_90() -> str:
+    """45-45-90 isosceles right triangle with legs a and hypotenuse a√2."""
+    W, H = 200, 160
+    A = (30, 30); B = (160, 130); C = (30, 130)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(C[0], C[1], B, A, size=8),
+        text(C[0] - 8, (A[1]+C[1])/2 + 4, "a", italic=True, anchor="end"),
+        text((B[0]+C[0])/2, C[1] + 16, "a", italic=True),
+        text((A[0]+B[0])/2 + 8, (A[1]+B[1])/2 - 4, "a√2", italic=True, anchor="start"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_25_30_60_90() -> str:
+    """30-60-90 triangle with sides in ratio 1 : √3 : 2."""
+    W, H = 220, 160
+    # 30 at top, 60 at bottom-left, 90 at bottom-right
+    A = (160, 30); B = (40, 130); C = (160, 130)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(C[0], C[1], B, A, size=8),
+        text(A[0] - 12, A[1] + 18, "30°", italic=False, anchor="end", size=11),
+        text(B[0] + 18, B[1] - 4, "60°", italic=False, anchor="start", size=11),
+        text((B[0]+C[0])/2, C[1] + 16, "a√3", italic=True),
+        text(C[0] + 6, (A[1]+C[1])/2 + 4, "a", italic=True, anchor="start"),
+        text((A[0]+B[0])/2 - 8, (A[1]+B[1])/2 - 4, "2a", italic=True, anchor="end"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_26_example_11_18() -> str:
+    """Isosceles ABC with AB=AC=50, base BC=80, altitude AX."""
+    W, H = 220, 130
+    A = (110, 20); B = (200, 110); C = (20, 110)
+    X = ((B[0]+C[0])/2, B[1])
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *X),
+        right_angle_mark(X[0], X[1], (X[0]+10, X[1]), (X[0], X[1]-10), size=7),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*X, "X", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_27_rectangle_two_triangles() -> str:
+    """Rectangle ABCD split by diagonal into two congruent right triangles."""
+    W, H = 220, 130
+    A = (30, 30); D = (180, 30); C = (180, 110); B = (30, 110)
+    body = "\n".join([
+        segment(*A, *D), segment(*D, *C), segment(*C, *B), segment(*B, *A),
+        # Diagonal BC (or actually AC for split)
+        segment(*A, *C),
+        right_angle_mark(A[0], A[1], (A[0]+12, A[1]), (A[0], A[1]+12), size=7),
+        right_angle_mark(C[0], C[1], (C[0]-12, C[1]), (C[0], C[1]-12), size=7),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "below-left", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "above-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_28_acute_altitude() -> str:
+    """Acute triangle ABC with altitude AX dividing into right triangles."""
+    W, H = 220, 130
+    A = (110, 20); B = (200, 110); C = (20, 110)
+    X = (105, 110)  # foot inside BC
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *X),
+        right_angle_mark(X[0], X[1], (X[0]+10, X[1]), (X[0], X[1]-10), size=7),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "below-right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(*X, "X", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_29_incircle_inradii() -> str:
+    """Triangle ABC with incircle and inradii to tangent points X, Y, Z; incenter I."""
+    W, H = 240, 220
+    A = (120, 20); B = (215, 195); C = (25, 195)
+    import math as m
+    a = m.dist(B, C); b = m.dist(A, C); c = m.dist(A, B); s = (a+b+c)/2
+    Ix = (a*A[0] + b*B[0] + c*C[0]) / (a+b+c)
+    Iy = (a*A[1] + b*B[1] + c*C[1]) / (a+b+c)
+    area = abs((B[0]-A[0])*(C[1]-A[1]) - (C[0]-A[0])*(B[1]-A[1])) / 2
+    r = area / s
+    # Tangent points: project I perpendicular to each side
+    def foot(p, q, P):
+        # Foot of perpendicular from P to line p-q
+        dx, dy = q[0]-p[0], q[1]-p[1]
+        t = ((P[0]-p[0])*dx + (P[1]-p[1])*dy) / (dx*dx + dy*dy)
+        return (p[0]+t*dx, p[1]+t*dy)
+    X = foot(B, C, (Ix, Iy))   # tangent on BC
+    Y = foot(A, C, (Ix, Iy))   # tangent on AC
+    Z = foot(A, B, (Ix, Iy))   # tangent on AB
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        circle(Ix, Iy, r),
+        # Connect I to vertices
+        segment(Ix, Iy, *A), segment(Ix, Iy, *B), segment(Ix, Iy, *C),
+        # Inradii from I to tangent points
+        segment(Ix, Iy, *X), segment(Ix, Iy, *Y), segment(Ix, Iy, *Z),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below-left", italic=True),
+        point(Ix, Iy, "I", "right", italic=True),
+        point(*X, "X", "below", italic=True),
+        point(*Y, "Y", "left", italic=True),
+        point(*Z, "Z", "above-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_30_pythagorean_square_proof() -> str:
+    """Large square of side c with four right triangles around an inner tilted square (Pythagorean proof)."""
+    W, H = 200, 200
+    L = 160
+    ox, oy = 20, 20
+    # Outer square corners
+    P1 = (ox, oy); P2 = (ox + L, oy); P3 = (ox + L, oy + L); P4 = (ox, oy + L)
+    # Inner square — tilted: vertices on each outer side at distance a (or b)
+    a = 50  # leg a
+    # Going around outer square clockwise: top side from P1 to P2, point at offset a from P1
+    Q1 = (ox + a, oy)               # on top edge, a from P1
+    Q2 = (ox + L, oy + a)           # on right edge, a from P2
+    Q3 = (ox + L - a, oy + L)       # on bottom edge, a from P3
+    Q4 = (ox, oy + L - a)           # on left edge, a from P4
+    body = "\n".join([
+        # Outer square
+        segment(*P1, *P2), segment(*P2, *P3), segment(*P3, *P4), segment(*P4, *P1),
+        # Inner tilted square (chord c)
+        segment(*Q1, *Q2), segment(*Q2, *Q3), segment(*Q3, *Q4), segment(*Q4, *Q1),
+        # Inner labels (a, b, c)
+        text(ox + a/2, oy - 6, "a", italic=True, size=11, anchor="middle"),
+        text(ox + a + (L-a)/2, oy - 6, "b", italic=True, size=11, anchor="middle"),
+        text((Q1[0]+Q2[0])/2 + 8, (Q1[1]+Q2[1])/2 - 4, "c", italic=True, size=11, anchor="start"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_31_parallel_transversal_angles() -> str:
+    """Two lines and a transversal with angles α, β, θ, φ marked at intersections."""
+    W, H = 200, 200
+    body = []
+    # two parallel lines
+    body.append(segment(20, 60, 180, 60))
+    body.append(segment(20, 140, 180, 140))
+    # transversal (slope ~75°)
+    body.append(segment(60, 20, 160, 180))
+    # angle labels at upper intersection (~95, 60)
+    body.append(text(85, 50, "α", italic=True, size=11, anchor="end"))
+    body.append(text(112, 53, "θ", italic=True, size=11, anchor="start"))
+    body.append(text(85, 78, "β", italic=True, size=11, anchor="end"))
+    body.append(text(112, 78, "φ", italic=True, size=11, anchor="start"))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_11_32_example_11_25_setup() -> str:
+    """Triangle ABC with E on AB, D on BC, F at intersection of AD and CE."""
+    W, H = 220, 160
+    A = (25, 130); B = (110, 25); C = (200, 130)
+    # E on AB, D on BC
+    E = (A[0] + (B[0]-A[0])*0.7, A[1] + (B[1]-A[1])*0.7)
+    D = (B[0] + (C[0]-B[0])*0.4, B[1] + (C[1]-B[1])*0.4)
+    # F = intersection of AD and CE
+    def line_intersect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if d == 0: return None
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    F = line_intersect(A, D, C, E)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *D), segment(*C, *E),
+        point(*A, "A", "below-left", italic=True),
+        point(*B, "B", "above", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*E, "E", "above-left", italic=True),
+        point(*D, "D", "above-right", italic=True),
+        point(*F, "F", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_33_example_11_25_with_aux() -> str:
+    """Same configuration with auxiliary DH parallel to EA."""
+    W, H = 220, 160
+    A = (25, 130); B = (110, 25); C = (200, 130)
+    E = (A[0] + (B[0]-A[0])*0.7, A[1] + (B[1]-A[1])*0.7)
+    D = (B[0] + (C[0]-B[0])*0.4, B[1] + (C[1]-B[1])*0.4)
+    def line_intersect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if d == 0: return None
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    F = line_intersect(A, D, C, E)
+    # H on AC such that DH parallel to EA
+    # EA direction = A-E
+    eax, eay = A[0]-E[0], A[1]-E[1]
+    # H = D + t*(eax, eay), and on AC. AC param: A + u*(C-A)
+    # D[0] + t*eax = A[0] + u*(C[0]-A[0])
+    # D[1] + t*eay = A[1] + u*(C[1]-A[1])
+    cax, cay = C[0]-A[0], C[1]-A[1]
+    denom = eax * cay - eay * cax
+    if denom != 0:
+        u = ((D[0]-A[0])*eay - (D[1]-A[1])*eax) / -denom
+        H_pt = (A[0] + u*cax, A[1] + u*cay)
+    else:
+        H_pt = (D[0] + 30, D[1] + 20)
+    G = line_intersect(D, H_pt, C, E)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *D), segment(*C, *E),
+        f'<line x1="{D[0]}" y1="{D[1]}" x2="{H_pt[0]}" y2="{H_pt[1]}" stroke="#1d1d1f" stroke-width="1.4" stroke-dasharray="3,3" fill="none"/>',
+        point(*A, "A", "below-left", italic=True),
+        point(*B, "B", "above", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*E, "E", "above-left", italic=True),
+        point(*D, "D", "above-right", italic=True),
+        point(*F, "F", "below", italic=True),
+        point(*H_pt, "H", "below-right", italic=True),
+        point(*G, "G", "left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_2_medians_centroid() -> str:
+    """Triangle ABC with medians AE, BF, CD meeting at centroid G."""
+    W, H = 220, 200
+    A = (115, 30); B = (185, 165); C = (35, 165)
+    # Midpoints
+    D = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    E = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    F = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    # Centroid
+    G = ((A[0]+B[0]+C[0])/3, (A[1]+B[1]+C[1])/3)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *A),
+        segment(*A, *E), segment(*B, *D), segment(*C, *F),
+        # Tick marks at midpoints (visual only)
+        point(*A, "A", "above"), point(*B, "B", "below-right"),
+        point(*C, "C", "below-left"), point(*D, "D", "left"),
+        point(*E, "E", "right"), point(*F, "F", "above-right"),
+        point(*G, "G", "right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_3_angle_bisectors_incenter() -> str:
+    """Triangle ABC with angle bisectors meeting at incenter I."""
+    W, H = 220, 200
+    A = (110, 30); B = (190, 170); C = (30, 170)
+    # Angle bisectors (approximate intersection points on opposite sides)
+    # Use the incenter formula: weighted by side lengths
+    import math as m
+    a = m.dist(B, C); b = m.dist(A, C); c = m.dist(A, B)
+    Ix = (a*A[0] + b*B[0] + c*C[0]) / (a+b+c)
+    Iy = (a*A[1] + b*B[1] + c*C[1]) / (a+b+c)
+    # Bisector from A to opposite side at D
+    # Use parametric: shoot from A through I, find intersection with BC
+    def line_intersect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if d == 0: return None
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    D = line_intersect(A, (Ix, Iy), B, C)
+    E = line_intersect(B, (Ix, Iy), A, C)
+    F = line_intersect(C, (Ix, Iy), A, B)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *A),
+        segment(*A, *D), segment(*B, *E), segment(*C, *F),
+        point(*A, "A", "above"), point(*B, "B", "below-right"),
+        point(*C, "C", "below-left"),
+        point(*D, "D", "below", italic=True),
+        point(*E, "E", "right", italic=True),
+        point(*F, "F", "above-left", italic=True),
+        point(Ix, Iy, "I", "right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_4_incircle() -> str:
+    """Triangle ABC with inscribed incircle of radius r at incenter I."""
+    W, H = 200, 200
+    A = (100, 30); B = (175, 170); C = (25, 170)
+    import math as m
+    a = m.dist(B, C); b = m.dist(A, C); c = m.dist(A, B)
+    s = (a+b+c)/2
+    Ix = (a*A[0] + b*B[0] + c*C[0]) / (a+b+c)
+    Iy = (a*A[1] + b*B[1] + c*C[1]) / (a+b+c)
+    # inradius = area / s; area via cross product
+    area = abs((B[0]-A[0])*(C[1]-A[1]) - (C[0]-A[0])*(B[1]-A[1])) / 2
+    r = area / s
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *A),
+        circle(Ix, Iy, r),
+        point(Ix, Iy, "I", "left", italic=True),
+        text(Ix + 4, Iy - 4, "r", italic=True, anchor="start", size=12),
+        point(*A, "A", "above"), point(*B, "B", "below-right"),
+        point(*C, "C", "below-left"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_5_three_circumcircles() -> str:
+    """Three circumcircles: acute (center inside), right (center on hypotenuse), obtuse (center outside)."""
+    W, H = 640, 200
+    body = []
+    # Acute triangle inscribed in circle (center inside)
+    cx1, cy1, r1 = 105, 100, 75
+    body.append(circle(cx1, cy1, r1))
+    A1 = (cx1 + r1 * 0, cy1 - r1)            # top
+    B1 = (cx1 - r1 * 0.95, cy1 + r1 * 0.31)  # left
+    C1 = (cx1 + r1 * 0.78, cy1 + r1 * 0.62)  # bottom-right
+    body += [segment(*A1, *B1), segment(*B1, *C1), segment(*C1, *A1)]
+    body += [point(cx1, cy1, "O", "below", italic=True),
+             point(*A1, "A", "above"),
+             point(*B1, "B", "left"),
+             point(*C1, "C", "right")]
+    body += [text(cx1 - 15, cy1 - 35, "R", italic=True, size=11)]
+    # Right triangle (center at midpoint of hypotenuse)
+    cx2, cy2, r2 = 320, 100, 75
+    body.append(circle(cx2, cy2, r2))
+    # Hypotenuse horizontal, A on top
+    Ar = (cx2, cy2 - r2); Br = (cx2 - r2, cy2); Cr = (cx2 + r2, cy2)
+    body += [segment(*Ar, *Br), segment(*Br, *Cr), segment(*Ar, *Cr),
+             right_angle_mark(Ar[0], Ar[1], (Ar[0]+10, Ar[1]), (Ar[0]-10, Ar[1]+10), size=8)]
+    body += [point(cx2, cy2, "O", "below", italic=True),
+             point(*Ar, "A", "above"), point(*Br, "B", "left"), point(*Cr, "C", "right")]
+    # Obtuse triangle (center outside)
+    cx3, cy3, r3 = 530, 100, 75
+    body.append(circle(cx3, cy3, r3))
+    # Obtuse triangle: A near top, B and C close together below — center O ends up outside?
+    # For pure obtuse, place A at top, B at bottom-mid, C nearby — but center is determined by circle.
+    # Just place 3 points on circle to look obtuse.
+    Ao = (cx3 - r3 * 0.15, cy3 - r3 * 0.99)
+    Bo = (cx3 - r3 * 0.96, cy3 + r3 * 0.28)
+    Co = (cx3 + r3 * 0.31, cy3 + r3 * 0.95)
+    body += [segment(*Ao, *Bo), segment(*Bo, *Co), segment(*Co, *Ao)]
+    body += [point(cx3, cy3, "O", "below", italic=True),
+             point(*Ao, "A", "above"), point(*Bo, "B", "left"), point(*Co, "C", "below")]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_11_6_altitude_extended() -> str:
+    """Obtuse triangle ABC with altitude AD drawn to extension of side BC."""
+    W, H = 220, 200
+    A = (130, 40); B = (180, 165); C = (90, 165)
+    # AD perpendicular to line BC extended; D is to the left of C
+    # Since BC is horizontal here, D is at (cx, By) with cx < C[0]
+    D = (50, 165)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        # Extension of BC dashed
+        f'<line x1="{C[0]}" y1="{C[1]}" x2="{D[0]}" y2="{D[1]}" stroke="#1d1d1f" stroke-width="1.4" stroke-dasharray="3,3" fill="none"/>',
+        # Altitude AD
+        segment(*A, *D),
+        right_angle_mark(D[0], D[1], (D[0]+10, D[1]), (D[0], D[1]-10), size=8),
+        point(*A, "A", "above"), point(*B, "B", "below-right"),
+        point(*C, "C", "below"), point(*D, "D", "below"),
+    ])
+    return svg(W, H, body)
+
+
+def fig_11_7_right_triangle_semicircle() -> str:
+    """Right triangle ABC inscribed in circle with center O at midpoint of hypotenuse AB."""
+    W, H = 220, 200
+    cx, cy, r = 110, 110, 75
+    A = (cx - r, cy); B = (cx + r, cy)  # diameter
+    # C on the upper semicircle
+    import math as m
+    th = m.radians(60)
+    C = (cx + r * m.cos(th), cy - r * m.sin(th))
+    body = "\n".join([
+        circle(cx, cy, r),
+        segment(*A, *B), segment(*A, *C), segment(*B, *C),
+        right_angle_mark(C[0], C[1], A, B, size=8),
+        point(cx, cy, "O", "below", italic=True),
+        point(*A, "A", "left"), point(*B, "B", "right"),
+        point(*C, "C", "above-right"),
+    ])
+    return svg(W, H, body)
+
+
 FIGURES = {
     "fig-3-1-coordinate-plane":           fig_3_1_coordinate_plane,
     "fig-9-1-circle-tangent-secant":      fig_9_1_circle_tangent_secant,
@@ -980,6 +1823,39 @@ FIGURES = {
     "fig-10-23-two-secants-proof":            fig_10_23_two_secants_proof,
     "fig-10-24-tangent-chord-proof":          fig_10_24_tangent_chord_proof,
     "fig-10-25-two-chords-proof":             fig_10_25_two_chords_proof,
+    "fig-11-1-six-triangles-classification":  fig_11_1_six_triangles_classification,
+    "fig-11-2-medians-centroid":              fig_11_2_medians_centroid,
+    "fig-11-3-angle-bisectors-incenter":      fig_11_3_angle_bisectors_incenter,
+    "fig-11-4-incircle":                      fig_11_4_incircle,
+    "fig-11-5-three-circumcircles":           fig_11_5_three_circumcircles,
+    "fig-11-6-altitude-extended":             fig_11_6_altitude_extended,
+    "fig-11-7-right-triangle-semicircle":     fig_11_7_right_triangle_semicircle,
+    "fig-11-8-pythagorean-setup":             fig_11_8_pythagorean_setup,
+    "fig-11-11-congruent-triangles-intro":    fig_11_11_congruent_triangles_intro,
+    "fig-11-12-sss-theorem":                  fig_11_12_sss_theorem,
+    "fig-11-13-sas-warning":                  fig_11_13_sas_warning,
+    "fig-11-14-asa-theorem":                  fig_11_14_asa_theorem,
+    "fig-11-15-hl-ll-right-triangles":        fig_11_15_hl_ll_right_triangles,
+    "fig-11-16-example-11-9-kite":            fig_11_16_example_11_9_kite,
+    "fig-11-17-example-11-10-isosceles-altitude": fig_11_17_example_11_10_isosceles_altitude,
+    "fig-11-18-similar-triangles-intro":      fig_11_18_similar_triangles_intro,
+    "fig-11-19-sas-similarity":               fig_11_19_sas_similarity,
+    "fig-11-20-example-11-11":                fig_11_20_example_11_11,
+    "fig-11-9-altitude-to-hypotenuse":        fig_11_9_altitude_to_hypotenuse,
+    "fig-11-10-angle-bisector-theorem":       fig_11_10_angle_bisector_theorem,
+    "fig-11-21-example-11-14":                fig_11_21_example_11_14,
+    "fig-11-22-example-11-15":                fig_11_22_example_11_15,
+    "fig-11-23-trig-right-triangle":          fig_11_23_trig_right_triangle,
+    "fig-11-24-45-45-90":                     fig_11_24_45_45_90,
+    "fig-11-25-30-60-90":                     fig_11_25_30_60_90,
+    "fig-11-26-example-11-18":                fig_11_26_example_11_18,
+    "fig-11-27-rectangle-two-triangles":      fig_11_27_rectangle_two_triangles,
+    "fig-11-28-acute-altitude":               fig_11_28_acute_altitude,
+    "fig-11-29-incircle-inradii":             fig_11_29_incircle_inradii,
+    "fig-11-30-pythagorean-square-proof":     fig_11_30_pythagorean_square_proof,
+    "fig-11-31-parallel-transversal-angles":  fig_11_31_parallel_transversal_angles,
+    "fig-11-32-example-11-25-setup":          fig_11_32_example_11_25_setup,
+    "fig-11-33-example-11-25-with-aux":       fig_11_33_example_11_25_with_aux,
 }
 
 

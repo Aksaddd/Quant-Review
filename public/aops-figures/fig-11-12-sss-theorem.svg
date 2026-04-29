@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" width="240" height="90">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="40" y1="25" x2="75" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="75" y1="75" x2="10" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="40" y1="25" x2="10" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="175" y1="25" x2="210" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="210" y1="75" x2="145" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="175" y1="25" x2="145" y2="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="61.5961596025952" y1="47.13268827818336" x2="53.4038403974048" y2="52.86731172181664" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="196.5961596025952" y1="47.13268827818336" x2="188.4038403974048" y2="52.86731172181664" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="44.5" y1="80.0" x2="44.5" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="40.5" y1="80.0" x2="40.5" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="179.5" y1="80.0" x2="179.5" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="175.5" y1="80.0" x2="175.5" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="31.345447650272828" y1="49.14250707428746" x2="22.770518393147388" y2="43.99754952001219" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="29.28746462856272" y1="52.57247877713763" x2="20.71253537143728" y2="47.42752122286237" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="27.229481606852612" y1="56.00245047998781" x2="18.654552349727172" y2="50.85749292571254" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="166.34544765027283" y1="49.14250707428746" x2="157.77051839314737" y2="43.99754952001219" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="164.28746462856273" y1="52.57247877713763" x2="155.71253537143727" y2="47.42752122286237" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="162.22948160685263" y1="56.00245047998781" x2="153.65455234972717" y2="50.85749292571254" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="40" y1="20" x2="95" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="95" y1="70" x2="40" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="40" y1="20" x2="40" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="155" y1="20" x2="210" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="210" y1="70" x2="155" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="155" y1="20" x2="155" y2="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 47.00 70.00 L 47.00 63.00 L 40.00 63.00" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 162.00 70.00 L 162.00 63.00 L 155.00 63.00" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="70.86336396998156" y1="41.30029963302028" x2="64.13663603001844" y2="48.69970036697972" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="185.86336396998155" y1="41.30029963302028" x2="179.13663603001845" y2="48.69970036697972" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="69.5" y1="75.0" x2="69.5" y2="65.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="65.5" y1="75.0" x2="65.5" y2="65.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="184.5" y1="75.0" x2="184.5" y2="65.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="180.5" y1="75.0" x2="180.5" y2="65.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="15" y1="100" x2="15" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="15" y1="145" x2="75" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="15" y1="100" x2="75" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="165" y1="100" x2="165" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="165" y1="145" x2="225" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="165" y1="100" x2="225" y2="145" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 15.00 138.00 L 22.00 138.00 L 22.00 145.00" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 165.00 138.00 L 172.00 138.00 L 172.00 145.00" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="20.0" y1="122.5" x2="10.0" y2="122.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="170.0" y1="122.5" x2="160.0" y2="122.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="43.0" y1="140.0" x2="43.0" y2="150.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="47.0" y1="140.0" x2="47.0" y2="150.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="193.0" y1="140.0" x2="193.0" y2="150.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="197.0" y1="140.0" x2="197.0" y2="150.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>
