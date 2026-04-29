@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="115" y1="30" x2="185" y2="165" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="185" y1="165" x2="35" y2="165" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="35" y1="165" x2="115" y2="30" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="115" y1="30" x2="110.0" y2="165.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="185" y1="165" x2="75.0" y2="97.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="35" y1="165" x2="150.0" y2="97.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="115" cy="30" r="2.5" fill="#1d1d1f"/>
+<text x="115" y="22" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">A</text>
+<circle cx="185" cy="165" r="2.5" fill="#1d1d1f"/>
+<text x="195" y="183" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="35" cy="165" r="2.5" fill="#1d1d1f"/>
+<text x="25" y="183" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">C</text>
+<circle cx="75.0" cy="97.5" r="2.5" fill="#1d1d1f"/>
+<text x="63.0" y="101.5" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">D</text>
+<circle cx="110.0" cy="165.0" r="2.5" fill="#1d1d1f"/>
+<text x="122.0" y="169.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">E</text>
+<circle cx="150.0" cy="97.5" r="2.5" fill="#1d1d1f"/>
+<text x="160.0" y="89.5" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">F</text>
+<circle cx="111.66666666666667" cy="120.0" r="2.5" fill="#1d1d1f"/>
+<text x="123.66666666666667" y="124.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">G</text>
+</svg>

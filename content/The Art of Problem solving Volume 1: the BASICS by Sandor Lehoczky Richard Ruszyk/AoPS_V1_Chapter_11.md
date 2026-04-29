@@ -22,7 +22,7 @@ Triangles can be classified by their angles or by the lengths of their sides. As
 - **Isosceles triangle** (eye-SOS-uh-leez) — two sides are equal. The two angles opposite the equal sides are also equal. The two equal sides are called the **legs** and the other side is the **base**. The angle opposite the base is the **vertex angle** and the equal angles are called the **base angles**.
 - **Scalene triangle** — no two sides are the same.
 
-> *[Figure 11.1: Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications]*
+> *[Figure: Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications]*
 
 ---
 
@@ -48,7 +48,11 @@ Like the medians, the angle bisectors all pass through a single point. How would
 
 Let $I$ be the intersection of angle bisectors $AD$ and $BE$. Since $I$ is on $AD$, it is equidistant from $AB$ and $AC$. Since $I$ is on $BE$, it is also equidistant from $AB$ and $BC$. Since it is equidistant from $AC$ and $AB$, and from $AB$ and $BC$, $I$ must also be equidistant from $AC$ and $BC$. Hence, it must be on the angle bisector of $\angle ACB$. Thus, the angle bisectors are concurrent at the point $I$.
 
+> *[Figure: $\triangle ABC$ with angle bisectors $AD$, $BE$, $CF$ meeting at incenter $I$]*
+
 Let's call the common distance from $I$ to the sides of the triangle $r$. Suppose we draw a circle with center $I$ and radius $r$. It will hit the sides of the triangle, but only at exactly one point, because the segment from $I$ to a side with length $r$ is perpendicular to the side. (Remember, $I$ is $r$ from each side.) We say that the circle is **inscribed** in the triangle because it is tangent to all three sides of the triangle and we call the circle the **incircle**. Likewise, point $I$ is the **incenter** and $r$ is the **inradius**.
+
+> *[Figure: $\triangle ABC$ with inscribed incircle of radius $r$ centered at incenter $I$]*
 
 ### Perpendicular Bisectors
 
@@ -58,11 +62,15 @@ The perpendicular bisectors of the sides of the triangle are concurrent at the *
 
 > **Note:** The circumcenter of an obtuse triangle is *outside* the triangle, of an acute triangle is *inside* the triangle, and that of a right triangle is *on* the triangle (at the midpoint of the hypotenuse).
 
+> *[Figure: Three circumcircles — acute triangle (circumcenter inside), right triangle (circumcenter on hypotenuse), obtuse triangle (circumcenter outside)]*
+
 You should be able to prove for yourself that the perpendicular bisectors are concurrent; the proof is exactly like that for angle bisectors: let $O$ be the intersection of the perpendicular bisectors of $AB$ and $AC$. Since $O$ is on the perpendicular bisector of $AB$, it is equidistant from $A$ and $B$. Continue from here to show that $O$ is equidistant from $A$, $B$, and $C$.
 
 ### Altitudes
 
 A perpendicular segment from the vertex of a triangle to the side opposite (or the extension of that side, as in an obtuse triangle) is called an **altitude**. (Sometimes the altitude of a triangle is also called the **height**.) The length of an altitude is the distance from the vertex to the line containing the opposite side. To draw the altitudes of an obtuse triangle, we must extend some sides of the triangle, then we can draw the altitude to that extended side. Remember, any time we say the distance from a point to a line, we mean the length of the perpendicular segment drawn from the point to the line.
+
+> *[Figure: Obtuse triangle $ABC$ with altitude $AD$ drawn to the extension of side $BC$]*
 
 The altitudes are usually denoted $h_a$, $h_b$, and $h_c$, where $h_a$ is the altitude from $A$ and so on. The altitudes are concurrent at the **orthocenter**, denoted $H$. The orthocenter of an obtuse triangle is outside the triangle. (Draw it and see for yourself!) Where is the orthocenter of a right triangle?
 
@@ -72,6 +80,8 @@ The altitudes are usually denoted $h_a$, $h_b$, and $h_c$, where $h_a$ is the al
 *Show that the circumcenter of a right triangle is the midpoint of its hypotenuse.*
 
 **Proof:** Since $\angle C$ is an inscribed right angle, we have $\widehat{AB} = 2\angle C = 180°$. Thus $\widehat{AB}$ is a semi-circular arc, and $AB$ is a diameter of the circle. Hence, $O$, as the midpoint of the diameter, is the center of the circle. Thus the midpoint of the hypotenuse of a right triangle is the circumcenter of the triangle. $\blacksquare$
+
+> *[Figure: Right triangle $ABC$ inscribed in a circle with center $O$ at the midpoint of hypotenuse $AB$]*
 
 ---
 
@@ -113,6 +123,8 @@ For example, above we found that if two sides of a triangle have lengths 1 cm an
 By far the most famous theorem in geometry is the **Pythagorean Theorem**, which states that *the sum of the squares of the lengths of the legs of a right triangle equals the square of the length of the hypotenuse*. Thus, for $\triangle ABC$ with right angle at $C$, we have
 
 $$(AC)^2 + (BC)^2 = (AB)^2.$$
+
+> *[Figure: Right triangle $ABC$ with right angle at $C$, legs $a = BC$ and $b = AC$, hypotenuse $c = AB$]*
 
 The Pythagorean Theorem is proven on page 112.
 
@@ -217,6 +229,8 @@ In this section we discuss how to prove that two triangles are congruent. Triang
 
 Two triangles are congruent if all their corresponding sides and corresponding angles are equal. When two triangles $ABC$ and $DEF$ are congruent, we write $\triangle ABC \cong \triangle DEF$. We always order the vertices the same way for each triangle, that is, $\angle A = \angle D$, $\angle B = \angle E$, and $\angle C = \angle F$, so we write $\triangle ABC \cong \triangle DEF$ rather than $\triangle ACB \cong \triangle DEF$.
 
+> *[Figure: Two congruent triangles $\triangle ABC$ and $\triangle DEF$ with corresponding parts equal]*
+
 Although we said that in two congruent triangles, all three sides and all three angles are equal, we don't in general need to show all six of these equalities just to prove congruency. Each of the seven criteria described below is sufficient to show that two triangles are congruent. The first four work for any triangles, while the last three work only for right triangles.
 
 ### Congruency Theorems
@@ -225,15 +239,21 @@ Although we said that in two congruent triangles, all three sides and all three 
 
 If we show that the three sides of a triangle are equal to the sides of another triangle, then it follows that the corresponding angles are equal and hence the triangles are congruent. In a proof, we would write "the two triangles are congruent by SSS."
 
+> *[Figure: Two triangles with all three corresponding sides marked equal — SSS congruency]*
+
 **2. Side-Angle-Side (SAS)**
 
 If two sides and the angle *between* them of one triangle are equal to two sides and the angle between them of another triangle, then the triangles are congruent.
 
 > ⚠️ **WARNING:** The angles which are equal in the triangles must be the ones *between* the sides you are using. This is very important — if the equal angles are not between the equal corresponding sides, the triangles are not necessarily congruent. **There is no such thing as SSA congruency.**
 
+> *[Figure: SAS — two triangles with two equal sides and the included angle equal — and the SSA warning showing why SSA fails]*
+
 **3. Angle-Side-Angle (ASA)**
 
 If a side in one triangle equals a side of another, and the angles formed by that side and each of the other two sides are equal to the corresponding angles in the other triangle, then the triangles are congruent.
+
+> *[Figure: ASA — two triangles with one matching side and the two angles at its endpoints equal]*
 
 > ⚠️ **WARNING:** The *corresponding* angles in each triangle must be equal. You can have equal sides and a pair of equal angles where the angles are not corresponding (in one triangle they share the equal side and in the other they do not), in which case the triangles are not necessarily congruent.
 
@@ -251,6 +271,8 @@ If the hypotenuse and one leg of a right triangle equal that of another, the tri
 
 If the legs of a right triangle equal those of another, then by LL, the right triangles are congruent. (This is just SAS applied to right triangles. Can you see why?)
 
+> *[Figure: HL and LL — pair of right-triangle congruency theorems with hypotenuse–leg and leg–leg matching]*
+
 **7. Side-Angle (SA)** — *right triangles only*
 
 If one of the acute angles of a right triangle equals that of another right triangle, and one of its sides equals a corresponding side of the other triangle, then the right triangles are congruent. These corresponding sides may be hypotenuses or corresponding legs.
@@ -266,6 +288,8 @@ What good is finding congruent triangles? The most useful tool is that if two fi
 ### Example 11-9
 *In the figure, $\triangle ABC \cong \triangle BAD$. Given $\angle BAC = 70°$ and $\angle ABC = 60°$, find $\angle D$.*
 
+> *[Figure: Kite $ABCD$ with $\triangle ABC \cong \triangle BAD$, angles $70°$ at $A$ and $60°$ at $B$ marked]*
+
 **Solution:** From the given triangle congruence we have $\angle ABC = \angle BAD = 60°$. Thus we find
 
 $$\angle D = \angle C = 180° - \angle BAC - \angle ABC = 180° - 70° - 60° = \boxed{50°}.$$
@@ -276,6 +300,8 @@ $$\angle D = \angle C = 180° - \angle BAC - \angle ABC = 180° - 70° - 60° = 
 *Prove that if two angles of a triangle are equal, then the sides opposite those angles are equal.*
 
 **Proof:** We first draw altitude $AX$ from the vertex which does not contain one of the equal angles. Thus, in right triangles $AXB$ and $AXC$ we have $AX = AX$ and $\angle B = \angle C$. By SA for right triangles we find $\triangle AXB \cong \triangle AXC$; hence, $AB = AC$. $\blacksquare$
+
+> *[Figure: Isosceles $\triangle ABC$ with altitude $AX$ to base $BC$, splitting into two congruent right triangles]*
 
 ---
 
@@ -299,6 +325,8 @@ Two triangles are **similar** if one is a magnified version of the other. If two
 
 $$\frac{c}{f} = \frac{b}{e} = \frac{a}{d}.$$
 
+> *[Figure: Two similar triangles $\triangle ABC$ (with sides $a$, $b$, $c$) and $\triangle DEF$ (with sides $d$, $e$, $f$)]*
+
 In addition to the sides, all other corresponding lengths, such as medians, altitudes, etc., have the same ratio as the common ratio of the sides. Furthermore, if the ratio of the sides is $k$, the ratio of the areas is $k^2$.
 
 To show that two triangles $ABC$ and $DEF$ are similar, we write $\triangle ABC \sim \triangle DEF$. As with congruent triangles, we always make sure to write the vertices in the same order for each triangle. (For example, we wouldn't write $\triangle ABC \sim \triangle DFE$ if the correspondence is $A \leftrightarrow D$, $B \leftrightarrow E$, $C \leftrightarrow F$.)
@@ -315,6 +343,8 @@ AA is the most useful method of proving that two triangles are similar. If the t
 
 If triangles $RST$ and $XYZ$ are such that $RS/XY = RT/XZ$ and $\angle R = \angle X$, then $\triangle RST \sim \triangle XYZ$. This similarity theorem has limited usefulness. It is generally used in situations where, for example, $D$ and $E$ lie on sides $AB$ and $AC$ of $\triangle ABC$ such that $AB/AD = AC/AE$, allowing us to conclude $\triangle ABC \sim \triangle ADE$.
 
+> *[Figure: $\triangle ABC$ with smaller similar $\triangle ADE$ inside, where $D$ on $AB$ and $E$ on $AC$ — SAS similarity]*
+
 **3. Side-Side-Side (SSS)**
 
 As we noted above, two triangles are similar if all the ratios of corresponding sides are equal. This is the most rarely used method of showing that two triangles are similar.
@@ -326,12 +356,16 @@ As we noted above, two triangles are similar if all the ratios of corresponding 
 ### Example 11-11
 *On sides $AB$ and $AC$ of $\triangle ABC$, we pick points $D$ and $E$, respectively, so that $DE \parallel BC$. If $AB = 3 \cdot AD$ and $DE = 6$, find $BC$.*
 
+> *[Figure: $\triangle ABC$ with $D$ on $AB$ and $E$ on $AC$, $DE \parallel BC$ creating similar $\triangle ADE \sim \triangle ABC$]*
+
 **Solution:** Since $DE \parallel BC$, we have $\angle ADE = \angle ABC$ and $\angle AED = \angle ACB$; thus, triangles $ABC$ and $ADE$ are similar. Hence we have $AB/AD = BC/DE$. We are given that $AB/AD = 3$, so $BC = 3 \cdot DE = \boxed{18}$.
 
 ---
 
 ### Example 11-12
 *Given that the altitude to the hypotenuse of a right triangle divides the hypotenuse into segments of lengths 4 and 8, find the length of the altitude.*
+
+> *[Figure: Right triangle $ACB$ with altitude $CD$ drawn to hypotenuse $AB$, splitting it into similar sub-triangles $ACD$ and $CBD$]*
 
 **Solution:** First we draw the altitude $CD$. Since $\angle CDA = \angle ACB$ and $\angle DAC = \angle BAC$, we have $\triangle ACD \sim \triangle ABC$ by AA similarity. Similarly we find $\triangle CBD \sim \triangle ABC$. Combining these:
 
@@ -346,6 +380,8 @@ From similar triangles $ADC$ and $CDB$ we have $AD/CD = CD/BD$. Thus $CD^2 = (AD
 ### Example 11-13 (Angle Bisector Theorem)
 *Prove the **Angle Bisector Theorem**, which states that if $AX$ bisects $\angle A$ of $\triangle ABC$, then $AC/CX = AB/BX$.*
 
+> *[Figure: $\triangle ABC$ with angle bisector $AX$ extended to point $E$ where $BE \parallel AC$, used to prove the Angle Bisector Theorem]*
+
 **Proof:** Seeing the ratio of sides, we think to look for similar triangles — most facts involving ratios of lengths can be proven using similar triangles. As the figure is drawn, however, no similar triangles stand out. We thus look for extra lines to draw.
 
 > **Heuristic:** Parallel lines usually make equal angles, and equal angles mean similar triangles.
@@ -359,6 +395,8 @@ $$\frac{AC}{CX} = \frac{BE}{BX} = \frac{AB}{BX}. \quad \blacksquare$$
 ### Example 11-14
 *If $AX$ and $BY$ are angle bisectors which intersect at $I$, show that*
 
+> *[Figure: $\triangle ABC$ with angle bisectors $AX$ and $BY$ meeting at incenter $I$; auxiliary segment $CI$ also bisects $\angle C$]*
+
 $$\frac{AI}{IX} = \frac{AC}{CX}.$$
 
 **Proof:** Remember that the angle bisectors of a triangle are concurrent. Hence, $CI$ bisects $\angle C$. Applying the Angle Bisector Theorem to $\angle C$ of $\triangle ACX$, we have $AC/AI = CX/XI$. Rearranging this slightly gives the desired relation. $\blacksquare$
@@ -367,6 +405,8 @@ $$\frac{AI}{IX} = \frac{AC}{CX}.$$
 
 ### Example 11-15
 *In the diagram, we have $AD = DB = 5$, $EC = 8$, $AE = 4$, and $\angle AED$ is a right angle. Find the length of $BC$.* *(MAΘ 1987)*
+
+> *[Figure: Configuration with $D$ on segment $AB$, $E$ off the segment, $\angle AED$ right; auxiliary $\overline{BH} \parallel \overline{DE}$ added to introduce similar triangles]*
 
 **Solution:** There are no similar triangles immediately in sight; however, we can introduce similar triangles by drawing $BH$ such that $BH \parallel DE$.
 
@@ -399,6 +439,8 @@ $$BC = \sqrt{36 + 16} = \boxed{2\sqrt{13}}.$$
 Right triangles are of paramount importance in geometry. Thus, mathematicians have developed a shorthand for writing the ratios of the sides of right triangles. Instead of writing "the ratio of the leg adjacent to an $18°$ angle to the hypotenuse of the triangle," we write "$\cos 18°$". Because expressions of this type frequently come up in physics, engineering, and many other branches of science, you can see why such a shorthand was developed.
 
 With respect to $\angle A$ in right $\triangle ABC$ with $\angle C = 90°$, $BC$ is considered the **opposite** leg and $AC$ the **adjacent** leg. These labels are reversed when working with $\angle B$: $AC$ is opposite and $BC$ adjacent.
+
+> *[Figure: Right triangle $ABC$ with right angle at $C$, sides labeled $a = BC$, $b = AC$, $c = AB$ (hypotenuse)]*
 
 ### The Six Basic Trigonometric Functions
 
@@ -458,6 +500,8 @@ $$\sin 45° = \cos 45° = \frac{a}{a\sqrt{2}} = \frac{\sqrt{2}}{2}, \qquad \tan 
 
 > **Key ratio:** In a $45°$-$45°$-$90°$ triangle, the sides are in ratio $1 : 1 : \sqrt{2}$.
 
+> *[Figure: Isosceles right triangle ($45°$-$45°$-$90°$) with both legs $a$ and hypotenuse $a\sqrt{2}$]*
+
 #### The 30°-60°-90° Triangle
 
 To derive this triangle's ratios, draw $AX$, the angle bisector of the $60°$ angle in a $30°$-$60°$-$90°$ triangle. This creates two more $30°$ angles. Drawing the perpendicular from $X$ to $AB$ divides $\triangle ABX$ into two congruent triangles (by ASA). Furthermore, by ASA we find $\triangle ACX \cong \triangle AYX$, so we have
@@ -473,6 +517,8 @@ Hence, in a $30°$-$60°$-$90°$ triangle, the hypotenuse ($AB$) is twice the le
 $$BC = \sqrt{AB^2 - AC^2} = \sqrt{4AC^2 - AC^2} = AC\sqrt{3}.$$
 
 > **Key ratio:** In a $30°$-$60°$-$90°$ triangle: $AC : BC : AB = 1 : \sqrt{3} : 2$.
+
+> *[Figure: $30°$-$60°$-$90°$ triangle with sides in ratio $1 : \sqrt{3} : 2$, hypotenuse $2a$ opposite the right angle]*
 
 Once you know one side of a $30°$-$60°$-$90°$ triangle, you can determine the other two sides. Also, whenever you see a right triangle whose hypotenuse is twice the length of a side, you have found a $30°$-$60°$-$90°$ triangle.
 
@@ -572,6 +618,8 @@ Recall that $h_a$ is the altitude to side $a$, $s$ the semiperimeter (half the s
 
 $$[ABC] = \frac{(BC)(AX)}{2} = \frac{80 \cdot 30}{2} = \boxed{1200}.$$
 
+> *[Figure: Isosceles $\triangle ABC$ with $AB = AC = 50$, base $BC = 80$, altitude $AX$ to base]*
+
 ---
 
 ### Example 11-19
@@ -609,9 +657,13 @@ $$\frac{[ABC]}{[DEF]} = \frac{a h_a}{d h_d} = \left(\frac{a}{d}\right) \left(\fr
 
 We start with right triangles. Two congruent right triangles $ABC$ and $CDA$ together form a rectangle. Thus the area of one triangle is half the area of the rectangle they form together. The area of the rectangle is its length times its width, so
 
+> *[Figure: Rectangle $ABCD$ split by diagonal into two congruent right triangles $ABC$ and $CDA$]*
+
 $$[ABC] = \frac{[ABCD]}{2} = \frac{(AB)(BC)}{2}.$$
 
 For acute triangles, draw altitude $AX$ to form two right triangles. The area of $ABC$ is the sum of the areas of $ABX$ and $ACX$:
+
+> *[Figure: Acute $\triangle ABC$ with altitude $AX$ to side $BC$, splitting into right triangles $ABX$ and $ACX$]*
 
 $$[ABC] = [ABX] + [ACX] = \frac{(AX)(BX)}{2} + \frac{(AX)(CX)}{2} = \frac{(AX)(BC)}{2}.$$
 
@@ -636,6 +688,8 @@ $$\frac{1}{2} ab \sin \alpha = \frac{1}{2} ab \sin(180° - \alpha) = \frac{1}{2}
 > **Important method:** Chopping up a desired area into pieces and finding the sum of the areas of the pieces.
 
 Since the formula involves the inradius, draw the inradii to where the circle is tangent to the sides of the triangle (these are perpendicular to the sides). Connect the incenter $I$ to the vertices, forming three triangles $AIB$, $BIC$, and $CIA$. For each of these, an inradius forms an altitude:
+
+> *[Figure: $\triangle ABC$ with incircle and inradii $IX$, $IY$, $IZ$ to tangent points; incenter $I$ connected to vertices forming three sub-triangles]*
 
 $$\begin{aligned}
 [ABC] &= [AIB] + [BIC] + [CIA] \\
@@ -684,6 +738,8 @@ $$r = \frac{60}{20} = \boxed{3}.$$
 
 **Proof:** Consider a large square of side $c$ containing four congruent right triangles (with legs $a$ and $b$, hypotenuse $c$) arranged so that their hypotenuses form an inner tilted square. We can find the area of the large square in two ways:
 
+> *[Figure: Large square with side $c$ containing four congruent right triangles around an inner tilted square — the famous Pythagorean Theorem proof diagram]*
+
 1. As the square of its side length: $c^2$.
 2. As the sum of the area of the smaller (inner) square and the four triangles. Since $XY = a$ and $XZ = b$, the sides of the smaller square have length $a - b$.
 
@@ -728,6 +784,8 @@ Given two lines and a transversal, the two lines are parallel if any of the foll
 3. **Same-side interior angles are supplementary:** $\beta + \phi = 180°$.
 4. **Two points on one line are equidistant from the other line.** For example, if points $A$ and $B$ on $m$ are at distances $x$ and $y$ from $\ell$, and $x = y$, then $\ell \parallel m$.
 
+> *[Figure: Two lines and a transversal with angles $\theta$, $\phi$, $\alpha$, $\beta$ marked at the intersection points]*
+
 ### Ways to Show Two Lines Are Perpendicular
 
 The simplest is to prove that they form a right angle. Methods divide into three categories: using angle relations, proving the angle is the largest angle of a right triangle, and showing perpendicularity without using angle measures.
@@ -757,7 +815,11 @@ The simplest is to prove that they form a right angle. Methods divide into three
 ### Example 11-25
 *Point $E$ is selected on side $AB$ of $\triangle ABC$ such that $AE : EB = 1 : 3$, and point $D$ is selected on side $BC$ so that $CD : DB = 1 : 2$. The point of intersection of $AD$ and $CE$ is $F$. Find $\dfrac{EF}{FC} + \dfrac{AF}{FD}$.* *(AHSME 1965)*
 
+> *[Figure: $\triangle ABC$ with $E$ on $AB$, $D$ on $BC$, and $F$ at intersection of $AD$ and $CE$]*
+
 **Solution:** Seeing ratios, we look for similar triangles involving the segments. Seeing no such triangles, we endeavor to make some.
+
+> *[Figure: Same configuration with auxiliary segment $DH \parallel EA$ added (where $H$ is on $AC$), introducing similar triangles for the proof]*
 
 Drawing $DH \parallel EA$ achieves this (where $H$ is on $AC$). Since $\angle EBC = \angle GDC$ and $\angle BEC = \angle DGC$ (corresponding angles), we have $\triangle EBC \sim \triangle GDC$. Thus
 

@@ -34,7 +34,43 @@ const CONTENT_DIR = path.join(
  * figures.json entries for that chapter.
  */
 function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
-  let out = md.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
+  // Strip leading YAML frontmatter (ch 20-28+ format: ---\n<metadata>\n---).
+  let out = md.replace(/^---\s*\n[\s\S]*?\n---\s*\n/, '');
+  // Strip vision-transcript prelude (ch 1-9 format).
+  out = out.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
+  // remark-math 6.x quirks:
+  //   1) `$$\begin{aligned}` on the same line strips the `\begin{aligned}`
+  //      prefix from the math content sent to KaTeX.
+  //   2) Single-line `$$...$$` is parsed as inlineMath, which makes KaTeX
+  //      reject display-only commands like `\tag`.
+  // Workaround for both: ensure `$$` always sits on its own line. That
+  // forces remark-math to recognize the block as display math and keeps
+  // `\begin{...}` / `\end{...}` cleanly separated.
+  // Single-line `$$...$$` (display math on one line) — split onto 3 lines.
+  // Preserve any leading blockquote markers `>` so the content stays inside
+  // the blockquote.
+  out = out.replace(
+    /^([ \t]*(?:>[ \t]*)*)\$\$(?!\n)([^\n]*?)(?<!\n)\$\$[ \t]*$/gm,
+    (_, prefix, content) => `${prefix}$$\n${prefix}${content}\n${prefix}$$`,
+  );
+  // `$$\begin{...}` — separate `$$` and `\begin{...}` onto their own lines,
+  // preserving any leading blockquote prefix.
+  out = out.replace(
+    /^([ \t]*(?:>[ \t]*)*)\$\$(\\begin\{[a-zA-Z*]+\})/gm,
+    (_, prefix, beginCmd) => `${prefix}$$\n${prefix}${beginCmd}`,
+  );
+  // `\end{...}$$` — separate them onto their own lines, preserving prefix.
+  out = out.replace(
+    /^([ \t]*(?:>[ \t]*)*)(\\end\{[a-zA-Z*]+\})\$\$[ \t]*$/gm,
+    (_, prefix, endCmd) => `${prefix}${endCmd}\n${prefix}$$`,
+  );
+  // `<text>$$` at end of line (multi-line math block closing on a content
+  // line) — push the closing `$$` to its own line. Skip lines that begin
+  // with `$$` (already-split single-line display math).
+  out = out.replace(
+    /^([ \t]*(?:>[ \t]*)*)(?!\$\$)(.+?)\$\$[ \t]*$/gm,
+    (_, prefix, content) => `${prefix}${content}\n${prefix}$$`,
+  );
   // Strip page-tracking HTML comments — no longer rendered inline.
   out = out.replace(/<!--[\s\S]*?-->/g, '');
   out = out.replace(/^\s*#\s+Chapter\s+\d+[^\n]*\n+/, '');
@@ -47,12 +83,12 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     const caption = captionMatch ? captionMatch[1].trim() : 'figure';
     const id = idMatch ? idMatch[1].trim() : '';
     const fig = aopsFigureById[id];
-    if (fig) return `![${caption}](/aops-figures/${fig.id}.svg)`;
+    if (fig) return `![${caption}](/aops-figures/${fig.id}.${fig.format ?? 'svg'})`;
     // Fall back to italic placeholder if no crop mapping exists.
     return `*[Figure: ${caption}]*`;
   });
 
-  // Ch 3, 9: sequential placeholder match against chapter's figures.json
+  // Ch 3, 9, 11: sequential placeholder match against chapter's figures.json
   // entries. The first *[Figure: ...]* gets the first figure, etc.
   const chapterFigures = aopsFiguresOfChapter(chapter.number);
   if (chapterFigures.length > 0) {
@@ -60,7 +96,7 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     out = out.replace(/\*\[Figures?:\s*([^\]]+)\]\*/g, (_, captionText) => {
       const fig = chapterFigures[figIndex++];
       const cleanCaption = captionText.trim().replace(/\.$/, '');
-      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.svg)`;
+      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.${fig.format ?? 'svg'})`;
       return `*[Figure: ${captionText.trim()}]*`;
     });
   }

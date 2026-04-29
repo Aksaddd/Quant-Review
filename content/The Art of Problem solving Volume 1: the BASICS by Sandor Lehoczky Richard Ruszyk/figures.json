@@ -5,197 +5,1680 @@
   "figures": [
     {
       "id": "fig-3-1-coordinate-plane",
-      "chapter": 3, "page": 33, "bookPage": 19,
-      "caption": "Coordinate plane showing two intersecting lines (x + y = 3 and x − y = 1).",
-      "bbox": [70, 120, 210, 200]
+      "chapter": 3,
+      "page": 33,
+      "bookPage": 19,
+      "caption": "Coordinate plane showing two intersecting lines (x + y = 3 and x \u2212 y = 1).",
+      "bbox": [
+        70,
+        120,
+        210,
+        200
+      ]
     },
-
     {
       "id": "fig-9-1-circle-tangent-secant",
-      "chapter": 9, "page": 95, "bookPage": 81,
-      "caption": "Circle with center O, chord AC, diameter AB, tangent line ℓ, and secant m.",
-      "bbox": [590, 295, 195, 150]
+      "chapter": 9,
+      "page": 95,
+      "bookPage": 81,
+      "caption": "Circle with center O, chord AC, diameter AB, tangent line \u2113, and secant m.",
+      "bbox": [
+        590,
+        295,
+        195,
+        150
+      ]
     },
     {
       "id": "fig-9-2-arc-sector-segment",
-      "chapter": 9, "page": 95, "bookPage": 81,
-      "caption": "Arc, sector, and circular segment — three small marginal sketches.",
-      "bbox": [60, 435, 150, 270]
+      "chapter": 9,
+      "page": 95,
+      "bookPage": 81,
+      "caption": "Arc, sector, and circular segment \u2014 three small marginal sketches.",
+      "bbox": [
+        60,
+        435,
+        150,
+        270
+      ]
     },
     {
       "id": "fig-9-3-tangent-circles-internal",
-      "chapter": 9, "page": 96, "bookPage": 82,
+      "chapter": 9,
+      "page": 96,
+      "bookPage": 82,
       "caption": "Large circle A with two smaller circles B and C internally tangent at X and Y.",
-      "bbox": [600, 300, 185, 140]
+      "bbox": [
+        600,
+        300,
+        185,
+        140
+      ]
     },
     {
       "id": "fig-9-4-mutually-tangent-circles",
-      "chapter": 9, "page": 96, "bookPage": 82,
+      "chapter": 9,
+      "page": 96,
+      "bookPage": 82,
       "caption": "Three mutually externally tangent circles A, B, C.",
-      "bbox": [600, 480, 185, 120]
+      "bbox": [
+        600,
+        480,
+        185,
+        120
+      ]
     },
     {
       "id": "fig-9-5-epicycle-pattern",
-      "chapter": 9, "page": 97, "bookPage": 83,
-      "caption": "Epicycle pattern — a flower-like ring of small circles.",
-      "bbox": [285, 425, 215, 230]
+      "chapter": 9,
+      "page": 97,
+      "bookPage": 83,
+      "caption": "Epicycle pattern \u2014 a flower-like ring of small circles.",
+      "bbox": [
+        285,
+        425,
+        215,
+        230
+      ]
     },
     {
       "id": "fig-9-6-ellipse-orbit",
-      "chapter": 9, "page": 97, "bookPage": 83,
+      "chapter": 9,
+      "page": 97,
+      "bookPage": 83,
       "caption": "Elliptical orbit with focus marked.",
-      "bbox": [280, 670, 220, 110]
+      "bbox": [
+        280,
+        670,
+        220,
+        110
+      ]
     },
-
     {
       "id": "fig-10-1-segments-rays-lines",
-      "chapter": 10, "page": 98, "bookPage": 84,
+      "chapter": 10,
+      "page": 98,
+      "bookPage": 84,
       "caption": "Segment AB, ray CD, and line EF, drawn vertically stacked.",
-      "bbox": [550, 355, 230, 115]
+      "bbox": [
+        550,
+        355,
+        230,
+        115
+      ]
     },
     {
       "id": "fig-10-2-collinear-segment",
-      "chapter": 10, "page": 98, "bookPage": 84,
+      "chapter": 10,
+      "page": 98,
+      "bookPage": 84,
       "caption": "Three collinear points A, X, B on a segment.",
-      "bbox": [60, 515, 165, 50]
+      "bbox": [
+        60,
+        515,
+        165,
+        50
+      ]
     },
     {
       "id": "fig-10-3-angle-subtending-arc",
-      "chapter": 10, "page": 98, "bookPage": 84,
+      "chapter": 10,
+      "page": 98,
+      "bookPage": 84,
       "caption": "Angle AOB with vertex O subtending an arc on a circle.",
-      "bbox": [60, 670, 165, 205]
+      "bbox": [
+        60,
+        670,
+        165,
+        205
+      ]
     },
     {
       "id": "fig-10-4-angle-types",
-      "chapter": 10, "page": 99, "bookPage": 85,
-      "caption": "Three angle classifications side-by-side: acute (48°), right, and obtuse.",
-      "bbox": [200, 645, 410, 125]
+      "chapter": 10,
+      "page": 99,
+      "bookPage": 85,
+      "caption": "Three angle classifications side-by-side: acute (48\u00b0), right, and obtuse.",
+      "bbox": [
+        200,
+        645,
+        410,
+        125
+      ]
     },
     {
       "id": "fig-10-5-vertical-angles",
-      "chapter": 10, "page": 99, "bookPage": 85,
-      "caption": "Two intersecting lines l and m forming four angles labeled θ, α, φ, β.",
-      "bbox": [665, 870, 110, 100]
+      "chapter": 10,
+      "page": 99,
+      "bookPage": 85,
+      "caption": "Two intersecting lines l and m forming four angles labeled \u03b8, \u03b1, \u03c6, \u03b2.",
+      "bbox": [
+        665,
+        870,
+        110,
+        100
+      ]
     },
     {
       "id": "fig-10-6-parallel-transversal",
-      "chapter": 10, "page": 100, "bookPage": 86,
+      "chapter": 10,
+      "page": 100,
+      "bookPage": 86,
       "caption": "Two parallel lines l and m cut by transversal n.",
-      "bbox": [600, 100, 185, 165]
+      "bbox": [
+        600,
+        100,
+        185,
+        165
+      ]
     },
     {
       "id": "fig-10-7-marking-equal-angles",
-      "chapter": 10, "page": 100, "bookPage": 86,
+      "chapter": 10,
+      "page": 100,
+      "bookPage": 86,
       "caption": "Parallelogram-like quadrilateral with equal angles marked by arcs.",
-      "bbox": [595, 345, 190, 155]
+      "bbox": [
+        595,
+        345,
+        190,
+        155
+      ]
     },
     {
       "id": "fig-10-8-triangle-angle-sum",
-      "chapter": 10, "page": 100, "bookPage": 86,
-      "caption": "Triangle ABC with line ℓ drawn through C parallel to AB.",
-      "bbox": [475, 575, 300, 140]
+      "chapter": 10,
+      "page": 100,
+      "bookPage": 86,
+      "caption": "Triangle ABC with line \u2113 drawn through C parallel to AB.",
+      "bbox": [
+        475,
+        575,
+        300,
+        140
+      ]
     },
     {
       "id": "fig-10-9-exterior-angle",
-      "chapter": 10, "page": 101, "bookPage": 87,
-      "caption": "Triangle with one side extended past a vertex to form exterior angle θ.",
-      "bbox": [600, 75, 195, 145]
+      "chapter": 10,
+      "page": 101,
+      "bookPage": 87,
+      "caption": "Triangle with one side extended past a vertex to form exterior angle \u03b8.",
+      "bbox": [
+        600,
+        75,
+        195,
+        145
+      ]
     },
     {
       "id": "fig-10-10-arc-sector",
-      "chapter": 10, "page": 101, "bookPage": 87,
-      "caption": "Circle with center O and sector AOB defined by central angle θ.",
-      "bbox": [60, 460, 200, 220]
+      "chapter": 10,
+      "page": 101,
+      "bookPage": 87,
+      "caption": "Circle with center O and sector AOB defined by central angle \u03b8.",
+      "bbox": [
+        60,
+        460,
+        200,
+        220
+      ]
     },
     {
       "id": "fig-10-11-inscribed-angle",
-      "chapter": 10, "page": 102, "bookPage": 88,
+      "chapter": 10,
+      "page": 102,
+      "bookPage": 88,
       "caption": "Inscribed angle ABC in a circle.",
-      "bbox": [600, 75, 180, 180]
+      "bbox": [
+        600,
+        75,
+        180,
+        180
+      ]
     },
     {
       "id": "fig-10-12-two-secants-external",
-      "chapter": 10, "page": 102, "bookPage": 88,
+      "chapter": 10,
+      "page": 102,
+      "bookPage": 88,
       "caption": "Two secants from external point A intersecting a circle.",
-      "bbox": [60, 260, 200, 180]
+      "bbox": [
+        60,
+        260,
+        200,
+        180
+      ]
     },
     {
       "id": "fig-10-13-tangent-chord-angle",
-      "chapter": 10, "page": 102, "bookPage": 88,
+      "chapter": 10,
+      "page": 102,
+      "bookPage": 88,
       "caption": "Tangent line at point B with chord BC; angle equals half the intercepted arc.",
-      "bbox": [580, 435, 200, 195]
+      "bbox": [
+        580,
+        435,
+        200,
+        195
+      ]
     },
     {
       "id": "fig-10-14-two-chords-internal",
-      "chapter": 10, "page": 102, "bookPage": 88,
-      "caption": "Two chords intersecting inside a circle, forming angle θ.",
-      "bbox": [60, 625, 205, 190]
+      "chapter": 10,
+      "page": 102,
+      "bookPage": 88,
+      "caption": "Two chords intersecting inside a circle, forming angle \u03b8.",
+      "bbox": [
+        60,
+        625,
+        205,
+        190
+      ]
     },
     {
       "id": "fig-10-15-diameter-tangent",
-      "chapter": 10, "page": 103, "bookPage": 89,
-      "caption": "Circle with diameter AB and tangent line ℓ at A perpendicular to AB.",
-      "bbox": [600, 75, 180, 220]
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
+      "caption": "Circle with diameter AB and tangent line \u2113 at A perpendicular to AB.",
+      "bbox": [
+        600,
+        75,
+        180,
+        220
+      ]
     },
     {
       "id": "fig-10-16-exercise-10-2",
-      "chapter": 10, "page": 103, "bookPage": 89,
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
       "caption": "Five points A, B, Q, D, C on a circle with external point P.",
-      "bbox": [580, 205, 200, 120]
+      "bbox": [
+        580,
+        205,
+        200,
+        120
+      ]
     },
     {
       "id": "fig-10-17-exercise-10-3",
-      "chapter": 10, "page": 103, "bookPage": 89,
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
       "caption": "Two tangents PA and PT from external point P touching a circle.",
-      "bbox": [595, 315, 190, 140]
+      "bbox": [
+        595,
+        315,
+        190,
+        140
+      ]
     },
     {
       "id": "fig-10-18-example-10-7",
-      "chapter": 10, "page": 103, "bookPage": 89,
-      "caption": "Two intersecting chords with arcs labeled 60° and 40°.",
-      "bbox": [600, 470, 185, 150]
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
+      "caption": "Two intersecting chords with arcs labeled 60\u00b0 and 40\u00b0.",
+      "bbox": [
+        600,
+        470,
+        185,
+        150
+      ]
     },
     {
       "id": "fig-10-19-example-10-8",
-      "chapter": 10, "page": 103, "bookPage": 89,
-      "caption": "Inscribed quadrilateral with angles ∠ABC = 60° and ∠BCD = 70°.",
-      "bbox": [595, 610, 190, 180]
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
+      "caption": "Inscribed quadrilateral with angles \u2220ABC = 60\u00b0 and \u2220BCD = 70\u00b0.",
+      "bbox": [
+        595,
+        610,
+        190,
+        180
+      ]
     },
     {
       "id": "fig-10-20-equal-inscribed-angles",
-      "chapter": 10, "page": 103, "bookPage": 89,
+      "chapter": 10,
+      "page": 103,
+      "bookPage": 89,
       "caption": "Two pairs of inscribed angles subtending the same arcs.",
-      "bbox": [505, 805, 280, 140]
+      "bbox": [
+        505,
+        805,
+        280,
+        140
+      ]
     },
     {
       "id": "fig-10-21-example-10-9-tangent-circles",
-      "chapter": 10, "page": 104, "bookPage": 90,
+      "chapter": 10,
+      "page": 104,
+      "bookPage": 90,
       "caption": "Two circles tangent at G with inscribed angles E and F.",
-      "bbox": [505, 175, 280, 245]
+      "bbox": [
+        505,
+        175,
+        280,
+        245
+      ]
     },
     {
       "id": "fig-10-22-inscribed-angle-proof-setup",
-      "chapter": 10, "page": 104, "bookPage": 90,
+      "chapter": 10,
+      "page": 104,
+      "bookPage": 90,
       "caption": "Inscribed angle proof setup with circle, center O, points A, B, C.",
-      "bbox": [575, 660, 210, 280]
+      "bbox": [
+        575,
+        660,
+        210,
+        280
+      ]
     },
     {
       "id": "fig-10-23-two-secants-proof",
-      "chapter": 10, "page": 105, "bookPage": 91,
+      "chapter": 10,
+      "page": 105,
+      "bookPage": 91,
       "caption": "Two secants from external point A with auxiliary chord DC.",
-      "bbox": [585, 555, 200, 200]
+      "bbox": [
+        585,
+        555,
+        200,
+        200
+      ]
     },
     {
       "id": "fig-10-24-tangent-chord-proof",
-      "chapter": 10, "page": 106, "bookPage": 92,
+      "chapter": 10,
+      "page": 106,
+      "bookPage": 92,
       "caption": "Tangent at A with chord AB and auxiliary line for proof.",
-      "bbox": [590, 180, 195, 225]
+      "bbox": [
+        590,
+        180,
+        195,
+        225
+      ]
     },
     {
       "id": "fig-10-25-two-chords-proof",
-      "chapter": 10, "page": 106, "bookPage": 92,
+      "chapter": 10,
+      "page": 106,
+      "bookPage": 92,
       "caption": "Two chords intersecting at B with auxiliary chord DC for proof.",
-      "bbox": [590, 575, 195, 225]
+      "bbox": [
+        590,
+        575,
+        195,
+        225
+      ]
+    },
+    {
+      "id": "fig-11-1-six-triangles-classification",
+      "chapter": 11,
+      "page": 107,
+      "bookPage": 93,
+      "caption": "Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications.",
+      "bbox": [
+        80,
+        660,
+        625,
+        100
+      ]
+    },
+    {
+      "id": "fig-11-2-medians-centroid",
+      "chapter": 11,
+      "page": 108,
+      "bookPage": 94,
+      "caption": "Triangle ABC with medians AE, BF, CD meeting at centroid G.",
+      "bbox": [
+        475,
+        250,
+        215,
+        195
+      ]
+    },
+    {
+      "id": "fig-11-3-angle-bisectors-incenter",
+      "chapter": 11,
+      "page": 108,
+      "bookPage": 94,
+      "caption": "Triangle ABC with angle bisectors AD, BE, CF meeting at incenter I.",
+      "bbox": [
+        60,
+        595,
+        195,
+        175
+      ]
+    },
+    {
+      "id": "fig-11-4-incircle",
+      "chapter": 11,
+      "page": 108,
+      "bookPage": 94,
+      "caption": "Triangle ABC with inscribed circle of radius r centered at incenter I.",
+      "bbox": [
+        535,
+        740,
+        195,
+        165
+      ]
+    },
+    {
+      "id": "fig-11-5-three-circumcircles",
+      "chapter": 11,
+      "page": 109,
+      "bookPage": 95,
+      "caption": "Three circumcircles for acute, right, and obtuse triangles.",
+      "bbox": [
+        70,
+        130,
+        640,
+        175
+      ]
+    },
+    {
+      "id": "fig-11-6-altitude-extended",
+      "chapter": 11,
+      "page": 109,
+      "bookPage": 95,
+      "caption": "Obtuse triangle with altitude AD drawn to the extension of side BC.",
+      "bbox": [
+        505,
+        535,
+        215,
+        175
+      ]
+    },
+    {
+      "id": "fig-11-7-right-triangle-semicircle",
+      "chapter": 11,
+      "page": 110,
+      "bookPage": 96,
+      "caption": "Right triangle ABC inscribed in a circle with center O at midpoint of hypotenuse AB.",
+      "bbox": [
+        535,
+        105,
+        215,
+        175
+      ]
+    },
+    {
+      "id": "fig-11-8-pythagorean-setup",
+      "chapter": 11,
+      "page": 111,
+      "bookPage": 97,
+      "caption": "Right triangle ABC with legs a, b and hypotenuse c.",
+      "bbox": [
+        535,
+        130,
+        215,
+        165
+      ]
+    },
+    {
+      "id": "fig-11-11-congruent-triangles-intro",
+      "chapter": 11,
+      "page": 113,
+      "bookPage": 99,
+      "caption": "Two congruent triangles ABC and DEF with corresponding parts equal.",
+      "bbox": [
+        75,
+        440,
+        230,
+        110
+      ]
+    },
+    {
+      "id": "fig-11-12-sss-theorem",
+      "chapter": 11,
+      "page": 113,
+      "bookPage": 99,
+      "caption": "SSS \u2014 two triangles with all three corresponding sides marked equal.",
+      "bbox": [
+        575,
+        710,
+        200,
+        70
+      ]
+    },
+    {
+      "id": "fig-11-13-sas-warning",
+      "chapter": 11,
+      "page": 113,
+      "bookPage": 99,
+      "caption": "SAS \u2014 two triangles with two equal sides and the included angle equal.",
+      "bbox": [
+        70,
+        820,
+        210,
+        95
+      ]
+    },
+    {
+      "id": "fig-11-14-asa-theorem",
+      "chapter": 11,
+      "page": 114,
+      "bookPage": 100,
+      "caption": "ASA \u2014 two triangles with one matching side and the angles at its endpoints equal.",
+      "bbox": [
+        75,
+        225,
+        230,
+        100
+      ]
+    },
+    {
+      "id": "fig-11-15-hl-ll-right-triangles",
+      "chapter": 11,
+      "page": 114,
+      "bookPage": 100,
+      "caption": "HL and LL \u2014 right-triangle congruency theorems.",
+      "bbox": [
+        530,
+        580,
+        235,
+        145
+      ]
+    },
+    {
+      "id": "fig-11-16-example-11-9-kite",
+      "chapter": 11,
+      "page": 115,
+      "bookPage": 101,
+      "caption": "Kite ABCD with triangles ABC and BAD congruent; angles 70\u00b0 and 60\u00b0 marked.",
+      "bbox": [
+        535,
+        240,
+        220,
+        180
+      ]
+    },
+    {
+      "id": "fig-11-17-example-11-10-isosceles-altitude",
+      "chapter": 11,
+      "page": 115,
+      "bookPage": 101,
+      "caption": "Isosceles triangle ABC with altitude AX to base BC.",
+      "bbox": [
+        505,
+        460,
+        240,
+        195
+      ]
+    },
+    {
+      "id": "fig-11-18-similar-triangles-intro",
+      "chapter": 11,
+      "page": 116,
+      "bookPage": 102,
+      "caption": "Two similar triangles ABC and DEF with sides labeled a, b, c and d, e, f.",
+      "bbox": [
+        510,
+        95,
+        250,
+        150
+      ]
+    },
+    {
+      "id": "fig-11-19-sas-similarity",
+      "chapter": 11,
+      "page": 116,
+      "bookPage": 102,
+      "caption": "Triangle ABC with smaller similar triangle ADE inside (SAS similarity).",
+      "bbox": [
+        510,
+        580,
+        200,
+        145
+      ]
+    },
+    {
+      "id": "fig-11-20-example-11-11",
+      "chapter": 11,
+      "page": 117,
+      "bookPage": 103,
+      "caption": "Triangle ABC with DE parallel to BC creating similar triangle ADE.",
+      "bbox": [
+        60,
+        80,
+        175,
+        130
+      ]
+    },
+    {
+      "id": "fig-11-9-altitude-to-hypotenuse",
+      "chapter": 11,
+      "page": 117,
+      "bookPage": 103,
+      "caption": "Right triangle ACB with altitude CD splitting it into similar sub-triangles.",
+      "bbox": [
+        510,
+        195,
+        230,
+        195
+      ]
+    },
+    {
+      "id": "fig-11-10-angle-bisector-theorem",
+      "chapter": 11,
+      "page": 117,
+      "bookPage": 103,
+      "caption": "Triangle ABC with angle bisector AX extended to E with BE parallel to AC.",
+      "bbox": [
+        495,
+        410,
+        230,
+        245
+      ]
+    },
+    {
+      "id": "fig-11-21-example-11-14",
+      "chapter": 11,
+      "page": 117,
+      "bookPage": 103,
+      "caption": "Triangle ABC with angle bisectors AX and BY meeting at incenter I.",
+      "bbox": [
+        505,
+        660,
+        220,
+        130
+      ]
+    },
+    {
+      "id": "fig-11-22-example-11-15",
+      "chapter": 11,
+      "page": 117,
+      "bookPage": 103,
+      "caption": "Configuration for Example 11-15 with auxiliary BH parallel to DE.",
+      "bbox": [
+        505,
+        800,
+        230,
+        135
+      ]
+    },
+    {
+      "id": "fig-11-23-trig-right-triangle",
+      "chapter": 11,
+      "page": 119,
+      "bookPage": 105,
+      "caption": "Right triangle ABC with right angle at C; sides a, b, c labeled for sin/cos/tan definitions.",
+      "bbox": [
+        555,
+        75,
+        215,
+        145
+      ]
+    },
+    {
+      "id": "fig-11-24-45-45-90",
+      "chapter": 11,
+      "page": 120,
+      "bookPage": 106,
+      "caption": "45-45-90 isosceles right triangle with legs a and hypotenuse a\u221a2.",
+      "bbox": [
+        550,
+        80,
+        195,
+        135
+      ]
+    },
+    {
+      "id": "fig-11-25-30-60-90",
+      "chapter": 11,
+      "page": 120,
+      "bookPage": 106,
+      "caption": "30-60-90 triangle with sides in ratio 1 : \u221a3 : 2.",
+      "bbox": [
+        550,
+        215,
+        195,
+        135
+      ]
+    },
+    {
+      "id": "fig-11-26-example-11-18",
+      "chapter": 11,
+      "page": 123,
+      "bookPage": 109,
+      "caption": "Isosceles triangle ABC with AB=AC=50, base BC=80, altitude AX bisecting BC.",
+      "bbox": [
+        555,
+        285,
+        215,
+        90
+      ]
+    },
+    {
+      "id": "fig-11-27-rectangle-two-triangles",
+      "chapter": 11,
+      "page": 124,
+      "bookPage": 110,
+      "caption": "Rectangle ABCD split into two congruent right triangles by a diagonal.",
+      "bbox": [
+        535,
+        145,
+        215,
+        110
+      ]
+    },
+    {
+      "id": "fig-11-28-acute-altitude",
+      "chapter": 11,
+      "page": 124,
+      "bookPage": 110,
+      "caption": "Acute triangle ABC with altitude AX dividing into two right triangles ABX and ACX.",
+      "bbox": [
+        555,
+        280,
+        200,
+        105
+      ]
+    },
+    {
+      "id": "fig-11-29-incircle-inradii",
+      "chapter": 11,
+      "page": 125,
+      "bookPage": 111,
+      "caption": "Triangle ABC with incircle and inradii to tangent points; incenter I connected to vertices.",
+      "bbox": [
+        535,
+        65,
+        220,
+        215
+      ]
+    },
+    {
+      "id": "fig-11-30-pythagorean-square-proof",
+      "chapter": 11,
+      "page": 126,
+      "bookPage": 112,
+      "caption": "Pythagorean Theorem proof: large square with side c containing four right triangles around inner tilted square.",
+      "bbox": [
+        600,
+        130,
+        175,
+        175
+      ]
+    },
+    {
+      "id": "fig-11-31-parallel-transversal-angles",
+      "chapter": 11,
+      "page": 127,
+      "bookPage": 113,
+      "caption": "Two lines with a transversal; angles \u03b1, \u03b2, \u03b8, \u03c6 marked at the intersections.",
+      "bbox": [
+        555,
+        110,
+        200,
+        145
+      ]
+    },
+    {
+      "id": "fig-11-32-example-11-25-setup",
+      "chapter": 11,
+      "page": 128,
+      "bookPage": 114,
+      "caption": "Triangle ABC with E on AB, D on BC, and F at intersection of AD and CE (Example 11-25 setup).",
+      "bbox": [
+        575,
+        715,
+        200,
+        95
+      ]
+    },
+    {
+      "id": "fig-11-33-example-11-25-with-aux",
+      "chapter": 11,
+      "page": 128,
+      "bookPage": 114,
+      "caption": "Same configuration with auxiliary DH parallel to EA added for the similar-triangles solution.",
+      "bbox": [
+        575,
+        825,
+        200,
+        105
+      ]
+    },
+    {
+      "id": "fig-12-1-convex-concave-quadrilaterals",
+      "chapter": 12,
+      "page": 132,
+      "bookPage": 118,
+      "caption": "Two quadrilaterals \u2014 convex ABCD and concave EFGH (with reflex angle at F).",
+      "bbox": [
+        60,
+        350,
+        245,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-2-trapezoid-with-median",
+      "chapter": 12,
+      "page": 132,
+      "bookPage": 118,
+      "caption": "Trapezoid ABCD with median XY and altitude EF.",
+      "bbox": [
+        510,
+        685,
+        195,
+        115
+      ]
+    },
+    {
+      "id": "fig-12-3-trapezoid-median-proof",
+      "chapter": 12,
+      "page": 133,
+      "bookPage": 119,
+      "caption": "Trapezoid with altitudes AE, BF forming rectangles for the median proof.",
+      "bbox": [
+        60,
+        75,
+        220,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-4-isosceles-trapezoid-diagonals",
+      "chapter": 12,
+      "page": 133,
+      "bookPage": 119,
+      "caption": "Isosceles trapezoid ABCD with altitudes DX, CY and both diagonals.",
+      "bbox": [
+        55,
+        605,
+        240,
+        105
+      ]
+    },
+    {
+      "id": "fig-12-5-example-12-1",
+      "chapter": 12,
+      "page": 134,
+      "bookPage": 120,
+      "caption": "Isosceles trapezoid for Example 12-1; smaller base 5, altitude 4, leg 8.",
+      "bbox": [
+        510,
+        165,
+        245,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-6-parallelogram-diagonals",
+      "chapter": 12,
+      "page": 134,
+      "bookPage": 120,
+      "caption": "Parallelogram ABCD with diagonals intersecting at E.",
+      "bbox": [
+        510,
+        480,
+        220,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-7-parallelogram-d1-d2-theta",
+      "chapter": 12,
+      "page": 135,
+      "bookPage": 121,
+      "caption": "Parallelogram with diagonals d1, d2 at angle \u03b8 at E.",
+      "bbox": [
+        60,
+        175,
+        220,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-8-rhombus-diagonals",
+      "chapter": 12,
+      "page": 135,
+      "bookPage": 121,
+      "caption": "Rhombus ABCD with perpendicular diagonals meeting at E.",
+      "bbox": [
+        60,
+        725,
+        215,
+        145
+      ]
+    },
+    {
+      "id": "fig-12-9-example-12-3-rhombus",
+      "chapter": 12,
+      "page": 136,
+      "bookPage": 122,
+      "caption": "Rhombus ABCD with diagonals meeting at E forming four congruent right triangles.",
+      "bbox": [
+        510,
+        165,
+        240,
+        165
+      ]
+    },
+    {
+      "id": "fig-12-10-rectangle",
+      "chapter": 12,
+      "page": 136,
+      "bookPage": 122,
+      "caption": "Rectangle ABCD with right angles and equal opposite sides marked.",
+      "bbox": [
+        510,
+        460,
+        230,
+        100
+      ]
+    },
+    {
+      "id": "fig-12-11-square",
+      "chapter": 12,
+      "page": 137,
+      "bookPage": 123,
+      "caption": "Square ABCD with all four sides marked equal and a diagonal drawn.",
+      "bbox": [
+        510,
+        175,
+        220,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-12-example-12-5-inscribed-square",
+      "chapter": 12,
+      "page": 137,
+      "bookPage": 123,
+      "caption": "Square ABCD with midpoints E, F, G, H connected to form an inscribed rotated square.",
+      "bbox": [
+        510,
+        425,
+        230,
+        145
+      ]
+    },
+    {
+      "id": "fig-12-13-example-12-8-midpoints",
+      "chapter": 12,
+      "page": 138,
+      "bookPage": 124,
+      "caption": "Parallelogram ABCD with midpoints E, F, G, H connected to form inner parallelogram EFGH.",
+      "bbox": [
+        510,
+        645,
+        240,
+        145
+      ]
+    },
+    {
+      "id": "fig-13-1-three-regular-polygons",
+      "chapter": 13,
+      "page": 141,
+      "bookPage": 127,
+      "caption": "Three small regular polygons: pentagon, hexagon, octagon.",
+      "bbox": [
+        565,
+        605,
+        195,
+        130
+      ]
+    },
+    {
+      "id": "fig-13-2-polygon-diagonals-from-vertex",
+      "chapter": 13,
+      "page": 142,
+      "bookPage": 128,
+      "caption": "Polygon with all diagonals drawn from one vertex, dividing it into n-2 triangles.",
+      "bbox": [
+        555,
+        95,
+        200,
+        110
+      ]
+    },
+    {
+      "id": "fig-13-3-polygon-interior-exterior-angles",
+      "chapter": 13,
+      "page": 142,
+      "bookPage": 128,
+      "caption": "Polygon with interior angles \u03b2_i and exterior angles \u03b1_i labeled at each vertex.",
+      "bbox": [
+        60,
+        230,
+        200,
+        210
+      ]
+    },
+    {
+      "id": "fig-13-4-example-13-1-hexagon-equilateral",
+      "chapter": 13,
+      "page": 143,
+      "bookPage": 129,
+      "caption": "Regular hexagon ABCDEF with inscribed equilateral triangle ACE.",
+      "bbox": [
+        225,
+        165,
+        290,
+        235
+      ]
+    },
+    {
+      "id": "fig-13-5-example-13-3-dodecagon-trapezoid",
+      "chapter": 13,
+      "page": 143,
+      "bookPage": 129,
+      "caption": "Trapezoid section ABCD of a regular dodecagon with perpendiculars BX, CY.",
+      "bbox": [
+        510,
+        580,
+        240,
+        105
+      ]
+    },
+    {
+      "id": "fig-13-6-hexagon-inscribed-circumscribed",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Regular hexagon with inscribed circle (radius r) and circumscribed circle (radius R).",
+      "bbox": [
+        555,
+        65,
+        220,
+        220
+      ]
+    },
+    {
+      "id": "fig-13-7-hexagon-six-equilateral-triangles",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Regular hexagon ABCDEF with center O, divided into 6 equilateral triangles.",
+      "bbox": [
+        555,
+        460,
+        220,
+        175
+      ]
+    },
+    {
+      "id": "fig-13-8-example-13-4-hexagon-all-segments",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Six points on a circle with all 15 connecting segments drawn.",
+      "bbox": [
+        625,
+        770,
+        145,
+        130
+      ]
+    },
+    {
+      "id": "fig-13-9-five-pointed-star",
+      "chapter": 13,
+      "page": 146,
+      "bookPage": 132,
+      "caption": "Five-pointed star with tip angles labeled 1 through 5.",
+      "bbox": [
+        275,
+        405,
+        215,
+        175
+      ]
+    },
+    {
+      "id": "fig-15-1-triangle-midpoints",
+      "chapter": 15,
+      "page": 150,
+      "bookPage": 136,
+      "caption": "Triangle ABC with midpoints D, E, F connected to form inner triangle DEF.",
+      "bbox": [
+        555,
+        470,
+        215,
+        165
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-2-trapezoid-diagonals",
+      "chapter": 15,
+      "page": 151,
+      "bookPage": 137,
+      "caption": "Trapezoid ABCD with diagonals AC, BD meeting at E.",
+      "bbox": [
+        570,
+        100,
+        195,
+        130
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-3-medians-six-regions",
+      "chapter": 15,
+      "page": 151,
+      "bookPage": 137,
+      "caption": "Triangle ABC with three medians drawn meeting at centroid G.",
+      "bbox": [
+        555,
+        530,
+        215,
+        195
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-4-example-15-5",
+      "chapter": 15,
+      "page": 152,
+      "bookPage": 138,
+      "caption": "Triangle ABC with D midpoint of AB, E midpoint of DB, F midpoint of BC.",
+      "bbox": [
+        555,
+        90,
+        195,
+        175
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-5-example-15-7",
+      "chapter": 15,
+      "page": 152,
+      "bookPage": 138,
+      "caption": "Quadrilateral ABCD with diagonals at X (midpoint of BD) and altitudes BY, DZ.",
+      "bbox": [
+        555,
+        295,
+        215,
+        200
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-6-annulus",
+      "chapter": 15,
+      "page": 152,
+      "bookPage": 138,
+      "caption": "Two concentric circles of radii 2 and 3 \u2014 annulus shaded between them.",
+      "bbox": [
+        635,
+        720,
+        130,
+        130
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-7-octagon-from-square",
+      "chapter": 15,
+      "page": 153,
+      "bookPage": 139,
+      "caption": "Regular octagon formed by cutting corners of a square.",
+      "bbox": [
+        680,
+        90,
+        100,
+        105
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-8-isosceles-triangle-with-arcs",
+      "chapter": 15,
+      "page": 153,
+      "bookPage": 139,
+      "caption": "Isosceles right triangle with semicircle on hypotenuse and quarter-circle centered at C.",
+      "bbox": [
+        600,
+        215,
+        175,
+        165
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-9-square-with-leaves",
+      "chapter": 15,
+      "page": 153,
+      "bookPage": 139,
+      "caption": "Square with four semicircles on its sides forming shaded 'leaves'.",
+      "bbox": [
+        640,
+        540,
+        140,
+        145
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-15-10-four-overlapping-circles",
+      "chapter": 15,
+      "page": 153,
+      "bookPage": 139,
+      "caption": "Four overlapping circles \u2014 one central, three outer with centers on the central circle.",
+      "bbox": [
+        610,
+        715,
+        175,
+        165
+      ],
+      "format": "png"
+    },
+    {
+      "id": "fig-16-1-cartesian-plane",
+      "chapter": 16,
+      "page": 157,
+      "bookPage": 143,
+      "format": "png",
+      "caption": "Cartesian plane with x-axis and y-axis crossing at origin, integer ticks labeled.",
+      "bbox": [
+        505,
+        425,
+        270,
+        175
+      ]
+    },
+    {
+      "id": "fig-16-2-polar-grid",
+      "chapter": 16,
+      "page": 158,
+      "bookPage": 144,
+      "format": "png",
+      "caption": "Polar grid: concentric circles for r, radial lines for \u03b8.",
+      "bbox": [
+        60,
+        90,
+        245,
+        220
+      ]
+    },
+    {
+      "id": "fig-16-3-line-with-rise-run",
+      "chapter": 16,
+      "page": 160,
+      "bookPage": 146,
+      "format": "png",
+      "caption": "Line on coordinate plane with y-intercept (0, b) and rise/run triangle showing slope m.",
+      "bbox": [
+        555,
+        580,
+        220,
+        175
+      ]
+    },
+    {
+      "id": "fig-16-4-perpendicular-lines",
+      "chapter": 16,
+      "page": 162,
+      "bookPage": 148,
+      "format": "png",
+      "caption": "Two perpendicular lines on a coordinate plane with rise/run triangles showing slopes a/b and -b/a.",
+      "bbox": [
+        555,
+        470,
+        200,
+        200
+      ]
+    },
+    {
+      "id": "fig-16-5-line-plot",
+      "chapter": 16,
+      "page": 163,
+      "bookPage": 149,
+      "format": "png",
+      "caption": "The line 3x + 4y = 5 plotted through four points.",
+      "bbox": [
+        555,
+        350,
+        200,
+        175
+      ]
+    },
+    {
+      "id": "fig-16-6-distance-formula-triangle",
+      "chapter": 16,
+      "page": 163,
+      "bookPage": 149,
+      "format": "png",
+      "caption": "Two points (x\u2081,y\u2081) and (x\u2082,y\u2082) connected by hypotenuse d with horizontal and vertical legs.",
+      "bbox": [
+        555,
+        690,
+        220,
+        200
+      ]
+    },
+    {
+      "id": "fig-16-7-circle-plot",
+      "chapter": 16,
+      "page": 164,
+      "bookPage": 150,
+      "format": "png",
+      "caption": "Circle of radius 3 centered at (-1, 2) on coordinate plane.",
+      "bbox": [
+        555,
+        270,
+        220,
+        195
+      ]
+    },
+    {
+      "id": "fig-17-1-two-tangents",
+      "chapter": 17,
+      "page": 169,
+      "bookPage": 155,
+      "format": "png",
+      "caption": "Two tangents AB, AC from external point A to a circle.",
+      "bbox": [
+        555,
+        530,
+        200,
+        160
+      ]
+    },
+    {
+      "id": "fig-17-2-tangent-and-secant",
+      "chapter": 17,
+      "page": 169,
+      "bookPage": 155,
+      "format": "png",
+      "caption": "Tangent AC and secant AD from external point A through B and D on circle.",
+      "bbox": [
+        55,
+        625,
+        270,
+        130
+      ]
+    },
+    {
+      "id": "fig-17-3-two-secants",
+      "chapter": 17,
+      "page": 169,
+      "bookPage": 155,
+      "format": "png",
+      "caption": "Two secants from external point A through B, C and D, E on circle.",
+      "bbox": [
+        555,
+        745,
+        220,
+        145
+      ]
+    },
+    {
+      "id": "fig-17-4-two-chords",
+      "chapter": 17,
+      "page": 169,
+      "bookPage": 155,
+      "format": "png",
+      "caption": "Two chords BC and DE intersecting at point A inside the circle.",
+      "bbox": [
+        60,
+        800,
+        200,
+        145
+      ]
+    },
+    {
+      "id": "fig-17-5-power-proof-outside",
+      "chapter": 17,
+      "page": 171,
+      "bookPage": 157,
+      "format": "png",
+      "caption": "Power of a Point proof: external A with tangent AB, secant ACD; auxiliary BD creates similar triangles.",
+      "bbox": [
+        555,
+        305,
+        220,
+        145
+      ]
+    },
+    {
+      "id": "fig-17-6-power-proof-inside",
+      "chapter": 17,
+      "page": 172,
+      "bookPage": 158,
+      "format": "png",
+      "caption": "Power of a Point proof: two chords intersecting at E inside circle, similar triangles EAC and EDB.",
+      "bbox": [
+        555,
+        90,
+        220,
+        195
+      ]
+    },
+    {
+      "id": "fig-18-1-sphere-plane-intersection",
+      "chapter": 18,
+      "page": 175,
+      "bookPage": 161,
+      "format": "png",
+      "caption": "Sphere with center O intersected by a plane in a circle of diameter AC, center B; OB \u22a5 plane.",
+      "bbox": [
+        80,
+        440,
+        200,
+        130
+      ]
+    },
+    {
+      "id": "fig-18-2-cube",
+      "chapter": 18,
+      "page": 176,
+      "bookPage": 162,
+      "format": "png",
+      "caption": "Cube drawn in 3D perspective showing 6 faces, 12 edges, 8 vertices.",
+      "bbox": [
+        590,
+        130,
+        145,
+        130
+      ]
+    },
+    {
+      "id": "fig-18-3-cube-diagonal",
+      "chapter": 18,
+      "page": 176,
+      "bookPage": 162,
+      "format": "png",
+      "caption": "Cube ABCDEFGH with face diagonal AC and space diagonal EC of length s\u221a3.",
+      "bbox": [
+        75,
+        270,
+        215,
+        175
+      ]
+    },
+    {
+      "id": "fig-18-4-cylinder-unroll",
+      "chapter": 18,
+      "page": 179,
+      "bookPage": 165,
+      "format": "png",
+      "caption": "Cylinder unrolled into a rectangle of dimensions h \u00d7 2\u03c0r.",
+      "bbox": [
+        130,
+        540,
+        490,
+        140
+      ]
+    },
+    {
+      "id": "fig-18-5-pyramid",
+      "chapter": 18,
+      "page": 180,
+      "bookPage": 166,
+      "format": "png",
+      "caption": "Square pyramid in 3D perspective with apex above a polygonal base.",
+      "bbox": [
+        600,
+        740,
+        165,
+        140
+      ]
+    },
+    {
+      "id": "fig-18-6-cone",
+      "chapter": 18,
+      "page": 181,
+      "bookPage": 167,
+      "format": "png",
+      "caption": "Right circular cone showing altitude h, radius r, and slant height \u2113.",
+      "bbox": [
+        605,
+        345,
+        170,
+        145
+      ]
+    },
+    {
+      "id": "fig-18-7-cone-unroll",
+      "chapter": 18,
+      "page": 181,
+      "bookPage": 167,
+      "format": "png",
+      "caption": "Cone unrolled into a sector of radius \u2113 with arc length 2\u03c0r.",
+      "bbox": [
+        270,
+        530,
+        480,
+        175
+      ]
+    },
+    {
+      "id": "fig-18-8-five-platonic-solids",
+      "chapter": 18,
+      "page": 182,
+      "bookPage": 168,
+      "format": "png",
+      "caption": "The five Platonic solids: tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
+      "bbox": [
+        100,
+        145,
+        645,
+        175
+      ]
+    },
+    {
+      "id": "fig-18-9-tetrahedron",
+      "chapter": 18,
+      "page": 182,
+      "bookPage": 168,
+      "format": "png",
+      "caption": "Regular tetrahedron ABCD with apex B over equilateral base ACD; centroid O, midpoint M of CD, altitude BO.",
+      "bbox": [
+        80,
+        770,
+        200,
+        165
+      ]
+    },
+    {
+      "id": "fig-18-10-octahedron",
+      "chapter": 18,
+      "page": 183,
+      "bookPage": 169,
+      "format": "png",
+      "caption": "Regular octahedron split into two square pyramids sharing base ABCD, with apex E above and F below.",
+      "bbox": [
+        75,
+        320,
+        220,
+        200
+      ]
+    },
+    {
+      "id": "fig-19-1-translation",
+      "chapter": 19,
+      "page": 187,
+      "bookPage": 173,
+      "format": "png",
+      "caption": "Triangle ABC translated upward and right to form A'B'C'.",
+      "bbox": [
+        540,
+        480,
+        220,
+        195
+      ]
+    },
+    {
+      "id": "fig-19-2-rotation",
+      "chapter": 19,
+      "page": 188,
+      "bookPage": 174,
+      "format": "png",
+      "caption": "Triangle ABC rotated by angle \u03b8 about center O to form A'B'C'.",
+      "bbox": [
+        540,
+        320,
+        235,
+        165
+      ]
+    },
+    {
+      "id": "fig-19-3-reflection-line",
+      "chapter": 19,
+      "page": 189,
+      "bookPage": 175,
+      "format": "png",
+      "caption": "Pentagon ABCDE reflected in line \u2113 to form pentagon A'B'C'D'E'.",
+      "bbox": [
+        425,
+        410,
+        320,
+        145
+      ]
+    },
+    {
+      "id": "fig-19-4-reflection-point",
+      "chapter": 19,
+      "page": 189,
+      "bookPage": 175,
+      "format": "png",
+      "caption": "Pentagon ABCDE reflected through point O to form A'B'C'D'E'.",
+      "bbox": [
+        460,
+        660,
+        290,
+        130
+      ]
+    },
+    {
+      "id": "fig-19-5-distortion",
+      "chapter": 19,
+      "page": 190,
+      "bookPage": 176,
+      "format": "png",
+      "caption": "Isosceles triangle ABC with apex distorted vertically into C' (squished) and C'' (stretched).",
+      "bbox": [
+        555,
+        700,
+        195,
+        175
+      ]
+    },
+    {
+      "id": "fig-19-6-dilation",
+      "chapter": 19,
+      "page": 191,
+      "bookPage": 177,
+      "format": "png",
+      "caption": "Quadrilateral ABCD dilated with center O to form A'B'C'D'; corresponding lines pass through O.",
+      "bbox": [
+        65,
+        360,
+        240,
+        200
+      ]
     }
   ]
 }

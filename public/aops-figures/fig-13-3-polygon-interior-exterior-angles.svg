@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="110.0" y1="45.0" x2="166.29165124598853" y2="77.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="166.29165124598853" y1="77.5" x2="166.29165124598853" y2="142.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="166.29165124598853" y1="142.5" x2="110.0" y2="175.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110.0" y1="175.0" x2="53.70834875401148" y2="142.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="53.70834875401148" y1="142.5" x2="53.70834875401149" y2="77.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="53.70834875401149" y1="77.5" x2="110.0" y2="45.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110.0" y1="45.0" x2="131.65063509461098" y2="32.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="133.65063509461098" y="35.96410161513776" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α1</text>
+<text x="110.0" y="56.7" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β1</text>
+<line x1="166.29165124598853" y1="77.5" x2="187.9422863405995" y2="90.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="185.9422863405995" y="93.46410161513775" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α2</text>
+<text x="156.1591540217106" y="83.35" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β2</text>
+<line x1="166.29165124598853" y1="142.5" x2="166.29165124598853" y2="167.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="162.29165124598853" y="167.5" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α3</text>
+<text x="156.1591540217106" y="136.65" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β3</text>
+<line x1="110.0" y1="175.0" x2="88.34936490538902" y2="187.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="86.34936490538902" y="184.03589838486224" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α4</text>
+<text x="110.0" y="163.3" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β4</text>
+<line x1="53.70834875401148" y1="142.5" x2="32.05771365940052" y2="130.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="34.05771365940052" y="126.53589838486225" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α5</text>
+<text x="63.840845978289416" y="136.65" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β5</text>
+<line x1="53.70834875401149" y1="77.5" x2="53.70834875401149" y2="52.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="57.70834875401149" y="52.5" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">α6</text>
+<text x="63.84084597828942" y="83.35" font-family="Times, Georgia, serif" font-style="italic" font-size="9" text-anchor="middle">β6</text>
+</svg>
