@@ -1,0 +1,1918 @@
+[
+  {
+    "file": "ch01-1.1-integer-exponents.md",
+    "chapter": 1,
+    "section": "1.1",
+    "title": "Integer Exponents",
+    "book_pages": [
+      1,
+      2
+    ],
+    "pdf_pages": [
+      15,
+      16
+    ]
+  },
+  {
+    "file": "ch01-1.2-fractional-exponents.md",
+    "chapter": 1,
+    "section": "1.2",
+    "title": "Fractional Exponents",
+    "book_pages": [
+      3,
+      4
+    ],
+    "pdf_pages": [
+      17,
+      18
+    ]
+  },
+  {
+    "file": "ch01-1.3-simplifying-radical-expressions.md",
+    "chapter": 1,
+    "section": "1.3",
+    "title": "Simplifying Radical Expressions",
+    "book_pages": [
+      5,
+      6
+    ],
+    "pdf_pages": [
+      19,
+      20
+    ]
+  },
+  {
+    "file": "ch01-1.4-rationalizing-denominators.md",
+    "chapter": 1,
+    "section": "1.4",
+    "title": "Rationalizing Denominators",
+    "book_pages": [
+      7,
+      8,
+      9
+    ],
+    "pdf_pages": [
+      21,
+      22,
+      23
+    ]
+  },
+  {
+    "file": "ch01-1.5-logarithms.md",
+    "chapter": 1,
+    "section": "1.5",
+    "title": "Logarithms",
+    "book_pages": [
+      10,
+      11,
+      12
+    ],
+    "pdf_pages": [
+      24,
+      25,
+      26
+    ]
+  },
+  {
+    "file": "ch02-2.1-the-square-root-of-1.md",
+    "chapter": 2,
+    "section": "2.1",
+    "title": "The Square Root of -1",
+    "book_pages": [
+      13
+    ],
+    "pdf_pages": [
+      27
+    ]
+  },
+  {
+    "file": "ch02-2.2-complex-number-operations.md",
+    "chapter": 2,
+    "section": "2.2",
+    "title": "Complex Number Operations",
+    "book_pages": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "pdf_pages": [
+      27,
+      28,
+      29,
+      30
+    ]
+  },
+  {
+    "file": "ch03-3.1-what-is-a-linear-equation.md",
+    "chapter": 3,
+    "section": "3.1",
+    "title": "What is a Linear Equation?",
+    "book_pages": [
+      17
+    ],
+    "pdf_pages": [
+      31
+    ]
+  },
+  {
+    "file": "ch03-3.2-one-equation-one-variable.md",
+    "chapter": 3,
+    "section": "3.2",
+    "title": "One Equation, One Variable",
+    "book_pages": [
+      17,
+      18
+    ],
+    "pdf_pages": [
+      31,
+      32
+    ]
+  },
+  {
+    "file": "ch03-3.3-two-equations-two-variables.md",
+    "chapter": 3,
+    "section": "3.3",
+    "title": "Two Equations, Two Variables",
+    "book_pages": [
+      19,
+      20,
+      21
+    ],
+    "pdf_pages": [
+      33,
+      34,
+      35
+    ]
+  },
+  {
+    "file": "ch03-3.4-word-problems.md",
+    "chapter": 3,
+    "section": "3.4",
+    "title": "Word Problems",
+    "book_pages": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "pdf_pages": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ]
+  },
+  {
+    "file": "ch04-4.1-direct-and-inverse.md",
+    "chapter": 4,
+    "section": "4.1",
+    "title": "Direct and Inverse",
+    "book_pages": [
+      28,
+      29
+    ],
+    "pdf_pages": [
+      42,
+      43
+    ]
+  },
+  {
+    "file": "ch04-4.2-manipulating-proportions.md",
+    "chapter": 4,
+    "section": "4.2",
+    "title": "Manipulating Proportions",
+    "book_pages": [
+      30
+    ],
+    "pdf_pages": [
+      44
+    ]
+  },
+  {
+    "file": "ch04-4.3-conversion-factors.md",
+    "chapter": 4,
+    "section": "4.3",
+    "title": "Conversion Factors",
+    "book_pages": [
+      31,
+      32
+    ],
+    "pdf_pages": [
+      45,
+      46
+    ]
+  },
+  {
+    "file": "ch04-4.4-percent.md",
+    "chapter": 4,
+    "section": "4.4",
+    "title": "Percent",
+    "book_pages": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "pdf_pages": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ]
+  },
+  {
+    "file": "ch05-5.1-divisibility.md",
+    "chapter": 5,
+    "section": "5.1",
+    "title": "Divisibility",
+    "book_pages": [
+      39
+    ],
+    "pdf_pages": [
+      53
+    ]
+  },
+  {
+    "file": "ch05-5.2-number-bases.md",
+    "chapter": 5,
+    "section": "5.2",
+    "title": "Number Bases",
+    "book_pages": [
+      39,
+      40,
+      41
+    ],
+    "pdf_pages": [
+      53,
+      54,
+      55
+    ]
+  },
+  {
+    "file": "ch05-5.3-the-last-digit.md",
+    "chapter": 5,
+    "section": "5.3",
+    "title": "The Last Digit",
+    "book_pages": [
+      42
+    ],
+    "pdf_pages": [
+      56
+    ]
+  },
+  {
+    "file": "ch05-5.4-modular-arithmetic.md",
+    "chapter": 5,
+    "section": "5.4",
+    "title": "Modular Arithmetic",
+    "book_pages": [
+      42,
+      43,
+      44
+    ],
+    "pdf_pages": [
+      56,
+      57,
+      58
+    ]
+  },
+  {
+    "file": "ch05-5.5-tricks.md",
+    "chapter": 5,
+    "section": "5.5",
+    "title": "Tricks",
+    "book_pages": [
+      45,
+      46
+    ],
+    "pdf_pages": [
+      59,
+      60
+    ]
+  },
+  {
+    "file": "ch05-5.6-primes.md",
+    "chapter": 5,
+    "section": "5.6",
+    "title": "Primes",
+    "book_pages": [
+      47
+    ],
+    "pdf_pages": [
+      61
+    ]
+  },
+  {
+    "file": "ch05-5.7-common-and-uncommon-factors.md",
+    "chapter": 5,
+    "section": "5.7",
+    "title": "Common and Uncommon Factors",
+    "book_pages": [
+      48,
+      49,
+      50,
+      51
+    ],
+    "pdf_pages": [
+      62,
+      63,
+      64,
+      65
+    ]
+  },
+  {
+    "file": "ch06-6.1-whats-a-quadratic.md",
+    "chapter": 6,
+    "section": "6.1",
+    "title": "What's a Quadratic?",
+    "book_pages": [
+      52
+    ],
+    "pdf_pages": [
+      66
+    ]
+  },
+  {
+    "file": "ch06-6.2-factoring-quadratics.md",
+    "chapter": 6,
+    "section": "6.2",
+    "title": "Factoring Quadratics",
+    "book_pages": [
+      52,
+      53,
+      54,
+      55
+    ],
+    "pdf_pages": [
+      66,
+      67,
+      68,
+      69
+    ]
+  },
+  {
+    "file": "ch06-6.3-the-quadratic-formula.md",
+    "chapter": 6,
+    "section": "6.3",
+    "title": "The Quadratic Formula",
+    "book_pages": [
+      56,
+      57,
+      58
+    ],
+    "pdf_pages": [
+      70,
+      71,
+      72
+    ]
+  },
+  {
+    "file": "ch06-6.4-variations-on-a-theme.md",
+    "chapter": 6,
+    "section": "6.4",
+    "title": "Variations on a Theme",
+    "book_pages": [
+      59,
+      60
+    ],
+    "pdf_pages": [
+      73,
+      74
+    ]
+  },
+  {
+    "file": "ch06-6.5-square-roots-of-irrationals-and-imaginaries.md",
+    "chapter": 6,
+    "section": "6.5",
+    "title": "Square Roots of Irrationals and Imaginaries",
+    "book_pages": [
+      61,
+      62
+    ],
+    "pdf_pages": [
+      75,
+      76
+    ]
+  },
+  {
+    "file": "ch06-6.6-beyond-quadratics.md",
+    "chapter": 6,
+    "section": "6.6",
+    "title": "Beyond Quadratics",
+    "book_pages": [
+      63,
+      64,
+      65,
+      66
+    ],
+    "pdf_pages": [
+      77,
+      78,
+      79,
+      80
+    ]
+  },
+  {
+    "file": "ch07-7.1-factorizations.md",
+    "chapter": 7,
+    "section": "7.1",
+    "title": "Factorizations",
+    "book_pages": [
+      67,
+      68,
+      69
+    ],
+    "pdf_pages": [
+      81,
+      82,
+      83
+    ]
+  },
+  {
+    "file": "ch07-7.2-manipulations.md",
+    "chapter": 7,
+    "section": "7.2",
+    "title": "Manipulations",
+    "book_pages": [
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "pdf_pages": [
+      84,
+      85,
+      86,
+      87,
+      88
+    ]
+  },
+  {
+    "file": "ch08-8.1-integers-and-rationals.md",
+    "chapter": 8,
+    "section": "8.1",
+    "title": "Integers and Rationals",
+    "book_pages": [
+      75,
+      76
+    ],
+    "pdf_pages": [
+      89,
+      90
+    ]
+  },
+  {
+    "file": "ch08-8.2-lowest-terms-and-irrationals.md",
+    "chapter": 8,
+    "section": "8.2",
+    "title": "Lowest Terms and Irrationals",
+    "book_pages": [
+      77,
+      78
+    ],
+    "pdf_pages": [
+      91,
+      92
+    ]
+  },
+  {
+    "file": "ch08-8.3-complex-and-beyond.md",
+    "chapter": 8,
+    "section": "8.3",
+    "title": "Complex and Beyond",
+    "book_pages": [
+      79,
+      80
+    ],
+    "pdf_pages": [
+      93,
+      94
+    ]
+  },
+  {
+    "file": "ch09-an-introduction-to-circles.md",
+    "chapter": 9,
+    "section": null,
+    "title": "An Introduction to Circles",
+    "book_pages": [
+      81,
+      82,
+      83
+    ],
+    "pdf_pages": [
+      95,
+      96,
+      97
+    ]
+  },
+  {
+    "file": "ch10-10.1-lines-rays-and-segments.md",
+    "chapter": 10,
+    "section": "10.1",
+    "title": "Lines, Rays, and Segments",
+    "book_pages": [
+      84
+    ],
+    "pdf_pages": [
+      98
+    ]
+  },
+  {
+    "file": "ch10-10.2-classification-and-measurement.md",
+    "chapter": 10,
+    "section": "10.2",
+    "title": "Classification and Measurement",
+    "book_pages": [
+      84,
+      85
+    ],
+    "pdf_pages": [
+      98,
+      99
+    ]
+  },
+  {
+    "file": "ch10-10.3-angles-and-parallel-lines.md",
+    "chapter": 10,
+    "section": "10.3",
+    "title": "Angles and Parallel Lines",
+    "book_pages": [
+      86
+    ],
+    "pdf_pages": [
+      100
+    ]
+  },
+  {
+    "file": "ch10-10.4-arcs-segments-sectors-and-angles.md",
+    "chapter": 10,
+    "section": "10.4",
+    "title": "Arcs, Segments, Sectors, and Angles",
+    "book_pages": [
+      87
+    ],
+    "pdf_pages": [
+      101
+    ]
+  },
+  {
+    "file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "chapter": 10,
+    "section": "10.5",
+    "title": "Angles Formed By Lines Intersecting a Circle",
+    "book_pages": [
+      87,
+      88,
+      89
+    ],
+    "pdf_pages": [
+      101,
+      102,
+      103
+    ]
+  },
+  {
+    "file": "ch10-10.6-the-burden-of-proof.md",
+    "chapter": 10,
+    "section": "10.6",
+    "title": "The Burden of Proof",
+    "book_pages": [
+      90,
+      91,
+      92
+    ],
+    "pdf_pages": [
+      104,
+      105,
+      106
+    ]
+  },
+  {
+    "file": "ch11-11.1-classifying-triangles.md",
+    "chapter": 11,
+    "section": "11.1",
+    "title": "Classifying Triangles",
+    "book_pages": [
+      93
+    ],
+    "pdf_pages": [
+      107
+    ]
+  },
+  {
+    "file": "ch11-11.2-parts-of-a-triangle.md",
+    "chapter": 11,
+    "section": "11.2",
+    "title": "Parts of a Triangle",
+    "book_pages": [
+      94,
+      95
+    ],
+    "pdf_pages": [
+      108,
+      109
+    ]
+  },
+  {
+    "file": "ch11-11.3-the-triangle-inequality.md",
+    "chapter": 11,
+    "section": "11.3",
+    "title": "The Triangle Inequality",
+    "book_pages": [
+      96
+    ],
+    "pdf_pages": [
+      110
+    ]
+  },
+  {
+    "file": "ch11-11.4-the-pythagorean-theorem.md",
+    "chapter": 11,
+    "section": "11.4",
+    "title": "The Pythagorean Theorem",
+    "book_pages": [
+      97,
+      98
+    ],
+    "pdf_pages": [
+      111,
+      112
+    ]
+  },
+  {
+    "file": "ch11-11.5-congruent-triangles.md",
+    "chapter": 11,
+    "section": "11.5",
+    "title": "Congruent Triangles",
+    "book_pages": [
+      99,
+      100,
+      101
+    ],
+    "pdf_pages": [
+      113,
+      114,
+      115
+    ]
+  },
+  {
+    "file": "ch11-11.6-similar-triangles.md",
+    "chapter": 11,
+    "section": "11.6",
+    "title": "Similar Triangles",
+    "book_pages": [
+      102,
+      103
+    ],
+    "pdf_pages": [
+      116,
+      117
+    ]
+  },
+  {
+    "file": "ch11-11.7-introduction-to-trigonometry.md",
+    "chapter": 11,
+    "section": "11.7",
+    "title": "Introduction to Trigonometry",
+    "book_pages": [
+      104,
+      105,
+      106,
+      107,
+      108
+    ],
+    "pdf_pages": [
+      118,
+      119,
+      120,
+      121,
+      122
+    ]
+  },
+  {
+    "file": "ch11-11.8-area-of-a-triangle.md",
+    "chapter": 11,
+    "section": "11.8",
+    "title": "Area of a Triangle",
+    "book_pages": [
+      109,
+      110,
+      111
+    ],
+    "pdf_pages": [
+      123,
+      124,
+      125
+    ]
+  },
+  {
+    "file": "ch11-11.9-a-handful-of-helpful-hints.md",
+    "chapter": 11,
+    "section": "11.9",
+    "title": "A Handful of Helpful Hints",
+    "book_pages": [
+      112,
+      113,
+      114,
+      115,
+      116,
+      117
+    ],
+    "pdf_pages": [
+      126,
+      127,
+      128,
+      129,
+      130,
+      131
+    ]
+  },
+  {
+    "file": "ch12-12.1-the-fundamentals.md",
+    "chapter": 12,
+    "section": "12.1",
+    "title": "The Fundamentals",
+    "book_pages": [
+      118
+    ],
+    "pdf_pages": [
+      132
+    ]
+  },
+  {
+    "file": "ch12-12.2-trapezoids.md",
+    "chapter": 12,
+    "section": "12.2",
+    "title": "Trapezoids",
+    "book_pages": [
+      118,
+      119
+    ],
+    "pdf_pages": [
+      132,
+      133
+    ]
+  },
+  {
+    "file": "ch12-12.3-parallelograms.md",
+    "chapter": 12,
+    "section": "12.3",
+    "title": "Parallelograms",
+    "book_pages": [
+      120
+    ],
+    "pdf_pages": [
+      134
+    ]
+  },
+  {
+    "file": "ch12-12.4-rhombuses-rhombi.md",
+    "chapter": 12,
+    "section": "12.4",
+    "title": "Rhombuses (Rhombi?)",
+    "book_pages": [
+      121
+    ],
+    "pdf_pages": [
+      135
+    ]
+  },
+  {
+    "file": "ch12-12.5-rectangles-and-squares.md",
+    "chapter": 12,
+    "section": "12.5",
+    "title": "Rectangles and Squares",
+    "book_pages": [
+      122
+    ],
+    "pdf_pages": [
+      136
+    ]
+  },
+  {
+    "file": "ch12-12.6-hints-and-problems.md",
+    "chapter": 12,
+    "section": "12.6",
+    "title": "Hints and Problems",
+    "book_pages": [
+      123,
+      124,
+      125,
+      126
+    ],
+    "pdf_pages": [
+      137,
+      138,
+      139,
+      140
+    ]
+  },
+  {
+    "file": "ch13-13.1-types-of-polygons.md",
+    "chapter": 13,
+    "section": "13.1",
+    "title": "Types of Polygons",
+    "book_pages": [
+      127
+    ],
+    "pdf_pages": [
+      141
+    ]
+  },
+  {
+    "file": "ch13-13.2-angles-in-a-polygon.md",
+    "chapter": 13,
+    "section": "13.2",
+    "title": "Angles in a Polygon",
+    "book_pages": [
+      128
+    ],
+    "pdf_pages": [
+      142
+    ]
+  },
+  {
+    "file": "ch13-13.3-regular-polygons.md",
+    "chapter": 13,
+    "section": "13.3",
+    "title": "Regular Polygons",
+    "book_pages": [
+      128,
+      129
+    ],
+    "pdf_pages": [
+      142,
+      143
+    ]
+  },
+  {
+    "file": "ch13-13.4-regular-hexagons.md",
+    "chapter": 13,
+    "section": "13.4",
+    "title": "Regular Hexagons",
+    "book_pages": [
+      130,
+      131,
+      132
+    ],
+    "pdf_pages": [
+      144,
+      145,
+      146
+    ]
+  },
+  {
+    "file": "ch14-angle-chasing.md",
+    "chapter": 14,
+    "section": null,
+    "title": "Angle Chasing",
+    "book_pages": [
+      133,
+      134,
+      135
+    ],
+    "pdf_pages": [
+      147,
+      148,
+      149
+    ]
+  },
+  {
+    "file": "ch15-15.1-similar-figures.md",
+    "chapter": 15,
+    "section": "15.1",
+    "title": "Similar Figures",
+    "book_pages": [
+      136
+    ],
+    "pdf_pages": [
+      150
+    ]
+  },
+  {
+    "file": "ch15-15.2-same-basesame-altitude.md",
+    "chapter": 15,
+    "section": "15.2",
+    "title": "Same Base/Same Altitude",
+    "book_pages": [
+      137
+    ],
+    "pdf_pages": [
+      151
+    ]
+  },
+  {
+    "file": "ch15-15.3-complicated-figures.md",
+    "chapter": 15,
+    "section": "15.3",
+    "title": "Complicated Figures",
+    "book_pages": [
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "pdf_pages": [
+      152,
+      153,
+      154,
+      155,
+      156
+    ]
+  },
+  {
+    "file": "ch16-16.1-labelling-the-plane.md",
+    "chapter": 16,
+    "section": "16.1",
+    "title": "Labelling the Plane",
+    "book_pages": [
+      143
+    ],
+    "pdf_pages": [
+      157
+    ]
+  },
+  {
+    "file": "ch16-16.2-whats-it-good-for.md",
+    "chapter": 16,
+    "section": "16.2",
+    "title": "What's it Good For?",
+    "book_pages": [
+      144
+    ],
+    "pdf_pages": [
+      158
+    ]
+  },
+  {
+    "file": "ch16-16.3-straight-and-narrow.md",
+    "chapter": 16,
+    "section": "16.3",
+    "title": "Straight and Narrow",
+    "book_pages": [
+      145,
+      146,
+      147
+    ],
+    "pdf_pages": [
+      159,
+      160,
+      161
+    ]
+  },
+  {
+    "file": "ch16-16.4-plotting-a-line.md",
+    "chapter": 16,
+    "section": "16.4",
+    "title": "Plotting a Line",
+    "book_pages": [
+      148
+    ],
+    "pdf_pages": [
+      162
+    ]
+  },
+  {
+    "file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "chapter": 16,
+    "section": "16.5",
+    "title": "The Distance Formula and Circles",
+    "book_pages": [
+      149,
+      150
+    ],
+    "pdf_pages": [
+      163,
+      164
+    ]
+  },
+  {
+    "file": "ch16-16.6-went-down-to-the-crossroads.md",
+    "chapter": 16,
+    "section": "16.6",
+    "title": "Went Down to the Crossroads",
+    "book_pages": [
+      151
+    ],
+    "pdf_pages": [
+      165
+    ]
+  },
+  {
+    "file": "ch16-16.7-fell-down-on-my-knees.md",
+    "chapter": 16,
+    "section": "16.7",
+    "title": "... Fell Down on My Knees",
+    "book_pages": [
+      152,
+      153,
+      154
+    ],
+    "pdf_pages": [
+      166,
+      167,
+      168
+    ]
+  },
+  {
+    "file": "ch17-17.1-introduction.md",
+    "chapter": 17,
+    "section": "17.1",
+    "title": "Introduction",
+    "book_pages": [
+      155,
+      156
+    ],
+    "pdf_pages": [
+      169,
+      170
+    ]
+  },
+  {
+    "file": "ch17-17.2-power-of-a-point-proofs.md",
+    "chapter": 17,
+    "section": "17.2",
+    "title": "Power of a Point Proofs",
+    "book_pages": [
+      157,
+      158,
+      159
+    ],
+    "pdf_pages": [
+      171,
+      172,
+      173
+    ]
+  },
+  {
+    "file": "ch18-18.1-planes-surface-area-and-volume.md",
+    "chapter": 18,
+    "section": "18.1",
+    "title": "Planes, Surface Area, and Volume",
+    "book_pages": [
+      160
+    ],
+    "pdf_pages": [
+      174
+    ]
+  },
+  {
+    "file": "ch18-18.2-spheres.md",
+    "chapter": 18,
+    "section": "18.2",
+    "title": "Spheres",
+    "book_pages": [
+      161
+    ],
+    "pdf_pages": [
+      175
+    ]
+  },
+  {
+    "file": "ch18-18.3-cubes-and-boxes.md",
+    "chapter": 18,
+    "section": "18.3",
+    "title": "Cubes and Boxes",
+    "book_pages": [
+      162,
+      163,
+      164
+    ],
+    "pdf_pages": [
+      176,
+      177,
+      178
+    ]
+  },
+  {
+    "file": "ch18-18.4-prisms-and-cylinders.md",
+    "chapter": 18,
+    "section": "18.4",
+    "title": "Prisms and Cylinders",
+    "book_pages": [
+      165
+    ],
+    "pdf_pages": [
+      179
+    ]
+  },
+  {
+    "file": "ch18-18.5-pyramids-and-cones.md",
+    "chapter": 18,
+    "section": "18.5",
+    "title": "Pyramids and Cones",
+    "book_pages": [
+      166,
+      167
+    ],
+    "pdf_pages": [
+      180,
+      181
+    ]
+  },
+  {
+    "file": "ch18-18.6-polyhedra.md",
+    "chapter": 18,
+    "section": "18.6",
+    "title": "Polyhedra",
+    "book_pages": [
+      168
+    ],
+    "pdf_pages": [
+      182
+    ]
+  },
+  {
+    "file": "ch18-18.7-how-to-solve-3d-problems.md",
+    "chapter": 18,
+    "section": "18.7",
+    "title": "How to Solve 3D Problems",
+    "book_pages": [
+      169,
+      170,
+      171,
+      172
+    ],
+    "pdf_pages": [
+      183,
+      184,
+      185,
+      186
+    ]
+  },
+  {
+    "file": "ch19-19.1-translation.md",
+    "chapter": 19,
+    "section": "19.1",
+    "title": "Translation",
+    "book_pages": [
+      173
+    ],
+    "pdf_pages": [
+      187
+    ]
+  },
+  {
+    "file": "ch19-19.2-rotation.md",
+    "chapter": 19,
+    "section": "19.2",
+    "title": "Rotation",
+    "book_pages": [
+      174
+    ],
+    "pdf_pages": [
+      188
+    ]
+  },
+  {
+    "file": "ch19-19.3-reflection.md",
+    "chapter": 19,
+    "section": "19.3",
+    "title": "Reflection",
+    "book_pages": [
+      175
+    ],
+    "pdf_pages": [
+      189
+    ]
+  },
+  {
+    "file": "ch19-19.4-distortion.md",
+    "chapter": 19,
+    "section": "19.4",
+    "title": "Distortion",
+    "book_pages": [
+      176
+    ],
+    "pdf_pages": [
+      190
+    ]
+  },
+  {
+    "file": "ch19-19.5-dilation.md",
+    "chapter": 19,
+    "section": "19.5",
+    "title": "Dilation",
+    "book_pages": [
+      177
+    ],
+    "pdf_pages": [
+      191
+    ]
+  },
+  {
+    "file": "ch19-19.6-the-more-things-change.md",
+    "chapter": 19,
+    "section": "19.6",
+    "title": "The More Things Change",
+    "book_pages": [
+      178
+    ],
+    "pdf_pages": [
+      192
+    ]
+  },
+  {
+    "file": "ch19-19.7-transformation-proofs.md",
+    "chapter": 19,
+    "section": "19.7",
+    "title": "Transformation Proofs",
+    "book_pages": [
+      178,
+      179,
+      180
+    ],
+    "pdf_pages": [
+      192,
+      193,
+      194
+    ]
+  },
+  {
+    "file": "ch20-a-potpourri-of-geometry.md",
+    "chapter": 20,
+    "section": null,
+    "title": "A Potpourri of Geometry",
+    "book_pages": [
+      181,
+      182,
+      183,
+      184,
+      185,
+      186
+    ],
+    "pdf_pages": [
+      195,
+      196,
+      197,
+      198,
+      199,
+      200
+    ]
+  },
+  {
+    "file": "ch21-21.1-welcome-to-the-machine.md",
+    "chapter": 21,
+    "section": "21.1",
+    "title": "Welcome to the Machine",
+    "book_pages": [
+      187
+    ],
+    "pdf_pages": [
+      201
+    ]
+  },
+  {
+    "file": "ch21-21.2-graphing-functions.md",
+    "chapter": 21,
+    "section": "21.2",
+    "title": "Graphing Functions",
+    "book_pages": [
+      188
+    ],
+    "pdf_pages": [
+      202
+    ]
+  },
+  {
+    "file": "ch21-21.3-inputs-and-outputs.md",
+    "chapter": 21,
+    "section": "21.3",
+    "title": "Inputs and Outputs",
+    "book_pages": [
+      189
+    ],
+    "pdf_pages": [
+      203
+    ]
+  },
+  {
+    "file": "ch21-21.4-even-and-odd.md",
+    "chapter": 21,
+    "section": "21.4",
+    "title": "Even and Odd",
+    "book_pages": [
+      190
+    ],
+    "pdf_pages": [
+      204
+    ]
+  },
+  {
+    "file": "ch21-21.5-some-special-functions.md",
+    "chapter": 21,
+    "section": "21.5",
+    "title": "Some Special Functions",
+    "book_pages": [
+      191,
+      192,
+      193
+    ],
+    "pdf_pages": [
+      205,
+      206,
+      207
+    ]
+  },
+  {
+    "file": "ch21-21.6-transforming-a-function.md",
+    "chapter": 21,
+    "section": "21.6",
+    "title": "Transforming a Function",
+    "book_pages": [
+      194,
+      195,
+      196
+    ],
+    "pdf_pages": [
+      208,
+      209,
+      210
+    ]
+  },
+  {
+    "file": "ch22-22.1-what-they-do.md",
+    "chapter": 22,
+    "section": "22.1",
+    "title": "What They Do",
+    "book_pages": [
+      197
+    ],
+    "pdf_pages": [
+      211
+    ]
+  },
+  {
+    "file": "ch22-22.2-linear-inequalities.md",
+    "chapter": 22,
+    "section": "22.2",
+    "title": "Linear Inequalities",
+    "book_pages": [
+      198
+    ],
+    "pdf_pages": [
+      212
+    ]
+  },
+  {
+    "file": "ch22-22.3-quadratic-inequalities.md",
+    "chapter": 22,
+    "section": "22.3",
+    "title": "Quadratic Inequalities",
+    "book_pages": [
+      199,
+      200,
+      201
+    ],
+    "pdf_pages": [
+      213,
+      214,
+      215
+    ]
+  },
+  {
+    "file": "ch22-22.4-absolute-value-inequalities.md",
+    "chapter": 22,
+    "section": "22.4",
+    "title": "Absolute Value Inequalities",
+    "book_pages": [
+      202
+    ],
+    "pdf_pages": [
+      216
+    ]
+  },
+  {
+    "file": "ch22-22.5-a-trivial-inequality.md",
+    "chapter": 22,
+    "section": "22.5",
+    "title": "A Trivial Inequality",
+    "book_pages": [
+      203,
+      204,
+      205
+    ],
+    "pdf_pages": [
+      217,
+      218,
+      219
+    ]
+  },
+  {
+    "file": "ch23-23.1-what-is-an-operation.md",
+    "chapter": 23,
+    "section": "23.1",
+    "title": "What is an Operation?",
+    "book_pages": [
+      206
+    ],
+    "pdf_pages": [
+      220
+    ]
+  },
+  {
+    "file": "ch23-23.2-properties-of-operations.md",
+    "chapter": 23,
+    "section": "23.2",
+    "title": "Properties of Operations",
+    "book_pages": [
+      207,
+      208
+    ],
+    "pdf_pages": [
+      221,
+      222
+    ]
+  },
+  {
+    "file": "ch23-23.3-relations.md",
+    "chapter": 23,
+    "section": "23.3",
+    "title": "Relations",
+    "book_pages": [
+      209,
+      210
+    ],
+    "pdf_pages": [
+      223,
+      224
+    ]
+  },
+  {
+    "file": "ch24-24.1-arithmetic-series.md",
+    "chapter": 24,
+    "section": "24.1",
+    "title": "Arithmetic Series",
+    "book_pages": [
+      211
+    ],
+    "pdf_pages": [
+      225
+    ]
+  },
+  {
+    "file": "ch24-24.2-geometric-series.md",
+    "chapter": 24,
+    "section": "24.2",
+    "title": "Geometric Series",
+    "book_pages": [
+      212
+    ],
+    "pdf_pages": [
+      226
+    ]
+  },
+  {
+    "file": "ch24-24.3-infinite-series.md",
+    "chapter": 24,
+    "section": "24.3",
+    "title": "Infinite Series",
+    "book_pages": [
+      213,
+      214
+    ],
+    "pdf_pages": [
+      227,
+      228
+    ]
+  },
+  {
+    "file": "ch24-24.4-sigma-notation.md",
+    "chapter": 24,
+    "section": "24.4",
+    "title": "Sigma Notation",
+    "book_pages": [
+      215
+    ],
+    "pdf_pages": [
+      229
+    ]
+  },
+  {
+    "file": "ch24-24.5-sequences.md",
+    "chapter": 24,
+    "section": "24.5",
+    "title": "Sequences",
+    "book_pages": [
+      216
+    ],
+    "pdf_pages": [
+      230
+    ]
+  },
+  {
+    "file": "ch24-24.6-sequences-and-means.md",
+    "chapter": 24,
+    "section": "24.6",
+    "title": "Sequences and Means",
+    "book_pages": [
+      217,
+      218,
+      219,
+      220
+    ],
+    "pdf_pages": [
+      231,
+      232,
+      233,
+      234
+    ]
+  },
+  {
+    "file": "ch25-25.1-whats-to-learn.md",
+    "chapter": 25,
+    "section": "25.1",
+    "title": "What's to Learn?",
+    "book_pages": [
+      221
+    ],
+    "pdf_pages": [
+      235
+    ]
+  },
+  {
+    "file": "ch25-25.2-multiplication.md",
+    "chapter": 25,
+    "section": "25.2",
+    "title": "Multiplication",
+    "book_pages": [
+      221,
+      222
+    ],
+    "pdf_pages": [
+      235,
+      236
+    ]
+  },
+  {
+    "file": "ch25-25.3-example-the-number-of-divisors.md",
+    "chapter": 25,
+    "section": "25.3",
+    "title": "Example: The Number of Divisors",
+    "book_pages": [
+      223
+    ],
+    "pdf_pages": [
+      237
+    ]
+  },
+  {
+    "file": "ch25-25.4-restrictions-on-multiplication.md",
+    "chapter": 25,
+    "section": "25.4",
+    "title": "Restrictions on Multiplication",
+    "book_pages": [
+      223,
+      224
+    ],
+    "pdf_pages": [
+      237,
+      238
+    ]
+  },
+  {
+    "file": "ch25-25.5-permutations-arrangements-and.md",
+    "chapter": 25,
+    "section": "25.5",
+    "title": "Permutations, Arrangements, and !",
+    "book_pages": [
+      225,
+      226
+    ],
+    "pdf_pages": [
+      239,
+      240
+    ]
+  },
+  {
+    "file": "ch25-25.6-mixing-it-up.md",
+    "chapter": 25,
+    "section": "25.6",
+    "title": "Mixing it Up",
+    "book_pages": [
+      227
+    ],
+    "pdf_pages": [
+      241
+    ]
+  },
+  {
+    "file": "ch25-25.7-counting-the-wrong-thing-part-i.md",
+    "chapter": 25,
+    "section": "25.7",
+    "title": "Counting the Wrong Thing, Part I",
+    "book_pages": [
+      228
+    ],
+    "pdf_pages": [
+      242
+    ]
+  },
+  {
+    "file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "chapter": 25,
+    "section": "25.8",
+    "title": "Counting the Wrong Thing, Part II",
+    "book_pages": [
+      229,
+      230,
+      231
+    ],
+    "pdf_pages": [
+      243,
+      244,
+      245
+    ]
+  },
+  {
+    "file": "ch25-25.9-doing-it-another-way.md",
+    "chapter": 25,
+    "section": "25.9",
+    "title": "Doing it Another Way",
+    "book_pages": [
+      232
+    ],
+    "pdf_pages": [
+      246
+    ]
+  },
+  {
+    "file": "ch25-25.10-the-binomial-theorem.md",
+    "chapter": 25,
+    "section": "25.10",
+    "title": "The Binomial Theorem",
+    "book_pages": [
+      232,
+      233,
+      234,
+      235
+    ],
+    "pdf_pages": [
+      246,
+      247,
+      248,
+      249
+    ]
+  },
+  {
+    "file": "ch26-26.1-statistics.md",
+    "chapter": 26,
+    "section": "26.1",
+    "title": "Statistics",
+    "book_pages": [
+      236,
+      237
+    ],
+    "pdf_pages": [
+      250,
+      251
+    ]
+  },
+  {
+    "file": "ch26-26.2-probability-and-common-sense.md",
+    "chapter": 26,
+    "section": "26.2",
+    "title": "Probability and Common Sense",
+    "book_pages": [
+      238,
+      239
+    ],
+    "pdf_pages": [
+      252,
+      253
+    ]
+  },
+  {
+    "file": "ch26-26.3-multiplying-probabilities.md",
+    "chapter": 26,
+    "section": "26.3",
+    "title": "Multiplying Probabilities",
+    "book_pages": [
+      240
+    ],
+    "pdf_pages": [
+      254
+    ]
+  },
+  {
+    "file": "ch26-26.4-casework.md",
+    "chapter": 26,
+    "section": "26.4",
+    "title": "Casework",
+    "book_pages": [
+      241
+    ],
+    "pdf_pages": [
+      255
+    ]
+  },
+  {
+    "file": "ch26-26.5-odds.md",
+    "chapter": 26,
+    "section": "26.5",
+    "title": "Odds",
+    "book_pages": [
+      242
+    ],
+    "pdf_pages": [
+      256
+    ]
+  },
+  {
+    "file": "ch26-26.6-what-did-you-expect.md",
+    "chapter": 26,
+    "section": "26.6",
+    "title": "What Did You Expect?",
+    "book_pages": [
+      242,
+      243,
+      244,
+      245
+    ],
+    "pdf_pages": [
+      256,
+      257,
+      258,
+      259
+    ]
+  },
+  {
+    "file": "ch27-27.1-some-definitions.md",
+    "chapter": 27,
+    "section": "27.1",
+    "title": "Some Definitions",
+    "book_pages": [
+      246
+    ],
+    "pdf_pages": [
+      260
+    ]
+  },
+  {
+    "file": "ch27-27.2-operating-on-sets.md",
+    "chapter": 27,
+    "section": "27.2",
+    "title": "Operating on Sets",
+    "book_pages": [
+      247
+    ],
+    "pdf_pages": [
+      261
+    ]
+  },
+  {
+    "file": "ch27-27.3-venn-diagrams.md",
+    "chapter": 27,
+    "section": "27.3",
+    "title": "Venn Diagrams",
+    "book_pages": [
+      248
+    ],
+    "pdf_pages": [
+      262
+    ]
+  },
+  {
+    "file": "ch27-27.4-subsets.md",
+    "chapter": 27,
+    "section": "27.4",
+    "title": "Subsets",
+    "book_pages": [
+      249,
+      250,
+      251
+    ],
+    "pdf_pages": [
+      263,
+      264,
+      265
+    ]
+  },
+  {
+    "file": "ch28-28.1-words-words-words.md",
+    "chapter": 28,
+    "section": "28.1",
+    "title": "Words, Words, Words",
+    "book_pages": [
+      252,
+      253
+    ],
+    "pdf_pages": [
+      266,
+      267
+    ]
+  },
+  {
+    "file": "ch28-28.2-contradiction.md",
+    "chapter": 28,
+    "section": "28.2",
+    "title": "Contradiction",
+    "book_pages": [
+      254
+    ],
+    "pdf_pages": [
+      268
+    ]
+  },
+  {
+    "file": "ch28-28.3-converses-arent-necessarily-true.md",
+    "chapter": 28,
+    "section": "28.3",
+    "title": "Converses Aren't Necessarily True",
+    "book_pages": [
+      255
+    ],
+    "pdf_pages": [
+      269
+    ]
+  },
+  {
+    "file": "ch28-28.4-mathematical-induction.md",
+    "chapter": 28,
+    "section": "28.4",
+    "title": "Mathematical Induction",
+    "book_pages": [
+      256
+    ],
+    "pdf_pages": [
+      270
+    ]
+  },
+  {
+    "file": "ch28-28.5-shooting-holes-in-pigeons.md",
+    "chapter": 28,
+    "section": "28.5",
+    "title": "Shooting Holes in Pigeons",
+    "book_pages": [
+      257
+    ],
+    "pdf_pages": [
+      271
+    ]
+  },
+  {
+    "file": "ch28-28.6-convincing-but-wrong.md",
+    "chapter": 28,
+    "section": "28.6",
+    "title": "Convincing But Wrong",
+    "book_pages": [
+      258,
+      259,
+      260,
+      261
+    ],
+    "pdf_pages": [
+      272,
+      273,
+      274,
+      275
+    ]
+  },
+  {
+    "file": "ch29-parting-shots.md",
+    "chapter": 29,
+    "section": null,
+    "title": "Parting Shots",
+    "book_pages": [
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274
+    ],
+    "pdf_pages": [
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288
+    ]
+  }
+]
