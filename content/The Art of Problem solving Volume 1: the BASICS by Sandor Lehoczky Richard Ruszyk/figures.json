@@ -847,6 +847,175 @@
         200,
         105
       ]
+    },
+    {
+      "id": "fig-12-1-convex-concave-quadrilaterals",
+      "chapter": 12,
+      "page": 132,
+      "bookPage": 118,
+      "caption": "Two quadrilaterals — convex ABCD and concave EFGH (with reflex angle at F).",
+      "bbox": [
+        60,
+        350,
+        245,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-2-trapezoid-with-median",
+      "chapter": 12,
+      "page": 132,
+      "bookPage": 118,
+      "caption": "Trapezoid ABCD with median XY and altitude EF.",
+      "bbox": [
+        510,
+        685,
+        195,
+        115
+      ]
+    },
+    {
+      "id": "fig-12-3-trapezoid-median-proof",
+      "chapter": 12,
+      "page": 133,
+      "bookPage": 119,
+      "caption": "Trapezoid with altitudes AE, BF forming rectangles for the median proof.",
+      "bbox": [
+        60,
+        75,
+        220,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-4-isosceles-trapezoid-diagonals",
+      "chapter": 12,
+      "page": 133,
+      "bookPage": 119,
+      "caption": "Isosceles trapezoid ABCD with altitudes DX, CY and both diagonals.",
+      "bbox": [
+        55,
+        605,
+        240,
+        105
+      ]
+    },
+    {
+      "id": "fig-12-5-example-12-1",
+      "chapter": 12,
+      "page": 134,
+      "bookPage": 120,
+      "caption": "Isosceles trapezoid for Example 12-1; smaller base 5, altitude 4, leg 8.",
+      "bbox": [
+        510,
+        165,
+        245,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-6-parallelogram-diagonals",
+      "chapter": 12,
+      "page": 134,
+      "bookPage": 120,
+      "caption": "Parallelogram ABCD with diagonals intersecting at E.",
+      "bbox": [
+        510,
+        480,
+        220,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-7-parallelogram-d1-d2-theta",
+      "chapter": 12,
+      "page": 135,
+      "bookPage": 121,
+      "caption": "Parallelogram with diagonals d1, d2 at angle θ at E.",
+      "bbox": [
+        60,
+        175,
+        220,
+        110
+      ]
+    },
+    {
+      "id": "fig-12-8-rhombus-diagonals",
+      "chapter": 12,
+      "page": 135,
+      "bookPage": 121,
+      "caption": "Rhombus ABCD with perpendicular diagonals meeting at E.",
+      "bbox": [
+        60,
+        725,
+        215,
+        145
+      ]
+    },
+    {
+      "id": "fig-12-9-example-12-3-rhombus",
+      "chapter": 12,
+      "page": 136,
+      "bookPage": 122,
+      "caption": "Rhombus ABCD with diagonals meeting at E forming four congruent right triangles.",
+      "bbox": [
+        510,
+        165,
+        240,
+        165
+      ]
+    },
+    {
+      "id": "fig-12-10-rectangle",
+      "chapter": 12,
+      "page": 136,
+      "bookPage": 122,
+      "caption": "Rectangle ABCD with right angles and equal opposite sides marked.",
+      "bbox": [
+        510,
+        460,
+        230,
+        100
+      ]
+    },
+    {
+      "id": "fig-12-11-square",
+      "chapter": 12,
+      "page": 137,
+      "bookPage": 123,
+      "caption": "Square ABCD with all four sides marked equal and a diagonal drawn.",
+      "bbox": [
+        510,
+        175,
+        220,
+        130
+      ]
+    },
+    {
+      "id": "fig-12-12-example-12-5-inscribed-square",
+      "chapter": 12,
+      "page": 137,
+      "bookPage": 123,
+      "caption": "Square ABCD with midpoints E, F, G, H connected to form an inscribed rotated square.",
+      "bbox": [
+        510,
+        425,
+        230,
+        145
+      ]
+    },
+    {
+      "id": "fig-12-13-example-12-8-midpoints",
+      "chapter": 12,
+      "page": 138,
+      "bookPage": 124,
+      "caption": "Parallelogram ABCD with midpoints E, F, G, H connected to form inner parallelogram EFGH.",
+      "bbox": [
+        510,
+        645,
+        240,
+        145
+      ]
     }
   ]
 }

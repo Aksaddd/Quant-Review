@@ -9,7 +9,7 @@ A **quadrilateral** is a four-sided figure.
 
 Problems involving concave quadrilaterals are quite rare, so we will generally just be working with convex quadrilaterals.
 
-> *[Figure 12.1: Two quadrilaterals — convex $ABCD$ and concave $EFGH$ (with reflex angle at $F$)]*
+> *[Figure: Two quadrilaterals — convex $ABCD$ and concave $EFGH$ (with reflex angle at $F$)]*
 
 A **diagonal** of a quadrilateral is a segment from any vertex to the vertex which is not adjacent to it. For example, in $ABCD$, $AC$ is a diagonal but $AB$ is not. All quadrilaterals have two diagonals. A quadrilateral is **orthodiagonal** if its diagonals are perpendicular.
 
@@ -36,6 +36,8 @@ Segment $EF$, the distance between the parallel sides of the trapezoid, is the *
 ### Length of the Median
 
 It should be clear that the median is parallel to the bases of the trapezoid. (Try to prove this rigorously by showing that $X$ and $Y$ are equidistant from $CD$.)
+
+> *[Figure: Trapezoid $ABCD$ with altitudes $AE$ and $BF$ forming rectangle $EFZW$; median $XY$ midway between bases]*
 
 We first draw altitudes $AE$ and $BF$, forming rectangles $EFZW$ and $WZBA$ (with $W$ on $AD$, $Z$ on $BC$, where the altitudes from $X$ and $Y$ meet $AB$ and the bases). Thus, $AB = WZ = EF$. Since $XY \parallel DC$, by AA we have
 
@@ -95,6 +97,8 @@ The proof of the converse (that equal diagonals imply equal legs) is the same as
 ### Example 12-1
 *An isosceles trapezoid has altitude 4 and leg length 8. If the smaller base has length 5, find the area of the trapezoid.*
 
+> *[Figure: Isosceles trapezoid with smaller base $AB = 5$, altitude $4$, leg length $8$; altitudes $AX$ and $BY$ dropped to longer base]*
+
 **Solution:** Given the altitude and one base, we can find the area by finding the length of the other base. Draw altitudes $AX$ and $BY$ from the upper base. Since $XY = AB$ (why?), we have $XY = 5$. To find $CY$, use the Pythagorean Theorem on $\triangle BYC$:
 
 $$CY = \sqrt{8^2 - 4^2} = \sqrt{48} = 4\sqrt{3}.$$
@@ -147,6 +151,8 @@ The diagonals of a parallelogram bisect each other. Letting the lengths of these
 
 $$[ABCD] = \tfrac{1}{2} d_1 d_2 \sin \theta.$$
 
+> *[Figure: Parallelogram $ABCD$ with diagonals of lengths $d_1$ and $d_2$ meeting at $E$; angle $\theta$ between them]*
+
 > **Note:** For $\theta$ we can use either $\angle AEB$ or $\angle BEC$ because $\angle AEB = 180° - \angle BEC$ and $\sin \theta = \sin(180° - \theta)$.
 
 How do you think you would prove this formula? Notice that it closely resembles one of the triangle area formulas. Now try to prove it.
@@ -189,6 +195,8 @@ $$[ABCD] = \frac{d_1 d_2}{2}.$$
 ### Example 12-3
 *Find the length of the side of a rhombus which has area 40 and diagonals with lengths $2x$ and $3x - 2$.*
 
+> *[Figure: Rhombus $ABCD$ with diagonals meeting at $E$ at right angles, forming four congruent right triangles]*
+
 **Solution:** Since the area of a rhombus is one-half the product of the diagonals:
 
 $$40 = \frac{(2x)(3x - 2)}{2} = 3x^2 - 2x.$$
@@ -210,6 +218,8 @@ $$AB = \sqrt{5^2 + 4^2} = \boxed{\sqrt{41}}.$$
 A **rectangle** is a quadrilateral with four equal angles. Since the sum of the angles in a quadrilateral is $360°$, the four angles of a rectangle are right angles. Since $\angle A + \angle B = \angle B + \angle C = 180°$, we find $AB \parallel CD$ and $BC \parallel AD$. Thus all rectangles are parallelograms, so all that is true of parallelograms is also true of rectangles.
 
 ### Properties of Rectangles
+
+> *[Figure: Rectangle $ABCD$ with right angles at all vertices and tick marks indicating equal opposite sides]*
 
 The two side lengths of rectangles are commonly called the **length**, $\ell$, and the **width**, $w$, where the length is usually the longer side.
 
@@ -251,6 +261,8 @@ If the side length of the square is $s$:
 - **Area:** $s^2$
 - **Perimeter:** $4s$
 
+> *[Figure: Square $ABCD$ with all four sides marked equal and a diagonal drawn]*
+
 > **Strategy:** In problems involving rectangles and squares, since the sides are all perpendicular or parallel, drawing additional perpendicular lines is often useful.
 
 ---
@@ -259,6 +271,8 @@ If the side length of the square is $s$:
 *Prove that by connecting the midpoints of the sides of a square in order, we form another square.*
 
 **Proof:** To prove a quadrilateral is a square, we must show that its sides are all equal and so are its angles.
+
+> *[Figure: Square $ABCD$ with midpoints $E$, $F$, $G$, $H$ on each side connected to form an inscribed (rotated) square]*
 
 Let $ABCD$ be the original square, with $E$, $F$, $G$, $H$ the midpoints of $AB$, $BC$, $CD$, $DA$ respectively.
 
@@ -322,6 +336,8 @@ From this we see that $z - x = y$, so $\angle ABD = \angle BDC$, which means $AB
 
 ### Example 12-8
 *Let $E$, $F$, $G$, and $H$ be the midpoints of the sides of parallelogram $ABCD$. Prove that $EFGH$ is also a parallelogram.*
+
+> *[Figure: Parallelogram $ABCD$ with midpoints $E$, $F$, $G$, $H$ on its sides connected to form inner parallelogram $EFGH$]*
 
 **Proof:** Since $AB = CD$, we find $AE = CG$ since $E$ and $G$ are midpoints of equal sides. Similarly, $FC = AH$. Since $\angle A$ and $\angle C$ are opposite angles of a parallelogram, they are equal. Thus $\triangle FCG \cong \triangle HAE$ by SAS, so $FG = EH$. In a similar manner, we can show $\triangle EBF \cong \triangle GDH$, so $GH = EF$. As you should have shown in Exercise 12-11, since the opposite sides of $EFGH$ are equal, $EFGH$ is a parallelogram. $\blacksquare$
 

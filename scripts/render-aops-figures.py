@@ -1790,6 +1790,286 @@ def fig_11_7_right_triangle_semicircle() -> str:
     return svg(W, H, body)
 
 
+# ─────────────────────────────────────────────
+# Chapter 12 figures
+# ─────────────────────────────────────────────
+
+def fig_12_1_convex_concave_quadrilaterals() -> str:
+    """Two quadrilaterals: convex ABCD and concave EFGH (with reflex at F)."""
+    W, Ht = 280, 130
+    A = (50, 20); B = (90, 50); C = (75, 105); D = (15, 75)
+    E = (170, 25); F = (215, 65); G = (180, 110); Hp = (260, 70)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C),
+        segment(*E, *F), segment(*F, *G), segment(*G, *Hp), segment(*Hp, *E),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below", italic=True),
+        point(*D, "D", "left", italic=True),
+        point(*E, "E", "above-left", italic=True),
+        point(*F, "F", "left", italic=True),
+        point(*G, "G", "below", italic=True),
+        point(*Hp, "H", "right", italic=True),
+        text(50, 125, "convex", italic=True, size=10),
+        text(200, 125, "concave", italic=True, size=10),
+    ])
+    return svg(W, Ht, body)
+
+
+def fig_12_2_trapezoid_with_median() -> str:
+    """Trapezoid ABCD with median XY and altitude EF."""
+    W, H = 240, 140
+    A = (70, 30); B = (170, 30); D = (15, 110); C = (225, 110)
+    E = (70, 110); F = (170, 110)
+    X = ((A[0]+D[0])/2, (A[1]+D[1])/2)
+    Y = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        f'<line x1="{A[0]}" y1="{A[1]}" x2="{E[0]}" y2="{E[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        segment(*X, *Y),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "above", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*X, "X", "left", italic=True),
+        point(*Y, "Y", "right", italic=True),
+        point(*E, "E", "below", italic=True),
+        point(*F, "F", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_3_trapezoid_median_proof() -> str:
+    """Trapezoid with altitudes AE, BF forming rectangles for the median proof."""
+    W, H = 260, 160
+    A = (80, 40); B = (175, 40); D = (15, 130); C = (245, 130)
+    E = (80, 130); F = (175, 130)
+    Wp = (50, 85); Z = (215, 85)
+    X = ((A[0]+D[0])/2, (A[1]+D[1])/2)
+    Y = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *E), segment(*B, *F),
+        right_angle_mark(E[0], E[1], (E[0]+10, E[1]), (E[0], E[1]-10), size=6),
+        right_angle_mark(F[0], F[1], (F[0]+10, F[1]), (F[0], F[1]-10), size=6),
+        segment(*X, *Y),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "above", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*X, "X", "left", italic=True),
+        point(*Y, "Y", "right", italic=True),
+        point(*E, "E", "below", italic=True),
+        point(*F, "F", "below", italic=True),
+        point(*Wp, "W", "below-left", italic=True),
+        point(*Z, "Z", "below-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_4_isosceles_trapezoid_diagonals() -> str:
+    """Isosceles trapezoid ABCD with altitudes DX, CY and both diagonals."""
+    W, H = 260, 140
+    D = (75, 30); C = (185, 30)
+    A = (35, 110); B = (225, 110)
+    X = (75, 110); Y = (185, 110)
+    body = "\n".join([
+        segment(*D, *C), segment(*C, *B), segment(*B, *A), segment(*A, *D),
+        f'<line x1="{D[0]}" y1="{D[1]}" x2="{X[0]}" y2="{X[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        f'<line x1="{C[0]}" y1="{C[1]}" x2="{Y[0]}" y2="{Y[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        segment(*A, *C), segment(*B, *D),
+        point(*A, "A", "below", italic=True),
+        point(*B, "B", "below", italic=True),
+        point(*C, "C", "above", italic=True),
+        point(*D, "D", "above", italic=True),
+        point(*X, "X", "below", italic=True),
+        point(*Y, "Y", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_5_example_12_1() -> str:
+    """Isosceles trapezoid for Ex 12-1: smaller base 5, altitude 4, leg 8."""
+    W, H = 280, 140
+    A = (110, 30); B = (170, 30); D = (35, 110); C = (245, 110)
+    X = (110, 110); Y = (170, 110)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        f'<line x1="{A[0]}" y1="{A[1]}" x2="{X[0]}" y2="{X[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        f'<line x1="{B[0]}" y1="{B[1]}" x2="{Y[0]}" y2="{Y[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        text((A[0]+B[0])/2, A[1] - 6, "5", italic=False, size=11),
+        text(B[0] + 4, (B[1]+Y[1])/2, "4", italic=False, anchor="start", size=11),
+        text((B[0]+C[0])/2 + 6, (B[1]+C[1])/2 - 4, "8", italic=False, anchor="start", size=11),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*X, "X", "below", italic=True),
+        point(*Y, "Y", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_6_parallelogram_diagonals() -> str:
+    """Parallelogram ABCD with diagonals intersecting at E."""
+    W, H = 220, 120
+    A = (45, 25); B = (200, 25); C = (175, 95); D = (20, 95)
+    E = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*E, "E", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_7_parallelogram_d1_d2_theta() -> str:
+    """Parallelogram with diagonals d1, d2 meeting at E with angle θ."""
+    W, H = 240, 130
+    A = (50, 30); B = (215, 30); C = (190, 100); D = (25, 100)
+    E = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        text(E[0] - 4, E[1] - 8, "θ", italic=True, size=11, anchor="end"),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*E, "E", "below", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_8_rhombus_diagonals() -> str:
+    """Rhombus ABCD with perpendicular diagonals at E."""
+    W, H = 220, 160
+    A = (110, 20); B = (200, 80); C = (110, 140); D = (20, 80)
+    E = (110, 80)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        right_angle_mark(E[0], E[1], (E[0]+10, E[1]), (E[0], E[1]-10), size=6),
+        _hash_mark(A, B, 1), _hash_mark(B, C, 1), _hash_mark(C, D, 1), _hash_mark(D, A, 1),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below", italic=True),
+        point(*D, "D", "left", italic=True),
+        point(*E, "E", "below-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_9_example_12_3_rhombus() -> str:
+    """Rhombus ABCD for Ex 12-3 with diagonals at E."""
+    W, H = 240, 180
+    A = (120, 25); B = (220, 90); C = (120, 155); D = (20, 90)
+    E = (120, 90)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        right_angle_mark(E[0], E[1], (E[0]+10, E[1]), (E[0], E[1]-10), size=6),
+        point(*A, "A", "above", italic=True),
+        point(*B, "B", "right", italic=True),
+        point(*C, "C", "below", italic=True),
+        point(*D, "D", "left", italic=True),
+        point(*E, "E", "above-right", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_10_rectangle() -> str:
+    """Rectangle ABCD with right angle marks and equal opposite sides."""
+    W, H = 240, 130
+    A = (30, 30); B = (210, 30); C = (210, 100); D = (30, 100)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        right_angle_mark(A[0], A[1], (A[0]+12, A[1]), (A[0], A[1]+12), size=7),
+        right_angle_mark(B[0], B[1], (B[0]-12, B[1]), (B[0], B[1]+12), size=7),
+        right_angle_mark(C[0], C[1], (C[0]-12, C[1]), (C[0], C[1]-12), size=7),
+        right_angle_mark(D[0], D[1], (D[0]+12, D[1]), (D[0], D[1]-12), size=7),
+        _hash_mark(A, B, 1), _hash_mark(D, C, 1),
+        _hash_mark(B, C, 2), _hash_mark(A, D, 2),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_11_square() -> str:
+    """Square ABCD with all four sides marked equal and a diagonal drawn."""
+    W, H = 220, 160
+    A = (60, 25); B = (160, 25); C = (160, 125); D = (60, 125)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C),
+        right_angle_mark(A[0], A[1], (A[0]+12, A[1]), (A[0], A[1]+12), size=7),
+        right_angle_mark(B[0], B[1], (B[0]-12, B[1]), (B[0], B[1]+12), size=7),
+        right_angle_mark(C[0], C[1], (C[0]-12, C[1]), (C[0], C[1]-12), size=7),
+        right_angle_mark(D[0], D[1], (D[0]+12, D[1]), (D[0], D[1]-12), size=7),
+        _hash_mark(A, B, 1), _hash_mark(B, C, 1),
+        _hash_mark(C, D, 1), _hash_mark(D, A, 1),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_12_example_12_5_inscribed_square() -> str:
+    """Square ABCD with midpoints E, F, G, H connected to form inscribed square."""
+    W, H = 220, 180
+    A = (50, 30); B = (180, 30); C = (180, 160); D = (50, 160)
+    E = ((A[0]+B[0])/2, A[1])
+    F = (B[0], (B[1]+C[1])/2)
+    G = ((C[0]+D[0])/2, C[1])
+    Hp = (A[0], (A[1]+D[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*E, *F), segment(*F, *G), segment(*G, *Hp), segment(*Hp, *E),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*E, "E", "above", italic=True),
+        point(*F, "F", "right", italic=True),
+        point(*G, "G", "below", italic=True),
+        point(*Hp, "H", "left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
+def fig_12_13_example_12_8_midpoints() -> str:
+    """Parallelogram ABCD with midpoints E, F, G, H connected as inner parallelogram."""
+    W, H = 240, 160
+    A = (60, 30); B = (215, 30); C = (185, 130); D = (30, 130)
+    E = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    F = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    G = ((C[0]+D[0])/2, (C[1]+D[1])/2)
+    Hp = ((D[0]+A[0])/2, (D[1]+A[1])/2)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*E, *F), segment(*F, *G), segment(*G, *Hp), segment(*Hp, *E),
+        point(*A, "A", "above-left", italic=True),
+        point(*B, "B", "above-right", italic=True),
+        point(*C, "C", "below-right", italic=True),
+        point(*D, "D", "below-left", italic=True),
+        point(*E, "E", "above", italic=True),
+        point(*F, "F", "right", italic=True),
+        point(*G, "G", "below", italic=True),
+        point(*Hp, "H", "left", italic=True),
+    ])
+    return svg(W, H, body)
+
+
 FIGURES = {
     "fig-3-1-coordinate-plane":           fig_3_1_coordinate_plane,
     "fig-9-1-circle-tangent-secant":      fig_9_1_circle_tangent_secant,
@@ -1856,6 +2136,19 @@ FIGURES = {
     "fig-11-31-parallel-transversal-angles":  fig_11_31_parallel_transversal_angles,
     "fig-11-32-example-11-25-setup":          fig_11_32_example_11_25_setup,
     "fig-11-33-example-11-25-with-aux":       fig_11_33_example_11_25_with_aux,
+    "fig-12-1-convex-concave-quadrilaterals": fig_12_1_convex_concave_quadrilaterals,
+    "fig-12-2-trapezoid-with-median":         fig_12_2_trapezoid_with_median,
+    "fig-12-3-trapezoid-median-proof":        fig_12_3_trapezoid_median_proof,
+    "fig-12-4-isosceles-trapezoid-diagonals": fig_12_4_isosceles_trapezoid_diagonals,
+    "fig-12-5-example-12-1":                  fig_12_5_example_12_1,
+    "fig-12-6-parallelogram-diagonals":       fig_12_6_parallelogram_diagonals,
+    "fig-12-7-parallelogram-d1-d2-theta":     fig_12_7_parallelogram_d1_d2_theta,
+    "fig-12-8-rhombus-diagonals":             fig_12_8_rhombus_diagonals,
+    "fig-12-9-example-12-3-rhombus":          fig_12_9_example_12_3_rhombus,
+    "fig-12-10-rectangle":                    fig_12_10_rectangle,
+    "fig-12-11-square":                       fig_12_11_square,
+    "fig-12-12-example-12-5-inscribed-square": fig_12_12_example_12_5_inscribed_square,
+    "fig-12-13-example-12-8-midpoints":       fig_12_13_example_12_8_midpoints,
 }
 
 

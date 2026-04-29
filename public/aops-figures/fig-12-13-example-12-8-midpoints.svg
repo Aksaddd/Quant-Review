@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="60" y1="30" x2="215" y2="30" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="215" y1="30" x2="185" y2="130" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="185" y1="130" x2="30" y2="130" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="130" x2="60" y2="30" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="137.5" y1="30.0" x2="200.0" y2="80.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="200.0" y1="80.0" x2="107.5" y2="130.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="107.5" y1="130.0" x2="45.0" y2="80.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="45.0" y1="80.0" x2="137.5" y2="30.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="60" cy="30" r="2.5" fill="#1d1d1f"/>
+<text x="50" y="22" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="215" cy="30" r="2.5" fill="#1d1d1f"/>
+<text x="225" y="22" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="185" cy="130" r="2.5" fill="#1d1d1f"/>
+<text x="195" y="148" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<circle cx="30" cy="130" r="2.5" fill="#1d1d1f"/>
+<text x="20" y="148" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">D</text>
+<circle cx="137.5" cy="30.0" r="2.5" fill="#1d1d1f"/>
+<text x="137.5" y="22.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">E</text>
+<circle cx="200.0" cy="80.0" r="2.5" fill="#1d1d1f"/>
+<text x="212.0" y="84.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">F</text>
+<circle cx="107.5" cy="130.0" r="2.5" fill="#1d1d1f"/>
+<text x="107.5" y="146.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">G</text>
+<circle cx="45.0" cy="80.0" r="2.5" fill="#1d1d1f"/>
+<text x="33.0" y="84.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">H</text>
+</svg>
