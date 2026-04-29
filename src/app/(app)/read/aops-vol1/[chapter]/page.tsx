@@ -16,15 +16,23 @@ const CONTENT_DIR = path.join(
 );
 
 /**
- * Strip the metadata prelude and the duplicated chapter-title H1s that appear
- * at the top of every transcribed chapter. The page header renders this info
- * itself, so the body should start with the first section heading (or prose,
- * for chapters with a single section).
+ * Normalize chapter markdown for rendering. Handles two source formats:
+ *   - Ch 1-9: "vision-transcribed" with a metadata prelude block (terminated by
+ *     ---) followed by a duplicated "# Chapter N" + "# *Title*" pair.
+ *   - Ch 10+: clean "# Chapter N: Title" single H1 with no prelude.
+ *
+ * Also collapses ```figure-spec``` blocks (a structured DSL describing geometry
+ * figures) into the same *[Figure: caption]* italic placeholder used in the
+ * earlier chapters, since we don't yet render figures.
  */
 function preprocessChapterMarkdown(md: string): string {
-  let out = md.replace(/^[\s\S]*?\n---\s*\n/, '');
-  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?# Chapter \d+\s*\n+/, '$1');
-  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?# \*[^*]+\*\s*\n+/, '$1');
+  let out = md.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
+  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?#\s+Chapter\s+\d+[^\n]*\n+/, '$1');
+  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?#\s+\*[^*\n]+\*\s*\n+/, '$1');
+  out = out.replace(/```figure-spec\n([\s\S]*?)\n```/g, (_, body) => {
+    const m = body.match(/^caption:\s*(.+?)$/m);
+    return `*[Figure: ${m ? m[1].trim() : 'figure'}]*`;
+  });
   return out.trimStart();
 }
 

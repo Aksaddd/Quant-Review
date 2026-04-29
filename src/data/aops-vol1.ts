@@ -20,6 +20,7 @@ export const aopsVol1Chapters: AopsChapter[] = [
   { number: 7, slug: 'special-factorizations-and-clever-manipulations', title: 'Special Factorizations and Clever Manipulations', pdfPages: [81, 88], bookPages: [67, 74], highlight: true, filename: 'aops_vol1_ch07_special_factorizations.md' },
   { number: 8, slug: 'what-numbers-really-are',                         title: 'What Numbers Really Are',                         pdfPages: [89, 94], bookPages: [75, 80], filename: 'aops_vol1_ch08_what_numbers_really_are.md' },
   { number: 9, slug: 'an-introduction-to-circles',                      title: 'An Introduction to Circles',                      pdfPages: [95, 97], bookPages: [81, 83], filename: 'aops_vol1_ch09_intro_to_circles.md' },
+  { number: 10, slug: 'angles',                                         title: 'Angles',                                          pdfPages: [98, 106], bookPages: [84, 92], filename: 'chapter_10.md' },
 ];
 
 export const aopsVol1ChapterByNumber: Record<number, AopsChapter> = Object.fromEntries(
