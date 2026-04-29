@@ -27,8 +27,11 @@ const CONTENT_DIR = path.join(
  */
 function preprocessChapterMarkdown(md: string): string {
   let out = md.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
-  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?#\s+Chapter\s+\d+[^\n]*\n+/, '$1');
-  out = out.replace(/^(\s*<!--[^>]*-->\s*\n+)?#\s+\*[^*\n]+\*\s*\n+/, '$1');
+  // Strip <!-- ... --> page-tracking annotations; ReactMarkdown escapes raw
+  // HTML comments to visible "&lt;!-- ... --&gt;" text otherwise.
+  out = out.replace(/<!--[\s\S]*?-->/g, '');
+  out = out.replace(/^\s*#\s+Chapter\s+\d+[^\n]*\n+/, '');
+  out = out.replace(/^\s*#\s+\*[^*\n]+\*\s*\n+/, '');
   out = out.replace(/```figure-spec\n([\s\S]*?)\n```/g, (_, body) => {
     const m = body.match(/^caption:\s*(.+?)$/m);
     return `*[Figure: ${m ? m[1].trim() : 'figure'}]*`;
