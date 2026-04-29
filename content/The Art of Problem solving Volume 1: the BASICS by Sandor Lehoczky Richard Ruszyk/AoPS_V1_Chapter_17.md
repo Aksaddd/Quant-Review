@@ -106,6 +106,8 @@ The proofs of the various Power of a Point configurations are excellent exercise
 
 We can knock off all of these configurations with a single proof. Once we establish the case with one secant and one tangent, the cases of two secants and two tangents will soon follow.
 
+> *[Figure: External point $A$ with tangent $AB$ and secant $ACD$ through points $C$ and $D$ on the circle, with auxiliary chord $BD$ drawn to create similar triangles $ADB \sim ABC$]*
+
 **Setup:** External point $A$ with tangent $AB$ and secant through $C$ and $D$. We wish to show that $(AD)(AC) = AB^2$. Rearranging:
 
 $$\frac{AD}{AB} = \frac{AB}{AC},$$
@@ -125,6 +127,8 @@ $$AB^2 = (AD)(AC) = AE^2,$$
 so $AB = AE$, showing that two tangents to a circle from the same point are equal. $\blacksquare$
 
 ### 2. Point Inside the Circle
+
+> *[Figure: Two chords $AB$ and $CD$ intersecting inside the circle at point $E$, with auxiliary segments forming similar triangles $EAC$ and $EDB$]*
 
 **Setup:** Two chords $AB$ and $CD$ intersecting at point $E$ inside the circle.
 

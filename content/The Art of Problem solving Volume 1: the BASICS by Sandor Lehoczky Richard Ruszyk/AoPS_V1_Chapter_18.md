@@ -63,6 +63,8 @@ The intersection of a sphere and a plane passing through its center is called a 
 ### Example 18-1
 *A plane intersects a sphere, forming a circle. Find the radius of the circle if the radius of the sphere is 8 and the center of the sphere is 5 units from the plane.*
 
+> *[Figure: A sphere with center O, intersected by a plane forming a circle of diameter AC and center B; segment OB perpendicular to the plane]*
+
 **Solution:** Draw diameter $AC$ of the circle, where $B$ is its center. Drawing segment $OB$ (from sphere center to circle center) and radii $OA$ and $OC$, we form two triangles $OBC$ and $OBA$. Since $AB = BC$ (radii of the circle), $OB = OB$, and $OC = OA$ (radii of the sphere), we have $\triangle OBC \cong \triangle OBA$ by SSS. Thus $\angle OBC = \angle OBA$. Since these two angles together form a straight line, they are right angles. Thus $OB$ is the distance from the center to the plane, so $OB = 5$. From the Pythagorean Theorem:
 
 $$AB = \sqrt{8^2 - 5^2} = \boxed{\sqrt{39}}.$$
@@ -92,6 +94,8 @@ This gives $r^3 = 216$, so $r = 6$. Thus the diameter is $2r = \boxed{12}$.
 
 ### The Cube
 
+> *[Figure: A cube drawn in 3D perspective showing all 6 faces, 12 edges, and 8 vertices]*
+
 A simple six-sided die is a **cube**. All the sides, or **faces**, are squares and each face is perpendicular to its adjacent faces. The segments which form the faces are called **edges**, and the edges meet at the **vertices**.
 
 If $s$ is the edge length:
@@ -100,6 +104,8 @@ If $s$ is the edge length:
 - **Volume:** $s^3$
 
 ### Diagonal of a Cube
+
+> *[Figure: A cube ABCDEFGH with face diagonal AC drawn on bottom face and space diagonal AG (or EC) from one vertex to the opposite, illustrating that the space diagonal has length s√3]*
 
 A **diagonal of a cube** is a segment drawn from a vertex to the vertex opposite it. To find its length:
 
@@ -317,6 +323,8 @@ $$AB = \sqrt{AC^2 + CB^2} = \sqrt{64 + 4\pi^2} = \boxed{2\sqrt{16 + \pi^2}}.$$
 
 ### Pyramids
 
+> *[Figure: A square pyramid in 3D perspective with apex at the top and a square base below; lateral faces drawn]*
+
 A solid figure with one polygonal face and all other faces triangles meeting at a common vertex is called a **pyramid**.
 
 - The common vertex is the **vertex** (or apex) of the pyramid.
@@ -347,6 +355,8 @@ A **regular pyramid** has a regular polygon as its base, with the vertex directl
 
 ### Cones
 
+> *[Figure: A right circular cone with apex at top, circular base at bottom, showing altitude $h$, radius $r$, and slant height $\ell$]*
+
 A **cone** is a pyramid with a curve as a base.
 
 - A **circular cone** has a circle as a base.
@@ -363,6 +373,8 @@ The **slant height** $\ell$ of a right circular cone is the distance from the ap
 > $$\text{Lateral Surface Area} = \pi r \ell$$
 
 ### The Cone-Unrolling Argument
+
+> *[Figure: A cone being unrolled into a sector of radius $\ell$ with arc length $2\pi r$]*
 
 Cut along a slant height $AB$ and unroll. Since the distance from $A$ to any point on the boundary is constant (= $\ell$), the unrolled figure is a **sector** of a circle of radius $\ell$. The arc length equals the circumference of the cone's base, $2\pi r$.
 
@@ -397,6 +409,8 @@ A **regular polyhedron** is one whose faces are all congruent regular polygons. 
 
 ### The Five Regular Polyhedra
 
+> *[Figure: The five Platonic solids — tetrahedron, cube, octahedron, dodecahedron, and icosahedron — drawn side by side]*
+
 | Name | Shape of Faces | # Faces | # Vertices | # Edges |
 |------|----------------|---------|------------|---------|
 | Tetrahedron | triangles | 4 | 4 | 6 |
@@ -420,6 +434,8 @@ Although the five Platonic solids are the only *regular* polyhedra, they are not
 ### Example 18-12 (Tetrahedron Volume)
 *Find the volume of a regular tetrahedron with side length 1.*
 
+> *[Figure: A regular tetrahedron $ABCD$ with apex $B$ above equilateral base $ACD$, with centroid $O$ of the base, midpoint $M$ of $CD$, and altitude $BO$ drawn]*
+
 **Solution:** A tetrahedron is just a regular pyramid with a triangular base. We need the area of the base and the altitude.
 
 **Base area:** Equilateral triangle with side 1: $\dfrac{1^2 \sqrt{3}}{4} = \dfrac{\sqrt{3}}{4}$.
@@ -441,6 +457,8 @@ $$V = \frac{[ACD] \cdot BO}{3} = \frac{1}{3}\left(\frac{\sqrt{3}}{4}\right)\left
 
 ### Example 18-13 (Octahedron Volume)
 *Find the volume of a regular octahedron with side length 1.*
+
+> *[Figure: A regular octahedron split into two square pyramids sharing base $ABCD$, with apex $E$ above and apex $F$ below; center $O$ of the square shown with diagonal cross-section $EAFC$]*
 
 **Solution:** Split the octahedron into two pyramids with a common square base $ABCD$ (with $E$ above and $F$ below). Find one pyramid's volume and double.
 

@@ -125,6 +125,8 @@ If the image of reflection of a figure in a line is the figure itself, the line 
 
 ### Reflection in a Point
 
+> *[Figure: Pentagon $ABCDE$ reflected through point $O$ to form pentagon $A'B'C'D'E'$ on the opposite side]*
+
 To reflect a point $E$ in another point $O$, we draw the line through $E$ and $O$. The image $E'$ is the point on line $EO$ on the opposite side of $O$ such that $EO = E'O$.
 
 If the image of a figure under reflection about a point is the figure itself, then the point is a **point of symmetry** of the figure.
@@ -177,6 +179,8 @@ Draw a picture with a marker on a piece of cellophane. Now pull on the cellophan
 > 💡 **Distortion:** One dimension of a figure is multiplied by some factor, while the other dimension(s) remain the same. Distortions are equivalent to squishing or stretching figures.
 
 ### Example: Triangle Distortion
+
+> *[Figure: Isosceles triangle $ABC$ with apex distorted vertically into $C'$ (squished) and $C''$ (stretched), showing how distortion changes proportions]*
 
 Consider isosceles triangle $ABC$. By distorting the vertical scale (squishing or stretching), we can transform $\triangle ABC$ into $\triangle ABC'$ or $\triangle ABC''$. **Most notably, there is some distortion that maps the isosceles triangle into an equilateral triangle.**
 

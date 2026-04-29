@@ -11,6 +11,8 @@ On page 109, we showed that if two triangles are similar and their sides have co
 ### Example 15-1
 *The area of a triangle is 36. Find the area of the triangle formed by connecting the midpoints of its sides.*
 
+> *[Figure: Triangle ABC with midpoints D, E, F connected to form an inner triangle DEF]*
+
 **Solution:** We first prove that any triangle is similar to the triangle formed by connecting the midpoints of its sides. Let $D$, $E$, $F$ be the midpoints of $BC$, $CA$, $AB$ respectively. Since $E$ and $F$ are midpoints, we have $AE/AC = AF/AB = 1/2$. Since $\angle EAF = \angle CAB$, we have $\triangle CAB \sim \triangle EAF$ from SAS Similarity. Hence $EF/CB = 1/2$. Similarly, $FD/AC = 1/2$ and $ED/AB = 1/2$. Thus, by SSS Similarity, we have $\triangle ABC \sim \triangle DEF$. Thus,
 
 $$\frac{[DEF]}{[ABC]} = \left(\frac{1}{2}\right)^2 = \frac{1}{4}.$$
@@ -28,6 +30,8 @@ Hence $[DEF] = [ABC]/4 = \boxed{9}$.
 
 ### Example 15-3
 *In trapezoid $ABCD$, $AB \parallel CD$ and the diagonals meet at $E$. If $AB = 4$ and $CD = 12$, show that the area of $\triangle CDE$ is 9 times the area of $\triangle ABE$.*
+
+> *[Figure: Trapezoid ABCD with $AB \parallel CD$ and diagonals AC, BD meeting at E]*
 
 **Proof:** Since $AB \parallel CD$, we have $\angle BAE = \angle DCE$ and $\angle ABE = \angle CDE$. Thus, by AA Similarity we get $\triangle ABE \sim \triangle CDE$. Since $CD/AB = 3$:
 
@@ -54,6 +58,8 @@ Similarly, if two triangles have the same **base**, the ratio of their areas is 
 ### Example 15-4
 *Show that by drawing the three medians of a triangle, we divide the triangle into six regions of equal area.*
 
+> *[Figure: Triangle ABC with all three medians drawn meeting at centroid G, dividing the triangle into six smaller regions]*
+
 **Proof:** First we show $[ACD] = [ABC]/2$. Triangles $ACD$ and $ABC$ have the same altitude from $A$, so the ratio of their areas is the ratio of the bases $CD$ and $CB$. Since $D$ is the midpoint of $BC$:
 
 $$\frac{[ACD]}{[ABC]} = \frac{CD}{CB} = \frac{1}{2}.$$
@@ -68,6 +74,8 @@ Similarly, each of the other 5 smaller triangles formed by drawing all the media
 
 ### Example 15-5
 *In $\triangle ABC$, $D$ is the midpoint of $AB$, $E$ is the midpoint of $DB$, and $F$ is the midpoint of $BC$. If the area of $\triangle ABC$ is 96, then find the area of $\triangle AEF$.* *(AHSME 1976)*
+
+> *[Figure: Triangle ABC with D the midpoint of AB, E the midpoint of DB, and F the midpoint of BC; segment AF and EF drawn]*
 
 **Solution:** Since $\triangle ABF$ has the same altitude as $\triangle ABC$ and half the base, it has half the area: $[ABF] = [ABC]/2 = 48$.
 
@@ -86,6 +94,8 @@ $$[AEF] = \frac{3}{4} [ABF] = \boxed{36}.$$
 
 ### Example 15-7
 *If the diagonal $AC$ of quadrilateral $ABCD$ divides the diagonal $BD$ into two equal segments, prove that $[ACD] = [ACB]$.* *(M&IQ 1992)*
+
+> *[Figure: Quadrilateral ABCD with diagonals meeting at midpoint X of BD; perpendicular altitudes BY and DZ from B, D to AC]*
 
 **Proof:** As described in the problem, $X$, the intersection of the diagonals, is the midpoint of $BD$. Since $\triangle ACD$ and $\triangle ABC$ share base $AC$, we can prove equal areas if we show their altitudes to this segment are equal. Draw altitudes $BY$ and $DZ$.
 
@@ -110,6 +120,8 @@ Sometimes it is easiest to find the area of a figure by breaking it up into smal
 ### Example 15-8
 *Find the area between the two concentric circles if the circles have radii 2 and 3.*
 
+> *[Figure: Two concentric circles of radii 2 and 3; the annulus (region between them) shaded]*
+
 **Solution:** The larger circle has area $9\pi$ and is the sum of the smaller circle and the shaded area. The smaller circle has area $4\pi$. Thus, the shaded region has area $9\pi - 4\pi = \boxed{5\pi}$.
 
 > The shaded region is called an **annulus**.
@@ -119,6 +131,8 @@ Sometimes it is easiest to find the area of a figure by breaking it up into smal
 ### Example 15-9
 *Find the area of a regular octagon with side length 2.*
 
+> *[Figure: A square with the four corners cut off as right isosceles triangles, leaving a regular octagon inscribed]*
+
 **Solution:** We can form a regular octagon by cutting the corners out of a square. Let $\triangle ABC$ be one of the cut corners, with $BC = 2$ on the octagon side. Since the cut creates a $45°$-$45°$-$90°$ triangle, $AB = 2/\sqrt{2} = \sqrt{2}$. The square's side has length $2 + 2\sqrt{2}$ and area $(2 + 2\sqrt{2})^2 = 12 + 8\sqrt{2}$. Each of the 4 corners has area $(\sqrt{2})^2 / 2 = 1$, so the octagon has area
 
 $$(12 + 8\sqrt{2}) - 4(1) = \boxed{8 + 8\sqrt{2}}.$$
@@ -127,6 +141,8 @@ $$(12 + 8\sqrt{2}) - 4(1) = \boxed{8 + 8\sqrt{2}}.$$
 
 ### Example 15-10
 *Find the shaded area, given that $\triangle ABC$ is an isosceles right triangle. The midpoint of $AB$ is the center of semicircle $\widehat{AB}$, point $C$ is the center of quarter circle $\widehat{AB}$, and $AB = 2\sqrt{2}$.* *(MAΘ 1990)*
+
+> *[Figure: Isosceles right triangle ABC with semicircle on hypotenuse AB and quarter-circle centered at C; shaded region between arcs]*
 
 **Solution:** Since $AB = 2\sqrt{2}$ and $\triangle ABC$ is isosceles right, $AC = CB = 2$ and $[ABC] = 2$. The quarter circle $\widehat{AB}$ centered at $C$ is $1/4$ of the circle of radius 2, area $= 4\pi/4 = \pi$. The semicircle on diameter $AB$ has area $(\sqrt{2})^2 \pi / 2 = \pi$.
 
@@ -141,6 +157,8 @@ $$\text{shaded} = \pi + 2 - \pi = \boxed{2}.$$
 ### Example 15-11
 *Given a square with side length 4 and four semicircles which have the sides of the square as their diameters, find the area of the 'leaves' which are shaded in the diagram.*
 
+> *[Figure: Square with four semicircles drawn on each side as diameter, forming four shaded "leaf" shapes inside the square]*
+
 **Solution:** The simple figures are 4 semicircles and a square. The shaded "leaves" are the regions where semicircles overlap.
 
 > 💡 **Key insight:** By adding together the areas of the four semicircles, we exceed the area of the square by the total area of the desired region — because each leaf is in *two* of the semicircles. This is "overcounting" the leaves.
@@ -153,6 +171,8 @@ $$4 \cdot \frac{(2)^2 \pi}{2} - 4^2 = \boxed{8\pi - 16}.$$
 
 ### Example 15-12
 *Each of the circles shown has a radius of 6 cm. The three outer circles have centers that are equally spaced on the original circle. Find the area, in square cm, of the sum of the three regions which are common to three of the four circles.* *(MATHCOUNTS 1992)*
+
+> *[Figure: Four overlapping circles of equal radius — one central circle and three outer circles whose centers lie on the central circle, equally spaced]*
 
 **Solution:** Our pieces are four circles, but we can't combine them directly. We must add lines to give us more pieces.
 

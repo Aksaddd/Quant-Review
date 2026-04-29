@@ -6,6 +6,8 @@ Already in this book we have discussed extensively the methods of solving geomet
 
 ### The Number Line and the Plane
 
+> *[Figure: A Cartesian plane with x-axis and y-axis crossing at the origin, with integer tick marks labeled]*
+
 The easiest way to explain coordinates is to recall the **number line**. Each point on a line is labelled by a number, the distance from a fixed origin. This is an interesting way to look at the real numbers, but is certainly not very useful for geometry, since there isn't much geometry in one dimension.
 
 With a little modification we can extend the same idea to cover the entire plane: we add another axis, perpendicular to the first and crossing it at the point 0. Then we can label each point in the plane by its distance to each axis. (It makes sense to label points with two numbers each because the plane is two dimensional.)
@@ -113,6 +115,8 @@ $$m = \frac{\text{rise}}{\text{run}} = \frac{\text{vertical change}}{\text{horiz
 
 Both rise and run can be negative; if the ratio is negative, the line is sloped downward.
 
+> *[Figure: A line on a coordinate plane showing the y-intercept (0, b) and a "rise over run" right triangle illustrating slope $m$]*
+
 ---
 
 **Exercise 16-6.** Think about it.
@@ -213,6 +217,8 @@ So how do we know if they are perpendicular? If one slope is the negative of the
 
 The actual idea: if one line goes over $a$ while it goes up $b$, a perpendicular one will go up $-a$ while it goes over $b$. The slopes are $a/b$ and $-b/a$, which multiply to $-1$.
 
+> *[Figure: Two perpendicular lines on a coordinate plane with rise/run triangles showing slopes $a/b$ and $-b/a$]*
+
 > 💡 **Two lines are perpendicular if and only if their slopes multiply to $-1$.** (Note: this can't be used for horizontal or vertical lines.)
 
 **Exercise 16-13.** Draw the lines $y = \frac{x}{2} + 1$ and $y = -2x + 3$, whose slopes do multiply to $-1$, to confirm.
@@ -241,6 +247,8 @@ For lines specifically, if the equation is in slope-intercept form with slope $m
 ### Example 16-7
 *Plot the line $3x + 4y = 5$.*
 
+> *[Figure: The line $3x + 4y = 5$ plotted on a coordinate plane through the four points (-1, 2), (0, 5/4), (1, 1/2), (2, -1/4)]*
+
 **Solution:** Plug in $x = -1, 0, 1, 2$ to get $y = 2, \frac{5}{4}, \frac{1}{2}, -\frac{1}{4}$. Plot these four points and connect them.
 
 > Note: while only two points are required to plot a line, more may help when fractional coordinates are involved.
@@ -256,6 +264,8 @@ For lines specifically, if the equation is in slope-intercept form with slope $m
 ### Distance Formula
 
 Given the coordinates $(x_1, y_1)$ and $(x_2, y_2)$ of two points in the plane, how far apart are they? The answer is a simple application of the **Pythagorean Theorem**.
+
+> *[Figure: Two points $(x_1, y_1)$ and $(x_2, y_2)$ on a coordinate plane connected by a hypotenuse $d$, with horizontal leg $x_2 - x_1$ and vertical leg $y_2 - y_1$]*
 
 To get from the first to the second, we go right a distance $(x_2 - x_1)$ and up a distance $(y_2 - y_1)$. These two distances form the legs of a right triangle. The hypotenuse $d$ is the distance we want:
 
@@ -294,6 +304,8 @@ $$\boxed{(x - p)^2 + (y - q)^2 = R^2.} \tag{16.2}$$
 
 ### Example 16-9
 *Plot the circle $(x + 1)^2 + (y - 2)^2 = 9$.*
+
+> *[Figure: Circle of radius 3 centered at $(-1, 2)$ on a coordinate plane]*
 
 **Solution:** By comparison with equation (16.2), the center is $(-1, 2)$ and the radius is 3. The first four points on the circle are 3 units in the four main directions from the center: $(2, 2)$, $(-4, 2)$, $(-1, -1)$, and $(-1, 5)$.
 
