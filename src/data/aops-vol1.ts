@@ -26,3 +26,40 @@ export const aopsVol1Chapters: AopsChapter[] = [
 export const aopsVol1ChapterByNumber: Record<number, AopsChapter> = Object.fromEntries(
   aopsVol1Chapters.map((c) => [c.number, c]),
 );
+
+/**
+ * Maps each ch 10 figure-spec id to the source PDF page it appears on.
+ * Used to render an inline thumbnail of the source page next to each figure
+ * caption. Mapping was determined by manually cross-referencing each figure
+ * with the page-NNN.jpg scans during the figure-integration audit.
+ */
+export const aopsVol1FigurePages: Record<string, number> = {
+  'fig-10-1-segments-rays-lines':           98,
+  'fig-10-2-collinear-segment':             98,
+  'fig-10-3-angle-subtending-arc':          98,
+  'fig-10-4-angle-types':                   99,
+  'fig-10-5-vertical-angles':               99,
+  'fig-10-6-parallel-transversal':         100,
+  'fig-10-7-marking-equal-angles':         100,
+  'fig-10-8-triangle-angle-sum':           100,
+  'fig-10-9-exterior-angle':               101,
+  'fig-10-10-arc-sector':                  101,
+  'fig-10-11-inscribed-angle':             102,
+  'fig-10-12-two-secants-external':        102,
+  'fig-10-13-tangent-chord-angle':         102,
+  'fig-10-14-two-chords-internal':         102,
+  'fig-10-15-diameter-tangent':            103,
+  'fig-10-16-exercise-10-2':               103,
+  'fig-10-17-exercise-10-3':               103,
+  'fig-10-18-example-10-7':                103,
+  'fig-10-19-example-10-8':                103,
+  'fig-10-20-equal-inscribed-angles':      103,
+  'fig-10-21-example-10-9-tangent-circles':104,
+  'fig-10-22-inscribed-angle-proof-setup': 104,
+  'fig-10-23-two-secants-proof':           105,
+  'fig-10-24-tangent-chord-proof':         106,
+  'fig-10-25-two-chords-proof':            106,
+};
+
+/** Converts a PDF page number to the printed book page number. */
+export const aopsBookPageOf = (pdfPage: number): number => pdfPage - 14;

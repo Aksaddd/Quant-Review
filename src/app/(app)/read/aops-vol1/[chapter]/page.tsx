@@ -7,6 +7,8 @@ import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import {
   aopsVol1Chapters,
   aopsVol1ChapterByNumber,
+  aopsVol1FigurePages,
+  aopsBookPageOf,
 } from '@/data/aops-vol1';
 
 const CONTENT_DIR = path.join(
@@ -18,23 +20,41 @@ const CONTENT_DIR = path.join(
 /**
  * Normalize chapter markdown for rendering. Handles two source formats:
  *   - Ch 1-9: "vision-transcribed" with a metadata prelude block (terminated by
- *     ---) followed by a duplicated "# Chapter N" + "# *Title*" pair.
- *   - Ch 10+: clean "# Chapter N: Title" single H1 with no prelude.
+ *     ---) followed by a duplicated "# Chapter N" + "# *Title*" pair, plus
+ *     "<!-- PDF page N / book page M -->" comments at every page break.
+ *   - Ch 10+: clean "# Chapter N: Title" single H1 with no prelude, and
+ *     ```figure-spec``` blocks describing each diagram.
  *
- * Also collapses ```figure-spec``` blocks (a structured DSL describing geometry
- * figures) into the same *[Figure: caption]* italic placeholder used in the
- * earlier chapters, since we don't yet render figures.
+ * Page markers and figure-specs are converted to inline markdown image
+ * references (`![Source page M (PDF N)](/api/aops-vol1/page/N)`) so the
+ * source-page scans flow naturally with the prose, rendered as constrained
+ * thumbnails by MarkdownRenderer's img override.
  */
 function preprocessChapterMarkdown(md: string): string {
   let out = md.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
-  // Strip <!-- ... --> page-tracking annotations; ReactMarkdown escapes raw
-  // HTML comments to visible "&lt;!-- ... --&gt;" text otherwise.
+  // Convert "<!-- PDF page N / book page M -->" markers (ch 1-9) into inline
+  // page-scan thumbnails at the natural page break.
+  out = out.replace(
+    /<!--\s*PDF page (\d+) \/ book page (\d+)\s*-->/g,
+    (_, pdf, book) =>
+      `\n\n![Source page ${book} (PDF page ${pdf})](/api/aops-vol1/page/${pdf})\n\n`,
+  );
+  // Strip any remaining HTML comments (none expected, but defensive).
   out = out.replace(/<!--[\s\S]*?-->/g, '');
   out = out.replace(/^\s*#\s+Chapter\s+\d+[^\n]*\n+/, '');
   out = out.replace(/^\s*#\s+\*[^*\n]+\*\s*\n+/, '');
+  // Convert figure-spec blocks (ch 10) to italic caption + inline page thumb.
   out = out.replace(/```figure-spec\n([\s\S]*?)\n```/g, (_, body) => {
-    const m = body.match(/^caption:\s*(.+?)$/m);
-    return `*[Figure: ${m ? m[1].trim() : 'figure'}]*`;
+    const captionMatch = body.match(/^caption:\s*(.+?)$/m);
+    const idMatch = body.match(/^id:\s*(\S+)/m);
+    const caption = captionMatch ? captionMatch[1].trim() : 'figure';
+    const id = idMatch ? idMatch[1].trim() : '';
+    const pdfPage = aopsVol1FigurePages[id];
+    if (pdfPage) {
+      const bookPage = aopsBookPageOf(pdfPage);
+      return `*[Figure: ${caption}]*\n\n![Source page ${bookPage} (PDF page ${pdfPage})](/api/aops-vol1/page/${pdfPage})`;
+    }
+    return `*[Figure: ${caption}]*`;
   });
   return out.trimStart();
 }

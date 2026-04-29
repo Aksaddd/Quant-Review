@@ -73,6 +73,37 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               </pre>
             );
           },
+          // Inline page-scan thumbnails. AoPS source-page images are served
+          // from /api/aops-vol1/page/N; render them as constrained thumbnails
+          // with the alt text as a caption and click-to-zoom in a new tab.
+          img: ({ src, alt }: any) => {
+            if (typeof src === 'string' && src.startsWith('/api/aops-vol1/page/')) {
+              return (
+                <a
+                  href={src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="not-prose block my-6 mx-auto w-fit text-center group"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={alt ?? ''}
+                    loading="lazy"
+                    className="block w-[260px] max-w-full h-auto rounded-md border border-[#e4e6ea] shadow-sm group-hover:shadow-md group-hover:border-[#1865f2] transition-all"
+                  />
+                  {alt && (
+                    <span className="block mt-2 text-[11px] text-[#9299a5] italic">
+                      {alt}
+                    </span>
+                  )}
+                </a>
+              );
+            }
+            // Fallback for any other markdown images
+            // eslint-disable-next-line @next/next/no-img-element
+            return <img src={src} alt={alt ?? ''} />;
+          },
         }}
       >
         {content}
