@@ -55,6 +55,15 @@ export const aopsVol1Chapters: AopsChapter[] = [
   { number: 17, slug: 'power-of-a-point',                               title: 'Power of a Point',                                pdfPages: [169, 173], bookPages: [155, 159], filename: 'AoPS_V1_Chapter_17.md' },
   { number: 18, slug: 'three-dimensional-geometry',                     title: 'Three Dimensional Geometry',                      pdfPages: [174, 186], bookPages: [160, 172], filename: 'AoPS_V1_Chapter_18.md' },
   { number: 19, slug: 'shifts-turns-flips-stretches-and-squeezes',      title: 'Shifts, Turns, Flips, Stretches, and Squeezes',   pdfPages: [187, 194], bookPages: [173, 180], filename: 'AoPS_V1_Chapter_19.md' },
+  { number: 20, slug: 'a-potpourri-of-geometry',                        title: 'A Potpourri of Geometry',                         pdfPages: [195, 200], bookPages: [181, 186], filename: 'AoPS_V1_Chapter_20.md' },
+  { number: 21, slug: 'functions',                                      title: 'Functions',                                       pdfPages: [201, 210], bookPages: [187, 196], filename: 'AoPS_V1_Chapter_21.md' },
+  { number: 22, slug: 'inequalities',                                   title: 'Inequalities',                                    pdfPages: [211, 219], bookPages: [197, 205], filename: 'AoPS_V1_Chapter_22.md' },
+  { number: 23, slug: 'operations-and-relations',                       title: 'Operations and Relations',                        pdfPages: [220, 224], bookPages: [206, 210], filename: 'AoPS_V1_Chapter_23.md' },
+  { number: 24, slug: 'sequences-and-series',                           title: 'Sequences and Series',                            pdfPages: [225, 234], bookPages: [211, 220], filename: 'AoPS_V1_Chapter_24.md' },
+  { number: 25, slug: 'learning-to-count',                              title: 'Learning to Count',                               pdfPages: [235, 249], bookPages: [221, 235], highlight: true, filename: 'AoPS_V1_Chapter_25.md' },
+  { number: 26, slug: 'statistics-and-probability',                     title: 'Statistics and Probability',                      pdfPages: [250, 259], bookPages: [236, 245], highlight: true, filename: 'AoPS_V1_Chapter_26.md' },
+  { number: 27, slug: 'sets',                                           title: 'Sets',                                            pdfPages: [260, 265], bookPages: [246, 251], filename: 'AoPS_V1_Chapter_27.md' },
+  { number: 28, slug: 'prove-it',                                       title: 'Prove It',                                        pdfPages: [266, 275], bookPages: [252, 261], filename: 'AoPS_V1_Chapter_28.md' },
 ];
 
 export const aopsVol1ChapterByNumber: Record<number, AopsChapter> = Object.fromEntries(
