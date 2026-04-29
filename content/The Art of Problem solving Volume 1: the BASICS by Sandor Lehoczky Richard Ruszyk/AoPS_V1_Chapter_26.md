@@ -225,7 +225,7 @@ A common mistake is to reverse the order of odds, forgetting which probability s
 
 Antoinette has really rotten luck. Every week for a year she played the lottery, and never won a thing. Terrible luck. Or is it?
 
-To see whether Antoinette's luck is really so bad, we need to see what the average winnings are. Suppose the prizes in each lottery total \$500{,}000, and $10{,}000{,}000$ people play each week. Then per person, the average winning is \$500{,}000$/$10{,}000{,}000$ = $\$0.05$ for each lottery. Thus if Antoinette plays for a year, or $52$ weeks, her expected earnings are only \$2.60$; suddenly her luck doesn't seem so bad.
+To see whether Antoinette's luck is really so bad, we need to see what the average winnings are. Suppose the prizes in each lottery total \$500{,}000, and $10{,}000{,}000$ people play each week. Then per person, the average winning is \$500{,}000 / \$10{,}000{,}000 = \$0.05 for each lottery. Thus if Antoinette plays for a year, or $52$ weeks, her expected earnings are only \$2.60; suddenly her luck doesn't seem so bad.
 
 This is the essence of **expected value**, the average amount that one can expect to get from some activity in which the result depends on chance. To find the expected value, all you need to do is take all the possible outcomes, multiply each by the probability of its happening, and add up the results.
 
@@ -235,7 +235,7 @@ This is the essence of **expected value**, the average amount that one can expec
 
 > **Exercise 26-14.** What is the expected value of a Michael Jordan shot if $43\%$ are 2-pointers, $6\%$ are 3-pointers, and the rest are misses ($0$ points)?
 
-> **Exercise 26-15.** What is the expected value of buying stock in a small company if the stock will fail with probability $1/2$, be worth \$1$ with probability $1/3$, and be worth \$10$ with probability $1/6$? Would you buy a share for \$2.50$?
+> **Exercise 26-15.** What is the expected value of buying stock in a small company if the stock will fail with probability $1/2$, be worth \$1 with probability $1/3$, and be worth \$10 with probability $1/6$? Would you buy a share for \$2.50?
 
 One thing to remember is that the expected value is *not* necessarily the most likely result in one event; it is simply the average result if the event were to take place many times. For example, suppose three coins are flipped. The expected number of heads is $1.5$; obviously this is not a very likely outcome!
 
