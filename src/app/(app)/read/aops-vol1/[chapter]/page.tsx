@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Images } from 'lucide-react';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import {
   aopsVol1Chapters,
@@ -42,6 +42,70 @@ function preprocessChapterMarkdown(md: string): string {
 function loadChapterMarkdown(filename: string): string {
   const full = path.join(CONTENT_DIR, filename);
   return preprocessChapterMarkdown(fs.readFileSync(full, 'utf-8'));
+}
+
+/**
+ * Renders a collapsible gallery of the original PDF page scans for the chapter.
+ * Source jpegs live in content/ and are served via /api/aops-vol1/page/[n].
+ * Used as a fallback for figures that aren't yet rendered as inline diagrams —
+ * readers can pop open the gallery to see the original geometry diagrams.
+ */
+function SourcePages({
+  chapter,
+}: {
+  chapter: { pdfPages: [number, number]; bookPages: [number, number] };
+}) {
+  const [start, end] = chapter.pdfPages;
+  const [bookStart] = chapter.bookPages;
+  const pages: Array<{ pdf: number; book: number }> = [];
+  for (let i = start; i <= end; i++) {
+    pages.push({ pdf: i, book: bookStart + (i - start) });
+  }
+
+  return (
+    <details className="mt-12 group">
+      <summary className="cursor-pointer list-none flex items-center gap-2 px-4 py-3 rounded-lg bg-[#f6faff] border border-[#d8e6ff] hover:bg-[#eef4fb] transition-colors">
+        <Images size={14} className="text-[#1865f2]" />
+        <span className="text-[13px] font-semibold text-[#1d1d1f]">
+          Source pages from the original textbook
+        </span>
+        <span className="text-[12px] text-[#626975] tabular-nums">
+          ({pages.length} pages, pp {chapter.bookPages[0]}–{chapter.bookPages[1]})
+        </span>
+        <ChevronRight
+          size={14}
+          className="ml-auto text-[#9299a5] transition-transform group-open:rotate-90"
+        />
+      </summary>
+      <p className="mt-3 px-1 text-[12px] text-[#626975] leading-relaxed">
+        Geometry figures and diagrams from the printed book are not yet rendered
+        inline. Click any page to view it full-size in a new tab.
+      </p>
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {pages.map((p) => (
+          <a
+            key={p.pdf}
+            href={`/api/aops-vol1/page/${p.pdf}`}
+            target="_blank"
+            rel="noreferrer"
+            className="block rounded-lg overflow-hidden border border-[#e4e6ea] hover:border-[#1865f2] hover:shadow-md transition-all bg-white"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/api/aops-vol1/page/${p.pdf}`}
+              alt={`Source page ${p.book} (PDF page ${p.pdf})`}
+              loading="lazy"
+              className="w-full h-auto block"
+            />
+            <div className="px-3 py-2 text-[11px] text-[#626975] flex items-center justify-between border-t border-[#e4e6ea]">
+              <span className="font-semibold text-[#21242c]">Page {p.book}</span>
+              <span className="tabular-nums text-[#9299a5]">PDF {p.pdf}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </details>
+  );
 }
 
 export default async function AopsVol1ChapterPage({
@@ -94,6 +158,10 @@ export default async function AopsVol1ChapterPage({
       <article>
         <MarkdownRenderer content={markdown} />
       </article>
+
+      {/* Source pages from the original textbook — collapsed by default,
+          lazy-loaded thumbnails, click any image to view full-size. */}
+      <SourcePages chapter={chapter} />
 
       {/* Prev / Next */}
       <nav className="mt-12 pt-6 border-t border-[#e4e6ea] flex items-center justify-between">
