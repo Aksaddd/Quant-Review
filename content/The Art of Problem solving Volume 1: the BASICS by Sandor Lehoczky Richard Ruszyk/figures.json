@@ -1,0 +1,201 @@
+{
+  "imageWidth": 778,
+  "imageHeight": 975,
+  "_comment": "bbox = [x, y, width, height] in source-image pixels (origin top-left). Figures are listed in reading order per chapter; ch 3 + ch 9 use sequential matching against [Figure: ...] placeholders, ch 10 matches by id against figure-spec blocks.",
+  "figures": [
+    {
+      "id": "fig-3-1-coordinate-plane",
+      "chapter": 3, "page": 33, "bookPage": 19,
+      "caption": "Coordinate plane showing two intersecting lines (x + y = 3 and x − y = 1).",
+      "bbox": [70, 120, 210, 200]
+    },
+
+    {
+      "id": "fig-9-1-circle-tangent-secant",
+      "chapter": 9, "page": 95, "bookPage": 81,
+      "caption": "Circle with center O, chord AC, diameter AB, tangent line ℓ, and secant m.",
+      "bbox": [590, 295, 195, 150]
+    },
+    {
+      "id": "fig-9-2-arc-sector-segment",
+      "chapter": 9, "page": 95, "bookPage": 81,
+      "caption": "Arc, sector, and circular segment — three small marginal sketches.",
+      "bbox": [60, 435, 150, 270]
+    },
+    {
+      "id": "fig-9-3-tangent-circles-internal",
+      "chapter": 9, "page": 96, "bookPage": 82,
+      "caption": "Large circle A with two smaller circles B and C internally tangent at X and Y.",
+      "bbox": [600, 300, 185, 140]
+    },
+    {
+      "id": "fig-9-4-mutually-tangent-circles",
+      "chapter": 9, "page": 96, "bookPage": 82,
+      "caption": "Three mutually externally tangent circles A, B, C.",
+      "bbox": [600, 480, 185, 120]
+    },
+    {
+      "id": "fig-9-5-epicycle-pattern",
+      "chapter": 9, "page": 97, "bookPage": 83,
+      "caption": "Epicycle pattern — a flower-like ring of small circles.",
+      "bbox": [285, 425, 215, 230]
+    },
+    {
+      "id": "fig-9-6-ellipse-orbit",
+      "chapter": 9, "page": 97, "bookPage": 83,
+      "caption": "Elliptical orbit with focus marked.",
+      "bbox": [280, 670, 220, 110]
+    },
+
+    {
+      "id": "fig-10-1-segments-rays-lines",
+      "chapter": 10, "page": 98, "bookPage": 84,
+      "caption": "Segment AB, ray CD, and line EF, drawn vertically stacked.",
+      "bbox": [550, 355, 230, 115]
+    },
+    {
+      "id": "fig-10-2-collinear-segment",
+      "chapter": 10, "page": 98, "bookPage": 84,
+      "caption": "Three collinear points A, X, B on a segment.",
+      "bbox": [60, 515, 165, 50]
+    },
+    {
+      "id": "fig-10-3-angle-subtending-arc",
+      "chapter": 10, "page": 98, "bookPage": 84,
+      "caption": "Angle AOB with vertex O subtending an arc on a circle.",
+      "bbox": [60, 670, 165, 205]
+    },
+    {
+      "id": "fig-10-4-angle-types",
+      "chapter": 10, "page": 99, "bookPage": 85,
+      "caption": "Three angle classifications side-by-side: acute (48°), right, and obtuse.",
+      "bbox": [200, 645, 410, 125]
+    },
+    {
+      "id": "fig-10-5-vertical-angles",
+      "chapter": 10, "page": 99, "bookPage": 85,
+      "caption": "Two intersecting lines l and m forming four angles labeled θ, α, φ, β.",
+      "bbox": [665, 870, 110, 100]
+    },
+    {
+      "id": "fig-10-6-parallel-transversal",
+      "chapter": 10, "page": 100, "bookPage": 86,
+      "caption": "Two parallel lines l and m cut by transversal n.",
+      "bbox": [600, 100, 185, 165]
+    },
+    {
+      "id": "fig-10-7-marking-equal-angles",
+      "chapter": 10, "page": 100, "bookPage": 86,
+      "caption": "Parallelogram-like quadrilateral with equal angles marked by arcs.",
+      "bbox": [595, 345, 190, 155]
+    },
+    {
+      "id": "fig-10-8-triangle-angle-sum",
+      "chapter": 10, "page": 100, "bookPage": 86,
+      "caption": "Triangle ABC with line ℓ drawn through C parallel to AB.",
+      "bbox": [475, 575, 300, 140]
+    },
+    {
+      "id": "fig-10-9-exterior-angle",
+      "chapter": 10, "page": 101, "bookPage": 87,
+      "caption": "Triangle with one side extended past a vertex to form exterior angle θ.",
+      "bbox": [600, 75, 195, 145]
+    },
+    {
+      "id": "fig-10-10-arc-sector",
+      "chapter": 10, "page": 101, "bookPage": 87,
+      "caption": "Circle with center O and sector AOB defined by central angle θ.",
+      "bbox": [60, 460, 200, 220]
+    },
+    {
+      "id": "fig-10-11-inscribed-angle",
+      "chapter": 10, "page": 102, "bookPage": 88,
+      "caption": "Inscribed angle ABC in a circle.",
+      "bbox": [600, 75, 180, 180]
+    },
+    {
+      "id": "fig-10-12-two-secants-external",
+      "chapter": 10, "page": 102, "bookPage": 88,
+      "caption": "Two secants from external point A intersecting a circle.",
+      "bbox": [60, 260, 200, 180]
+    },
+    {
+      "id": "fig-10-13-tangent-chord-angle",
+      "chapter": 10, "page": 102, "bookPage": 88,
+      "caption": "Tangent line at point B with chord BC; angle equals half the intercepted arc.",
+      "bbox": [580, 435, 200, 195]
+    },
+    {
+      "id": "fig-10-14-two-chords-internal",
+      "chapter": 10, "page": 102, "bookPage": 88,
+      "caption": "Two chords intersecting inside a circle, forming angle θ.",
+      "bbox": [60, 625, 205, 190]
+    },
+    {
+      "id": "fig-10-15-diameter-tangent",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Circle with diameter AB and tangent line ℓ at A perpendicular to AB.",
+      "bbox": [600, 75, 180, 220]
+    },
+    {
+      "id": "fig-10-16-exercise-10-2",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Five points A, B, Q, D, C on a circle with external point P.",
+      "bbox": [580, 205, 200, 120]
+    },
+    {
+      "id": "fig-10-17-exercise-10-3",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Two tangents PA and PT from external point P touching a circle.",
+      "bbox": [595, 315, 190, 140]
+    },
+    {
+      "id": "fig-10-18-example-10-7",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Two intersecting chords with arcs labeled 60° and 40°.",
+      "bbox": [600, 470, 185, 150]
+    },
+    {
+      "id": "fig-10-19-example-10-8",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Inscribed quadrilateral with angles ∠ABC = 60° and ∠BCD = 70°.",
+      "bbox": [595, 610, 190, 180]
+    },
+    {
+      "id": "fig-10-20-equal-inscribed-angles",
+      "chapter": 10, "page": 103, "bookPage": 89,
+      "caption": "Two pairs of inscribed angles subtending the same arcs.",
+      "bbox": [505, 805, 280, 140]
+    },
+    {
+      "id": "fig-10-21-example-10-9-tangent-circles",
+      "chapter": 10, "page": 104, "bookPage": 90,
+      "caption": "Two circles tangent at G with inscribed angles E and F.",
+      "bbox": [505, 175, 280, 245]
+    },
+    {
+      "id": "fig-10-22-inscribed-angle-proof-setup",
+      "chapter": 10, "page": 104, "bookPage": 90,
+      "caption": "Inscribed angle proof setup with circle, center O, points A, B, C.",
+      "bbox": [575, 660, 210, 280]
+    },
+    {
+      "id": "fig-10-23-two-secants-proof",
+      "chapter": 10, "page": 105, "bookPage": 91,
+      "caption": "Two secants from external point A with auxiliary chord DC.",
+      "bbox": [585, 555, 200, 200]
+    },
+    {
+      "id": "fig-10-24-tangent-chord-proof",
+      "chapter": 10, "page": 106, "bookPage": 92,
+      "caption": "Tangent at A with chord AB and auxiliary line for proof.",
+      "bbox": [590, 180, 195, 225]
+    },
+    {
+      "id": "fig-10-25-two-chords-proof",
+      "chapter": 10, "page": 106, "bookPage": 92,
+      "caption": "Two chords intersecting at B with auxiliary chord DC for proof.",
+      "bbox": [590, 575, 195, 225]
+    }
+  ]
+}

@@ -73,10 +73,30 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               </pre>
             );
           },
-          // Inline page-scan thumbnails. AoPS source-page images are served
-          // from /api/aops-vol1/page/N; render them as constrained thumbnails
-          // with the alt text as a caption and click-to-zoom in a new tab.
+          // Inline AoPS figure crops and source-page thumbnails. Figure crops
+          // (/aops-figures/) render at natural aspect ratio with a 340px cap
+          // and no caption (the figure's own labels speak for themselves).
+          // Source-page thumbnails (/api/aops-vol1/page/) get a caption with
+          // the page numbers since they're not self-labeled.
           img: ({ src, alt }: any) => {
+            if (typeof src === 'string' && src.startsWith('/aops-figures/')) {
+              return (
+                <a
+                  href={src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="not-prose block my-5 mx-auto w-fit hover:opacity-90 transition-opacity"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={alt ?? ''}
+                    loading="lazy"
+                    className="block max-w-[340px] max-h-[280px] w-auto h-auto rounded-md border border-[#e4e6ea] shadow-sm"
+                  />
+                </a>
+              );
+            }
             if (typeof src === 'string' && src.startsWith('/api/aops-vol1/page/')) {
               return (
                 <a

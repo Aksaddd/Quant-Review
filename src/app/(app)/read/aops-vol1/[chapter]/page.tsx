@@ -7,8 +7,9 @@ import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import {
   aopsVol1Chapters,
   aopsVol1ChapterByNumber,
-  aopsVol1FigurePages,
-  aopsBookPageOf,
+  aopsFigureById,
+  aopsFiguresOfChapter,
+  type AopsChapter,
 } from '@/data/aops-vol1';
 
 const CONTENT_DIR = path.join(
@@ -18,50 +19,58 @@ const CONTENT_DIR = path.join(
 );
 
 /**
- * Normalize chapter markdown for rendering. Handles two source formats:
- *   - Ch 1-9: "vision-transcribed" with a metadata prelude block (terminated by
- *     ---) followed by a duplicated "# Chapter N" + "# *Title*" pair, plus
- *     "<!-- PDF page N / book page M -->" comments at every page break.
- *   - Ch 10+: clean "# Chapter N: Title" single H1 with no prelude, and
- *     ```figure-spec``` blocks describing each diagram.
+ * Normalize chapter markdown for rendering and inline figure crops.
  *
- * Page markers and figure-specs are converted to inline markdown image
- * references (`![Source page M (PDF N)](/api/aops-vol1/page/N)`) so the
- * source-page scans flow naturally with the prose, rendered as constrained
- * thumbnails by MarkdownRenderer's img override.
+ * Source formats:
+ *   - Ch 1-9: vision-transcribed prose with a metadata prelude (terminated by
+ *     ---) and "<!-- PDF page N / book page M -->" markers at page breaks.
+ *     Figures appear as italic placeholders: *[Figure: <caption>]*.
+ *   - Ch 10+: clean "# Chapter N: Title" with ```figure-spec``` blocks
+ *     containing structured figure metadata (id, caption, elements).
+ *
+ * Both formats are rewritten to standard markdown image syntax pointing at
+ * pre-cropped figure PNGs in /aops-figures/. For ch 10 the mapping is by
+ * figure-spec id; for ch 3/9 it's a sequential match in reading order against
+ * figures.json entries for that chapter.
  */
-function preprocessChapterMarkdown(md: string): string {
+function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
   let out = md.replace(/^[\s\S]*?\*This chapter spans[\s\S]*?\n---\s*\n/, '');
-  // Convert "<!-- PDF page N / book page M -->" markers (ch 1-9) into inline
-  // page-scan thumbnails at the natural page break.
-  out = out.replace(
-    /<!--\s*PDF page (\d+) \/ book page (\d+)\s*-->/g,
-    (_, pdf, book) =>
-      `\n\n![Source page ${book} (PDF page ${pdf})](/api/aops-vol1/page/${pdf})\n\n`,
-  );
-  // Strip any remaining HTML comments (none expected, but defensive).
+  // Strip page-tracking HTML comments — no longer rendered inline.
   out = out.replace(/<!--[\s\S]*?-->/g, '');
   out = out.replace(/^\s*#\s+Chapter\s+\d+[^\n]*\n+/, '');
   out = out.replace(/^\s*#\s+\*[^*\n]+\*\s*\n+/, '');
-  // Convert figure-spec blocks (ch 10) to italic caption + inline page thumb.
+
+  // Ch 10: figure-spec block → cropped figure image (id-based lookup).
   out = out.replace(/```figure-spec\n([\s\S]*?)\n```/g, (_, body) => {
     const captionMatch = body.match(/^caption:\s*(.+?)$/m);
     const idMatch = body.match(/^id:\s*(\S+)/m);
     const caption = captionMatch ? captionMatch[1].trim() : 'figure';
     const id = idMatch ? idMatch[1].trim() : '';
-    const pdfPage = aopsVol1FigurePages[id];
-    if (pdfPage) {
-      const bookPage = aopsBookPageOf(pdfPage);
-      return `*[Figure: ${caption}]*\n\n![Source page ${bookPage} (PDF page ${pdfPage})](/api/aops-vol1/page/${pdfPage})`;
-    }
+    const fig = aopsFigureById[id];
+    if (fig) return `![${caption}](/aops-figures/${fig.id}.png)`;
+    // Fall back to italic placeholder if no crop mapping exists.
     return `*[Figure: ${caption}]*`;
   });
+
+  // Ch 3, 9: sequential placeholder match against chapter's figures.json
+  // entries. The first *[Figure: ...]* gets the first figure, etc.
+  const chapterFigures = aopsFiguresOfChapter(chapter.number);
+  if (chapterFigures.length > 0) {
+    let figIndex = 0;
+    out = out.replace(/\*\[Figures?:\s*([^\]]+)\]\*/g, (_, captionText) => {
+      const fig = chapterFigures[figIndex++];
+      const cleanCaption = captionText.trim().replace(/\.$/, '');
+      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.png)`;
+      return `*[Figure: ${captionText.trim()}]*`;
+    });
+  }
+
   return out.trimStart();
 }
 
-function loadChapterMarkdown(filename: string): string {
-  const full = path.join(CONTENT_DIR, filename);
-  return preprocessChapterMarkdown(fs.readFileSync(full, 'utf-8'));
+function loadChapterMarkdown(chapter: AopsChapter): string {
+  const full = path.join(CONTENT_DIR, chapter.filename);
+  return preprocessChapterMarkdown(fs.readFileSync(full, 'utf-8'), chapter);
 }
 
 /**
@@ -98,8 +107,9 @@ function SourcePages({
         />
       </summary>
       <p className="mt-3 px-1 text-[12px] text-[#626975] leading-relaxed">
-        Geometry figures and diagrams from the printed book are not yet rendered
-        inline. Click any page to view it full-size in a new tab.
+        Reference: full-page scans from the printed book. Individual figures
+        are already extracted and inlined with the prose above; use this
+        gallery to see surrounding context or to verify a transcription.
       </p>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {pages.map((p) => (
@@ -140,7 +150,7 @@ export default async function AopsVol1ChapterPage({
 
   const prev = aopsVol1ChapterByNumber[num - 1];
   const next = aopsVol1ChapterByNumber[num + 1];
-  const markdown = loadChapterMarkdown(chapter.filename);
+  const markdown = loadChapterMarkdown(chapter);
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
