@@ -196,6 +196,67 @@
       "chapter": 10, "page": 106, "bookPage": 92,
       "caption": "Two chords intersecting at B with auxiliary chord DC for proof.",
       "bbox": [590, 575, 195, 225]
+    },
+
+    {
+      "id": "fig-11-1-six-triangles-classification",
+      "chapter": 11, "page": 107, "bookPage": 93, "format": "png",
+      "caption": "Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications.",
+      "bbox": [80, 660, 625, 100]
+    },
+    {
+      "id": "fig-11-2-medians-centroid",
+      "chapter": 11, "page": 108, "bookPage": 94, "format": "png",
+      "caption": "Triangle ABC with medians AE, BF, CD meeting at centroid G.",
+      "bbox": [475, 250, 215, 195]
+    },
+    {
+      "id": "fig-11-3-angle-bisectors-incenter",
+      "chapter": 11, "page": 108, "bookPage": 94, "format": "png",
+      "caption": "Triangle ABC with angle bisectors AD, BE, CF meeting at incenter I.",
+      "bbox": [60, 595, 195, 175]
+    },
+    {
+      "id": "fig-11-4-incircle",
+      "chapter": 11, "page": 108, "bookPage": 94, "format": "png",
+      "caption": "Triangle ABC with inscribed circle of radius r centered at incenter I.",
+      "bbox": [535, 740, 195, 165]
+    },
+    {
+      "id": "fig-11-5-three-circumcircles",
+      "chapter": 11, "page": 109, "bookPage": 95, "format": "png",
+      "caption": "Three circumcircles for acute, right, and obtuse triangles.",
+      "bbox": [70, 130, 640, 175]
+    },
+    {
+      "id": "fig-11-6-altitude-extended",
+      "chapter": 11, "page": 109, "bookPage": 95, "format": "png",
+      "caption": "Obtuse triangle with altitude AD drawn to the extension of side BC.",
+      "bbox": [505, 535, 215, 175]
+    },
+    {
+      "id": "fig-11-7-right-triangle-semicircle",
+      "chapter": 11, "page": 110, "bookPage": 96, "format": "png",
+      "caption": "Right triangle ABC inscribed in a circle with center O at midpoint of hypotenuse AB.",
+      "bbox": [535, 105, 215, 175]
+    },
+    {
+      "id": "fig-11-8-pythagorean-setup",
+      "chapter": 11, "page": 111, "bookPage": 97, "format": "png",
+      "caption": "Right triangle ABC with legs a, b and hypotenuse c.",
+      "bbox": [535, 130, 215, 165]
+    },
+    {
+      "id": "fig-11-9-altitude-to-hypotenuse",
+      "chapter": 11, "page": 117, "bookPage": 103, "format": "png",
+      "caption": "Right triangle ACB with altitude CD splitting it into similar sub-triangles.",
+      "bbox": [510, 195, 230, 195]
+    },
+    {
+      "id": "fig-11-10-angle-bisector-theorem",
+      "chapter": 11, "page": 117, "bookPage": 103, "format": "png",
+      "caption": "Triangle ABC with angle bisector AX extended to E with BE parallel to AC.",
+      "bbox": [495, 410, 230, 245]
     }
   ]
 }

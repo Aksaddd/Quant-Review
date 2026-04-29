@@ -7,6 +7,9 @@ export interface AopsFigure {
   bookPage: number;
   caption: string;
   bbox: [number, number, number, number];
+  /** Asset format. Defaults to "svg" — only set to "png" for chapters whose
+   *  figures are still bitmap crops (e.g. ch 11 pending code-gen). */
+  format?: "svg" | "png";
 }
 
 export const aopsFigures: AopsFigure[] = (figuresJson.figures as AopsFigure[]);
@@ -43,6 +46,7 @@ export const aopsVol1Chapters: AopsChapter[] = [
   { number: 8, slug: 'what-numbers-really-are',                         title: 'What Numbers Really Are',                         pdfPages: [89, 94], bookPages: [75, 80], filename: 'aops_vol1_ch08_what_numbers_really_are.md' },
   { number: 9, slug: 'an-introduction-to-circles',                      title: 'An Introduction to Circles',                      pdfPages: [95, 97], bookPages: [81, 83], filename: 'aops_vol1_ch09_intro_to_circles.md' },
   { number: 10, slug: 'angles',                                         title: 'Angles',                                          pdfPages: [98, 106], bookPages: [84, 92], filename: 'chapter_10.md' },
+  { number: 11, slug: 'triangles',                                      title: 'Triangles, a.k.a. Geometry',                      pdfPages: [107, 131], bookPages: [93, 117], highlight: true, filename: 'AoPS_V1_Chapter_11.md' },
 ];
 
 export const aopsVol1ChapterByNumber: Record<number, AopsChapter> = Object.fromEntries(

@@ -34,6 +34,10 @@ def main() -> int:
     written = 0
     skipped = 0
     for f in figures:
+        # Only crop figures whose asset format is png. SVG-format figures
+        # (ch 3, 9, 10) are produced by scripts/render-aops-figures.py instead.
+        if f.get("format") != "png":
+            continue
         page = f["page"]
         bbox = f["bbox"]
         x, y, w, h = bbox

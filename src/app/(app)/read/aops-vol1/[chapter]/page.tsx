@@ -47,12 +47,12 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     const caption = captionMatch ? captionMatch[1].trim() : 'figure';
     const id = idMatch ? idMatch[1].trim() : '';
     const fig = aopsFigureById[id];
-    if (fig) return `![${caption}](/aops-figures/${fig.id}.svg)`;
+    if (fig) return `![${caption}](/aops-figures/${fig.id}.${fig.format ?? 'svg'})`;
     // Fall back to italic placeholder if no crop mapping exists.
     return `*[Figure: ${caption}]*`;
   });
 
-  // Ch 3, 9: sequential placeholder match against chapter's figures.json
+  // Ch 3, 9, 11: sequential placeholder match against chapter's figures.json
   // entries. The first *[Figure: ...]* gets the first figure, etc.
   const chapterFigures = aopsFiguresOfChapter(chapter.number);
   if (chapterFigures.length > 0) {
@@ -60,7 +60,7 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     out = out.replace(/\*\[Figures?:\s*([^\]]+)\]\*/g, (_, captionText) => {
       const fig = chapterFigures[figIndex++];
       const cleanCaption = captionText.trim().replace(/\.$/, '');
-      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.svg)`;
+      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.${fig.format ?? 'svg'})`;
       return `*[Figure: ${captionText.trim()}]*`;
     });
   }

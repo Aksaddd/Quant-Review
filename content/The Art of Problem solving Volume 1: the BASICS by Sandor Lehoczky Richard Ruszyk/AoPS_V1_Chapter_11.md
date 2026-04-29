@@ -22,7 +22,7 @@ Triangles can be classified by their angles or by the lengths of their sides. As
 - **Isosceles triangle** (eye-SOS-uh-leez) — two sides are equal. The two angles opposite the equal sides are also equal. The two equal sides are called the **legs** and the other side is the **base**. The angle opposite the base is the **vertex angle** and the equal angles are called the **base angles**.
 - **Scalene triangle** — no two sides are the same.
 
-> *[Figure 11.1: Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications]*
+> *[Figure: Six triangles illustrating acute, right, obtuse, scalene, isosceles, and equilateral classifications]*
 
 ---
 
@@ -48,7 +48,11 @@ Like the medians, the angle bisectors all pass through a single point. How would
 
 Let $I$ be the intersection of angle bisectors $AD$ and $BE$. Since $I$ is on $AD$, it is equidistant from $AB$ and $AC$. Since $I$ is on $BE$, it is also equidistant from $AB$ and $BC$. Since it is equidistant from $AC$ and $AB$, and from $AB$ and $BC$, $I$ must also be equidistant from $AC$ and $BC$. Hence, it must be on the angle bisector of $\angle ACB$. Thus, the angle bisectors are concurrent at the point $I$.
 
+> *[Figure: $\triangle ABC$ with angle bisectors $AD$, $BE$, $CF$ meeting at incenter $I$]*
+
 Let's call the common distance from $I$ to the sides of the triangle $r$. Suppose we draw a circle with center $I$ and radius $r$. It will hit the sides of the triangle, but only at exactly one point, because the segment from $I$ to a side with length $r$ is perpendicular to the side. (Remember, $I$ is $r$ from each side.) We say that the circle is **inscribed** in the triangle because it is tangent to all three sides of the triangle and we call the circle the **incircle**. Likewise, point $I$ is the **incenter** and $r$ is the **inradius**.
+
+> *[Figure: $\triangle ABC$ with inscribed incircle of radius $r$ centered at incenter $I$]*
 
 ### Perpendicular Bisectors
 
@@ -58,11 +62,15 @@ The perpendicular bisectors of the sides of the triangle are concurrent at the *
 
 > **Note:** The circumcenter of an obtuse triangle is *outside* the triangle, of an acute triangle is *inside* the triangle, and that of a right triangle is *on* the triangle (at the midpoint of the hypotenuse).
 
+> *[Figure: Three circumcircles — acute triangle (circumcenter inside), right triangle (circumcenter on hypotenuse), obtuse triangle (circumcenter outside)]*
+
 You should be able to prove for yourself that the perpendicular bisectors are concurrent; the proof is exactly like that for angle bisectors: let $O$ be the intersection of the perpendicular bisectors of $AB$ and $AC$. Since $O$ is on the perpendicular bisector of $AB$, it is equidistant from $A$ and $B$. Continue from here to show that $O$ is equidistant from $A$, $B$, and $C$.
 
 ### Altitudes
 
 A perpendicular segment from the vertex of a triangle to the side opposite (or the extension of that side, as in an obtuse triangle) is called an **altitude**. (Sometimes the altitude of a triangle is also called the **height**.) The length of an altitude is the distance from the vertex to the line containing the opposite side. To draw the altitudes of an obtuse triangle, we must extend some sides of the triangle, then we can draw the altitude to that extended side. Remember, any time we say the distance from a point to a line, we mean the length of the perpendicular segment drawn from the point to the line.
+
+> *[Figure: Obtuse triangle $ABC$ with altitude $AD$ drawn to the extension of side $BC$]*
 
 The altitudes are usually denoted $h_a$, $h_b$, and $h_c$, where $h_a$ is the altitude from $A$ and so on. The altitudes are concurrent at the **orthocenter**, denoted $H$. The orthocenter of an obtuse triangle is outside the triangle. (Draw it and see for yourself!) Where is the orthocenter of a right triangle?
 
@@ -72,6 +80,8 @@ The altitudes are usually denoted $h_a$, $h_b$, and $h_c$, where $h_a$ is the al
 *Show that the circumcenter of a right triangle is the midpoint of its hypotenuse.*
 
 **Proof:** Since $\angle C$ is an inscribed right angle, we have $\widehat{AB} = 2\angle C = 180°$. Thus $\widehat{AB}$ is a semi-circular arc, and $AB$ is a diameter of the circle. Hence, $O$, as the midpoint of the diameter, is the center of the circle. Thus the midpoint of the hypotenuse of a right triangle is the circumcenter of the triangle. $\blacksquare$
+
+> *[Figure: Right triangle $ABC$ inscribed in a circle with center $O$ at the midpoint of hypotenuse $AB$]*
 
 ---
 
@@ -113,6 +123,8 @@ For example, above we found that if two sides of a triangle have lengths 1 cm an
 By far the most famous theorem in geometry is the **Pythagorean Theorem**, which states that *the sum of the squares of the lengths of the legs of a right triangle equals the square of the length of the hypotenuse*. Thus, for $\triangle ABC$ with right angle at $C$, we have
 
 $$(AC)^2 + (BC)^2 = (AB)^2.$$
+
+> *[Figure: Right triangle $ABC$ with right angle at $C$, legs $a = BC$ and $b = AC$, hypotenuse $c = AB$]*
 
 The Pythagorean Theorem is proven on page 112.
 
@@ -333,6 +345,8 @@ As we noted above, two triangles are similar if all the ratios of corresponding 
 ### Example 11-12
 *Given that the altitude to the hypotenuse of a right triangle divides the hypotenuse into segments of lengths 4 and 8, find the length of the altitude.*
 
+> *[Figure: Right triangle $ACB$ with altitude $CD$ drawn to hypotenuse $AB$, splitting it into similar sub-triangles $ACD$ and $CBD$]*
+
 **Solution:** First we draw the altitude $CD$. Since $\angle CDA = \angle ACB$ and $\angle DAC = \angle BAC$, we have $\triangle ACD \sim \triangle ABC$ by AA similarity. Similarly we find $\triangle CBD \sim \triangle ABC$. Combining these:
 
 $$\triangle ACD \sim \triangle ABC \sim \triangle CBD.$$
@@ -345,6 +359,8 @@ From similar triangles $ADC$ and $CDB$ we have $AD/CD = CD/BD$. Thus $CD^2 = (AD
 
 ### Example 11-13 (Angle Bisector Theorem)
 *Prove the **Angle Bisector Theorem**, which states that if $AX$ bisects $\angle A$ of $\triangle ABC$, then $AC/CX = AB/BX$.*
+
+> *[Figure: $\triangle ABC$ with angle bisector $AX$ extended to point $E$ where $BE \parallel AC$, used to prove the Angle Bisector Theorem]*
 
 **Proof:** Seeing the ratio of sides, we think to look for similar triangles — most facts involving ratios of lengths can be proven using similar triangles. As the figure is drawn, however, no similar triangles stand out. We thus look for extra lines to draw.
 
