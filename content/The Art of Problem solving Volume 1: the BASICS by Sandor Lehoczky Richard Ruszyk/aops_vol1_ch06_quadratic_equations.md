@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 6
+chapter_title: "Quadratic Equations"
+pdf_page_range: [66, 80]
+book_page_range: [52, 66]
+high_value: false
+---
+
 # Chapter 6 — Quadratic Equations
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

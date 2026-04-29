@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 1
+chapter_title: "Exponents and Logarithms"
+pdf_page_range: [15, 26]
+book_page_range: [1, 12]
+high_value: false
+---
+
 # Chapter 1 — Exponents and Logarithms
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

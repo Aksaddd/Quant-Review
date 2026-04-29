@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 9
+chapter_title: "An Introduction to Circles"
+pdf_page_range: [95, 97]
+book_page_range: [81, 83]
+high_value: false
+---
+
 # Chapter 9 — An Introduction to Circles
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

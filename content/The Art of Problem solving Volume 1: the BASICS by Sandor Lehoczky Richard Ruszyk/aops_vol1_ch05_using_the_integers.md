@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 5
+chapter_title: "Using the Integers"
+pdf_page_range: [53, 65]
+book_page_range: [39, 51]
+high_value: true
+---
+
 # Chapter 5 — Using the Integers ⭐
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 3
+chapter_title: "Linear Equations"
+pdf_page_range: [31, 41]
+book_page_range: [17, 27]
+high_value: false
+---
+
 # Chapter 3 — Linear Equations
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

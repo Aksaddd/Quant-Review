@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 8
+chapter_title: "What Numbers Really Are"
+pdf_page_range: [89, 94]
+book_page_range: [75, 80]
+high_value: false
+---
+
 # Chapter 8 — What Numbers Really Are
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

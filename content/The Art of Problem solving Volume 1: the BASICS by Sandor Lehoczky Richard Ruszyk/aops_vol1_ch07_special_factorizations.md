@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 7
+chapter_title: "Special Factorizations and Clever Manipulations"
+pdf_page_range: [81, 88]
+book_page_range: [67, 74]
+high_value: true
+---
+
 # Chapter 7 — Special Factorizations and Clever Manipulations ⭐
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*

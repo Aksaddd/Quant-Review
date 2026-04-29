@@ -1,3 +1,13 @@
+---
+book: "The Art of Problem Solving, Volume 1: The Basics"
+authors: ["Sandor Lehoczky", "Richard Rusczyk"]
+chapter: 4
+chapter_title: "Proportions"
+pdf_page_range: [42, 52]
+book_page_range: [28, 38]
+high_value: false
+---
+
 # Chapter 4 — Proportions
 
 *From* The Art of Problem Solving, Volume 1: The Basics *by Sandor Lehoczky & Richard Rusczyk*
