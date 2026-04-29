@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" width="240" height="220">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="115" cy="110" r="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="45.7179676972449" y1="70.0" x2="184.2820323027551" y2="150.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="155.0" y1="40.717967697244916" x2="58.43145750507618" y2="166.5685424949238" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="45.7179676972449" cy="70.0" r="2.5" fill="#1d1d1f"/>
+<text x="35.7179676972449" y="62.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="155.0" cy="40.717967697244916" r="2.5" fill="#1d1d1f"/>
+<text x="165.0" y="32.717967697244916" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<circle cx="184.2820323027551" cy="150.0" r="2.5" fill="#1d1d1f"/>
+<text x="194.2820323027551" y="168.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">E</text>
+<circle cx="58.43145750507618" cy="166.5685424949238" r="2.5" fill="#1d1d1f"/>
+<text x="48.43145750507618" y="184.5685424949238" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">D</text>
+<circle cx="120" cy="115" r="2.5" fill="#1d1d1f"/>
+<text x="130" y="107" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<text x="209" y="115" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="middle">α</text>
+<text x="21" y="115" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="middle">β</text>
+</svg>

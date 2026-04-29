@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="240" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="155" cy="100" r="60" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="25" y1="100" x2="197.42640687119285" y2="57.573593128807154" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="25" y1="100" x2="209.378467222199" y2="125.35709570444197" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="109.03733341286133" y1="138.56725658119234" x2="197.42640687119285" y2="57.573593128807154" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="25" cy="100" r="2.5" fill="#1d1d1f"/>
+<text x="13" y="104" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="100.62153277780101" cy="74.64290429555803" r="2.5" fill="#1d1d1f"/>
+<text x="90.62153277780101" y="66.64290429555803" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">B</text>
+<circle cx="197.42640687119285" cy="57.573593128807154" r="2.5" fill="#1d1d1f"/>
+<text x="207.42640687119285" y="49.573593128807154" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<circle cx="109.03733341286133" cy="138.56725658119234" r="2.5" fill="#1d1d1f"/>
+<text x="99.03733341286133" y="156.56725658119234" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">D</text>
+<circle cx="209.378467222199" cy="125.35709570444197" r="2.5" fill="#1d1d1f"/>
+<text x="219.378467222199" y="143.35709570444197" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">E</text>
+<text x="47" y="104" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="middle">α</text>
+<text x="229" y="106" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="middle">β</text>
+</svg>

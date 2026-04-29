@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" width="200" height="180">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="20" y1="50" x2="180" y2="50" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="8" y="54" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">l</text>
+<line x1="20" y1="130" x2="180" y2="130" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="8" y="134" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">m</text>
+<line x1="60" y1="10" x2="160" y2="170" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="165" y="175" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">n</text>
+<text x="78" y="40" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="end">γ</text>
+<text x="110" y="42" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="start">θ</text>
+<text x="78" y="65" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="end">α</text>
+<text x="112" y="65" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="start">β</text>
+</svg>

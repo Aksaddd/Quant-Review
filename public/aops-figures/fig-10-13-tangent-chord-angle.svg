@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="110" cy="115" r="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="17.809632400479188" y1="114.03246609091909" x2="107.79989775659467" y2="221.278688127576" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="56.37688898167154" y1="159.99513267805776" x2="154.99513267805776" y2="61.37688898167154" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="56.37688898167154" cy="159.99513267805776" r="2.5" fill="#1d1d1f"/>
+<text x="46.37688898167154" y="177.99513267805776" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">B</text>
+<circle cx="154.99513267805776" cy="61.37688898167154" r="2.5" fill="#1d1d1f"/>
+<text x="164.99513267805776" y="53.37688898167154" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<text x="76.37688898167154" y="149.99513267805776" font-family="Times, Georgia, serif" font-style="italic" font-size="13" text-anchor="middle">θ</text>
+</svg>

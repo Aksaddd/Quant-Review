@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 130" width="220" height="130">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<ellipse cx="110" cy="65" rx="80" ry="42" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="75" cy="65" r="4" fill="#1d1d1f"/>
+</svg>

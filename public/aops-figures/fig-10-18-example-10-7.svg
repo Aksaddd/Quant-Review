@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="110" cy="100" r="75" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="42.02691597225126" y1="68.30363036944755" x2="177.97308402774874" y2="131.69636963055245" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="147.5" y1="35.0480947161671" x2="52.54666676607665" y2="148.20907072649044" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="130" y="21" font-family="Times, Georgia, serif" font-style="normal" font-size="11" text-anchor="middle">60°</text>
+<text x="31" y="105" font-family="Times, Georgia, serif" font-style="normal" font-size="11" text-anchor="end">40°</text>
+<circle cx="42.02691597225126" cy="68.30363036944755" r="2.5" fill="#1d1d1f"/>
+<text x="32.02691597225126" y="60.303630369447546" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="147.5" cy="35.0480947161671" r="2.5" fill="#1d1d1f"/>
+<text x="157.5" y="27.0480947161671" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="177.97308402774874" cy="131.69636963055245" r="2.5" fill="#1d1d1f"/>
+<text x="187.97308402774874" y="149.69636963055245" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<circle cx="90.58857161731093" cy="172.44443697168012" r="2.5" fill="#1d1d1f"/>
+<text x="90.58857161731093" y="188.44443697168012" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">D</text>
+<circle cx="52.54666676607665" cy="148.20907072649044" r="2.5" fill="#1d1d1f"/>
+<text x="42.54666676607665" y="166.20907072649044" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">E</text>
+</svg>

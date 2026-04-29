@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="40" y1="30" x2="170" y2="50" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="170" y1="50" x2="160" y2="130" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="160" y1="130" x2="30" y2="110" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="110" x2="40" y2="30" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 37.77 47.86 A 18 18 0 0 0 57.79 32.74" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 162.23 112.14 A 18 18 0 0 0 142.21 127.26" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 155.17 47.72 A 15 15 0 0 0 168.14 64.88" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 150.23 46.96 A 20 20 0 0 0 167.52 69.85" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 44.83 112.28 A 15 15 0 0 0 31.86 95.12" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 49.77 113.04 A 20 20 0 0 0 32.48 90.15" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

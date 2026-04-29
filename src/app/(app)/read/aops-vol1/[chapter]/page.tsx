@@ -29,7 +29,7 @@ const CONTENT_DIR = path.join(
  *     containing structured figure metadata (id, caption, elements).
  *
  * Both formats are rewritten to standard markdown image syntax pointing at
- * pre-cropped figure PNGs in /aops-figures/. For ch 10 the mapping is by
+ * code-generated SVG figures in /aops-figures/. For ch 10 the mapping is by
  * figure-spec id; for ch 3/9 it's a sequential match in reading order against
  * figures.json entries for that chapter.
  */
@@ -47,7 +47,7 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     const caption = captionMatch ? captionMatch[1].trim() : 'figure';
     const id = idMatch ? idMatch[1].trim() : '';
     const fig = aopsFigureById[id];
-    if (fig) return `![${caption}](/aops-figures/${fig.id}.png)`;
+    if (fig) return `![${caption}](/aops-figures/${fig.id}.svg)`;
     // Fall back to italic placeholder if no crop mapping exists.
     return `*[Figure: ${caption}]*`;
   });
@@ -60,7 +60,7 @@ function preprocessChapterMarkdown(md: string, chapter: AopsChapter): string {
     out = out.replace(/\*\[Figures?:\s*([^\]]+)\]\*/g, (_, captionText) => {
       const fig = chapterFigures[figIndex++];
       const cleanCaption = captionText.trim().replace(/\.$/, '');
-      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.png)`;
+      if (fig) return `![${cleanCaption}](/aops-figures/${fig.id}.svg)`;
       return `*[Figure: ${captionText.trim()}]*`;
     });
   }

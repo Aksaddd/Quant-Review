@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" width="220" height="180">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="110" cy="50" r="38" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="72" cy="115.816" r="38" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="148" cy="115.816" r="38" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="110" y="42" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">A</text>
+<text x="62" y="133.816" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">B</text>
+<text x="158" y="133.816" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<line x1="110" y1="50" x2="72" y2="115.816" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="72" y1="115.816" x2="148" y2="115.816" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="148" y1="115.816" x2="110" y2="50" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

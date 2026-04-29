@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="165.0" cy="110.0" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="178.2" cy="99.0" r="2" fill="#1d1d1f"/>
+<circle cx="148.89087296526012" cy="148.89087296526012" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="162.0908729652601" cy="137.89087296526012" r="2" fill="#1d1d1f"/>
+<circle cx="110.0" cy="165.0" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="123.2" cy="154.0" r="2" fill="#1d1d1f"/>
+<circle cx="71.10912703473988" cy="148.89087296526012" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="84.30912703473989" cy="137.89087296526012" r="2" fill="#1d1d1f"/>
+<circle cx="55.0" cy="110.0" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="68.2" cy="99.0" r="2" fill="#1d1d1f"/>
+<circle cx="71.10912703473988" cy="71.10912703473988" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="84.30912703473989" cy="60.109127034739885" r="2" fill="#1d1d1f"/>
+<circle cx="109.99999999999999" cy="55.0" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="123.19999999999999" cy="44.0" r="2" fill="#1d1d1f"/>
+<circle cx="148.8908729652601" cy="71.10912703473988" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="162.09087296526008" cy="60.109127034739885" r="2" fill="#1d1d1f"/>
+</svg>

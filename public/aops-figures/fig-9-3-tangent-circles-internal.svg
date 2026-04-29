@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="110" cy="110" r="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="75" cy="135" r="2.5" fill="#1d1d1f"/>
+<text x="65" y="153" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="90" cy="65" r="30" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="90" cy="73" r="2.5" fill="#1d1d1f"/>
+<text x="90" y="89" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">C</text>
+<circle cx="77.5089227157242" cy="36.895076110379435" r="2.5" fill="#1d1d1f"/>
+<text x="77.5089227157242" y="28.895076110379435" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">Y</text>
+<circle cx="145" cy="130" r="28" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="145" cy="136" r="2.5" fill="#1d1d1f"/>
+<text x="145" y="152" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">B</text>
+<circle cx="179.45945136995675" cy="149.6911150685467" r="2.5" fill="#1d1d1f"/>
+<text x="191.45945136995675" y="153.6911150685467" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">X</text>
+<line x1="110" y1="110" x2="77.5089227157242" y2="36.895076110379435" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110" y1="110" x2="179.45945136995675" y2="149.6911150685467" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>
