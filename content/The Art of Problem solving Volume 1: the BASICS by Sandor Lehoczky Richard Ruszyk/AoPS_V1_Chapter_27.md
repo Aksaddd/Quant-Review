@@ -142,7 +142,7 @@ $$\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n}.$$
 
 But by Example 27-4, the total number is $2^{n}$! Thus we have immediately proven that for any $n$,
 
-$$\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n} = 2^{n}. \tag{27.1}$$
+$$\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n} = 2^{n}. \quad (27.1)$$
 
 > **Exercise 27-10.** Express the identity (27.1) in $\sum$ form.
 

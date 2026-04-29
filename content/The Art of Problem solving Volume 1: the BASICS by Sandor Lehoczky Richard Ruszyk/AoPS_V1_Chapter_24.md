@@ -120,7 +120,7 @@ $$S - Sr = a - ar^{n},$$
 
 or, as long as $r \neq 1$,
 
-$$S = \frac{a - ar^{n}}{1 - r}. \tag{24.1}$$
+$$S = \frac{a - ar^{n}}{1 - r}. \quad (24.1)$$
 
 Make sure you understand the method used to find this sum. It is a very useful one in many circumstances.
 

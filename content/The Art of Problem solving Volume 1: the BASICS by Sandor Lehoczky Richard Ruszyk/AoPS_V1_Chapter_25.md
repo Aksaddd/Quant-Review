@@ -293,7 +293,7 @@ A second way to count something other than what we actually want is by the creat
 
 > **Exercise 25-21.** Verify that the answers of the two previous problems satisfy
 >
-> $$\frac{n!}{k!\,(n - k)!}, \tag{25.1}$$
+> $$\frac{n!}{k!\,(n - k)!}, \quad (25.1)$$
 >
 > where $n$ is the number of objects to be chosen from and $k$ is the number to choose.
 
