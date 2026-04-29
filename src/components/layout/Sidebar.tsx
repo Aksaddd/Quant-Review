@@ -13,6 +13,7 @@ import { SECTIONS, problemsBySection } from '@/data/problems';
 import { textbookChapters } from '@/data/chapters';
 import { effectiveCppChapters } from '@/data/effective-cpp';
 import { cpHandbookParts } from '@/data/competitive-programmers-handbook';
+import { aopsVol1Chapters, AOPS_VOL1_TOTAL_CHAPTERS } from '@/data/aops-vol1';
 
 const TOP_NAV = [
   { href: '/dashboard',  label: 'Dashboard', icon: LayoutDashboard },
@@ -52,6 +53,9 @@ export default function Sidebar() {
   function toggleCphPart(n: number) {
     setOpenCphParts((prev) => ({ ...prev, [n]: !prev[n] }));
   }
+
+  // Top-level Art of Problem Solving collapsible
+  const [aopsOpen, setAopsOpen] = useState(false);
 
   const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
 
@@ -470,6 +474,51 @@ export default function Sidebar() {
                   </div>
                 );
               })}
+            </div>
+          )}
+        </div>
+
+        {/* Art of Problem Solving — Volume 1 */}
+        <div className="mt-3 pt-3 border-t border-[#e4e6ea]">
+          <button
+            onClick={() => setAopsOpen(!aopsOpen)}
+            className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#626975] uppercase tracking-wider hover:text-[#21242c] transition-colors"
+          >
+            <BookOpen size={13} />
+            <span className="flex-1 text-left truncate">AoPS Vol. 1 · Lehoczky &amp; Rusczyk</span>
+            {aopsOpen ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+          </button>
+
+          {aopsOpen && (
+            <div className="mb-2 space-y-0.5">
+              <Link
+                href="/read/aops-vol1"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+              >
+                <span className="w-4 h-4 rounded-md bg-[#1865f2] text-white flex items-center justify-center text-[9px] font-semibold shrink-0">
+                  {aopsVol1Chapters.length}
+                </span>
+                <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] transition-colors truncate">
+                  All chapters
+                </span>
+              </Link>
+              {aopsVol1Chapters.map((ch) => (
+                <Link
+                  key={ch.number}
+                  href={`/read/aops-vol1/${ch.number}`}
+                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#f0f1f3] transition-colors group"
+                >
+                  <span className="text-[10px] font-bold text-[#9299a5] w-8 shrink-0">
+                    Ch {ch.number}
+                  </span>
+                  <span className="flex-1 text-[12px] text-[#626975] group-hover:text-[#21242c] leading-snug transition-colors text-left truncate">
+                    {ch.title}
+                  </span>
+                </Link>
+              ))}
+              <div className="px-3 py-1.5 text-[10px] text-[#9299a5] italic">
+                Ch {aopsVol1Chapters.length + 1}–{AOPS_VOL1_TOTAL_CHAPTERS} coming soon
+              </div>
             </div>
           )}
         </div>
