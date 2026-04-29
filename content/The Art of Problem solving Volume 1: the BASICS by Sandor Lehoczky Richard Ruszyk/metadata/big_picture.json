@@ -1,0 +1,50 @@
+[
+  {
+    "chapter": 1,
+    "section": "1.5",
+    "pdf_page": 26,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "section": "4.4",
+    "pdf_page": 52,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.7",
+    "pdf_page": 65,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.6",
+    "pdf_page": 80,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "chapter": 7,
+    "section": "7.2",
+    "pdf_page": 88,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "chapter": 9,
+    "section": null,
+    "pdf_page": 97,
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch09_intro_to_circles.md",
+    "needs_review": false
+  }
+]

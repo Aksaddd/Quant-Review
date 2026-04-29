@@ -1,0 +1,669 @@
+[
+  {
+    "chapter": 1,
+    "title": "Exponents and Logarithms",
+    "high_value": false,
+    "pdf_page_range": [
+      15,
+      26
+    ],
+    "book_page_range": [
+      1,
+      12
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "is_monolithic": false,
+    "section_count": 5,
+    "example_count": 15,
+    "exercise_count": 9,
+    "problem_count": 16,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 2,
+    "title": "Complex Numbers",
+    "high_value": false,
+    "pdf_page_range": [
+      27,
+      30
+    ],
+    "book_page_range": [
+      13,
+      16
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch02_complex_numbers.md",
+    "is_monolithic": false,
+    "section_count": 2,
+    "example_count": 5,
+    "exercise_count": 14,
+    "problem_count": 10,
+    "big_picture_count": 0,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 3,
+    "title": "Linear Equations",
+    "high_value": false,
+    "pdf_page_range": [
+      31,
+      41
+    ],
+    "book_page_range": [
+      17,
+      27
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch03_linear_equations.md",
+    "is_monolithic": false,
+    "section_count": 4,
+    "example_count": 15,
+    "exercise_count": 7,
+    "problem_count": 29,
+    "big_picture_count": 0,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "title": "Proportions",
+    "high_value": false,
+    "pdf_page_range": [
+      42,
+      52
+    ],
+    "book_page_range": [
+      28,
+      38
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch04_proportions.md",
+    "is_monolithic": false,
+    "section_count": 4,
+    "example_count": 15,
+    "exercise_count": 10,
+    "problem_count": 31,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "title": "Using the Integers",
+    "high_value": true,
+    "pdf_page_range": [
+      53,
+      65
+    ],
+    "book_page_range": [
+      39,
+      51
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch05_using_the_integers.md",
+    "is_monolithic": false,
+    "section_count": 7,
+    "example_count": 13,
+    "exercise_count": 33,
+    "problem_count": 23,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "title": "Quadratic Equations",
+    "high_value": false,
+    "pdf_page_range": [
+      66,
+      80
+    ],
+    "book_page_range": [
+      52,
+      66
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch06_quadratic_equations.md",
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 15,
+    "exercise_count": 11,
+    "problem_count": 28,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 7,
+    "title": "Special Factorizations and Clever Manipulations",
+    "high_value": true,
+    "pdf_page_range": [
+      81,
+      88
+    ],
+    "book_page_range": [
+      67,
+      74
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch07_special_factorizations.md",
+    "is_monolithic": false,
+    "section_count": 2,
+    "example_count": 6,
+    "exercise_count": 4,
+    "problem_count": 24,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 8,
+    "title": "What Numbers Really Are",
+    "high_value": false,
+    "pdf_page_range": [
+      89,
+      94
+    ],
+    "book_page_range": [
+      75,
+      80
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch08_what_numbers_really_are.md",
+    "is_monolithic": false,
+    "section_count": 3,
+    "example_count": 4,
+    "exercise_count": 11,
+    "problem_count": 5,
+    "big_picture_count": 0,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 9,
+    "title": "An Introduction to Circles",
+    "high_value": false,
+    "pdf_page_range": [
+      95,
+      97
+    ],
+    "book_page_range": [
+      81,
+      83
+    ],
+    "has_chapter_md": true,
+    "chapter_md_file": "aops_vol1_ch09_intro_to_circles.md",
+    "is_monolithic": true,
+    "section_count": 1,
+    "example_count": 2,
+    "exercise_count": 4,
+    "problem_count": 0,
+    "big_picture_count": 1,
+    "source": "chapter_md",
+    "needs_review": false
+  },
+  {
+    "chapter": 10,
+    "title": "Angles",
+    "high_value": false,
+    "pdf_page_range": [
+      98,
+      106
+    ],
+    "book_page_range": [
+      84,
+      92
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 9,
+    "exercise_count": 3,
+    "problem_count": 0,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "title": "Triangles, a.k.a. Geometry",
+    "high_value": false,
+    "pdf_page_range": [
+      107,
+      131
+    ],
+    "book_page_range": [
+      93,
+      117
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 9,
+    "example_count": 25,
+    "exercise_count": 26,
+    "problem_count": 9,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "title": "Quadrilaterals",
+    "high_value": false,
+    "pdf_page_range": [
+      132,
+      140
+    ],
+    "book_page_range": [
+      118,
+      126
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 8,
+    "exercise_count": 15,
+    "problem_count": 9,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 13,
+    "title": "Polygons",
+    "high_value": false,
+    "pdf_page_range": [
+      141,
+      146
+    ],
+    "book_page_range": [
+      127,
+      132
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 4,
+    "example_count": 4,
+    "exercise_count": 3,
+    "problem_count": 4,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 14,
+    "title": "Angle Chasing",
+    "high_value": false,
+    "pdf_page_range": [
+      147,
+      149
+    ],
+    "book_page_range": [
+      133,
+      135
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": true,
+    "section_count": 1,
+    "example_count": 0,
+    "exercise_count": 0,
+    "problem_count": 10,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 15,
+    "title": "Areas",
+    "high_value": false,
+    "pdf_page_range": [
+      150,
+      156
+    ],
+    "book_page_range": [
+      136,
+      142
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 3,
+    "example_count": 12,
+    "exercise_count": 0,
+    "problem_count": 11,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "title": "The Power of Coordinates",
+    "high_value": false,
+    "pdf_page_range": [
+      157,
+      168
+    ],
+    "book_page_range": [
+      143,
+      154
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 7,
+    "example_count": 12,
+    "exercise_count": 19,
+    "problem_count": 2,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 17,
+    "title": "Power of a Point",
+    "high_value": false,
+    "pdf_page_range": [
+      169,
+      173
+    ],
+    "book_page_range": [
+      155,
+      159
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 2,
+    "example_count": 4,
+    "exercise_count": 2,
+    "problem_count": 1,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "title": "Three Dimensional Geometry",
+    "high_value": false,
+    "pdf_page_range": [
+      174,
+      186
+    ],
+    "book_page_range": [
+      160,
+      172
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 7,
+    "example_count": 13,
+    "exercise_count": 10,
+    "problem_count": 2,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "title": "Shifts, Turns, Flips, Stretches, and Squeezes",
+    "high_value": false,
+    "pdf_page_range": [
+      187,
+      194
+    ],
+    "book_page_range": [
+      173,
+      180
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 7,
+    "example_count": 10,
+    "exercise_count": 9,
+    "problem_count": 4,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 20,
+    "title": "A Potpourri of Geometry",
+    "high_value": false,
+    "pdf_page_range": [
+      195,
+      200
+    ],
+    "book_page_range": [
+      181,
+      186
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": true,
+    "section_count": 1,
+    "example_count": 0,
+    "exercise_count": 0,
+    "problem_count": 27,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "title": "Functions",
+    "high_value": false,
+    "pdf_page_range": [
+      201,
+      210
+    ],
+    "book_page_range": [
+      187,
+      196
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 12,
+    "exercise_count": 32,
+    "problem_count": 4,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "title": "Inequalities",
+    "high_value": false,
+    "pdf_page_range": [
+      211,
+      219
+    ],
+    "book_page_range": [
+      197,
+      205
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 5,
+    "example_count": 5,
+    "exercise_count": 14,
+    "problem_count": 5,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 23,
+    "title": "Operations and Relations",
+    "high_value": false,
+    "pdf_page_range": [
+      220,
+      224
+    ],
+    "book_page_range": [
+      206,
+      210
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 3,
+    "example_count": 6,
+    "exercise_count": 5,
+    "problem_count": 1,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "title": "Sequences and Series",
+    "high_value": false,
+    "pdf_page_range": [
+      225,
+      234
+    ],
+    "book_page_range": [
+      211,
+      220
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 8,
+    "exercise_count": 20,
+    "problem_count": 6,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "title": "Learning to Count",
+    "high_value": false,
+    "pdf_page_range": [
+      235,
+      249
+    ],
+    "book_page_range": [
+      221,
+      235
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 10,
+    "example_count": 18,
+    "exercise_count": 30,
+    "problem_count": 4,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "title": "Statistics and Probability",
+    "high_value": false,
+    "pdf_page_range": [
+      250,
+      259
+    ],
+    "book_page_range": [
+      236,
+      245
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 13,
+    "exercise_count": 15,
+    "problem_count": 5,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 27,
+    "title": "Sets",
+    "high_value": false,
+    "pdf_page_range": [
+      260,
+      265
+    ],
+    "book_page_range": [
+      246,
+      251
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 4,
+    "example_count": 4,
+    "exercise_count": 11,
+    "problem_count": 3,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "title": "Prove It",
+    "high_value": false,
+    "pdf_page_range": [
+      266,
+      275
+    ],
+    "book_page_range": [
+      252,
+      261
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": false,
+    "section_count": 6,
+    "example_count": 11,
+    "exercise_count": 6,
+    "problem_count": 2,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  },
+  {
+    "chapter": 29,
+    "title": "Parting Shots",
+    "high_value": false,
+    "pdf_page_range": [
+      276,
+      288
+    ],
+    "book_page_range": [
+      262,
+      274
+    ],
+    "has_chapter_md": false,
+    "chapter_md_file": null,
+    "is_monolithic": true,
+    "section_count": 1,
+    "example_count": 0,
+    "exercise_count": 0,
+    "problem_count": 22,
+    "big_picture_count": 0,
+    "source": "ocr_section_md",
+    "needs_review": true
+  }
+]

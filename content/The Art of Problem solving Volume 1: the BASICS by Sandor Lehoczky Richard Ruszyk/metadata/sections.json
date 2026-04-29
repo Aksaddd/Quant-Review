@@ -1,0 +1,2320 @@
+[
+  {
+    "chapter": 1,
+    "section": "1.1",
+    "title": "Integer Exponents",
+    "book_pages": [
+      1,
+      2
+    ],
+    "pdf_pages": [
+      15,
+      16
+    ],
+    "section_md_file": "ch01-1.1-integer-exponents.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 1,
+    "section": "1.2",
+    "title": "Fractional Exponents",
+    "book_pages": [
+      3,
+      4
+    ],
+    "pdf_pages": [
+      17,
+      18
+    ],
+    "section_md_file": "ch01-1.2-fractional-exponents.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 1,
+    "section": "1.3",
+    "title": "Simplifying Radical Expressions",
+    "book_pages": [
+      5,
+      6
+    ],
+    "pdf_pages": [
+      19,
+      20
+    ],
+    "section_md_file": "ch01-1.3-simplifying-radical-expressions.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 1,
+    "section": "1.4",
+    "title": "Rationalizing Denominators",
+    "book_pages": [
+      7,
+      8,
+      9
+    ],
+    "pdf_pages": [
+      21,
+      22,
+      23
+    ],
+    "section_md_file": "ch01-1.4-rationalizing-denominators.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 1,
+    "section": "1.5",
+    "title": "Logarithms",
+    "book_pages": [
+      10,
+      11,
+      12
+    ],
+    "pdf_pages": [
+      24,
+      25,
+      26
+    ],
+    "section_md_file": "ch01-1.5-logarithms.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 2,
+    "section": "2.1",
+    "title": "The Square Root of -1",
+    "book_pages": [
+      13
+    ],
+    "pdf_pages": [
+      27
+    ],
+    "section_md_file": "ch02-2.1-the-square-root-of-1.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 2,
+    "section": "2.2",
+    "title": "Complex Number Operations",
+    "book_pages": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "pdf_pages": [
+      27,
+      28,
+      29,
+      30
+    ],
+    "section_md_file": "ch02-2.2-complex-number-operations.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 3,
+    "section": "3.1",
+    "title": "What is a Linear Equation?",
+    "book_pages": [
+      17
+    ],
+    "pdf_pages": [
+      31
+    ],
+    "section_md_file": "ch03-3.1-what-is-a-linear-equation.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 3,
+    "section": "3.2",
+    "title": "One Equation, One Variable",
+    "book_pages": [
+      17,
+      18
+    ],
+    "pdf_pages": [
+      31,
+      32
+    ],
+    "section_md_file": "ch03-3.2-one-equation-one-variable.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 3,
+    "section": "3.3",
+    "title": "Two Equations, Two Variables",
+    "book_pages": [
+      19,
+      20,
+      21
+    ],
+    "pdf_pages": [
+      33,
+      34,
+      35
+    ],
+    "section_md_file": "ch03-3.3-two-equations-two-variables.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 3,
+    "section": "3.4",
+    "title": "Word Problems",
+    "book_pages": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "pdf_pages": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ],
+    "section_md_file": "ch03-3.4-word-problems.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "section": "4.1",
+    "title": "Direct and Inverse",
+    "book_pages": [
+      28,
+      29
+    ],
+    "pdf_pages": [
+      42,
+      43
+    ],
+    "section_md_file": "ch04-4.1-direct-and-inverse.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "section": "4.2",
+    "title": "Manipulating Proportions",
+    "book_pages": [
+      30
+    ],
+    "pdf_pages": [
+      44
+    ],
+    "section_md_file": "ch04-4.2-manipulating-proportions.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "section": "4.3",
+    "title": "Conversion Factors",
+    "book_pages": [
+      31,
+      32
+    ],
+    "pdf_pages": [
+      45,
+      46
+    ],
+    "section_md_file": "ch04-4.3-conversion-factors.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 4,
+    "section": "4.4",
+    "title": "Percent",
+    "book_pages": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "pdf_pages": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "section_md_file": "ch04-4.4-percent.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.1",
+    "title": "Divisibility",
+    "book_pages": [
+      39
+    ],
+    "pdf_pages": [
+      53
+    ],
+    "section_md_file": "ch05-5.1-divisibility.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.2",
+    "title": "Number Bases",
+    "book_pages": [
+      39,
+      40,
+      41
+    ],
+    "pdf_pages": [
+      53,
+      54,
+      55
+    ],
+    "section_md_file": "ch05-5.2-number-bases.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.3",
+    "title": "The Last Digit",
+    "book_pages": [
+      42
+    ],
+    "pdf_pages": [
+      56
+    ],
+    "section_md_file": "ch05-5.3-the-last-digit.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.4",
+    "title": "Modular Arithmetic",
+    "book_pages": [
+      42,
+      43,
+      44
+    ],
+    "pdf_pages": [
+      56,
+      57,
+      58
+    ],
+    "section_md_file": "ch05-5.4-modular-arithmetic.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.5",
+    "title": "Tricks",
+    "book_pages": [
+      45,
+      46
+    ],
+    "pdf_pages": [
+      59,
+      60
+    ],
+    "section_md_file": "ch05-5.5-tricks.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.6",
+    "title": "Primes",
+    "book_pages": [
+      47
+    ],
+    "pdf_pages": [
+      61
+    ],
+    "section_md_file": "ch05-5.6-primes.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 5,
+    "section": "5.7",
+    "title": "Common and Uncommon Factors",
+    "book_pages": [
+      48,
+      49,
+      50,
+      51
+    ],
+    "pdf_pages": [
+      62,
+      63,
+      64,
+      65
+    ],
+    "section_md_file": "ch05-5.7-common-and-uncommon-factors.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.1",
+    "title": "What's a Quadratic?",
+    "book_pages": [
+      52
+    ],
+    "pdf_pages": [
+      66
+    ],
+    "section_md_file": "ch06-6.1-whats-a-quadratic.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.2",
+    "title": "Factoring Quadratics",
+    "book_pages": [
+      52,
+      53,
+      54,
+      55
+    ],
+    "pdf_pages": [
+      66,
+      67,
+      68,
+      69
+    ],
+    "section_md_file": "ch06-6.2-factoring-quadratics.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.3",
+    "title": "The Quadratic Formula",
+    "book_pages": [
+      56,
+      57,
+      58
+    ],
+    "pdf_pages": [
+      70,
+      71,
+      72
+    ],
+    "section_md_file": "ch06-6.3-the-quadratic-formula.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.4",
+    "title": "Variations on a Theme",
+    "book_pages": [
+      59,
+      60
+    ],
+    "pdf_pages": [
+      73,
+      74
+    ],
+    "section_md_file": "ch06-6.4-variations-on-a-theme.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.5",
+    "title": "Square Roots of Irrationals and Imaginaries",
+    "book_pages": [
+      61,
+      62
+    ],
+    "pdf_pages": [
+      75,
+      76
+    ],
+    "section_md_file": "ch06-6.5-square-roots-of-irrationals-and-imaginaries.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 6,
+    "section": "6.6",
+    "title": "Beyond Quadratics",
+    "book_pages": [
+      63,
+      64,
+      65,
+      66
+    ],
+    "pdf_pages": [
+      77,
+      78,
+      79,
+      80
+    ],
+    "section_md_file": "ch06-6.6-beyond-quadratics.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 7,
+    "section": "7.1",
+    "title": "Factorizations",
+    "book_pages": [
+      67,
+      68,
+      69
+    ],
+    "pdf_pages": [
+      81,
+      82,
+      83
+    ],
+    "section_md_file": "ch07-7.1-factorizations.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 7,
+    "section": "7.2",
+    "title": "Manipulations",
+    "book_pages": [
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "pdf_pages": [
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "section_md_file": "ch07-7.2-manipulations.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 8,
+    "section": "8.1",
+    "title": "Integers and Rationals",
+    "book_pages": [
+      75,
+      76
+    ],
+    "pdf_pages": [
+      89,
+      90
+    ],
+    "section_md_file": "ch08-8.1-integers-and-rationals.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 8,
+    "section": "8.2",
+    "title": "Lowest Terms and Irrationals",
+    "book_pages": [
+      77,
+      78
+    ],
+    "pdf_pages": [
+      91,
+      92
+    ],
+    "section_md_file": "ch08-8.2-lowest-terms-and-irrationals.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 8,
+    "section": "8.3",
+    "title": "Complex and Beyond",
+    "book_pages": [
+      79,
+      80
+    ],
+    "pdf_pages": [
+      93,
+      94
+    ],
+    "section_md_file": "ch08-8.3-complex-and-beyond.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 9,
+    "section": null,
+    "title": "An Introduction to Circles",
+    "book_pages": [
+      81,
+      82,
+      83
+    ],
+    "pdf_pages": [
+      95,
+      96,
+      97
+    ],
+    "section_md_file": "ch09-an-introduction-to-circles.md",
+    "in_chapter_md": true,
+    "source": "manifest",
+    "needs_review": false
+  },
+  {
+    "chapter": 10,
+    "section": "10.1",
+    "title": "Lines, Rays, and Segments",
+    "book_pages": [
+      84
+    ],
+    "pdf_pages": [
+      98
+    ],
+    "section_md_file": "ch10-10.1-lines-rays-and-segments.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 10,
+    "section": "10.2",
+    "title": "Classification and Measurement",
+    "book_pages": [
+      84,
+      85
+    ],
+    "pdf_pages": [
+      98,
+      99
+    ],
+    "section_md_file": "ch10-10.2-classification-and-measurement.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 10,
+    "section": "10.3",
+    "title": "Angles and Parallel Lines",
+    "book_pages": [
+      86
+    ],
+    "pdf_pages": [
+      100
+    ],
+    "section_md_file": "ch10-10.3-angles-and-parallel-lines.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 10,
+    "section": "10.4",
+    "title": "Arcs, Segments, Sectors, and Angles",
+    "book_pages": [
+      87
+    ],
+    "pdf_pages": [
+      101
+    ],
+    "section_md_file": "ch10-10.4-arcs-segments-sectors-and-angles.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 10,
+    "section": "10.5",
+    "title": "Angles Formed By Lines Intersecting a Circle",
+    "book_pages": [
+      87,
+      88,
+      89
+    ],
+    "pdf_pages": [
+      101,
+      102,
+      103
+    ],
+    "section_md_file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 10,
+    "section": "10.6",
+    "title": "The Burden of Proof",
+    "book_pages": [
+      90,
+      91,
+      92
+    ],
+    "pdf_pages": [
+      104,
+      105,
+      106
+    ],
+    "section_md_file": "ch10-10.6-the-burden-of-proof.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.1",
+    "title": "Classifying Triangles",
+    "book_pages": [
+      93
+    ],
+    "pdf_pages": [
+      107
+    ],
+    "section_md_file": "ch11-11.1-classifying-triangles.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.2",
+    "title": "Parts of a Triangle",
+    "book_pages": [
+      94,
+      95
+    ],
+    "pdf_pages": [
+      108,
+      109
+    ],
+    "section_md_file": "ch11-11.2-parts-of-a-triangle.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.3",
+    "title": "The Triangle Inequality",
+    "book_pages": [
+      96
+    ],
+    "pdf_pages": [
+      110
+    ],
+    "section_md_file": "ch11-11.3-the-triangle-inequality.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.4",
+    "title": "The Pythagorean Theorem",
+    "book_pages": [
+      97,
+      98
+    ],
+    "pdf_pages": [
+      111,
+      112
+    ],
+    "section_md_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.5",
+    "title": "Congruent Triangles",
+    "book_pages": [
+      99,
+      100,
+      101
+    ],
+    "pdf_pages": [
+      113,
+      114,
+      115
+    ],
+    "section_md_file": "ch11-11.5-congruent-triangles.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.6",
+    "title": "Similar Triangles",
+    "book_pages": [
+      102,
+      103
+    ],
+    "pdf_pages": [
+      116,
+      117
+    ],
+    "section_md_file": "ch11-11.6-similar-triangles.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.7",
+    "title": "Introduction to Trigonometry",
+    "book_pages": [
+      104,
+      105,
+      106,
+      107,
+      108
+    ],
+    "pdf_pages": [
+      118,
+      119,
+      120,
+      121,
+      122
+    ],
+    "section_md_file": "ch11-11.7-introduction-to-trigonometry.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.8",
+    "title": "Area of a Triangle",
+    "book_pages": [
+      109,
+      110,
+      111
+    ],
+    "pdf_pages": [
+      123,
+      124,
+      125
+    ],
+    "section_md_file": "ch11-11.8-area-of-a-triangle.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 11,
+    "section": "11.9",
+    "title": "A Handful of Helpful Hints",
+    "book_pages": [
+      112,
+      113,
+      114,
+      115,
+      116,
+      117
+    ],
+    "pdf_pages": [
+      126,
+      127,
+      128,
+      129,
+      130,
+      131
+    ],
+    "section_md_file": "ch11-11.9-a-handful-of-helpful-hints.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.1",
+    "title": "The Fundamentals",
+    "book_pages": [
+      118
+    ],
+    "pdf_pages": [
+      132
+    ],
+    "section_md_file": "ch12-12.1-the-fundamentals.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.2",
+    "title": "Trapezoids",
+    "book_pages": [
+      118,
+      119
+    ],
+    "pdf_pages": [
+      132,
+      133
+    ],
+    "section_md_file": "ch12-12.2-trapezoids.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.3",
+    "title": "Parallelograms",
+    "book_pages": [
+      120
+    ],
+    "pdf_pages": [
+      134
+    ],
+    "section_md_file": "ch12-12.3-parallelograms.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.4",
+    "title": "Rhombuses (Rhombi?)",
+    "book_pages": [
+      121
+    ],
+    "pdf_pages": [
+      135
+    ],
+    "section_md_file": "ch12-12.4-rhombuses-rhombi.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.5",
+    "title": "Rectangles and Squares",
+    "book_pages": [
+      122
+    ],
+    "pdf_pages": [
+      136
+    ],
+    "section_md_file": "ch12-12.5-rectangles-and-squares.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 12,
+    "section": "12.6",
+    "title": "Hints and Problems",
+    "book_pages": [
+      123,
+      124,
+      125,
+      126
+    ],
+    "pdf_pages": [
+      137,
+      138,
+      139,
+      140
+    ],
+    "section_md_file": "ch12-12.6-hints-and-problems.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 13,
+    "section": "13.1",
+    "title": "Types of Polygons",
+    "book_pages": [
+      127
+    ],
+    "pdf_pages": [
+      141
+    ],
+    "section_md_file": "ch13-13.1-types-of-polygons.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 13,
+    "section": "13.2",
+    "title": "Angles in a Polygon",
+    "book_pages": [
+      128
+    ],
+    "pdf_pages": [
+      142
+    ],
+    "section_md_file": "ch13-13.2-angles-in-a-polygon.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 13,
+    "section": "13.3",
+    "title": "Regular Polygons",
+    "book_pages": [
+      128,
+      129
+    ],
+    "pdf_pages": [
+      142,
+      143
+    ],
+    "section_md_file": "ch13-13.3-regular-polygons.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 13,
+    "section": "13.4",
+    "title": "Regular Hexagons",
+    "book_pages": [
+      130,
+      131,
+      132
+    ],
+    "pdf_pages": [
+      144,
+      145,
+      146
+    ],
+    "section_md_file": "ch13-13.4-regular-hexagons.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 14,
+    "section": null,
+    "title": "Angle Chasing",
+    "book_pages": [
+      133,
+      134,
+      135
+    ],
+    "pdf_pages": [
+      147,
+      148,
+      149
+    ],
+    "section_md_file": "ch14-angle-chasing.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 15,
+    "section": "15.1",
+    "title": "Similar Figures",
+    "book_pages": [
+      136
+    ],
+    "pdf_pages": [
+      150
+    ],
+    "section_md_file": "ch15-15.1-similar-figures.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 15,
+    "section": "15.2",
+    "title": "Same Base/Same Altitude",
+    "book_pages": [
+      137
+    ],
+    "pdf_pages": [
+      151
+    ],
+    "section_md_file": "ch15-15.2-same-basesame-altitude.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 15,
+    "section": "15.3",
+    "title": "Complicated Figures",
+    "book_pages": [
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "pdf_pages": [
+      152,
+      153,
+      154,
+      155,
+      156
+    ],
+    "section_md_file": "ch15-15.3-complicated-figures.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.1",
+    "title": "Labelling the Plane",
+    "book_pages": [
+      143
+    ],
+    "pdf_pages": [
+      157
+    ],
+    "section_md_file": "ch16-16.1-labelling-the-plane.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.2",
+    "title": "What's it Good For?",
+    "book_pages": [
+      144
+    ],
+    "pdf_pages": [
+      158
+    ],
+    "section_md_file": "ch16-16.2-whats-it-good-for.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.3",
+    "title": "Straight and Narrow",
+    "book_pages": [
+      145,
+      146,
+      147
+    ],
+    "pdf_pages": [
+      159,
+      160,
+      161
+    ],
+    "section_md_file": "ch16-16.3-straight-and-narrow.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.4",
+    "title": "Plotting a Line",
+    "book_pages": [
+      148
+    ],
+    "pdf_pages": [
+      162
+    ],
+    "section_md_file": "ch16-16.4-plotting-a-line.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.5",
+    "title": "The Distance Formula and Circles",
+    "book_pages": [
+      149,
+      150
+    ],
+    "pdf_pages": [
+      163,
+      164
+    ],
+    "section_md_file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.6",
+    "title": "Went Down to the Crossroads",
+    "book_pages": [
+      151
+    ],
+    "pdf_pages": [
+      165
+    ],
+    "section_md_file": "ch16-16.6-went-down-to-the-crossroads.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 16,
+    "section": "16.7",
+    "title": "... Fell Down on My Knees",
+    "book_pages": [
+      152,
+      153,
+      154
+    ],
+    "pdf_pages": [
+      166,
+      167,
+      168
+    ],
+    "section_md_file": "ch16-16.7-fell-down-on-my-knees.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 17,
+    "section": "17.1",
+    "title": "Introduction",
+    "book_pages": [
+      155,
+      156
+    ],
+    "pdf_pages": [
+      169,
+      170
+    ],
+    "section_md_file": "ch17-17.1-introduction.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 17,
+    "section": "17.2",
+    "title": "Power of a Point Proofs",
+    "book_pages": [
+      157,
+      158,
+      159
+    ],
+    "pdf_pages": [
+      171,
+      172,
+      173
+    ],
+    "section_md_file": "ch17-17.2-power-of-a-point-proofs.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.1",
+    "title": "Planes, Surface Area, and Volume",
+    "book_pages": [
+      160
+    ],
+    "pdf_pages": [
+      174
+    ],
+    "section_md_file": "ch18-18.1-planes-surface-area-and-volume.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.2",
+    "title": "Spheres",
+    "book_pages": [
+      161
+    ],
+    "pdf_pages": [
+      175
+    ],
+    "section_md_file": "ch18-18.2-spheres.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.3",
+    "title": "Cubes and Boxes",
+    "book_pages": [
+      162,
+      163,
+      164
+    ],
+    "pdf_pages": [
+      176,
+      177,
+      178
+    ],
+    "section_md_file": "ch18-18.3-cubes-and-boxes.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.4",
+    "title": "Prisms and Cylinders",
+    "book_pages": [
+      165
+    ],
+    "pdf_pages": [
+      179
+    ],
+    "section_md_file": "ch18-18.4-prisms-and-cylinders.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.5",
+    "title": "Pyramids and Cones",
+    "book_pages": [
+      166,
+      167
+    ],
+    "pdf_pages": [
+      180,
+      181
+    ],
+    "section_md_file": "ch18-18.5-pyramids-and-cones.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.6",
+    "title": "Polyhedra",
+    "book_pages": [
+      168
+    ],
+    "pdf_pages": [
+      182
+    ],
+    "section_md_file": "ch18-18.6-polyhedra.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 18,
+    "section": "18.7",
+    "title": "How to Solve 3D Problems",
+    "book_pages": [
+      169,
+      170,
+      171,
+      172
+    ],
+    "pdf_pages": [
+      183,
+      184,
+      185,
+      186
+    ],
+    "section_md_file": "ch18-18.7-how-to-solve-3d-problems.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.1",
+    "title": "Translation",
+    "book_pages": [
+      173
+    ],
+    "pdf_pages": [
+      187
+    ],
+    "section_md_file": "ch19-19.1-translation.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.2",
+    "title": "Rotation",
+    "book_pages": [
+      174
+    ],
+    "pdf_pages": [
+      188
+    ],
+    "section_md_file": "ch19-19.2-rotation.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.3",
+    "title": "Reflection",
+    "book_pages": [
+      175
+    ],
+    "pdf_pages": [
+      189
+    ],
+    "section_md_file": "ch19-19.3-reflection.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.4",
+    "title": "Distortion",
+    "book_pages": [
+      176
+    ],
+    "pdf_pages": [
+      190
+    ],
+    "section_md_file": "ch19-19.4-distortion.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.5",
+    "title": "Dilation",
+    "book_pages": [
+      177
+    ],
+    "pdf_pages": [
+      191
+    ],
+    "section_md_file": "ch19-19.5-dilation.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.6",
+    "title": "The More Things Change",
+    "book_pages": [
+      178
+    ],
+    "pdf_pages": [
+      192
+    ],
+    "section_md_file": "ch19-19.6-the-more-things-change.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 19,
+    "section": "19.7",
+    "title": "Transformation Proofs",
+    "book_pages": [
+      178,
+      179,
+      180
+    ],
+    "pdf_pages": [
+      192,
+      193,
+      194
+    ],
+    "section_md_file": "ch19-19.7-transformation-proofs.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 20,
+    "section": null,
+    "title": "A Potpourri of Geometry",
+    "book_pages": [
+      181,
+      182,
+      183,
+      184,
+      185,
+      186
+    ],
+    "pdf_pages": [
+      195,
+      196,
+      197,
+      198,
+      199,
+      200
+    ],
+    "section_md_file": "ch20-a-potpourri-of-geometry.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.1",
+    "title": "Welcome to the Machine",
+    "book_pages": [
+      187
+    ],
+    "pdf_pages": [
+      201
+    ],
+    "section_md_file": "ch21-21.1-welcome-to-the-machine.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.2",
+    "title": "Graphing Functions",
+    "book_pages": [
+      188
+    ],
+    "pdf_pages": [
+      202
+    ],
+    "section_md_file": "ch21-21.2-graphing-functions.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.3",
+    "title": "Inputs and Outputs",
+    "book_pages": [
+      189
+    ],
+    "pdf_pages": [
+      203
+    ],
+    "section_md_file": "ch21-21.3-inputs-and-outputs.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.4",
+    "title": "Even and Odd",
+    "book_pages": [
+      190
+    ],
+    "pdf_pages": [
+      204
+    ],
+    "section_md_file": "ch21-21.4-even-and-odd.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.5",
+    "title": "Some Special Functions",
+    "book_pages": [
+      191,
+      192,
+      193
+    ],
+    "pdf_pages": [
+      205,
+      206,
+      207
+    ],
+    "section_md_file": "ch21-21.5-some-special-functions.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 21,
+    "section": "21.6",
+    "title": "Transforming a Function",
+    "book_pages": [
+      194,
+      195,
+      196
+    ],
+    "pdf_pages": [
+      208,
+      209,
+      210
+    ],
+    "section_md_file": "ch21-21.6-transforming-a-function.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "section": "22.1",
+    "title": "What They Do",
+    "book_pages": [
+      197
+    ],
+    "pdf_pages": [
+      211
+    ],
+    "section_md_file": "ch22-22.1-what-they-do.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "section": "22.2",
+    "title": "Linear Inequalities",
+    "book_pages": [
+      198
+    ],
+    "pdf_pages": [
+      212
+    ],
+    "section_md_file": "ch22-22.2-linear-inequalities.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "section": "22.3",
+    "title": "Quadratic Inequalities",
+    "book_pages": [
+      199,
+      200,
+      201
+    ],
+    "pdf_pages": [
+      213,
+      214,
+      215
+    ],
+    "section_md_file": "ch22-22.3-quadratic-inequalities.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "section": "22.4",
+    "title": "Absolute Value Inequalities",
+    "book_pages": [
+      202
+    ],
+    "pdf_pages": [
+      216
+    ],
+    "section_md_file": "ch22-22.4-absolute-value-inequalities.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 22,
+    "section": "22.5",
+    "title": "A Trivial Inequality",
+    "book_pages": [
+      203,
+      204,
+      205
+    ],
+    "pdf_pages": [
+      217,
+      218,
+      219
+    ],
+    "section_md_file": "ch22-22.5-a-trivial-inequality.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 23,
+    "section": "23.1",
+    "title": "What is an Operation?",
+    "book_pages": [
+      206
+    ],
+    "pdf_pages": [
+      220
+    ],
+    "section_md_file": "ch23-23.1-what-is-an-operation.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 23,
+    "section": "23.2",
+    "title": "Properties of Operations",
+    "book_pages": [
+      207,
+      208
+    ],
+    "pdf_pages": [
+      221,
+      222
+    ],
+    "section_md_file": "ch23-23.2-properties-of-operations.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 23,
+    "section": "23.3",
+    "title": "Relations",
+    "book_pages": [
+      209,
+      210
+    ],
+    "pdf_pages": [
+      223,
+      224
+    ],
+    "section_md_file": "ch23-23.3-relations.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.1",
+    "title": "Arithmetic Series",
+    "book_pages": [
+      211
+    ],
+    "pdf_pages": [
+      225
+    ],
+    "section_md_file": "ch24-24.1-arithmetic-series.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.2",
+    "title": "Geometric Series",
+    "book_pages": [
+      212
+    ],
+    "pdf_pages": [
+      226
+    ],
+    "section_md_file": "ch24-24.2-geometric-series.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.3",
+    "title": "Infinite Series",
+    "book_pages": [
+      213,
+      214
+    ],
+    "pdf_pages": [
+      227,
+      228
+    ],
+    "section_md_file": "ch24-24.3-infinite-series.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.4",
+    "title": "Sigma Notation",
+    "book_pages": [
+      215
+    ],
+    "pdf_pages": [
+      229
+    ],
+    "section_md_file": "ch24-24.4-sigma-notation.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.5",
+    "title": "Sequences",
+    "book_pages": [
+      216
+    ],
+    "pdf_pages": [
+      230
+    ],
+    "section_md_file": "ch24-24.5-sequences.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 24,
+    "section": "24.6",
+    "title": "Sequences and Means",
+    "book_pages": [
+      217,
+      218,
+      219,
+      220
+    ],
+    "pdf_pages": [
+      231,
+      232,
+      233,
+      234
+    ],
+    "section_md_file": "ch24-24.6-sequences-and-means.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.1",
+    "title": "What's to Learn?",
+    "book_pages": [
+      221
+    ],
+    "pdf_pages": [
+      235
+    ],
+    "section_md_file": "ch25-25.1-whats-to-learn.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.2",
+    "title": "Multiplication",
+    "book_pages": [
+      221,
+      222
+    ],
+    "pdf_pages": [
+      235,
+      236
+    ],
+    "section_md_file": "ch25-25.2-multiplication.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.3",
+    "title": "Example: The Number of Divisors",
+    "book_pages": [
+      223
+    ],
+    "pdf_pages": [
+      237
+    ],
+    "section_md_file": "ch25-25.3-example-the-number-of-divisors.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.4",
+    "title": "Restrictions on Multiplication",
+    "book_pages": [
+      223,
+      224
+    ],
+    "pdf_pages": [
+      237,
+      238
+    ],
+    "section_md_file": "ch25-25.4-restrictions-on-multiplication.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.5",
+    "title": "Permutations, Arrangements, and !",
+    "book_pages": [
+      225,
+      226
+    ],
+    "pdf_pages": [
+      239,
+      240
+    ],
+    "section_md_file": "ch25-25.5-permutations-arrangements-and.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.6",
+    "title": "Mixing it Up",
+    "book_pages": [
+      227
+    ],
+    "pdf_pages": [
+      241
+    ],
+    "section_md_file": "ch25-25.6-mixing-it-up.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.7",
+    "title": "Counting the Wrong Thing, Part I",
+    "book_pages": [
+      228
+    ],
+    "pdf_pages": [
+      242
+    ],
+    "section_md_file": "ch25-25.7-counting-the-wrong-thing-part-i.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.8",
+    "title": "Counting the Wrong Thing, Part II",
+    "book_pages": [
+      229,
+      230,
+      231
+    ],
+    "pdf_pages": [
+      243,
+      244,
+      245
+    ],
+    "section_md_file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.9",
+    "title": "Doing it Another Way",
+    "book_pages": [
+      232
+    ],
+    "pdf_pages": [
+      246
+    ],
+    "section_md_file": "ch25-25.9-doing-it-another-way.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 25,
+    "section": "25.10",
+    "title": "The Binomial Theorem",
+    "book_pages": [
+      232,
+      233,
+      234,
+      235
+    ],
+    "pdf_pages": [
+      246,
+      247,
+      248,
+      249
+    ],
+    "section_md_file": "ch25-25.10-the-binomial-theorem.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.1",
+    "title": "Statistics",
+    "book_pages": [
+      236,
+      237
+    ],
+    "pdf_pages": [
+      250,
+      251
+    ],
+    "section_md_file": "ch26-26.1-statistics.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.2",
+    "title": "Probability and Common Sense",
+    "book_pages": [
+      238,
+      239
+    ],
+    "pdf_pages": [
+      252,
+      253
+    ],
+    "section_md_file": "ch26-26.2-probability-and-common-sense.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.3",
+    "title": "Multiplying Probabilities",
+    "book_pages": [
+      240
+    ],
+    "pdf_pages": [
+      254
+    ],
+    "section_md_file": "ch26-26.3-multiplying-probabilities.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.4",
+    "title": "Casework",
+    "book_pages": [
+      241
+    ],
+    "pdf_pages": [
+      255
+    ],
+    "section_md_file": "ch26-26.4-casework.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.5",
+    "title": "Odds",
+    "book_pages": [
+      242
+    ],
+    "pdf_pages": [
+      256
+    ],
+    "section_md_file": "ch26-26.5-odds.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 26,
+    "section": "26.6",
+    "title": "What Did You Expect?",
+    "book_pages": [
+      242,
+      243,
+      244,
+      245
+    ],
+    "pdf_pages": [
+      256,
+      257,
+      258,
+      259
+    ],
+    "section_md_file": "ch26-26.6-what-did-you-expect.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 27,
+    "section": "27.1",
+    "title": "Some Definitions",
+    "book_pages": [
+      246
+    ],
+    "pdf_pages": [
+      260
+    ],
+    "section_md_file": "ch27-27.1-some-definitions.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 27,
+    "section": "27.2",
+    "title": "Operating on Sets",
+    "book_pages": [
+      247
+    ],
+    "pdf_pages": [
+      261
+    ],
+    "section_md_file": "ch27-27.2-operating-on-sets.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 27,
+    "section": "27.3",
+    "title": "Venn Diagrams",
+    "book_pages": [
+      248
+    ],
+    "pdf_pages": [
+      262
+    ],
+    "section_md_file": "ch27-27.3-venn-diagrams.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 27,
+    "section": "27.4",
+    "title": "Subsets",
+    "book_pages": [
+      249,
+      250,
+      251
+    ],
+    "pdf_pages": [
+      263,
+      264,
+      265
+    ],
+    "section_md_file": "ch27-27.4-subsets.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.1",
+    "title": "Words, Words, Words",
+    "book_pages": [
+      252,
+      253
+    ],
+    "pdf_pages": [
+      266,
+      267
+    ],
+    "section_md_file": "ch28-28.1-words-words-words.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.2",
+    "title": "Contradiction",
+    "book_pages": [
+      254
+    ],
+    "pdf_pages": [
+      268
+    ],
+    "section_md_file": "ch28-28.2-contradiction.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.3",
+    "title": "Converses Aren't Necessarily True",
+    "book_pages": [
+      255
+    ],
+    "pdf_pages": [
+      269
+    ],
+    "section_md_file": "ch28-28.3-converses-arent-necessarily-true.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.4",
+    "title": "Mathematical Induction",
+    "book_pages": [
+      256
+    ],
+    "pdf_pages": [
+      270
+    ],
+    "section_md_file": "ch28-28.4-mathematical-induction.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.5",
+    "title": "Shooting Holes in Pigeons",
+    "book_pages": [
+      257
+    ],
+    "pdf_pages": [
+      271
+    ],
+    "section_md_file": "ch28-28.5-shooting-holes-in-pigeons.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 28,
+    "section": "28.6",
+    "title": "Convincing But Wrong",
+    "book_pages": [
+      258,
+      259,
+      260,
+      261
+    ],
+    "pdf_pages": [
+      272,
+      273,
+      274,
+      275
+    ],
+    "section_md_file": "ch28-28.6-convincing-but-wrong.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  },
+  {
+    "chapter": 29,
+    "section": null,
+    "title": "Parting Shots",
+    "book_pages": [
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274
+    ],
+    "pdf_pages": [
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288
+    ],
+    "section_md_file": "ch29-parting-shots.md",
+    "in_chapter_md": false,
+    "source": "manifest",
+    "needs_review": true
+  }
+]

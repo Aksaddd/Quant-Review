@@ -1,0 +1,4226 @@
+[
+  {
+    "id": "1-1",
+    "chapter": 1,
+    "number": 1,
+    "section": "1.1",
+    "pdf_page": 15,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-2",
+    "chapter": 1,
+    "number": 2,
+    "section": "1.1",
+    "pdf_page": 15,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-3",
+    "chapter": 1,
+    "number": 3,
+    "section": "1.1",
+    "pdf_page": 16,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-4",
+    "chapter": 1,
+    "number": 4,
+    "section": "1.1",
+    "pdf_page": 17,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-5",
+    "chapter": 1,
+    "number": 5,
+    "section": "1.1",
+    "pdf_page": 17,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-6",
+    "chapter": 1,
+    "number": 6,
+    "section": "1.2",
+    "pdf_page": 17,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-7",
+    "chapter": 1,
+    "number": 7,
+    "section": "1.2",
+    "pdf_page": 18,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-8",
+    "chapter": 1,
+    "number": 8,
+    "section": "1.2",
+    "pdf_page": 18,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-9",
+    "chapter": 1,
+    "number": 9,
+    "section": "1.2",
+    "pdf_page": 19,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-10",
+    "chapter": 1,
+    "number": 10,
+    "section": "1.2",
+    "pdf_page": 19,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-11",
+    "chapter": 1,
+    "number": 11,
+    "section": "1.3",
+    "pdf_page": 20,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-12",
+    "chapter": 1,
+    "number": 12,
+    "section": "1.4",
+    "pdf_page": 22,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-13",
+    "chapter": 1,
+    "number": 13,
+    "section": "1.4",
+    "pdf_page": 23,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-14",
+    "chapter": 1,
+    "number": 14,
+    "section": "1.4",
+    "pdf_page": 23,
+    "tags": {
+      "high_value": false,
+      "hard": true,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "1-15",
+    "chapter": 1,
+    "number": 15,
+    "section": "1.5",
+    "pdf_page": 25,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch01_exponents_and_logarithms.md",
+    "needs_review": false
+  },
+  {
+    "id": "2-1",
+    "chapter": 2,
+    "number": 1,
+    "section": "2.2",
+    "pdf_page": 28,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch02_complex_numbers.md",
+    "needs_review": false
+  },
+  {
+    "id": "2-2",
+    "chapter": 2,
+    "number": 2,
+    "section": "2.2",
+    "pdf_page": 28,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch02_complex_numbers.md",
+    "needs_review": false
+  },
+  {
+    "id": "2-3",
+    "chapter": 2,
+    "number": 3,
+    "section": "2.2",
+    "pdf_page": 28,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch02_complex_numbers.md",
+    "needs_review": false
+  },
+  {
+    "id": "2-4",
+    "chapter": 2,
+    "number": 4,
+    "section": "2.2",
+    "pdf_page": 29,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch02_complex_numbers.md",
+    "needs_review": false
+  },
+  {
+    "id": "2-5",
+    "chapter": 2,
+    "number": 5,
+    "section": "2.2",
+    "pdf_page": 29,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch02_complex_numbers.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-1",
+    "chapter": 3,
+    "number": 1,
+    "section": "3.1",
+    "pdf_page": 31,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-2",
+    "chapter": 3,
+    "number": 2,
+    "section": "3.2",
+    "pdf_page": 32,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-3",
+    "chapter": 3,
+    "number": 3,
+    "section": "3.2",
+    "pdf_page": 32,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-4",
+    "chapter": 3,
+    "number": 4,
+    "section": "3.2",
+    "pdf_page": 32,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-5",
+    "chapter": 3,
+    "number": 5,
+    "section": "3.3",
+    "pdf_page": 34,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-6",
+    "chapter": 3,
+    "number": 6,
+    "section": "3.3",
+    "pdf_page": 34,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-7",
+    "chapter": 3,
+    "number": 7,
+    "section": "3.3",
+    "pdf_page": 35,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-8",
+    "chapter": 3,
+    "number": 8,
+    "section": "3.3",
+    "pdf_page": 35,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-9",
+    "chapter": 3,
+    "number": 9,
+    "section": "3.3",
+    "pdf_page": 35,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-10",
+    "chapter": 3,
+    "number": 10,
+    "section": "3.4",
+    "pdf_page": 36,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-11",
+    "chapter": 3,
+    "number": 11,
+    "section": "3.4",
+    "pdf_page": 36,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-12",
+    "chapter": 3,
+    "number": 12,
+    "section": "3.4",
+    "pdf_page": 37,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-13",
+    "chapter": 3,
+    "number": 13,
+    "section": "3.4",
+    "pdf_page": 37,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-14",
+    "chapter": 3,
+    "number": 14,
+    "section": "3.4",
+    "pdf_page": 37,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "3-15",
+    "chapter": 3,
+    "number": 15,
+    "section": "3.4",
+    "pdf_page": 38,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch03_linear_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-1",
+    "chapter": 4,
+    "number": 1,
+    "section": "4.1",
+    "pdf_page": 42,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-2",
+    "chapter": 4,
+    "number": 2,
+    "section": "4.1",
+    "pdf_page": 43,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-3",
+    "chapter": 4,
+    "number": 3,
+    "section": "4.1",
+    "pdf_page": 43,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-4",
+    "chapter": 4,
+    "number": 4,
+    "section": "4.1",
+    "pdf_page": 43,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-5",
+    "chapter": 4,
+    "number": 5,
+    "section": "4.1",
+    "pdf_page": 43,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-6",
+    "chapter": 4,
+    "number": 6,
+    "section": "4.1",
+    "pdf_page": 44,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-7",
+    "chapter": 4,
+    "number": 7,
+    "section": "4.2",
+    "pdf_page": 45,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-8",
+    "chapter": 4,
+    "number": 8,
+    "section": "4.3",
+    "pdf_page": 47,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-9",
+    "chapter": 4,
+    "number": 9,
+    "section": "4.3",
+    "pdf_page": 47,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-10",
+    "chapter": 4,
+    "number": 10,
+    "section": "4.4",
+    "pdf_page": 48,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-11",
+    "chapter": 4,
+    "number": 11,
+    "section": "4.4",
+    "pdf_page": 48,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-12",
+    "chapter": 4,
+    "number": 12,
+    "section": "4.4",
+    "pdf_page": 49,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-13",
+    "chapter": 4,
+    "number": 13,
+    "section": "4.4",
+    "pdf_page": 49,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-14",
+    "chapter": 4,
+    "number": 14,
+    "section": "4.4",
+    "pdf_page": 49,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "4-15",
+    "chapter": 4,
+    "number": 15,
+    "section": "4.4",
+    "pdf_page": 49,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch04_proportions.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-1",
+    "chapter": 5,
+    "number": 1,
+    "section": "5.2",
+    "pdf_page": 54,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-2",
+    "chapter": 5,
+    "number": 2,
+    "section": "5.2",
+    "pdf_page": 54,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-3",
+    "chapter": 5,
+    "number": 3,
+    "section": "5.2",
+    "pdf_page": 55,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-4",
+    "chapter": 5,
+    "number": 4,
+    "section": "5.3",
+    "pdf_page": 56,
+    "tags": {
+      "high_value": false,
+      "hard": true,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-5",
+    "chapter": 5,
+    "number": 5,
+    "section": "5.4",
+    "pdf_page": 57,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-6",
+    "chapter": 5,
+    "number": 6,
+    "section": "5.4",
+    "pdf_page": 57,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-7",
+    "chapter": 5,
+    "number": 7,
+    "section": "5.4",
+    "pdf_page": 59,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-8",
+    "chapter": 5,
+    "number": 8,
+    "section": "5.5",
+    "pdf_page": 60,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-9",
+    "chapter": 5,
+    "number": 9,
+    "section": "5.6",
+    "pdf_page": 61,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-10",
+    "chapter": 5,
+    "number": 10,
+    "section": "5.6",
+    "pdf_page": 61,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-11",
+    "chapter": 5,
+    "number": 11,
+    "section": "5.7",
+    "pdf_page": 62,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-12",
+    "chapter": 5,
+    "number": 12,
+    "section": "5.7",
+    "pdf_page": 63,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "5-13",
+    "chapter": 5,
+    "number": 13,
+    "section": "5.7",
+    "pdf_page": 63,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch05_using_the_integers.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-1",
+    "chapter": 6,
+    "number": 1,
+    "section": "6.2",
+    "pdf_page": 67,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-2",
+    "chapter": 6,
+    "number": 2,
+    "section": "6.2",
+    "pdf_page": 68,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-3",
+    "chapter": 6,
+    "number": 3,
+    "section": "6.2",
+    "pdf_page": 68,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-4",
+    "chapter": 6,
+    "number": 4,
+    "section": "6.2",
+    "pdf_page": 69,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-5",
+    "chapter": 6,
+    "number": 5,
+    "section": "6.3",
+    "pdf_page": 71,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-6",
+    "chapter": 6,
+    "number": 6,
+    "section": "6.3",
+    "pdf_page": 72,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": true
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-7",
+    "chapter": 6,
+    "number": 7,
+    "section": "6.3",
+    "pdf_page": 72,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-8",
+    "chapter": 6,
+    "number": 8,
+    "section": "6.4",
+    "pdf_page": 73,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-9",
+    "chapter": 6,
+    "number": 9,
+    "section": "6.4",
+    "pdf_page": 73,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-10",
+    "chapter": 6,
+    "number": 10,
+    "section": "6.4",
+    "pdf_page": 74,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-11",
+    "chapter": 6,
+    "number": 11,
+    "section": "6.4",
+    "pdf_page": 74,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-12",
+    "chapter": 6,
+    "number": 12,
+    "section": "6.4",
+    "pdf_page": 75,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-13",
+    "chapter": 6,
+    "number": 13,
+    "section": "6.4",
+    "pdf_page": 75,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-14",
+    "chapter": 6,
+    "number": 14,
+    "section": "6.5",
+    "pdf_page": 76,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "6-15",
+    "chapter": 6,
+    "number": 15,
+    "section": "6.5",
+    "pdf_page": 77,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch06_quadratic_equations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-1",
+    "chapter": 7,
+    "number": 1,
+    "section": "7.1",
+    "pdf_page": 82,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-2",
+    "chapter": 7,
+    "number": 2,
+    "section": "7.1",
+    "pdf_page": 83,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-3",
+    "chapter": 7,
+    "number": 3,
+    "section": "7.1",
+    "pdf_page": 83,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-4",
+    "chapter": 7,
+    "number": 4,
+    "section": "7.2",
+    "pdf_page": 85,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-5",
+    "chapter": 7,
+    "number": 5,
+    "section": "7.2",
+    "pdf_page": 85,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "7-6",
+    "chapter": 7,
+    "number": 6,
+    "section": "7.2",
+    "pdf_page": 85,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch07_special_factorizations.md",
+    "needs_review": false
+  },
+  {
+    "id": "8-1",
+    "chapter": 8,
+    "number": 1,
+    "section": "8.1",
+    "pdf_page": 90,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch08_what_numbers_really_are.md",
+    "needs_review": false
+  },
+  {
+    "id": "8-2",
+    "chapter": 8,
+    "number": 2,
+    "section": "8.1",
+    "pdf_page": 90,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch08_what_numbers_really_are.md",
+    "needs_review": false
+  },
+  {
+    "id": "8-3",
+    "chapter": 8,
+    "number": 3,
+    "section": "8.1",
+    "pdf_page": 90,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch08_what_numbers_really_are.md",
+    "needs_review": false
+  },
+  {
+    "id": "8-4",
+    "chapter": 8,
+    "number": 4,
+    "section": "8.1",
+    "pdf_page": 91,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch08_what_numbers_really_are.md",
+    "needs_review": false
+  },
+  {
+    "id": "9-1",
+    "chapter": 9,
+    "number": 1,
+    "section": null,
+    "pdf_page": 95,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch09_intro_to_circles.md",
+    "needs_review": false
+  },
+  {
+    "id": "9-2",
+    "chapter": 9,
+    "number": 2,
+    "section": null,
+    "pdf_page": 96,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "chapter_md",
+    "source_file": "aops_vol1_ch09_intro_to_circles.md",
+    "needs_review": false
+  },
+  {
+    "id": "10-1",
+    "chapter": 10,
+    "number": 1,
+    "section": "10.2",
+    "pdf_page": 99,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.2-classification-and-measurement.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-2",
+    "chapter": 10,
+    "number": 2,
+    "section": "10.2",
+    "pdf_page": 99,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.2-classification-and-measurement.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-3",
+    "chapter": 10,
+    "number": 3,
+    "section": "10.3",
+    "pdf_page": 100,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.3-angles-and-parallel-lines.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-4",
+    "chapter": 10,
+    "number": 4,
+    "section": "10.3",
+    "pdf_page": 100,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.3-angles-and-parallel-lines.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-5",
+    "chapter": 10,
+    "number": 5,
+    "section": "10.5",
+    "pdf_page": 102,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-6",
+    "chapter": 10,
+    "number": 6,
+    "section": "10.5",
+    "pdf_page": 102,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-7",
+    "chapter": 10,
+    "number": 7,
+    "section": "10.5",
+    "pdf_page": 103,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-8",
+    "chapter": 10,
+    "number": 8,
+    "section": "10.5",
+    "pdf_page": 103,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.5-angles-formed-by-lines-intersecting-a-circle.md",
+    "needs_review": true
+  },
+  {
+    "id": "10-9",
+    "chapter": 10,
+    "number": 9,
+    "section": "10.6",
+    "pdf_page": 104,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch10-10.6-the-burden-of-proof.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-1",
+    "chapter": 11,
+    "number": 1,
+    "section": "11.3",
+    "pdf_page": 110,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.3-the-triangle-inequality.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-2",
+    "chapter": 11,
+    "number": 2,
+    "section": "11.3",
+    "pdf_page": 110,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.3-the-triangle-inequality.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-3",
+    "chapter": 11,
+    "number": 3,
+    "section": "11.4",
+    "pdf_page": 111,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-4",
+    "chapter": 11,
+    "number": 4,
+    "section": "11.4",
+    "pdf_page": 111,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-5",
+    "chapter": 11,
+    "number": 5,
+    "section": "11.4",
+    "pdf_page": 111,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-6",
+    "chapter": 11,
+    "number": 6,
+    "section": "11.4",
+    "pdf_page": 111,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-7",
+    "chapter": 11,
+    "number": 7,
+    "section": "11.4",
+    "pdf_page": 112,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-8",
+    "chapter": 11,
+    "number": 8,
+    "section": "11.4",
+    "pdf_page": 112,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.4-the-pythagorean-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-9",
+    "chapter": 11,
+    "number": 9,
+    "section": "11.5",
+    "pdf_page": 115,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.5-congruent-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-10",
+    "chapter": 11,
+    "number": 10,
+    "section": "11.5",
+    "pdf_page": 115,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.5-congruent-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-11",
+    "chapter": 11,
+    "number": 11,
+    "section": "11.6",
+    "pdf_page": 116,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.6-similar-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-12",
+    "chapter": 11,
+    "number": 12,
+    "section": "11.6",
+    "pdf_page": 117,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.6-similar-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-13",
+    "chapter": 11,
+    "number": 13,
+    "section": "11.6",
+    "pdf_page": 117,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.6-similar-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-14",
+    "chapter": 11,
+    "number": 14,
+    "section": "11.6",
+    "pdf_page": 117,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.6-similar-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-15",
+    "chapter": 11,
+    "number": 15,
+    "section": "11.6",
+    "pdf_page": 117,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.6-similar-triangles.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-16",
+    "chapter": 11,
+    "number": 16,
+    "section": "11.7",
+    "pdf_page": 122,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.7-introduction-to-trigonometry.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-17",
+    "chapter": 11,
+    "number": 17,
+    "section": "11.7",
+    "pdf_page": 122,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.7-introduction-to-trigonometry.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-18",
+    "chapter": 11,
+    "number": 18,
+    "section": "11.8",
+    "pdf_page": 123,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.8-area-of-a-triangle.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-19",
+    "chapter": 11,
+    "number": 19,
+    "section": "11.8",
+    "pdf_page": 123,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.8-area-of-a-triangle.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-20",
+    "chapter": 11,
+    "number": 20,
+    "section": "11.8",
+    "pdf_page": 123,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.8-area-of-a-triangle.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-21",
+    "chapter": 11,
+    "number": 21,
+    "section": "11.8",
+    "pdf_page": 123,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.8-area-of-a-triangle.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-22",
+    "chapter": 11,
+    "number": 22,
+    "section": "11.8",
+    "pdf_page": 125,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.8-area-of-a-triangle.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-23",
+    "chapter": 11,
+    "number": 23,
+    "section": "11.9",
+    "pdf_page": 126,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.9-a-handful-of-helpful-hints.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-24",
+    "chapter": 11,
+    "number": 24,
+    "section": "11.9",
+    "pdf_page": 126,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.9-a-handful-of-helpful-hints.md",
+    "needs_review": true
+  },
+  {
+    "id": "11-25",
+    "chapter": 11,
+    "number": 25,
+    "section": "11.9",
+    "pdf_page": 128,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch11-11.9-a-handful-of-helpful-hints.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-1",
+    "chapter": 12,
+    "number": 1,
+    "section": "12.3",
+    "pdf_page": 134,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.3-parallelograms.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-2",
+    "chapter": 12,
+    "number": 2,
+    "section": "12.4",
+    "pdf_page": 135,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.4-rhombuses-rhombi.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-3",
+    "chapter": 12,
+    "number": 3,
+    "section": "12.5",
+    "pdf_page": 136,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.5-rectangles-and-squares.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-4",
+    "chapter": 12,
+    "number": 4,
+    "section": "12.5",
+    "pdf_page": 136,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.5-rectangles-and-squares.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-5",
+    "chapter": 12,
+    "number": 5,
+    "section": "12.6",
+    "pdf_page": 137,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.6-hints-and-problems.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-6",
+    "chapter": 12,
+    "number": 6,
+    "section": "12.6",
+    "pdf_page": 138,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.6-hints-and-problems.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-7",
+    "chapter": 12,
+    "number": 7,
+    "section": "12.6",
+    "pdf_page": 138,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.6-hints-and-problems.md",
+    "needs_review": true
+  },
+  {
+    "id": "12-8",
+    "chapter": 12,
+    "number": 8,
+    "section": "12.6",
+    "pdf_page": 138,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch12-12.6-hints-and-problems.md",
+    "needs_review": true
+  },
+  {
+    "id": "13-1",
+    "chapter": 13,
+    "number": 1,
+    "section": "13.3",
+    "pdf_page": 143,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch13-13.3-regular-polygons.md",
+    "needs_review": true
+  },
+  {
+    "id": "13-2",
+    "chapter": 13,
+    "number": 2,
+    "section": "13.3",
+    "pdf_page": 143,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch13-13.3-regular-polygons.md",
+    "needs_review": true
+  },
+  {
+    "id": "13-3",
+    "chapter": 13,
+    "number": 3,
+    "section": "13.3",
+    "pdf_page": 143,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch13-13.3-regular-polygons.md",
+    "needs_review": true
+  },
+  {
+    "id": "13-4",
+    "chapter": 13,
+    "number": 4,
+    "section": "13.4",
+    "pdf_page": 144,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch13-13.4-regular-hexagons.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-1",
+    "chapter": 15,
+    "number": 1,
+    "section": "15.1",
+    "pdf_page": 150,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.1-similar-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-2",
+    "chapter": 15,
+    "number": 2,
+    "section": "15.1",
+    "pdf_page": 150,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.1-similar-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-3",
+    "chapter": 15,
+    "number": 3,
+    "section": "15.2",
+    "pdf_page": 151,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.2-same-basesame-altitude.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-4",
+    "chapter": 15,
+    "number": 4,
+    "section": "15.2",
+    "pdf_page": 151,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.2-same-basesame-altitude.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-5",
+    "chapter": 15,
+    "number": 5,
+    "section": "15.2",
+    "pdf_page": 151,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.2-same-basesame-altitude.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-6",
+    "chapter": 15,
+    "number": 6,
+    "section": "15.3",
+    "pdf_page": 152,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-7",
+    "chapter": 15,
+    "number": 7,
+    "section": "15.3",
+    "pdf_page": 152,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-8",
+    "chapter": 15,
+    "number": 8,
+    "section": "15.3",
+    "pdf_page": 152,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-9",
+    "chapter": 15,
+    "number": 9,
+    "section": "15.3",
+    "pdf_page": 153,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-10",
+    "chapter": 15,
+    "number": 10,
+    "section": "15.3",
+    "pdf_page": 153,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-11",
+    "chapter": 15,
+    "number": 11,
+    "section": "15.3",
+    "pdf_page": 153,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "15-12",
+    "chapter": 15,
+    "number": 12,
+    "section": "15.3",
+    "pdf_page": 153,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch15-15.3-complicated-figures.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-1",
+    "chapter": 16,
+    "number": 1,
+    "section": "16.3",
+    "pdf_page": 160,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.3-straight-and-narrow.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-2",
+    "chapter": 16,
+    "number": 2,
+    "section": "16.3",
+    "pdf_page": 161,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.3-straight-and-narrow.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-3",
+    "chapter": 16,
+    "number": 3,
+    "section": "16.3",
+    "pdf_page": 161,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.3-straight-and-narrow.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-4",
+    "chapter": 16,
+    "number": 4,
+    "section": "16.3",
+    "pdf_page": 161,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.3-straight-and-narrow.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-5",
+    "chapter": 16,
+    "number": 5,
+    "section": "16.3",
+    "pdf_page": 161,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.3-straight-and-narrow.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-6",
+    "chapter": 16,
+    "number": 6,
+    "section": "16.4",
+    "pdf_page": 162,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.4-plotting-a-line.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-7",
+    "chapter": 16,
+    "number": 7,
+    "section": "16.5",
+    "pdf_page": 163,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-8",
+    "chapter": 16,
+    "number": 8,
+    "section": "16.5",
+    "pdf_page": 164,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-9",
+    "chapter": 16,
+    "number": 9,
+    "section": "16.5",
+    "pdf_page": 164,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-10",
+    "chapter": 16,
+    "number": 10,
+    "section": "16.5",
+    "pdf_page": 164,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.5-the-distance-formula-and-circles.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-11",
+    "chapter": 16,
+    "number": 11,
+    "section": "16.6",
+    "pdf_page": 165,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.6-went-down-to-the-crossroads.md",
+    "needs_review": true
+  },
+  {
+    "id": "16-12",
+    "chapter": 16,
+    "number": 12,
+    "section": "16.7",
+    "pdf_page": 166,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch16-16.7-fell-down-on-my-knees.md",
+    "needs_review": true
+  },
+  {
+    "id": "17-1",
+    "chapter": 17,
+    "number": 1,
+    "section": "17.1",
+    "pdf_page": 170,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch17-17.1-introduction.md",
+    "needs_review": true
+  },
+  {
+    "id": "17-2",
+    "chapter": 17,
+    "number": 2,
+    "section": "17.1",
+    "pdf_page": 170,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch17-17.1-introduction.md",
+    "needs_review": true
+  },
+  {
+    "id": "17-3",
+    "chapter": 17,
+    "number": 3,
+    "section": "17.1",
+    "pdf_page": 170,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch17-17.1-introduction.md",
+    "needs_review": true
+  },
+  {
+    "id": "17-4",
+    "chapter": 17,
+    "number": 4,
+    "section": "17.1",
+    "pdf_page": 170,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch17-17.1-introduction.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-1",
+    "chapter": 18,
+    "number": 1,
+    "section": "18.2",
+    "pdf_page": 175,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.2-spheres.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-2",
+    "chapter": 18,
+    "number": 2,
+    "section": "18.2",
+    "pdf_page": 175,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.2-spheres.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-3",
+    "chapter": 18,
+    "number": 3,
+    "section": "18.3",
+    "pdf_page": 176,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.3-cubes-and-boxes.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-4",
+    "chapter": 18,
+    "number": 4,
+    "section": "18.3",
+    "pdf_page": 176,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.3-cubes-and-boxes.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-5",
+    "chapter": 18,
+    "number": 5,
+    "section": "18.3",
+    "pdf_page": 177,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.3-cubes-and-boxes.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-6",
+    "chapter": 18,
+    "number": 6,
+    "section": "18.3",
+    "pdf_page": 178,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.3-cubes-and-boxes.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-7",
+    "chapter": 18,
+    "number": 7,
+    "section": "18.3",
+    "pdf_page": 178,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.3-cubes-and-boxes.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-8",
+    "chapter": 18,
+    "number": 8,
+    "section": "18.4",
+    "pdf_page": 179,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.4-prisms-and-cylinders.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-9",
+    "chapter": 18,
+    "number": 9,
+    "section": "18.5",
+    "pdf_page": 180,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.5-pyramids-and-cones.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-10",
+    "chapter": 18,
+    "number": 10,
+    "section": "18.5",
+    "pdf_page": 181,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.5-pyramids-and-cones.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-11",
+    "chapter": 18,
+    "number": 11,
+    "section": "18.5",
+    "pdf_page": 181,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.5-pyramids-and-cones.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-12",
+    "chapter": 18,
+    "number": 12,
+    "section": "18.6",
+    "pdf_page": 182,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.6-polyhedra.md",
+    "needs_review": true
+  },
+  {
+    "id": "18-13",
+    "chapter": 18,
+    "number": 13,
+    "section": "18.7",
+    "pdf_page": 183,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch18-18.7-how-to-solve-3d-problems.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-1",
+    "chapter": 19,
+    "number": 1,
+    "section": "19.1",
+    "pdf_page": 187,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.1-translation.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-2",
+    "chapter": 19,
+    "number": 2,
+    "section": "19.2",
+    "pdf_page": 188,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.2-rotation.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-3",
+    "chapter": 19,
+    "number": 3,
+    "section": "19.2",
+    "pdf_page": 188,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.2-rotation.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-4",
+    "chapter": 19,
+    "number": 4,
+    "section": "19.4",
+    "pdf_page": 190,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.4-distortion.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-5",
+    "chapter": 19,
+    "number": 5,
+    "section": "19.4",
+    "pdf_page": 190,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.4-distortion.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-6",
+    "chapter": 19,
+    "number": 6,
+    "section": "19.5",
+    "pdf_page": 191,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.5-dilation.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-7",
+    "chapter": 19,
+    "number": 7,
+    "section": "19.5",
+    "pdf_page": 191,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.5-dilation.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-8",
+    "chapter": 19,
+    "number": 8,
+    "section": "19.6",
+    "pdf_page": 192,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.6-the-more-things-change.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-9",
+    "chapter": 19,
+    "number": 9,
+    "section": "19.7",
+    "pdf_page": 193,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.7-transformation-proofs.md",
+    "needs_review": true
+  },
+  {
+    "id": "19-10",
+    "chapter": 19,
+    "number": 10,
+    "section": "19.7",
+    "pdf_page": 193,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch19-19.7-transformation-proofs.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-1",
+    "chapter": 21,
+    "number": 1,
+    "section": "21.2",
+    "pdf_page": 202,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.2-graphing-functions.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-2",
+    "chapter": 21,
+    "number": 2,
+    "section": "21.2",
+    "pdf_page": 202,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.2-graphing-functions.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-3",
+    "chapter": 21,
+    "number": 3,
+    "section": "21.3",
+    "pdf_page": 203,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.3-inputs-and-outputs.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-4",
+    "chapter": 21,
+    "number": 4,
+    "section": "21.3",
+    "pdf_page": 203,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.3-inputs-and-outputs.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-5",
+    "chapter": 21,
+    "number": 5,
+    "section": "21.4",
+    "pdf_page": 204,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.4-even-and-odd.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-8",
+    "chapter": 21,
+    "number": 8,
+    "section": "21.5",
+    "pdf_page": 205,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.5-some-special-functions.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-9",
+    "chapter": 21,
+    "number": 9,
+    "section": "21.5",
+    "pdf_page": 205,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.5-some-special-functions.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-10",
+    "chapter": 21,
+    "number": 10,
+    "section": "21.5",
+    "pdf_page": 206,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.5-some-special-functions.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-11",
+    "chapter": 21,
+    "number": 11,
+    "section": "21.6",
+    "pdf_page": 208,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.6-transforming-a-function.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-12",
+    "chapter": 21,
+    "number": 12,
+    "section": "21.6",
+    "pdf_page": 208,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.6-transforming-a-function.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-13",
+    "chapter": 21,
+    "number": 13,
+    "section": "21.6",
+    "pdf_page": 208,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.6-transforming-a-function.md",
+    "needs_review": true
+  },
+  {
+    "id": "21-14",
+    "chapter": 21,
+    "number": 14,
+    "section": "21.6",
+    "pdf_page": 209,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch21-21.6-transforming-a-function.md",
+    "needs_review": true
+  },
+  {
+    "id": "22-1",
+    "chapter": 22,
+    "number": 1,
+    "section": "22.2",
+    "pdf_page": 212,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch22-22.2-linear-inequalities.md",
+    "needs_review": true
+  },
+  {
+    "id": "22-2",
+    "chapter": 22,
+    "number": 2,
+    "section": "22.3",
+    "pdf_page": 213,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch22-22.3-quadratic-inequalities.md",
+    "needs_review": true
+  },
+  {
+    "id": "22-3",
+    "chapter": 22,
+    "number": 3,
+    "section": "22.3",
+    "pdf_page": 215,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch22-22.3-quadratic-inequalities.md",
+    "needs_review": true
+  },
+  {
+    "id": "22-4",
+    "chapter": 22,
+    "number": 4,
+    "section": "22.3",
+    "pdf_page": 215,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch22-22.3-quadratic-inequalities.md",
+    "needs_review": true
+  },
+  {
+    "id": "22-5",
+    "chapter": 22,
+    "number": 5,
+    "section": "22.5",
+    "pdf_page": 217,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch22-22.5-a-trivial-inequality.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-1",
+    "chapter": 23,
+    "number": 1,
+    "section": "23.1",
+    "pdf_page": 220,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.1-what-is-an-operation.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-2",
+    "chapter": 23,
+    "number": 2,
+    "section": "23.2",
+    "pdf_page": 222,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.2-properties-of-operations.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-3",
+    "chapter": 23,
+    "number": 3,
+    "section": "23.2",
+    "pdf_page": 222,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.2-properties-of-operations.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-4",
+    "chapter": 23,
+    "number": 4,
+    "section": "23.2",
+    "pdf_page": 222,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.2-properties-of-operations.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-5",
+    "chapter": 23,
+    "number": 5,
+    "section": "23.2",
+    "pdf_page": 222,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.2-properties-of-operations.md",
+    "needs_review": true
+  },
+  {
+    "id": "23-6",
+    "chapter": 23,
+    "number": 6,
+    "section": "23.2",
+    "pdf_page": 222,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch23-23.2-properties-of-operations.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-1",
+    "chapter": 24,
+    "number": 1,
+    "section": "24.2",
+    "pdf_page": 226,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.2-geometric-series.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-2",
+    "chapter": 24,
+    "number": 2,
+    "section": "24.2",
+    "pdf_page": 226,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.2-geometric-series.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-3",
+    "chapter": 24,
+    "number": 3,
+    "section": "24.3",
+    "pdf_page": 227,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.3-infinite-series.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-4",
+    "chapter": 24,
+    "number": 4,
+    "section": "24.3",
+    "pdf_page": 228,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.3-infinite-series.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-5",
+    "chapter": 24,
+    "number": 5,
+    "section": "24.4",
+    "pdf_page": 229,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.4-sigma-notation.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-6",
+    "chapter": 24,
+    "number": 6,
+    "section": "24.5",
+    "pdf_page": 230,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.5-sequences.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-7",
+    "chapter": 24,
+    "number": 7,
+    "section": "24.6",
+    "pdf_page": 231,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.6-sequences-and-means.md",
+    "needs_review": true
+  },
+  {
+    "id": "24-8",
+    "chapter": 24,
+    "number": 8,
+    "section": "24.6",
+    "pdf_page": 232,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch24-24.6-sequences-and-means.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-1",
+    "chapter": 25,
+    "number": 1,
+    "section": "25.1",
+    "pdf_page": 235,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.1-whats-to-learn.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-2",
+    "chapter": 25,
+    "number": 2,
+    "section": "25.2",
+    "pdf_page": 236,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.2-multiplication.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-3",
+    "chapter": 25,
+    "number": 3,
+    "section": "25.2",
+    "pdf_page": 236,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.2-multiplication.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-4",
+    "chapter": 25,
+    "number": 4,
+    "section": "25.4",
+    "pdf_page": 238,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.4-restrictions-on-multiplication.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-5",
+    "chapter": 25,
+    "number": 5,
+    "section": "25.5",
+    "pdf_page": 239,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.5-permutations-arrangements-and.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-6",
+    "chapter": 25,
+    "number": 6,
+    "section": "25.5",
+    "pdf_page": 239,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.5-permutations-arrangements-and.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-7",
+    "chapter": 25,
+    "number": 7,
+    "section": "25.5",
+    "pdf_page": 239,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.5-permutations-arrangements-and.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-8",
+    "chapter": 25,
+    "number": 8,
+    "section": "25.5",
+    "pdf_page": 239,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.5-permutations-arrangements-and.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-9",
+    "chapter": 25,
+    "number": 9,
+    "section": "25.6",
+    "pdf_page": 241,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.6-mixing-it-up.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-10",
+    "chapter": 25,
+    "number": 10,
+    "section": "25.6",
+    "pdf_page": 241,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.6-mixing-it-up.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-11",
+    "chapter": 25,
+    "number": 11,
+    "section": "25.7",
+    "pdf_page": 242,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.7-counting-the-wrong-thing-part-i.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-12",
+    "chapter": 25,
+    "number": 12,
+    "section": "25.7",
+    "pdf_page": 242,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.7-counting-the-wrong-thing-part-i.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-13",
+    "chapter": 25,
+    "number": 13,
+    "section": "25.8",
+    "pdf_page": 243,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-14",
+    "chapter": 25,
+    "number": 14,
+    "section": "25.8",
+    "pdf_page": 244,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-15",
+    "chapter": 25,
+    "number": 15,
+    "section": "25.8",
+    "pdf_page": 244,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-16",
+    "chapter": 25,
+    "number": 16,
+    "section": "25.8",
+    "pdf_page": 244,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.8-counting-the-wrong-thing-part-ii.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-17",
+    "chapter": 25,
+    "number": 17,
+    "section": "25.10",
+    "pdf_page": 246,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.10-the-binomial-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "25-18",
+    "chapter": 25,
+    "number": 18,
+    "section": "25.10",
+    "pdf_page": 247,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch25-25.10-the-binomial-theorem.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-1",
+    "chapter": 26,
+    "number": 1,
+    "section": "26.1",
+    "pdf_page": 250,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.1-statistics.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-2",
+    "chapter": 26,
+    "number": 2,
+    "section": "26.1",
+    "pdf_page": 251,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.1-statistics.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-3",
+    "chapter": 26,
+    "number": 3,
+    "section": "26.1",
+    "pdf_page": 251,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.1-statistics.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-4",
+    "chapter": 26,
+    "number": 4,
+    "section": "26.2",
+    "pdf_page": 252,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.2-probability-and-common-sense.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-5",
+    "chapter": 26,
+    "number": 5,
+    "section": "26.2",
+    "pdf_page": 252,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.2-probability-and-common-sense.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-6",
+    "chapter": 26,
+    "number": 6,
+    "section": "26.2",
+    "pdf_page": 253,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.2-probability-and-common-sense.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-7",
+    "chapter": 26,
+    "number": 7,
+    "section": "26.2",
+    "pdf_page": 253,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.2-probability-and-common-sense.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-8",
+    "chapter": 26,
+    "number": 8,
+    "section": "26.2",
+    "pdf_page": 253,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.2-probability-and-common-sense.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-9",
+    "chapter": 26,
+    "number": 9,
+    "section": "26.3",
+    "pdf_page": 254,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.3-multiplying-probabilities.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-10",
+    "chapter": 26,
+    "number": 10,
+    "section": "26.3",
+    "pdf_page": 254,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.3-multiplying-probabilities.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-11",
+    "chapter": 26,
+    "number": 11,
+    "section": "26.4",
+    "pdf_page": 255,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.4-casework.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-12",
+    "chapter": 26,
+    "number": 12,
+    "section": "26.4",
+    "pdf_page": 255,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.4-casework.md",
+    "needs_review": true
+  },
+  {
+    "id": "26-13",
+    "chapter": 26,
+    "number": 13,
+    "section": "26.6",
+    "pdf_page": 257,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch26-26.6-what-did-you-expect.md",
+    "needs_review": true
+  },
+  {
+    "id": "27-1",
+    "chapter": 27,
+    "number": 1,
+    "section": "27.2",
+    "pdf_page": 261,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch27-27.2-operating-on-sets.md",
+    "needs_review": true
+  },
+  {
+    "id": "27-2",
+    "chapter": 27,
+    "number": 2,
+    "section": "27.3",
+    "pdf_page": 262,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch27-27.3-venn-diagrams.md",
+    "needs_review": true
+  },
+  {
+    "id": "27-3",
+    "chapter": 27,
+    "number": 3,
+    "section": "27.3",
+    "pdf_page": 262,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch27-27.3-venn-diagrams.md",
+    "needs_review": true
+  },
+  {
+    "id": "27-4",
+    "chapter": 27,
+    "number": 4,
+    "section": "27.4",
+    "pdf_page": 263,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch27-27.4-subsets.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-1",
+    "chapter": 28,
+    "number": 1,
+    "section": "28.1",
+    "pdf_page": 266,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.1-words-words-words.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-2",
+    "chapter": 28,
+    "number": 2,
+    "section": "28.1",
+    "pdf_page": 267,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.1-words-words-words.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-3",
+    "chapter": 28,
+    "number": 3,
+    "section": "28.1",
+    "pdf_page": 267,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.1-words-words-words.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-4",
+    "chapter": 28,
+    "number": 4,
+    "section": "28.2",
+    "pdf_page": 268,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.2-contradiction.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-5",
+    "chapter": 28,
+    "number": 5,
+    "section": "28.2",
+    "pdf_page": 268,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.2-contradiction.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-6",
+    "chapter": 28,
+    "number": 6,
+    "section": "28.3",
+    "pdf_page": 269,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.3-converses-arent-necessarily-true.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-7",
+    "chapter": 28,
+    "number": 7,
+    "section": "28.3",
+    "pdf_page": 269,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.3-converses-arent-necessarily-true.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-8",
+    "chapter": 28,
+    "number": 8,
+    "section": "28.5",
+    "pdf_page": 271,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.5-shooting-holes-in-pigeons.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-9",
+    "chapter": 28,
+    "number": 9,
+    "section": "28.5",
+    "pdf_page": 271,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.5-shooting-holes-in-pigeons.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-10",
+    "chapter": 28,
+    "number": 10,
+    "section": "28.6",
+    "pdf_page": 273,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.6-convincing-but-wrong.md",
+    "needs_review": true
+  },
+  {
+    "id": "28-11",
+    "chapter": 28,
+    "number": 11,
+    "section": "28.6",
+    "pdf_page": 273,
+    "tags": {
+      "high_value": false,
+      "hard": false,
+      "warning": false,
+      "conceptual": false
+    },
+    "source": "ocr_section_md",
+    "source_file": "ch28-28.6-convincing-but-wrong.md",
+    "needs_review": true
+  }
+]
