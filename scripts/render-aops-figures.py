@@ -2070,6 +2070,218 @@ def fig_12_13_example_12_8_midpoints() -> str:
     return svg(W, H, body)
 
 
+# ─────────────────────────────────────────────
+# Chapter 13 figures
+# ─────────────────────────────────────────────
+
+def _regular_polygon(cx, cy, r, n, rotation_deg=-90):
+    """Return list of (x,y) vertices of a regular n-gon centered at (cx,cy)
+    with circumradius r. rotation_deg controls orientation (default puts
+    a vertex on top)."""
+    import math as m
+    return [
+        (cx + r * m.cos(m.radians(rotation_deg + 360 * i / n)),
+         cy + r * m.sin(m.radians(rotation_deg + 360 * i / n)))
+        for i in range(n)
+    ]
+
+
+def fig_13_1_three_regular_polygons() -> str:
+    """Three small regular polygons: pentagon, hexagon, octagon."""
+    W, Ht = 240, 160
+    body = []
+    # Pentagon
+    for i, n in enumerate([5, 6, 8]):
+        cx = 50 + i * 80
+        cy = 70
+        verts = _regular_polygon(cx, cy, 32, n)
+        for j in range(n):
+            p1, p2 = verts[j], verts[(j+1) % n]
+            body.append(segment(*p1, *p2))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_2_polygon_diagonals_from_vertex() -> str:
+    """Polygon with all diagonals drawn from a single vertex."""
+    W, Ht = 220, 130
+    cx, cy, r, n = 105, 65, 55, 8
+    verts = _regular_polygon(cx, cy, r, n, rotation_deg=-100)
+    body = []
+    # Sides
+    for i in range(n):
+        body.append(segment(*verts[i], *verts[(i+1) % n]))
+    # Diagonals from vertex 0 (top-ish)
+    v0 = verts[0]
+    for i in range(2, n - 1):
+        body.append(segment(*v0, *verts[i]))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_3_polygon_interior_exterior_angles() -> str:
+    """Hexagon with interior angles β_i and exterior angles α_i at each vertex."""
+    W, Ht = 220, 220
+    cx, cy, r, n = 110, 110, 65, 6
+    verts = _regular_polygon(cx, cy, r, n, rotation_deg=-90)
+    body = []
+    # sides
+    for i in range(n):
+        body.append(segment(*verts[i], *verts[(i+1) % n]))
+    # extend each side past its vertex to show exterior angle
+    import math as m
+    for i in range(n):
+        p = verts[i]
+        prev = verts[(i - 1) % n]
+        # extend from prev through p
+        dx = p[0] - prev[0]
+        dy = p[1] - prev[1]
+        L = m.hypot(dx, dy)
+        ex = p[0] + dx * 25 / L
+        ey = p[1] + dy * 25 / L
+        body.append(segment(*p, ex, ey))
+        # label αi outside, βi inside
+        # midway extension for α
+        body.append(text(ex - dy * 4 / L, ey + dx * 4 / L, f"α{i+1}", italic=True, size=9, anchor="middle"))
+        # inside the polygon for β
+        ix = p[0] + (cx - p[0]) * 0.18
+        iy = p[1] + (cy - p[1]) * 0.18
+        body.append(text(ix, iy, f"β{i+1}", italic=True, size=9, anchor="middle"))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_4_example_13_1_hexagon_equilateral() -> str:
+    """Regular hexagon ABCDEF with inscribed equilateral triangle ACE."""
+    W, Ht = 240, 200
+    cx, cy, r = 120, 100, 75
+    verts = _regular_polygon(cx, cy, r, 6, rotation_deg=-60)
+    labels = ["B", "A", "F", "E", "D", "C"]
+    pos = ["above-left", "above-right", "right", "below-right", "below-left", "left"]
+    body = []
+    # Hexagon
+    for i in range(6):
+        body.append(segment(*verts[i], *verts[(i+1) % 6]))
+    # Triangle ACE: vertices at indices for A, C, E
+    A = verts[1]; C = verts[5]; E = verts[3]
+    body.append(segment(*A, *C))
+    body.append(segment(*C, *E))
+    body.append(segment(*E, *A))
+    for v, lab, p in zip(verts, labels, pos):
+        body.append(point(*v, lab, p, italic=True))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_5_example_13_3_dodecagon_trapezoid() -> str:
+    """Trapezoid section ABCD of a regular dodecagon with perpendiculars BX, CY."""
+    W, Ht = 260, 130
+    A = (30, 100); D = (235, 100)
+    B = (90, 30); C = (175, 30)
+    X = (90, 100); Y = (175, 100)
+    body = "\n".join([
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        f'<line x1="{B[0]}" y1="{B[1]}" x2="{X[0]}" y2="{X[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        f'<line x1="{C[0]}" y1="{C[1]}" x2="{Y[0]}" y2="{Y[1]}" stroke="#1d1d1f" stroke-width="1.0" stroke-dasharray="3,3" fill="none"/>',
+        right_angle_mark(X[0], X[1], (X[0]+10, X[1]), (X[0], X[1]-10), size=6),
+        right_angle_mark(Y[0], Y[1], (Y[0]-10, Y[1]), (Y[0], Y[1]-10), size=6),
+        point(*A, "A", "below-left", italic=True),
+        point(*B, "B", "above-left", italic=True),
+        point(*C, "C", "above-right", italic=True),
+        point(*D, "D", "below-right", italic=True),
+        point(*X, "X", "below", italic=True),
+        point(*Y, "Y", "below", italic=True),
+    ])
+    return svg(W, Ht, body)
+
+
+def fig_13_6_hexagon_inscribed_circumscribed() -> str:
+    """Regular hexagon with inscribed circle r and circumscribed circle R."""
+    W, Ht = 240, 240
+    import math as m
+    cx, cy, R = 120, 120, 90
+    verts = _regular_polygon(cx, cy, R, 6, rotation_deg=-90)
+    # Apothem r = R * cos(30°)
+    r = R * m.cos(m.radians(30))
+    # Triangle AXO: A is one vertex, X is midpoint of side AB, O is center
+    A = verts[0]
+    B = verts[1]
+    X = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    body = []
+    body.append(circle(cx, cy, R))
+    body.append(circle(cx, cy, r))
+    for i in range(6):
+        body.append(segment(*verts[i], *verts[(i+1) % 6]))
+    body.append(segment(cx, cy, *A))
+    body.append(segment(cx, cy, *X))
+    body.append(segment(*A, *X))
+    right_angle_mark_part = right_angle_mark(X[0], X[1], (cx, cy), A, size=6)
+    body.append(right_angle_mark_part)
+    body.append(point(cx, cy, "O", "below", italic=True))
+    body.append(point(*A, "A", "above", italic=True))
+    body.append(point(*X, "X", "above-right", italic=True))
+    body.append(text((cx + A[0])/2 + 4, (cy + A[1])/2, "R", italic=True, size=11, anchor="start"))
+    body.append(text((cx + X[0])/2, (cy + X[1])/2 + 8, "r", italic=True, size=11))
+    body.append(text(cx + 8, cy + 14, "θ", italic=True, size=10))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_7_hexagon_six_equilateral_triangles() -> str:
+    """Regular hexagon ABCDEF with center O divided into 6 equilateral triangles."""
+    W, Ht = 240, 200
+    cx, cy, r = 120, 100, 80
+    verts = _regular_polygon(cx, cy, r, 6, rotation_deg=-60)
+    labels = ["B", "A", "F", "E", "D", "C"]
+    pos = ["above-left", "above-right", "right", "below-right", "below-left", "left"]
+    body = []
+    for i in range(6):
+        body.append(segment(*verts[i], *verts[(i+1) % 6]))
+        body.append(segment(cx, cy, *verts[i]))
+    body.append(point(cx, cy, "O", "below-right", italic=True))
+    for v, lab, p in zip(verts, labels, pos):
+        body.append(point(*v, lab, p, italic=True))
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_8_example_13_4_hexagon_all_segments() -> str:
+    """Six points on a circle with all 15 connecting segments drawn."""
+    W, Ht = 180, 180
+    cx, cy, r = 90, 90, 70
+    verts = _regular_polygon(cx, cy, r, 6, rotation_deg=-90)
+    body = []
+    body.append(circle(cx, cy, r))
+    # All C(6,2) = 15 segments
+    for i in range(6):
+        for j in range(i+1, 6):
+            body.append(segment(*verts[i], *verts[j]))
+    # Dots at vertices
+    for v in verts:
+        body.append(f'<circle cx="{v[0]}" cy="{v[1]}" r="2.5" {DOT}/>')
+    return svg(W, Ht, "\n".join(body))
+
+
+def fig_13_9_five_pointed_star() -> str:
+    """Five-pointed star with tip angles labeled 1 through 5."""
+    W, Ht = 220, 220
+    import math as m
+    cx, cy = 110, 115
+    # Star: 5 outer points (large radius), 5 inner points (small radius).
+    # The figure is a "drawn star" — connect every other vertex of regular pentagon.
+    R = 90
+    pts = _regular_polygon(cx, cy, R, 5, rotation_deg=-90)
+    # Connect pts[0]→pts[2]→pts[4]→pts[1]→pts[3]→pts[0]
+    order = [0, 2, 4, 1, 3]
+    body = []
+    for i in range(5):
+        a = pts[order[i]]
+        b = pts[order[(i+1) % 5]]
+        body.append(segment(*a, *b))
+    # Label each tip with number 1-5
+    for i, idx in enumerate(order):
+        x, y = pts[idx]
+        # Slightly inset toward center for label visibility
+        lx = x + (cx - x) * 0.18
+        ly = y + (cy - y) * 0.18
+        body.append(text(lx, ly + 4, str(i+1), italic=False, size=11, anchor="middle"))
+    return svg(W, Ht, "\n".join(body))
+
+
 FIGURES = {
     "fig-3-1-coordinate-plane":           fig_3_1_coordinate_plane,
     "fig-9-1-circle-tangent-secant":      fig_9_1_circle_tangent_secant,
@@ -2149,6 +2361,15 @@ FIGURES = {
     "fig-12-11-square":                       fig_12_11_square,
     "fig-12-12-example-12-5-inscribed-square": fig_12_12_example_12_5_inscribed_square,
     "fig-12-13-example-12-8-midpoints":       fig_12_13_example_12_8_midpoints,
+    "fig-13-1-three-regular-polygons":        fig_13_1_three_regular_polygons,
+    "fig-13-2-polygon-diagonals-from-vertex": fig_13_2_polygon_diagonals_from_vertex,
+    "fig-13-3-polygon-interior-exterior-angles": fig_13_3_polygon_interior_exterior_angles,
+    "fig-13-4-example-13-1-hexagon-equilateral": fig_13_4_example_13_1_hexagon_equilateral,
+    "fig-13-5-example-13-3-dodecagon-trapezoid": fig_13_5_example_13_3_dodecagon_trapezoid,
+    "fig-13-6-hexagon-inscribed-circumscribed": fig_13_6_hexagon_inscribed_circumscribed,
+    "fig-13-7-hexagon-six-equilateral-triangles": fig_13_7_hexagon_six_equilateral_triangles,
+    "fig-13-8-example-13-4-hexagon-all-segments": fig_13_8_example_13_4_hexagon_all_segments,
+    "fig-13-9-five-pointed-star":             fig_13_9_five_pointed_star,
 }
 
 

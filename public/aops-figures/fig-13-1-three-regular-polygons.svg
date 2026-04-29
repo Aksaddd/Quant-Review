@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="50.0" y1="38.0" x2="80.43380852144492" y2="60.11145618000168" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="80.43380852144492" y1="60.11145618000168" x2="68.80912807335915" y2="95.88854381999832" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="68.80912807335915" y1="95.88854381999832" x2="31.190871926640863" y2="95.88854381999832" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="31.190871926640863" y1="95.88854381999832" x2="19.566191478555083" y2="60.11145618000169" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="19.566191478555083" y1="60.11145618000169" x2="50.0" y2="38.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="130.0" y1="38.0" x2="157.71281292110203" y2="54.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="157.71281292110203" y1="54.0" x2="157.71281292110203" y2="86.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="157.71281292110203" y1="86.0" x2="130.0" y2="102.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="130.0" y1="102.0" x2="102.28718707889796" y2="86.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="102.28718707889796" y1="86.0" x2="102.28718707889797" y2="54.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="102.28718707889797" y1="54.0" x2="130.0" y2="38.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="210.0" y1="38.0" x2="232.62741699796953" y2="47.37258300203048" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="232.62741699796953" y1="47.37258300203048" x2="242.0" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="242.0" y1="70.0" x2="232.62741699796953" y2="92.62741699796952" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="232.62741699796953" y1="92.62741699796952" x2="210.0" y2="102.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="210.0" y1="102.0" x2="187.37258300203047" y2="92.62741699796952" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="187.37258300203047" y1="92.62741699796952" x2="178.0" y2="70.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="178.0" y1="70.0" x2="187.37258300203047" y2="47.37258300203048" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="187.37258300203047" y1="47.37258300203048" x2="210.0" y2="38.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

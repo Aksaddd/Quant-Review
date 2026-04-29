@@ -1016,6 +1016,123 @@
         240,
         145
       ]
+    },
+    {
+      "id": "fig-13-1-three-regular-polygons",
+      "chapter": 13,
+      "page": 141,
+      "bookPage": 127,
+      "caption": "Three small regular polygons: pentagon, hexagon, octagon.",
+      "bbox": [
+        565,
+        605,
+        195,
+        130
+      ]
+    },
+    {
+      "id": "fig-13-2-polygon-diagonals-from-vertex",
+      "chapter": 13,
+      "page": 142,
+      "bookPage": 128,
+      "caption": "Polygon with all diagonals drawn from one vertex, dividing it into n-2 triangles.",
+      "bbox": [
+        555,
+        95,
+        200,
+        110
+      ]
+    },
+    {
+      "id": "fig-13-3-polygon-interior-exterior-angles",
+      "chapter": 13,
+      "page": 142,
+      "bookPage": 128,
+      "caption": "Polygon with interior angles β_i and exterior angles α_i labeled at each vertex.",
+      "bbox": [
+        60,
+        230,
+        200,
+        210
+      ]
+    },
+    {
+      "id": "fig-13-4-example-13-1-hexagon-equilateral",
+      "chapter": 13,
+      "page": 143,
+      "bookPage": 129,
+      "caption": "Regular hexagon ABCDEF with inscribed equilateral triangle ACE.",
+      "bbox": [
+        225,
+        165,
+        290,
+        235
+      ]
+    },
+    {
+      "id": "fig-13-5-example-13-3-dodecagon-trapezoid",
+      "chapter": 13,
+      "page": 143,
+      "bookPage": 129,
+      "caption": "Trapezoid section ABCD of a regular dodecagon with perpendiculars BX, CY.",
+      "bbox": [
+        510,
+        580,
+        240,
+        105
+      ]
+    },
+    {
+      "id": "fig-13-6-hexagon-inscribed-circumscribed",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Regular hexagon with inscribed circle (radius r) and circumscribed circle (radius R).",
+      "bbox": [
+        555,
+        65,
+        220,
+        220
+      ]
+    },
+    {
+      "id": "fig-13-7-hexagon-six-equilateral-triangles",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Regular hexagon ABCDEF with center O, divided into 6 equilateral triangles.",
+      "bbox": [
+        555,
+        460,
+        220,
+        175
+      ]
+    },
+    {
+      "id": "fig-13-8-example-13-4-hexagon-all-segments",
+      "chapter": 13,
+      "page": 144,
+      "bookPage": 130,
+      "caption": "Six points on a circle with all 15 connecting segments drawn.",
+      "bbox": [
+        625,
+        770,
+        145,
+        130
+      ]
+    },
+    {
+      "id": "fig-13-9-five-pointed-star",
+      "chapter": 13,
+      "page": 146,
+      "bookPage": 132,
+      "caption": "Five-pointed star with tip angles labeled 1 through 5.",
+      "bbox": [
+        275,
+        405,
+        215,
+        175
+      ]
     }
   ]
 }

@@ -16,6 +16,8 @@ A **polygon** is a simple closed planar figure formed by line segments. Polygons
 | 10 | decagon |
 | 12 | dodecagon |
 
+> *[Figure: Three small regular polygons — a pentagon, hexagon, and octagon]*
+
 A polygon is called a **regular polygon** if all of its sides are equal *and* all of its angles are equal.
 
 > ⚠️ **Important:** As we saw with quadrilaterals, just because all the sides of a polygon are equal doesn't mean the polygon is regular. The same is true of the angles. (Can you draw a polygon whose interior angles are equal but which is still not regular?)
@@ -41,6 +43,8 @@ $$\text{Sum of interior angles of an $n$-gon} = 180(n-2)\text{ degrees}.$$
 > *[Figure: An octagon with all 5 diagonals drawn from a single vertex, dividing it into 6 triangles]*
 
 ### Sum of Exterior Angles
+
+> *[Figure: Polygon with interior angles $\beta_i$ and exterior angles $\alpha_i$ labeled at each vertex]*
 
 Consider the exterior angles of a polygon. Let the interior angle at vertex $i$ equal $\beta_i$ and the exterior angle be $\alpha_i$. At each vertex, $\alpha_i + \beta_i = 180°$. Adding these equations together for all $n$ vertices:
 
@@ -81,6 +85,8 @@ $$\text{Exterior angle} = \frac{360}{n}$$
 
 ### Example 13-1
 *Prove that by connecting every other vertex of a regular hexagon, we form an equilateral triangle.*
+
+> *[Figure: Regular hexagon $ABCDEF$ with diagonals $AC$, $CE$, $EA$ drawn forming an inscribed equilateral triangle]*
 
 **Proof:** Let the hexagon be $ABCDEF$. We must show that the three sides $AC$, $CE$, and $AE$ are equal.
 
@@ -184,6 +190,8 @@ We also see that the longest diagonals (like $AD$) are **twice the length of a s
 
 ### Example 13-4
 *Six points are equally spaced around a circle with radius 1. What is the sum of the lengths of all possible segments formed by connecting two of the points?*
+
+> *[Figure: Six points on a circle (vertices of a regular hexagon) with all $\binom{6}{2} = 15$ connecting segments drawn]*
 
 **Solution:** The six points form a regular hexagon. The center of the circle is the center of the hexagon, so the hexagon has side length 1 (since for a regular hexagon, side length equals circumradius).
 
