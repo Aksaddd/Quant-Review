@@ -64,6 +64,7 @@ export const aopsVol1Chapters: AopsChapter[] = [
   { number: 26, slug: 'statistics-and-probability',                     title: 'Statistics and Probability',                      pdfPages: [250, 259], bookPages: [236, 245], highlight: true, filename: 'AoPS_V1_Chapter_26.md' },
   { number: 27, slug: 'sets',                                           title: 'Sets',                                            pdfPages: [260, 265], bookPages: [246, 251], filename: 'AoPS_V1_Chapter_27.md' },
   { number: 28, slug: 'prove-it',                                       title: 'Prove It',                                        pdfPages: [266, 275], bookPages: [252, 261], filename: 'AoPS_V1_Chapter_28.md' },
+  { number: 29, slug: 'parting-shots',                                  title: 'Parting Shots',                                   pdfPages: [276, 288], bookPages: [262, 274], filename: 'AoPS_V1_Chapter_29.md' },
 ];
 
 export const aopsVol1ChapterByNumber: Record<number, AopsChapter> = Object.fromEntries(

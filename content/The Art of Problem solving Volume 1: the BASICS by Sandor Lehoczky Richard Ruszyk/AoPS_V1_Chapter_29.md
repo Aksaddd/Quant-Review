@@ -137,7 +137,7 @@ Here's a potpourri of problems, arranged very roughly by difficulty. Enjoy!
 
 ---
 
-**550.** The total cost to produce $10$ units of a certain product is \$40$, and for $20$ units the total cost is \$70$. The total cost is linearly related to the number of units produced. Find the total cost of producing $25$ units. *(MAΘ 1991)*
+**550.** The total cost to produce $10$ units of a certain product is \$40, and for $20$ units the total cost is \$70. The total cost is linearly related to the number of units produced. Find the total cost of producing $25$ units. *(MAΘ 1991)*
 
 ---
 
