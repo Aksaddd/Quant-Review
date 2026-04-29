@@ -1141,10 +1141,10 @@
       "bookPage": 136,
       "caption": "Triangle ABC with midpoints D, E, F connected to form inner triangle DEF.",
       "bbox": [
-        555,
-        470,
-        215,
-        165
+        570,
+        615,
+        205,
+        175
       ],
       "format": "png"
     },
@@ -1169,10 +1169,10 @@
       "bookPage": 137,
       "caption": "Triangle ABC with three medians drawn meeting at centroid G.",
       "bbox": [
-        555,
-        530,
-        215,
-        195
+        510,
+        660,
+        245,
+        165
       ],
       "format": "png"
     },
@@ -1184,9 +1184,9 @@
       "caption": "Triangle ABC with D midpoint of AB, E midpoint of DB, F midpoint of BC.",
       "bbox": [
         555,
-        90,
-        195,
-        175
+        70,
+        220,
+        200
       ],
       "format": "png"
     },
@@ -1211,8 +1211,8 @@
       "bookPage": 138,
       "caption": "Two concentric circles of radii 2 and 3 \u2014 annulus shaded between them.",
       "bbox": [
-        635,
-        720,
+        650,
+        815,
         130,
         130
       ],
@@ -1226,7 +1226,7 @@
       "caption": "Regular octagon formed by cutting corners of a square.",
       "bbox": [
         680,
-        90,
+        145,
         100,
         105
       ],
@@ -1267,10 +1267,10 @@
       "bookPage": 139,
       "caption": "Four overlapping circles \u2014 one central, three outer with centers on the central circle.",
       "bbox": [
-        610,
-        715,
+        605,
+        800,
         175,
-        165
+        155
       ],
       "format": "png"
     },
@@ -1282,10 +1282,10 @@
       "format": "png",
       "caption": "Cartesian plane with x-axis and y-axis crossing at origin, integer ticks labeled.",
       "bbox": [
-        505,
-        425,
+        510,
+        605,
         270,
-        175
+        195
       ]
     },
     {
@@ -1297,9 +1297,9 @@
       "caption": "Polar grid: concentric circles for r, radial lines for \u03b8.",
       "bbox": [
         60,
-        90,
-        245,
-        220
+        130,
+        220,
+        195
       ]
     },
     {
@@ -1310,10 +1310,10 @@
       "format": "png",
       "caption": "Line on coordinate plane with y-intercept (0, b) and rise/run triangle showing slope m.",
       "bbox": [
-        555,
-        580,
+        540,
+        480,
         220,
-        175
+        195
       ]
     },
     {
@@ -1338,10 +1338,10 @@
       "format": "png",
       "caption": "The line 3x + 4y = 5 plotted through four points.",
       "bbox": [
-        555,
-        350,
-        200,
-        175
+        540,
+        440,
+        220,
+        130
       ]
     },
     {
@@ -1366,10 +1366,10 @@
       "format": "png",
       "caption": "Circle of radius 3 centered at (-1, 2) on coordinate plane.",
       "bbox": [
-        555,
-        270,
-        220,
-        195
+        540,
+        395,
+        230,
+        170
       ]
     },
     {
@@ -1380,10 +1380,10 @@
       "format": "png",
       "caption": "Two tangents AB, AC from external point A to a circle.",
       "bbox": [
-        555,
         530,
-        200,
-        160
+        475,
+        220,
+        130
       ]
     },
     {
@@ -1394,10 +1394,10 @@
       "format": "png",
       "caption": "Tangent AC and secant AD from external point A through B and D on circle.",
       "bbox": [
-        55,
-        625,
-        270,
-        130
+        70,
+        600,
+        240,
+        145
       ]
     },
     {
@@ -1408,10 +1408,10 @@
       "format": "png",
       "caption": "Two secants from external point A through B, C and D, E on circle.",
       "bbox": [
-        555,
-        745,
-        220,
-        145
+        540,
+        720,
+        230,
+        140
       ]
     },
     {
@@ -1423,9 +1423,9 @@
       "caption": "Two chords BC and DE intersecting at point A inside the circle.",
       "bbox": [
         60,
-        800,
+        815,
         200,
-        145
+        135
       ]
     },
     {
@@ -1436,10 +1436,10 @@
       "format": "png",
       "caption": "Power of a Point proof: external A with tangent AB, secant ACD; auxiliary BD creates similar triangles.",
       "bbox": [
-        555,
-        305,
-        220,
-        145
+        545,
+        480,
+        230,
+        155
       ]
     },
     {
@@ -1506,10 +1506,10 @@
       "format": "png",
       "caption": "Cylinder unrolled into a rectangle of dimensions h \u00d7 2\u03c0r.",
       "bbox": [
-        130,
-        540,
-        490,
-        140
+        185,
+        645,
+        425,
+        150
       ]
     },
     {
@@ -1534,10 +1534,10 @@
       "format": "png",
       "caption": "Right circular cone showing altitude h, radius r, and slant height \u2113.",
       "bbox": [
-        605,
-        345,
-        170,
-        145
+        590,
+        350,
+        175,
+        140
       ]
     },
     {
@@ -1548,10 +1548,10 @@
       "format": "png",
       "caption": "Cone unrolled into a sector of radius \u2113 with arc length 2\u03c0r.",
       "bbox": [
-        270,
-        530,
-        480,
-        175
+        390,
+        540,
+        350,
+        165
       ]
     },
     {
@@ -1604,10 +1604,10 @@
       "format": "png",
       "caption": "Triangle ABC translated upward and right to form A'B'C'.",
       "bbox": [
-        540,
-        480,
+        550,
+        580,
         220,
-        195
+        125
       ]
     },
     {
