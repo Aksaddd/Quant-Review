@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { Sparkles, Mail, Lock, Eye, EyeOff, ArrowRight, ArrowLeft } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 import Button from '@/components/ui/Button';
 import toast from 'react-hot-toast';
@@ -58,6 +58,15 @@ export default function LoginPage() {
       />
 
       <div className="w-full max-w-md relative animate-fade-up">
+        {/* Back-to-home link — sits above the card so it doesn't push the
+            form down on phones */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 mb-3 px-2 py-2 -ml-2 min-h-[40px] text-[12px] font-semibold tracking-tight text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+        >
+          <ArrowLeft size={14} /> Back to home
+        </Link>
+
         <div
           className="px-6 pt-8 pb-7"
           style={{

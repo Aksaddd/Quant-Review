@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Mail, Lock, User, Eye, EyeOff, ArrowRight, Check } from 'lucide-react';
+import { Sparkles, Mail, Lock, User, Eye, EyeOff, ArrowRight, ArrowLeft, Check } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 import Button from '@/components/ui/Button';
 import toast from 'react-hot-toast';
@@ -132,14 +132,22 @@ export default function SignupPage() {
             boxShadow: 'var(--shadow-hud)',
           }}
         >
-          <div className="lg:hidden flex items-center gap-2 mb-6">
-            <div
-              className="w-7 h-7 flex items-center justify-center"
-              style={{ borderRadius: 9, background: 'var(--eureka-accent)' }}
+          <div className="lg:hidden flex items-center justify-between gap-2 mb-6">
+            <Link href="/" className="flex items-center gap-2">
+              <div
+                className="w-7 h-7 flex items-center justify-center"
+                style={{ borderRadius: 9, background: 'var(--eureka-accent)' }}
+              >
+                <Sparkles size={14} className="text-white" />
+              </div>
+              <span className="font-semibold text-[14px] text-[#1d1d1f] tracking-tight">Quant Review</span>
+            </Link>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 px-2 py-2 -mr-2 min-h-[40px] text-[12px] font-semibold tracking-tight text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
             >
-              <Sparkles size={14} className="text-white" />
-            </div>
-            <span className="font-semibold text-[14px] text-[#1d1d1f] tracking-tight">Quant Review</span>
+              <ArrowLeft size={13} /> Home
+            </Link>
           </div>
 
           <h2 className="text-[22px] font-semibold tracking-[-0.02em] text-[#1d1d1f] mb-1 leading-tight">

@@ -7,6 +7,7 @@ export default function Chapter6Page() {
   return (
     <ChapterReader
       chapter={chapter6}
+      prevChapter={{ number: 5, title: 'Stochastic Processes and Stochastic Calculus', href: '/read/chapter-5' }}
       nextChapter={{ number: 7, title: 'Algorithms and Numerical Methods', href: '/read/chapter-7' }}
     />
   );

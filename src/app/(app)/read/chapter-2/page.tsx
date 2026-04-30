@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { useTextSettings } from '@/hooks/useTextSettings';
 import { useProgress } from '@/hooks/useProgress';
 import { chapter2Problems, SECTIONS } from '@/data/problems';
@@ -9,6 +9,7 @@ import ProblemBlock from '@/components/reader/ProblemBlock';
 import TableOfContents from '@/components/reader/TableOfContents';
 import TextControls from '@/components/reader/TextControls';
 import ReaderProgressPanel from '@/components/reader/ReaderProgressPanel';
+import ChapterPager from '@/components/reader/ChapterPager';
 
 export default function Chapter2Page() {
   const { cssVars } = useTextSettings();
@@ -24,24 +25,31 @@ export default function Chapter2Page() {
     <div className="reading-page min-h-screen">
       {/* Sticky header — KA breadcrumb style */}
       <div className="sticky top-0 z-30 reading-card border-b" style={{ borderColor: 'var(--rt-card-border)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-xs font-medium min-w-0" style={{ color: 'var(--rt-text-muted)' }}>
-            <span className="font-semibold truncate" style={{ color: 'var(--rt-text-secondary)' }}>Quant Finance Interview Prep</span>
-            <span>/</span>
-            <span className="font-semibold truncate" style={{ color: 'var(--rt-text)' }}>Chapter 2: Brain Teasers</span>
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 h-12 flex items-center justify-between gap-2 sm:gap-4">
+          {/* Breadcrumb + mobile back button */}
+          <div className="flex items-center gap-1.5 text-xs font-medium min-w-0 flex-1" style={{ color: 'var(--rt-text-muted)' }}>
+            <Link
+              href="/dashboard"
+              aria-label="Back to dashboard"
+              className="lg:hidden w-9 h-9 -ml-1.5 flex items-center justify-center rounded-full text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors shrink-0"
+            >
+              <ChevronLeft size={18} />
+            </Link>
+            <span className="hidden sm:inline font-semibold truncate" style={{ color: 'var(--rt-text-secondary)' }}>Quant Finance Interview Prep</span>
+            <span className="hidden sm:inline">/</span>
+            <span className="font-semibold truncate" style={{ color: 'var(--rt-text)' }}>Chapter 2<span className="hidden sm:inline">: Brain Teasers</span></span>
           </div>
 
           {/* Progress + settings */}
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="w-28 h-1.5 bg-[#e4e6ea] rounded-full overflow-hidden">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="w-16 sm:w-28 h-1.5 bg-[#e4e6ea] rounded-full overflow-hidden">
                 <div
                   className="h-full bg-[var(--ka-blue)] rounded-full transition-all duration-500"
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <span className="text-xs font-semibold text-[var(--ka-blue)] whitespace-nowrap">
+              <span className="text-xs font-semibold text-[var(--ka-blue)] whitespace-nowrap tabular-nums">
                 {totalSolved}/{totalProblems}
               </span>
             </div>
@@ -114,23 +122,11 @@ export default function Chapter2Page() {
         {/* Floating progress panel */}
         <ReaderProgressPanel />
 
-        {/* End of chapter */}
-        <div className="mt-12 py-8 px-6 text-center bg-white border border-[#e4e6ea] rounded-lg">
-          <p className="text-3xl mb-2">🎓</p>
-          <p className="text-lg font-bold text-[#21242c]">End of Chapter 2</p>
-          <p className="text-sm text-[#626975] mt-1">
-            {totalSolved === totalProblems
-              ? `All ${totalProblems} problems solved. Outstanding!`
-              : `${totalProblems - totalSolved} problems remaining. Keep going!`}
-          </p>
-          <Link
-            href="/read/chapter-3"
-            className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full bg-[var(--ka-blue)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            Continue to Chapter 3: Calculus and Linear Algebra
-            <ArrowRight size={16} />
-          </Link>
-        </div>
+        {/* Chapter footer navigation */}
+        <ChapterPager
+          prev={{ number: 1, title: 'General Principles', href: '/read/chapter-1' }}
+          next={{ number: 3, title: 'Calculus and Linear Algebra', href: '/read/chapter-3' }}
+        />
       </div>
     </div>
   );

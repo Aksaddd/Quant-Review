@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/dashboard',      label: 'Dashboard' },
   { href: '/read/chapter-1', label: 'Chapter 1' },
   { href: '/read/chapter-2', label: 'Chapter 2' },
+  { href: '/#library',       label: 'Library'   },
   { href: '/flashcards',     label: 'Practice'  },
 ];
 

@@ -4,8 +4,9 @@ import { useTextSettings } from '@/hooks/useTextSettings';
 import { chapter1Principles } from '@/data/chapter1';
 import MarkdownRenderer from '@/components/reader/MarkdownRenderer';
 import TextControls from '@/components/reader/TextControls';
+import ChapterPager from '@/components/reader/ChapterPager';
 import Link from 'next/link';
-import { ChevronRight, Lightbulb, ArrowRight } from 'lucide-react';
+import { ChevronLeft, Lightbulb } from 'lucide-react';
 
 export default function Chapter1Page() {
   const { cssVars } = useTextSettings();
@@ -14,11 +15,18 @@ export default function Chapter1Page() {
     <div className="bg-[#f7f8fa] min-h-screen">
       {/* Sticky breadcrumb bar */}
       <div className="sticky top-0 z-30 bg-white border-b border-[#e4e6ea]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-1.5 text-xs text-[#9299a5] font-medium min-w-0">
-            <span className="text-[#626975] font-semibold truncate">Quant Finance Interview Prep</span>
-            <span>/</span>
-            <span className="text-[#21242c] font-semibold truncate">Chapter 1: General Principles</span>
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 h-12 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 text-xs text-[#9299a5] font-medium min-w-0 flex-1">
+            <Link
+              href="/dashboard"
+              aria-label="Back to dashboard"
+              className="lg:hidden w-9 h-9 -ml-1.5 flex items-center justify-center rounded-full text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors shrink-0"
+            >
+              <ChevronLeft size={18} />
+            </Link>
+            <span className="hidden sm:inline text-[#626975] font-semibold truncate">Quant Finance Interview Prep</span>
+            <span className="hidden sm:inline">/</span>
+            <span className="text-[#21242c] font-semibold truncate">Chapter 1<span className="hidden sm:inline">: General Principles</span></span>
           </div>
           <TextControls />
         </div>
@@ -96,20 +104,10 @@ export default function Chapter1Page() {
           ))}
         </div>
 
-        {/* Next chapter CTA */}
-        <div className="mt-8 bg-white border border-[#e4e6ea] rounded-lg p-6 flex items-center justify-between gap-4">
-          <div>
-            <p className="text-xs font-bold text-[#9299a5] uppercase tracking-wider mb-1">Up next</p>
-            <p className="text-base font-extrabold text-[#21242c]">Chapter 2: Brain Teasers</p>
-            <p className="text-sm text-[#626975] mt-0.5">37 problems across 9 technique categories</p>
-          </div>
-          <Link
-            href="/read/chapter-2"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors shrink-0"
-          >
-            Start Chapter 2 <ArrowRight size={15} />
-          </Link>
-        </div>
+        {/* Chapter footer navigation */}
+        <ChapterPager
+          next={{ number: 2, title: 'Brain Teasers', href: '/read/chapter-2' }}
+        />
       </div>
     </div>
   );

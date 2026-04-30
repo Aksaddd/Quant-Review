@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, CalendarClock, Star } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarClock, Layers, Star } from 'lucide-react';
 
 interface DueCardsBannerProps {
   dueCount: number;
@@ -20,27 +20,43 @@ export default function DueCardsBanner({ dueCount, newCount, streak }: DueCardsB
   if (total === 0) {
     return (
       <div
-        className="flex items-center gap-4 p-4"
+        className="flex flex-wrap items-center gap-3 sm:gap-4 p-4"
         style={{
           ...CARD_BASE,
           background: 'rgba(48,209,88,0.08)',
           border: '0.5px solid rgba(48,209,88,0.2)',
         }}
       >
-        <span className="text-2xl" aria-hidden>✅</span>
-        <div className="flex-1">
+        <span className="text-2xl shrink-0" aria-hidden>✅</span>
+        <div className="flex-1 min-w-0">
           <p className="text-[14px] font-semibold tracking-tight" style={{ color: '#1f9b46' }}>
             All caught up for today
           </p>
           <p className="text-[11px] mt-0.5" style={{ color: '#30a14c' }}>
-            No reviews or new cards due. Come back tomorrow.
+            No reviews or new cards due. Read ahead or browse all your cards.
           </p>
         </div>
         {streak > 0 && (
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold" style={{ color: '#ff453a' }}>
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold shrink-0" style={{ color: '#ff453a' }}>
             🔥 {streak} day streak
           </div>
         )}
+        {/* Concrete next actions instead of a dead-end "come back tomorrow" */}
+        <div className="w-full sm:w-auto flex items-center gap-2 sm:shrink-0">
+          <Link
+            href="/read/chapter-1"
+            className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg border border-[#a8d5b5] text-[12px] font-semibold text-[#1f9b46] bg-white hover:bg-[#e6f4ea] transition-colors"
+          >
+            <BookOpen size={13} /> Read ahead
+          </Link>
+          <Link
+            href="/flashcards"
+            className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg text-white text-[12px] font-semibold transition-colors"
+            style={{ background: '#1f9b46' }}
+          >
+            <Layers size={13} /> Browse cards
+          </Link>
+        </div>
       </div>
     );
   }

@@ -7,6 +7,7 @@ export default function Chapter3Page() {
   return (
     <ChapterReader
       chapter={chapter3}
+      prevChapter={{ number: 2, title: 'Brain Teasers', href: '/read/chapter-2' }}
       nextChapter={{ number: 4, title: 'Probability Theory', href: '/read/chapter-4' }}
     />
   );

@@ -5,6 +5,9 @@ import { chapter7 } from '@/data/chapters';
 
 export default function Chapter7Page() {
   return (
-    <ChapterReader chapter={chapter7} />
+    <ChapterReader
+      chapter={chapter7}
+      prevChapter={{ number: 6, title: 'Finance', href: '/read/chapter-6' }}
+    />
   );
 }

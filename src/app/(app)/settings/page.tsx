@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Trash2, AlertTriangle, CalendarClock, CheckSquare, Square, Check, Star } from 'lucide-react';
+import Link from 'next/link';
+import { Trash2, AlertTriangle, CalendarClock, CheckSquare, Square, Check, Star, ChevronLeft, Layers } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 import { flashcardsById } from '@/data/flashcards';
 import { problemsById } from '@/data/problems';
@@ -105,9 +106,23 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-10">
-      <div>
-        <h1 className="text-2xl font-extrabold text-[#21242c] mb-0.5">Settings</h1>
-        <p className="text-sm text-[#626975]">Manage your progress, review queue, and data.</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-1.5 mb-2 px-2 py-2 -ml-2 min-h-[40px] text-[12px] font-semibold tracking-tight text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+          >
+            <ChevronLeft size={14} /> Dashboard
+          </Link>
+          <h1 className="text-2xl font-extrabold text-[#21242c] mb-0.5">Settings</h1>
+          <p className="text-sm text-[#626975]">Manage your progress, review queue, and data.</p>
+        </div>
+        <Link
+          href="/flashcards"
+          className="flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg border border-[#e4e6ea] text-xs font-semibold text-[#626975] hover:border-[#c8ccd4] hover:text-[#21242c] transition-colors"
+        >
+          <Layers size={13} /> Open flashcards
+        </Link>
       </div>
 
       {/* ── Study Settings ────────────────────────────────────────────────── */}

@@ -2,16 +2,18 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { List, ChevronDown, ChevronRight, ArrowRight, CheckCircle2, Circle } from 'lucide-react';
+import { List, ChevronDown, ChevronRight, CheckCircle2, Circle, ChevronLeft } from 'lucide-react';
 import { useTextSettings } from '@/hooks/useTextSettings';
 import { useProgress } from '@/hooks/useProgress';
 import TextControls from './TextControls';
 import MarkdownRenderer from './MarkdownRenderer';
 import ProblemBlock from './ProblemBlock';
+import ChapterPager from './ChapterPager';
 import type { Chapter, Problem } from '@/lib/types';
 
 interface ChapterReaderProps {
   chapter: Chapter;
+  prevChapter?: { number: number; title: string; href: string };
   nextChapter?: { number: number; title: string; href: string };
 }
 
@@ -23,7 +25,7 @@ interface ChapterReaderProps {
  * — while preserving the textbook prose that introduces each technique. Each
  * section is rendered as an ordered list of content blocks (prose or problem).
  */
-export default function ChapterReader({ chapter, nextChapter }: ChapterReaderProps) {
+export default function ChapterReader({ chapter, prevChapter, nextChapter }: ChapterReaderProps) {
   const { cssVars } = useTextSettings();
   const { getProblemStatus } = useProgress();
   const [tocOpen, setTocOpen] = useState(false);
@@ -82,6 +84,14 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
       >
         <div className="max-w-4xl mx-auto px-3 sm:px-6 h-12 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex items-center gap-1.5 text-[11px] font-medium tracking-tight min-w-0 text-[#86868b] flex-1">
+            {/* Mobile-only back-to-dashboard chevron — desktop has the sidebar */}
+            <Link
+              href="/dashboard"
+              aria-label="Back to dashboard"
+              className="lg:hidden w-9 h-9 -ml-1.5 flex items-center justify-center rounded-full text-[#626975] hover:text-[#21242c] hover:bg-[#f0f1f3] transition-colors shrink-0"
+            >
+              <ChevronLeft size={18} />
+            </Link>
             {/* Mobile: just the chapter — desktop: full breadcrumb */}
             <span className="hidden sm:inline font-semibold truncate text-[#6e6e73]">
               Quant Finance Interview Prep
@@ -295,57 +305,19 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
           ))}
         </div>
 
-        {/* Next chapter CTA */}
+        {/* Chapter footer navigation */}
         {nextChapter ? (
-          <div
-            className="mt-8 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            style={{
-              borderRadius: 20,
-              background: '#ffffff',
-              border: '0.5px solid rgba(0,0,0,0.06)',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
-            }}
-          >
-            <div className="min-w-0">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-[#86868b] mb-1">
-                Up next
-              </p>
-              <p className="text-[15px] sm:text-[16px] font-semibold tracking-tight text-[#1d1d1f]">
-                Chapter {nextChapter.number}: {nextChapter.title}
-              </p>
-            </div>
-            <Link
-              href={nextChapter.href}
-              className="flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97] shrink-0 w-full sm:w-auto"
-              style={{
-                borderRadius: 12,
-                background: 'var(--eureka-accent)',
-                color: '#ffffff',
-                transitionTimingFunction: 'var(--ease-standard)',
-              }}
-            >
-              <span className="sm:hidden">Start Ch {nextChapter.number}</span>
-              <span className="hidden sm:inline">Start Chapter {nextChapter.number}</span>
-              <ArrowRight size={15} />
-            </Link>
-          </div>
+          <ChapterPager prev={prevChapter} next={nextChapter} />
         ) : (
-          <div
-            className="mt-12 py-8 text-center"
-            style={{
-              borderRadius: 20,
-              background: '#ffffff',
-              border: '0.5px solid rgba(0,0,0,0.06)',
-            }}
-          >
-            <p className="text-3xl mb-2">🎓</p>
-            <p className="text-[17px] font-semibold tracking-tight text-[#1d1d1f]">End of Chapter {chapter.number}</p>
-            <p className="text-[13px] text-[#6e6e73] mt-1 max-w-md mx-auto">
-              {totalProblems > 0 && solvedCount === totalProblems
-                ? `All ${totalProblems} problems solved. Outstanding.`
-                : `You've reached the end of the book. Keep reviewing with flashcards to lock it in.`}
-            </p>
-          </div>
+          <ChapterPager
+            variant="end"
+            prev={prevChapter}
+            endMessage={
+              <p className="text-[17px] font-semibold tracking-tight text-[#1d1d1f]">
+                End of Chapter {chapter.number}
+              </p>
+            }
+          />
         )}
       </div>
     </div>
