@@ -7,7 +7,7 @@ import Button from '@/components/ui/Button';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-20 pb-24 px-4 sm:px-6">
+    <section className="relative overflow-hidden pt-12 sm:pt-20 pb-16 sm:pb-24 px-4 sm:px-6">
       {/* Accent halo */}
       <div
         aria-hidden
@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto text-center relative">
         {/* Pill badge */}
         <div
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-medium mb-8 animate-fade-up tracking-tight"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-medium mb-6 sm:mb-8 animate-fade-up tracking-tight max-w-full"
           style={{
             borderRadius: 9999,
             background: 'var(--eureka-accent-tint)',
@@ -35,9 +35,9 @@ export default function Hero() {
 
         {/* Headline — Apple display treatment */}
         <h1
-          className="font-semibold leading-[1.04] mb-6 animate-fade-up [animation-delay:60ms] text-[#1d1d1f]"
+          className="font-semibold leading-[1.04] mb-5 sm:mb-6 animate-fade-up [animation-delay:60ms] text-[#1d1d1f]"
           style={{
-            fontSize: 'clamp(42px, 7vw, 72px)',
+            fontSize: 'clamp(34px, 7vw, 72px)',
             letterSpacing: '-0.035em',
           }}
         >
@@ -58,21 +58,21 @@ export default function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up [animation-delay:180ms]">
-          <Link href="/dashboard">
-            <Button size="lg" iconRight={<ArrowRight size={18} />}>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 animate-fade-up [animation-delay:180ms]">
+          <Link href="/dashboard" className="w-full sm:w-auto">
+            <Button size="lg" iconRight={<ArrowRight size={18} />} fullWidth>
               Start Studying
             </Button>
           </Link>
-          <Link href="/read/chapter-2">
-            <Button variant="secondary" size="lg" iconLeft={<BookOpen size={17} />}>
+          <Link href="/read/chapter-2" className="w-full sm:w-auto">
+            <Button variant="secondary" size="lg" iconLeft={<BookOpen size={17} />} fullWidth>
               Browse Chapter 2
             </Button>
           </Link>
         </div>
 
         {/* Stat row */}
-        <div className="flex flex-wrap items-center justify-center gap-10 mt-14 animate-fade-up [animation-delay:240ms]">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-6 sm:gap-10 mt-10 sm:mt-14 animate-fade-up [animation-delay:240ms]">
           {[
             { icon: Brain,    value: '37',   label: 'Problems' },
             { icon: Sparkles, value: '56',   label: 'Flashcards' },
@@ -89,7 +89,7 @@ export default function Hero() {
       </div>
 
       {/* Floating problem card preview */}
-      <div className="max-w-2xl mx-auto mt-16 animate-fade-up [animation-delay:300ms]">
+      <div className="max-w-2xl mx-auto mt-10 sm:mt-16 animate-fade-up [animation-delay:300ms]">
         <PreviewCard />
       </div>
     </section>

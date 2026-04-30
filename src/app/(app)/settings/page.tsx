@@ -104,7 +104,7 @@ export default function SettingsPage() {
   const allSelected = filteredCards.length > 0 && filteredCards.every((c) => selected.has(c.cardId));
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-10">
       <div>
         <h1 className="text-2xl font-extrabold text-[#21242c] mb-0.5">Settings</h1>
         <p className="text-sm text-[#626975]">Manage your progress, review queue, and data.</p>
@@ -119,12 +119,12 @@ export default function SettingsPage() {
         <p className="text-sm text-[#626975] mb-4">
           How many new cards to introduce each day. Today: <strong className="text-[#21242c]">{newIntroducedToday}</strong> introduced, <strong className="text-[#21242c]">{newCardsQueue.length}</strong> remaining.
         </p>
-        <div className="flex gap-2 flex-wrap mb-8">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 mb-8">
           {[5, 10, 15, 20].map((n) => (
             <button
               key={n}
               onClick={() => setNewCardsPerDay(n)}
-              className="px-4 py-2 rounded-lg border text-sm font-semibold transition-colors"
+              className="px-4 py-2.5 min-h-[44px] rounded-lg border text-sm font-semibold transition-colors"
               style={newCardsPerDay === n
                 ? { backgroundColor: '#1865f2', borderColor: '#1865f2', color: '#fff' }
                 : { backgroundColor: '#fff', borderColor: '#e4e6ea', color: '#626975' }
@@ -250,14 +250,16 @@ export default function SettingsPage() {
         </div>
 
         {/* Action bar */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={handleMarkDue}
             disabled={selected.size === 0}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             <CalendarClock size={14} />
-            Mark {selected.size > 0 ? selected.size : ''} card{selected.size !== 1 ? 's' : ''} as due
+            <span>
+              Mark {selected.size > 0 ? selected.size : ''} card{selected.size !== 1 ? 's' : ''} as due
+            </span>
           </button>
           {markedDone && (
             <span className="flex items-center gap-1.5 text-sm text-[#1fab54] font-semibold">
@@ -277,8 +279,8 @@ export default function SettingsPage() {
         <div className="space-y-3">
           {RESET_OPTIONS.map((opt) => (
             <div key={opt.id} className="bg-white border border-[#e4e6ea] rounded-lg p-4">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-[#21242c]">{opt.label}</p>
                   <p className="text-xs text-[#9299a5] mt-0.5">{opt.description}</p>
                 </div>
@@ -287,13 +289,13 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => setConfirming(null)}
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-[#e4e6ea] text-[#626975] hover:bg-[#f7f8fa] transition-colors"
+                      className="flex-1 sm:flex-none px-3 py-2 min-h-[40px] text-xs font-semibold rounded-lg border border-[#e4e6ea] text-[#626975] hover:bg-[#f7f8fa] transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={() => handleReset(opt)}
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg text-white"
+                      className="flex-1 sm:flex-none px-3 py-2 min-h-[40px] text-xs font-semibold rounded-lg text-white"
                       style={{ backgroundColor: opt.color }}
                     >
                       Confirm
@@ -302,7 +304,7 @@ export default function SettingsPage() {
                 ) : (
                   <button
                     onClick={() => setConfirming(opt.id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border shrink-0"
+                    className="flex items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-semibold rounded-lg border shrink-0 w-full sm:w-auto"
                     style={{ borderColor: opt.border, color: opt.color, backgroundColor: opt.bg }}
                   >
                     <Trash2 size={12} /> Reset

@@ -743,3 +743,42 @@ body:hover ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.35); }
 ───────────────────────────────────────────────────────────────────────────── */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MOBILE / TOUCH
+   - Disable iOS double-tap zoom delay on interactive controls
+   - Prevent iOS auto-zoom when focusing an input (font-size ≥ 16px on phones)
+   - Prevent horizontal page-scroll on tiny viewports
+───────────────────────────────────────────────────────────────────────────── */
+html, body {
+  /* Stop horizontal scroll caused by stray fixed-width children. Inner blocks
+     that need to overflow (math, tables, code) opt back in via overflow-x. */
+  overflow-x: hidden;
+  /* Allow the viewport to expand beyond physical width when the on-screen
+     keyboard appears in iOS Safari. */
+  overscroll-behavior-y: none;
+}
+
+button, a, [role='button'] {
+  /* Remove the iOS Safari tap highlight and 300ms tap delay */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (max-width: 640px) {
+  /* iOS auto-zooms when focusing a font-size < 16px input. Lifting all form
+     controls to 16px on phones avoids the zoom without affecting typography
+     elsewhere — desktop styles on these elements are unaffected. */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Tap-target helper — apply to icon-only buttons on touch devices to ensure
+   Apple HIG / Material 44–48 px minimum. */
+.tap-target {
+  min-width: 44px;
+  min-height: 44px;
+}

@@ -54,7 +54,7 @@ export default function ChapterList() {
             <Link
               key={chap.id}
               href={`/read/chapter-${chap.number}`}
-              className="group flex items-center gap-4 p-4 transition-all duration-200"
+              className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 transition-all duration-200"
               style={{
                 background: '#ffffff',
                 border: '0.5px solid rgba(0,0,0,0.06)',

@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './Sidebar';
 import MobileNav from './MobileNav';
+import MobileDrawer from './MobileDrawer';
 import { AppTopBar } from './Navbar';
 import { ProgressProvider } from '@/components/providers/ProgressProvider';
 import ReadingSettingsSync from '@/components/providers/ReadingSettingsSync';
@@ -27,13 +29,17 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
   const { visible: chromeVisible } = useIdleChrome();
   useKeyboardShortcuts();
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const openDrawer = () => setDrawerOpen(true);
+  const closeDrawer = () => setDrawerOpen(false);
+
   // Chrome is shown when: focus mode off AND (auto-hide off OR user active)
   const showChrome = !focusModeActive && chromeVisible;
 
   return (
     <ProgressProvider>
       <ReadingSettingsSync />
-      <div className="eureka-active flex h-screen overflow-hidden bg-[var(--surface-0)]">
+      <div className="eureka-active flex h-[100dvh] overflow-hidden bg-[var(--surface-0)]">
         {/* Desktop sidebar — fades on idle / focus */}
         <AnimatePresence>
           {showChrome && (
@@ -62,12 +68,12 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
                 exit={{ opacity: 0, y: -8, pointerEvents: 'none' }}
                 transition={CHROME_SPRING}
               >
-                <AppTopBar title={pageTitle} />
+                <AppTopBar title={pageTitle} onOpenMenu={openDrawer} />
               </motion.div>
             )}
           </AnimatePresence>
 
-          <main className={`flex-1 overflow-y-auto h-full ${focusModeActive ? 'pb-6' : 'pb-20 lg:pb-6'}`}>
+          <main className={`flex-1 overflow-y-auto h-full ${focusModeActive ? 'pb-6' : 'pb-24 lg:pb-6'}`}>
             {children}
           </main>
         </div>
@@ -82,10 +88,13 @@ export default function AppShell({ children, pageTitle }: AppShellProps) {
               exit={{ opacity: 0, y: 12, pointerEvents: 'none' }}
               transition={CHROME_SPRING}
             >
-              <MobileNav />
+              <MobileNav onOpenMenu={openDrawer} />
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Mobile slide-in drawer with full course tree */}
+        <MobileDrawer open={drawerOpen} onClose={closeDrawer} />
 
         {/* Focus mode toggle — always visible */}
         <FocusModeToggle />

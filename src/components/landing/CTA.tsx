@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 export default function CTA() {
   return (
     <section
-      className="py-20 px-4 sm:px-6"
+      className="py-14 sm:py-20 px-4 sm:px-6"
       style={{ borderTop: '0.5px solid rgba(0,0,0,0.06)' }}
     >
       <div className="max-w-3xl mx-auto text-center relative">
@@ -49,14 +49,14 @@ export default function CTA() {
           your interview confident.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link href="/dashboard">
-            <Button size="lg" iconRight={<ArrowRight size={18} />}>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+          <Link href="/dashboard" className="w-full sm:w-auto">
+            <Button size="lg" iconRight={<ArrowRight size={18} />} fullWidth>
               Start Studying Free
             </Button>
           </Link>
-          <Link href="/read/chapter-2">
-            <Button variant="ghost" size="lg">
+          <Link href="/read/chapter-2" className="w-full sm:w-auto">
+            <Button variant="ghost" size="lg" fullWidth>
               Try without signing up →
             </Button>
           </Link>

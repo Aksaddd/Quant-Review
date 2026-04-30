@@ -8,6 +8,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        /* Extra-small breakpoint for very narrow phones (< 360px) */
+        xs: '420px',
+      },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         serif: ['var(--font-lora)', 'Georgia', 'serif'],

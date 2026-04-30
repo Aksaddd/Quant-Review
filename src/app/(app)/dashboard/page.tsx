@@ -31,7 +31,7 @@ export default function DashboardPage() {
 
   return (
     <PageTransition>
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-5 sm:space-y-6">
       {/* Page header */}
       <div>
         <h1 className="text-2xl font-extrabold text-[#21242c]">

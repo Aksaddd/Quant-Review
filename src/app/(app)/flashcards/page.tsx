@@ -233,27 +233,30 @@ export default function FlashcardsPage() {
     return (
       <div className="min-h-screen bg-[#f7f8fa] flex flex-col">
         {/* Top bar */}
-        <div className="bg-white border-b border-[#e4e6ea] px-4 sm:px-6 py-3 flex items-center gap-4">
+        <div className="bg-white border-b border-[#e4e6ea] px-3 sm:px-6 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-4">
           <button
             onClick={() => setSessionCards(null)}
-            className="flex items-center gap-1.5 text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 py-2 min-h-[40px] text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
+            aria-label="Back to deck"
           >
-            <ChevronLeft size={16} /> Back
+            <ChevronLeft size={18} />
+            <span className="hidden sm:inline">Back</span>
           </button>
           {sessionMode === 'browse' && (
             <button
               onClick={() => setSpineOpen((v) => !v)}
-              className="flex items-center gap-1.5 text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
+              className="flex items-center gap-1.5 px-2 py-2 min-h-[40px] text-sm text-[#626975] hover:text-[#21242c] transition-colors shrink-0"
               title={spineOpen ? 'Hide card list' : 'Show card list'}
+              aria-label={spineOpen ? 'Hide card list' : 'Show card list'}
             >
-              <List size={16} />
+              <List size={18} />
             </button>
           )}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <DeckProgress current={sessionIndex + 1} total={sessionCards.length} reviewed={sessionReviewed} />
           </div>
-          <span className="text-xs text-[#9299a5] font-medium whitespace-nowrap">
-            {sessionIndex + 1} / {sessionCards.length}
+          <span className="text-xs text-[#9299a5] font-medium whitespace-nowrap tabular-nums">
+            {sessionIndex + 1}/{sessionCards.length}
           </span>
         </div>
 
@@ -545,11 +548,11 @@ export default function FlashcardsPage() {
   const totalSessionSize = todaySessionFlashcards.length;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-5 sm:space-y-6">
 
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div className="min-w-0">
           <h1 className="text-2xl font-extrabold text-[#21242c]">Flashcards</h1>
           <p className="text-sm text-[#626975] mt-0.5">
             {stats.total} cards across {ALL_SECTIONS.length} sections · {stats.mastered} mastered
@@ -557,40 +560,40 @@ export default function FlashcardsPage() {
         </div>
         <button
           onClick={() => startSession([...allFlashcards], new Set(), 'browse')}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#c8ccd4] text-sm font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg border border-[#c8ccd4] text-sm font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
         >
           <Sparkles size={14} /> Study all {allFlashcards.length}
         </button>
       </div>
 
       {/* Today's session */}
-      <div className="bg-white border border-[#e4e6ea] rounded-lg p-5">
+      <div className="bg-white border border-[#e4e6ea] rounded-lg p-4 sm:p-5">
         <p className="text-xs font-bold text-[#9299a5] uppercase tracking-wider mb-4">Today&apos;s Session</p>
-        <div className="flex items-center gap-6 mb-5">
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-5">
           <div className="text-center">
-            <p className="text-3xl font-extrabold text-[#1865f2]">{reviewDue.length}</p>
+            <p className="text-3xl font-extrabold text-[#1865f2] tabular-nums">{reviewDue.length}</p>
             <p className="text-xs text-[#9299a5] mt-0.5 flex items-center gap-1 justify-center">
-              <CalendarClock size={10} /> Due for review
+              <CalendarClock size={10} /> Due
             </p>
           </div>
           <div className="text-[#e4e6ea] text-2xl font-thin">+</div>
           <div className="text-center">
-            <p className="text-3xl font-extrabold text-[#f5a623]">{newCardsQueue.length}</p>
+            <p className="text-3xl font-extrabold text-[#f5a623] tabular-nums">{newCardsQueue.length}</p>
             <p className="text-xs text-[#9299a5] mt-0.5 flex items-center gap-1 justify-center">
-              <Star size={10} /> New today
+              <Star size={10} /> New
               <span className="text-[#c8ccd4]">({newIntroducedToday}/{newCardsPerDay})</span>
             </p>
           </div>
-          <div className="flex-1" />
+          <div className="flex-1 min-w-0" />
           {totalSessionSize > 0 ? (
             <button
               onClick={startTodaySession}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 min-h-[44px] rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors"
             >
               <Brain size={15} /> Start ({totalSessionSize})
             </button>
           ) : (
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#e6f4ea] text-[#1fab54] text-sm font-semibold">
+            <div className="flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-lg bg-[#e6f4ea] text-[#1fab54] text-sm font-semibold">
               <CheckCircle2 size={15} /> All done today!
             </div>
           )}
@@ -612,7 +615,7 @@ export default function FlashcardsPage() {
       </div>
 
       {/* Browse tabs */}
-      <div className="flex gap-1 p-1 bg-[#f0f1f3] rounded-lg w-fit">
+      <div className="flex gap-1 p-1 bg-[#f0f1f3] rounded-lg w-full sm:w-fit overflow-x-auto hide-scrollbar">
         <button
           onClick={() => setBrowseTab('all')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
@@ -732,7 +735,7 @@ export default function FlashcardsPage() {
                                 <div
                                   key={card.id}
                                   onClick={() => startSession(orderedCards, new Set(), 'browse', globalIdx)}
-                                  className="w-full flex items-center gap-3 px-4 py-3 bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group cursor-pointer"
+                                  className="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 min-h-[52px] bg-white border border-[#e4e6ea] rounded-lg hover:border-[var(--ka-blue)] hover:bg-[var(--ka-blue-light)] transition-all duration-150 text-left group cursor-pointer"
                                 >
                                   <span
                                     className="w-2 h-2 rounded-full shrink-0"
@@ -741,15 +744,17 @@ export default function FlashcardsPage() {
                                   />
                                   <p className="flex-1 text-sm font-medium text-[#21242c] truncate">{title}</p>
                                   <DifficultyBadge difficulty={card.difficulty} size="sm" />
-                                  <TypeBadge type={card.type} />
-                                  <AddToSetButton
-                                    cardId={card.id}
-                                    sets={sets}
-                                    isCardInSet={isCardInSet}
-                                    onAddToSet={addCardToSet}
-                                    onRemoveFromSet={removeCardFromSet}
-                                    onCreateSet={createSet}
-                                  />
+                                  <span className="hidden sm:inline-flex"><TypeBadge type={card.type} /></span>
+                                  <span className="hidden sm:inline-flex">
+                                    <AddToSetButton
+                                      cardId={card.id}
+                                      sets={sets}
+                                      isCardInSet={isCardInSet}
+                                      onAddToSet={addCardToSet}
+                                      onRemoveFromSet={removeCardFromSet}
+                                      onCreateSet={createSet}
+                                    />
+                                  </span>
                                   <ChevronRight size={13} className="text-[#9299a5] group-hover:text-[var(--ka-blue)] transition-colors shrink-0" />
                                 </div>
                               );
@@ -781,9 +786,9 @@ export default function FlashcardsPage() {
 
             return (
               <div key={sec.id} className="bg-white border border-[#e4e6ea] rounded-lg p-4">
-                <div className="flex items-start justify-between gap-4 mb-3">
+                <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
+                    <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
                       <span className="text-[10px] font-bold text-[var(--ka-blue)] uppercase tracking-wider">{sec.id}</span>
                       {dueCount > 0 && (
                         <span className="flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#e8f0fe] text-[#1865f2]">
@@ -796,16 +801,19 @@ export default function FlashcardsPage() {
                         </span>
                       )}
                     </div>
-                    <h3 className="text-sm font-bold text-[#21242c]">{sec.title}</h3>
+                    <h3 className="text-sm font-bold text-[#21242c] break-words">{sec.title}</h3>
                     <p className="text-xs text-[#9299a5] mt-0.5">
                       {secCards.length} cards · {mastered} mastered
                     </p>
                   </div>
                   <button
                     onClick={() => startSession(secCards, new Set(), 'browse')}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
+                    className="flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors shrink-0"
+                    aria-label={`Study section ${sec.id}`}
                   >
-                    <Sparkles size={11} /> Study {sec.id}
+                    <Sparkles size={11} />
+                    <span className="hidden xs:inline">Study</span>
+                    <span>{sec.id}</span>
                   </button>
                 </div>
 
@@ -909,8 +917,8 @@ function ShuffleView({
     <div className="space-y-4">
       {/* Controls */}
       <div className="bg-white border border-[#e4e6ea] rounded-lg p-4">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="min-w-0">
             <p className="text-sm font-bold text-[#21242c]">
               {activeCards.length} card{activeCards.length !== 1 ? 's' : ''} ready
             </p>
@@ -918,17 +926,17 @@ function ShuffleView({
               {omitted.size > 0 ? `${omitted.size} omitted · ` : ''}Shuffled from {allCards.length} total
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={reshuffle}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors"
             >
               <Shuffle size={12} /> Reshuffle
             </button>
             <button
               onClick={() => onStudy(activeCards)}
               disabled={activeCards.length === 0}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 min-h-[40px] rounded-lg bg-[var(--ka-blue)] text-white text-sm font-semibold hover:bg-[var(--ka-blue-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Brain size={13} /> Study ({activeCards.length})
             </button>
@@ -1100,10 +1108,10 @@ function MySetsView({
             return (
               <div key={set.id} className="bg-white border border-[#e4e6ea] rounded-lg overflow-hidden">
                 <div className="p-4">
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       {renamingId === set.id ? (
-                        <div className="flex gap-1.5 items-center">
+                        <div className="flex flex-wrap gap-1.5 items-center">
                           <input
                             value={renameTitle}
                             onChange={(e) => setRenameTitle(e.target.value)}
@@ -1112,16 +1120,16 @@ function MySetsView({
                               if (e.key === 'Escape') { setRenamingId(null); setRenameTitle(''); }
                             }}
                             autoFocus
-                            className="flex-1 text-sm border border-[#c8ccd4] rounded px-2 py-1 outline-none focus:border-[var(--ka-blue)]"
+                            className="flex-1 min-w-[140px] text-sm border border-[#c8ccd4] rounded px-2 py-2 outline-none focus:border-[var(--ka-blue)]"
                           />
-                          <button onClick={() => handleRename(set.id)} className="text-xs text-[var(--ka-blue)] font-semibold">Save</button>
-                          <button onClick={() => { setRenamingId(null); setRenameTitle(''); }} className="text-xs text-[#9299a5]">Cancel</button>
+                          <button onClick={() => handleRename(set.id)} className="px-2 py-2 min-h-[36px] text-xs text-[var(--ka-blue)] font-semibold">Save</button>
+                          <button onClick={() => { setRenamingId(null); setRenameTitle(''); }} className="px-2 py-2 min-h-[36px] text-xs text-[#9299a5]">Cancel</button>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <button
                             onClick={() => setExpandedId(isExpanded ? null : set.id)}
-                            className="text-sm font-bold text-[#21242c] hover:text-[var(--ka-blue)] transition-colors truncate"
+                            className="text-sm font-bold text-[#21242c] hover:text-[var(--ka-blue)] transition-colors break-words text-left"
                           >
                             {set.title}
                           </button>
@@ -1136,25 +1144,26 @@ function MySetsView({
                         {setCards.length} card{setCards.length !== 1 ? 's' : ''} · {masteredInSet} mastered · {reviewedCount} reviewed
                       </p>
                     </div>
-                    <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="flex items-center gap-1.5 shrink-0 flex-wrap">
                       <button
                         onClick={() => { setRenamingId(set.id); setRenameTitle(set.title); }}
-                        className="p-1.5 rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-[#626975] hover:border-[#c8ccd4] transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-[#626975] hover:border-[#c8ccd4] transition-colors"
                         title="Rename set"
+                        aria-label="Rename set"
                       >
-                        <Pencil size={11} />
+                        <Pencil size={13} />
                       </button>
                       {confirmDeleteId === set.id ? (
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => { deleteSet(set.id); setConfirmDeleteId(null); }}
-                            className="text-[10px] font-semibold text-red-600 hover:text-red-700 px-1.5 py-1 rounded border border-red-200 bg-red-50"
+                            className="text-[11px] font-semibold text-red-600 hover:text-red-700 px-2 py-2 min-h-[36px] rounded border border-red-200 bg-red-50"
                           >
                             Confirm
                           </button>
                           <button
                             onClick={() => setConfirmDeleteId(null)}
-                            className="text-[10px] text-[#9299a5] px-1.5 py-1"
+                            className="text-[11px] text-[#9299a5] px-2 py-2 min-h-[36px]"
                           >
                             Cancel
                           </button>
@@ -1162,16 +1171,17 @@ function MySetsView({
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteId(set.id)}
-                          className="p-1.5 rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-red-500 hover:border-red-200 transition-colors"
+                          className="w-9 h-9 flex items-center justify-center rounded-md border border-[#e4e6ea] text-[#9299a5] hover:text-red-500 hover:border-red-200 transition-colors"
                           title="Delete set"
+                          aria-label="Delete set"
                         >
-                          <Trash2 size={11} />
+                          <Trash2 size={13} />
                         </button>
                       )}
                       <button
                         onClick={() => handleStudySet(set)}
                         disabled={setCards.length === 0}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-lg border border-[#c8ccd4] text-xs font-semibold text-[#626975] hover:border-[var(--ka-blue)] hover:text-[var(--ka-blue)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                       >
                         <Sparkles size={11} /> Study
                       </button>

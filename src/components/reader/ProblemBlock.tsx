@@ -90,7 +90,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
     >
       {/* Problem header */}
       <div
-        className="reading-card-header px-5 pt-4 pb-3"
+        className="reading-card-header px-4 sm:px-5 pt-4 pb-3"
         style={{
           borderBottom: '0.5px solid rgba(0,0,0,0.06)',
           background: solved ? 'rgba(48,209,88,0.04)' : undefined,
@@ -141,7 +141,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
       </div>
 
       {/* Problem setup */}
-      <div className="px-5 py-4">
+      <div className="px-4 sm:px-5 py-4">
         <div className="prose-reading text-[#1d1d1f]">
           <MarkdownRenderer content={problem.setup} />
         </div>
@@ -149,7 +149,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
 
       {/* Multiple choice */}
       {problem.choices && problem.choices.length > 0 && (
-        <div className="px-5">
+        <div className="px-4 sm:px-5">
           <MultipleChoiceQuestion
             problemId={problem.id}
             choices={problem.choices}
@@ -158,7 +158,7 @@ export default function ProblemBlock({ problem, index }: ProblemBlockProps) {
       )}
 
       {/* Solution */}
-      <div className="px-5 pb-5">
+      <div className="px-4 sm:px-5 pb-5">
         <SolutionReveal
           solution={problem.solution}
           finalAnswer={problem.finalAnswer}

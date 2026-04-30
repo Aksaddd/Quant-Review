@@ -55,7 +55,7 @@ export default function SectionGrid({ sections }: SectionGridProps) {
             <Link
               key={sec.section}
               href={`/read/chapter-2#section-${sec.section}`}
-              className="group flex items-center gap-4 p-4 transition-all duration-200"
+              className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 transition-all duration-200"
               style={{
                 background: '#ffffff',
                 border: '0.5px solid rgba(0,0,0,0.06)',
@@ -118,7 +118,7 @@ export default function SectionGrid({ sections }: SectionGridProps) {
               {/* Right — flashcard mastery dots + chevron */}
               <div className="flex items-center gap-3 shrink-0">
                 {sec.total > 0 && (
-                  <div className="flex flex-col items-end gap-1">
+                  <div className="hidden sm:flex flex-col items-end gap-1">
                     <div className="flex gap-0.5">
                       {Array.from({ length: 4 }).map((_, i) => {
                         const filled = sec.cardsMastered > 0

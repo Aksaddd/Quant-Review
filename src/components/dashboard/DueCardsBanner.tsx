@@ -47,19 +47,19 @@ export default function DueCardsBanner({ dueCount, newCount, streak }: DueCardsB
 
   return (
     <div
-      className="flex items-center gap-4 p-4"
+      className="flex flex-wrap items-center gap-3 sm:gap-4 p-4"
       style={{
         ...CARD_BASE,
         background: 'var(--eureka-accent-tint)',
         border: '0.5px solid var(--eureka-accent-tint-strong)',
       }}
     >
-      <span className="text-2xl" aria-hidden>🧠</span>
+      <span className="text-2xl shrink-0" aria-hidden>🧠</span>
       <div className="flex-1 min-w-0">
         <p className="text-[14px] font-semibold tracking-tight" style={{ color: 'var(--eureka-accent)' }}>
           Today&apos;s session — {total} card{total !== 1 ? 's' : ''}
         </p>
-        <div className="flex items-center gap-3 mt-0.5">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-0.5">
           {dueCount > 0 && (
             <span className="flex items-center gap-1 text-[11px] tabular-nums" style={{ color: 'var(--eureka-accent)' }}>
               <CalendarClock size={11} /> {dueCount} review{dueCount !== 1 ? 's' : ''}
@@ -79,7 +79,7 @@ export default function DueCardsBanner({ dueCount, newCount, streak }: DueCardsB
       )}
       <Link
         href="/flashcards"
-        className="flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold tracking-tight text-white shrink-0 transition-all duration-200 active:scale-[0.97]"
+        className="flex items-center justify-center gap-1.5 px-4 py-2.5 min-h-[40px] text-[13px] font-semibold tracking-tight text-white transition-all duration-200 active:scale-[0.97] w-full sm:w-auto sm:shrink-0"
         style={{
           borderRadius: 12,
           background: 'var(--eureka-accent)',

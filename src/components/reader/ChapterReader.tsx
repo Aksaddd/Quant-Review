@@ -80,21 +80,24 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
           borderBottom: '0.5px solid rgba(0,0,0,0.06)',
         }}
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-1.5 text-[11px] font-medium tracking-tight min-w-0 text-[#86868b]">
-            <span className="font-semibold truncate text-[#6e6e73]">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 h-12 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 text-[11px] font-medium tracking-tight min-w-0 text-[#86868b] flex-1">
+            {/* Mobile: just the chapter — desktop: full breadcrumb */}
+            <span className="hidden sm:inline font-semibold truncate text-[#6e6e73]">
               Quant Finance Interview Prep
             </span>
-            <span>/</span>
+            <span className="hidden sm:inline">/</span>
             <span className="font-semibold truncate text-[#1d1d1f]">
-              Chapter {chapter.number}: {chapter.title}
+              Ch {chapter.number}
+              <span className="hidden sm:inline">: {chapter.title}</span>
+              <span className="sm:hidden"> · {chapter.title}</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {totalProblems > 0 && (
-              <div className="flex items-center gap-2">
-                <div className="w-28 h-[3px] rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.08)' }}>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="w-16 sm:w-28 h-[3px] rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.08)' }}>
                   <div
                     className="h-full rounded-full"
                     style={{
@@ -114,16 +117,21 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Chapter title card */}
         <div
-          className="reading-card p-6 mb-6"
+          className="reading-card p-4 sm:p-6 mb-5 sm:mb-6"
           style={{ borderRadius: 20, border: '0.5px solid rgba(0,0,0,0.06)' }}
         >
           <p className="text-[10px] font-semibold uppercase tracking-[0.08em] mb-2" style={{ color: 'var(--eureka-accent)' }}>
             Chapter {chapter.number} · Pages {chapter.pageRange}
           </p>
-          <h1 className="text-[32px] font-semibold tracking-[-0.02em] leading-[1.1] text-[#1d1d1f] mb-3">{chapter.title}</h1>
+          <h1
+            className="font-semibold tracking-[-0.02em] leading-[1.1] text-[#1d1d1f] mb-3"
+            style={{ fontSize: 'clamp(22px, 5vw, 32px)' }}
+          >
+            {chapter.title}
+          </h1>
           <p className="text-[14px] text-[#6e6e73] leading-relaxed max-w-2xl">{chapter.overview}</p>
 
           {/* Section pills */}
@@ -238,11 +246,14 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
                 className="flex items-center gap-3 mb-5 pb-3"
                 style={{ borderBottom: `1px solid var(--eureka-accent-tint-strong)` }}
               >
-                <div className="flex flex-col">
+                <div className="flex flex-col min-w-0">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.08em]" style={{ color: 'var(--eureka-accent)' }}>
                     {sec.id}
                   </span>
-                  <h2 className="text-[22px] font-semibold tracking-[-0.015em] leading-tight" style={{ color: 'var(--rt-text)' }}>
+                  <h2
+                    className="font-semibold tracking-[-0.015em] leading-tight break-words"
+                    style={{ color: 'var(--rt-text)', fontSize: 'clamp(18px, 4.5vw, 22px)' }}
+                  >
                     {sec.title}
                   </h2>
                   {sec.problemCount > 0 && (
@@ -261,7 +272,7 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
                     return (
                       <div
                         key={`${sec.id}-prose-${i}`}
-                        className="reading-card px-6 py-5"
+                        className="reading-card px-4 sm:px-6 py-5"
                         style={{ borderRadius: 16, border: '0.5px solid rgba(0,0,0,0.06)' }}
                       >
                         <div className="prose-reading text-[#1d1d1f]">
@@ -287,7 +298,7 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
         {/* Next chapter CTA */}
         {nextChapter ? (
           <div
-            className="mt-8 p-6 flex items-center justify-between gap-4"
+            className="mt-8 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
             style={{
               borderRadius: 20,
               background: '#ffffff',
@@ -295,17 +306,17 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
               boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
             }}
           >
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-[#86868b] mb-1">
                 Up next
               </p>
-              <p className="text-[16px] font-semibold tracking-tight text-[#1d1d1f]">
+              <p className="text-[15px] sm:text-[16px] font-semibold tracking-tight text-[#1d1d1f]">
                 Chapter {nextChapter.number}: {nextChapter.title}
               </p>
             </div>
             <Link
               href={nextChapter.href}
-              className="flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97] shrink-0"
+              className="flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] text-[13px] font-semibold tracking-tight transition-all duration-200 active:scale-[0.97] shrink-0 w-full sm:w-auto"
               style={{
                 borderRadius: 12,
                 background: 'var(--eureka-accent)',
@@ -313,7 +324,9 @@ export default function ChapterReader({ chapter, nextChapter }: ChapterReaderPro
                 transitionTimingFunction: 'var(--ease-standard)',
               }}
             >
-              Start Chapter {nextChapter.number} <ArrowRight size={15} />
+              <span className="sm:hidden">Start Ch {nextChapter.number}</span>
+              <span className="hidden sm:inline">Start Chapter {nextChapter.number}</span>
+              <ArrowRight size={15} />
             </Link>
           </div>
         ) : (

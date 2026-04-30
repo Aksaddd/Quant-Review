@@ -62,7 +62,7 @@ export default function StatsOverview({
       {cards.map(({ label, value, sub, pct, color, icon: Icon }) => (
         <div
           key={label}
-          className="p-4"
+          className="p-3 sm:p-4"
           style={{
             background: '#ffffff',
             border: '0.5px solid rgba(0,0,0,0.06)',
@@ -73,15 +73,15 @@ export default function StatsOverview({
           <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-[#86868b] mb-2">
             {label}
           </p>
-          <div className="flex items-end gap-1.5">
+          <div className="flex items-end gap-1.5 flex-wrap">
             {Icon && <Icon size={18} style={{ color }} className="mb-0.5 shrink-0" />}
             <span
-              className="text-[28px] font-semibold leading-none tabular-nums tracking-[-0.02em]"
-              style={{ color }}
+              className="font-semibold leading-none tabular-nums tracking-[-0.02em]"
+              style={{ color, fontSize: 'clamp(22px, 6vw, 28px)' }}
             >
               {value}
             </span>
-            <span className="text-[12px] text-[#86868b] mb-1 tabular-nums">{sub}</span>
+            <span className="text-[11px] sm:text-[12px] text-[#86868b] mb-1 tabular-nums">{sub}</span>
           </div>
           {pct !== null && (
             <div className="mt-3">

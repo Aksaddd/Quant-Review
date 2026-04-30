@@ -61,12 +61,12 @@ const FEATURES = [
 export default function Features() {
   return (
     <section
-      className="py-20 px-4 sm:px-6"
+      className="py-14 sm:py-20 px-4 sm:px-6"
       style={{ borderTop: '0.5px solid rgba(0,0,0,0.06)' }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10 sm:mb-14">
           <p
             className="text-[11px] font-semibold uppercase tracking-[0.12em] mb-3"
             style={{ color: 'var(--eureka-accent)' }}
@@ -87,11 +87,11 @@ export default function Features() {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {FEATURES.map(({ icon: Icon, color, bg, title, description }) => (
             <div
               key={title}
-              className="p-5 transition-all duration-200"
+              className="p-4 sm:p-5 transition-all duration-200"
               style={{
                 background: '#ffffff',
                 border: '0.5px solid rgba(0,0,0,0.06)',

@@ -20,11 +20,11 @@ const SECTION_EMOJI: Record<string, string> = {
 export default function SectionPreview() {
   return (
     <section
-      className="py-20 px-4 sm:px-6"
+      className="py-14 sm:py-20 px-4 sm:px-6"
       style={{ borderTop: '0.5px solid rgba(0,0,0,0.06)' }}
     >
       <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
             <p
               className="text-[11px] font-semibold uppercase tracking-[0.12em] mb-2"
@@ -48,7 +48,7 @@ export default function SectionPreview() {
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {SECTIONS.map(({ id, title }) => (
             <Link
               key={id}
