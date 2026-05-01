@@ -1,0 +1,57 @@
+{
+  "id": "limits-and-derivatives",
+  "kind": "technique",
+  "name": "Limits and Derivatives",
+  "tagline": "Three calculus tools for closed-form questions: logarithmic differentiation for f(x)^g(x), monotonicity arguments for comparing two quantities, and L'Hospital's rule for indeterminate limits.",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.1",
+    "title": "Limits and Derivatives",
+    "exemplarProblemId": "ch3-01-derivative-ln-x-ln-x"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Section 3.1 problems are about USING the basic calculus toolkit to answer non-numerical questions. Three sub-techniques recur: (1) logarithmic differentiation to handle expressions of the form y = f(x)^g(x), where direct differentiation tangles you up; (2) monotonicity arguments using f'(x) to compare f(a) and f(b) without computing either; (3) L'Hospital's rule for limits of the form 0/0 or infinity/infinity."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The unifying skill is recognizing which tool applies. f^g problems => take ln. Compare f(a) vs f(b) => differentiate, look at sign. Indeterminate limit => L'Hospital. Most quant interview calculus questions reduce to one of these three patterns, sometimes nested."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "If you see f(x)^g(x), ALWAYS take the natural log first. If you're asked to compare two transcendental numbers without a calculator, find a function f and an x where f(x) hides the comparison -- then study f's monotonicity. If a limit gives 0/0 or infinity/infinity, L'Hospital. If it gives 0 * infinity, rewrite as a quotient and apply L'Hospital."
+    }
+  ],
+  "whenToUse": [
+    "Differentiating expressions of the form f(x)^g(x) (variable base AND variable exponent).",
+    "Comparing two specific transcendental values (like e^pi vs pi^e) without numerical computation.",
+    "Evaluating limits where direct substitution gives an indeterminate form.",
+    "Verifying the location of a maximum or minimum on a function.",
+    "Anywhere the question asks for an EXACT answer to a calculus expression."
+  ],
+  "recipe": [
+    "For f(x)^g(x): write y = f(x)^g(x), take ln of both sides to get ln(y) = g(x) * ln(f(x)), then differentiate both sides (using d/dx[ln y] = y'/y on the left).",
+    "For f(a) vs f(b): differentiate, find f'(x) and its zeros, determine where f is increasing vs decreasing, then read off f(a) > f(b) or f(a) < f(b) directly.",
+    "For 0/0 or infinity/infinity: L'Hospital says lim f/g = lim f'/g' (if the latter exists). For 0 * infinity: rewrite f * g as f / (1/g) to put it in 0/0 or infinity/infinity form, then apply.",
+    "After applying L'Hospital, check the new limit: if STILL indeterminate, apply again."
+  ],
+  "commonPitfalls": [
+    "Forgetting that y' = y * (ln y)' rather than y' = (ln y)'. The factor of y is essential.",
+    "Applying L'Hospital to non-indeterminate forms -- it's only valid for 0/0 or infinity/infinity.",
+    "Confusing 0 * infinity with 0/0 -- they need to be rewritten before L'Hospital applies.",
+    "Trying to compare e^pi vs pi^e by Taylor-expanding -- the comparison is much cleaner via monotonicity of ln(x)/x.",
+    "Failing to verify the sign of f'(x) on the relevant interval (e.g., 'f decreasing for x > e' must be checked, not assumed)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-01-derivative-ln-x-ln-x", "title": "Derivative of (ln x)^(ln x)", "chapter": 3, "section": "3.1" },
+    { "problemId": "ch3-02-e-vs-pi",              "title": "e^pi vs. pi^e",                "chapter": 3, "section": "3.1" },
+    { "problemId": "ch3-03-two-limits",           "title": "Two Limits",                   "chapter": 3, "section": "3.1" }
+  ],
+  "relatedTechniques": ["logic-reasoning", "math-induction"]
+}

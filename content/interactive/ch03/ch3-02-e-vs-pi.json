@@ -1,0 +1,106 @@
+{
+  "id": "ch3-02-e-vs-pi",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.1",
+  "title": "e^pi vs. pi^e",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "144-164"
+  },
+  "mechanism": {
+    "primary": "limits-and-derivatives",
+    "structure": "monotonicity-of-ln-x-over-x-on-x-greater-than-e",
+    "insight": "f-of-x-equals-ln-x-over-x-is-decreasing-for-x-greater-than-e",
+    "variantAxes": ["compared_pair"]
+  },
+  "setup": {
+    "narrative": "Two transcendental numbers: e^pi (e raised to the pi-th power) and pi^e (pi raised to the e-th power). e is approximately 2.718; pi is approximately 3.14159.",
+    "rules": [
+      "You may NOT use a calculator or compute either value numerically.",
+      "Standard calculus tools (derivatives, monotonicity, log identities) are allowed.",
+      "The answer is either 'e^pi > pi^e', 'e^pi < pi^e', or 'they are equal.'"
+    ],
+    "question": "Which is larger: e^pi or pi^e?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Reduce the comparison to a question about a single function f(x).",
+    "Find a function f such that the comparison becomes f(e) vs f(pi).",
+    "Use monotonicity of f to conclude without computing values."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Take ln of both sides",
+      "prompt": "Apply ln to both candidates. The comparison becomes equivalent to comparing what?",
+      "options": [
+        { "id": "a", "text": "pi (= ln(e^pi)) vs. e * ln(pi) (= ln(pi^e))",  "correct": true },
+        { "id": "b", "text": "e^2 vs. pi^2",                                    "correct": false },
+        { "id": "c", "text": "e + pi vs. e * pi",                                "correct": false }
+      ],
+      "explanation": "ln(e^pi) = pi * ln(e) = pi * 1 = pi. ln(pi^e) = e * ln(pi). Since ln is strictly increasing, comparing the originals is equivalent to comparing pi vs. e * ln(pi)."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Reduce to a single function",
+      "prompt": "Rearrange pi vs. e * ln(pi). Which equivalent comparison shows the structure?",
+      "options": [
+        { "id": "a", "text": "1 / e vs. ln(pi) / pi -- equivalently, ln(e) / e vs. ln(pi) / pi",  "correct": true },
+        { "id": "b", "text": "e * pi vs. e^2",                                                       "correct": false },
+        { "id": "c", "text": "pi - e vs. ln(pi)",                                                    "correct": false }
+      ],
+      "explanation": "pi vs. e * ln(pi) -- divide by e * pi: 1/e vs. ln(pi)/pi. Note that 1/e = ln(e)/e (since ln e = 1). So we're comparing f(e) vs. f(pi) where f(x) = ln(x) / x.",
+      "learnMoreTechnique": "limits-and-derivatives"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Differentiate f(x) = ln(x) / x",
+      "prompt": "Compute f'(x) where f(x) = ln(x) / x.",
+      "options": [
+        { "id": "a", "text": "f'(x) = (1 - ln x) / x^2", "correct": true },
+        { "id": "b", "text": "f'(x) = 1 / x^2",           "correct": false },
+        { "id": "c", "text": "f'(x) = ln(x) / x^2",       "correct": false }
+      ],
+      "explanation": "Quotient rule: f'(x) = [(1/x) * x - ln(x) * 1] / x^2 = (1 - ln x) / x^2."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Find the critical point and determine monotonicity",
+      "prompt": "Where is f'(x) = 0, and on which interval is f decreasing?",
+      "options": [
+        { "id": "a", "text": "f'(x) = 0 at x = e (since 1 - ln x = 0). For x > e, ln(x) > 1, so f'(x) < 0. f is DECREASING for x > e.", "correct": true },
+        { "id": "b", "text": "f is increasing for all x > 0.",                                                                            "correct": false },
+        { "id": "c", "text": "f has no critical points.",                                                                                 "correct": false }
+      ],
+      "explanation": "Set 1 - ln x = 0, so ln x = 1, so x = e. For x > e, 1 - ln x < 0, so f'(x) < 0 -- f is strictly decreasing on (e, infinity)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Since pi > e and f is decreasing on (e, infinity), what's the comparison?",
+      "options": [
+        { "id": "a", "text": "f(pi) < f(e), so ln(pi)/pi < 1/e, so e * ln(pi) < pi, so ln(pi^e) < ln(e^pi), so pi^e < e^pi. Therefore e^pi > pi^e.", "correct": true },
+        { "id": "b", "text": "pi^e > e^pi.",                                                                                                            "correct": false },
+        { "id": "c", "text": "They're equal.",                                                                                                          "correct": false }
+      ],
+      "explanation": "f decreasing means larger x gives smaller f(x). So f(pi) < f(e), which unwinds back to e^pi > pi^e. e^pi is approximately 23.14; pi^e is approximately 22.46. The calculus argument matched the numerical truth without computing either."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Use the same method to compare 2^3 and 3^2. (You should get 3^2 = 9 < 8 = 2^3 -- agreeing with monotonicity since both 2 and 3 are < e? Wait -- 2 < e but 3 > e. Investigate where the comparison flips.)",
+        "What's the maximum value of f(x) = ln(x) / x?",
+        "Compare a^b vs. b^a for general a, b > 0. When does a^b > b^a?"
+      ]
+    }
+  ]
+}

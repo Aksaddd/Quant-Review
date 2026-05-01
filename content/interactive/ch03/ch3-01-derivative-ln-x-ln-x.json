@@ -1,0 +1,118 @@
+{
+  "id": "ch3-01-derivative-ln-x-ln-x",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.1",
+  "title": "Derivative of (ln x)^(ln x)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "93-125"
+  },
+  "mechanism": {
+    "primary": "limits-and-derivatives",
+    "structure": "logarithmic-differentiation-on-f-to-the-g",
+    "insight": "take-ln-of-both-sides-to-linearize-the-exponent",
+    "variantAxes": ["base_function", "exponent_function"]
+  },
+  "setup": {
+    "narrative": "Let y = (ln x)^(ln x). Both the base and the exponent depend on x.",
+    "rules": [
+      "x is a positive real number, x > 1 (so ln x > 0).",
+      "The base of the exponentiation is ln(x); the exponent is also ln(x).",
+      "You may use any standard differentiation rule (product, quotient, chain) plus the identity d/dx[ln(u)] = (1/u) * du/dx."
+    ],
+    "question": "What is dy/dx?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that f(x)^g(x) requires logarithmic differentiation.",
+    "Use ln of both sides to convert exponent into a product.",
+    "Differentiate ln(ln(x)) carefully via chain rule."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why direct differentiation fails",
+      "prompt": "Why can't we just apply the power rule (d/dx[x^n] = n*x^(n-1)) to y = (ln x)^(ln x)?",
+      "options": [
+        { "id": "a", "text": "The power rule applies to x^n where n is a CONSTANT. Here the exponent ln(x) varies with x, so the rule doesn't apply directly.", "correct": true },
+        { "id": "b", "text": "The base ln(x) is not differentiable.",                                                                                       "correct": false },
+        { "id": "c", "text": "It does apply -- the answer is (ln x) * (ln x)^(ln x - 1).",                                                                  "correct": false }
+      ],
+      "explanation": "The power rule x^n with constant n is the wrong tool. (Option (c) makes that mistake -- it would treat ln x as if it were a constant exponent.) Variable base AND variable exponent calls for logarithmic differentiation."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right move?",
+      "options": [
+        { "id": "a", "text": "Logarithmic differentiation: take ln of both sides, then differentiate using product rule.", "correct": true },
+        { "id": "b", "text": "Implicit differentiation by treating y as an unknown function.",                                "correct": false },
+        { "id": "c", "text": "L'Hospital's rule.",                                                                            "correct": false }
+      ],
+      "explanation": "Logarithmic differentiation linearizes the exponent: ln(y) = ln(x) * ln(ln(x)). Now both sides are differentiable directly via product rule + chain rule.",
+      "learnMoreTechnique": "limits-and-derivatives"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Take ln of both sides",
+      "prompt": "Apply ln to y = (ln x)^(ln x). What's ln(y)?",
+      "options": [
+        { "id": "a", "text": "ln(y) = ln(x) * ln(ln(x))", "correct": true },
+        { "id": "b", "text": "ln(y) = (ln x)^2",          "correct": false },
+        { "id": "c", "text": "ln(y) = ln(x) + ln(ln x)",  "correct": false }
+      ],
+      "explanation": "ln(a^b) = b * ln(a). Here a = ln(x) and b = ln(x), so ln(y) = ln(x) * ln(ln(x))."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Differentiate d/dx[ln(ln x)]",
+      "prompt": "Use the chain rule on d/dx[ln(ln x)]. What is it?",
+      "options": [
+        { "id": "a", "text": "1 / (x * ln x)",     "correct": true },
+        { "id": "b", "text": "1 / ln x",            "correct": false },
+        { "id": "c", "text": "ln(x) / x",           "correct": false }
+      ],
+      "explanation": "d/dx[ln(u)] = (1/u) * du/dx. With u = ln(x): d/dx[ln(ln x)] = (1/ln x) * (1/x) = 1/(x * ln x)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Differentiate the right side",
+      "prompt": "Differentiate ln(x) * ln(ln x) using the product rule. What do you get?",
+      "options": [
+        { "id": "a", "text": "(1/x) * ln(ln x) + ln(x) * 1/(x * ln x) = [ln(ln x) + 1] / x", "correct": true },
+        { "id": "b", "text": "(1/x) * ln(ln x)",                                                "correct": false },
+        { "id": "c", "text": "ln(x) / (x * ln x)",                                              "correct": false }
+      ],
+      "explanation": "Product rule: d/dx[ln(x) * ln(ln x)] = (d/dx ln x) * ln(ln x) + ln(x) * (d/dx ln(ln x)) = (1/x) * ln(ln x) + ln(x) * 1/(x * ln x). The second term simplifies: ln(x) / (x * ln x) = 1/x. So total = [ln(ln x) + 1] / x."
+    },
+    {
+      "id": "s6",
+      "type": "mc-single",
+      "label": "Solve for dy/dx",
+      "prompt": "From (1/y) * dy/dx = [ln(ln x) + 1] / x, solve for dy/dx.",
+      "options": [
+        { "id": "a", "text": "dy/dx = y * [ln(ln x) + 1] / x = (ln x)^(ln x) * [ln(ln x) + 1] / x", "correct": true },
+        { "id": "b", "text": "dy/dx = [ln(ln x) + 1] / x",                                            "correct": false },
+        { "id": "c", "text": "dy/dx = y / x",                                                          "correct": false }
+      ],
+      "explanation": "Multiply both sides by y. Then substitute y = (ln x)^(ln x). The y factor is what (b) misses -- a common error in logarithmic differentiation."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is the derivative of x^x using the same method?",
+        "Why does logarithmic differentiation always introduce a factor of y on the right side?",
+        "Could you differentiate y = sin(x)^cos(x) the same way? Walk through the first two steps."
+      ]
+    }
+  ]
+}

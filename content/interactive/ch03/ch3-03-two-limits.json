@@ -1,0 +1,117 @@
+{
+  "id": "ch3-03-two-limits",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.1",
+  "title": "Two Limits",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "189-212"
+  },
+  "mechanism": {
+    "primary": "limits-and-derivatives",
+    "structure": "lhospital-rule-on-indeterminate-forms",
+    "insight": "0-times-infinity-must-be-rewritten-as-a-quotient-before-applying-lhospital",
+    "variantAxes": ["function_pair"]
+  },
+  "setup": {
+    "narrative": "Two limits to evaluate using L'Hospital's rule.",
+    "rules": [
+      "L'Hospital's rule: if lim f/g is of the form 0/0 or infinity/infinity, then lim f/g = lim f'/g' (when the latter exists).",
+      "L'Hospital does NOT directly apply to 0 * infinity; rewrite as a quotient first."
+    ],
+    "question": "Find: (a) lim(x -> infinity) e^x / x^2  and  (b) lim(x -> 0+) x^2 * ln x"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Identify when a limit is in indeterminate form and which form (0/0 or infinity/infinity).",
+    "Apply L'Hospital iteratively when one application is not enough.",
+    "Rewrite a 0 * infinity form as a quotient before applying L'Hospital."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify indeterminate form for limit (a)",
+      "prompt": "lim(x -> infinity) e^x / x^2: as x -> infinity, the numerator and denominator both go to infinity. What's the form?",
+      "options": [
+        { "id": "a", "text": "infinity / infinity -- L'Hospital applies.",     "correct": true },
+        { "id": "b", "text": "infinity * 0 -- needs rewriting.",                 "correct": false },
+        { "id": "c", "text": "Not indeterminate -- the limit is 0.",             "correct": false }
+      ],
+      "explanation": "Both e^x and x^2 grow without bound. infinity/infinity is one of L'Hospital's two valid forms.",
+      "learnMoreTechnique": "limits-and-derivatives"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply L'Hospital to limit (a)",
+      "prompt": "Differentiate numerator and denominator: d/dx[e^x] / d/dx[x^2] = ?",
+      "options": [
+        { "id": "a", "text": "e^x / (2x) -- still infinity / infinity, apply L'Hospital again to get e^x / 2 -> infinity.", "correct": true },
+        { "id": "b", "text": "0 / 2 = 0",                                                                                       "correct": false },
+        { "id": "c", "text": "e^x / x",                                                                                          "correct": false }
+      ],
+      "explanation": "First application: e^x / (2x) -- still infinity/infinity. Second application: e^x / 2 -> infinity. The exponential beats the polynomial."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Identify the form for limit (b)",
+      "prompt": "lim(x -> 0+) x^2 * ln(x): as x -> 0+, x^2 -> 0 and ln(x) -> -infinity. What's the form?",
+      "options": [
+        { "id": "a", "text": "0 * (-infinity) -- needs rewriting before L'Hospital applies.", "correct": true },
+        { "id": "b", "text": "infinity / infinity -- L'Hospital applies directly.",            "correct": false },
+        { "id": "c", "text": "0 / 0 -- L'Hospital applies directly.",                            "correct": false }
+      ],
+      "explanation": "L'Hospital is for QUOTIENTS in 0/0 or infinity/infinity form. A product of 0 * infinity must be rewritten as a quotient first."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Rewrite limit (b) as a quotient",
+      "prompt": "How do you rewrite x^2 * ln(x) as a quotient amenable to L'Hospital?",
+      "options": [
+        { "id": "a", "text": "ln(x) / (1/x^2) -- as x -> 0+, this becomes (-infinity) / infinity.", "correct": true },
+        { "id": "b", "text": "x^2 / ln(x) -- becomes 0 / (-infinity) which equals 0 directly.",      "correct": false },
+        { "id": "c", "text": "It can't be rewritten.",                                                  "correct": false }
+      ],
+      "explanation": "x^2 * ln x = ln x / (1/x^2). The denominator 1/x^2 -> infinity as x -> 0+, and ln(x) -> -infinity. So we have (-infinity)/infinity -- a valid L'Hospital form."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Apply L'Hospital to limit (b)",
+      "prompt": "Differentiate ln(x) / (1/x^2). What do you get, and what does the limit evaluate to?",
+      "options": [
+        { "id": "a", "text": "(1/x) / (-2/x^3) = -x^2 / 2 -> 0 as x -> 0+.", "correct": true },
+        { "id": "b", "text": "1 / (-2x) -> -infinity.",                       "correct": false },
+        { "id": "c", "text": "Indeterminate -- can't evaluate.",                "correct": false }
+      ],
+      "explanation": "d/dx[ln x] = 1/x. d/dx[1/x^2] = -2/x^3. Quotient: (1/x) / (-2/x^3) = (1/x) * (x^3/-2) = -x^2/2. As x -> 0+, this -> 0. So lim(x -> 0+) x^2 * ln x = 0."
+    },
+    {
+      "id": "s6",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final answers?",
+      "options": [
+        { "id": "a", "text": "(a) infinity   (b) 0", "correct": true },
+        { "id": "b", "text": "(a) 1   (b) 1",         "correct": false },
+        { "id": "c", "text": "(a) 0   (b) infinity",  "correct": false }
+      ],
+      "explanation": "(a) Exponential dominates polynomial -> infinity. (b) Polynomial 'beats' the logarithm at 0 -> 0. These are the canonical limits everyone should remember."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: lim(x -> infinity) e^x / x^n for any positive integer n. (Apply L'Hospital n times.)",
+        "Generalize: lim(x -> 0+) x^p * ln(x) for any p > 0. (Same trick.)",
+        "Why does L'Hospital fail when applied to non-indeterminate forms? Try lim(x -> 0) cos(x) / 1 to see the issue."
+      ]
+    }
+  ]
+}
