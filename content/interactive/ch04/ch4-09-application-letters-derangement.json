@@ -1,0 +1,106 @@
+{
+  "id": "ch4-09-application-letters-derangement",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Application Letters (Derangement)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "216-236"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "inclusion-exclusion-on-letter-i-correctly-placed-events",
+    "insight": "P-of-some-letter-correct-equals-1-minus-1-over-2-factorial-plus-1-over-3-factorial-minus-...",
+    "variantAxes": ["n_letters"]
+  },
+  "setup": {
+    "narrative": "5 personalized letters are randomly stuffed into 5 addressed envelopes (uniformly random pairing).",
+    "rules": [
+      "Each letter goes into exactly one envelope; each envelope gets exactly one letter.",
+      "All 5! = 120 pairings are equally likely.",
+      "A letter is 'correct' if it lands in its matching envelope."
+    ],
+    "question": "What is the probability that ALL 5 letters end up in WRONG envelopes?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Define E_i = 'letter i is in the correct envelope' and use inclusion-exclusion.",
+    "Compute P(intersection of any k specific E_i) = (5-k)!/5! = 1/(5*4*...*(5-k+1)).",
+    "Apply the alternating-sum formula and subtract from 1."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute P(at least one letter correct), then subtract from 1?",
+      "options": [
+        { "id": "a", "text": "Inclusion-exclusion on E_i = 'letter i correctly placed'.  P(some correct) = sum P(E_i) - sum P(E_i ∩ E_j) + ...", "correct": true },
+        { "id": "b", "text": "Direct enumeration of all 120 permutations.",                                                                            "correct": false },
+        { "id": "c", "text": "Independence: P(some correct) = 1 - (4/5)^5.",                                                                            "correct": false }
+      ],
+      "explanation": "The events E_i overlap heavily and are NOT independent (they're constrained by the permutation structure). Inclusion-exclusion handles overlap exactly.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute single-event probabilities",
+      "prompt": "What is P(E_i) for a specific i?",
+      "options": [
+        { "id": "a", "text": "P(E_i) = 1/5  (letter i lands uniformly in any of 5 envelopes; correct one is one of them).", "correct": true },
+        { "id": "b", "text": "P(E_i) = 1/5! = 1/120.",                                                                       "correct": false },
+        { "id": "c", "text": "P(E_i) = 1.",                                                                                   "correct": false }
+      ],
+      "explanation": "Letter i is equally likely to be in any of the 5 envelopes; correct-placement probability = 1/5."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compute k-fold intersections",
+      "prompt": "What is P(E_{i_1} ∩ E_{i_2} ∩ ... ∩ E_{i_k}) -- all k specific letters correctly placed?",
+      "options": [
+        { "id": "a", "text": "(5-k)! / 5! = 1 / (5 * 4 * ... * (5-k+1))  -- the remaining 5-k letters can go anywhere.", "correct": true },
+        { "id": "b", "text": "(1/5)^k",                                                                                  "correct": false },
+        { "id": "c", "text": "1/5",                                                                                       "correct": false }
+      ],
+      "explanation": "If k specific letters are correctly placed, the other (5-k) letters can be in ANY arrangement -- (5-k)! arrangements out of 5! total. So P = (5-k)!/5! = 1/(5 * 4 * ... * (5-k+1))."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply inclusion-exclusion",
+      "prompt": "P(union E_i) = sum_{k=1 to 5} (-1)^(k+1) * C(5, k) * (5-k)!/5!. Simplify (note C(5,k) * (5-k)!/5! = 1/k!) to get the famous derangement formula.",
+      "options": [
+        { "id": "a", "text": "P(some correct) = 1 - 1/2! + 1/3! - 1/4! + 1/5! = 1 - 1/2 + 1/6 - 1/24 + 1/120 = 76/120 = 19/30.", "correct": true },
+        { "id": "b", "text": "P(some correct) = 1.",                                                                                "correct": false },
+        { "id": "c", "text": "P(some correct) = 5/120.",                                                                            "correct": false }
+      ],
+      "explanation": "C(5, k) * (5-k)!/5! = 5!/(k!(5-k)!) * (5-k)!/5! = 1/k!. So sum becomes 1/1! - 1/2! + 1/3! - 1/4! + 1/5! = 19/30."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "P(all wrong) = 1 - P(some correct) = ?",
+      "options": [
+        { "id": "a", "text": "1 - 19/30 = 11/30 ≈ 0.367.", "correct": true },
+        { "id": "b", "text": "1/120.",                       "correct": false },
+        { "id": "c", "text": "0.",                            "correct": false }
+      ],
+      "explanation": "P(all wrong) = 11/30 ≈ 0.3667. As n -> infinity, this approaches 1/e ≈ 0.3679 -- a famous limit. So 'derangement probability' is approximately 1/e regardless of how many letters you have."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute P(all wrong) for n = 4 and n = 6. How fast does it converge to 1/e?",
+        "What does the count of derangements of n look like? (D_n = n! * sum_{k=0}^n (-1)^k / k!.)",
+        "Why does the answer approach 1/e specifically?"
+      ]
+    }
+  ]
+}

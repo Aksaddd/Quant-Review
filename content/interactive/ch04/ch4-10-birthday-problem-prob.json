@@ -1,0 +1,88 @@
+{
+  "id": "ch4-10-birthday-problem-prob",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Birthday Problem (probability)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "240-249"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "complement-product-of-no-match-probabilities",
+    "insight": "computing-P-no-match-as-a-product-and-comparing-to-1-half",
+    "variantAxes": ["n_days", "threshold_probability"]
+  },
+  "setup": {
+    "narrative": "A room of n people. Birthdays are uniformly distributed over 365 days, independent across people. (Ignore leap years and assume birthdays are independent.)",
+    "rules": [
+      "Each person's birthday is uniform on {1, 2, ..., 365}.",
+      "Birthdays are mutually independent.",
+      "We want the smallest n such that P(at least 2 people share a birthday) > 1/2."
+    ],
+    "question": "What is the smallest n such that the probability of at least one shared birthday exceeds 1/2?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Compute P(no shared birthday) as a product of terms (365-k)/365.",
+    "Use the complement: P(at least one match) = 1 - P(no match).",
+    "Iterate to find the smallest n crossing the 0.5 threshold."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Compute P(no match) for n people",
+      "prompt": "Add people one at a time. The 1st has any birthday. The 2nd avoids the 1st: probability 364/365. The 3rd avoids both: 363/365. And so on. P(no match for n people) = ?",
+      "options": [
+        { "id": "a", "text": "(365/365) * (364/365) * (363/365) * ... * ((365 - n + 1) / 365)  =  365! / ((365-n)! * 365^n).", "correct": true },
+        { "id": "b", "text": "1 - n/365.",                                                                                       "correct": false },
+        { "id": "c", "text": "1/365^n.",                                                                                          "correct": false }
+      ],
+      "explanation": "Sequentially place each person; each new person must avoid all already-placed birthdays. The probability factors as a product of (365 - k + 1)/365 for k = 1, ..., n.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute for n = 22",
+      "prompt": "P(no match for 22 people) = (365/365) * (364/365) * ... * (344/365) ≈ ?",
+      "answerType": "numeric",
+      "answer": 0.524,
+      "explanation": "Computing the product gives ≈ 0.524. So P(at least one match) ≈ 1 - 0.524 = 0.476 -- still BELOW 0.5."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute for n = 23",
+      "prompt": "P(no match for 23 people) ≈ ?",
+      "answerType": "numeric",
+      "answer": 0.493,
+      "explanation": "P(no match for 23) ≈ 0.493. So P(at least one match) ≈ 1 - 0.493 = 0.507 -- now ABOVE 0.5. So n = 23 is the threshold."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is the smallest n with P(match) > 1/2?",
+      "options": [
+        { "id": "a", "text": "n = 23.  P(match) ≈ 0.507.",  "correct": true },
+        { "id": "b", "text": "n = 183 (half of 365).",         "correct": false },
+        { "id": "c", "text": "n = 100.",                        "correct": false }
+      ],
+      "explanation": "23 -- famously counterintuitive. People expect the answer to be around 365/2 = 183, but the QUADRATIC growth of pairs (C(n,2)) makes 23 enough."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the answer so much smaller than 183? (Hint: count PAIRS rather than people.)",
+        "What's the threshold for P(match) > 0.99?",
+        "What if there are 366 days? Find the smallest n."
+      ]
+    }
+  ]
+}

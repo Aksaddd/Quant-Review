@@ -1,0 +1,84 @@
+{
+  "id": "ch4-05-poker-hands",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Poker Hands",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "150-164"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "count-favorable-hands-using-C-n-k-then-divide-by-total-5-card-hands",
+    "insight": "for-each-hand-type-multiply-the-counts-of-each-independent-choice",
+    "variantAxes": ["hand_type", "deck_size"]
+  },
+  "setup": {
+    "narrative": "A standard 52-card deck has 13 values (2, 3, ..., 10, J, Q, K, A) and 4 suits. A poker hand is 5 cards drawn without replacement.",
+    "rules": [
+      "All 5-card hands are equally likely.",
+      "Total number of 5-card hands is C(52, 5) = 2,598,960.",
+      "Compute the count of each hand type, divide by the total to get the probability."
+    ],
+    "question": "What are the probabilities of (a) four-of-a-kind, (b) full house, (c) two pairs?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Count the number of ways to form each specific hand type.",
+    "Use C(n, k) systematically: pick a value, then pick suits, then fill in the remaining cards.",
+    "Avoid double-counting (e.g., for two pairs, dividing by ordering choices)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "ladder-step",
+      "label": "Count four-of-a-kind",
+      "prompt": "Four-of-a-kind = all 4 cards of one value plus 1 other card. How many such hands are there?",
+      "answerType": "numeric",
+      "answer": 624,
+      "explanation": "13 ways to pick the value (e.g., '4 sevens'). For each, all 4 suits are forced (no choice). Then 48 remaining cards to fill the 5th slot. Total: 13 * 1 * 48 = 624."
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Count full house",
+      "prompt": "Full house = three-of-a-kind + a different pair. How many?",
+      "answerType": "numeric",
+      "answer": 3744,
+      "explanation": "13 ways to pick the value for the three; C(4,3) = 4 ways to pick which 3 suits. Then 12 remaining values for the pair; C(4,2) = 6 ways to pick its 2 suits. Total: 13 * 4 * 12 * 6 = 3744."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Count two pairs",
+      "prompt": "Two pairs = two different values with 2 cards each + a 5th card of a third value. How many?",
+      "answerType": "numeric",
+      "answer": 123552,
+      "explanation": "C(13, 2) = 78 ways to pick the two values for the pairs. C(4, 2) = 6 ways for each pair's suits = 6 * 6 = 36. Then 44 remaining cards for the 5th (52 - 8 used = 44). Total: 78 * 36 * 44 = 123,552. Divide by C(52,5) for the probability."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit probabilities",
+      "prompt": "Match each hand to its probability (rounded to 4 decimals).",
+      "options": [
+        { "id": "a", "text": "Four-of-a-kind: 624/2598960 ≈ 0.00024;  Full house: 3744/2598960 ≈ 0.00144;  Two pairs: 123552/2598960 ≈ 0.04754.", "correct": true },
+        { "id": "b", "text": "All three are about 1/100.",                                                                                                "correct": false },
+        { "id": "c", "text": "Two pairs is rarer than four-of-a-kind.",                                                                                   "correct": false }
+      ],
+      "explanation": "Two pairs is most common (~5%), then full house (~0.14%), then four-of-a-kind (~0.024%). Counting carefully matters -- e.g., 'two pairs' uses C(13, 2) for VALUES (not P(13, 2)), since order doesn't distinguish the pair-of-aces from pair-of-kings."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Count straight flushes (5 consecutive same-suit cards). What's the probability?",
+        "Count three-of-a-kind (exactly three of one value, no pair). Why is this DIFFERENT from full house?",
+        "Verify that the sum of all hand-type probabilities equals 1."
+      ]
+    }
+  ]
+}

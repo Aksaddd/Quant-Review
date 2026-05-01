@@ -1,0 +1,94 @@
+{
+  "id": "ch4-11-100th-digit",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "100th Digit of (1+sqrt(2))^3000",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "253-274"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "use-conjugate-pair-and-binomial-theorem-to-prove-N-minus-tiny-equals-target",
+    "insight": "the-conjugate-1-minus-sqrt-2-to-the-3000-is-positive-but-tinier-than-10-to-the-minus-100",
+    "variantAxes": ["base_pair", "exponent"]
+  },
+  "setup": {
+    "narrative": "Compute the 100th decimal digit of (1 + sqrt(2))^3000.",
+    "rules": [
+      "Direct computation isn't feasible -- the number has thousands of digits.",
+      "Use the binomial theorem and the conjugate (1 - sqrt(2))^3000.",
+      "Note: 1 - sqrt(2) ≈ -0.414 has |1 - sqrt(2)| < 1."
+    ],
+    "question": "What is the 100th digit to the right of the decimal point in (1 + sqrt(2))^3000?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use the binomial theorem to show (1+sqrt(2))^n + (1-sqrt(2))^n is an integer.",
+    "Argue that (sqrt(2)-1)^3000 is positive and < 10^(-100).",
+    "Conclude that (1+sqrt(2))^3000 = N - tiny, so its decimal is N-1.999...9 with many 9s."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the trick to compute one specific digit of an enormous number?",
+      "options": [
+        { "id": "a", "text": "Add the conjugate (1-sqrt(2))^3000 to (1+sqrt(2))^3000. The sum is an INTEGER (irrational parts cancel by binomial expansion).", "correct": true },
+        { "id": "b", "text": "Compute (1 + sqrt(2))^3000 numerically.",                                                                                          "correct": false },
+        { "id": "c", "text": "It's an unsolved problem.",                                                                                                          "correct": false }
+      ],
+      "explanation": "Conjugate-pair trick. By the binomial theorem, (1+sqrt(2))^n = sum C(n,k) sqrt(2)^k and (1-sqrt(2))^n = sum C(n,k) (-sqrt(2))^k. The odd-k terms cancel when added, leaving twice the sum over even k -- which is an integer.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Bound the conjugate",
+      "prompt": "Note that (1 - sqrt(2)) ≈ -0.414, so |1 - sqrt(2)|^3000 = (sqrt(2) - 1)^3000. How large is this?",
+      "options": [
+        { "id": "a", "text": "Tiny -- (sqrt(2) - 1)^3000 ≈ (0.414)^3000 ≈ 10^(-1145).  Much less than 10^(-100).", "correct": true },
+        { "id": "b", "text": "Large -- about 10^1000.",                                                              "correct": false },
+        { "id": "c", "text": "Exactly 1.",                                                                            "correct": false }
+      ],
+      "explanation": "log10(0.414) ≈ -0.382. Multiply by 3000: about -1146. So (sqrt(2)-1)^3000 ≈ 10^(-1146). FAR smaller than 10^(-100)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Combine to identify the decimal",
+      "prompt": "Let N = (1+sqrt(2))^3000 + (1-sqrt(2))^3000 (integer). Then (1+sqrt(2))^3000 = N - (1-sqrt(2))^3000. Since (1-sqrt(2))^3000 is positive (even exponent makes negative -> positive) and < 10^(-100), what does the decimal look like?",
+      "options": [
+        { "id": "a", "text": "(1+sqrt(2))^3000 = N - epsilon where 0 < epsilon < 10^(-100). In decimal: this is (N-1).999...9 with at least 100 nines after the decimal point.", "correct": true },
+        { "id": "b", "text": "(1+sqrt(2))^3000 is exactly N.",                                                                                                                    "correct": false },
+        { "id": "c", "text": "(1+sqrt(2))^3000 = N + epsilon.",                                                                                                                    "correct": false }
+      ],
+      "explanation": "(1-sqrt(2))^3000 = ((-1)(sqrt(2)-1))^3000 = (sqrt(2)-1)^3000 (even power makes positive). Subtracting a tiny positive number from integer N gives N - epsilon, which in decimal is (N-1).999...9. The 9s extend far past the 100th place."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is the 100th digit after the decimal point?",
+      "options": [
+        { "id": "a", "text": "9.",  "correct": true },
+        { "id": "b", "text": "0.",   "correct": false },
+        { "id": "c", "text": "1.",   "correct": false }
+      ],
+      "explanation": "The decimal is (N-1).999...9 with 9s extending well past position 100. So digit 100 = 9. Beautiful trick: never compute the actual number."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is the digit at position 1146 (approximately where the 9s end and other digits begin)?",
+        "Generalize: for which n is the 100th digit of (1+sqrt(2))^n equal to 9?",
+        "Apply the same technique to (3 + 2*sqrt(2))^1000 -- find a high-precision digit."
+      ]
+    }
+  ]
+}

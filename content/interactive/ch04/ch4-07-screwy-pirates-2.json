@@ -1,0 +1,96 @@
+{
+  "id": "ch4-07-screwy-pirates-2",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Screwy Pirates 2",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "184-198"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "one-lock-per-blocking-coalition-of-size-n-minus-majority",
+    "insight": "for-each-set-of-5-pirates-there-must-be-one-lock-the-6-others-can-collectively-open",
+    "variantAxes": ["n_pirates", "majority_threshold"]
+  },
+  "setup": {
+    "narrative": "11 pirates put their treasure in a safe. They want any MAJORITY (>= 6 of 11) to be able to open the safe, but no smaller group should be able to.",
+    "rules": [
+      "The safe has many locks.",
+      "Each lock can have multiple identical keys distributed among the pirates.",
+      "A group can open the safe iff they collectively hold at least one key for EVERY lock.",
+      "Find the minimum number of locks and the number of keys per pirate."
+    ],
+    "question": "What is the minimum number of locks? How many keys does each pirate carry?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that EACH coalition of 5 pirates (no majority) must be 'blocked' by at least one lock.",
+    "Each blocking lock's keys must be held by some superset of the COMPLEMENT (6 pirates).",
+    "Count the minimum: one lock per 5-pirate subset, giving C(11, 5) = 462 locks."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you minimize the number of locks?",
+      "options": [
+        { "id": "a", "text": "For EACH 5-pirate subset (the 'blocked' coalitions), there must be one lock that they collectively cannot open. Different subsets need DIFFERENT locks (otherwise some 5-subset could open the lock). Min locks = C(11, 5) = 462.", "correct": true },
+        { "id": "b", "text": "1 lock with 6 keys.",                                                                                                                                                                                                                  "correct": false },
+        { "id": "c", "text": "11 locks, one per pirate.",                                                                                                                                                                                                              "correct": false }
+      ],
+      "explanation": "Combinatorial design problem. The minimum number of locks equals the number of distinct 5-pirate coalitions to block: C(11, 5) = 462.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Why each 5-subset needs its own lock",
+      "prompt": "Why can't two different 5-pirate coalitions share the same blocking lock?",
+      "options": [
+        { "id": "a", "text": "If lock L blocks coalitions A and B (both size 5), then no pirate in A holds L's key AND no pirate in B holds L's key. So the union A ∪ B (>=5 pirates) has no key for L. But A ∪ B might be a majority of >=6, who SHOULD be able to open L.", "correct": true },
+        { "id": "b", "text": "Locks are physically incompatible.",                                                                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "It works fine to share locks.",                                                                                                                                                                                                                            "correct": false }
+      ],
+      "explanation": "Each lock blocks exactly one coalition of 5. The keys are held by the COMPLEMENTARY 6 pirates. Sharing a lock between coalitions A and B violates the requirement that any majority can open."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Count locks and keys per pirate",
+      "prompt": "How many locks total? Each lock has C(?, ?) keys held by the complementary 6 pirates. How many of these locks does each pirate possess a key to?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "a", "text": "Total locks = C(11, 5) = 462. Each lock has 6 keys (one per non-blocked pirate). Each pirate is in C(10, 5) = 252 distinct 6-pirate coalitions, so each pirate carries 252 keys.", "correct": true },
+        { "id": "b", "text": "Total locks = 11. Each pirate has 1 key.",                                                                                                                                            "correct": false },
+        { "id": "c", "text": "Total locks = 6. Each pirate has 6 keys.",                                                                                                                                            "correct": false }
+      ],
+      "explanation": "Total locks: C(11, 5) = 462 (one per 5-coalition). Each lock has 6 keys (one per pirate in the complementary 6-coalition). Each pirate appears in C(10, 5) = 252 different 6-coalitions, so they carry 252 keys."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final answer.",
+      "options": [
+        { "id": "a", "text": "462 locks; each pirate carries 252 keys.", "correct": true },
+        { "id": "b", "text": "11 locks; each pirate carries 6 keys.",     "correct": false },
+        { "id": "c", "text": "C(11, 6) = 462 locks; 6 keys each.",         "correct": false }
+      ],
+      "explanation": "462 locks, 252 keys per pirate. (Note: C(11, 5) = C(11, 6) = 462 by symmetry of the binomial coefficient.) The system is impractical with physical locks but illustrates the combinatorial 'threshold cryptography' concept."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: n pirates, threshold t (majority requires >= t). Find the formulas.",
+        "For 5 pirates with majority = 3, count locks and keys per pirate.",
+        "What MODERN cryptographic primitive solves this same problem with much less physical setup?"
+      ]
+    }
+  ]
+}

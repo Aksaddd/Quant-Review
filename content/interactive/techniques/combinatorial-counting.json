@@ -1,0 +1,62 @@
+{
+  "id": "combinatorial-counting",
+  "kind": "technique",
+  "name": "Combinatorial Counting",
+  "tagline": "Five tools for counting outcomes: permutations, combinations, the binomial theorem, inclusion-exclusion, and recursive counting (Fibonacci-style).",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.2",
+    "title": "Combinatorial Analysis",
+    "exemplarProblemId": "ch4-05-poker-hands"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Most probability questions reduce to counting: count the favorable outcomes, count the total outcomes, divide. The five core counting tools: P(n, k) = n!/(n-k)! for permutations (order matters); C(n, k) = n!/(k!(n-k)!) for combinations (order doesn't matter); the binomial theorem (x+y)^n = sum C(n,k) x^k y^(n-k); inclusion-exclusion for unions of overlapping events; and recursive counting when the count satisfies a self-similar recurrence (e.g., Fibonacci)."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Beyond probability, the binomial theorem powers algebraic-identity tricks. Expressions like (1 + sqrt(2))^n + (1 - sqrt(2))^n are integers because the irrational parts cancel pairwise. The expansion (a + 10b)^3 isolates the last-digit and tens-digit behavior of x^3."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When counting, ask: 'is order significant?' Yes -> permutations. No -> combinations. 'Are events overlapping?' Yes -> inclusion-exclusion. 'Does the count for n decompose into counts for n-1 and n-2?' Yes -> recurrence (often Fibonacci or related)."
+    }
+  ],
+  "whenToUse": [
+    "Counting outcomes in a finite sample space.",
+    "Probabilities of poker hands, lottery wins, dice rolls.",
+    "Recursive counting (e.g., paths on a grid, climbing stairs).",
+    "Inclusion-exclusion when events overlap.",
+    "Algebraic identities involving (a + b)^n and conjugate-pair cancellation."
+  ],
+  "recipe": [
+    "Identify whether order matters. If yes, use P(n, k); if no, use C(n, k).",
+    "For probabilities of compound events, decompose: P(A ∪ B) = P(A) + P(B) - P(A ∩ B), generalizing to inclusion-exclusion for n events.",
+    "For self-similar problems: write a recurrence, identify base cases, and either compute iteratively or solve the closed form.",
+    "For algebraic problems involving sqrt(2), sqrt(3), etc.: expand (a + sqrt(b))^n via binomial theorem and look for cancellation tricks with the conjugate (a - sqrt(b))^n."
+  ],
+  "commonPitfalls": [
+    "Confusing C(n, k) with P(n, k) -- order vs no-order.",
+    "Inclusion-exclusion: forgetting the alternating signs or missing a higher-order intersection term.",
+    "In conjugate-pair tricks: forgetting that (1 - sqrt(2)) is negative and < 1 in absolute value, so (1 - sqrt(2))^n -> 0 with alternating sign.",
+    "In poker-hand counting: confusing 'pairs' with 'two pairs' (one set of two equal-value cards vs two sets).",
+    "Off-by-one errors in recurrences (especially the base case)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-05-poker-hands",                    "title": "Poker Hands",                       "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-06-hopping-rabbit",                 "title": "Hopping Rabbit",                    "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-07-screwy-pirates-2",               "title": "Screwy Pirates 2",                  "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-08-chess-tournament",               "title": "Chess Tournament",                  "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-09-application-letters-derangement", "title": "Application Letters (Derangement)", "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-10-birthday-problem-prob",          "title": "Birthday Problem (probability)",     "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-11-100th-digit",                    "title": "100th Digit of (1+sqrt(2))^3000",   "chapter": 4, "section": "4.2" },
+    { "problemId": "ch4-12-cubic-of-integer",               "title": "Cubic of Integer",                  "chapter": 4, "section": "4.2" }
+  ],
+  "relatedTechniques": ["probability-foundations", "math-induction", "series-summation"]
+}

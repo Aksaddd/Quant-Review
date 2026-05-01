@@ -1,0 +1,91 @@
+{
+  "id": "ch4-06-hopping-rabbit",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Hopping Rabbit",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "168-180"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "fibonacci-recurrence-from-last-hop-cases",
+    "insight": "the-final-hop-is-1-step-from-stair-n-1-or-2-steps-from-stair-n-2",
+    "variantAxes": ["max_hop_size"]
+  },
+  "setup": {
+    "narrative": "A rabbit at the bottom of a staircase with n stairs hops upward. Each hop is either 1 stair or 2 stairs.",
+    "rules": [
+      "Each hop is exactly 1 or exactly 2 stairs.",
+      "The rabbit must reach exactly the top stair (no overshoot).",
+      "Two paths are different if any single hop differs."
+    ],
+    "question": "How many distinct sequences of hops reach the top of n stairs?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up a recurrence by considering the FINAL hop.",
+    "Recognize the Fibonacci recurrence f(n) = f(n-1) + f(n-2).",
+    "Identify the correct base cases f(1) = 1 and f(2) = 2."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the recurrence",
+      "prompt": "Consider the FINAL hop reaching stair n. It came from either stair n-1 (one-step hop) or stair n-2 (two-step hop). What recurrence does this give?",
+      "options": [
+        { "id": "a", "text": "f(n) = f(n-1) + f(n-2)  -- the Fibonacci recurrence.", "correct": true },
+        { "id": "b", "text": "f(n) = 2 * f(n-1)",                                       "correct": false },
+        { "id": "c", "text": "f(n) = f(n/2)",                                            "correct": false }
+      ],
+      "explanation": "Two disjoint groups of paths: those whose last hop is 1 (came from n-1) and those whose last hop is 2 (came from n-2). Counts add.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Establish base cases",
+      "prompt": "What are f(1) and f(2)?",
+      "options": [
+        { "id": "a", "text": "f(1) = 1 (single 1-hop) and f(2) = 2 (two 1-hops, OR one 2-hop).", "correct": true },
+        { "id": "b", "text": "f(1) = 0 and f(2) = 1.",                                            "correct": false },
+        { "id": "c", "text": "f(1) = 1 and f(2) = 1.",                                            "correct": false }
+      ],
+      "explanation": "f(1) = 1: only one way -- a single 1-hop. f(2) = 2: either (1, 1) or (2). The Fibonacci sequence shifted: 1, 2, 3, 5, 8, ..."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute f(10)",
+      "prompt": "Iterate the Fibonacci recurrence to get f(10). (1, 2, 3, 5, 8, 13, 21, 34, 55, 89.)",
+      "answerType": "numeric",
+      "answer": 89,
+      "explanation": "f(1)=1, f(2)=2, f(3)=3, f(4)=5, f(5)=8, f(6)=13, f(7)=21, f(8)=34, f(9)=55, f(10)=89."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Generalization: f(n) is which famous sequence?",
+      "options": [
+        { "id": "a", "text": "Fibonacci (shifted by one): 1, 2, 3, 5, 8, 13, 21, ...",  "correct": true },
+        { "id": "b", "text": "Powers of 2: 2, 4, 8, 16, ...",                              "correct": false },
+        { "id": "c", "text": "Triangular numbers: 1, 3, 6, 10, ...",                       "correct": false }
+      ],
+      "explanation": "The Fibonacci sequence with base cases f(1) = 1, f(2) = 2. Equivalent to the Fibonacci numbers F_2, F_3, F_4, ... where F_1 = F_2 = 1."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "If the rabbit could hop 1, 2, OR 3 stairs, what's the recurrence?",
+        "Closed form for f(n) involves the golden ratio. Look up Binet's formula and verify f(10).",
+        "How does the count grow asymptotically with n? (Hint: phi^n.)"
+      ]
+    }
+  ]
+}

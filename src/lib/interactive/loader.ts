@@ -72,6 +72,14 @@ import ch4CoinToss       from '../../../content/interactive/ch04/ch4-01-coin-tos
 import ch4CardCompare    from '../../../content/interactive/ch04/ch4-02-card-comparison.json';
 import ch4DrunkPass      from '../../../content/interactive/ch04/ch4-03-drunk-passenger.json';
 import ch4NPointsCircle  from '../../../content/interactive/ch04/ch4-04-n-points-on-circle.json';
+import ch4PokerHands     from '../../../content/interactive/ch04/ch4-05-poker-hands.json';
+import ch4HoppingRabbit  from '../../../content/interactive/ch04/ch4-06-hopping-rabbit.json';
+import ch4Pirates2       from '../../../content/interactive/ch04/ch4-07-screwy-pirates-2.json';
+import ch4ChessTournament from '../../../content/interactive/ch04/ch4-08-chess-tournament.json';
+import ch4Derangement    from '../../../content/interactive/ch04/ch4-09-application-letters-derangement.json';
+import ch4BirthdayProb   from '../../../content/interactive/ch04/ch4-10-birthday-problem-prob.json';
+import ch4HundredthDigit from '../../../content/interactive/ch04/ch4-11-100th-digit.json';
+import ch4CubicInt       from '../../../content/interactive/ch04/ch4-12-cubic-of-integer.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -91,6 +99,7 @@ import techLagrange      from '../../../content/interactive/techniques/lagrange-
 import techODE           from '../../../content/interactive/techniques/ordinary-differential-equations.json';
 import techLinAlg        from '../../../content/interactive/techniques/linear-algebra-techniques.json';
 import techProbFound     from '../../../content/interactive/techniques/probability-foundations.json';
+import techCombiCount    from '../../../content/interactive/techniques/combinatorial-counting.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -159,6 +168,14 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch4-02-card-comparison':   ch4CardCompare    as unknown as ProblemWalkthrough,
   'ch4-03-drunk-passenger':   ch4DrunkPass      as unknown as ProblemWalkthrough,
   'ch4-04-n-points-on-circle': ch4NPointsCircle as unknown as ProblemWalkthrough,
+  'ch4-05-poker-hands':       ch4PokerHands     as unknown as ProblemWalkthrough,
+  'ch4-06-hopping-rabbit':    ch4HoppingRabbit  as unknown as ProblemWalkthrough,
+  'ch4-07-screwy-pirates-2':  ch4Pirates2       as unknown as ProblemWalkthrough,
+  'ch4-08-chess-tournament':  ch4ChessTournament as unknown as ProblemWalkthrough,
+  'ch4-09-application-letters-derangement': ch4Derangement as unknown as ProblemWalkthrough,
+  'ch4-10-birthday-problem-prob': ch4BirthdayProb as unknown as ProblemWalkthrough,
+  'ch4-11-100th-digit':       ch4HundredthDigit as unknown as ProblemWalkthrough,
+  'ch4-12-cubic-of-integer':  ch4CubicInt       as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -178,6 +195,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ordinary-differential-equations': techODE    as unknown as Technique,
   'linear-algebra-techniques': techLinAlg       as unknown as Technique,
   'probability-foundations':  techProbFound     as unknown as Technique,
+  'combinatorial-counting':   techCombiCount    as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

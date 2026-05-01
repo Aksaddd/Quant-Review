@@ -1,0 +1,104 @@
+{
+  "id": "ch4-08-chess-tournament",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.2",
+  "title": "Chess Tournament",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "202-212"
+  },
+  "mechanism": {
+    "primary": "combinatorial-counting",
+    "structure": "for-finalists-they-must-be-in-different-half-brackets",
+    "insight": "player-1-always-reaches-the-final-so-only-player-2s-bracket-placement-matters",
+    "variantAxes": ["bracket_size_n"]
+  },
+  "setup": {
+    "narrative": "A single-elimination knockout tournament has 2^n players, with skills ranked 1 > 2 > ... > 2^n (the higher-ranked player ALWAYS wins). The bracket is a uniformly random pairing.",
+    "rules": [
+      "Single elimination: lose once and you're out.",
+      "Better-skilled player always wins (no upsets).",
+      "Bracket pairing is uniformly random.",
+      "There are n rounds; the final is round n with two players."
+    ],
+    "question": "What is the probability that players 1 and 2 meet in the FINAL?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that player 1 always wins, so always reaches the final.",
+    "Reduce the question to: 'is player 2 in the OTHER half of the bracket from player 1?'",
+    "Count slots in player 1's half vs the other half."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Player 1 always reaches the final",
+      "prompt": "Why is player 1 guaranteed to reach the final?",
+      "options": [
+        { "id": "a", "text": "Player 1 has the highest skill, so wins every match. They survive all n-1 prior rounds and reach round n (the final).", "correct": true },
+        { "id": "b", "text": "Random chance gives them a 50% shot.",                                                                                    "correct": false },
+        { "id": "c", "text": "They might lose in early rounds.",                                                                                        "correct": false }
+      ],
+      "explanation": "Better-skilled always wins and player 1 has the highest skill. So player 1 wins every match and reaches the final automatically.",
+      "learnMoreTechnique": "combinatorial-counting"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Reduce to bracket placement",
+      "prompt": "For player 2 to meet player 1 in the final, where must player 2 be?",
+      "options": [
+        { "id": "a", "text": "In the OPPOSITE half of the bracket from player 1 (so they only meet in the final).", "correct": true },
+        { "id": "b", "text": "Anywhere in the bracket.",                                                              "correct": false },
+        { "id": "c", "text": "Must be in player 1's same half.",                                                        "correct": false }
+      ],
+      "explanation": "If player 2 is in the same half as player 1, they meet in some earlier round (and player 2 loses, never reaching the final). If they're in OPPOSITE halves, player 2 wins their half (skill #2 beats skills 3..2^n) and meets player 1 in the final."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Count the slots",
+      "prompt": "There are 2^n total slots. Player 1 occupies one slot. The OTHER 2^n - 1 slots are split equally between player 1's half (2^(n-1) - 1 slots) and the OTHER half (2^(n-1) slots). What's P(player 2 in the other half)?",
+      "options": [
+        { "id": "a", "text": "P = 2^(n-1) / (2^n - 1)", "correct": true },
+        { "id": "b", "text": "P = 1/2",                  "correct": false },
+        { "id": "c", "text": "P = 1 / (2^n)",            "correct": false }
+      ],
+      "explanation": "Player 2 lands in one of the 2^n - 1 remaining slots uniformly. The 'other half' contains 2^(n-1) of those slots. So P = 2^(n-1) / (2^n - 1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Concrete check at n = 3",
+      "prompt": "For 8 players (n = 3), compute P(1 and 2 meet in the final).",
+      "answerType": "numeric",
+      "answer": 0.5714285,
+      "explanation": "P = 2^2 / (2^3 - 1) = 4/7 ≈ 0.5714."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit and observe limit",
+      "prompt": "What does P approach as n -> infinity (very large tournaments)?",
+      "options": [
+        { "id": "a", "text": "P -> 2^(n-1) / 2^n = 1/2.",  "correct": true },
+        { "id": "b", "text": "P -> 1.",                     "correct": false },
+        { "id": "c", "text": "P -> 0.",                     "correct": false }
+      ],
+      "explanation": "For large n, 2^(n-1) / (2^n - 1) ≈ 2^(n-1) / 2^n = 1/2. Makes intuitive sense: the chance player 2 lands in the 'other half' approaches 50% as bracket sizes grow."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the probability that players 1 and 3 meet in the final? (Hint: player 3 must beat player 2 too -- impossible.)",
+        "What's the probability that players 1 and 2 meet in round k (for k < n)?",
+        "Verify by direct conditional probability: at each round k = 1, ..., n-1, P(don't meet | hadn't met) = 2*(2^(n-k) - 1) / (2^(n-k+1) - 1). Show the product gives 2^(n-1) / (2^n - 1)."
+      ]
+    }
+  ]
+}
