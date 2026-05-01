@@ -1,0 +1,94 @@
+{
+  "id": "ch2-31-division-by-9",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.7",
+  "title": "Division by 9",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "641-654"
+  },
+  "mechanism": {
+    "primary": "modular-arithmetic",
+    "structure": "10-equiv-1-mod-9-makes-digits-equal-place-values",
+    "insight": "10-to-the-k-equals-1-mod-9-for-every-k",
+    "variantAxes": ["divisor", "base"]
+  },
+  "setup": {
+    "narrative": "There is a well-known divisibility rule: an integer is divisible by 9 if and only if the SUM OF ITS DIGITS is divisible by 9.",
+    "rules": [
+      "The integer is in standard base-10 representation.",
+      "'Digit sum' means literally adding the digits as base-10 numerals.",
+      "Equivalence is in both directions: divisible by 9 implies digit sum divisible by 9, AND digit sum divisible by 9 implies the original is divisible by 9."
+    ],
+    "question": "Prove this divisibility rule using modular arithmetic."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that 10 = 1 mod 9, so every power 10^k = 1 mod 9.",
+    "Express a number a as a polynomial in 10 and reduce term-by-term.",
+    "Conclude that a's residue mod 9 equals its digit sum's residue mod 9."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the cleanest way to prove this divisibility rule?",
+      "options": [
+        { "id": "a", "text": "Modular arithmetic: 10 = 1 mod 9, so each digit's place value collapses to the digit itself.", "correct": true },
+        { "id": "b", "text": "Induction over the number of digits.",                                                            "correct": false },
+        { "id": "c", "text": "Brute force: check the rule on all 1-digit, 2-digit, ... numbers.",                                "correct": false }
+      ],
+      "explanation": "All three CAN work, but modular arithmetic is the cleanest -- it captures the essence in one line: 10^k = 1 mod 9.",
+      "learnMoreTechnique": "modular-arithmetic"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "The key fact",
+      "prompt": "What is 10 mod 9?",
+      "options": [
+        { "id": "a", "text": "1 (since 10 = 1*9 + 1).", "correct": true },
+        { "id": "b", "text": "0",                       "correct": false },
+        { "id": "c", "text": "10",                       "correct": false }
+      ],
+      "explanation": "10 = 9 + 1, so 10 = 1 mod 9. Consequently 10^k = 1^k = 1 mod 9 for every k >= 0. (10^0 = 1, 10^1 = 10 = 1, 10^2 = 100 = 11*9 + 1 = 1, etc.)"
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "The reduction",
+      "prompt": "Write a number a in expanded form: a = a_n * 10^n + a_{n-1} * 10^{n-1} + ... + a_1 * 10 + a_0. Reduce mod 9.",
+      "template": "Each 10^k = __[a]__ mod 9, so a mod 9 = a_n + a_{n-1} + ... + a_0 mod 9 -- exactly the __[b]__ sum.",
+      "blanks": [
+        { "id": "a", "answers": ["1"], "caseInsensitive": true },
+        { "id": "b", "answers": ["digit"], "caseInsensitive": true }
+      ],
+      "explanation": "Substituting 10^k = 1 mod 9 into the expansion collapses each place value to the digit itself. So a's residue mod 9 equals the digit-sum's residue mod 9. Hence: 9 divides a iff 9 divides the digit sum."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply",
+      "prompt": "Is 12345678 divisible by 9?",
+      "options": [
+        { "id": "a", "text": "Yes -- digit sum = 1+2+3+4+5+6+7+8 = 36, and 36 / 9 = 4.", "correct": true },
+        { "id": "b", "text": "No -- digit sum = 36 is not divisible by 9.",                "correct": false },
+        { "id": "c", "text": "Need to actually divide to check.",                          "correct": false }
+      ],
+      "explanation": "Digit sum = 36 = 4 * 9. So 12345678 mod 9 = 36 mod 9 = 0. Yes, divisible. Verify: 12345678 / 9 = 1371742, exactly."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the analogous rule for divisibility by 3? (Hint: 10 mod 3 = ?)",
+        "For divisibility by 11, you use the ALTERNATING digit sum. Why? (Hint: 10 mod 11 = ?)",
+        "Could you state the rule for divisibility by 99? (Hint: pair digits.)"
+      ]
+    }
+  ]
+}

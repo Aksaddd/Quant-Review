@@ -1,0 +1,106 @@
+{
+  "id": "ch2-36-irrational-number",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.9",
+  "title": "Irrational Number",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "748-759"
+  },
+  "mechanism": {
+    "primary": "proof-by-contradiction",
+    "structure": "assume-rational-derive-infinite-descent",
+    "insight": "lowest-terms-assumption-contradicts-shared-factor-of-2",
+    "variantAxes": ["target_irrational"]
+  },
+  "setup": {
+    "narrative": "A rational number is a number that can be written as a/b where a and b are integers with b != 0. An irrational number is one that cannot be written this way.",
+    "rules": [
+      "A rational number a/b can always be reduced to LOWEST TERMS, where gcd(a, b) = 1.",
+      "If both a and b are even, gcd(a, b) >= 2, so a/b is NOT in lowest terms.",
+      "An integer m is even iff m^2 is even (and m is odd iff m^2 is odd)."
+    ],
+    "question": "Prove that sqrt(2) is irrational."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Negate the claim ('sqrt(2) is irrational') correctly: assume sqrt(2) = m/n with gcd(m, n) = 1.",
+    "Derive that m must be even, then n must be even -- contradicting gcd = 1.",
+    "Recognize that the same proof technique extends to sqrt(p) for any prime p."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the natural way to prove sqrt(2) is irrational?",
+      "options": [
+        { "id": "a", "text": "Proof by contradiction: assume sqrt(2) = m/n in lowest terms, derive a contradiction.", "correct": true },
+        { "id": "b", "text": "Direct construction of sqrt(2)'s decimal expansion.",                                     "correct": false },
+        { "id": "c", "text": "Compute sqrt(2) numerically and observe it's non-repeating.",                              "correct": false }
+      ],
+      "explanation": "Contradiction is the standard tool for irrationality proofs. The negation ('sqrt(2) is rational') is a strong, concrete statement -- it gives us m, n integers we can manipulate.",
+      "learnMoreTechnique": "proof-by-contradiction"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Set up the assumption",
+      "prompt": "Assume sqrt(2) is rational. What's the precise statement?",
+      "options": [
+        { "id": "a", "text": "There exist integers m, n with n != 0 AND gcd(m, n) = 1 such that sqrt(2) = m/n.",  "correct": true },
+        { "id": "b", "text": "There exist integers m, n such that sqrt(2) = m + n.",                                "correct": false },
+        { "id": "c", "text": "sqrt(2) is a specific decimal.",                                                       "correct": false }
+      ],
+      "explanation": "Rational means expressible as m/n. Lowest terms (gcd = 1) is the key extra condition that will produce the contradiction."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Square and rearrange",
+      "prompt": "Square both sides of sqrt(2) = m/n and rearrange. What do you get?",
+      "options": [
+        { "id": "a", "text": "2 = m^2/n^2, so m^2 = 2n^2 -- meaning m^2 is even.",  "correct": true },
+        { "id": "b", "text": "m^2 + n^2 = 2",                                          "correct": false },
+        { "id": "c", "text": "m + n = sqrt(2)",                                        "correct": false }
+      ],
+      "explanation": "Squaring: 2 = m^2/n^2. Multiplying by n^2: m^2 = 2n^2. Right side is twice an integer, so m^2 is even."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Derive that m is even, then n is even",
+      "prompt": "From m^2 = 2n^2, derive the contradiction.",
+      "options": [
+        { "id": "a", "text": "m^2 even => m even. Write m = 2k. Then (2k)^2 = 2n^2, so 4k^2 = 2n^2, so n^2 = 2k^2 -- meaning n^2 is even, so n is even. But gcd(m, n) = 1 contradicts both being even.", "correct": true },
+        { "id": "b", "text": "m^2 even => m^2 has more factors of 2 than n^2.",                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "We can't conclude anything about n.",                                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "m^2 even forces m even (because the squares of odd numbers are odd). Substituting m = 2k yields n^2 = 2k^2, so n is also even. But m and n share factor 2, contradicting gcd(m, n) = 1. So our initial assumption must be false."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Is sqrt(2) irrational?",
+      "options": [
+        { "id": "a", "text": "Yes -- the assumption sqrt(2) = m/n (lowest terms) leads to m and n both even, contradicting lowest terms.", "correct": true },
+        { "id": "b", "text": "No -- the proof has a gap.",                                                                                  "correct": false },
+        { "id": "c", "text": "Sometimes -- depends on context.",                                                                            "correct": false }
+      ],
+      "explanation": "Yes. The contradiction means our assumption was false. Hence sqrt(2) cannot be expressed as m/n in lowest terms -- and since any rational has a lowest-terms representation, sqrt(2) is not rational. QED."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Does the same proof work for sqrt(p) when p is any prime? Where does 'prime' come in?",
+        "Can you adapt the proof for sqrt(6) (where 6 is not prime)?",
+        "Is e (the base of natural logs) irrational? (Different proof, but same technique family.)"
+      ]
+    }
+  ]
+}

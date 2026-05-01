@@ -1,0 +1,58 @@
+{
+  "id": "math-induction",
+  "kind": "technique",
+  "name": "Mathematical Induction",
+  "tagline": "Prove a statement holds for all integers >= some base by proving the base case and showing 'P(n) implies P(n+1).' Strong induction allows P(1)..P(n) to imply P(n+1).",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.8",
+    "title": "Math Induction",
+    "exemplarProblemId": "ch2-33-coin-split"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Mathematical induction is the dominoes-falling principle: if you can knock over the first domino (the base case) and you can show that any falling domino knocks over the next (the inductive step), then ALL dominoes fall. Formally: prove P(1), then prove that for all n, P(n) implies P(n+1). Conclusion: P holds for every positive integer."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The variant 'strong induction' lets you assume P(1), P(2), ..., P(n) when proving P(n+1) -- not just the immediate predecessor. This is essential when the inductive step splits into smaller subproblems of arbitrary sizes (e.g., Coin Split, where N coins split into x and N-x for any 1 <= x < N)."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Two questions: (1) Is the base case TRUE? (2) Does the inductive hypothesis ENABLE the next step? If both are yes, the proof writes itself. If you can't prove P(n+1) from P(n), try strong induction. If even that fails, the statement may be wrong."
+    }
+  ],
+  "whenToUse": [
+    "Proving a formula or property holds for ALL positive integers.",
+    "Proving an algorithm produces the same output regardless of intermediate choices.",
+    "Bounding the worst case of a recursive process.",
+    "Proving combinatorial identities.",
+    "When the structure of the problem naturally splits into smaller versions of itself."
+  ],
+  "recipe": [
+    "State the claim P(n) precisely. Vague claims lead to vague induction.",
+    "Verify the base case P(1) -- or whatever the smallest meaningful n is.",
+    "Assume P(n) (or P(1)..P(n) for strong induction). Prove P(n+1).",
+    "When the inductive step uses subproblems of arbitrary smaller size, you need STRONG induction.",
+    "Always check that the inductive step uses the hypothesis -- otherwise you might be proving the wrong thing."
+  ],
+  "commonPitfalls": [
+    "Forgetting to check the base case. (A famous 'proof' that all horses are the same color fails because the base case n=1 doesn't compose to n=2.)",
+    "Inductive step that doesn't actually use P(n) -- this isn't induction, it's a direct proof.",
+    "Using P(n+1) inside the proof of P(n+1) (circular reasoning).",
+    "Confusing 'P(n) for all n' with 'P holds in the limit' -- induction proves the former, not the latter.",
+    "Failing to verify that the inductive step works for ALL n, including edge cases like n=1 -> n=2."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-33-coin-split",   "title": "Coin Split Problem",  "chapter": 2, "section": "2.8" },
+    { "problemId": "ch2-34-chocolate-bar","title": "Chocolate Bar Problem","chapter": 2, "section": "2.8" },
+    { "problemId": "ch2-35-race-track",   "title": "Race Track",          "chapter": 2, "section": "2.8" }
+  ],
+  "relatedTechniques": ["backward-induction", "invariant-arguments"]
+}

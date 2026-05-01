@@ -1,0 +1,105 @@
+{
+  "id": "ch2-32-chameleon-colors",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.7",
+  "title": "Chameleon Colors",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "658-680"
+  },
+  "mechanism": {
+    "primary": "modular-arithmetic",
+    "structure": "mod-3-residues-of-color-counts-are-permanently-distinct",
+    "insight": "every-meeting-decreases-two-counts-by-1-and-increases-third-by-2-shifting-residues-uniformly",
+    "variantAxes": ["initial_counts", "n_colors"]
+  },
+  "setup": {
+    "narrative": "A remote island has chameleons of three colors: 13 red, 15 green, 17 blue. When two chameleons of DIFFERENT colors meet, both change to the THIRD color.",
+    "rules": [
+      "Initial counts: R = 13, G = 15, B = 17.",
+      "When a red and a green meet: both become blue (R - 1, G - 1, B + 2).",
+      "When a red and a blue meet: both become green (R - 1, G + 2, B - 1).",
+      "When a green and a blue meet: both become red (R + 2, G - 1, B - 1).",
+      "Same-color meetings have no effect."
+    ],
+    "question": "Can the chameleons ever ALL become the same color?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Compute residues mod 3 of the three color counts and show they're permanently distinct.",
+    "Recognize that 'all same color' requires two of the residues to coincide -- which is impossible.",
+    "Generalize the principle: invariants under multiple move types often live in mod-3 (or higher) classes."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why this is a state-machine problem",
+      "prompt": "What's the right framing?",
+      "options": [
+        { "id": "a", "text": "Find an invariant under all three meeting types -- if 'all same color' violates the invariant, it's unreachable.", "correct": true },
+        { "id": "b", "text": "Probability: with random meetings, eventually all-same occurs.",                                                       "correct": false },
+        { "id": "c", "text": "Backward induction over meetings.",                                                                                   "correct": false }
+      ],
+      "explanation": "We need to either construct a sequence of meetings that produces all-same, or prove no such sequence exists. The right tool for impossibility proofs in state machines is finding an invariant.",
+      "learnMoreTechnique": "modular-arithmetic"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute initial residues",
+      "prompt": "What is 13 mod 3?",
+      "answerType": "numeric",
+      "answer": 1,
+      "explanation": "13 = 4*3 + 1, so 13 mod 3 = 1. Similarly 15 mod 3 = 0 and 17 mod 3 = 2. Initial residue triple = (1, 0, 2)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "How meetings affect residues",
+      "prompt": "Each meeting changes two counts by -1 and one count by +2. What does this do to residues mod 3?",
+      "options": [
+        { "id": "a", "text": "Two residues each decrease by 1 (mod 3), and one residue increases by 2 (mod 3) -- but +2 = -1 mod 3, so ALL THREE residues decrease by 1 mod 3.", "correct": true },
+        { "id": "b", "text": "Residues are unchanged.",                                                                                                                          "correct": false },
+        { "id": "c", "text": "The MULTISET of residues changes unpredictably.",                                                                                                  "correct": false }
+      ],
+      "explanation": "Key insight: -1 and +2 are the SAME mod 3. So every meeting subtracts 1 from each of the three residues simultaneously. The MULTISET of residues is preserved (just cyclically shifted)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Why all-same is impossible",
+      "prompt": "If the three counts ever became (N, 0, 0) -- all same color -- what would the multiset of residues mod 3 be?",
+      "options": [
+        { "id": "a", "text": "{N mod 3, 0, 0} -- two zeros. But the initial multiset is {0, 1, 2} with three DISTINCT residues. So unreachable.", "correct": true },
+        { "id": "b", "text": "{1, 1, 1} -- three equal residues.",                                                                                  "correct": false },
+        { "id": "c", "text": "Could be anything.",                                                                                                  "correct": false }
+      ],
+      "explanation": "(N, 0, 0) has multiset {N mod 3, 0, 0} -- contains TWO zeros. The initial multiset is {0, 1, 2} -- all DISTINCT. Since meetings preserve the multiset (modulo cyclic shift, all three residues remain distinct), (N, 0, 0) is unreachable forever."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Can the chameleons ever become all the same color?",
+      "options": [
+        { "id": "a", "text": "No -- the three residues mod 3 of the color counts remain permanently distinct.", "correct": true },
+        { "id": "b", "text": "Yes -- given enough time it'll happen.",                                            "correct": false },
+        { "id": "c", "text": "Only with luck.",                                                                    "correct": false }
+      ],
+      "explanation": "Impossible. The mod-3 invariant rules out the target state forever. (This is a classic application of modular arithmetic to a state-machine problem.)"
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What initial counts WOULD allow reaching all-same color?",
+        "What if the rule were 'two same-color chameleons turn into one of each remaining color'? Would all-same be reachable?",
+        "Why is mod 3 the right modulus for this problem -- not mod 2 or mod 4?"
+      ]
+    }
+  ]
+}

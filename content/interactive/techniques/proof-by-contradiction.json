@@ -1,0 +1,57 @@
+{
+  "id": "proof-by-contradiction",
+  "kind": "technique",
+  "name": "Proof by Contradiction",
+  "tagline": "To prove P, assume not-P and derive a contradiction. The classical workhorse for impossibility proofs and existence theorems.",
+  "category": "logic",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.9",
+    "title": "Proof by Contradiction",
+    "exemplarProblemId": "ch2-36-irrational-number"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Proof by contradiction (reductio ad absurdum) proves a statement P by assuming its negation NOT-P, deriving consequences, and reaching an absurd or contradictory conclusion. Since the assumption led to a contradiction, the assumption must be false -- so P holds. The technique is foundational in mathematics and surprisingly versatile in brain teasers."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The classical example is the irrationality of sqrt(2): assume sqrt(2) = m/n in lowest terms, derive that both m and n must be even, contradicting 'lowest terms'. Other applications include showing the existence of unrepresentable numbers, the impossibility of certain configurations, and the soundness of strategies (e.g., 'if no prisoner guesses correctly, then sum_of_hats mod 7 fits no remainder class -- impossible')."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When the conclusion is hard to construct directly but easy to test, try contradiction: assume the world DOESN'T have what you want, watch what breaks. The break point is your contradiction."
+    }
+  ],
+  "whenToUse": [
+    "Proving impossibility (showing some configuration cannot exist).",
+    "Proving existence non-constructively when direct construction is hard.",
+    "Proving uniqueness (assume two distinct solutions, derive both equal).",
+    "Proving correctness of a strategy (assume the strategy fails, derive impossibility).",
+    "Anywhere the negation is a STRONG, CONCRETE statement you can manipulate."
+  ],
+  "recipe": [
+    "Write the proposition P clearly.",
+    "Negate it precisely. (Universal -> existential, etc. Be careful with quantifiers.)",
+    "Treat NOT-P as a hypothesis and derive consequences.",
+    "Look for a contradiction: a statement and its negation, or a statement contradicting a known fact, or impossible numerical conclusions like 'an integer is both even and odd.'",
+    "Conclude that NOT-P leads to absurdity, so P must hold."
+  ],
+  "commonPitfalls": [
+    "Negating the proposition incorrectly (e.g., negating 'for all' as 'for all not' instead of 'there exists not').",
+    "Confusing 'I haven't found a contradiction yet' with 'no contradiction exists' -- contradictions can be subtle.",
+    "Using the assumption circularly (e.g., assuming the conclusion in disguise).",
+    "Missing intuitionistic concerns -- proof by contradiction isn't always constructive. Some constructive contexts reject it.",
+    "Stopping after deriving consequences without explicitly identifying the contradiction."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-36-irrational-number", "title": "Irrational Number", "chapter": 2, "section": "2.9" },
+    { "problemId": "ch2-37-rainbow-hats",      "title": "Rainbow Hats",      "chapter": 2, "section": "2.9" }
+  ],
+  "relatedTechniques": ["modular-arithmetic", "logic-reasoning"]
+}

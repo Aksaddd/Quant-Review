@@ -36,6 +36,14 @@ import ch2Handshakes     from '../../../content/interactive/ch02/ch2-26-handshak
 import ch2HaveWeMet      from '../../../content/interactive/ch02/ch2-27-have-we-met.json';
 import ch2AntsOnSquare   from '../../../content/interactive/ch02/ch2-28-ants-on-square.json';
 import ch2CounterfeitII  from '../../../content/interactive/ch02/ch2-29-counterfeit-coins-ii.json';
+import ch2Prisoner2      from '../../../content/interactive/ch02/ch2-30-prisoner-2-colors.json';
+import ch2DivisionBy9    from '../../../content/interactive/ch02/ch2-31-division-by-9.json';
+import ch2Chameleons     from '../../../content/interactive/ch02/ch2-32-chameleon-colors.json';
+import ch2CoinSplit      from '../../../content/interactive/ch02/ch2-33-coin-split.json';
+import ch2ChocolateBar   from '../../../content/interactive/ch02/ch2-34-chocolate-bar.json';
+import ch2RaceTrack      from '../../../content/interactive/ch02/ch2-35-race-track.json';
+import ch2IrrationalNum  from '../../../content/interactive/ch02/ch2-36-irrational-number.json';
+import ch2RainbowHats    from '../../../content/interactive/ch02/ch2-37-rainbow-hats.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -44,6 +52,9 @@ import techOOTB          from '../../../content/interactive/techniques/thinking-
 import techSymmetry      from '../../../content/interactive/techniques/symmetry-arguments.json';
 import techSeries        from '../../../content/interactive/techniques/series-summation.json';
 import techPigeonHole    from '../../../content/interactive/techniques/pigeon-hole-principle.json';
+import techModular       from '../../../content/interactive/techniques/modular-arithmetic.json';
+import techMathInduction from '../../../content/interactive/techniques/math-induction.json';
+import techContradiction from '../../../content/interactive/techniques/proof-by-contradiction.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -76,6 +87,14 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch2-27-have-we-met':       ch2HaveWeMet      as unknown as ProblemWalkthrough,
   'ch2-28-ants-on-square':    ch2AntsOnSquare   as unknown as ProblemWalkthrough,
   'ch2-29-counterfeit-coins-ii': ch2CounterfeitII as unknown as ProblemWalkthrough,
+  'ch2-30-prisoner-2-colors': ch2Prisoner2      as unknown as ProblemWalkthrough,
+  'ch2-31-division-by-9':     ch2DivisionBy9    as unknown as ProblemWalkthrough,
+  'ch2-32-chameleon-colors':  ch2Chameleons     as unknown as ProblemWalkthrough,
+  'ch2-33-coin-split':        ch2CoinSplit      as unknown as ProblemWalkthrough,
+  'ch2-34-chocolate-bar':     ch2ChocolateBar   as unknown as ProblemWalkthrough,
+  'ch2-35-race-track':        ch2RaceTrack      as unknown as ProblemWalkthrough,
+  'ch2-36-irrational-number': ch2IrrationalNum  as unknown as ProblemWalkthrough,
+  'ch2-37-rainbow-hats':      ch2RainbowHats    as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -84,6 +103,9 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'symmetry-arguments':       techSymmetry      as unknown as Technique,
   'series-summation':         techSeries        as unknown as Technique,
   'pigeon-hole-principle':    techPigeonHole    as unknown as Technique,
+  'modular-arithmetic':       techModular       as unknown as Technique,
+  'math-induction':           techMathInduction as unknown as Technique,
+  'proof-by-contradiction':   techContradiction as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

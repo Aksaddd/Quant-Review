@@ -1,0 +1,56 @@
+{
+  "id": "modular-arithmetic",
+  "kind": "technique",
+  "name": "Modular Arithmetic",
+  "tagline": "Track residues mod N to find invariants, encode information in coordinated guessing, and prove divisibility properties.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.7",
+    "title": "Modular Arithmetic",
+    "exemplarProblemId": "ch2-30-prisoner-2-colors"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Modular arithmetic studies remainders. Two integers are congruent mod N (written x = y mod N) if their difference is a multiple of N. The arithmetic operations +, -, * all respect congruence: if x = y mod N and a = b mod N, then x + a = y + b mod N. This makes mod-N residues a self-contained number system."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "In brain teasers, modular arithmetic plays three roles: (1) finding INVARIANTS that survive every move (e.g., Chameleon Colors -- residues mod 3 of the population counts); (2) ENCODING information in coordinated strategies (e.g., the Prisoner Hat problem -- one prisoner sacrifices certainty to broadcast a parity bit); (3) DIVISIBILITY tests (e.g., divisibility by 9 via digit sums)."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When chasing an invariant in a state-machine problem, ask: 'do the moves preserve a residue mod N for some N?' Often N=2 (parity) suffices, but N=3 or higher is required when there are three or more move types or three or more state classes."
+    }
+  ],
+  "whenToUse": [
+    "State-machine problems where you need to prove some target state is unreachable.",
+    "Puzzles with three or more colors / players / states (parity isn't enough -- use mod 3 or higher).",
+    "Coordinated guessing problems where prisoners or agents need a shared encoding.",
+    "Divisibility checks (mod 9, mod 11, mod p in general).",
+    "Anywhere a problem says 'every minute / step, exactly one of these three transformations happens.'"
+  ],
+  "recipe": [
+    "Identify the moves and what each one does to your candidate residue.",
+    "Find an N such that every move PRESERVES residues mod N. Try N=2 (parity) first; if moves break parity, try N=3.",
+    "Compute the initial residue and the target residue. If they differ, the target is unreachable.",
+    "For coordinated strategies: assign each agent a unique residue class. The 'sacrifice' agent broadcasts the actual residue; others decode their own state from it."
+  ],
+  "commonPitfalls": [
+    "Picking a residue mod N that's not actually invariant -- check ALL moves.",
+    "Forgetting that mod-N requires N >= 2; trivial mod-1 gives nothing.",
+    "Confusing 'invariant of one component' with 'invariant of all components.'  E.g., in Chameleon Colors, individual color counts change mod 3, but the MULTISET of residues is invariant.",
+    "Trying to use modular arithmetic when the problem really needs a different invariant (e.g., a sum or a sign-weighted sum)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-30-prisoner-2-colors", "title": "Prisoner Problem (2 colors)", "chapter": 2, "section": "2.7" },
+    { "problemId": "ch2-31-division-by-9",     "title": "Division by 9",                "chapter": 2, "section": "2.7" },
+    { "problemId": "ch2-32-chameleon-colors",  "title": "Chameleon Colors",             "chapter": 2, "section": "2.7" }
+  ],
+  "relatedTechniques": ["invariant-arguments", "proof-by-contradiction"]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "ch2-34-chocolate-bar",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.8",
+  "title": "Chocolate Bar Problem",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "713-723"
+  },
+  "mechanism": {
+    "primary": "math-induction",
+    "structure": "each-break-increases-piece-count-by-exactly-one",
+    "insight": "from-1-piece-to-mn-pieces-needs-exactly-mn-minus-1-breaks",
+    "variantAxes": ["m", "n", "n_dimensions"]
+  },
+  "setup": {
+    "narrative": "You have a 6 x 8 rectangular chocolate bar (a grid of 48 unit squares).",
+    "rules": [
+      "Each break separates one rectangular piece into two smaller rectangular pieces along a grid line.",
+      "You can only break along ONE straight line at a time (no diagonal or zigzag).",
+      "You want to end up with 48 individual unit squares, all separated."
+    ],
+    "question": "What is the minimum number of breaks required?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that each break increases the piece count by EXACTLY 1.",
+    "Use this invariant to count breaks for any m x n bar: mn - 1.",
+    "See that the answer is independent of break order or strategy."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "What does each break change?",
+      "prompt": "When you break a rectangular piece into two pieces, how does the total number of pieces change?",
+      "options": [
+        { "id": "a", "text": "Increases by exactly 1 (one piece becomes two pieces).", "correct": true },
+        { "id": "b", "text": "Increases by exactly 2.",                                  "correct": false },
+        { "id": "c", "text": "Depends on the size of the resulting pieces.",              "correct": false }
+      ],
+      "explanation": "Every break converts ONE piece into TWO. So the piece count grows by 1 per break -- regardless of where you break or how big the pieces are."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the cleanest way to count the breaks?",
+      "options": [
+        { "id": "a", "text": "Induction on the piece count -- but the invariant 'each break adds 1 piece' is so strong that the formula is direct.", "correct": true },
+        { "id": "b", "text": "Geometry: count rows and columns separately.",                                                                            "correct": false },
+        { "id": "c", "text": "Brute force: try each break order.",                                                                                       "correct": false }
+      ],
+      "explanation": "Induction on # of breaks formalizes it. Base: 0 breaks, 1 piece. Inductive step: k breaks => k+1 pieces. So to go from 1 piece to 48 pieces requires 47 breaks. The invariant makes the answer independent of break order.",
+      "learnMoreTechnique": "math-induction"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute for 6 x 8",
+      "prompt": "How many breaks for a 6 x 8 bar (48 squares total)?",
+      "answerType": "numeric",
+      "answer": 47,
+      "explanation": "6*8 - 1 = 47. Start with 1 piece, want 48 pieces, each break adds 1 piece -- so 47 breaks."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "General formula",
+      "prompt": "Generalize the formula.",
+      "template": "For an m x n chocolate bar (mn unit squares), the minimum number of breaks is __[a]__.",
+      "blanks": [
+        { "id": "a", "answers": ["mn - 1", "mn-1", "m*n - 1", "m*n-1"], "caseInsensitive": true }
+      ],
+      "explanation": "mn - 1 breaks. The formula is the same regardless of grid shape or break strategy -- the 'each break adds 1 piece' invariant is too strong to escape."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why isn't there a SHORTER path? Could a clever break order beat mn - 1?",
+        "What changes if you can stack multiple pieces and break through them at once?",
+        "Generalize to 3D (m x n x k cuboid sliced along grid planes). How many slices to get all unit cubes?"
+      ]
+    }
+  ]
+}

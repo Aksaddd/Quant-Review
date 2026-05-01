@@ -1,0 +1,101 @@
+{
+  "id": "ch2-33-coin-split",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.8",
+  "title": "Coin Split Problem",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "694-709"
+  },
+  "mechanism": {
+    "primary": "math-induction",
+    "structure": "strong-induction-on-pile-size",
+    "insight": "the-final-sum-is-always-n-choose-2-regardless-of-split-choices",
+    "variantAxes": ["n_coins"]
+  },
+  "setup": {
+    "narrative": "Take 1000 coins. Split them into two piles (say x and 1000-x coins, where 1 <= x <= 999). Multiply x * (1000 - x). Add this product to a running total. Now repeat: pick any pile of size > 1 and split it into two non-empty subpiles, multiply their sizes, and add to the total. Continue until every pile has exactly 1 coin.",
+    "rules": [
+      "Each split divides ONE pile into TWO non-empty subpiles.",
+      "On each split, multiply the two resulting subpile sizes and add to the running total.",
+      "Continue until all piles have size 1.",
+      "The split choices at each step are arbitrary."
+    ],
+    "question": "Prove that the final accumulated sum is the SAME regardless of how the splits are chosen, and find the closed form."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that 'invariant under arbitrary choices' often signals an induction proof.",
+    "Use STRONG induction to handle splits of arbitrary sizes.",
+    "Verify the closed form f(n) = n(n-1)/2 = C(n, 2) algebraically."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "ladder-step",
+      "label": "Compute small cases",
+      "prompt": "What is f(2)? (One pile of 2 coins splits into 1+1, contributing 1*1 = 1. Then we're done.)",
+      "answerType": "numeric",
+      "answer": 1,
+      "explanation": "f(2) = 1*1 = 1. Try f(3): split 3 = 1+2 (gives 1*2 = 2), then split the 2 (1+1, gives 1). Total = 3. Or split 3 = 2+1 -- same result. f(3) = 3."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach to prove f(n) is constant regardless of split choices?",
+      "options": [
+        { "id": "a", "text": "Strong induction on n: hypothesize f(k) = k(k-1)/2 for all k < n, then prove for n.", "correct": true },
+        { "id": "b", "text": "Probability over random splits.",                                                       "correct": false },
+        { "id": "c", "text": "Direct case-by-case for n = 1000.",                                                     "correct": false }
+      ],
+      "explanation": "The natural splits divide an N-pile into x and (N-x) piles -- TWO smaller subproblems of arbitrary sizes. Each subproblem is recursively the same problem on a smaller N. This screams strong induction.",
+      "learnMoreTechnique": "math-induction"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Conjecture the formula",
+      "prompt": "From f(2) = 1, f(3) = 3, what's the natural formula?",
+      "options": [
+        { "id": "a", "text": "f(n) = n(n-1)/2 = C(n,2). Check: f(2) = 1, f(3) = 3, f(4) = 6.", "correct": true },
+        { "id": "b", "text": "f(n) = n^2",                                                       "correct": false },
+        { "id": "c", "text": "f(n) = 2^n",                                                       "correct": false }
+      ],
+      "explanation": "f(n) = n(n-1)/2 fits the pattern. Beyond fitting, this is C(n, 2) -- the number of pairs of coins -- which suggests the deeper meaning: each split records a 'pair-count' and the total is exactly the number of coin pairs."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Inductive step",
+      "prompt": "For N coins split into x and N-x: f(N) = x*(N-x) + f(x) + f(N-x). Substituting the inductive hypothesis f(k) = k(k-1)/2 for k < N, what do you get?",
+      "options": [
+        { "id": "a", "text": "f(N) = x(N-x) + x(x-1)/2 + (N-x)(N-x-1)/2 = N(N-1)/2 -- algebraically simplifies to the conjectured formula.", "correct": true },
+        { "id": "b", "text": "f(N) depends on x.",                                                                                              "correct": false },
+        { "id": "c", "text": "The substitution doesn't simplify.",                                                                              "correct": false }
+      ],
+      "explanation": "Algebra: x(N-x) + x(x-1)/2 + (N-x)(N-x-1)/2 = [2x(N-x) + x(x-1) + (N-x)(N-x-1)] / 2 = [2xN - 2x^2 + x^2 - x + (N-x)^2 - (N-x)] / 2 = [2xN - x^2 - x + N^2 - 2Nx + x^2 - N + x] / 2 = [N^2 - N] / 2 = N(N-1)/2. Independent of x. QED."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Commit final answer for n = 1000",
+      "prompt": "f(1000) = ?",
+      "answerType": "numeric",
+      "answer": 499500,
+      "explanation": "1000 * 999 / 2 = 499500. The formula f(n) = n(n-1)/2 gives 1000*999/2 = 499500."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the formula equal C(n, 2) -- the number of coin pairs? What's the deeper bijection?",
+        "What if instead of multiplying we ADDED the two subpile sizes? Would the total still be invariant?",
+        "Try n = 5: split 5 = 2+3 (contribution 6), then 3 = 1+2 (contribution 2), then 2 = 1+1 (contribution 1), then 2 = 1+1 (contribution 1). Total = 10 = 5*4/2. Verify with a different split sequence."
+      ]
+    }
+  ]
+}

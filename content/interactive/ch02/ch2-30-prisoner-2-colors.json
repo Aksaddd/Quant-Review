@@ -1,0 +1,108 @@
+{
+  "id": "ch2-30-prisoner-2-colors",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.7",
+  "title": "Prisoner Problem (2 colors)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "621-637"
+  },
+  "mechanism": {
+    "primary": "modular-arithmetic",
+    "structure": "first-prisoner-broadcasts-parity-bit",
+    "insight": "one-sacrificial-guess-encodes-mod-2-information-for-everyone-else",
+    "variantAxes": ["n_prisoners", "n_colors"]
+  },
+  "setup": {
+    "narrative": "100 prisoners are each given a hat (red or blue). Each prisoner can see all OTHER prisoners' hats but not their own. They are called out one at a time in random order to guess their own hat color. Each guess is heard by all others.",
+    "rules": [
+      "Prisoners can plan a strategy together before any hats are placed.",
+      "Once hats are placed, no communication is allowed -- only the publicly-spoken guesses.",
+      "Each prisoner must guess 'red' or 'blue' (no abstaining).",
+      "If a prisoner guesses correctly, they're freed. If wrong, they're executed.",
+      "The order of calling is random and unknown in advance."
+    ],
+    "question": "Design a strategy that maximizes the GUARANTEED number of saved prisoners."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that one prisoner can SACRIFICE certainty to broadcast a parity (mod-2) bit.",
+    "Understand how subsequent prisoners decode their own hat color using the parity announcement plus what they observe.",
+    "Generalize the strategy from 2 colors (mod 2) to N colors (mod N)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Worst-case naive bound",
+      "prompt": "Without coordination, what's the worst-case number of saved prisoners?",
+      "options": [
+        { "id": "a", "text": "Each prisoner has a 50% chance, so on average 50 are saved -- but worst case could be 0.", "correct": true },
+        { "id": "b", "text": "100 -- they always know.",                                                                  "correct": false },
+        { "id": "c", "text": "0 -- they can't see their own hat.",                                                          "correct": false }
+      ],
+      "explanation": "Independent guessing yields 50% expected, but no guarantee. We need a strategy that GUARANTEES the maximum -- that's where modular arithmetic comes in."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Modular arithmetic: the first prisoner announces the PARITY of the red hats they see. This gives everyone else a mod-2 reference they can use to deduce their own.", "correct": true },
+        { "id": "b", "text": "Pigeon hole over hat colors.",                                                                                                                                       "correct": false },
+        { "id": "c", "text": "Backward induction over the call order.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "The first prisoner sacrifices certainty (their own guess is 50/50 because they don't know their own hat). But by encoding the PARITY of red hats they see, they broadcast a mod-2 invariant that lets everyone else figure out their own hat with certainty.",
+      "learnMoreTechnique": "modular-arithmetic"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "First prisoner's encoding",
+      "prompt": "Prisoner 1 (the first called) counts the red hats among the OTHER 99. The agreed convention: announce 'red' if odd, 'blue' if even. What information does this convey?",
+      "options": [
+        { "id": "a", "text": "The PARITY of red hats among the 99 others -- which lets everyone else deduce their own hat color, given they each know what they see.", "correct": true },
+        { "id": "b", "text": "The first prisoner's actual hat color.",                                                                                                  "correct": false },
+        { "id": "c", "text": "Nothing useful.",                                                                                                                         "correct": false }
+      ],
+      "explanation": "Prisoner 1's announcement encodes the parity of the OTHER 99 reds. Each subsequent prisoner i knows: parity of (other 99 reds) AND can SEE 98 of the others' hats (everyone except prisoner 1 and themselves -- wait, actually they can see prisoner 1's hat too). So prisoner i sees 98 others (excluding themselves), counts the reds among them, and combined with the announcement deduces their own."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Decoding by a later prisoner",
+      "prompt": "Prisoner 1 announces 'red' = parity of red hats in P2..P100 is ODD. Prisoner 2 sees P1, P3, P4, ..., P100. Prisoner 2 computes: parity of red hats in P3..P100. How does P2 figure out their own hat?",
+      "options": [
+        { "id": "a", "text": "P2's hat parity = (announced parity for P2..P100) XOR (parity of P3..P100, which P2 sees). If they match, P2's hat is BLUE (0); if they differ, P2's hat is RED (1).", "correct": true },
+        { "id": "b", "text": "P2 needs another announcement to determine their own.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "P2 can't determine theirs -- only P3 onward can.",                                                                                                                              "correct": false }
+      ],
+      "explanation": "The announcement gives parity of {P2 + P3 + ... + P100}. P2 sees and counts {P3 + ... + P100}. The XOR (i.e., announced parity minus seen parity, mod 2) is P2's own hat. P3 onwards: same idea, but they also use the spoken guesses of earlier prisoners (which are correct) to update."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "How many prisoners are GUARANTEED to be saved?",
+      "options": [
+        { "id": "a", "text": "At least 99. Prisoner 1 has a 50% chance; everyone else can deduce theirs with certainty using the announced parity.", "correct": true },
+        { "id": "b", "text": "100 always.", "correct": false },
+        { "id": "c", "text": "50 in expectation but 0 in worst case.", "correct": false }
+      ],
+      "explanation": "Prisoner 1 has 50% (might announce 'red' when his own is blue, etc.). The other 99 each combine prisoner 1's announcement with what they see to deduce their own with certainty. Worst case: 99 saved."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How does the strategy generalize to 3 colors? (Hint: parity becomes residue mod 3.)",
+        "What if prisoners are called in a known order? Does the answer change?",
+        "Why is exactly ONE prisoner sacrificing necessary -- could you sacrifice 'less'?"
+      ]
+    }
+  ]
+}

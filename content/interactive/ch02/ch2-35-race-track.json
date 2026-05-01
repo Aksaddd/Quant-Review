@@ -1,0 +1,107 @@
+{
+  "id": "ch2-35-race-track",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.8",
+  "title": "Race Track",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "727-738"
+  },
+  "mechanism": {
+    "primary": "math-induction",
+    "structure": "merge-adjacent-cans-to-reduce-n-by-one",
+    "insight": "there-always-exists-a-can-with-enough-gas-to-reach-the-next",
+    "variantAxes": ["n_cans", "track_geometry"]
+  },
+  "setup": {
+    "narrative": "A car must complete one lap on a one-way circular race track. There are N gas cans placed at various positions around the track. The TOTAL gas across all cans is exactly enough to complete one full lap.",
+    "rules": [
+      "The car starts with no gas in its tank.",
+      "Whenever the car passes a gas can, it immediately picks up that can's gas and adds it to the tank.",
+      "The car drives in one direction only.",
+      "You can choose any starting position. The car must complete a full lap from there."
+    ],
+    "question": "Prove that there always exists a starting position that lets the car complete the full lap."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Use induction on N to reduce the problem to a smaller instance.",
+    "Identify a can whose gas is sufficient to reach the next can -- such a can must exist by an averaging argument.",
+    "Merge that pair into a single virtual can to reduce N by 1."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Induction on N: prove the base case (N=1), then show that for any N, you can MERGE two cans to reduce to N-1.",  "correct": true },
+        { "id": "b", "text": "Probability over starting positions.",                                                                              "correct": false },
+        { "id": "c", "text": "Brute force over the N possible starting positions.",                                                              "correct": false }
+      ],
+      "explanation": "The natural recursion: if we can show how to reduce an N-can problem to an (N-1)-can problem with the same total-gas-equals-lap property, induction handles the rest.",
+      "learnMoreTechnique": "math-induction"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Base case",
+      "prompt": "For N = 1 can, can the car always complete the lap?",
+      "options": [
+        { "id": "a", "text": "Yes -- the single can holds exactly 1 lap's worth of gas. Start there.",  "correct": true },
+        { "id": "b", "text": "Only if the can is at a specific location.",                                "correct": false },
+        { "id": "c", "text": "No -- can-position matters.",                                              "correct": false }
+      ],
+      "explanation": "With N = 1, the can holds exactly the gas for 1 lap. Starting at the can gives a full tank, so the lap is doable."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Inductive step: find a mergeable pair",
+      "prompt": "For N+1 cans with total gas = 1 lap, why must there exist some can whose gas is enough to reach the NEXT can?",
+      "options": [
+        { "id": "a", "text": "If EVERY can fell short of reaching the next, the total gas (= 1 lap) would have to be less than the total track distance (= 1 lap) -- contradiction. So at least one can has enough gas to reach its successor.", "correct": true },
+        { "id": "b", "text": "By probability.",                                                                                                                                                                                                "correct": false },
+        { "id": "c", "text": "By the largest-can argument: the can with the most gas is enough.",                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Averaging argument: total gas = total distance = 1 lap. If can_i had less than segment_i for all i, summing would give total_gas < total_distance, contradicting the equality. So some can_i has gas_i >= segment_i."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Merge the pair",
+      "prompt": "Suppose can i has enough gas to reach can i+1. We MERGE them: replace cans i and i+1 with a single virtual can at position i, holding gas_i + gas_{i+1}. Why is this reduction valid?",
+      "options": [
+        { "id": "a", "text": "Any starting position that solves the N-can merged problem also solves the (N+1)-can original -- because reaching the merged-can position with sufficient gas in the merged version corresponds to reaching can i in the original (with enough gas to continue).",  "correct": true },
+        { "id": "b", "text": "It's a simplification but not strictly equivalent.",                                                                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "The merged problem might have a different total gas.",                                                                                                                                                                                                              "correct": false }
+      ],
+      "explanation": "The merge is rigorous: if the car can complete the lap in the merged version starting at some position S, then the same starting position S works in the original (N+1)-can version, because at can i the car has enough gas to reach can i+1 directly (without 'pausing' at can i+1 specifically)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Is the inductive proof complete?",
+      "options": [
+        { "id": "a", "text": "Yes -- base case N=1 works, and any (N+1)-can instance reduces to an N-can instance via the merge. By induction, the result holds for all N.",  "correct": true },
+        { "id": "b", "text": "No -- we didn't show the merging preserves the total gas.",                                                                                       "correct": false },
+        { "id": "c", "text": "No -- the merged can might not be at an optimal position.",                                                                                       "correct": false }
+      ],
+      "explanation": "The merge preserves total gas (gas_i + gas_{i+1} stays the same) and total distance (it's still one lap). So the inductive hypothesis applies to the smaller instance, and the original starting position pulls back from there."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "There's a non-inductive proof: drive a 'phantom car' with a full tank from any starting point and record the tank level at each can. Where do you start an empty-tank car?",
+        "What if total gas exceeded one lap by epsilon? Is the conclusion still true?",
+        "Generalize: what if you have TWO laps' worth of total gas? Can you complete TWO laps from some starting position?"
+      ]
+    }
+  ]
+}

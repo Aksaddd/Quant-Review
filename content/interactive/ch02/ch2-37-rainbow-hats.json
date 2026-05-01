@@ -1,0 +1,107 @@
+{
+  "id": "ch2-37-rainbow-hats",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.9",
+  "title": "Rainbow Hats",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "763-780"
+  },
+  "mechanism": {
+    "primary": "proof-by-contradiction",
+    "structure": "each-prisoner-claims-a-residue-class",
+    "insight": "if-everyone-misses-then-the-true-sum-fits-no-residue-class-contradiction",
+    "variantAxes": ["n_prisoners_equals_n_colors"]
+  },
+  "setup": {
+    "narrative": "7 prisoners are each given a hat in one of 7 'rainbow' colors (the executioner chooses the colors arbitrarily, and colors can repeat). Each prisoner can see the other 6 hats but not their own. Each prisoner writes down a guess for their own hat color simultaneously -- no communication.",
+    "rules": [
+      "Prisoners can plan a strategy together before any hats are placed.",
+      "Once hats are placed, no communication is allowed.",
+      "Each prisoner writes ONE guess for their own hat color.",
+      "If AT LEAST ONE prisoner guesses correctly, ALL 7 go free."
+    ],
+    "question": "Design a guaranteed strategy that always saves all 7 prisoners."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that each prisoner can claim a unique 'residue class' so that the 7 guesses cover all possible sums-mod-7.",
+    "Use proof by contradiction to show at least one prisoner is correct: if all were wrong, the true sum's residue would fit no class.",
+    "See the deep connection between modular arithmetic and proof by contradiction."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive strategies fail",
+      "prompt": "Suppose each prisoner guesses a fixed color. What's the worst case?",
+      "options": [
+        { "id": "a", "text": "All 7 could be wrong if the executioner picks colors that don't match any of the fixed guesses.", "correct": true },
+        { "id": "b", "text": "At least one is always correct.",                                                                   "correct": false },
+        { "id": "c", "text": "Half are correct on average.",                                                                       "correct": false }
+      ],
+      "explanation": "Independent guessing has no guarantee. We need a strategy where the 7 guesses COLLECTIVELY cover all possibilities."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing?",
+      "options": [
+        { "id": "a", "text": "Assign color codes 0-6 and prisoner labels 0-6. Each prisoner i guesses the color making (sum of all 7 hats) = i mod 7. The 7 prisoners cover all 7 residue classes -- one MUST be correct.", "correct": true },
+        { "id": "b", "text": "Pigeon hole over color combinations.",                                                                                                                                                               "correct": false },
+        { "id": "c", "text": "Probability over random hats.",                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Modular arithmetic + proof by contradiction. Each prisoner claims a unique residue class. Whatever the actual sum's residue is, the prisoner who claims that class guesses correctly. The proof that this works is by contradiction.",
+      "learnMoreTechnique": "proof-by-contradiction"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "The strategy",
+      "prompt": "Prisoner i sees the other 6 hats. Let s_i = sum of their codes. What does prisoner i guess for their own hat color?",
+      "options": [
+        { "id": "a", "text": "g_i = i - s_i mod 7. So that g_i + s_i = i mod 7 -- making the TOTAL hat sum equal to i mod 7 IF prisoner i's hat is g_i.", "correct": true },
+        { "id": "b", "text": "g_i = s_i mod 7.",                                                                                                              "correct": false },
+        { "id": "c", "text": "g_i = i + 1 mod 7 (a fixed guess).",                                                                                            "correct": false }
+      ],
+      "explanation": "Prisoner i computes g_i = (i - s_i) mod 7. If their actual hat code is g_i, then the total sum (g_i + s_i) = i mod 7 -- and prisoner i guesses correctly. Each prisoner is 'responsible for' the case where the true total is congruent to their own label."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Proof by contradiction",
+      "prompt": "Suppose ALL 7 prisoners guess wrongly. What goes wrong?",
+      "options": [
+        { "id": "a", "text": "If everyone is wrong, the true sum's residue mod 7 matches NONE of {0, 1, 2, 3, 4, 5, 6}. But every integer's residue mod 7 IS in that set -- contradiction.", "correct": true },
+        { "id": "b", "text": "Two prisoners guess the same color.",                                                                                                                          "correct": false },
+        { "id": "c", "text": "The strategy works only on average.",                                                                                                                          "correct": false }
+      ],
+      "explanation": "Contradiction: every integer modulo 7 has SOME residue in {0..6}. So whatever the true sum is, exactly one prisoner -- the one whose label equals that residue -- guesses correctly. 'All wrong' is impossible."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Does the strategy guarantee all 7 prisoners go free?",
+      "options": [
+        { "id": "a", "text": "Yes -- exactly one prisoner ALWAYS guesses correctly (the one whose label equals the true residue).", "correct": true },
+        { "id": "b", "text": "Most of the time.",                                                                                     "correct": false },
+        { "id": "c", "text": "Only with luck.",                                                                                       "correct": false }
+      ],
+      "explanation": "Exactly one prisoner is always correct -- the one whose label matches the true residue mod 7. Since 'at least one correct' triggers freedom, all 7 always go free."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the strategy require exactly N = 7 prisoners and N = 7 colors? What if there were 8 colors?",
+        "How is this connected to the Prisoner Hat problem (Section 2.7) where one prisoner SACRIFICES?",
+        "Can you design a similar 'covers all residues' strategy for 100 prisoners with 100 colors?"
+      ]
+    }
+  ]
+}
