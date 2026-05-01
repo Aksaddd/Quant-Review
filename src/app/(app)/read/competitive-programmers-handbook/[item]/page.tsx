@@ -24,6 +24,55 @@ type Segment =
   | { kind: 'figure'; order: number; src: string; alt: string }
   | { kind: 'subhead'; order: number; level: number; title: string };
 
+/* PDF-extraction artifacts: figure-label fragments (node coordinates, axis
+ * markers, table column headers, traversal-step numbers) that ended up as
+ * standalone paragraphs in items.json. They render as floating noise next
+ * to figures in chapters 14+. We detect and drop them at render time so the
+ * generated metadata stays untouched. */
+const FIGURE_LABEL_PATTERNS: RegExp[] = [
+  /^\$[a-zA-Z↑↓→←_^][a-zA-Z↑↓→←_^0-9]{0,3}\$$/,
+  /^(\$[a-zA-Z↑↓→←_^][a-zA-Z↑↓→←_^0-9]{0,3}\$\s+)+\$[a-zA-Z↑↓→←_^][a-zA-Z↑↓→←_^0-9]{0,3}\$$/,
+  /^\$[a-zA-Z]\s*=\s*[a-zA-Z]\$$/,
+  /^(\(\s*-?\d{1,4}(?:\.\d+)?\s*,\s*-?\d{1,4}(?:\.\d+)?\s*\)\s*)+$/,
+  /^\*(\s+\*)*$/,
+  /^(step\s+\d+\s*)+$/i,
+  /^(\w+\s+)?\$[a-zA-Z]\$(\s+\d{1,3}){3,}$/,
+  /^(\d+\/\d+\s+){2,}\d+\/\d+$/,
+  /^(\$\^[^$]{1,3}\$\s+){0,3}\$\^[^$]{1,3}\$$/,
+];
+const FIGURE_LABEL_LITERALS = new Set([
+  'node id',
+  'subtree size',
+  'node value',
+  'path sum',
+  'depth',
+  'node distance',
+  'euclidean distance manhattan distance',
+]);
+const LONE_NUMBER_RE = /^(\d{1,3}\.\s*)+$/;
+
+function staticallyMatchesFigureLabel(text: string): boolean {
+  const t = text.trim();
+  if (FIGURE_LABEL_LITERALS.has(t.toLowerCase())) return true;
+  return FIGURE_LABEL_PATTERNS.some((re) => re.test(t));
+}
+
+/* A bare "1." or "5." is ambiguous — broken math equations also extract that
+ * way (e.g. ch21 ∛3·3). Only treat it as a figure label when another lone
+ * number sits within ±3 paragraphs of it (the run-of-step-labels signature). */
+function loneNumberLabelOrders(chapter: CphChapter): Set<number> {
+  const candidates = chapter.paragraphs
+    .filter((p) => LONE_NUMBER_RE.test(p.text.trim()))
+    .map((p) => p.order);
+  const set = new Set<number>();
+  for (const idx of candidates) {
+    if (candidates.some((other) => other !== idx && Math.abs(idx - other) <= 3)) {
+      set.add(idx);
+    }
+  }
+  return set;
+}
+
 /**
  * Interleave paragraphs, code, figures, and subsection headings into reading
  * order. Each non-prose segment records the paragraph order it follows
@@ -55,10 +104,17 @@ function weaveSegments(chapter: CphChapter): Segment[] {
     push(key, { kind: 'subhead', order: firstInSub, level: sub.level, title: sub.title });
   }
 
+  const loneNumberLabels = loneNumberLabelOrders(chapter);
+
   const segments: Segment[] = [];
   for (const seg of bucket.get('leading') ?? []) segments.push(seg);
   for (const p of chapter.paragraphs) {
-    segments.push({ kind: 'prose', order: p.order, text: p.text });
+    const isLabel =
+      staticallyMatchesFigureLabel(p.text) || loneNumberLabels.has(p.order);
+    if (!isLabel) {
+      segments.push({ kind: 'prose', order: p.order, text: p.text });
+    }
+    // Always keep attached figures/code/subheads — only the prose label is dropped.
     for (const seg of bucket.get(p.order) ?? []) segments.push(seg);
   }
   return segments;
