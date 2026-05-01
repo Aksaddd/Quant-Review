@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 150" width="160" height="150">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="40" y1="35" x2="130" y2="35" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="130" y1="35" x2="40" y2="110" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="40" y1="35" x2="40" y2="110" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 40.00 102.00 L 46.15 96.88 L 46.15 104.88" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 40 35 A 45.0 45.0 0 0 1 130 35" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 40 35 A 75.0 75.0 0 0 1 130 35" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<defs><pattern id="lunehatch" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0,0 L5,5 M0,5 L5,0" stroke="#1d1d1f" stroke-width="0.6"/></pattern></defs>
+<path d="M 40 35 A 45.0 45.0 0 0 1 130 35 A 75.0 75.0 0 0 0 40 35 Z" fill="url(#lunehatch)" stroke="none"/>
+<circle cx="40" cy="35" r="2.5" fill="#1d1d1f"/>
+<text x="28" y="39" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="130" cy="35" r="2.5" fill="#1d1d1f"/>
+<text x="142" y="39" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="40" cy="110" r="2.5" fill="#1d1d1f"/>
+<text x="30" y="128" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">C</text>
+</svg>

@@ -1327,8 +1327,7 @@
         615,
         205,
         175
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-2-trapezoid-diagonals",
@@ -1341,8 +1340,7 @@
         100,
         195,
         130
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-3-medians-six-regions",
@@ -1355,8 +1353,7 @@
         660,
         245,
         165
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-4-example-15-5",
@@ -1369,8 +1366,7 @@
         70,
         220,
         200
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-5-example-15-7",
@@ -1383,8 +1379,7 @@
         295,
         215,
         200
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-6-annulus",
@@ -1397,8 +1392,7 @@
         815,
         130,
         130
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-7-octagon-from-square",
@@ -1411,8 +1405,7 @@
         145,
         100,
         105
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-8-isosceles-triangle-with-arcs",
@@ -1425,8 +1418,7 @@
         215,
         175,
         165
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-9-square-with-leaves",
@@ -1439,8 +1431,7 @@
         540,
         140,
         145
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-15-10-four-overlapping-circles",
@@ -1453,15 +1444,13 @@
         800,
         175,
         155
-      ],
-      "format": "png"
+      ]
     },
     {
       "id": "fig-16-1-cartesian-plane",
       "chapter": 16,
       "page": 157,
       "bookPage": 143,
-      "format": "png",
       "caption": "Cartesian plane with x-axis and y-axis crossing at origin, integer ticks labeled.",
       "bbox": [
         510,
@@ -1475,7 +1464,6 @@
       "chapter": 16,
       "page": 158,
       "bookPage": 144,
-      "format": "png",
       "caption": "Polar grid: concentric circles for r, radial lines for \u03b8.",
       "bbox": [
         60,
@@ -1489,7 +1477,6 @@
       "chapter": 16,
       "page": 160,
       "bookPage": 146,
-      "format": "png",
       "caption": "Line on coordinate plane with y-intercept (0, b) and rise/run triangle showing slope m.",
       "bbox": [
         540,
@@ -1503,7 +1490,6 @@
       "chapter": 16,
       "page": 162,
       "bookPage": 148,
-      "format": "png",
       "caption": "Two perpendicular lines on a coordinate plane with rise/run triangles showing slopes a/b and -b/a.",
       "bbox": [
         555,
@@ -1517,7 +1503,6 @@
       "chapter": 16,
       "page": 163,
       "bookPage": 149,
-      "format": "png",
       "caption": "The line 3x + 4y = 5 plotted through four points.",
       "bbox": [
         540,
@@ -1531,7 +1516,6 @@
       "chapter": 16,
       "page": 163,
       "bookPage": 149,
-      "format": "png",
       "caption": "Two points (x\u2081,y\u2081) and (x\u2082,y\u2082) connected by hypotenuse d with horizontal and vertical legs.",
       "bbox": [
         555,
@@ -1545,7 +1529,6 @@
       "chapter": 16,
       "page": 164,
       "bookPage": 150,
-      "format": "png",
       "caption": "Circle of radius 3 centered at (-1, 2) on coordinate plane.",
       "bbox": [
         540,
@@ -1559,7 +1542,6 @@
       "chapter": 17,
       "page": 169,
       "bookPage": 155,
-      "format": "png",
       "caption": "Two tangents AB, AC from external point A to a circle.",
       "bbox": [
         530,
@@ -1573,7 +1555,6 @@
       "chapter": 17,
       "page": 169,
       "bookPage": 155,
-      "format": "png",
       "caption": "Tangent AC and secant AD from external point A through B and D on circle.",
       "bbox": [
         70,
@@ -1587,7 +1568,6 @@
       "chapter": 17,
       "page": 169,
       "bookPage": 155,
-      "format": "png",
       "caption": "Two secants from external point A through B, C and D, E on circle.",
       "bbox": [
         540,
@@ -1601,7 +1581,6 @@
       "chapter": 17,
       "page": 169,
       "bookPage": 155,
-      "format": "png",
       "caption": "Two chords BC and DE intersecting at point A inside the circle.",
       "bbox": [
         60,
@@ -1615,7 +1594,6 @@
       "chapter": 17,
       "page": 171,
       "bookPage": 157,
-      "format": "png",
       "caption": "Power of a Point proof: external A with tangent AB, secant ACD; auxiliary BD creates similar triangles.",
       "bbox": [
         545,
@@ -1629,7 +1607,6 @@
       "chapter": 17,
       "page": 172,
       "bookPage": 158,
-      "format": "png",
       "caption": "Power of a Point proof: two chords intersecting at E inside circle, similar triangles EAC and EDB.",
       "bbox": [
         555,
@@ -1643,7 +1620,6 @@
       "chapter": 18,
       "page": 175,
       "bookPage": 161,
-      "format": "png",
       "caption": "Sphere with center O intersected by a plane in a circle of diameter AC, center B; OB \u22a5 plane.",
       "bbox": [
         80,
@@ -1657,7 +1633,6 @@
       "chapter": 18,
       "page": 176,
       "bookPage": 162,
-      "format": "png",
       "caption": "Cube drawn in 3D perspective showing 6 faces, 12 edges, 8 vertices.",
       "bbox": [
         590,
@@ -1671,7 +1646,6 @@
       "chapter": 18,
       "page": 176,
       "bookPage": 162,
-      "format": "png",
       "caption": "Cube ABCDEFGH with face diagonal AC and space diagonal EC of length s\u221a3.",
       "bbox": [
         75,
@@ -1685,7 +1659,6 @@
       "chapter": 18,
       "page": 179,
       "bookPage": 165,
-      "format": "png",
       "caption": "Cylinder unrolled into a rectangle of dimensions h \u00d7 2\u03c0r.",
       "bbox": [
         185,
@@ -1699,7 +1672,6 @@
       "chapter": 18,
       "page": 180,
       "bookPage": 166,
-      "format": "png",
       "caption": "Square pyramid in 3D perspective with apex above a polygonal base.",
       "bbox": [
         600,
@@ -1713,7 +1685,6 @@
       "chapter": 18,
       "page": 181,
       "bookPage": 167,
-      "format": "png",
       "caption": "Right circular cone showing altitude h, radius r, and slant height \u2113.",
       "bbox": [
         590,
@@ -1727,7 +1698,6 @@
       "chapter": 18,
       "page": 181,
       "bookPage": 167,
-      "format": "png",
       "caption": "Cone unrolled into a sector of radius \u2113 with arc length 2\u03c0r.",
       "bbox": [
         390,
@@ -1741,7 +1711,6 @@
       "chapter": 18,
       "page": 182,
       "bookPage": 168,
-      "format": "png",
       "caption": "The five Platonic solids: tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
       "bbox": [
         100,
@@ -1755,7 +1724,6 @@
       "chapter": 18,
       "page": 182,
       "bookPage": 168,
-      "format": "png",
       "caption": "Regular tetrahedron ABCD with apex B over equilateral base ACD; centroid O, midpoint M of CD, altitude BO.",
       "bbox": [
         80,
@@ -1769,7 +1737,6 @@
       "chapter": 18,
       "page": 183,
       "bookPage": 169,
-      "format": "png",
       "caption": "Regular octahedron split into two square pyramids sharing base ABCD, with apex E above and F below.",
       "bbox": [
         75,
@@ -1783,7 +1750,6 @@
       "chapter": 19,
       "page": 187,
       "bookPage": 173,
-      "format": "png",
       "caption": "Triangle ABC translated upward and right to form A'B'C'.",
       "bbox": [
         550,
@@ -1797,7 +1763,6 @@
       "chapter": 19,
       "page": 188,
       "bookPage": 174,
-      "format": "png",
       "caption": "Triangle ABC rotated by angle \u03b8 about center O to form A'B'C'.",
       "bbox": [
         540,
@@ -1811,7 +1776,6 @@
       "chapter": 19,
       "page": 189,
       "bookPage": 175,
-      "format": "png",
       "caption": "Pentagon ABCDE reflected in line \u2113 to form pentagon A'B'C'D'E'.",
       "bbox": [
         425,
@@ -1825,7 +1789,6 @@
       "chapter": 19,
       "page": 189,
       "bookPage": 175,
-      "format": "png",
       "caption": "Pentagon ABCDE reflected through point O to form A'B'C'D'E'.",
       "bbox": [
         460,
@@ -1839,7 +1802,6 @@
       "chapter": 19,
       "page": 190,
       "bookPage": 176,
-      "format": "png",
       "caption": "Isosceles triangle ABC with apex distorted vertically into C' (squished) and C'' (stretched).",
       "bbox": [
         555,
@@ -1853,7 +1815,6 @@
       "chapter": 19,
       "page": 191,
       "bookPage": 177,
-      "format": "png",
       "caption": "Quadrilateral ABCD dilated with center O to form A'B'C'D'; corresponding lines pass through O.",
       "bbox": [
         65,

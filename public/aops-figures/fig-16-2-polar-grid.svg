@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="120" cy="120" r="35" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="147" y="133" font-family="Times, Georgia, serif" font-style="normal" font-size="10" text-anchor="middle">1</text>
+<circle cx="120" cy="120" r="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="182" y="133" font-family="Times, Georgia, serif" font-style="normal" font-size="10" text-anchor="middle">2</text>
+<circle cx="120" cy="120" r="105" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="217" y="133" font-family="Times, Georgia, serif" font-style="normal" font-size="10" text-anchor="middle">3</text>
+<line x1="120" y1="120" x2="225.0" y2="120.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="238.0" y="124.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">0°</text>
+<line x1="120" y1="120" x2="210.93266739736606" y2="67.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="222.19099764656377" y="65.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">30°</text>
+<line x1="120" y1="120" x2="172.5" y2="29.067332602633954" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="179.0" y="21.80900235343624" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">60°</text>
+<line x1="120" y1="120" x2="120.0" y2="15.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="120.00000000000001" y="6.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">90°</text>
+<line x1="120" y1="120" x2="67.50000000000003" y2="29.06733260263394" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="61.00000000000003" y="21.809002353436227" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">120°</text>
+<line x1="120" y1="120" x2="29.06733260263394" y2="67.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="17.809002353436227" y="65.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">150°</text>
+<line x1="120" y1="120" x2="15.0" y2="119.99999999999999" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="2.0" y="123.99999999999999" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">180°</text>
+<line x1="120" y1="120" x2="29.067332602633954" y2="172.5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="17.80900235343624" y="183.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">210°</text>
+<line x1="120" y1="120" x2="67.49999999999994" y2="210.93266739736603" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="60.99999999999995" y="226.19099764656374" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">240°</text>
+<line x1="120" y1="120" x2="119.99999999999999" y2="225.0" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="119.99999999999997" y="242.0" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">270°</text>
+<line x1="120" y1="120" x2="172.5" y2="210.93266739736606" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="179.0" y="226.19099764656374" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">300°</text>
+<line x1="120" y1="120" x2="210.93266739736603" y2="172.50000000000006" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="222.19099764656374" y="183.00000000000006" font-family="Times, Georgia, serif" font-style="normal" font-size="9" text-anchor="middle">330°</text>
+<circle cx="120" cy="120" r="2.5" fill="#1d1d1f"/>
+</svg>

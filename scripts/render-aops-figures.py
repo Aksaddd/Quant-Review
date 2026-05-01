@@ -2691,6 +2691,1104 @@ def fig_14_14_problem_251_semicircles() -> str:
     return svg(W, H, "\n".join(body))
 
 
+# ─────────────────────────────────────────────
+# Chapter 15 — Areas
+# ─────────────────────────────────────────────
+
+def fig_15_1_triangle_midpoints() -> str:
+    """Triangle ABC with midpoints D (on BC), E (on AC), F (on AB)
+    connected to form the medial triangle DEF."""
+    W, H = 200, 160
+    A = (110, 25); B = (30, 130); C = (190, 130)
+    D = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    E = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    F = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*D, *E), segment(*E, *F), segment(*F, *D),
+        point(*A, "A", "above"),
+        point(*B, "B", "below-left"),
+        point(*C, "C", "below-right"),
+        point(*D, "D", "below"),
+        point(*E, "E", "right"),
+        point(*F, "F", "left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_2_trapezoid_diagonals() -> str:
+    """Trapezoid ABCD (AB || DC) with diagonals AC, BD meeting at E."""
+    W, H = 200, 130
+    A = (70, 30); B = (130, 30); D = (25, 110); C = (175, 110)
+    # E = intersection of AC and BD
+    def isect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    E = isect(A, C, B, D)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "above-right"),
+        point(*D, "D", "below-left"),
+        point(*C, "C", "below-right"),
+        point(*E, "E", "below", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_3_medians_six_regions() -> str:
+    """Triangle ABC with three medians AD, BE, CF meeting at centroid G,
+    dividing the triangle into six smaller regions."""
+    W, H = 230, 160
+    A = (115, 25); B = (210, 130); C = (20, 130)
+    D = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    E = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    F = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    G = ((A[0]+B[0]+C[0])/3, (A[1]+B[1]+C[1])/3)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *D), segment(*B, *E), segment(*C, *F),
+        point(*A, "A", "above"),
+        point(*B, "B", "below-right"),
+        point(*C, "C", "below-left"),
+        point(*D, "D", "below"),
+        point(*E, "E", "above-right"),
+        point(*F, "F", "above-left"),
+        point(*G, "G", "right", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_4_example_15_5() -> str:
+    """Triangle ABC with D midpoint of AB, E midpoint of DB, F midpoint of BC;
+    segments AF and EF drawn."""
+    W, H = 200, 160
+    A = (110, 25); B = (190, 130); C = (20, 130)
+    D = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    E = ((D[0]+B[0])/2, (D[1]+B[1])/2)
+    F = ((B[0]+C[0])/2, (B[1]+C[1])/2)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *F), segment(*E, *F),
+        point(*A, "A", "above"),
+        point(*B, "B", "below-right"),
+        point(*C, "C", "below-left"),
+        point(*D, "D", "right"),
+        point(*E, "E", "right"),
+        point(*F, "F", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_5_example_15_7() -> str:
+    """Quadrilateral ABCD with diagonals meeting at midpoint X of BD;
+    perpendicular altitudes BY and DZ from B, D to diagonal AC."""
+    W, H = 230, 160
+    A = (75, 35); C = (165, 130); B = (175, 55); D = (35, 110)
+    # X = midpoint of BD
+    X = ((B[0]+D[0])/2, (B[1]+D[1])/2)
+    # Y = foot of perpendicular from B onto AC
+    AC = (C[0]-A[0], C[1]-A[1])
+    AB = (B[0]-A[0], B[1]-A[1])
+    t = (AB[0]*AC[0] + AB[1]*AC[1]) / (AC[0]**2 + AC[1]**2)
+    Y = (A[0] + t*AC[0], A[1] + t*AC[1])
+    # Z = foot of perpendicular from D onto AC
+    AD = (D[0]-A[0], D[1]-A[1])
+    s = (AD[0]*AC[0] + AD[1]*AC[1]) / (AC[0]**2 + AC[1]**2)
+    Z = (A[0] + s*AC[0], A[1] + s*AC[1])
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*A, *C), segment(*B, *D),
+        segment(*B, *Y), segment(*D, *Z),
+        right_angle_mark(Y[0], Y[1], A, B, size=6),
+        right_angle_mark(Z[0], Z[1], C, D, size=6),
+        _hash_mark(B, X, 1), _hash_mark(X, D, 1),
+        point(*A, "A", "above"),
+        point(*B, "B", "right"),
+        point(*D, "D", "left"),
+        point(*C, "C", "below-right"),
+        point(*X, "X", "below", dot=False),
+        point(*Y, "Y", "below", dot=False),
+        point(*Z, "Z", "above", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_6_annulus() -> str:
+    """Two concentric circles (radii 2 and 3) — annulus between them, the
+    annulus shaded with horizontal hatching."""
+    W, H = 160, 160
+    cx, cy = 80, 80
+    body = [
+        '<defs><pattern id="annhatch" width="6" height="6" patternUnits="userSpaceOnUse">'
+        '<line x1="0" y1="3" x2="6" y2="3" stroke="#1d1d1f" stroke-width="0.8"/></pattern></defs>',
+        f'<circle cx="{cx}" cy="{cy}" r="60" fill="url(#annhatch)" stroke="#1d1d1f" stroke-width="1.4"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="30" fill="#ffffff" stroke="#1d1d1f" stroke-width="1.4"/>',
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_7_octagon_from_square() -> str:
+    """Square with the four corners cut off as right isosceles triangles,
+    leaving a regular octagon inscribed."""
+    W, H = 140, 140
+    # Square coords
+    s = 100
+    x0, y0 = 20, 20
+    # Cut corner amount (such that the resulting shape is a regular octagon):
+    # if side of square is s, cut = s*(sqrt2 - 1)/(sqrt2 + 1) * s_factor
+    # For a regular octagon, cut = s * (sqrt(2) - 1) / (sqrt(2) + 1)... simpler:
+    # the octagon side length = s / (1 + sqrt(2)). Each cut = (s - octside) / 2
+    octside = s / (1 + 2**0.5)
+    cut = (s - octside) / 2
+    body = [
+        # Square outline
+        segment(x0, y0, x0+s, y0),
+        segment(x0+s, y0, x0+s, y0+s),
+        segment(x0+s, y0+s, x0, y0+s),
+        segment(x0, y0+s, x0, y0),
+        # Diagonals at each corner cutting off the triangles
+        segment(x0+cut, y0,        x0,        y0+cut),  # top-left
+        segment(x0+s-cut, y0,      x0+s,      y0+cut),  # top-right
+        segment(x0+s-cut, y0+s,    x0+s,      y0+s-cut),# bottom-right
+        segment(x0+cut, y0+s,      x0,        y0+s-cut),# bottom-left
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_8_isosceles_triangle_with_arcs() -> str:
+    """Isosceles right triangle ABC with semicircle on hypotenuse AB and
+    quarter-circle arc centered at C; the lune between them is shaded."""
+    W, H = 160, 150
+    A = (40, 35); B = (130, 35); C = (40, 110)
+    # Hypotenuse semicircle: AB diameter
+    midAB = ((A[0]+B[0])/2, (A[1]+B[1])/2)
+    rAB = ((B[0]-A[0])**2 + (B[1]-A[1])**2)**0.5 / 2
+    # Quarter-circle centered at C, from A to B (legs CA and CB)
+    rCA = ((A[0]-C[0])**2 + (A[1]-C[1])**2)**0.5
+    body = [
+        # Triangle
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(C[0], C[1], A, B, size=8),
+        # Semicircle bulging upward from AB
+        f'<path d="M {A[0]} {A[1]} A {rAB} {rAB} 0 0 1 {B[0]} {B[1]}" {STROKE}/>',
+        # Quarter-circle arc from A to B (with center at C, radius CA = CB)
+        f'<path d="M {A[0]} {A[1]} A {rCA} {rCA} 0 0 1 {B[0]} {B[1]}" {STROKE}/>',
+        # Shaded "lune" — the crescent between the two arcs, with checker pattern
+        f'<defs><pattern id="lunehatch" width="5" height="5" patternUnits="userSpaceOnUse">'
+        f'<path d="M0,0 L5,5 M0,5 L5,0" stroke="#1d1d1f" stroke-width="0.6"/></pattern></defs>',
+        f'<path d="M {A[0]} {A[1]} A {rAB} {rAB} 0 0 1 {B[0]} {B[1]} '
+        f'A {rCA} {rCA} 0 0 0 {A[0]} {A[1]} Z" fill="url(#lunehatch)" stroke="none"/>',
+        point(*A, "A", "left"),
+        point(*B, "B", "right"),
+        point(*C, "C", "below-left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_9_square_with_leaves() -> str:
+    """Square with four semicircles, each drawn on a side as diameter and
+    bulging inward, forming four shaded 'leaf' (lens) shapes inside.
+
+    Each leaf is the intersection of two adjacent semicircles; we draw it
+    explicitly as two arcs from the corner to the square's center."""
+    W, H = 160, 160
+    s = 120
+    x0, y0 = 20, 20
+    r = s / 2
+    cx, cy = x0 + r, y0 + r       # center of square
+    TL = (x0, y0); TR = (x0 + s, y0); BR = (x0 + s, y0 + s); BL = (x0, y0 + s)
+    M = (cx, cy)
+
+    def leaf(corner):
+        return (f'<path d="M {corner[0]} {corner[1]} '
+                f'A {r} {r} 0 0 1 {M[0]} {M[1]} '
+                f'A {r} {r} 0 0 1 {corner[0]} {corner[1]} Z" '
+                f'fill="#1d1d1f"/>')
+
+    body = [
+        f'<rect x="{x0}" y="{y0}" width="{s}" height="{s}" {STROKE}/>',
+        leaf(TL), leaf(BR),
+        # The other two corners need the opposite sweep direction
+        f'<path d="M {TR[0]} {TR[1]} A {r} {r} 0 0 0 {M[0]} {M[1]} '
+        f'A {r} {r} 0 0 0 {TR[0]} {TR[1]} Z" fill="#1d1d1f"/>',
+        f'<path d="M {BL[0]} {BL[1]} A {r} {r} 0 0 0 {M[0]} {M[1]} '
+        f'A {r} {r} 0 0 0 {BL[0]} {BL[1]} Z" fill="#1d1d1f"/>',
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_15_10_four_overlapping_circles() -> str:
+    """Four overlapping circles of equal radius — one central circle and three
+    outer circles whose centers lie on the central circle, equally spaced."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 38
+    # Three outer circles centered at points on the central circle, spaced 120°
+    # but the original figure shows them clustered (60° spacing, all going up-right)
+    # — so use the original layout: centers above and to either side.
+    angles = [60, 180, 300]  # 120° apart
+    body = [circle(cx, cy, r)]
+    for a in angles:
+        ox = cx + r * _m.cos(_m.radians(a))
+        oy = cy - r * _m.sin(_m.radians(a))
+        body.append(circle(ox, oy, r))
+    return svg(W, H, "\n".join(body))
+
+
+# ─────────────────────────────────────────────
+# Chapter 16 — The Power of Coordinates
+# ─────────────────────────────────────────────
+
+def _axes(cx, cy, half, tick_count=6, tick=3):
+    """Helper: x and y axes through (cx,cy) with tick marks."""
+    parts = []
+    # Tick marks every ~unit
+    for i in range(1, tick_count + 1):
+        d = i * (half / (tick_count + 0.5))
+        parts.append(segment(cx + d, cy - tick, cx + d, cy + tick))
+        parts.append(segment(cx - d, cy - tick, cx - d, cy + tick))
+        parts.append(segment(cx - tick, cy + d, cx + tick, cy + d))
+        parts.append(segment(cx - tick, cy - d, cx + tick, cy - d))
+    parts.append(line(cx - half - 5, cy, cx + half + 5, cy))  # x-axis
+    parts.append(line(cx, cy - half - 5, cx, cy + half + 5))  # y-axis
+    parts.append(text(cx + half + 14, cy + 5, "x", italic=True))
+    parts.append(text(cx, cy - half - 12, "y", italic=True))
+    return parts
+
+
+def fig_16_1_cartesian_plane() -> str:
+    """Cartesian plane with labeled tick marks 1-6 in each direction."""
+    W, H = 280, 220
+    cx, cy = 140, 110
+    half = 110
+    parts = []
+    spacing = 14
+    # tick lines
+    for i in range(1, 7):
+        d = i * spacing
+        parts.append(segment(cx + d, cy - 4, cx + d, cy + 4))
+        parts.append(segment(cx - d, cy - 4, cx - d, cy + 4))
+        parts.append(segment(cx - 4, cy + d, cx + 4, cy + d))
+        parts.append(segment(cx - 4, cy - d, cx + 4, cy - d))
+        parts.append(text(cx + d, cy + 16, str(i),  italic=False, size=10))
+        parts.append(text(cx - d, cy + 16, str(-i), italic=False, size=10))
+        parts.append(text(cx - 10, cy - d + 4, str(i),  italic=False, size=10, anchor="end"))
+        parts.append(text(cx - 10, cy + d + 4, str(-i), italic=False, size=10, anchor="end"))
+    # Axes
+    parts.append(line(cx - half, cy, cx + half, cy))
+    parts.append(line(cx, cy - half, cx, cy + half))
+    parts.append(text(cx + half + 12, cy + 5, "x", italic=True))
+    parts.append(text(cx, cy - half - 10, "y", italic=True))
+    return svg(W, H, "\n".join(parts))
+
+
+def fig_16_2_polar_grid() -> str:
+    """Polar grid: concentric circles for r, radial lines for θ."""
+    W, H = 240, 240
+    cx, cy = 120, 120
+    parts = []
+    # Three concentric circles r=1, 2, 3
+    for r, label in [(35, "1"), (70, "2"), (105, "3")]:
+        parts.append(circle(cx, cy, r))
+        parts.append(text(cx + r - 8, cy + 13, label, italic=False, size=10, anchor="middle"))
+    # Radial lines every 30°
+    for d in range(0, 360, 30):
+        x = cx + 105 * _m.cos(_m.radians(d))
+        y = cy - 105 * _m.sin(_m.radians(d))
+        parts.append(segment(cx, cy, x, y))
+        # Labels just outside circle
+        lx = cx + 118 * _m.cos(_m.radians(d))
+        ly = cy - 118 * _m.sin(_m.radians(d)) + 4
+        parts.append(text(lx, ly, f"{d}°", italic=False, size=9, anchor="middle"))
+    parts.append(f'<circle cx="{cx}" cy="{cy}" r="2.5" {DOT}/>')
+    return svg(W, H, "\n".join(parts))
+
+
+def fig_16_3_line_with_rise_run() -> str:
+    """Line on coordinate plane with y-intercept (0,b) and rise/run triangle."""
+    W, H = 240, 200
+    cx, cy = 120, 100
+    parts = _axes(cx, cy, 90)
+    # Line through (0, b) with slope m. Visually pick b at -20 (below origin)
+    # and slope ≈ 1/2.
+    b = (cx, cy + 25)
+    # Line endpoints
+    P1 = (cx - 80, cy + 65)
+    P2 = (cx + 90, cy - 20)
+    parts.append(segment(*P1, *P2))
+    # rise-run dotted right triangle to the right of intercept
+    runX = (cx + 35, cy + 25); runY = (cx + 35, cy + 7)
+    parts.append(segment(b[0], b[1], runX[0], runX[1]))
+    parts.append(segment(runX[0], runX[1], runY[0], runY[1]))
+    parts.append(text((b[0]+runX[0])/2, b[1] + 14, "4", italic=False, size=10))
+    parts.append(text(runX[0] + 12, (b[1]+runY[1])/2, "4m", italic=True, size=10, anchor="start"))
+    parts.append(point(*b, "(0, b)", "left", italic=False))
+    return svg(W, H, "\n".join(parts))
+
+
+def fig_16_4_perpendicular_lines() -> str:
+    """Two perpendicular lines on coordinate plane with rise/run a, b labels."""
+    W, H = 240, 200
+    cx, cy = 120, 100
+    parts = _axes(cx, cy, 85)
+    # Two perpendicular lines through origin with slopes m and -1/m
+    # m = 0.5
+    parts.append(segment(cx - 80, cy + 40, cx + 80, cy - 40))
+    parts.append(segment(cx - 40, cy - 80, cx + 40, cy + 80))
+    # Triangle for one line: rise b vertical, run a horizontal
+    parts.append(segment(cx, cy, cx + 50, cy))
+    parts.append(segment(cx + 50, cy, cx + 50, cy - 25))
+    parts.append(text(cx + 25, cy + 14, "a", italic=True, size=11))
+    parts.append(text(cx + 60, cy - 12, "b", italic=True, size=11))
+    # Label "-a" on the other line for clarity
+    parts.append(text(cx - 28, cy + 38, "-a", italic=True, size=10))
+    return svg(W, H, "\n".join(parts))
+
+
+def fig_16_5_line_plot() -> str:
+    """The line 3x + 4y = 5 plotted through several points."""
+    W, H = 240, 160
+    cx, cy = 120, 80
+    parts = _axes(cx, cy, 80)
+    # 3x + 4y = 5: when x=-1, y=2; when x=3, y=-1; when x=5/3, y=0.
+    # Pick visible endpoints. Use scale 16 px / unit.
+    s = 14
+    P1 = (cx + (-3)*s, cy - 3.5*s)   # x=-3, y=3.5 → (3*-3 + 4*3.5)= -9+14=5 ✓
+    P2 = (cx + 4*s,    cy - (-1.75)*s) # x=4,  y=-1.75 → 12-7=5 ✓
+    parts.append(segment(*P1, *P2))
+    # Mark a couple of integer-ish points along the line
+    parts.append(point(cx + (-1)*s, cy - 2*s, dot=True, label=None))
+    parts.append(point(cx + 3*s,    cy - (-1)*s, dot=True, label=None))
+    return svg(W, H, "\n".join(parts))
+
+
+def fig_16_6_distance_formula_triangle() -> str:
+    """Distance formula: two points (x₁,y₁) and (x₂,y₂) connected by hypotenuse
+    d, with legs x₂-x₁ and y₂-y₁."""
+    W, H = 240, 200
+    cx, cy = 120, 110
+    parts = _axes(cx, cy, 90)
+    P1 = (cx - 50, cy + 35)
+    P2 = (cx + 50, cy - 30)
+    R  = (P2[0], P1[1])    # right-angle corner
+    parts.append(segment(*P1, *P2))            # hypotenuse d
+    parts.append(segment(*P1, *R))              # horizontal leg
+    parts.append(segment(*R,  *P2))             # vertical leg
+    right_angle_mark_str = right_angle_mark(R[0], R[1], P1, P2, size=7)
+    parts.append(right_angle_mark_str)
+    parts.append(text((P1[0]+R[0])/2, P1[1]+14, "x₂ - x₁", italic=True, size=10))
+    parts.append(text(R[0]+8, (R[1]+P2[1])/2, "y₂ - y₁", italic=True, size=10, anchor="start"))
+    parts.append(text((P1[0]+P2[0])/2 - 6, (P1[1]+P2[1])/2 - 4, "d", italic=True, size=12))
+    parts.append(point(*P1, "(x₁,y₁)", "below-left", italic=False))
+    parts.append(point(*P2, "(x₂,y₂)", "above-right", italic=False))
+    return svg(W, H, "\n".join(parts))
+
+
+# ─────────────────────────────────────────────
+# Chapter 17 — Power of a Point
+# ─────────────────────────────────────────────
+
+def _tangent_points(P, C, r):
+    """Return the two tangent points from external P to circle (C, r)."""
+    cx, cy = C
+    d = ((P[0]-cx)**2 + (P[1]-cy)**2)**0.5
+    ang = _m.atan2(cy - P[1], cx - P[0])
+    alpha = _m.asin(r / d)
+    p1 = (cx + r*_m.cos(ang - alpha - _m.pi/2),
+          cy + r*_m.sin(ang - alpha - _m.pi/2))
+    p2 = (cx + r*_m.cos(ang + alpha + _m.pi/2),
+          cy + r*_m.sin(ang + alpha + _m.pi/2))
+    return p1, p2
+
+
+def fig_17_1_two_tangents() -> str:
+    """Two tangents AB, AC from external point A to a circle."""
+    W, H = 220, 140
+    cx, cy, r = 80, 70, 45
+    A = (200, 70)
+    B, C = _tangent_points(A, (cx, cy), r)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B), segment(*A, *C),
+        point(*A, "A", "right"),
+        point(*B, "B", "above"),
+        point(*C, "C", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_17_2_tangent_and_secant() -> str:
+    """Tangent AC and secant AD from external A through B and D on circle."""
+    W, H = 240, 150
+    cx, cy, r = 145, 75, 45
+    A = (30, 75)
+    # Tangent from A — pick the upper tangent point as C
+    _, C = _tangent_points(A, (cx, cy), r)
+    # Secant: from A through interior of circle. Pick a chord that the secant
+    # cuts. B is closer to A (entry), D is exit.
+    # Choose secant heading toward (cx + 5, cy + 25) (lower-right)
+    direction = (cx - A[0], cy + 20 - A[1])
+    L = (direction[0]**2 + direction[1]**2)**0.5
+    ux, uy = direction[0]/L, direction[1]/L
+    # Solve for intersections of line A + t*(ux,uy) with circle
+    fx = A[0] - cx; fy = A[1] - cy
+    aQ = ux*ux + uy*uy
+    bQ = 2*(fx*ux + fy*uy)
+    cQ = fx*fx + fy*fy - r*r
+    disc = bQ*bQ - 4*aQ*cQ
+    t1 = (-bQ - disc**0.5) / (2*aQ)
+    t2 = (-bQ + disc**0.5) / (2*aQ)
+    B = (A[0] + t1*ux, A[1] + t1*uy)
+    D = (A[0] + t2*ux, A[1] + t2*uy)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *C),    # tangent
+        segment(*A, *D),    # secant
+        point(*A, "A", "left"),
+        point(*C, "C", "above"),
+        point(*B, "B", "below-left"),
+        point(*D, "D", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_17_3_two_secants() -> str:
+    """Two secants from external A through B,C and D,E on circle."""
+    W, H = 230, 150
+    cx, cy, r = 150, 75, 45
+    A = (30, 75)
+    # Two secants: one upper through B (near) and C (far); one lower through D, E
+    def secant(angle_to_target_offset_y):
+        target = (cx, cy + angle_to_target_offset_y)
+        dx, dy = target[0]-A[0], target[1]-A[1]
+        L = (dx*dx + dy*dy)**0.5
+        ux, uy = dx/L, dy/L
+        fx = A[0] - cx; fy = A[1] - cy
+        aQ = ux*ux + uy*uy
+        bQ = 2*(fx*ux + fy*uy)
+        cQ = fx*fx + fy*fy - r*r
+        disc = bQ*bQ - 4*aQ*cQ
+        t1 = (-bQ - disc**0.5) / (2*aQ)
+        t2 = (-bQ + disc**0.5) / (2*aQ)
+        return ((A[0]+t1*ux, A[1]+t1*uy), (A[0]+t2*ux, A[1]+t2*uy))
+    B, C = secant(-22)
+    D, E = secant( 22)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *C), segment(*A, *E),
+        point(*A, "A", "left"),
+        point(*B, "B", "above"),
+        point(*C, "C", "above-right"),
+        point(*D, "D", "below"),
+        point(*E, "E", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_17_4_two_chords() -> str:
+    """Two chords BC and DE intersecting at A inside the circle."""
+    W, H = 200, 160
+    cx, cy, r = 100, 80, 55
+    # Make chords cross — one going upper-left to lower-right, one the other
+    B = (cx + r*_m.cos(_m.radians(160)), cy - r*_m.sin(_m.radians(160)))
+    C = (cx + r*_m.cos(_m.radians(-20)), cy - r*_m.sin(_m.radians(-20)))
+    D = (cx + r*_m.cos(_m.radians(225)), cy - r*_m.sin(_m.radians(225)))
+    E = (cx + r*_m.cos(_m.radians( 60)), cy - r*_m.sin(_m.radians( 60)))
+    # Intersection A = isect(BC, DE)
+    def isect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    A = isect(B, C, D, E)
+    body = [
+        circle(cx, cy, r),
+        segment(*B, *C), segment(*D, *E),
+        point(*B, "B", "left"),
+        point(*C, "C", "right"),
+        point(*D, "D", "below"),
+        point(*E, "E", "right"),
+        point(*A, "A", "above", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_17_5_power_proof_outside() -> str:
+    """Power of a Point proof for external A: tangent AB plus secant ACD."""
+    W, H = 220, 160
+    cx, cy, r = 80, 80, 50
+    A = (200, 80)
+    # Tangent point B (upper)
+    _, B = _tangent_points(A, (cx, cy), r)
+    # Secant through A intersecting circle at C (near) and E (far);
+    # also draw segment to D on circle for the proof. Pick line through (cx,cy)
+    direction = (cx - A[0], cy - A[1])
+    L = (direction[0]**2 + direction[1]**2)**0.5
+    ux, uy = direction[0]/L, direction[1]/L
+    fx = A[0] - cx; fy = A[1] - cy
+    aQ = ux*ux + uy*uy
+    bQ = 2*(fx*ux + fy*uy)
+    cQ = fx*fx + fy*fy - r*r
+    disc = bQ*bQ - 4*aQ*cQ
+    tA = (-bQ - disc**0.5) / (2*aQ)
+    tB = (-bQ + disc**0.5) / (2*aQ)
+    D_ = (A[0] + tA*ux, A[1] + tA*uy)
+    E  = (A[0] + tB*ux, A[1] + tB*uy)
+    # Mark C as a point on the upper-left of circle
+    C  = (cx + r*_m.cos(_m.radians(170)), cy - r*_m.sin(_m.radians(170)))
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B),       # tangent
+        segment(*A, *E),       # secant (full)
+        segment(*B, *C),
+        segment(*C, *E),
+        point(*A, "A", "right"),
+        point(*B, "B", "above"),
+        point(*C, "C", "left"),
+        point(*D_, "D", "below"),
+        point(*E,  "E", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_17_6_power_proof_inside() -> str:
+    """Power of a Point proof: two chords BC and DE intersecting at E inside."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 65
+    B = (cx + r*_m.cos(_m.radians(140)), cy - r*_m.sin(_m.radians(140)))
+    C = (cx + r*_m.cos(_m.radians( -5)), cy - r*_m.sin(_m.radians( -5)))
+    D = (cx + r*_m.cos(_m.radians( 50)), cy - r*_m.sin(_m.radians( 50)))
+    A = (cx + r*_m.cos(_m.radians(-90)), cy - r*_m.sin(_m.radians(-90)))
+    def isect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    E = isect(B, C, D, A)
+    body = [
+        circle(cx, cy, r),
+        segment(*B, *C), segment(*D, *A),
+        # Add the connecting chord BD and CA for similar-triangle proof
+        segment(*B, *D), segment(*C, *A),
+        point(*B, "B", "above-left"),
+        point(*D, "D", "above-right"),
+        point(*E, "E", "below", dot=False),
+        point(*A, "A", "below"),
+        point(*C, "C", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+# ─────────────────────────────────────────────
+# Chapter 19 — Shifts, Turns, Flips, Stretches, and Squeezes
+# ─────────────────────────────────────────────
+
+def fig_19_1_translation() -> str:
+    """Triangle ABC translated up-and-right to form A'B'C'."""
+    W, H = 240, 130
+    A = (35, 70); B = (25, 110); C = (90, 100)
+    dx, dy = 95, -55
+    Ap = (A[0]+dx, A[1]+dy); Bp = (B[0]+dx, B[1]+dy); Cp = (C[0]+dx, C[1]+dy)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*Ap, *Bp), segment(*Bp, *Cp), segment(*Ap, *Cp),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "below-left"),
+        point(*C, "C", "right"),
+        point(*Ap, "A'", "above"),
+        point(*Bp, "B'", "below-left"),
+        point(*Cp, "C'", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_19_2_rotation() -> str:
+    """Triangle ABC rotated by angle θ about center O to form A'B'C'."""
+    W, H = 260, 160
+    O = (220, 130)
+    # ABC near lower-left
+    A = (60, 75); B = (40, 115); C = (105, 100)
+    th = _m.radians(50)
+    def rot(p):
+        x, y = p[0]-O[0], p[1]-O[1]
+        nx = x*_m.cos(th) - y*_m.sin(th)
+        ny = x*_m.sin(th) + y*_m.cos(th)
+        return (O[0]+nx, O[1]+ny)
+    Ap, Bp, Cp = rot(A), rot(B), rot(C)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*Ap, *Bp), segment(*Bp, *Cp), segment(*Ap, *Cp),
+        _dashed(*O, *A), _dashed(*O, *Ap),
+        text(O[0]-25, O[1]-3, "θ", italic=True, size=11),
+        point(*A, "A", "left"),
+        point(*B, "B", "below-left"),
+        point(*C, "C", "below"),
+        point(*Ap, "A'", "above"),
+        point(*Bp, "B'", "left"),
+        point(*Cp, "C'", "right"),
+        point(*O, "O", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_19_3_reflection_line() -> str:
+    """Pentagon ABCDE reflected across vertical line ℓ to form A'B'C'D'E'."""
+    W, H = 320, 150
+    # Mirror line at x = cx
+    cx = 160
+    body = [_dashed(cx, 10, cx, 140)]
+    body.append(text(cx + 4, 144, "ℓ", italic=True, size=11, anchor="start"))
+    # Pentagon ABCDE on the left
+    pts_L = [
+        ('A', (40, 35)),
+        ('E', (75, 25)),
+        ('D', (115, 60)),
+        ('C', (90, 100)),
+        ('B', (45, 90)),
+    ]
+    # Reflected pentagon (mirror x across cx)
+    pts_R = [(name+"'", (2*cx - p[0], p[1])) for name, p in pts_L]
+    for poly in (pts_L, pts_R):
+        for i in range(len(poly)):
+            p1 = poly[i][1]; p2 = poly[(i+1) % len(poly)][1]
+            body.append(segment(*p1, *p2))
+    for name, p in pts_L:
+        pos = "above" if name in ('A','E') else "below" if name in ('B','C') else "right"
+        body.append(point(*p, name, pos))
+    for name, p in pts_R:
+        pos = "above" if name in ("A'","E'") else "below" if name in ("B'","C'") else "left"
+        body.append(point(*p, name, pos))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_19_4_reflection_point() -> str:
+    """Pentagon ABCDE reflected through center point O to form A'B'C'D'E'
+    (180° rotation)."""
+    W, H = 320, 130
+    O = (160, 65)
+    pts_L = [
+        ('A', (40, 30)),
+        ('E', (75, 22)),
+        ('D', (115, 50)),
+        ('C', (90, 95)),
+        ('B', (45, 85)),
+    ]
+    # Reflect through O: (2*Ox - x, 2*Oy - y)
+    pts_R = [(name+"'", (2*O[0] - p[0], 2*O[1] - p[1])) for name, p in pts_L]
+    body = [point(*O, "O", "above", dot=True, italic=False)]
+    for poly in (pts_L, pts_R):
+        for i in range(len(poly)):
+            p1 = poly[i][1]; p2 = poly[(i+1) % len(poly)][1]
+            body.append(segment(*p1, *p2))
+    for name, p in pts_L:
+        pos = "above" if name in ('A','E') else "below" if name in ('B','C') else "right"
+        body.append(point(*p, name, pos))
+    for name, p in pts_R:
+        pos = "below" if name in ("A'","E'") else "above" if name in ("B'","C'") else "left"
+        body.append(point(*p, name, pos))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_19_5_distortion() -> str:
+    """Isosceles triangle ABC with apex distorted vertically into C', C''."""
+    W, H = 200, 170
+    A = (30, 145); B = (170, 145)
+    Cs = [
+        ("C''", 100, 25),
+        ("C",   100, 60),
+        ("C'",  100, 95),
+    ]
+    body = []
+    for name, x, y in Cs:
+        body.append(segment(*A, x, y))
+        body.append(segment(*B, x, y))
+        body.append(point(x, y, name, "above" if name == "C''" else "right" if name == "C'" else "above"))
+    body.append(segment(*A, *B))
+    body.append(point(*A, "A", "below"))
+    body.append(point(*B, "B", "below"))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_19_6_dilation() -> str:
+    """Quadrilateral ABCD dilated with center O and a positive factor giving
+    A'B'C'D' (larger version) on the other side of O."""
+    W, H = 280, 200
+    O = (40, 110)
+    A = (110, 50); B = (150, 70); C = (130, 110); D = (90, 95)
+    k = 1.7
+    def dil(p):
+        return (O[0] + (p[0]-O[0])*k, O[1] + (p[1]-O[1])*k)
+    Ap, Bp, Cp, Dp = dil(A), dil(B), dil(C), dil(D)
+    body = [
+        # Original quadrilateral (small, solid)
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        # Dilated quadrilateral (larger, solid)
+        segment(*Ap, *Bp), segment(*Bp, *Cp), segment(*Cp, *Dp), segment(*Dp, *Ap),
+        # Rays from O through each vertex (dashed)
+        _dashed(*O, *Ap), _dashed(*O, *Bp), _dashed(*O, *Cp), _dashed(*O, *Dp),
+        point(*O, "O", "left"),
+        point(*A, "A", "above"),
+        point(*B, "B", "above-right"),
+        point(*C, "C", "right"),
+        point(*D, "D", "below-left"),
+        point(*Ap, "A'", "above"),
+        point(*Bp, "B'", "above-right"),
+        point(*Cp, "C'", "right"),
+        point(*Dp, "D'", "left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+# ─────────────────────────────────────────────
+# Chapter 18 — Three Dimensional Geometry
+# Pseudo-3D line drawings via simple oblique projection.
+# ─────────────────────────────────────────────
+
+def _dashed(x1, y1, x2, y2):
+    """Helper: dashed line segment for hidden edges."""
+    return (f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+            f'stroke="#1d1d1f" stroke-width="1.2" stroke-dasharray="4,3" fill="none"/>')
+
+
+def fig_18_1_sphere_plane_intersection() -> str:
+    """Sphere (drawn as ellipse) with center O and a plane intersecting it
+    in a circle of diameter AB; segment OB inside the sphere."""
+    W, H = 220, 160
+    cx, cy = 110, 80
+    R = 60
+    # Outer sphere outline
+    body = [circle(cx, cy, R)]
+    # Inner ellipse for the equator-style cross-section (the "great circle")
+    body.append(f'<ellipse cx="{cx}" cy="{cy}" rx="{R}" ry="20" {STROKE}/>')
+    # The plane intersection — small ellipse near the top
+    Bx, By = cx - 35, cy - 30
+    Ax, Ay = cx + 35, cy - 30
+    body.append(f'<ellipse cx="{cx}" cy="{cy-30}" rx="35" ry="9" {STROKE}/>')
+    # Segments OB, OA
+    O = (cx, cy)
+    body.append(segment(*O, Bx, By))
+    body.append(segment(*O, Ax, Ay))
+    body.append(point(Bx, By, "B", "above-left"))
+    body.append(point(Ax, Ay, "A", "above-right"))
+    body.append(point(*O, "O", "below-left"))
+    return svg(W, H, "\n".join(body))
+
+
+def _cube_vertices(x, y, s, depth):
+    """Helper: front-face top-left at (x,y), side s, oblique depth offset.
+    Returns the 8 vertices: front (0..3), back (4..7) in TL,TR,BR,BL order."""
+    F = [(x, y), (x+s, y), (x+s, y+s), (x, y+s)]              # front face
+    B = [(p[0]+depth, p[1]-depth) for p in F]                 # back, shifted up-right
+    return F + B
+
+
+def fig_18_2_cube() -> str:
+    """A cube drawn in oblique 3D perspective."""
+    W, H = 180, 160
+    V = _cube_vertices(30, 60, 80, 30)
+    F0,F1,F2,F3, B0,B1,B2,B3 = V
+    # Visible (solid) edges
+    solid = [
+        segment(*F0, *F1), segment(*F1, *F2), segment(*F2, *F3), segment(*F3, *F0),
+        segment(*F1, *B1), segment(*F2, *B2),  # right side
+        segment(*B1, *B2),
+        segment(*F0, *B0),
+        segment(*B0, *B1),
+    ]
+    # Hidden edges (dashed)
+    hidden = [
+        _dashed(*F3, *B3),
+        _dashed(*B3, *B0),
+        _dashed(*B3, *B2),
+    ]
+    return svg(W, H, "\n".join(solid + hidden))
+
+
+def fig_18_3_cube_diagonal() -> str:
+    """Cube ABCDEFGH with face diagonal AC (on bottom face) and space diagonal EC."""
+    W, H = 220, 200
+    # Layout: front face = ABCD (top-left, top-right, bottom-right, bottom-left)
+    # back face = EFGH same convention but offset
+    s = 90; dpx, dpy = 35, -32
+    A_, B_ = (40, 40), (40+s, 40)
+    D_, C_ = (40, 40+s), (40+s, 40+s)
+    E_, F_ = (A_[0]+dpx, A_[1]+dpy), (B_[0]+dpx, B_[1]+dpy)
+    H_, G_ = (D_[0]+dpx, D_[1]+dpy), (C_[0]+dpx, C_[1]+dpy)
+    body = [
+        # Front face ABCD
+        segment(*A_, *B_), segment(*B_, *C_), segment(*C_, *D_), segment(*D_, *A_),
+        # Right side, top
+        segment(*B_, *F_), segment(*F_, *G_), segment(*G_, *C_),
+        # Top edge from A to E
+        segment(*A_, *E_), segment(*E_, *F_),
+        # Hidden edges
+        _dashed(*D_, *H_), _dashed(*H_, *E_), _dashed(*H_, *G_),
+        # Diagonals: AC (face) and EC (space)
+        segment(*A_, *C_),
+        segment(*E_, *C_),
+        # Right angle marks at C and A
+        right_angle_mark(C_[0], C_[1], B_, D_, size=6),
+        point(*A_, "A", "above-left"),
+        point(*B_, "B", "above"),
+        point(*C_, "C", "below"),
+        point(*D_, "D", "below-left"),
+        point(*E_, "E", "above-left"),
+        point(*F_, "F", "above-right"),
+        point(*G_, "G", "right"),
+        point(*H_, "H", "above-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_4_cylinder_unroll() -> str:
+    """Cylinder unrolled into a rectangle of height h and width 2πr."""
+    W, H = 320, 150
+    # Cylinder on the left
+    body = []
+    cx, cy_top = 60, 30
+    cy_bot = 110
+    rx_ell, ry_ell = 30, 8
+    # Top ellipse
+    body.append(f'<ellipse cx="{cx}" cy="{cy_top}" rx="{rx_ell}" ry="{ry_ell}" {STROKE}/>')
+    # Vertical sides
+    body.append(segment(cx - rx_ell, cy_top, cx - rx_ell, cy_bot))
+    body.append(segment(cx + rx_ell, cy_top, cx + rx_ell, cy_bot))
+    # Bottom ellipse — solid front, dashed back
+    body.append(f'<path d="M {cx - rx_ell} {cy_bot} A {rx_ell} {ry_ell} 0 0 0 {cx + rx_ell} {cy_bot}" {STROKE}/>')
+    body.append(_dashed(cx - rx_ell, cy_bot, cx + rx_ell, cy_bot))
+    # Vertical dashed line through center showing height
+    body.append(_dashed(cx, cy_top, cx, cy_bot))
+    # A and B labels at top and bottom
+    body.append(text(cx, cy_top - 8, "A", italic=True, size=11))
+    body.append(text(cx, cy_bot + 16, "B", italic=True, size=11))
+    # Rectangle on the right
+    rx, ry = 160, 30
+    rw, rh = 130, 80
+    body.append(f'<rect x="{rx}" y="{ry}" width="{rw}" height="{rh}" {STROKE}/>')
+    # right-angle marks on corners
+    body.append(right_angle_mark(rx, ry+rh, (rx+10, ry+rh), (rx, ry+rh-10), size=6))
+    body.append(text(rx-8, ry-4, "A", italic=True, size=11, anchor="end"))
+    body.append(text(rx-8, ry+rh+12, "B", italic=True, size=11, anchor="end"))
+    body.append(text(rx + rw/2, ry - 6, "2πr", italic=True, size=11))
+    body.append(text(rx + rw + 4, ry + rh/2 + 4, "h", italic=True, size=11, anchor="start"))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_5_pyramid() -> str:
+    """Square pyramid in 3D perspective — apex above a square base."""
+    W, H = 180, 170
+    # Base in oblique projection
+    A = (40, 130); B = (130, 130); C = (155, 100); D = (65, 100)
+    apex = (95, 25)
+    body = [
+        segment(*A, *B), segment(*B, *C),
+        segment(*A, *apex), segment(*B, *apex), segment(*C, *apex),
+        segment(*D, *apex),
+        # Hidden edges
+        _dashed(*A, *D), _dashed(*D, *C),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_6_cone() -> str:
+    """Right circular cone — apex with circular base, altitude h, slant height ℓ."""
+    W, H = 180, 180
+    apex = (90, 25)
+    cx, cy = 90, 140
+    rx, ry = 55, 14
+    # Side outlines from apex tangent to ellipse
+    LEFT  = (cx - rx, cy)
+    RIGHT = (cx + rx, cy)
+    body = [
+        segment(*apex, *LEFT),
+        segment(*apex, *RIGHT),
+        # Front half of base ellipse (solid)
+        f'<path d="M {LEFT[0]} {LEFT[1]} A {rx} {ry} 0 0 0 {RIGHT[0]} {RIGHT[1]}" {STROKE}/>',
+        # Back half (dashed)
+        _dashed(LEFT[0], LEFT[1], RIGHT[0], RIGHT[1]),
+        f'<path d="M {LEFT[0]} {LEFT[1]} A {rx} {ry} 0 0 1 {RIGHT[0]} {RIGHT[1]}" stroke="#1d1d1f" stroke-width="1.2" stroke-dasharray="4,3" fill="none"/>',
+        # Altitude (dashed) and radius
+        _dashed(*apex, cx, cy),
+        segment(cx, cy, RIGHT[0], RIGHT[1]),
+        # Labels
+        text(cx + 4, (apex[1]+cy)/2, "h", italic=True, size=11, anchor="start"),
+        text((cx + RIGHT[0])/2, cy - 4, "r", italic=True, size=11),
+        text((apex[0]+RIGHT[0])/2 + 6, (apex[1]+RIGHT[1])/2, "ℓ", italic=True, size=11, anchor="start"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_7_cone_unroll() -> str:
+    """Cone unrolled into a sector of radius ℓ with arc length 2πr."""
+    W, H = 360, 170
+    # Cone on the left (re-use simplified rendering)
+    apex_L = (70, 30)
+    cx_L, cy_L = 70, 130
+    rx_L, ry_L = 35, 10
+    body = [
+        segment(*apex_L, cx_L - rx_L, cy_L),
+        segment(*apex_L, cx_L + rx_L, cy_L),
+        f'<ellipse cx="{cx_L}" cy="{cy_L}" rx="{rx_L}" ry="{ry_L}" {STROKE}/>',
+        _dashed(*apex_L, cx_L, cy_L),
+        text(cx_L + 4, (apex_L[1]+cy_L)/2, "ℓ", italic=True, size=11, anchor="start"),
+        text(apex_L[0] - 8, apex_L[1] - 2, "A", italic=True, size=11, anchor="end"),
+        text(cx_L - rx_L - 6, cy_L + 4, "B", italic=True, size=11, anchor="end"),
+    ]
+    # Sector on the right — apex at A_R, arc swept from B to B'
+    Ax, Ay = 220, 30
+    radius = 110
+    # Arc from angle 60° (CCW) to 130° measured from +x axis (drawing downward)
+    # Use a 100° sweep
+    a0 = _m.radians(60); a1 = _m.radians(120)
+    Bx,  By  = Ax + radius*_m.cos(a0), Ay + radius*_m.sin(a0)
+    Bpx, Bpy = Ax + radius*_m.cos(a1), Ay + radius*_m.sin(a1)
+    body += [
+        segment(Ax, Ay, Bx, By),
+        segment(Ax, Ay, Bpx, Bpy),
+        f'<path d="M {Bx} {By} A {radius} {radius} 0 0 1 {Bpx} {Bpy}" {STROKE}/>',
+        text(Ax, Ay - 6, "A", italic=True, size=11),
+        text(Bx + 6, By + 6, "B", italic=True, size=11, anchor="start"),
+        text(Bpx - 8, Bpy + 6, "B'", italic=True, size=11, anchor="end"),
+        text((Ax+Bx)/2 + 6, (Ay+By)/2, "ℓ", italic=True, size=11, anchor="start"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_8_five_platonic_solids() -> str:
+    """The five Platonic solids: tetrahedron, cube, octahedron, dodecahedron,
+    icosahedron — line-art outlines arranged in a row."""
+    W, H = 660, 160
+    body = []
+
+    # 1. Tetrahedron
+    A = (50, 30); Bp = (20, 120); Cp = (90, 120); D_ = (60, 110)
+    body += [segment(*A, *Bp), segment(*A, *Cp), segment(*Bp, *Cp),
+             segment(*A, *D_), _dashed(*Bp, *D_), _dashed(*D_, *Cp)]
+
+    # 2. Cube
+    s = 70; ox, oy = 130, 50; dpx, dpy = 22, -22
+    F = [(ox, oy), (ox+s, oy), (ox+s, oy+s), (ox, oy+s)]
+    Bk = [(p[0]+dpx, p[1]+dpy) for p in F]
+    body += [segment(*F[0], *F[1]), segment(*F[1], *F[2]), segment(*F[2], *F[3]),
+             segment(*F[3], *F[0]),
+             segment(*F[0], *Bk[0]), segment(*F[1], *Bk[1]), segment(*F[2], *Bk[2]),
+             segment(*Bk[0], *Bk[1]), segment(*Bk[1], *Bk[2]),
+             _dashed(*F[3], *Bk[3]), _dashed(*Bk[3], *Bk[0]), _dashed(*Bk[3], *Bk[2])]
+
+    # 3. Octahedron
+    cx_o, cy_o = 290, 75
+    top = (cx_o, cy_o - 50); bot = (cx_o, cy_o + 50)
+    L = (cx_o - 45, cy_o); R = (cx_o + 45, cy_o)
+    F_o = (cx_o - 5, cy_o + 8); Bk_o = (cx_o + 5, cy_o - 8)
+    body += [segment(*top, *L), segment(*top, *R), segment(*top, *F_o),
+             segment(*bot, *L), segment(*bot, *R), segment(*bot, *F_o),
+             segment(*L, *F_o), segment(*R, *F_o),
+             _dashed(*top, *Bk_o), _dashed(*bot, *Bk_o),
+             _dashed(*L, *Bk_o), _dashed(*R, *Bk_o)]
+
+    # 4. Dodecahedron — approximate as two stacked pentagons
+    cx_d, cy_d = 420, 75
+    def pentagon(c, r, rot=0):
+        return [(c[0] + r*_m.cos(_m.radians(rot + 72*i - 90)),
+                 c[1] + r*_m.sin(_m.radians(rot + 72*i - 90))) for i in range(5)]
+    front = pentagon((cx_d, cy_d + 5), 38, rot=0)
+    back  = pentagon((cx_d, cy_d - 5), 38, rot=36)
+    for i in range(5):
+        body.append(segment(*front[i], *front[(i+1) % 5]))
+    for i in range(5):
+        body.append(_dashed(*back[i], *back[(i+1) % 5]))
+    for f, b in zip(front, back):
+        body.append(segment(*f, *b))
+
+    # 5. Icosahedron — approximate as 6 vertices arranged with cross edges
+    cx_i, cy_i = 555, 75
+    R_i = 50
+    angles = [90, 162, 234, 306, 18]
+    pts = [(cx_i + R_i*_m.cos(_m.radians(a)),
+            cy_i + R_i*_m.sin(_m.radians(a))) for a in angles]
+    # Add top and bottom
+    top_i = (cx_i, cy_i - R_i*1.1)
+    bot_i = (cx_i, cy_i + R_i*1.1)
+    for i in range(5):
+        body.append(segment(*pts[i], *pts[(i+1) % 5]))
+        body.append(segment(*top_i, *pts[i]))
+        body.append(segment(*bot_i, *pts[i]))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_9_tetrahedron() -> str:
+    """Regular tetrahedron ABCD with apex B above the equilateral base ACD,
+    altitude from B to centroid O of base."""
+    W, H = 200, 180
+    # Base triangle ACD with O the centroid
+    A = (160, 130); C = (40, 130); D = (110, 90)
+    O = ((A[0]+C[0]+D[0])/3, (A[1]+C[1]+D[1])/3)
+    B_ = (O[0], 25)   # apex directly above O
+    body = [
+        segment(*A, *C), segment(*C, *D), segment(*A, *D),
+        segment(*B_, *A), segment(*B_, *C), segment(*B_, *D),
+        # Altitude (dashed) and base segment from O to one vertex
+        _dashed(*B_, *O), segment(*O, *D),
+        right_angle_mark(O[0], O[1], B_, D, size=6),
+        point(*A, "A", "right"),
+        point(*B_, "B", "above"),
+        point(*C, "C", "left"),
+        point(*D, "D", "below-right"),
+        point(*O, "O", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_18_10_octahedron() -> str:
+    """Regular octahedron split into two square pyramids sharing base ABCD."""
+    W, H = 220, 180
+    cx, cy = 110, 90
+    # Square base ABCD in oblique view
+    A = (cx + 55, cy);   C = (cx - 55, cy)
+    B_ = (cx, cy + 35); D_ = (cx, cy - 35)
+    E  = (cx, cy - 70)
+    F  = (cx, cy + 70)
+    body = [
+        segment(*E, *A), segment(*E, *B_), segment(*E, *C), segment(*E, *D_),
+        segment(*F, *A), segment(*F, *B_), segment(*F, *C),
+        _dashed(*F, *D_),
+        # Base edges
+        segment(*A, *B_), segment(*B_, *C),
+        _dashed(*C, *D_), _dashed(*D_, *A),
+        # OA segment (radius from center to A)
+        segment(cx, cy, *A),
+        point(*E, "E", "above"),
+        point(*A, "A", "right"),
+        point(*B_, "B", "below"),
+        point(*C, "C", "left"),
+        point(*D_, "D", "above"),
+        point(*F, "F", "below"),
+        point(cx, cy, "O", "below-left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_16_7_circle_plot() -> str:
+    """Circle of radius 3 centered at (-1, 2) on coordinate plane."""
+    W, H = 240, 180
+    cx, cy = 120, 90
+    parts = _axes(cx, cy, 80)
+    s = 14
+    # Center at (-1, 2)
+    Cx = cx + (-1)*s
+    Cy = cy - 2*s
+    r = 3 * s
+    parts.append(circle(Cx, Cy, r))
+    parts.append(point(Cx, Cy, label=None))
+    # Mark the four cardinal points on the circle
+    for dx, dy in [(r, 0), (-r, 0), (0, r), (0, -r)]:
+        parts.append(point(Cx + dx, Cy + dy, label=None, dot=True))
+    return svg(W, H, "\n".join(parts))
+
+
 FIGURES = {
     "fig-3-1-coordinate-plane":           fig_3_1_coordinate_plane,
     "fig-9-1-circle-tangent-secant":      fig_9_1_circle_tangent_secant,
@@ -2793,6 +3891,45 @@ FIGURES = {
     "fig-14-12-problem-249-pqr-bisector":         fig_14_12_problem_249_pqr_bisector,
     "fig-14-13-problem-250-parallelograms":       fig_14_13_problem_250_parallelograms,
     "fig-14-14-problem-251-semicircles":          fig_14_14_problem_251_semicircles,
+    "fig-15-1-triangle-midpoints":               fig_15_1_triangle_midpoints,
+    "fig-15-2-trapezoid-diagonals":              fig_15_2_trapezoid_diagonals,
+    "fig-15-3-medians-six-regions":              fig_15_3_medians_six_regions,
+    "fig-15-4-example-15-5":                     fig_15_4_example_15_5,
+    "fig-15-5-example-15-7":                     fig_15_5_example_15_7,
+    "fig-15-6-annulus":                          fig_15_6_annulus,
+    "fig-15-7-octagon-from-square":              fig_15_7_octagon_from_square,
+    "fig-15-8-isosceles-triangle-with-arcs":     fig_15_8_isosceles_triangle_with_arcs,
+    "fig-15-9-square-with-leaves":               fig_15_9_square_with_leaves,
+    "fig-15-10-four-overlapping-circles":        fig_15_10_four_overlapping_circles,
+    "fig-16-1-cartesian-plane":                  fig_16_1_cartesian_plane,
+    "fig-16-2-polar-grid":                       fig_16_2_polar_grid,
+    "fig-16-3-line-with-rise-run":               fig_16_3_line_with_rise_run,
+    "fig-16-4-perpendicular-lines":              fig_16_4_perpendicular_lines,
+    "fig-16-5-line-plot":                        fig_16_5_line_plot,
+    "fig-16-6-distance-formula-triangle":        fig_16_6_distance_formula_triangle,
+    "fig-16-7-circle-plot":                      fig_16_7_circle_plot,
+    "fig-17-1-two-tangents":                     fig_17_1_two_tangents,
+    "fig-17-2-tangent-and-secant":               fig_17_2_tangent_and_secant,
+    "fig-17-3-two-secants":                      fig_17_3_two_secants,
+    "fig-17-4-two-chords":                       fig_17_4_two_chords,
+    "fig-17-5-power-proof-outside":              fig_17_5_power_proof_outside,
+    "fig-17-6-power-proof-inside":               fig_17_6_power_proof_inside,
+    "fig-18-1-sphere-plane-intersection":        fig_18_1_sphere_plane_intersection,
+    "fig-18-2-cube":                             fig_18_2_cube,
+    "fig-18-3-cube-diagonal":                    fig_18_3_cube_diagonal,
+    "fig-18-4-cylinder-unroll":                  fig_18_4_cylinder_unroll,
+    "fig-18-5-pyramid":                          fig_18_5_pyramid,
+    "fig-18-6-cone":                             fig_18_6_cone,
+    "fig-18-7-cone-unroll":                      fig_18_7_cone_unroll,
+    "fig-18-8-five-platonic-solids":             fig_18_8_five_platonic_solids,
+    "fig-18-9-tetrahedron":                      fig_18_9_tetrahedron,
+    "fig-18-10-octahedron":                      fig_18_10_octahedron,
+    "fig-19-1-translation":                      fig_19_1_translation,
+    "fig-19-2-rotation":                         fig_19_2_rotation,
+    "fig-19-3-reflection-line":                  fig_19_3_reflection_line,
+    "fig-19-4-reflection-point":                 fig_19_4_reflection_point,
+    "fig-19-5-distortion":                       fig_19_5_distortion,
+    "fig-19-6-dilation":                         fig_19_6_dilation,
 }
 
 
