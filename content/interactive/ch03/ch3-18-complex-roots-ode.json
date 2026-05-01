@@ -1,0 +1,91 @@
+{
+  "id": "ch3-18-complex-roots-ode",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.5",
+  "title": "Complex Roots ODE",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "855-869"
+  },
+  "mechanism": {
+    "primary": "ordinary-differential-equations",
+    "structure": "characteristic-equation-with-complex-conjugate-roots",
+    "insight": "complex-roots-give-oscillating-decay-via-eulers-formula",
+    "variantAxes": ["ode_coefficients"]
+  },
+  "setup": {
+    "narrative": "Solve the second-order homogeneous ODE y'' + y' + y = 0.",
+    "rules": [
+      "Constant coefficients: a = 1, b = 1, c = 1.",
+      "The characteristic equation is a*r^2 + b*r + c = 0.",
+      "For complex roots r = alpha +/- i * beta, the general solution is e^(alpha*x) * (c1*cos(beta*x) + c2*sin(beta*x))."
+    ],
+    "question": "What is the general solution y(x)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the characteristic equation r^2 + r + 1 = 0.",
+    "Recognize the discriminant b^2 - 4ac < 0 as the complex-roots case.",
+    "Apply Euler's formula to convert e^((alpha+i*beta)*x) into oscillating real solutions."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the characteristic equation",
+      "prompt": "y'' + y' + y = 0 has characteristic equation:",
+      "options": [
+        { "id": "a", "text": "r^2 + r + 1 = 0",  "correct": true },
+        { "id": "b", "text": "r^2 = 0",           "correct": false },
+        { "id": "c", "text": "r + 1 = 0",          "correct": false }
+      ],
+      "explanation": "Substitute y = e^(rx): y' = r * e^(rx), y'' = r^2 * e^(rx). The ODE becomes (r^2 + r + 1) * e^(rx) = 0. Since e^(rx) is never zero, r^2 + r + 1 = 0.",
+      "learnMoreTechnique": "ordinary-differential-equations"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute the discriminant",
+      "prompt": "Discriminant of r^2 + r + 1 = 0: b^2 - 4ac = 1 - 4 = ?",
+      "answerType": "numeric",
+      "answer": -3,
+      "explanation": "b^2 - 4ac = 1 - 4 = -3. Negative -> complex conjugate roots."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Find the complex roots",
+      "prompt": "Apply the quadratic formula: r = (-b +/- sqrt(b^2 - 4ac)) / (2a). What are the roots?",
+      "options": [
+        { "id": "a", "text": "r = (-1 +/- sqrt(-3)) / 2 = -1/2 +/- (sqrt(3)/2) * i.  So alpha = -1/2 and beta = sqrt(3)/2.", "correct": true },
+        { "id": "b", "text": "r = +/- 1",                                                                                       "correct": false },
+        { "id": "c", "text": "r = -1 (double root)",                                                                              "correct": false }
+      ],
+      "explanation": "sqrt(-3) = i * sqrt(3). So r = -1/2 +/- (sqrt(3)/2) * i. Read alpha = -1/2 (real part) and beta = sqrt(3)/2 (imaginary magnitude)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit the general solution",
+      "prompt": "For complex roots r = alpha +/- i*beta, the general solution is y = e^(alpha*x) * (c1*cos(beta*x) + c2*sin(beta*x)). Plug in alpha = -1/2 and beta = sqrt(3)/2.",
+      "options": [
+        { "id": "a", "text": "y = e^(-x/2) * (c1*cos(sqrt(3)*x/2) + c2*sin(sqrt(3)*x/2))", "correct": true },
+        { "id": "b", "text": "y = c1 + c2*x",                                                  "correct": false },
+        { "id": "c", "text": "y = e^(-x) + e^x",                                                "correct": false }
+      ],
+      "explanation": "The decaying envelope e^(-x/2) and oscillation at frequency sqrt(3)/2. Two free constants for a second-order ODE."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is e^(alpha*x) * cos(beta*x) a real solution? (Hint: Re of e^((alpha + i*beta)*x).)",
+        "Solve y'' - 4y = 0 (real distinct roots case).",
+        "Solve y'' + 2y' + y = 0 (real repeated roots case)."
+      ]
+    }
+  ]
+}

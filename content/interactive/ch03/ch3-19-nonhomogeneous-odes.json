@@ -1,0 +1,106 @@
+{
+  "id": "ch3-19-nonhomogeneous-odes",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.5",
+  "title": "Nonhomogeneous ODEs",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "891-922"
+  },
+  "mechanism": {
+    "primary": "ordinary-differential-equations",
+    "structure": "general-equals-homogeneous-plus-particular",
+    "insight": "for-polynomial-rhs-guess-a-polynomial-of-the-same-degree-as-the-particular-solution",
+    "variantAxes": ["rhs_function"]
+  },
+  "setup": {
+    "narrative": "Solve two nonhomogeneous ODEs that share the same homogeneous part: (i) y'' + y' + y = 1 and (ii) y'' + y' + y = x.",
+    "rules": [
+      "The general solution is y = y_h + y_p, where y_h is the homogeneous solution and y_p is any particular solution.",
+      "The homogeneous part y'' + y' + y = 0 has the solution we derived in the previous problem: y_h = e^(-x/2) * (c1*cos(sqrt(3)*x/2) + c2*sin(sqrt(3)*x/2)).",
+      "When the right-hand side is a polynomial, try a polynomial of the SAME DEGREE for y_p."
+    ],
+    "question": "Find y(x) for both right-hand sides."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that any particular solution will do (combined with the full homogeneous family).",
+    "Guess y_p as a polynomial of the same degree as the right-hand side.",
+    "Match coefficients to determine the polynomial's coefficients."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why the structure 'y_h + y_p' works",
+      "prompt": "Why is the general solution y = y_h + y_p?",
+      "options": [
+        { "id": "a", "text": "Because the operator L[y] = y'' + y' + y is linear: L[y_h] = 0 and L[y_p] = d, so L[y_h + y_p] = 0 + d = d. Also, ANY two solutions differ by a homogeneous solution, so y_h covers ALL the freedom.", "correct": true },
+        { "id": "b", "text": "It's a coincidence.",                                                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "Only when the right-hand side is constant.",                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Linearity: the solution space of the nonhomogeneous equation is an affine space -- pick any one point (y_p), then translate by the homogeneous space (y_h).",
+      "learnMoreTechnique": "ordinary-differential-equations"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Find y_p for y'' + y' + y = 1",
+      "prompt": "Try y_p = constant. What constant works?",
+      "options": [
+        { "id": "a", "text": "y_p = 1.  Verify: y_p'' + y_p' + y_p = 0 + 0 + 1 = 1.  ✓", "correct": true },
+        { "id": "b", "text": "y_p = 0",                                                     "correct": false },
+        { "id": "c", "text": "y_p = x",                                                     "correct": false }
+      ],
+      "explanation": "Constant guess: y_p = c. Then y_p' = y_p'' = 0, so y_p'' + y_p' + y_p = c. Setting c = 1 makes the equation hold."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Find y_p for y'' + y' + y = x",
+      "prompt": "The right side is degree 1. Try y_p = m*x + n. Compute and match coefficients.",
+      "options": [
+        { "id": "a", "text": "y_p'' + y_p' + y_p = 0 + m + (mx + n) = mx + (m + n) = x.  Match: m = 1 and m + n = 0, so n = -1.  y_p = x - 1.", "correct": true },
+        { "id": "b", "text": "y_p = x^2",                                                                                                          "correct": false },
+        { "id": "c", "text": "y_p = x",                                                                                                            "correct": false }
+      ],
+      "explanation": "y_p = mx + n. y_p' = m. y_p'' = 0. Sum = mx + (m + n). Match coefficient-by-coefficient with x: x term gives m = 1; constant term gives m + n = 0, so n = -1. Particular solution: y_p = x - 1."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Verify y_p = x - 1",
+      "prompt": "Check by plugging y_p = x - 1 into y'' + y' + y.",
+      "options": [
+        { "id": "a", "text": "y_p'' + y_p' + y_p = 0 + 1 + (x - 1) = x.  ✓", "correct": true },
+        { "id": "b", "text": "y_p'' + y_p' + y_p = 1",                       "correct": false },
+        { "id": "c", "text": "y_p'' + y_p' + y_p = x + 1",                    "correct": false }
+      ],
+      "explanation": "y_p = x - 1, y_p' = 1, y_p'' = 0. Sum: 0 + 1 + (x - 1) = x. ✓"
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit both general solutions",
+      "prompt": "Combine the homogeneous solution y_h = e^(-x/2) * (c1*cos(sqrt(3)*x/2) + c2*sin(sqrt(3)*x/2)) with each y_p.",
+      "options": [
+        { "id": "a", "text": "(i) y = y_h + 1.  (ii) y = y_h + (x - 1).",  "correct": true },
+        { "id": "b", "text": "(i) y = 1.  (ii) y = x - 1.",                  "correct": false },
+        { "id": "c", "text": "(i) y = y_h.  (ii) y = y_h.",                   "correct": false }
+      ],
+      "explanation": "(i) y = e^(-x/2) * (c1*cos(sqrt(3)*x/2) + c2*sin(sqrt(3)*x/2)) + 1. (ii) y = e^(-x/2) * (c1*cos(sqrt(3)*x/2) + c2*sin(sqrt(3)*x/2)) + (x - 1). Two free constants in each (from the second-order homogeneous part)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Solve y'' + y' + y = e^x. (Try y_p = A * e^x and find A.)",
+        "What if the right-hand side were a HOMOGENEOUS solution, e.g., y'' + y' + y = e^(-x/2)*cos(sqrt(3)*x/2)? The standard guess would yield 0 = nonzero. How do you handle this RESONANCE?",
+        "Why is the principle 'general = homogeneous + particular' specific to LINEAR equations?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "ordinary-differential-equations",
+  "kind": "technique",
+  "name": "Ordinary Differential Equations",
+  "tagline": "Four patterns cover most quant interview ODEs: separable, change-of-variable, first-order linear (integrating factor), and second-order constant-coefficient (characteristic equation).",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.5",
+    "title": "Ordinary Differential Equations",
+    "exemplarProblemId": "ch3-15-separable-ode"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Most ODEs you'll see in a quant interview reduce to one of four canonical patterns. (1) Separable: dy/dx = g(x) * h(y) -- separate the variables and integrate. (2) Change-of-variable: not separable in the original variables, but a substitution makes it separable. (3) First-order linear: dy/dx + P(x) y = Q(x) -- multiply by an integrating factor I(x) = e^(integral P dx). (4) Second-order homogeneous with constant coefficients: solve the characteristic equation a*r^2 + b*r + c = 0 to get the form of the general solution."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "For nonhomogeneous a*y'' + b*y' + c*y = d(x), the general solution is y_h + y_p where y_h is the homogeneous solution and y_p is any particular solution. When d(x) is a polynomial, try y_p as a polynomial of the same degree and match coefficients."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "First, identify the pattern. Separable? Easy: integrate both sides. Linear? Easy: integrating factor. Homogeneous constant-coefficient? Easy: characteristic equation. Otherwise: try a substitution. The hard step is RECOGNIZING which pattern applies."
+    }
+  ],
+  "whenToUse": [
+    "Modeling growth, decay, and rates of change.",
+    "Pricing problems where a variable evolves continuously (e.g., the Black-Scholes PDE reduces to ODEs in some variables).",
+    "Probability problems that admit a continuous-time formulation.",
+    "Anywhere a function and its rate of change satisfy a relation."
+  ],
+  "recipe": [
+    "Try to recognize the pattern: separable / linear / homogeneous-constant-coefficient / nonhomogeneous.",
+    "Separable: integrate dy/h(y) = g(x) dx. Apply initial conditions.",
+    "First-order linear: compute I(x) = e^(integral P dx), multiply through, integrate (I*y)' = I*Q.",
+    "Second-order homogeneous: solve a*r^2 + b*r + c = 0. Real distinct roots give c1*e^(r1 x) + c2*e^(r2 x); real repeated give (c1 + c2*x)*e^(r x); complex give e^(alpha x) * (c1*cos(beta x) + c2*sin(beta x)).",
+    "Nonhomogeneous: add the homogeneous solution to ANY particular solution. Try a guess of the same form as d(x)."
+  ],
+  "commonPitfalls": [
+    "Forgetting the integration constant on indefinite integrals.",
+    "In separable ODEs: dividing by h(y) without checking h(y) != 0 (you may miss the constant solution where h vanishes).",
+    "In integrating-factor problems: not simplifying I(x)*P(x)*y term as (I(x)*y)' before integrating.",
+    "In characteristic-equation problems: confusing real-distinct, real-repeated, and complex cases when the discriminant is small.",
+    "When d(x) is a polynomial that resembles a homogeneous solution, the standard particular-solution guess fails; multiply by x to lift it out of the resonance."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-15-separable-ode",         "title": "Separable ODE",            "chapter": 3, "section": "3.5" },
+    { "problemId": "ch3-16-change-of-variable-ode","title": "Change of Variable",       "chapter": 3, "section": "3.5" },
+    { "problemId": "ch3-17-first-order-linear-ode","title": "First-Order Linear ODE",   "chapter": 3, "section": "3.5" },
+    { "problemId": "ch3-18-complex-roots-ode",     "title": "Complex Roots ODE",        "chapter": 3, "section": "3.5" },
+    { "problemId": "ch3-19-nonhomogeneous-odes",   "title": "Nonhomogeneous ODEs",      "chapter": 3, "section": "3.5" }
+  ],
+  "relatedTechniques": ["integration-techniques", "limits-and-derivatives"]
+}

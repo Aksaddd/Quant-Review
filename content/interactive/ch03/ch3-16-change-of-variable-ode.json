@@ -1,0 +1,105 @@
+{
+  "id": "ch3-16-change-of-variable-ode",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.5",
+  "title": "Change of Variable ODE",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "765-792"
+  },
+  "mechanism": {
+    "primary": "ordinary-differential-equations",
+    "structure": "substitute-z-equals-x-plus-y-to-make-separable",
+    "insight": "the-right-substitution-converts-a-non-separable-equation-into-a-separable-one",
+    "variantAxes": ["substitution"]
+  },
+  "setup": {
+    "narrative": "Solve the ODE y' = (x - y) / (x + y).",
+    "rules": [
+      "The ODE is NOT separable in its original form -- you can't write it as dy/h(y) = g(x) dx directly.",
+      "Hint: try the substitution z = x + y."
+    ],
+    "question": "Find an implicit form of the solution y(x)."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize when direct separation fails and a substitution is needed.",
+    "Apply the substitution z = x + y, with z' = 1 + y'.",
+    "Rearrange the substituted equation into a separable form and integrate."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why direct separation fails",
+      "prompt": "Try to separate y' = (x - y) / (x + y) into dy/h(y) = g(x) dx. What goes wrong?",
+      "options": [
+        { "id": "a", "text": "The right side mixes x and y in both numerator and denominator -- no algebraic rearrangement separates them. A substitution is needed.", "correct": true },
+        { "id": "b", "text": "It separates trivially.",                                                                                                              "correct": false },
+        { "id": "c", "text": "The ODE is undefined.",                                                                                                                "correct": false }
+      ],
+      "explanation": "(x - y) / (x + y) doesn't factor into a function-of-x times a function-of-y. We need a clever substitution.",
+      "learnMoreTechnique": "ordinary-differential-equations"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply the substitution",
+      "prompt": "Let z = x + y, so y = z - x and y' = z' - 1. Substitute into y' = (x - y)/(x + y) and simplify the right side.",
+      "options": [
+        { "id": "a", "text": "z' - 1 = (x - (z - x)) / z = (2x - z) / z, so z' = 1 + (2x - z)/z = 2x/z.", "correct": true },
+        { "id": "b", "text": "z' = z",                                                                     "correct": false },
+        { "id": "c", "text": "z' = x - y",                                                                  "correct": false }
+      ],
+      "explanation": "Substituting: x - y = x - (z - x) = 2x - z. And x + y = z. So y' = (2x - z) / z. Then z' = y' + 1 = (2x - z)/z + 1 = (2x - z + z)/z = 2x/z. Now SEPARABLE: z dz = 2x dx."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Integrate the separated form",
+      "prompt": "z dz = 2x dx. Integrate both sides.",
+      "options": [
+        { "id": "a", "text": "z^2 / 2 = x^2 + c_1, so z^2 = 2x^2 + C (where C = 2*c_1).", "correct": true },
+        { "id": "b", "text": "z = x^2",                                                     "correct": false },
+        { "id": "c", "text": "z + x = C",                                                    "correct": false }
+      ],
+      "explanation": "integral z dz = z^2/2. integral 2x dx = x^2. So z^2/2 = x^2 + c_1, equivalently z^2 = 2x^2 + C."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Substitute back and commit",
+      "prompt": "z = x + y. Replace z^2 with (x+y)^2 and simplify.",
+      "options": [
+        { "id": "a", "text": "(x + y)^2 = 2x^2 + C  =>  x^2 + 2xy + y^2 = 2x^2 + C  =>  y^2 + 2xy - x^2 = C.", "correct": true },
+        { "id": "b", "text": "y = x + sqrt(C)",                                                                  "correct": false },
+        { "id": "c", "text": "y^2 = x^2",                                                                          "correct": false }
+      ],
+      "explanation": "Expand (x+y)^2 = x^2 + 2xy + y^2. Setting equal to 2x^2 + C and rearranging: y^2 + 2xy - x^2 = C. This is the IMPLICIT solution."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Verify",
+      "prompt": "Differentiate y^2 + 2xy - x^2 = C implicitly. What do you get?",
+      "options": [
+        { "id": "a", "text": "2y * y' + 2y + 2x * y' - 2x = 0  =>  y' (y + x) = x - y  =>  y' = (x-y)/(x+y).  ✓", "correct": true },
+        { "id": "b", "text": "y' = 2y",                                                                                "correct": false },
+        { "id": "c", "text": "y' = 0",                                                                                  "correct": false }
+      ],
+      "explanation": "d/dx(y^2) = 2y * y'. d/dx(2xy) = 2y + 2x * y'. d/dx(-x^2) = -2x. Setting sum to 0: 2y*y' + 2y + 2x*y' - 2x = 0, factor y': y' * 2(y + x) = 2(x - y), so y' = (x - y)/(x + y). The original ODE recovered."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How would you guess the right substitution if the hint weren't given? (Hint: the equation is HOMOGENEOUS in x, y -- both occur to degree 1 in numerator and denominator.)",
+        "Try z = y/x (the standard homogeneous-ODE substitution) on the same equation. What do you get?",
+        "What initial condition y(x_0) = y_0 would pin down a specific C?"
+      ]
+    }
+  ]
+}

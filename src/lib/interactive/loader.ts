@@ -58,6 +58,11 @@ import ch3Bernoulli      from '../../../content/interactive/ch03/ch3-11-bernoull
 import ch3Sqrt37         from '../../../content/interactive/ch03/ch3-12-sqrt-37.json';
 import ch3RootFinding    from '../../../content/interactive/ch03/ch3-13-root-finding-algorithms.json';
 import ch3DistToPlane    from '../../../content/interactive/ch03/ch3-14-distance-to-plane.json';
+import ch3SeparableOde   from '../../../content/interactive/ch03/ch3-15-separable-ode.json';
+import ch3ChangeVarOde   from '../../../content/interactive/ch03/ch3-16-change-of-variable-ode.json';
+import ch3FirstOrderLin  from '../../../content/interactive/ch03/ch3-17-first-order-linear-ode.json';
+import ch3ComplexRootsOde from '../../../content/interactive/ch03/ch3-18-complex-roots-ode.json';
+import ch3NonhomogOdes   from '../../../content/interactive/ch03/ch3-19-nonhomogeneous-odes.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -74,6 +79,7 @@ import techIntegration   from '../../../content/interactive/techniques/integrati
 import techTaylor        from '../../../content/interactive/techniques/taylor-series.json';
 import techNewton        from '../../../content/interactive/techniques/newton-method.json';
 import techLagrange      from '../../../content/interactive/techniques/lagrange-multipliers.json';
+import techODE           from '../../../content/interactive/techniques/ordinary-differential-equations.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -128,6 +134,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch3-12-sqrt-37':           ch3Sqrt37         as unknown as ProblemWalkthrough,
   'ch3-13-root-finding-algorithms': ch3RootFinding as unknown as ProblemWalkthrough,
   'ch3-14-distance-to-plane': ch3DistToPlane    as unknown as ProblemWalkthrough,
+  'ch3-15-separable-ode':     ch3SeparableOde   as unknown as ProblemWalkthrough,
+  'ch3-16-change-of-variable-ode': ch3ChangeVarOde as unknown as ProblemWalkthrough,
+  'ch3-17-first-order-linear-ode': ch3FirstOrderLin as unknown as ProblemWalkthrough,
+  'ch3-18-complex-roots-ode': ch3ComplexRootsOde as unknown as ProblemWalkthrough,
+  'ch3-19-nonhomogeneous-odes': ch3NonhomogOdes  as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -144,6 +155,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'taylor-series':            techTaylor        as unknown as Technique,
   'newton-method':            techNewton        as unknown as Technique,
   'lagrange-multipliers':     techLagrange      as unknown as Technique,
+  'ordinary-differential-equations': techODE    as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

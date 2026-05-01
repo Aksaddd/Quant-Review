@@ -1,0 +1,90 @@
+{
+  "id": "ch3-15-separable-ode",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.5",
+  "title": "Separable ODE with Initial Condition",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "749-761"
+  },
+  "mechanism": {
+    "primary": "ordinary-differential-equations",
+    "structure": "separable-with-explicit-initial-condition",
+    "insight": "rearrange-to-dy-over-y-equals-something-dx-then-integrate",
+    "variantAxes": ["coefficient", "initial_condition"]
+  },
+  "setup": {
+    "narrative": "Solve the ODE y' + 6xy = 0 with initial condition y(0) = 1.",
+    "rules": [
+      "y' = dy/dx denotes the derivative of y with respect to x.",
+      "The initial condition pins down the integration constant."
+    ],
+    "question": "What is y(x)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize the ODE as separable: dy/y = -6x dx.",
+    "Integrate both sides and write the general solution as y = A * e^(-3x^2).",
+    "Apply the initial condition to determine A."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What kind of ODE is y' + 6xy = 0?",
+      "options": [
+        { "id": "a", "text": "Separable: rewrite as dy/y = -6x dx, then integrate.", "correct": true },
+        { "id": "b", "text": "Second-order homogeneous.",                                "correct": false },
+        { "id": "c", "text": "Nonhomogeneous linear.",                                    "correct": false }
+      ],
+      "explanation": "y' = dy/dx. Rearrange: dy/dx = -6xy, then dy/y = -6x dx. Variables separated. Integrate both sides.",
+      "learnMoreTechnique": "ordinary-differential-equations"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Integrate both sides",
+      "prompt": "integral of dy/y = integral of (-6x) dx. What do you get?",
+      "options": [
+        { "id": "a", "text": "ln|y| = -3x^2 + C, so y = A * e^(-3x^2) where A = +/- e^C.", "correct": true },
+        { "id": "b", "text": "y = -3x^2 + C",                                                "correct": false },
+        { "id": "c", "text": "y = 1/(-6x)",                                                   "correct": false }
+      ],
+      "explanation": "integral of 1/y dy = ln|y|. integral of -6x dx = -3x^2. So ln|y| = -3x^2 + C, hence |y| = e^C * e^(-3x^2) = A * e^(-3x^2) (with A = e^C > 0, but signing absorbed yields A real)."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Apply the initial condition",
+      "prompt": "y(0) = 1. Plug into y = A * e^(-3x^2). What is A?",
+      "answerType": "numeric",
+      "answer": 1,
+      "explanation": "y(0) = A * e^0 = A * 1 = A. Setting equal to 1 gives A = 1."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is y(x)?",
+      "options": [
+        { "id": "a", "text": "y = e^(-3x^2)",   "correct": true },
+        { "id": "b", "text": "y = -3x^2 + 1",    "correct": false },
+        { "id": "c", "text": "y = e^(6x)",        "correct": false }
+      ],
+      "explanation": "y(x) = e^(-3x^2). Verify: y' = -6x * e^(-3x^2) = -6x * y, so y' + 6xy = 0 ✓. And y(0) = 1 ✓."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if the initial condition were y(0) = 5? How does that change A?",
+        "Solve y' = ky for general k. (Exponential growth/decay.)",
+        "Why is dy/y the right separation rather than y dy?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "id": "ch3-17-first-order-linear-ode",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.5",
+  "title": "First-Order Linear ODE",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "815-830"
+  },
+  "mechanism": {
+    "primary": "ordinary-differential-equations",
+    "structure": "integrating-factor-method",
+    "insight": "multiply-by-integrating-factor-makes-the-left-side-a-perfect-derivative",
+    "variantAxes": ["P_x", "Q_x"]
+  },
+  "setup": {
+    "narrative": "Solve the ODE y' + y/x = 1/x^2 with initial condition y(1) = 1, on the interval x > 0.",
+    "rules": [
+      "The equation has the form y' + P(x) y = Q(x), with P(x) = 1/x and Q(x) = 1/x^2.",
+      "Use the integrating-factor method.",
+      "x > 0 keeps logarithms and divisions clean."
+    ],
+    "question": "What is y(x)?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Identify the ODE as first-order linear and identify P(x), Q(x).",
+    "Compute the integrating factor I(x) = e^(integral P dx).",
+    "Recognize that multiplying by I(x) makes the left side d/dx[I(x) * y]."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify the form",
+      "prompt": "Match y' + y/x = 1/x^2 against y' + P(x) y = Q(x). What are P and Q?",
+      "options": [
+        { "id": "a", "text": "P(x) = 1/x,  Q(x) = 1/x^2",  "correct": true },
+        { "id": "b", "text": "P(x) = y/x,  Q(x) = 1/x^2",   "correct": false },
+        { "id": "c", "text": "P(x) = 1/x^2,  Q(x) = 1/x",   "correct": false }
+      ],
+      "explanation": "P is the coefficient of y; Q is the right-hand-side. Here P(x) = 1/x, Q(x) = 1/x^2.",
+      "learnMoreTechnique": "ordinary-differential-equations"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute the integrating factor",
+      "prompt": "I(x) = e^(integral P dx) = e^(integral 1/x dx) = ?",
+      "options": [
+        { "id": "a", "text": "e^(ln x) = x",  "correct": true },
+        { "id": "b", "text": "e^(1/x)",        "correct": false },
+        { "id": "c", "text": "1 / ln x",        "correct": false }
+      ],
+      "explanation": "integral 1/x dx = ln(x) (for x > 0; we drop the constant). e^(ln x) = x. So I(x) = x."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Multiply through and recognize a perfect derivative",
+      "prompt": "Multiply the ODE by I(x) = x: x*y' + y = 1/x. The left side simplifies to ?",
+      "options": [
+        { "id": "a", "text": "(x*y)' -- by the product rule, (x*y)' = x*y' + y.", "correct": true },
+        { "id": "b", "text": "x*y'",                                                "correct": false },
+        { "id": "c", "text": "y'/x",                                                 "correct": false }
+      ],
+      "explanation": "The whole point of the integrating factor: the left side x*y' + y is exactly d/dx[x*y] by the product rule. The ODE becomes (x*y)' = 1/x."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Integrate both sides",
+      "prompt": "Integrate (x*y)' = 1/x.",
+      "options": [
+        { "id": "a", "text": "x*y = ln(x) + c, so y = (ln x + c)/x.", "correct": true },
+        { "id": "b", "text": "y = 1/x",                                  "correct": false },
+        { "id": "c", "text": "x*y = x + c",                              "correct": false }
+      ],
+      "explanation": "integral (x*y)' dx = x*y. integral (1/x) dx = ln(x). So x*y = ln(x) + c, hence y = (ln(x) + c)/x."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Apply the initial condition",
+      "prompt": "y(1) = 1. From y = (ln(x) + c)/x: y(1) = (ln(1) + c)/1 = c. So c = ?",
+      "answerType": "numeric",
+      "answer": 1,
+      "explanation": "ln(1) = 0, so y(1) = c. The initial condition c = 1."
+    },
+    {
+      "id": "s6",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is y(x)?",
+      "options": [
+        { "id": "a", "text": "y = (ln(x) + 1) / x", "correct": true },
+        { "id": "b", "text": "y = ln(x) / x",        "correct": false },
+        { "id": "c", "text": "y = x * ln(x)",         "correct": false }
+      ],
+      "explanation": "y(x) = (ln(x) + 1) / x. Verify: y' = [(1/x)*x - (ln x + 1)] / x^2 = (1 - ln x - 1) / x^2 = -ln(x)/x^2. Then y' + y/x = -ln(x)/x^2 + (ln x + 1)/x^2 = 1/x^2 ✓. And y(1) = (0+1)/1 = 1 ✓."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does multiplying by I(x) make the left side a perfect derivative? Where does I'(x) = I(x) * P(x) come from?",
+        "Solve y' + 2y = e^x. (Identifying factor + integration.)",
+        "What goes wrong if you try the integrating-factor method on a NONLINEAR ODE?"
+      ]
+    }
+  ]
+}
