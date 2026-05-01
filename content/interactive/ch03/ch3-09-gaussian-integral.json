@@ -1,0 +1,103 @@
+{
+  "id": "ch3-09-gaussian-integral",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.3",
+  "title": "Gaussian Integral",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "477-498"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "square-the-integral-and-switch-to-polar",
+    "insight": "the-2d-integral-of-e-to-the-minus-half-x-squared-y-squared-has-radial-symmetry",
+    "variantAxes": ["dimension", "exponent_factor"]
+  },
+  "setup": {
+    "narrative": "Consider the famous Gaussian integral: I = integral from -infinity to infinity of e^(-x^2/2) dx.",
+    "rules": [
+      "There is no elementary antiderivative of e^(-x^2/2) -- you cannot solve this with substitution or by-parts.",
+      "However, the value is exactly known: I = sqrt(2*pi).",
+      "The standard normal pdf (1/sqrt(2*pi)) * e^(-x^2/2) integrates to 1, which is equivalent to the result."
+    ],
+    "question": "Prove that I = sqrt(2*pi) using polar coordinates."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that squaring the integral converts a 1D problem to a 2D problem.",
+    "Switch to polar coordinates to exploit radial symmetry.",
+    "Apply the Jacobian r when changing variables from (x, y) to (r, theta)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "The trick",
+      "prompt": "Why is squaring the integral useful?",
+      "options": [
+        { "id": "a", "text": "I^2 = (integral of e^(-x^2/2) dx) * (integral of e^(-y^2/2) dy) = double integral of e^(-(x^2+y^2)/2) dx dy. The 2D integrand has radial symmetry, which polar coordinates handle cleanly.", "correct": true },
+        { "id": "b", "text": "Squaring is a coincidence -- any integer power would work.",                                                                                                                                            "correct": false },
+        { "id": "c", "text": "Squaring removes the constant 1/sqrt(2*pi).",                                                                                                                                                              "correct": false }
+      ],
+      "explanation": "The 2D integrand e^(-(x^2+y^2)/2) depends only on r^2 = x^2 + y^2 -- pure radial symmetry. In Cartesian, hard. In polar, the angle integrates trivially and the radial integral is doable.",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Switch to polar",
+      "prompt": "In polar coordinates, x = r * cos(theta), y = r * sin(theta), and dx dy = r dr d(theta). Rewrite I^2.",
+      "options": [
+        { "id": "a", "text": "I^2 = integral from 0 to 2*pi d(theta) * integral from 0 to infinity of r * e^(-r^2/2) dr.", "correct": true },
+        { "id": "b", "text": "I^2 = integral from 0 to 2*pi of e^(-1/2) d(theta).",                                          "correct": false },
+        { "id": "c", "text": "I^2 = integral from 0 to infinity of e^(-r^2/2) dr.",                                          "correct": false }
+      ],
+      "explanation": "Substitute and split: x^2 + y^2 = r^2, dx dy = r dr d(theta). The integrand becomes e^(-r^2/2) * r. The double integral factors because the integrand doesn't depend on theta."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "The angular integral",
+      "prompt": "What is integral from 0 to 2*pi d(theta)?",
+      "answerType": "numeric",
+      "answer": 6.2831853,
+      "explanation": "integral from 0 to 2*pi d(theta) = 2*pi ≈ 6.2832."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "The radial integral",
+      "prompt": "Compute integral from 0 to infinity of r * e^(-r^2/2) dr using u = -r^2/2, du = -r dr.",
+      "options": [
+        { "id": "a", "text": "[-e^(-r^2/2)] from 0 to infinity = 0 - (-1) = 1.", "correct": true },
+        { "id": "b", "text": "0",                                                  "correct": false },
+        { "id": "c", "text": "infinity",                                           "correct": false }
+      ],
+      "explanation": "u-sub: integral becomes -e^u from 0 to -infinity = -(0 - 1) = 1. Or directly: antiderivative of r * e^(-r^2/2) is -e^(-r^2/2). At infinity it's 0; at 0 it's -1. Difference: 1."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Combining: I^2 = 2*pi * 1 = 2*pi. So I = ?",
+      "options": [
+        { "id": "a", "text": "sqrt(2*pi).",  "correct": true },
+        { "id": "b", "text": "pi.",            "correct": false },
+        { "id": "c", "text": "2*pi.",         "correct": false }
+      ],
+      "explanation": "I^2 = 2*pi, so I = sqrt(2*pi) ≈ 2.5066. (Take the positive square root since the integrand e^(-x^2/2) > 0 everywhere.) This is the normalization constant of the standard Gaussian -- the famous '1/sqrt(2*pi)' factor in the pdf."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the polar trick work specifically for e^(-x^2 - y^2)? Could you do it for e^(-x^2 - 2*y^2)?",
+        "Generalize to n dimensions: what is the integral over R^n of e^(-||x||^2 / 2)?",
+        "What goes wrong if you try to evaluate the 1D integral by series expansion of e^(-x^2/2)?"
+      ]
+    }
+  ]
+}

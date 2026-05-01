@@ -47,6 +47,12 @@ import ch2RainbowHats    from '../../../content/interactive/ch02/ch2-37-rainbow-
 import ch3DerivLnXLnX    from '../../../content/interactive/ch03/ch3-01-derivative-ln-x-ln-x.json';
 import ch3EVsPi          from '../../../content/interactive/ch03/ch3-02-e-vs-pi.json';
 import ch3TwoLimits      from '../../../content/interactive/ch03/ch3-03-two-limits.json';
+import ch3IntLnX         from '../../../content/interactive/ch03/ch3-04-integral-of-ln-x.json';
+import ch3IntSecX        from '../../../content/interactive/ch03/ch3-05-integral-of-sec-x.json';
+import ch3Cylinders      from '../../../content/interactive/ch03/ch3-06-intersecting-cylinders.json';
+import ch3SnowPlow       from '../../../content/interactive/ch03/ch3-07-snow-plow.json';
+import ch3HalfNormal     from '../../../content/interactive/ch03/ch3-08-half-normal-expectation.json';
+import ch3GaussianInt    from '../../../content/interactive/ch03/ch3-09-gaussian-integral.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -59,6 +65,7 @@ import techModular       from '../../../content/interactive/techniques/modular-a
 import techMathInduction from '../../../content/interactive/techniques/math-induction.json';
 import techContradiction from '../../../content/interactive/techniques/proof-by-contradiction.json';
 import techLimDeriv      from '../../../content/interactive/techniques/limits-and-derivatives.json';
+import techIntegration   from '../../../content/interactive/techniques/integration-techniques.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -102,6 +109,12 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch3-01-derivative-ln-x-ln-x': ch3DerivLnXLnX as unknown as ProblemWalkthrough,
   'ch3-02-e-vs-pi':           ch3EVsPi          as unknown as ProblemWalkthrough,
   'ch3-03-two-limits':        ch3TwoLimits      as unknown as ProblemWalkthrough,
+  'ch3-04-integral-of-ln-x':  ch3IntLnX         as unknown as ProblemWalkthrough,
+  'ch3-05-integral-of-sec-x': ch3IntSecX        as unknown as ProblemWalkthrough,
+  'ch3-06-intersecting-cylinders': ch3Cylinders as unknown as ProblemWalkthrough,
+  'ch3-07-snow-plow':         ch3SnowPlow       as unknown as ProblemWalkthrough,
+  'ch3-08-half-normal-expectation': ch3HalfNormal as unknown as ProblemWalkthrough,
+  'ch3-09-gaussian-integral': ch3GaussianInt    as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -114,6 +127,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'math-induction':           techMathInduction as unknown as Technique,
   'proof-by-contradiction':   techContradiction as unknown as Technique,
   'limits-and-derivatives':   techLimDeriv      as unknown as Technique,
+  'integration-techniques':   techIntegration   as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

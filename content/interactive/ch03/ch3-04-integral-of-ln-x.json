@@ -1,0 +1,93 @@
+{
+  "id": "ch3-04-integral-of-ln-x",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.2",
+  "title": "Integral of ln(x)",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "249-261"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "integration-by-parts-with-u-equals-ln-x",
+    "insight": "ln-x-has-no-elementary-antiderivative-but-by-parts-with-dv-equals-dx-cracks-it",
+    "variantAxes": ["integrand"]
+  },
+  "setup": {
+    "narrative": "Compute the indefinite integral of ln(x) with respect to x.",
+    "rules": [
+      "Use any integration technique you like.",
+      "The answer should be an elementary function plus a constant of integration."
+    ],
+    "question": "What is integral of ln(x) dx?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that ln(x) has no obvious antiderivative -- it requires integration by parts.",
+    "Choose u = ln(x) and dv = dx to make the resulting integral simpler.",
+    "Verify the answer by differentiating it back."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "ln(x) is a single function, not an obvious product. Which technique do you reach for?",
+      "options": [
+        { "id": "a", "text": "Integration by parts -- artificially treat ln(x) as a product ln(x) * 1 with u = ln(x) and dv = dx.", "correct": true },
+        { "id": "b", "text": "u-substitution with u = ln(x).",                                                                       "correct": false },
+        { "id": "c", "text": "Look it up in a table.",                                                                                 "correct": false }
+      ],
+      "explanation": "Integration by parts: ∫u dv = uv - ∫v du. The trick is choosing u = ln(x) and dv = dx. That way du = (1/x) dx is simpler, and v = x is straightforward.",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute du and v",
+      "prompt": "With u = ln(x) and dv = dx, what are du and v?",
+      "options": [
+        { "id": "a", "text": "du = (1/x) dx,    v = x", "correct": true },
+        { "id": "b", "text": "du = x dx,    v = ln(x)", "correct": false },
+        { "id": "c", "text": "du = dx,    v = ln(x)",   "correct": false }
+      ],
+      "explanation": "du = d(ln x) = (1/x) dx. v = ∫dv = ∫dx = x."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Apply the parts formula",
+      "prompt": "Substitute into ∫u dv = uv - ∫v du. What do you get?",
+      "options": [
+        { "id": "a", "text": "x * ln(x) - integral of x * (1/x) dx = x * ln(x) - integral of 1 dx = x * ln(x) - x + C", "correct": true },
+        { "id": "b", "text": "x * ln(x) - integral of ln(x) dx",                                                          "correct": false },
+        { "id": "c", "text": "ln(x) - x + C",                                                                              "correct": false }
+      ],
+      "explanation": "uv = x * ln(x). ∫v du = ∫x * (1/x) dx = ∫1 dx = x. So the integral is x * ln(x) - x + C."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What is integral of ln(x) dx?",
+      "options": [
+        { "id": "a", "text": "x * ln(x) - x + C",  "correct": true },
+        { "id": "b", "text": "ln(x) / x + C",        "correct": false },
+        { "id": "c", "text": "(ln x)^2 / 2 + C",     "correct": false }
+      ],
+      "explanation": "x * ln(x) - x + C. Verify by differentiating: d/dx[x ln(x) - x] = ln(x) + x*(1/x) - 1 = ln(x) + 1 - 1 = ln(x). ✓"
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Use the same technique to integrate ln(x)^2. What's the answer?",
+        "Why is choosing u = ln(x) (rather than dv = ln(x) dx) the right move? What goes wrong the other way?",
+        "Use the result to compute the definite integral integral from 1 to e of ln(x) dx."
+      ]
+    }
+  ]
+}

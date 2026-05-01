@@ -1,0 +1,94 @@
+{
+  "id": "ch3-08-half-normal-expectation",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.2",
+  "title": "E[X | X > 0] for N(0,1)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "421-444"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "u-substitution-on-x-times-pdf-then-divide-by-tail-probability",
+    "insight": "u-equals-minus-x-squared-over-2-makes-the-x-factor-disappear",
+    "variantAxes": ["distribution", "conditioning_event"]
+  },
+  "setup": {
+    "narrative": "X is a standard normal random variable, X ~ N(0, 1). The probability density function is f(x) = (1/sqrt(2*pi)) * e^(-x^2/2).",
+    "rules": [
+      "E[X | X > 0] = (integral from 0 to infinity of x * f(x) dx) / P(X > 0).",
+      "P(X > 0) = 1/2 by the symmetry of the standard normal."
+    ],
+    "question": "What is E[X | X > 0]?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the conditional expectation as a ratio of two integrals.",
+    "Use u-substitution u = -x^2/2 to evaluate the numerator integral.",
+    "Divide by the tail probability to get the conditional expectation."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the conditional expectation",
+      "prompt": "How do you compute E[X | X > 0]?",
+      "options": [
+        { "id": "a", "text": "(integral from 0 to infinity of x * f(x) dx) / P(X > 0).", "correct": true },
+        { "id": "b", "text": "integral from 0 to infinity of x * f(x) dx, no division needed.", "correct": false },
+        { "id": "c", "text": "P(X > 0) directly.",                                                "correct": false }
+      ],
+      "explanation": "Conditional expectation = E[X * indicator(X > 0)] / P(X > 0). The numerator integrates x against the joint of (X, X > 0)."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique for the numerator",
+      "prompt": "Compute integral from 0 to infinity of x * (1/sqrt(2*pi)) * e^(-x^2/2) dx. What's the right substitution?",
+      "options": [
+        { "id": "a", "text": "u = -x^2/2,  du = -x dx.  The x dx in the integrand becomes -du, simplifying everything.", "correct": true },
+        { "id": "b", "text": "Integration by parts.",                                                                       "correct": false },
+        { "id": "c", "text": "Polar coordinates.",                                                                          "correct": false }
+      ],
+      "explanation": "u-substitution. The integrand has the form (something) * x dx, so set u = (something exponent) and du captures the x dx factor.",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Evaluate the numerator",
+      "prompt": "After substitution u = -x^2/2, the integral becomes (1/sqrt(2*pi)) * integral from 0 to -infinity of e^u * (-du) = (1/sqrt(2*pi)) * [-e^(-x^2/2)] from 0 to infinity. What does this evaluate to?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "a", "text": "(1/sqrt(2*pi)) * (0 - (-1)) = 1/sqrt(2*pi).",  "correct": true },
+        { "id": "b", "text": "1/2",                                            "correct": false },
+        { "id": "c", "text": "0",                                              "correct": false }
+      ],
+      "explanation": "At x = infinity, e^(-x^2/2) -> 0. At x = 0, e^0 = 1. So [-e^(-x^2/2)] from 0 to infinity = 0 - (-1) = 1. Multiply by 1/sqrt(2*pi) to get 1/sqrt(2*pi)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Divide the numerator (= 1/sqrt(2*pi)) by P(X > 0) = 1/2.",
+      "options": [
+        { "id": "a", "text": "(1/sqrt(2*pi)) / (1/2) = 2/sqrt(2*pi) = sqrt(2/pi) ≈ 0.798.", "correct": true },
+        { "id": "b", "text": "1/sqrt(pi)",  "correct": false },
+        { "id": "c", "text": "1/2",          "correct": false }
+      ],
+      "explanation": "E[X | X > 0] = (1/sqrt(2*pi)) / (1/2) = 2/sqrt(2*pi) = sqrt(2)/sqrt(pi) = sqrt(2/pi) ≈ 0.7979."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is E[X | X > 0] not simply 0? (X has mean 0 unconditionally.)",
+        "Compute E[X | X > a] for general a > 0. (Use the same substitution.)",
+        "Compute E[X^2 | X > 0]. Does the same trick work?"
+      ]
+    }
+  ]
+}

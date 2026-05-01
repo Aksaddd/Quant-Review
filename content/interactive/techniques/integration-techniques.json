@@ -1,0 +1,61 @@
+{
+  "id": "integration-techniques",
+  "kind": "technique",
+  "name": "Integration Techniques",
+  "tagline": "Three workhorses for evaluating integrals: substitution, integration by parts, and recognizing antiderivatives via reverse differentiation. Plus polar coordinates for radially symmetric 2D integrals.",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.2",
+    "title": "Integration",
+    "exemplarProblemId": "ch3-04-integral-of-ln-x"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Most quant interview integrals reduce to one of three techniques: u-substitution (for integrals where du appears alongside f(u)), integration by parts (for products of unrelated functions), or reverse differentiation (compute d/dx of a candidate F(x) and match against the integrand). Add polar coordinates for any 2D integral with x^2 + y^2 structure."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The hardest integrals are sometimes computed by RECOGNIZING the antiderivative rather than constructing it. The integral of sec(x) is a famous example -- you don't derive it; you notice that d/dx[ln|sec x + tan x|] equals sec x, and the integral falls out."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Look at the integrand and ask: 'is there a function whose derivative looks like this?' If yes, that function is the antiderivative. If you see f(g(x)) * g'(x), use substitution u = g(x). If you see a product where one factor's antiderivative AND the other factor's derivative are both simpler, use integration by parts."
+    }
+  ],
+  "whenToUse": [
+    "Definite or indefinite integrals over a single variable.",
+    "Volume problems (integrate cross-sectional area along an axis).",
+    "Expected value computations where the integrand is x * pdf(x).",
+    "2D integrals with rotational symmetry (use polar).",
+    "Anywhere an antiderivative isn't immediately obvious from the basic table."
+  ],
+  "recipe": [
+    "Try u-substitution first if the integrand contains a function and its derivative.",
+    "Try integration by parts (∫u dv = uv - ∫v du) for products. Choose u so du is simpler; choose dv so v is computable.",
+    "If neither helps, search for an antiderivative by hypothesis: differentiate candidate functions until one matches.",
+    "For 2D integrals with x^2 + y^2 structure, switch to polar coordinates (don't forget the r Jacobian).",
+    "For volume by slicing: V = ∫ A(z) dz where A(z) is the cross-section at height z."
+  ],
+  "commonPitfalls": [
+    "Forgetting the Jacobian r when switching to polar.",
+    "In integration by parts, choosing u and dv backwards (one good rule: LIATE -- prefer logarithms then inverse trig then algebraic then trig then exponential as your u).",
+    "Forgetting to change limits when doing definite-integral substitution.",
+    "Losing the constant of integration in indefinite integrals.",
+    "Treating a divergent integral as if it converges (always check that improper-integral limits exist)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-04-integral-of-ln-x",       "title": "Integral of ln(x)",       "chapter": 3, "section": "3.2" },
+    { "problemId": "ch3-05-integral-of-sec-x",      "title": "Integral of sec(x)",      "chapter": 3, "section": "3.2" },
+    { "problemId": "ch3-06-intersecting-cylinders", "title": "Intersecting Cylinders",  "chapter": 3, "section": "3.2" },
+    { "problemId": "ch3-07-snow-plow",              "title": "Snow Plow",                "chapter": 3, "section": "3.2" },
+    { "problemId": "ch3-08-half-normal-expectation","title": "E[X | X > 0] for N(0,1)", "chapter": 3, "section": "3.2" },
+    { "problemId": "ch3-09-gaussian-integral",      "title": "Gaussian Integral",       "chapter": 3, "section": "3.3" }
+  ],
+  "relatedTechniques": ["limits-and-derivatives", "series-summation"]
+}

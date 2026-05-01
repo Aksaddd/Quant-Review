@@ -1,0 +1,104 @@
+{
+  "id": "ch3-07-snow-plow",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.2",
+  "title": "Snow Plow",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "358-411"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "model-applied-problem-then-integrate-and-solve-transcendental",
+    "insight": "plow-speed-is-proportional-to-1-over-time-elapsed-since-snow-began",
+    "variantAxes": ["initial_lag", "distance_pattern"]
+  },
+  "setup": {
+    "narrative": "Snow began falling at a constant rate at some unknown time T hours BEFORE noon. At noon, a snow plow began clearing a road. The plow removes a constant volume of snow per unit time. By 1 PM, the plow has traveled 2 miles; by 2 PM, 3 miles.",
+    "rules": [
+      "Snow fell at a constant rate -- depth grows linearly with time since snow started.",
+      "The plow removes a constant VOLUME of snow per hour, so its speed is inversely proportional to current snow depth.",
+      "Let t = 0 be noon, and let T be the number of hours BEFORE noon that snow began.",
+      "Distance from noon to time t is the integral of plow speed from 0 to t."
+    ],
+    "question": "When did the snow begin to fall?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Model the plow's speed as v(t) = c / (t + T) using the constant-volume-removal constraint.",
+    "Integrate to get distance = c * ln((t + T)/T).",
+    "Solve the resulting transcendental system for T."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the speed model",
+      "prompt": "If snow depth grows linearly as A(t) = c_2 * (t + T) (where t = 0 is noon) and the plow clears a constant volume c_1 per hour, what's the plow's speed?",
+      "options": [
+        { "id": "a", "text": "v(t) = c_1 / A(t) = c_1 / [c_2 * (t + T)] = c / (t + T) where c = c_1 / c_2.", "correct": true },
+        { "id": "b", "text": "v(t) is constant.",                                                            "correct": false },
+        { "id": "c", "text": "v(t) is proportional to t.",                                                    "correct": false }
+      ],
+      "explanation": "Constant volume per hour means: speed = (volume/hour) / (cross-section area). Since cross-section grows linearly, speed shrinks like 1/(t + T). Note the +T -- snow has been falling longer than the plow has been moving."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Integrate to get distance",
+      "prompt": "Distance(t_1) = integral from 0 to t_1 of c / (t + T) dt. What's the antiderivative?",
+      "options": [
+        { "id": "a", "text": "c * ln((t_1 + T) / T)", "correct": true },
+        { "id": "b", "text": "c * t_1 / T",            "correct": false },
+        { "id": "c", "text": "c * t_1 * (t_1 + T)",    "correct": false }
+      ],
+      "explanation": "integral of c/(t+T) dt = c * ln(t + T) + const. Evaluated from 0 to t_1: c * [ln(t_1 + T) - ln(T)] = c * ln((t_1 + T)/T).",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Set up the system",
+      "prompt": "Use the given facts: distance(1) = 2, distance(2) = 3. Write two equations.",
+      "options": [
+        { "id": "a", "text": "c * ln((1+T)/T) = 2 (eqn 1) and c * ln((2+T)/T) = 3 (eqn 2).", "correct": true },
+        { "id": "b", "text": "c * 1/T = 2 and c * 2/T = 3.",                                  "correct": false },
+        { "id": "c", "text": "c + T = 2 and c + 2T = 3.",                                       "correct": false }
+      ],
+      "explanation": "Plug t_1 = 1 and t_1 = 2 into the distance formula. Two equations in two unknowns (c, T)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Solve via substitution k = e^(1/c)",
+      "prompt": "Let k = e^(1/c). From eqn 1: (1+T)/T = k^2. From eqn 2: (2+T)/T = k^3. Setting both expressions for 1/T equal gives a polynomial in k. What is it?",
+      "options": [
+        { "id": "a", "text": "k^3 - 2k^2 + 1 = 0,  which factors as (k - 1)(k^2 - k - 1) = 0. The relevant root is k = (1 + sqrt(5)) / 2 -- the golden ratio.", "correct": true },
+        { "id": "b", "text": "k^2 - 1 = 0.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "k^3 = 2.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "From eqn 1: 1 + T = T * k^2, so 1/T = k^2 - 1. From eqn 2: 2 + T = T * k^3, so 1/T = k^3 - k^2. Set equal: k^2 - 1 = k^3 - k^2, i.e., k^3 - 2k^2 + 1 = 0. Factor (k - 1)(k^2 - k - 1) = 0. We need k > 1 (since c > 0 implies k = e^(1/c) > 1), so the valid root is k = (1 + sqrt(5))/2 -- yes, the golden ratio."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Commit final answer",
+      "prompt": "Given k = (1 + sqrt(5))/2 and T = 1/(k^2 - 1) = 1/k (using k^2 = k + 1), compute T to 2 decimals.",
+      "answerType": "numeric",
+      "answer": 0.62,
+      "explanation": "k^2 = k + 1 (golden ratio identity), so k^2 - 1 = k. Thus T = 1/k = 2/(1 + sqrt(5)) = (sqrt(5) - 1)/2 ≈ 0.618 hours ≈ 37 minutes. Snow began about 37 minutes before noon -- approximately 11:23 AM."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the GOLDEN RATIO appear here? Is there a deeper reason?",
+        "Could the same setup work if 'snowfall began' were AFTER the plow started? What would T < 0 mean physically?",
+        "Generalize: distance(1) = a and distance(2) = b. What's the formula for T?"
+      ]
+    }
+  ]
+}

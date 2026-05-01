@@ -1,0 +1,107 @@
+{
+  "id": "ch3-05-integral-of-sec-x",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.2",
+  "title": "Integral of sec(x)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "265-306"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "recognize-antiderivative-via-reverse-differentiation",
+    "insight": "d-dx-of-ln-sec-plus-tan-equals-sec",
+    "variantAxes": ["bounds"]
+  },
+  "setup": {
+    "narrative": "Compute the definite integral of sec(x) from 0 to pi/6.",
+    "rules": [
+      "sec(x) = 1 / cos(x).",
+      "tan(x) = sin(x) / cos(x).",
+      "Standard derivative facts: d/dx[sin x] = cos x, d/dx[cos x] = -sin x.",
+      "You may use any integration technique."
+    ],
+    "question": "What is the value of integral from 0 to pi/6 of sec(x) dx?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize when no obvious substitution or by-parts works.",
+    "Search for an antiderivative by computing derivatives of plausible candidates.",
+    "Apply the Fundamental Theorem of Calculus to evaluate at the bounds."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive techniques fail",
+      "prompt": "Try u-substitution with u = cos(x) on integral of 1/cos(x) dx. What happens?",
+      "options": [
+        { "id": "a", "text": "Stuck -- du = -sin(x) dx but the integrand has no sin(x) factor to absorb. u-substitution doesn't apply.", "correct": true },
+        { "id": "b", "text": "Substitution works directly to give -ln|u| + C.",                                                            "correct": false },
+        { "id": "c", "text": "Substitution gives 1/u^2 + C.",                                                                              "correct": false }
+      ],
+      "explanation": "u-substitution requires the derivative of u to appear in the integrand. Here d/dx[cos x] = -sin x, but the integrand 1/cos(x) has no sin(x). Stuck. Same problem with by-parts. We need to GUESS an antiderivative and verify."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right move?",
+      "options": [
+        { "id": "a", "text": "Hypothesize: try ln|sec(x) + tan(x)| as an antiderivative. Differentiate and check.", "correct": true },
+        { "id": "b", "text": "Numerical integration -- the integral has no closed form.",                            "correct": false },
+        { "id": "c", "text": "Series expansion of sec(x).",                                                          "correct": false }
+      ],
+      "explanation": "Recognize-by-reverse-differentiation. The expression sec(x) + tan(x) shows up because d/dx[sec x] = sec x * tan x and d/dx[tan x] = sec^2 x. Sum: d/dx[sec x + tan x] = sec x * (sec x + tan x). The factor (sec x + tan x) cancels when we take ln.",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Verify the antiderivative",
+      "prompt": "Compute d/dx[ln|sec(x) + tan(x)|]. What do you get?",
+      "options": [
+        { "id": "a", "text": "[sec(x) * tan(x) + sec^2(x)] / [sec(x) + tan(x)] = sec(x) * [tan(x) + sec(x)] / [sec(x) + tan(x)] = sec(x).", "correct": true },
+        { "id": "b", "text": "tan(x)",                                                                                                            "correct": false },
+        { "id": "c", "text": "1 / (sec(x) + tan(x))",                                                                                              "correct": false }
+      ],
+      "explanation": "Chain rule: d/dx[ln u] = u'/u where u = sec(x) + tan(x). u' = sec(x) tan(x) + sec^2(x) = sec(x) * [tan(x) + sec(x)] = sec(x) * u. So u'/u = sec(x). The factor of u cancels -- giving us our antiderivative for free."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Evaluate at the bounds",
+      "prompt": "What are sec(pi/6) and tan(pi/6)?",
+      "options": [
+        { "id": "a", "text": "sec(pi/6) = 2/sqrt(3),  tan(pi/6) = 1/sqrt(3).  Sum = 3/sqrt(3) = sqrt(3).", "correct": true },
+        { "id": "b", "text": "sec(pi/6) = 1/2,  tan(pi/6) = sqrt(3)/3.",                                    "correct": false },
+        { "id": "c", "text": "sec(pi/6) = sqrt(3),  tan(pi/6) = 1.",                                         "correct": false }
+      ],
+      "explanation": "cos(pi/6) = sqrt(3)/2 and sin(pi/6) = 1/2. So sec(pi/6) = 2/sqrt(3) and tan(pi/6) = 1/sqrt(3). Sum = 3/sqrt(3) = sqrt(3)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Apply the Fundamental Theorem of Calculus.",
+      "options": [
+        { "id": "a", "text": "ln(sqrt(3)) - ln(1) = ln(sqrt(3)) = (1/2) * ln(3).", "correct": true },
+        { "id": "b", "text": "ln(2) - ln(1) = ln(2).",                              "correct": false },
+        { "id": "c", "text": "sqrt(3) - 1.",                                          "correct": false }
+      ],
+      "explanation": "FTC: integral from 0 to pi/6 of sec x dx = ln|sec(pi/6) + tan(pi/6)| - ln|sec(0) + tan(0)| = ln(sqrt(3)) - ln(1) = ln(sqrt(3)) = (1/2) ln(3) ≈ 0.549."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "There's an alternative trick: multiply numerator and denominator of sec(x) by (sec(x) + tan(x)) before integrating. Walk through that approach.",
+        "What's the integral of csc(x)? (Symmetric trick.)",
+        "Why doesn't the absolute value matter on (0, pi/6)? When does it matter?"
+      ]
+    }
+  ]
+}

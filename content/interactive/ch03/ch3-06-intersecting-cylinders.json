@@ -1,0 +1,104 @@
+{
+  "id": "ch3-06-intersecting-cylinders",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.2",
+  "title": "Volume of Intersecting Cylinders",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "312-353"
+  },
+  "mechanism": {
+    "primary": "integration-techniques",
+    "structure": "volume-by-cross-sectional-slicing",
+    "insight": "horizontal-slice-of-the-intersection-is-a-square-with-side-2-times-sqrt-1-minus-z-squared",
+    "variantAxes": ["cylinder_radius", "n_cylinders"]
+  },
+  "setup": {
+    "narrative": "Two infinite cylinders, each of radius 1, intersect at right angles with their axes meeting at the origin. The first cylinder's axis lies along the x-axis; the second along the y-axis.",
+    "rules": [
+      "Cylinder 1: y^2 + z^2 <= 1 (axis along x).",
+      "Cylinder 2: x^2 + z^2 <= 1 (axis along y).",
+      "Compute the volume of their intersection."
+    ],
+    "question": "What is the volume of the intersection?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Apply the slicing formula V = integral of A(z) dz to a 3D solid.",
+    "Determine the cross-sectional shape A(z) at height z.",
+    "Use symmetry about z = 0 to simplify the integral bounds."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute the volume of a 3D solid?",
+      "options": [
+        { "id": "a", "text": "V = integral of A(z) dz, where A(z) is the cross-sectional area at height z.", "correct": true },
+        { "id": "b", "text": "V = side^3 always.",                                                              "correct": false },
+        { "id": "c", "text": "Use a 3D ruler.",                                                                  "correct": false }
+      ],
+      "explanation": "The slicing formula. Cut the solid into thin horizontal slabs at each height z; each slab has volume A(z) dz; integrate.",
+      "learnMoreTechnique": "integration-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Find the cross-section at height z",
+      "prompt": "Cut the intersection with the horizontal plane at height z (where -1 <= z <= 1). The cross-section is the set of (x, y) satisfying both cylinder constraints. What shape is it?",
+      "options": [
+        { "id": "a", "text": "A square with side 2 * sqrt(1 - z^2).",  "correct": true },
+        { "id": "b", "text": "A circle with radius 1.",                  "correct": false },
+        { "id": "c", "text": "A diamond with diagonals sqrt(1 - z^2).",  "correct": false }
+      ],
+      "explanation": "Cylinder 1 constraint at height z: y^2 + z^2 <= 1, so |y| <= sqrt(1 - z^2). Cylinder 2 constraint: |x| <= sqrt(1 - z^2). Both constraints together define a square -- |x| <= sqrt(1-z^2) AND |y| <= sqrt(1-z^2). Side length: 2 * sqrt(1 - z^2). Area: [2 * sqrt(1 - z^2)]^2 = 4(1 - z^2)."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute A(z)",
+      "prompt": "What is A(z), the cross-sectional area at height z?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "a", "text": "A(z) = 4 (1 - z^2)",     "correct": true },
+        { "id": "b", "text": "A(z) = pi (1 - z^2)",     "correct": false },
+        { "id": "c", "text": "A(z) = (1 - z^2)^2",      "correct": false }
+      ],
+      "explanation": "Square with side 2 sqrt(1 - z^2) has area [2 sqrt(1 - z^2)]^2 = 4(1 - z^2)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Integrate using symmetry",
+      "prompt": "V = integral from -1 to 1 of A(z) dz = integral from -1 to 1 of 4(1-z^2) dz. Using symmetry about z = 0 (so V = 2 * integral from 0 to 1), compute V.",
+      "answerType": "numeric",
+      "answer": 5.333333,
+      "explanation": "V = 2 * integral from 0 to 1 of 4(1-z^2) dz = 8 * [z - z^3/3] from 0 to 1 = 8 * (1 - 1/3) = 8 * (2/3) = 16/3 ≈ 5.333."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What is the volume of the intersection?",
+      "options": [
+        { "id": "a", "text": "16/3",  "correct": true },
+        { "id": "b", "text": "(4/3) * pi",  "correct": false },
+        { "id": "c", "text": "8/3",  "correct": false }
+      ],
+      "explanation": "16/3, exactly. (Sanity check via the inscribed-sphere method: a unit sphere has volume (4/3)*pi and lives inside the intersection. At each z, sphere cross-section / square cross-section = pi(1-z^2) / 4(1-z^2) = pi/4 -- a constant ratio. So V_intersection = (4/pi) * V_sphere = (4/pi) * (4*pi/3) = 16/3. ✓)"
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is the volume if THREE mutually perpendicular cylinders all of radius 1 intersect? (Steinmetz solid -- requires more thought.)",
+        "Why does the inscribed-sphere ratio (pi/4) persist at every z? What makes it constant?",
+        "If the cylinders had different radii r_1 and r_2, what's the volume?"
+      ]
+    }
+  ]
+}
