@@ -53,6 +53,11 @@ import ch3Cylinders      from '../../../content/interactive/ch03/ch3-06-intersec
 import ch3SnowPlow       from '../../../content/interactive/ch03/ch3-07-snow-plow.json';
 import ch3HalfNormal     from '../../../content/interactive/ch03/ch3-08-half-normal-expectation.json';
 import ch3GaussianInt    from '../../../content/interactive/ch03/ch3-09-gaussian-integral.json';
+import ch3IToTheI        from '../../../content/interactive/ch03/ch3-10-i-to-the-i.json';
+import ch3Bernoulli      from '../../../content/interactive/ch03/ch3-11-bernoulli-inequality.json';
+import ch3Sqrt37         from '../../../content/interactive/ch03/ch3-12-sqrt-37.json';
+import ch3RootFinding    from '../../../content/interactive/ch03/ch3-13-root-finding-algorithms.json';
+import ch3DistToPlane    from '../../../content/interactive/ch03/ch3-14-distance-to-plane.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -66,6 +71,9 @@ import techMathInduction from '../../../content/interactive/techniques/math-indu
 import techContradiction from '../../../content/interactive/techniques/proof-by-contradiction.json';
 import techLimDeriv      from '../../../content/interactive/techniques/limits-and-derivatives.json';
 import techIntegration   from '../../../content/interactive/techniques/integration-techniques.json';
+import techTaylor        from '../../../content/interactive/techniques/taylor-series.json';
+import techNewton        from '../../../content/interactive/techniques/newton-method.json';
+import techLagrange      from '../../../content/interactive/techniques/lagrange-multipliers.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -115,6 +123,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch3-07-snow-plow':         ch3SnowPlow       as unknown as ProblemWalkthrough,
   'ch3-08-half-normal-expectation': ch3HalfNormal as unknown as ProblemWalkthrough,
   'ch3-09-gaussian-integral': ch3GaussianInt    as unknown as ProblemWalkthrough,
+  'ch3-10-i-to-the-i':        ch3IToTheI        as unknown as ProblemWalkthrough,
+  'ch3-11-bernoulli-inequality': ch3Bernoulli   as unknown as ProblemWalkthrough,
+  'ch3-12-sqrt-37':           ch3Sqrt37         as unknown as ProblemWalkthrough,
+  'ch3-13-root-finding-algorithms': ch3RootFinding as unknown as ProblemWalkthrough,
+  'ch3-14-distance-to-plane': ch3DistToPlane    as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -128,6 +141,9 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'proof-by-contradiction':   techContradiction as unknown as Technique,
   'limits-and-derivatives':   techLimDeriv      as unknown as Technique,
   'integration-techniques':   techIntegration   as unknown as Technique,
+  'taylor-series':            techTaylor        as unknown as Technique,
+  'newton-method':            techNewton        as unknown as Technique,
+  'lagrange-multipliers':     techLagrange      as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

@@ -1,0 +1,111 @@
+{
+  "id": "ch3-14-distance-to-plane",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.4",
+  "title": "Distance from Origin to a Plane",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "692-732"
+  },
+  "mechanism": {
+    "primary": "lagrange-multipliers",
+    "structure": "minimize-distance-squared-subject-to-the-plane-equation",
+    "insight": "the-closest-point-on-a-plane-to-the-origin-is-along-the-normal-direction",
+    "variantAxes": ["plane_coefficients"]
+  },
+  "setup": {
+    "narrative": "Find the shortest (perpendicular) distance from the origin (0, 0, 0) to the plane 2x + 3y + 4z = 12.",
+    "rules": [
+      "The plane is the set of points (x, y, z) satisfying 2x + 3y + 4z = 12.",
+      "Distance from origin to a point (x, y, z) is sqrt(x^2 + y^2 + z^2).",
+      "Minimizing distance is equivalent to minimizing distance-squared (since sqrt is monotonic on non-negative inputs)."
+    ],
+    "question": "What is the distance from the origin to the plane 2x + 3y + 4z = 12?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Set up a Lagrangian: minimize x^2 + y^2 + z^2 subject to 2x + 3y + 4z - 12 = 0.",
+    "Solve the gradient conditions to express x, y, z in terms of lambda.",
+    "Substitute back into the constraint to solve for lambda, then for the distance."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you minimize a function subject to an equality constraint?",
+      "options": [
+        { "id": "a", "text": "Lagrange multipliers: minimize f = x^2 + y^2 + z^2 subject to g = 2x + 3y + 4z - 12 = 0.  Set gradient(f) + lambda * gradient(g) = 0.", "correct": true },
+        { "id": "b", "text": "Pick three random points on the plane and check.",                                                                                       "correct": false },
+        { "id": "c", "text": "Use the slope formula.",                                                                                                                "correct": false }
+      ],
+      "explanation": "Lagrange multipliers handles constrained optimization. Squaring the distance avoids sqrt while preserving the optimum.",
+      "learnMoreTechnique": "lagrange-multipliers"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Set up the gradient conditions",
+      "prompt": "gradient(f) = (2x, 2y, 2z). gradient(g) = (2, 3, 4). The Lagrange equations 2x = -lambda * 2, 2y = -lambda * 3, 2z = -lambda * 4 give what?",
+      "options": [
+        { "id": "a", "text": "x = -lambda,  y = -3*lambda/2,  z = -2*lambda.", "correct": true },
+        { "id": "b", "text": "x = lambda,  y = lambda,  z = lambda.",            "correct": false },
+        { "id": "c", "text": "x = 2*lambda,  y = 3*lambda,  z = 4*lambda.",      "correct": false }
+      ],
+      "explanation": "Solving each equation: 2x = -2*lambda gives x = -lambda. 2y = -3*lambda gives y = -3*lambda/2. 2z = -4*lambda gives z = -2*lambda. Each variable is proportional to the corresponding plane coefficient -- which is the geometric statement that the minimum is along the NORMAL to the plane."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Substitute into the constraint",
+      "prompt": "Substitute x = -lambda, y = -3*lambda/2, z = -2*lambda into 2x + 3y + 4z = 12 and solve for lambda.",
+      "answerType": "numeric",
+      "answer": -0.8275862,
+      "explanation": "2(-lambda) + 3(-3*lambda/2) + 4(-2*lambda) = -2*lambda - 9*lambda/2 - 8*lambda = (-4*lambda - 9*lambda - 16*lambda)/2 = -29*lambda/2 = 12. So lambda = -24/29 ~ -0.8276."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Find the optimal point",
+      "prompt": "Plug lambda = -24/29 back to find (x, y, z).",
+      "options": [
+        { "id": "a", "text": "(24/29, 36/29, 48/29).",  "correct": true },
+        { "id": "b", "text": "(2/29, 3/29, 4/29).",       "correct": false },
+        { "id": "c", "text": "(0, 0, 12).",                "correct": false }
+      ],
+      "explanation": "x = -lambda = 24/29. y = -3*lambda/2 = 36/29. z = -2*lambda = 48/29. The point lies on the plane (verify: 2*24 + 3*36 + 4*48 = 48 + 108 + 192 = 348, divided by 29 = 12 ✓)."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Compute the distance",
+      "prompt": "D = sqrt(x^2 + y^2 + z^2) = sqrt((24^2 + 36^2 + 48^2) / 29^2) = sqrt(numerator / 841). Compute D to 3 decimals.",
+      "answerType": "numeric",
+      "answer": 2.228,
+      "explanation": "Numerator: 24^2 + 36^2 + 48^2 = 576 + 1296 + 2304 = 4176. So D = sqrt(4176 / 841) = sqrt(144 / 29) = 12 / sqrt(29) ~ 2.228."
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "General formula",
+      "prompt": "From this calculation we can extract the general formula for distance from the origin to a plane ax + by + cz = d:",
+      "template": "D = |__[a]__| / sqrt(a^2 + b^2 + c^2)",
+      "blanks": [
+        { "id": "a", "answers": ["d"], "caseInsensitive": true }
+      ],
+      "explanation": "D = |d| / sqrt(a^2 + b^2 + c^2). Verify with our numbers: |12| / sqrt(4 + 9 + 16) = 12 / sqrt(29) ✓. The formula is much faster than running Lagrange every time, but the Lagrange derivation is what proves the formula is correct."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the distance from the point (1, 1, 1) (not the origin) to the same plane?",
+        "Why does the optimal direction (24, 36, 48) coincide with the plane's normal vector (2, 3, 4)? Geometric intuition.",
+        "Generalize: distance from origin to a hyperplane in n dimensions."
+      ]
+    }
+  ]
+}

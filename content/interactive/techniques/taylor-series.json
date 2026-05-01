@@ -1,0 +1,56 @@
+{
+  "id": "taylor-series",
+  "kind": "technique",
+  "name": "Taylor's Series",
+  "tagline": "Approximate or evaluate a function by its polynomial expansion around a point. Three master expansions (e^x, sin x, cos x) plus the remainder term cover most quant interview applications.",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.4",
+    "title": "Important Calculus Methods",
+    "exemplarProblemId": "ch3-10-i-to-the-i"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Taylor's series expands f(x) around x_0 as f(x) = f(x_0) + f'(x_0)(x-x_0) + f''(x_0)/2! * (x-x_0)^2 + .... When x_0 = 0 it is called the Maclaurin series. Three expansions show up so often that they should be memorized: e^x = sum of x^n/n!, sin(x) = x - x^3/3! + x^5/5! - ..., and cos(x) = 1 - x^2/2! + x^4/4! - ...."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Beyond approximation, Taylor's series proves identities (Euler's formula e^(i*theta) = cos(theta) + i*sin(theta)) and inequalities (Bernoulli: (1+x)^n > 1 + nx) by examining the remainder term. The remainder R_n(x) = f^(n+1)(x_bar) / (n+1)! * (x-x_0)^(n+1) for some x_bar between x_0 and x carries the truncation error and often has a definite sign."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Taylor's series turns a hard nonlinear function into a polynomial. If you only need 'close to x_0', use a few terms. If you need an exact identity (e^(i*theta)), use the full series and pattern-match. If you need an inequality, examine the sign of the remainder."
+    }
+  ],
+  "whenToUse": [
+    "Approximating f(x) for x near x_0 (linear, quadratic, etc).",
+    "Proving identities involving e, sin, cos, and complex numbers (via Euler's formula).",
+    "Proving inequalities by showing the remainder term has a definite sign.",
+    "Deriving Newton's method (linear Taylor) and its quadratic-convergence rate (next-order remainder).",
+    "Anywhere f is hard but its derivatives at one point are easy."
+  ],
+  "recipe": [
+    "Choose the expansion point x_0 -- usually 0 or a value where f and its derivatives are simple.",
+    "Compute f(x_0), f'(x_0), f''(x_0), ... up to the order you need.",
+    "Plug into the Taylor formula. For Maclaurin (x_0 = 0): f(x) = sum of f^(n)(0)/n! * x^n.",
+    "If proving an identity: pattern-match against known series.",
+    "If proving an inequality: write f(x) = T_n(x) + R_n(x) and show R_n has the right sign."
+  ],
+  "commonPitfalls": [
+    "Forgetting the n! in the denominator -- a famous source of factor-of-n errors.",
+    "Truncating too early when the next term changes the answer significantly.",
+    "Using the series outside its radius of convergence (e.g., the Maclaurin series of 1/(1-x) only converges for |x| < 1).",
+    "Dropping the remainder term when its sign matters for the conclusion."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-10-i-to-the-i",         "title": "What is i^i?",          "chapter": 3, "section": "3.4" },
+    { "problemId": "ch3-11-bernoulli-inequality", "title": "Bernoulli's Inequality", "chapter": 3, "section": "3.4" }
+  ],
+  "relatedTechniques": ["limits-and-derivatives", "math-induction"]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "ch3-13-root-finding-algorithms",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.4",
+  "title": "Root-Finding Algorithms",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "643-675"
+  },
+  "mechanism": {
+    "primary": "newton-method",
+    "structure": "compare-newton-bisection-secant-on-convergence-rate-vs-guarantee",
+    "insight": "convergence-speed-and-convergence-guarantee-trade-off-against-each-other",
+    "variantAxes": ["function_smoothness"]
+  },
+  "setup": {
+    "narrative": "You want to solve f(x) = 0 numerically for a smooth function f. Three classic methods are: Newton's method, the bisection method, and the secant method.",
+    "rules": [
+      "Newton: x_{n+1} = x_n - f(x_n)/f'(x_n).",
+      "Bisection: maintain an interval [a, b] with f(a) < 0 < f(b); halve to whichever side preserves the sign change.",
+      "Secant: x_{n+1} = x_n - f(x_n) * (x_n - x_{n-1}) / (f(x_n) - f(x_{n-1}))."
+    ],
+    "question": "Compare the three methods on convergence rate, derivative requirement, and convergence guarantee."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that Newton uses the EXACT derivative; secant uses a finite-difference approximation.",
+    "Order the methods by speed: bisection (linear) < secant (~1.618) < Newton (quadratic).",
+    "Recognize the trade-off: faster methods tend to lack convergence guarantees."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Newton vs Secant",
+      "prompt": "What's the key difference between Newton's method and the secant method?",
+      "options": [
+        { "id": "a", "text": "Newton uses the EXACT derivative f'(x_n). Secant approximates the derivative using a finite difference between two prior iterates.", "correct": true },
+        { "id": "b", "text": "Newton requires two starting points; secant requires one.",                                                                          "correct": false },
+        { "id": "c", "text": "Secant is the same as bisection.",                                                                                                "correct": false }
+      ],
+      "explanation": "Both methods linearize f and find where the line crosses zero. Newton uses the exact tangent (slope = f'(x_n)). Secant uses the chord through two recent iterates (slope ~ (f(x_n) - f(x_{n-1})) / (x_n - x_{n-1})). The secant slope -> tangent slope as iterates converge.",
+      "learnMoreTechnique": "newton-method"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Convergence rates",
+      "prompt": "Order the three methods by convergence rate, fastest first.",
+      "options": [
+        { "id": "a", "text": "Newton (quadratic, ~2) > Secant (superlinear, ~1.618) > Bisection (linear, <1).", "correct": true },
+        { "id": "b", "text": "Bisection > Newton > Secant.",                                                     "correct": false },
+        { "id": "c", "text": "All three have the same rate.",                                                    "correct": false }
+      ],
+      "explanation": "Newton: error squares each step (quadratic). Secant: error grows by the golden ratio's exponent each step (~1.618). Bisection: error halves each step (linear, factor 0.5). Newton wins on speed when it converges."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Convergence guarantees",
+      "prompt": "Which method offers a CONVERGENCE GUARANTEE given proper setup?",
+      "options": [
+        { "id": "a", "text": "Bisection -- if you start with f(a) and f(b) of opposite sign (a valid bracket), bisection ALWAYS converges to a root.", "correct": true },
+        { "id": "b", "text": "Newton -- always converges.",                                                                                            "correct": false },
+        { "id": "c", "text": "Secant -- always converges.",                                                                                            "correct": false }
+      ],
+      "explanation": "Bisection's strength is its guarantee: any continuous function with a sign change in the bracket has a root there (intermediate value theorem), and halving always preserves the bracket. Newton and secant can diverge or oscillate from bad starts."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit -- the trade-off",
+      "prompt": "What's the practical takeaway?",
+      "options": [
+        { "id": "a", "text": "Bisection: slow but safe. Newton: fast but fragile. Secant: in between, no derivative needed. Use bisection to FIND a bracket, then Newton to POLISH within it.", "correct": true },
+        { "id": "b", "text": "Newton is always best.",                                                                                                                                            "correct": false },
+        { "id": "c", "text": "Bisection is always best.",                                                                                                                                          "correct": false }
+      ],
+      "explanation": "In practice, hybrid algorithms (like Brent's method) combine bisection's safety with Newton-like speed. The key meta-lesson: convergence speed and convergence guarantee TRADE OFF -- faster methods make stronger smoothness assumptions and so risk failure when those assumptions break."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the secant method's rate exactly the GOLDEN RATIO 1.618...? (Hint: error recurrence e_{n+1} ~ e_n * e_{n-1} -- examine fixed points.)",
+        "Where would Newton's method fail badly? Give a function and starting point.",
+        "Why does bisection's CONVERGENCE GUARANTEE also constrain its SPEED?"
+      ]
+    }
+  ]
+}

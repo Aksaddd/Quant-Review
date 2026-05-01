@@ -1,0 +1,55 @@
+{
+  "id": "lagrange-multipliers",
+  "kind": "technique",
+  "name": "Lagrange Multipliers",
+  "tagline": "Optimize a multivariate function subject to equality constraints by setting gradient(f) = sum of lambda_i * gradient(g_i). The lambdas measure the constraints' shadow prices.",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.4",
+    "title": "Important Calculus Methods",
+    "exemplarProblemId": "ch3-14-distance-to-plane"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "To find local extrema of f(x_1, ..., x_n) subject to constraints g_1(x) = 0, ..., g_k(x) = 0, the necessary condition is that the gradient of f be a linear combination of the gradients of the constraints: gradient(f) + sum of lambda_i * gradient(g_i) = 0. The lambda_i are called Lagrange multipliers. Geometrically: at an extremum, you can't move 'along the constraint surface' without changing f."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The method gives n + k unknowns (n coordinates plus k multipliers) and n + k equations (n gradient conditions plus k constraint equations). Solving the system identifies candidate extremum points. You then evaluate f at each candidate to find the actual max or min."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "The constraint surface is like a fence. The function f has level curves. An extremum on the fence happens where a level curve is TANGENT to the fence -- the gradients align. Lagrange multipliers formalize this alignment."
+    }
+  ],
+  "whenToUse": [
+    "Constrained optimization in 2 or more variables.",
+    "Distance from a point to a curve, surface, or higher-dimensional object.",
+    "Maximum/minimum of f along a path defined by g(x) = c.",
+    "Economics / portfolio problems where lambda is interpretable as a 'shadow price' of a constraint."
+  ],
+  "recipe": [
+    "Identify the objective f and the constraints g_1, ..., g_k = 0.",
+    "Compute the gradients of f and each g_i.",
+    "Set up the system: gradient(f) + sum of lambda_i * gradient(g_i) = 0, plus the original constraints.",
+    "Solve the system. Often algebra reduces all variables to functions of a single lambda.",
+    "Evaluate f at each candidate and take the smallest (for min) or largest (for max)."
+  ],
+  "commonPitfalls": [
+    "Forgetting that gradient(f) is the gradient of the OBJECTIVE, not the Lagrangian. The sign convention for lambda is consistent but easy to mix up.",
+    "Solving only the gradient equations and skipping the constraint equations -- you must use both.",
+    "Failing to check the second-order condition -- Lagrange gives candidates, not classification.",
+    "Confusing equality constraints (Lagrange) with inequality constraints (KKT, a generalization).",
+    "Squaring the objective to avoid sqrt without realizing this preserves the optimum (true for non-negative objectives like distance squared)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-14-distance-to-plane", "title": "Distance from Origin to a Plane", "chapter": 3, "section": "3.4" }
+  ],
+  "relatedTechniques": ["limits-and-derivatives", "integration-techniques"]
+}

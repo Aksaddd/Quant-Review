@@ -1,0 +1,88 @@
+{
+  "id": "ch3-12-sqrt-37",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.4",
+  "title": "Approximate sqrt(37)",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "618-639"
+  },
+  "mechanism": {
+    "primary": "newton-method",
+    "structure": "single-newton-iteration-near-a-perfect-square",
+    "insight": "newton-iteration-on-x-squared-minus-37-equals-half-x-plus-37-over-x",
+    "variantAxes": ["target_number"]
+  },
+  "setup": {
+    "narrative": "Approximate sqrt(37) to three decimal digits without using a calculator.",
+    "rules": [
+      "You may use Newton's method, Taylor approximation, or simple algebra.",
+      "Three-digit accuracy is enough.",
+      "The closest perfect square is 36 (= 6^2), so 6 is a natural starting guess."
+    ],
+    "question": "What is sqrt(37) to 3 decimal digits?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up Newton's method for sqrt(N) by solving x^2 - N = 0.",
+    "Pick a good initial guess (the nearest perfect square's root).",
+    "See that one Newton iteration suffices for 3-digit accuracy when starting close."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute sqrt(37) by hand?",
+      "options": [
+        { "id": "a", "text": "Newton's method on f(x) = x^2 - 37, starting at x_0 = 6 (since 6^2 = 36, close to 37).", "correct": true },
+        { "id": "b", "text": "Long division by sqrt(37).",                                                            "correct": false },
+        { "id": "c", "text": "It's not possible without a calculator.",                                                "correct": false }
+      ],
+      "explanation": "Newton's method converges quadratically -- one iteration from a close start often suffices. f(x) = x^2 - 37 has root at sqrt(37); starting at 6 (where the function is -1) gives a tiny correction.",
+      "learnMoreTechnique": "newton-method"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute f(x_0) and f'(x_0)",
+      "prompt": "With f(x) = x^2 - 37 and x_0 = 6: what is f(x_0)?",
+      "answerType": "numeric",
+      "answer": -1,
+      "explanation": "f(6) = 6^2 - 37 = 36 - 37 = -1. (Also f'(x) = 2x, so f'(6) = 12.)"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Apply one Newton iteration",
+      "prompt": "x_1 = x_0 - f(x_0) / f'(x_0) = 6 - (-1) / 12 = 6 + 1/12. Compute to 3 decimals.",
+      "answerType": "numeric",
+      "answer": 6.083,
+      "explanation": "1/12 = 0.0833... so x_1 = 6 + 0.0833 = 6.0833. Rounded to 3 decimals: 6.083."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit and verify",
+      "prompt": "Verify: 6.083^2 = ?",
+      "options": [
+        { "id": "a", "text": "6.083^2 = 37.003 -- agrees with sqrt(37) to 3 decimals.",  "correct": true },
+        { "id": "b", "text": "6.083^2 = 36 -- not a good approximation.",                  "correct": false },
+        { "id": "c", "text": "6.083^2 = 37 exactly.",                                       "correct": false }
+      ],
+      "explanation": "(6.083)^2 = 36 + 2*6*0.083 + 0.083^2 = 36 + 0.996 + 0.0069 ~ 37.003. So sqrt(37) ~ 6.083 to 3 decimals. The actual value is 6.08276..."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify: the same Newton iteration formula simplifies to x_{n+1} = (x_n + 37/x_n)/2 -- the famous 'Babylonian' / 'Heron' method for square roots.",
+        "Apply Newton to sqrt(50). What's a good starting point and what's the result?",
+        "Why is the linear Taylor approximation sqrt(36) + 1/(2*sqrt(36)) * 1 the same as one Newton iteration here?"
+      ]
+    }
+  ]
+}

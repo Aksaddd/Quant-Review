@@ -1,0 +1,96 @@
+{
+  "id": "ch3-11-bernoulli-inequality",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.4",
+  "title": "Bernoulli's Inequality",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "564-596"
+  },
+  "mechanism": {
+    "primary": "taylor-series",
+    "structure": "show-the-taylor-remainder-term-is-positive",
+    "insight": "1-plus-nx-is-the-first-two-terms-of-the-taylor-series-and-the-third-term-is-positive",
+    "variantAxes": ["exponent_n", "x_range"]
+  },
+  "setup": {
+    "narrative": "Consider the function f(x) = (1 + x)^n where n is a fixed integer >= 2.",
+    "rules": [
+      "x is a real number with x > -1 (so 1 + x > 0 and the expression is well-defined).",
+      "n is a fixed integer with n >= 2.",
+      "We want to prove the inequality (1 + x)^n > 1 + nx for all such x and n."
+    ],
+    "question": "Prove Bernoulli's inequality: (1 + x)^n > 1 + nx for all x > -1 and integers n >= 2."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that 1 + nx is the first two terms of the Taylor expansion of (1+x)^n.",
+    "Use the Lagrange form of the remainder to capture the truncation error.",
+    "Show the remainder is strictly positive under the given constraints."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's a clean way to prove (1+x)^n > 1 + nx?",
+      "options": [
+        { "id": "a", "text": "Taylor expand f(x) = (1+x)^n around x_0 = 0. The first two terms give 1 + nx; show the remainder is positive.", "correct": true },
+        { "id": "b", "text": "Compute (1+x)^n numerically for several x.",                                                                          "correct": false },
+        { "id": "c", "text": "Differentiate both sides.",                                                                                            "correct": false }
+      ],
+      "explanation": "Taylor's series with Lagrange remainder gives an EXACT formula: f(x) = (first two terms) + (positive remainder). So f(x) STRICTLY exceeds the first two terms.",
+      "learnMoreTechnique": "taylor-series"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute the Taylor expansion to order 2",
+      "prompt": "Expand f(x) = (1+x)^n around x_0 = 0 with second-order Lagrange remainder. What do you get?",
+      "options": [
+        { "id": "a", "text": "(1+x)^n = 1 + nx + [n(n-1)(1+x_bar)^(n-2) / 2] * x^2  for some x_bar between 0 and x.", "correct": true },
+        { "id": "b", "text": "(1+x)^n = 1 + nx + x^2",                                                                  "correct": false },
+        { "id": "c", "text": "(1+x)^n = 1 + nx",                                                                         "correct": false }
+      ],
+      "explanation": "f(0) = 1, f'(0) = n, and f''(x) = n(n-1)(1+x)^(n-2). The Lagrange remainder evaluates f'' at some intermediate x_bar."
+    },
+    {
+      "id": "s3",
+      "type": "mc-multi",
+      "label": "Show the remainder is positive",
+      "prompt": "The remainder is [n(n-1)(1+x_bar)^(n-2) / 2] * x^2. Which factors are STRICTLY POSITIVE under the given conditions (n >= 2, x > -1, x != 0)?",
+      "options": [
+        { "id": "n",      "text": "n is positive (n >= 2)",                                       "correct": true },
+        { "id": "nminus1","text": "(n-1) is positive (n - 1 >= 1)",                                "correct": true },
+        { "id": "base",   "text": "(1 + x_bar)^(n-2) is positive (since x_bar > -1)",              "correct": true },
+        { "id": "x2",     "text": "x^2 is positive (x != 0)",                                       "correct": true },
+        { "id": "x",      "text": "x itself is positive (it's not in our case x > -1 generally)",   "correct": false }
+      ],
+      "explanation": "All four selected factors are positive: n >= 2 > 0, n - 1 >= 1 > 0, (1 + x_bar)^(n-2) > 0 (since x_bar > -1 makes 1 + x_bar > 0), and x^2 > 0 for x != 0. The product is positive. So the remainder is strictly positive whenever x != 0."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Conclude the proof.",
+      "options": [
+        { "id": "a", "text": "(1+x)^n = 1 + nx + (positive remainder), so (1+x)^n > 1 + nx for x != 0. (At x = 0, both sides equal 1.) The inequality is proven.", "correct": true },
+        { "id": "b", "text": "We need induction instead.",                                                                                                              "correct": false },
+        { "id": "c", "text": "The proof fails when n is even.",                                                                                                          "correct": false }
+      ],
+      "explanation": "The Taylor expansion equals 1 + nx PLUS a strictly positive number (the remainder), so (1+x)^n strictly exceeds 1 + nx. The inequality is established for all x != 0 with x > -1, and trivially holds with equality at x = 0."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Reprove the inequality by INDUCTION on n. Base case n = 2: (1+x)^2 > 1 + 2x. Inductive step: assume for k, prove for k+1.",
+        "What if n is a NON-integer real, say n = 3.5? Does the inequality still hold? Where does the proof break?",
+        "What is the strongest CONVEX-FUNCTION argument for the same inequality? (Hint: Jensen's inequality.)"
+      ]
+    }
+  ]
+}

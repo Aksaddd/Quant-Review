@@ -1,0 +1,106 @@
+{
+  "id": "ch3-10-i-to-the-i",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.4",
+  "title": "What is i^i?",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "534-560"
+  },
+  "mechanism": {
+    "primary": "taylor-series",
+    "structure": "use-eulers-formula-derived-from-taylor-series",
+    "insight": "i-to-the-i-equals-e-to-the-i-times-ln-i-and-ln-i-equals-i-pi-over-2",
+    "variantAxes": ["base", "exponent"]
+  },
+  "setup": {
+    "narrative": "i is the imaginary unit (i^2 = -1). The expression i^i raises i to the i-th power.",
+    "rules": [
+      "You may use Euler's formula e^(i*theta) = cos(theta) + i*sin(theta).",
+      "You may use the identity x^y = e^(y * ln x) for any positive x and any y.",
+      "ln(i) is well-defined as a particular complex number (we'll derive it)."
+    ],
+    "question": "What is i^i? Is it a real number?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Derive Euler's formula by Taylor-expanding e^(i*theta).",
+    "Use Euler's formula to find ln(i) = i*pi/2.",
+    "Apply x^y = e^(y * ln x) with x = i, y = i."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach to evaluate i^i?",
+      "options": [
+        { "id": "a", "text": "Use Taylor series to derive Euler's formula, then express i^i as e^(i*ln(i)).", "correct": true },
+        { "id": "b", "text": "i^i is undefined.",                                                              "correct": false },
+        { "id": "c", "text": "Just compute i*i = -1.",                                                          "correct": false }
+      ],
+      "explanation": "i^i is well-defined as e^(i * ln(i)). The trick is expressing ln(i) using Euler's formula, which itself comes from Taylor series.",
+      "learnMoreTechnique": "taylor-series"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Derive Euler's formula via Taylor",
+      "prompt": "Expand e^(i*theta) = sum of (i*theta)^n / n!. Group real and imaginary parts. What do you get?",
+      "options": [
+        { "id": "a", "text": "Real part: 1 - theta^2/2! + theta^4/4! - ... = cos(theta).  Imaginary part: theta - theta^3/3! + theta^5/5! - ... = sin(theta).  So e^(i*theta) = cos(theta) + i*sin(theta).", "correct": true },
+        { "id": "b", "text": "e^(i*theta) = e * theta",                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "e^(i*theta) = cos(theta) - i*sin(theta)",                                                                                                                                        "correct": false }
+      ],
+      "explanation": "Powers of i cycle: i^0=1, i^1=i, i^2=-1, i^3=-i, i^4=1, .... So (i*theta)^n / n! contributes to the real part for even n (with alternating sign) and to the imaginary part for odd n (with alternating sign). Pattern-match: real = Taylor of cos, imaginary = Taylor of sin."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Find ln(i)",
+      "prompt": "Use Euler's formula at theta = pi/2. What is e^(i*pi/2)?",
+      "options": [
+        { "id": "a", "text": "e^(i*pi/2) = cos(pi/2) + i*sin(pi/2) = 0 + i*1 = i.  So ln(i) = i*pi/2.", "correct": true },
+        { "id": "b", "text": "e^(i*pi/2) = -1",                                                          "correct": false },
+        { "id": "c", "text": "ln(i) = 0",                                                                "correct": false }
+      ],
+      "explanation": "At theta = pi/2: cos(pi/2) = 0, sin(pi/2) = 1, so e^(i*pi/2) = i. Taking ln: ln(i) = i*pi/2 (this is the principal branch)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply the identity x^y = e^(y * ln x)",
+      "prompt": "i^i = e^(i * ln i) = e^(i * (i*pi/2)) = ?",
+      "options": [
+        { "id": "a", "text": "e^(i^2 * pi/2) = e^(-pi/2)", "correct": true },
+        { "id": "b", "text": "e^(i*pi/2)",                  "correct": false },
+        { "id": "c", "text": "i*pi/2",                       "correct": false }
+      ],
+      "explanation": "i * (i*pi/2) = i^2 * pi/2 = -pi/2. So i^i = e^(-pi/2)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What is i^i, and is it real?",
+      "options": [
+        { "id": "a", "text": "i^i = e^(-pi/2) ~ 0.2079.  YES, it is a REAL number.", "correct": true },
+        { "id": "b", "text": "i^i = i  (still imaginary).",                            "correct": false },
+        { "id": "c", "text": "i^i is undefined.",                                       "correct": false }
+      ],
+      "explanation": "i^i = e^(-pi/2) is a positive real number, approximately 0.2079. The fact that an imaginary number raised to an imaginary power gives a real number is one of the most surprising results in elementary complex analysis."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is (-1)^i? Use the same method.",
+        "Does i^i have OTHER values? (Hint: ln(i) has multiple branches: i*pi/2, i*5*pi/2, ....)",
+        "What does Euler's identity e^(i*pi) + 1 = 0 mean intuitively?"
+      ]
+    }
+  ]
+}

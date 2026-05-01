@@ -1,0 +1,56 @@
+{
+  "id": "newton-method",
+  "kind": "technique",
+  "name": "Newton's Method",
+  "tagline": "Iteratively solve f(x) = 0 by linearizing at each guess: x_{n+1} = x_n - f(x_n)/f'(x_n). Quadratic convergence when it converges; not always guaranteed.",
+  "category": "calculus",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.4",
+    "title": "Important Calculus Methods",
+    "exemplarProblemId": "ch3-12-sqrt-37"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Newton's method (Newton-Raphson) is an iterative algorithm for solving f(x) = 0. Starting from a guess x_0, the next guess comes from approximating f as its tangent line at x_n and solving where the tangent crosses zero: x_{n+1} = x_n - f(x_n) / f'(x_n). The derivation is just a one-step Taylor expansion of f around x_n."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "When Newton's method converges, it does so QUADRATICALLY: |x_{n+1} - x*| / |x_n - x*|^2 stays bounded. Each step roughly squares the error. This makes Newton extremely fast in practice -- 5 or 6 iterations typically reach machine precision -- but convergence requires a good initial guess."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "At each step you draw the tangent line to f at your current guess and slide to where the tangent hits zero. The closer you start to the true root, the more the curve looks like its tangent, and the faster you converge. Bad starting points can send you anywhere."
+    }
+  ],
+  "whenToUse": [
+    "Solving f(x) = 0 when f is smooth and you have a reasonable initial guess.",
+    "Computing square roots, cube roots, and other algebraic quantities to high precision.",
+    "Solving transcendental equations where no closed form exists.",
+    "Anywhere quadratic convergence is needed and computing f'(x) is cheap."
+  ],
+  "recipe": [
+    "Pick an initial guess x_0 close to the suspected root.",
+    "Compute x_{n+1} = x_n - f(x_n) / f'(x_n).",
+    "Check the residual |f(x_{n+1})|. If it's within tolerance, stop.",
+    "Otherwise iterate. Each step roughly squares the error.",
+    "If iteration diverges or oscillates, try a different starting point or a more robust method (bisection, secant)."
+  ],
+  "commonPitfalls": [
+    "Starting too far from the root -- iteration may diverge or land at a different root.",
+    "f'(x_n) = 0 at some iterate -- the formula divides by zero.",
+    "Functions with multiple roots near the start -- you may converge to the wrong one.",
+    "Functions with inflection points or near-zero derivatives -- convergence may be slower than quadratic.",
+    "Using Newton's method when f is not smooth -- the linearization is meaningless near kinks."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-12-sqrt-37",                  "title": "Approximate sqrt(37)",   "chapter": 3, "section": "3.4" },
+    { "problemId": "ch3-13-root-finding-algorithms",  "title": "Root-Finding Algorithms", "chapter": 3, "section": "3.4" }
+  ],
+  "relatedTechniques": ["taylor-series", "limits-and-derivatives"]
+}
