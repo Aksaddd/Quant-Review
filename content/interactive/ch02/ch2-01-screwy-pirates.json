@@ -1,0 +1,301 @@
+{
+  "id": "ch2-01-screwy-pirates",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.1",
+  "title": "Screwy Pirates",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "37-59"
+  },
+  "mechanism": {
+    "primary": "backward-induction",
+    "structure": "sequential-elimination-vote",
+    "insight": "bribe-the-pirate-who-gets-zero-next-round",
+    "variantAxes": ["n_players", "vote_threshold", "tie_breaking", "resource_count", "story_surface"]
+  },
+  "setup": {
+    "narrative": "Five pirates loot a chest of 100 gold coins. They divide it as follows.",
+    "rules": [
+      "The most senior pirate proposes a distribution.",
+      "All pirates vote, including the proposer.",
+      "If at least 50% accept, gold is divided as proposed.",
+      "If not, the most senior pirate is killed and the process repeats.",
+      "Pirates are perfectly rational. Priorities: (1) stay alive, (2) maximize gold, (3) prefer fewer pirates if otherwise indifferent."
+    ],
+    "question": "How will the gold be divided?"
+  },
+  "skipToCommitStageId": "s6",
+  "learningObjectives": [
+    "Apply backward induction to a sequential elimination game.",
+    "Identify the cheapest coalition the proposer can buy.",
+    "Recognize the parity pattern in elimination-vote games."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "If a proposal gets exactly 50% of the votes, what happens?",
+      "options": [
+        { "id": "a", "text": "Proposal fails -- strict majority required.", "correct": false },
+        { "id": "b", "text": "Proposal passes -- 50% is the acceptance threshold.", "correct": true },
+        { "id": "c", "text": "Goes to a tie-breaking second round.", "correct": false }
+      ],
+      "explanation": "The rule says 'at least 50% accept' -- a tie passes. This is what makes the proposer's job easier than it looks."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "Which technique most directly cracks this problem?",
+      "options": [
+        { "id": "a", "text": "Symmetry argument", "correct": false },
+        { "id": "b", "text": "Backward induction from the smallest sub-case", "correct": true },
+        { "id": "c", "text": "Bayes' theorem", "correct": false },
+        { "id": "d", "text": "Generating functions", "correct": false }
+      ],
+      "explanation": "Section 2.1 is 'Problem Simplification.' Each pirate's decision depends on what would happen one step later -- that's backward induction."
+    },
+    {
+      "id": "s3",
+      "type": "self-grade",
+      "label": "Base case",
+      "prompt": "What is the simplest version of this game you should solve first? (One-line answer.)",
+      "canonicalAnswer": "The 2-pirate case. The senior pirate keeps all 100 coins because their own vote is exactly 50%.",
+      "ratingScale": [
+        { "value": 1, "label": "Forgot" },
+        { "value": 2, "label": "Hard" },
+        { "value": 3, "label": "Good" },
+        { "value": 4, "label": "Easy" }
+      ],
+      "hint": "What's the smallest number of pirates where the rules still apply?"
+    },
+    {
+      "id": "s4-n2",
+      "type": "ladder-step",
+      "label": "Ladder: n = 2",
+      "prompt": "With 2 pirates and 100 coins, how many coins does Pirate 2 keep?",
+      "answerType": "numeric",
+      "answer": 100,
+      "followUp": {
+        "prompt": "Which pirates vote YES?",
+        "type": "mc-multi",
+        "options": [
+          { "id": "p2", "text": "Pirate 2 (proposer)", "correct": true },
+          { "id": "p1", "text": "Pirate 1", "correct": false }
+        ]
+      },
+      "explanation": "P2's own vote is 1 of 2 = 50%, which passes. P1 has no leverage."
+    },
+    {
+      "id": "s4-n3",
+      "type": "ladder-step",
+      "label": "Ladder: n = 3",
+      "prompt": "With 3 pirates, how many coins does Pirate 3 keep?",
+      "answerType": "numeric",
+      "answer": 99,
+      "followUp": {
+        "prompt": "Whose vote does Pirate 3 buy with 1 coin?",
+        "type": "mc-single",
+        "options": [
+          { "id": "p1", "text": "Pirate 1 (would get 0 if P3 dies)", "correct": true },
+          { "id": "p2", "text": "Pirate 2 (would get 100 if P3 dies)", "correct": false }
+        ]
+      },
+      "explanation": "If P3 dies the game collapses to n=2 where P1 gets 0. So P1 accepts any positive offer. P3 offers 1 to P1, keeps 99. Passes 2-of-3."
+    },
+    {
+      "id": "s4-n4",
+      "type": "ladder-step",
+      "label": "Ladder: n = 4",
+      "prompt": "With 4 pirates, how many coins does Pirate 4 keep?",
+      "answerType": "numeric",
+      "answer": 99,
+      "followUp": {
+        "prompt": "Whose vote does Pirate 4 buy with 1 coin?",
+        "type": "mc-single",
+        "options": [
+          { "id": "p1", "text": "Pirate 1", "correct": false },
+          { "id": "p2", "text": "Pirate 2 (gets 0 in the n=3 outcome)", "correct": true },
+          { "id": "p3", "text": "Pirate 3 (keeps 99 if P4 dies)", "correct": false }
+        ]
+      },
+      "explanation": "If P4 dies the n=3 outcome fires (P3=99, P1=1, P2=0). P2 is the cheapest flip. P4 offers P2 one coin, keeps 99. Passes 2-of-4 (50%)."
+    },
+    {
+      "id": "s4-n5",
+      "type": "ladder-step",
+      "label": "Ladder: n = 5 (the original)",
+      "prompt": "5 pirates, 100 coins. How many coins does Pirate 5 keep?",
+      "answerType": "numeric",
+      "answer": 98,
+      "followUp": {
+        "prompt": "Which TWO pirates does Pirate 5 buy off with 1 coin each?",
+        "type": "mc-multi",
+        "exactCount": 2,
+        "options": [
+          { "id": "p1", "text": "Pirate 1 (gets 0 in n=4 outcome)", "correct": true },
+          { "id": "p2", "text": "Pirate 2 (gets 1 in n=4 outcome)", "correct": false },
+          { "id": "p3", "text": "Pirate 3 (gets 0 in n=4 outcome)", "correct": true },
+          { "id": "p4", "text": "Pirate 4 (keeps 99 if P5 dies)", "correct": false }
+        ]
+      },
+      "explanation": "If P5 dies the n=4 outcome fires (P4=99, P2=1, P1=P3=0). P5 buys the cheapest two votes (P1 and P3) at 1 coin each, keeps 98. Passes 3-of-5."
+    },
+    {
+      "id": "s5",
+      "type": "cloze",
+      "label": "Pattern",
+      "prompt": "Fill in the rule from your ladder.",
+      "template": "In the 5-pirate game, Pirate 5 offers __[a]__ coin each to pirates __[b]__ and __[c]__, and keeps __[d]__ coins.",
+      "blanks": [
+        { "id": "a", "answers": ["1", "one"], "caseInsensitive": true },
+        { "id": "b", "answers": ["1"], "caseInsensitive": true },
+        { "id": "c", "answers": ["3"], "caseInsensitive": true },
+        { "id": "d", "answers": ["98"], "caseInsensitive": true }
+      ],
+      "explanation": "The proposer always bribes the pirates who would get nothing in the (n-1) game -- by induction, the odd-numbered pirates."
+    },
+    {
+      "id": "s6",
+      "type": "numeric-grid",
+      "label": "Commit final answer",
+      "prompt": "Distribute the 100 coins. Each row is a non-negative integer. Total = 100.",
+      "rows": [
+        { "id": "p1", "label": "Pirate 1", "answer": 1 },
+        { "id": "p2", "label": "Pirate 2", "answer": 0 },
+        { "id": "p3", "label": "Pirate 3", "answer": 1 },
+        { "id": "p4", "label": "Pirate 4", "answer": 0 },
+        { "id": "p5", "label": "Pirate 5", "answer": 98 }
+      ],
+      "constraint": { "type": "sum-equals", "value": 100 },
+      "explanation": "P5 = 98, P1 = P3 = 1, P2 = P4 = 0."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "In one sentence, what was the key insight that unlocked this problem?",
+        "Name another problem (in this book or elsewhere) where 'work backward from the smallest sub-case' would apply.",
+        "If the threshold were a 2/3 supermajority, would your method still work? Where would you start?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-01-v1-seven-pirates",
+      "parentId": "ch2-01-screwy-pirates",
+      "kind": "drill",
+      "axes": { "n_players": 7, "resource_count": 100, "vote_threshold": "50%" },
+      "title": "Screwy Pirates -- 7 Pirates",
+      "setup": {
+        "narrative": "Same rules as the parent problem. Now there are 7 pirates and still 100 gold coins.",
+        "question": "How will the gold be divided?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the pattern",
+          "prompt": "Using the rule from the parent problem, who gets 1 coin each in the 7-pirate game?",
+          "options": [
+            { "id": "a", "text": "Pirates 1, 3, 5", "correct": true },
+            { "id": "b", "text": "Pirates 2, 4, 6", "correct": false },
+            { "id": "c", "text": "Pirates 1, 2, 3", "correct": false }
+          ],
+          "explanation": "Senior is P7, needs 4-of-7 votes (own + 3). The cheapest 3 are the odd-numbered pirates 1, 3, 5."
+        },
+        {
+          "id": "v1-s2",
+          "type": "numeric-grid",
+          "label": "Commit",
+          "prompt": "Distribute 100 coins.",
+          "rows": [
+            { "id": "p1", "label": "P1", "answer": 1 },
+            { "id": "p2", "label": "P2", "answer": 0 },
+            { "id": "p3", "label": "P3", "answer": 1 },
+            { "id": "p4", "label": "P4", "answer": 0 },
+            { "id": "p5", "label": "P5", "answer": 1 },
+            { "id": "p6", "label": "P6", "answer": 0 },
+            { "id": "p7", "label": "P7", "answer": 97 }
+          ],
+          "constraint": { "type": "sum-equals", "value": 100 },
+          "explanation": "P7 keeps 97; bribes P1, P3, P5 with 1 coin each."
+        }
+      ]
+    },
+    {
+      "id": "ch2-01-v2-supermajority",
+      "parentId": "ch2-01-screwy-pirates",
+      "kind": "stretch",
+      "axes": { "n_players": 5, "resource_count": 100, "vote_threshold": "2/3 (rounded up)" },
+      "title": "Screwy Pirates -- Supermajority",
+      "setup": {
+        "narrative": "Same crew of 5 pirates, same 100 coins. Now a proposal needs ceil(2/3) acceptance to pass.",
+        "question": "How will the gold be divided?"
+      },
+      "stages": [
+        {
+          "id": "v2-s1",
+          "type": "mc-single",
+          "label": "Threshold consequence",
+          "prompt": "With 5 pirates and a ceil(2/3) threshold, how many YES votes does the proposer need?",
+          "options": [
+            { "id": "a", "text": "3", "correct": false },
+            { "id": "b", "text": "4", "correct": true },
+            { "id": "c", "text": "5", "correct": false }
+          ],
+          "explanation": "ceil(2/3 * 5) = 4. P5 needs own vote + 3 others."
+        },
+        {
+          "id": "v2-s2",
+          "type": "ladder-step",
+          "label": "Re-walk: n = 2",
+          "prompt": "With 2 pirates and a ceil(2/3) threshold, what happens?",
+          "answerType": "mc-single",
+          "options": [
+            { "id": "a", "text": "P2 keeps 100.", "correct": false },
+            { "id": "b", "text": "P2 dies. P1 keeps 100.", "correct": true }
+          ],
+          "explanation": "ceil(2/3 * 2) = 2 -- P2 needs both votes. P1 vetoes (would inherit everything). P2 dies."
+        },
+        {
+          "id": "v2-s3",
+          "type": "ladder-step",
+          "label": "Re-walk: n = 3",
+          "prompt": "With 3 pirates, how many coins does P3 keep?",
+          "answerType": "numeric",
+          "answer": 100,
+          "explanation": "ceil(2/3 * 3) = 2. If P3 dies the n=2 case fires and P2 dies. So P2 will accept 0 just to survive. P3 + P2 = 2 votes. P3 keeps everything."
+        },
+        {
+          "id": "v2-s4",
+          "type": "ladder-step",
+          "label": "Re-walk: n = 4",
+          "prompt": "How many coins does P4 keep?",
+          "answerType": "numeric",
+          "answer": 98,
+          "explanation": "ceil(2/3 * 4) = 3. If P4 dies the n=3 outcome fires (P3=100, P2=0, P1=0). P4 needs 2 outside votes. P1 and P2 each get 0 in fallback -- bribe each with 1 coin. P4 keeps 98."
+        },
+        {
+          "id": "v2-s5",
+          "type": "numeric-grid",
+          "label": "Commit (n = 5)",
+          "prompt": "Now the original 5-pirate game with the ceil(2/3) rule. Distribute 100 coins.",
+          "rows": [
+            { "id": "p1", "label": "P1", "answer": 2 },
+            { "id": "p2", "label": "P2", "answer": 2 },
+            { "id": "p3", "label": "P3", "answer": 1 },
+            { "id": "p4", "label": "P4", "answer": 0 },
+            { "id": "p5", "label": "P5", "answer": 95 }
+          ],
+          "constraint": { "type": "sum-equals", "value": 100 },
+          "explanation": "P5 needs 4 votes. Fallback (n=4): P4=98, P1=1, P2=1, P3=0. Cheapest 3 to flip: P3 (offer 1, beats 0), P1 (offer 2, beats 1), P2 (offer 2, beats 1). Total bribes = 5. P5 keeps 95. Note the parity pattern from the parent problem does NOT survive -- the threshold change breaks it."
+        }
+      ]
+    }
+  ]
+}

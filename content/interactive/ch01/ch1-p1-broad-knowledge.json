@@ -1,0 +1,83 @@
+{
+  "id": "ch1-p1-broad-knowledge",
+  "kind": "reading-section",
+  "chapter": 1,
+  "section": "1.1",
+  "title": "Principle 1: Build a Broad Knowledge Base",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-01-general-principles.md",
+    "lines": "15-29"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Quant interviews can include brain teasers, calculus, linear algebra, probability, statistics, derivative pricing, or programming. Success requires broad knowledge in math, finance, and programming."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Each specific quant role often requires only limited knowledge in any one domain. General problem-solving skills may matter more than specific knowledge."
+    },
+    {
+      "id": "b3",
+      "type": "list-numbered",
+      "title": "Two reasons interviews are so comprehensive:",
+      "items": [
+        "Each interviewer has favorite topics tied to their own background.",
+        "A basic grasp of many topics improves analysis and helps you contribute beyond your own projects."
+      ]
+    },
+    {
+      "id": "b4",
+      "type": "callout",
+      "label": "Key Insight",
+      "text": "Interviewers do not expect expert-level knowledge unless it is literally your PhD topic. Know the basics very well."
+    }
+  ],
+  "learningObjectives": [
+    "State the two reasons Zhou gives for why quant interviews test broadly.",
+    "Distinguish 'basic understanding' from 'expert-level knowledge'.",
+    "Apply the principle to allocating limited study time."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-multi",
+      "label": "Comprehension",
+      "prompt": "According to Zhou, why are quant interviews so broad? Select all that apply.",
+      "targetBlocks": ["b3"],
+      "options": [
+        { "id": "a", "text": "Each interviewer's favorite topics reflect their own background.", "correct": true },
+        { "id": "b", "text": "A basic grasp of many topics improves analysis and team contribution.", "correct": true },
+        { "id": "c", "text": "Most quant roles actually require deep mastery of every topic in the interview.", "correct": false },
+        { "id": "d", "text": "Firms use breadth as a way to filter for IQ.", "correct": false }
+      ],
+      "explanation": "Zhou gives exactly two reasons in block b3. He explicitly notes most roles only need limited depth in any one domain, so (c) is wrong. (d) is plausible but not what the text says."
+    },
+    {
+      "id": "s2",
+      "type": "scenario",
+      "label": "Application",
+      "prompt": "You have 6 weeks to prepare. You're a probability PhD with no finance background. A friend says: 'You should spend the whole 6 weeks going deep on stochastic calculus -- it's your strongest area, lean into it.' Is this advice consistent with Zhou's principle?",
+      "targetBlocks": ["b1", "b2", "b4"],
+      "options": [
+        { "id": "a", "text": "Yes -- playing to your strength maximizes your interview signal.", "correct": false },
+        { "id": "b", "text": "No -- Zhou would say you need basic competence across math, finance, and programming, not deep mastery of one area.", "correct": true },
+        { "id": "c", "text": "Yes -- interviewers will pick the topic you're strongest in.", "correct": false },
+        { "id": "d", "text": "No -- Zhou would say drop probability entirely and focus on what you don't know.", "correct": false }
+      ],
+      "explanation": "The principle is breadth at a basic level. (b) is the right reading. (d) overshoots -- keep your strength, but fill the gaps."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection (your notes -- not graded)",
+      "targetBlocks": ["b4"],
+      "prompts": [
+        "Look at the seven chapter topics in this book. Which two are weakest for you right now?",
+        "How will you allocate study time across them given Zhou's 'know the basics very well' rule?"
+      ]
+    }
+  ]
+}
