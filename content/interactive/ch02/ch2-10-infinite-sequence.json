@@ -1,0 +1,143 @@
+{
+  "id": "ch2-10-infinite-sequence",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Infinite Sequence",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "245-255"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "self-similarity-fixed-point",
+    "insight": "infinity-makes-the-tail-equal-the-whole",
+    "variantAxes": ["target_value"]
+  },
+  "setup": {
+    "narrative": "Define an infinite power tower: x ^ x ^ x ^ x ^ ... where ^ denotes exponentiation, evaluated right-to-left.",
+    "rules": [
+      "The tower extends infinitely upward.",
+      "All exponents are the same value x > 0.",
+      "Assume the tower converges to a finite value.",
+      "You are told the tower equals 2."
+    ],
+    "question": "What is x?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize when self-similarity reduces an infinite expression to a finite equation.",
+    "Use substitution to expose a fixed-point equation.",
+    "Spot the convergence question lurking behind an algebraic answer."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "What does 'x ^ x ^ x ^ ...' mean exactly?",
+      "options": [
+        { "id": "a", "text": "x * x * x * ... (an infinite product).",                                          "correct": false },
+        { "id": "b", "text": "x ^ (x ^ (x ^ ...)) -- right-associated exponentiation, evaluated from the top.", "correct": true },
+        { "id": "c", "text": "(((x ^ x) ^ x) ^ ...) -- left-associated.",                                          "correct": false }
+      ],
+      "explanation": "Power towers are right-associative by convention: a^b^c means a^(b^c). The tower is infinite, so the 'top' is at infinity -- but that's exactly what makes the trick work."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right move?",
+      "options": [
+        { "id": "a", "text": "Probability over the unknown structure of an infinite expression.",                              "correct": false },
+        { "id": "b", "text": "Logic reasoning: exploit the fact that an infinite tower minus its base is still infinite.",     "correct": true },
+        { "id": "c", "text": "Numerical solver -- there's no closed form.",                                                     "correct": false }
+      ],
+      "explanation": "The classic move on infinite self-similar expressions: removing one layer doesn't change the tail, so the tail equals the whole. That collapses the infinite expression to a finite equation.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Apply self-similarity",
+      "prompt": "Let T = the value of the entire tower. Then x ^ T equals... ?",
+      "options": [
+        { "id": "a", "text": "T (the whole tower, since x^(rest of tower) IS the whole tower).", "correct": true },
+        { "id": "b", "text": "T^2",                                                                "correct": false },
+        { "id": "c", "text": "x^x (only the bottom two)",                                          "correct": false }
+      ],
+      "explanation": "x^(x^x^...) is just the tower with one extra x on the bottom -- but the tower is INFINITE, so adding an x on the bottom gives an equally-infinite tower. Both equal T."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Solve the fixed-point equation",
+      "prompt": "Given T = 2 (we're told the tower equals 2), and x^T = T, write the equation for x and solve it. What is x?",
+      "answerType": "numeric",
+      "answer": 1.4142,
+      "explanation": "x^2 = 2, so x = sqrt(2) ~ 1.4142. Numeric input accepts decimals. The exact answer is sqrt(2)."
+    },
+    {
+      "id": "s5",
+      "type": "cloze",
+      "label": "Pattern",
+      "prompt": "Fill in the general pattern for an infinite tower equal to T.",
+      "template": "If x ^ x ^ x ^ ... = T, then x = T ^ (1/__[a]__) = T ^ (1/T). Substituting T = 2 gives x = 2 ^ (1/2) = __[b]__.",
+      "blanks": [
+        { "id": "a", "answers": ["T", "t"], "caseInsensitive": true },
+        { "id": "b", "answers": ["sqrt(2)", "√2", "1.4142", "1.41"], "caseInsensitive": true }
+      ],
+      "explanation": "From x^T = T, take T-th root: x = T^(1/T). For T = 2: x = 2^(1/2) = sqrt(2)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "If T = 4 instead of 2, what would x be? (Compute and check whether the tower actually converges to 4.)",
+        "When does the tower x^x^x... actually CONVERGE for a given x? (Hint: it converges only on a specific interval.)",
+        "What would 'x + x + x + ... = 2' tell you about x?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-10-v1-equals-four",
+      "parentId": "ch2-10-infinite-sequence",
+      "kind": "stretch",
+      "axes": { "target_value": 4 },
+      "title": "Infinite Sequence -- Tower Equals 4",
+      "setup": {
+        "narrative": "Same infinite tower: x ^ x ^ x ^ ... Now you're told it equals 4.",
+        "question": "What is x?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply T = 4",
+          "prompt": "Using x = T^(1/T), compute x for T = 4.",
+          "options": [
+            { "id": "a", "text": "x = 4^(1/4) = sqrt(2) ~ 1.414",  "correct": true },
+            { "id": "b", "text": "x = 2",                            "correct": false },
+            { "id": "c", "text": "x = 4",                            "correct": false }
+          ],
+          "explanation": "4^(1/4) = (2^2)^(1/4) = 2^(1/2) = sqrt(2). Same answer as the parent problem! That's not a coincidence -- the function T^(1/T) reaches its maximum at T = e and is non-monotonic. T = 2 and T = 4 give the same x."
+        },
+        {
+          "id": "v1-s2",
+          "type": "mc-single",
+          "label": "But wait -- does the tower actually converge to 4?",
+          "prompt": "If the same x = sqrt(2) gives both T = 2 and T = 4 algebraically, which value does the tower ACTUALLY converge to when you compute it?",
+          "options": [
+            { "id": "a", "text": "It converges to 2.", "correct": true },
+            { "id": "b", "text": "It converges to 4.", "correct": false },
+            { "id": "c", "text": "It oscillates between 2 and 4.", "correct": false }
+          ],
+          "explanation": "The tower for x = sqrt(2) converges to 2, NOT 4. The fixed-point equation has multiple solutions, but only ONE is the actual limit. T = 4 is an algebraic fixed point but an unstable one -- the iteration doesn't converge to it. Lesson: 'self-similarity gives an equation' is necessary but not sufficient. Always check convergence."
+        }
+      ]
+    }
+  ]
+}

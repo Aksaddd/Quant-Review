@@ -1,0 +1,118 @@
+{
+  "id": "ch2-07-defective-ball",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Defective Ball",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "184-205"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "ternary-information-channel",
+    "insight": "balance-scale-has-three-outcomes-not-two",
+    "variantAxes": ["n_balls", "n_weighings", "direction_known"]
+  },
+  "setup": {
+    "narrative": "You have 12 identical-looking balls. Exactly one is defective -- it's either heavier OR lighter than the others (you don't know which).",
+    "rules": [
+      "You have a balance scale that compares two groups and tells you which side is heavier (or that they balance).",
+      "You may use the scale at most 3 times.",
+      "You must identify the defective ball AND determine whether it is heavier or lighter."
+    ],
+    "question": "Is this possible? If so, what is the procedure?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that a balance scale yields ternary information (3 outcomes), not binary.",
+    "Compute the information capacity 3^n and compare to the problem's required distinguishability.",
+    "Understand why dividing into three groups is the right first move."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "How many distinct outcomes does a single weighing produce?",
+      "options": [
+        { "id": "a", "text": "2 (heavier or lighter)",                "correct": false },
+        { "id": "b", "text": "3 (left heavier, right heavier, balanced)", "correct": true },
+        { "id": "c", "text": "12 (one for each ball)",                  "correct": false }
+      ],
+      "explanation": "A balance scale has THREE outcomes, not two. This is the entire engine of the problem -- ternary information channels are stronger than binary."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing?",
+      "options": [
+        { "id": "a", "text": "Logic reasoning -- treat each weighing as a step in a decision tree, with 3 branches per weighing.", "correct": true },
+        { "id": "b", "text": "Probability -- compute likelihoods over which ball is defective.",                                     "correct": false },
+        { "id": "c", "text": "Backward induction -- solve from the last weighing backwards.",                                       "correct": false }
+      ],
+      "explanation": "Each weighing splits possibilities into 3 branches. With 3 weighings you have 3*3*3 = 27 possible outcome paths -- enough capacity to distinguish 24 cases (12 balls * 2 directions). The information bound JUST fits, which is why this is the famous 12-ball, 3-weighing problem.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Information bound",
+      "prompt": "We need to distinguish 12 * 2 = 24 distinct cases (which ball, and whether heavy or light). How many cases can n weighings distinguish in the best case?",
+      "options": [
+        { "id": "a", "text": "2^n", "correct": false },
+        { "id": "b", "text": "3^n", "correct": true },
+        { "id": "c", "text": "n!",   "correct": false }
+      ],
+      "explanation": "Each weighing has 3 outcomes, so n weighings can distinguish at most 3^n paths. With n=3, that's 27 -- just barely enough for the 24 cases. (If you had 13 balls, you'd be at 26 cases and still fit in 27. The limit is 13 balls in 3 weighings when direction is unknown -- but Zhou poses this as a 12-ball problem, which is the canonical version.)"
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "First weighing strategy",
+      "prompt": "Why divide the 12 balls into 3 groups of 4 (and weigh group A vs group B), instead of 2 groups of 6?",
+      "options": [
+        { "id": "a", "text": "6 vs 6 wastes a weighing -- you'd always tilt and learn nothing about WHICH side has the bad ball.", "correct": false },
+        { "id": "b", "text": "Balanced 4 vs 4 PIN-points the defective to group C (4 candidates). Unbalanced narrows to 8 candidates split by direction. Both branches leave a tractable sub-problem with 2 weighings.", "correct": true },
+        { "id": "c", "text": "It's an aesthetic choice -- both work.",                                                              "correct": false }
+      ],
+      "explanation": "The 4-4-4 split balances the information across all three outcomes of the first weighing. Each branch of the weighing leaves a sub-problem you can solve in 2 more weighings. A 6-6 split would leave 6 candidates after the first weighing -- too many to crack in 2 weighings (2 weighings give at most 9 outcomes, but with the heavy/light direction half-pinned you'd still be in trouble)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Is identifying the defective ball (and its direction) achievable in 3 weighings?",
+      "options": [
+        { "id": "a", "text": "Yes, with the 4-4-4 split as the first weighing and a careful follow-up tree.", "correct": true },
+        { "id": "b", "text": "No -- 3 weighings can distinguish at most 8 cases.",                              "correct": false },
+        { "id": "c", "text": "Only if you know in advance whether the ball is heavier or lighter.",             "correct": false }
+      ],
+      "explanation": "Yes. The full procedure (Figure 2.1 in Zhou) walks the decision tree explicitly, but the meta-argument that it's POSSIBLE comes from the information bound: 3^3 = 27 >= 24 cases. The 4-4-4 split is the move that exposes this capacity."
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "General formula",
+      "prompt": "Fill in the general formulas.",
+      "template": "If you KNOW whether the defective ball is heavier or lighter, you can identify it among __[a]__ balls in n weighings. If the direction is UNKNOWN, you can identify it among __[b]__ balls in n weighings.",
+      "blanks": [
+        { "id": "a", "answers": ["3^n", "3**n"], "caseInsensitive": true },
+        { "id": "b", "answers": ["(3^n - 3) / 2", "(3^n-3)/2"], "caseInsensitive": true }
+      ],
+      "explanation": "Direction known: each ball is one case, and 3^n outcomes pin it down. Direction unknown: each ball is two cases (heavy or light), but you also need to RULE OUT the 'no defective ball' outcome path and account for the fact that you can't always tell direction in the same weighing -- which gives the formula (3^n - 3)/2."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does a balance scale beat a one-sided scale (which only tells you 'heavy or not heavy') for this kind of problem?",
+        "If you had 13 balls instead of 12, could you still solve it in 3 weighings? (Hint: count cases.)",
+        "How does this generalize to 'find the counterfeit coin' problems?"
+      ]
+    }
+  ]
+}

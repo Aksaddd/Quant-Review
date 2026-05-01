@@ -1,0 +1,135 @@
+{
+  "id": "ch2-05-card-game",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Card Game",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "151-164"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "invariant-argument",
+    "insight": "every-discarded-pair-removes-one-of-each-color",
+    "variantAxes": ["deck_size", "color_balance", "rule_swap"]
+  },
+  "setup": {
+    "narrative": "A casino offers a card game using a normal 52-card deck (26 red, 26 black). You turn over two cards at a time, repeatedly, until the deck is empty.",
+    "rules": [
+      "If both cards are BLACK, the pair goes to the dealer's pile.",
+      "If both cards are RED, the pair goes to YOUR pile.",
+      "If the pair is one-red-one-black, the pair is DISCARDED.",
+      "If you end up with strictly more cards than the dealer, you win $100. Otherwise you win nothing."
+    ],
+    "question": "How much would you pay to play this game?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Spot the invariant that fixes the outcome regardless of card order.",
+    "Distinguish 'looks random' from 'is genuinely random' in payoff games.",
+    "Use simple counting (not probability) to settle the answer."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "Which pile gets a discarded mixed pair?",
+      "options": [
+        { "id": "a", "text": "Yours",   "correct": false },
+        { "id": "b", "text": "Dealer's", "correct": false },
+        { "id": "c", "text": "Neither -- the pair is removed from play.", "correct": true }
+      ],
+      "explanation": "Mixed pairs are discarded entirely. They count toward neither pile."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach for figuring out the fair price?",
+      "options": [
+        { "id": "a", "text": "Compute the probability over all 52!/(2^26 * 26!) ways to pair the deck.",  "correct": false },
+        { "id": "b", "text": "Logic reasoning -- look for an invariant that holds for every possible play.", "correct": true },
+        { "id": "c", "text": "Simulation -- run a million trials.",                                          "correct": false },
+        { "id": "d", "text": "Backward induction over the last few pairs.",                                   "correct": false }
+      ],
+      "explanation": "Every probability calculation here would be a distraction. There's a quantity that NEVER changes regardless of the order cards come out -- find it and the answer falls out.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Spot the invariant",
+      "prompt": "What is true about EVERY mixed pair that gets discarded?",
+      "options": [
+        { "id": "a", "text": "It contains exactly one red and one black card.",      "correct": true },
+        { "id": "b", "text": "It contains two cards of the same suit.",                "correct": false },
+        { "id": "c", "text": "It contains at least one face card.",                    "correct": false }
+      ],
+      "explanation": "A mixed pair is by definition one red + one black. So the discard pile, however large it ends up being, always has equal red and black counts."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply the invariant",
+      "prompt": "There are 26 red and 26 black cards total. Suppose D mixed pairs got discarded. How many reds end up in your pile, and how many blacks end up in the dealer's pile?",
+      "options": [
+        { "id": "a", "text": "Your pile has 26 - D reds. Dealer's pile has 26 - D blacks. ALWAYS equal.", "correct": true },
+        { "id": "b", "text": "Your pile has 26 - 2D reds. Dealer's has 26 blacks.",                        "correct": false },
+        { "id": "c", "text": "It depends on the order -- they can differ.",                                "correct": false }
+      ],
+      "explanation": "The discard pile takes D reds and D blacks. So 26 - D reds and 26 - D blacks remain. Reds go to your pile (in same-color pairs), blacks go to the dealer's. The piles are ALWAYS equal in size, no matter what order the cards come out."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Given that your pile and the dealer's are always equal, what's the maximum you would pay to play this $100-payoff game?",
+      "options": [
+        { "id": "a", "text": "$0 -- you can never WIN, only tie.",  "correct": true },
+        { "id": "b", "text": "$50 -- it's a 50/50 bet.",              "correct": false },
+        { "id": "c", "text": "$100 -- the upside is huge.",           "correct": false }
+      ],
+      "explanation": "Your pile size = dealer's pile size, on every possible play. You can never have STRICTLY more, so the prize never triggers. Pay $0."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "In one sentence, what general lesson does this teach about games that look random?",
+        "If the rule were 'mixed pair goes to YOUR pile', would the answer change? By how much?",
+        "Can you construct a deck (red/black ratio) where you'd actually have a chance to win?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-05-v1-mixed-to-you",
+      "parentId": "ch2-05-card-game",
+      "kind": "stretch",
+      "axes": { "rule_swap": "mixed-to-you" },
+      "title": "Card Game -- Mixed Pairs to You",
+      "setup": {
+        "narrative": "Same 52-card deck. The rule changes: mixed pairs now go to YOUR pile (instead of being discarded). Same-colour pairs still split the same way as before.",
+        "question": "How much would you pay now?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the invariant in the new regime",
+          "prompt": "With the new rule, your pile contains all the reds AND all the mixed-pair cards. How does it compare to the dealer's?",
+          "options": [
+            { "id": "a", "text": "Your pile has 26 reds + (mixed pairs) cards. Dealer's pile has 26 - (mixed reds) blacks. Your pile is strictly larger when ANY mixed pair occurs.", "correct": true },
+            { "id": "b", "text": "They're still equal.",                                                                                                                                  "correct": false },
+            { "id": "c", "text": "Dealer's pile is larger because they get all 26 blacks.",                                                                                                "correct": false }
+          ],
+          "explanation": "Your pile now soaks up all 26 reds AND all the cards from mixed pairs (half of which are blacks that would have gone to the dealer). So your pile strictly dominates the dealer's whenever any mixed pair occurs -- which is essentially always. The game becomes valuable to you. Fair price: close to $100."
+        }
+      ]
+    }
+  ]
+}

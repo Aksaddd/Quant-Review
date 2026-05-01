@@ -1,0 +1,146 @@
+{
+  "id": "ch2-08-trailing-zeros",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Trailing Zeros",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "209-221"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "prime-factor-counting",
+    "insight": "trailing-zeros-equal-bottleneck-prime-multiplicity",
+    "variantAxes": ["n_factorial", "base"]
+  },
+  "setup": {
+    "narrative": "Consider 100! = 1 * 2 * 3 * ... * 100, the factorial of 100.",
+    "rules": [
+      "A 'trailing zero' is a 0 at the end of the decimal representation.",
+      "Each trailing zero comes from a factor of 10 in the number.",
+      "10 = 2 * 5, so each trailing zero requires one factor of 2 AND one factor of 5."
+    ],
+    "question": "How many trailing zeros does 100! have?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Translate 'trailing zeros' into 'factors of 10' into 'min(factors of 2, factors of 5)'.",
+    "Identify the bottleneck prime (whichever appears less often).",
+    "Count factor multiplicities using floor division (Legendre's formula)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "How many trailing zeros does 50,000 have?",
+      "options": [
+        { "id": "a", "text": "3", "correct": false },
+        { "id": "b", "text": "4", "correct": true },
+        { "id": "c", "text": "5", "correct": false }
+      ],
+      "explanation": "50,000 = 5 * 10^4. It has 4 trailing zeros, because it has 4 factors of 10 = 4 (factor-of-2, factor-of-5) pairs."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing for counting trailing zeros in n!?",
+      "options": [
+        { "id": "a", "text": "Compute n! directly and count.",                                          "correct": false },
+        { "id": "b", "text": "Logic reasoning: count factors of 10 = min(factors of 2, factors of 5).",  "correct": true },
+        { "id": "c", "text": "Probability over random factorizations.",                                  "correct": false }
+      ],
+      "explanation": "n! is too big to compute directly (100! has ~158 digits). The right move is to count prime factors of 2 and of 5 separately, then take the minimum. That minimum equals the number of factor-10 pairs and hence the trailing zero count.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Spot the bottleneck",
+      "prompt": "In 100! = 1 * 2 * ... * 100, which prime appears LESS often: 2 or 5?",
+      "options": [
+        { "id": "a", "text": "2 -- because evens are rarer than fives.",                                                 "correct": false },
+        { "id": "b", "text": "5 -- because every 5th integer contributes a factor of 5, but every 2nd contributes 2.",  "correct": true },
+        { "id": "c", "text": "They appear equally often.",                                                                "correct": false }
+      ],
+      "explanation": "Multiples of 2 in [1,100]: 50. Multiples of 5: 20. Factor-of-2s vastly outnumber factor-of-5s. So 5 is the bottleneck. Count factors of 5 only -- that's the trailing-zero count."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Count factors of 5: first contribution",
+      "prompt": "How many integers in [1, 100] are divisible by 5? (Each contributes at least one factor of 5.)",
+      "answerType": "numeric",
+      "answer": 20,
+      "explanation": "100 / 5 = 20. The numbers 5, 10, 15, ..., 100 each contribute at least one factor of 5."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Count factors of 5: extra contributions",
+      "prompt": "How many integers in [1, 100] are divisible by 25? (Each of these contributes an EXTRA factor of 5, beyond the one already counted.)",
+      "answerType": "numeric",
+      "answer": 4,
+      "explanation": "100 / 25 = 4. The numbers 25, 50, 75, 100 each contribute a SECOND factor of 5. (No integer in [1, 100] contributes a third factor, since 125 > 100.)"
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "Pattern (Legendre's formula)",
+      "prompt": "Fill in the general formula for the multiplicity of prime p in n!.",
+      "template": "v_p(n!) = floor(n/p) + floor(n/p^2) + floor(n/p^3) + ... For p=5 and n=100, this evaluates to floor(100/5) + floor(100/25) + floor(100/125) = __[a]__ + __[b]__ + 0 = __[c]__.",
+      "blanks": [
+        { "id": "a", "answers": ["20"], "caseInsensitive": true },
+        { "id": "b", "answers": ["4"],  "caseInsensitive": true },
+        { "id": "c", "answers": ["24"], "caseInsensitive": true }
+      ],
+      "explanation": "This is Legendre's formula. Each term counts the integers in [1,n] divisible by progressively higher powers of p. The infinite sum is finite because p^k > n eventually."
+    },
+    {
+      "id": "s7",
+      "type": "ladder-step",
+      "label": "Commit final answer",
+      "prompt": "How many trailing zeros does 100! have?",
+      "answerType": "numeric",
+      "answer": 24,
+      "explanation": "100! has 24 trailing zeros. The bottleneck is the count of factors of 5, which is 20 + 4 = 24."
+    },
+    {
+      "id": "s8",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the answer for 1000!? Apply Legendre's formula.",
+        "What if we asked 'how many trailing zeros does 100! have in BASE 12?' How does the bottleneck change?",
+        "Why does the formula always converge? Where does it terminate?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-08-v1-thousand-factorial",
+      "parentId": "ch2-08-trailing-zeros",
+      "kind": "drill",
+      "axes": { "n_factorial": 1000 },
+      "title": "Trailing Zeros of 1000!",
+      "setup": {
+        "narrative": "Same idea, but for 1000! instead of 100!.",
+        "question": "How many trailing zeros does 1000! have?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "ladder-step",
+          "label": "Apply Legendre",
+          "prompt": "Compute floor(1000/5) + floor(1000/25) + floor(1000/125) + floor(1000/625) (the next power, 3125, exceeds 1000).",
+          "answerType": "numeric",
+          "answer": 249,
+          "explanation": "200 + 40 + 8 + 1 = 249 trailing zeros."
+        }
+      ]
+    }
+  ]
+}

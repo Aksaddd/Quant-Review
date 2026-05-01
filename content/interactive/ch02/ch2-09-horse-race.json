@@ -1,0 +1,143 @@
+{
+  "id": "ch2-09-horse-race",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Horse Race",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "225-241"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "tournament-with-information-elimination",
+    "insight": "transitive-comparison-eliminates-whole-groups",
+    "variantAxes": ["n_horses", "n_lanes", "n_top"]
+  },
+  "setup": {
+    "narrative": "There are 25 horses. Each runs at a unique constant speed. The track has only 5 lanes -- only 5 horses can race at a time. There is no clock; you only learn relative finishing order from each race.",
+    "rules": [
+      "Each race involves up to 5 horses and reveals their relative ranking.",
+      "Horses always run at the same speed (no fatigue).",
+      "You want to identify the top 3 fastest horses overall."
+    ],
+    "question": "What is the minimum number of races needed?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Use round-1 races to establish per-group rankings.",
+    "Eliminate entire groups based on the result of a 'race-of-winners'.",
+    "Reason about which horses can still possibly be 2nd or 3rd."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "Each race tells you... ?",
+      "options": [
+        { "id": "a", "text": "The exact speed of each horse.",                                        "correct": false },
+        { "id": "b", "text": "The relative finishing order of the (up to 5) horses in that race.", "correct": true },
+        { "id": "c", "text": "Which horse is the overall fastest in the field of 25.",                "correct": false }
+      ],
+      "explanation": "You only learn the order of horses IN that specific race -- nothing about horses not racing. This forces you to chain races together."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Race 25 horses in groups of 5; the fastest of each group is in the top 3.",                "correct": false },
+        { "id": "b", "text": "Logic reasoning: use early races to ELIMINATE horses that can't possibly be in the top 3.", "correct": true },
+        { "id": "c", "text": "Race every pair (300 races).",                                                                "correct": false }
+      ],
+      "explanation": "Brute force is C(25,5) or worse. The smart move is to use group winners to eliminate large blocks of slow horses with a single race.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Round 1: rank within groups",
+      "prompt": "How many races do you need to rank the 25 horses within 5 groups of 5?",
+      "answerType": "numeric",
+      "answer": 5,
+      "explanation": "Split 25 horses into 5 groups of 5. Race each group once. After 5 races you know the per-group ranking. None of the 4th-or-5th-placers in any group can possibly be in the overall top 3 (they were beaten by at least 3 horses in their own group)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Round 2: race the group winners",
+      "prompt": "After racing the 5 group winners (1 more race), suppose the order is W1 > W2 > W3 > W4 > W5. What can you eliminate?",
+      "options": [
+        { "id": "a", "text": "All horses in W4's and W5's groups (10 horses), AND W4 and W5 themselves -- because each of those groups has its WINNER finishing at most 4th overall.", "correct": true },
+        { "id": "b", "text": "Only W4 and W5 -- the rest of their groups might still be top-3.", "correct": false },
+        { "id": "c", "text": "Nothing -- you can't eliminate horses you haven't seen race together.", "correct": false }
+      ],
+      "explanation": "If W4 is at best 4th overall, then everyone else in W4's group is even slower. Same for W5. So all 10 horses in those two groups are eliminated. Also, W1 is the overall fastest (no one beat W1 yet)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-multi",
+      "label": "Identify the candidates for 2nd and 3rd",
+      "prompt": "After Round 2, who could STILL be 2nd or 3rd overall? (W1 is already locked as 1st.)",
+      "options": [
+        { "id": "w1g2", "text": "W1's group: 2nd-place horse (call it W1's #2)",  "correct": true },
+        { "id": "w1g3", "text": "W1's group: 3rd-place horse (W1's #3)",            "correct": true },
+        { "id": "w2",   "text": "W2 (group winner who came 2nd in the race-of-winners)", "correct": true },
+        { "id": "w2g2", "text": "W2's group: 2nd-place horse (W2's #2)",            "correct": true },
+        { "id": "w3",   "text": "W3 (group winner who came 3rd in the race-of-winners)", "correct": true },
+        { "id": "w3g2", "text": "W3's group: 2nd-place horse (W3's #2)",            "correct": false },
+        { "id": "w1g4", "text": "W1's group: 4th-place horse",                       "correct": false }
+      ],
+      "explanation": "5 candidates remain: W1's #2, W1's #3, W2, W2's #2, W3. Why not W3's #2? Because W3 is at best 3rd overall, so anything below W3 in W3's group is at best 4th. Why not W1's #4? Same logic -- 4th in W1's group is at best 4th overall."
+    },
+    {
+      "id": "s6",
+      "type": "ladder-step",
+      "label": "Round 3: race the 5 candidates",
+      "prompt": "Race those 5 candidates. The top 2 in this race, plus W1, are the overall top 3. How many races have you done in total?",
+      "answerType": "numeric",
+      "answer": 7,
+      "explanation": "5 (Round 1) + 1 (Round 2) + 1 (Round 3) = 7 races total. The information theoretic lower bound also turns out to be 7 for this problem."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why can W3's 2nd-place horse NOT be in the overall top 3?",
+        "How does the answer change if you only need the top 1 (fastest)?",
+        "How would the strategy change with 25 horses and 6 lanes (i.e., race 6 at a time)?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-09-v1-top-1",
+      "parentId": "ch2-09-horse-race",
+      "kind": "drill",
+      "axes": { "n_top": 1 },
+      "title": "Horse Race -- Find Just the Fastest",
+      "setup": {
+        "narrative": "Same setup: 25 horses, 5 lanes, no clock.",
+        "question": "What's the minimum number of races to find ONLY the single fastest horse?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Strip out the top-3 logic",
+          "prompt": "How many races to find the single fastest of 25?",
+          "options": [
+            { "id": "a", "text": "5 races -- group winners alone include the fastest.", "correct": false },
+            { "id": "b", "text": "6 races -- 5 group races, then race the 5 winners.",  "correct": true },
+            { "id": "c", "text": "7 -- same as the top-3 problem.",                       "correct": false }
+          ],
+          "explanation": "5 group races find each group's fastest. One more race among the 5 group winners reveals the overall fastest. No third round needed."
+        }
+      ]
+    }
+  ]
+}

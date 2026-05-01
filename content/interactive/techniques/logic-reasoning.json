@@ -55,9 +55,14 @@
     "Confusing 'no path exists' with 'I haven't found one' -- always try a few configurations before claiming impossibility."
   ],
   "appearsIn": [
-    { "problemId": "ch2-03-river-crossing",   "title": "River Crossing",   "chapter": 2, "section": "2.2" },
-    { "problemId": "ch2-04-birthday-problem", "title": "Birthday Problem", "chapter": 2, "section": "2.2" },
-    { "problemId": "ch2-06-burning-ropes",    "title": "Burning Ropes",    "chapter": 2, "section": "2.2" }
+    { "problemId": "ch2-03-river-crossing",    "title": "River Crossing",    "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-04-birthday-problem",  "title": "Birthday Problem",  "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-05-card-game",         "title": "Card Game",         "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-06-burning-ropes",     "title": "Burning Ropes",     "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-07-defective-ball",    "title": "Defective Ball",    "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-08-trailing-zeros",    "title": "Trailing Zeros",    "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-09-horse-race",        "title": "Horse Race",        "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-10-infinite-sequence", "title": "Infinite Sequence", "chapter": 2, "section": "2.2" }
   ],
   "relatedTechniques": ["backward-induction", "proof-by-contradiction"]
 }
