@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 170" width="200" height="170">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<rect x="40" y="30" width="120" height="110" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="135" y1="30" x2="120" y2="140" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="135" y1="30" x2="40" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="120" y1="140" x2="40" y2="80" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<text x="135.5" y="85.0" font-family="Times, Georgia, serif" font-style="italic" font-size="12" text-anchor="start">ℓ</text>
+<circle cx="160" cy="140" r="2.5" fill="#1d1d1f"/>
+<text x="170" y="158" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="40" cy="80" r="2.5" fill="#1d1d1f"/>
+<text x="28" y="84" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">C</text>
+</svg>

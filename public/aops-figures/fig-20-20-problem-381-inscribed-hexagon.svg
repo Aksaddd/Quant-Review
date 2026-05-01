@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="90" cy="90" r="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="102.15537243668513" y1="21.063457289145433" x2="77.84462756331487" y2="21.063457289145433" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="77.84462756331487" y1="21.063457289145433" x2="22.385192159765225" y2="71.88266684282353" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="22.385192159765225" y1="71.88266684282353" x2="36.37688898167154" y2="134.99513267805776" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="36.37688898167154" y1="134.99513267805776" x2="96.10090199233605" y2="159.73362886642218" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="96.10090199233605" y1="159.73362886642218" x2="158.93654271085455" y2="102.15537243668513" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="158.93654271085455" y1="102.15537243668513" x2="102.15537243668513" y2="21.063457289145433" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+</svg>

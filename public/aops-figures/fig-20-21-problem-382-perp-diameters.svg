@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="100" cy="100" r="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="100" x2="170" y2="100" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="100" y1="30" x2="100" y2="170" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="100" x2="144.99513267805776" y2="46.37688898167154" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<path d="M 106.00 100.00 L 106.00 94.00 L 100.00 94.00" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="30" cy="100" r="2.5" fill="#1d1d1f"/>
+<text x="18" y="104" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="170" cy="100" r="2.5" fill="#1d1d1f"/>
+<text x="182" y="104" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="100" cy="30" r="2.5" fill="#1d1d1f"/>
+<text x="100" y="22" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">C</text>
+<circle cx="144.99513267805776" cy="46.37688898167154" r="2.5" fill="#1d1d1f"/>
+<text x="154.99513267805776" y="38.37688898167154" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">M</text>
+<text x="88.0" y="71.3584639291501" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">P</text>
+<circle cx="100" cy="170" r="2.5" fill="#1d1d1f"/>
+<text x="100" y="186" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">D</text>
+<circle cx="100" cy="100" r="2.5" fill="#1d1d1f"/>
+<text x="110" y="118" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">O</text>
+</svg>

@@ -3283,6 +3283,904 @@ def fig_17_6_power_proof_inside() -> str:
 
 
 # ─────────────────────────────────────────────
+# Chapter 20 — A Potpourri of Geometry (problem-specific figures)
+# Each function reproduces the diagram printed on pp 181-186 (PDF 195-200).
+# ─────────────────────────────────────────────
+
+def _isect(p1, p2, p3, p4):
+    x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+    d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+    if abs(d) < 1e-9:
+        return ((p1[0]+p2[0])/2, (p1[1]+p2[1])/2)
+    t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+    return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+
+
+def _foot(P, A, B):
+    """Foot of perpendicular from P onto line AB."""
+    AB = (B[0]-A[0], B[1]-A[1])
+    AP = (P[0]-A[0], P[1]-A[1])
+    t = (AP[0]*AB[0] + AP[1]*AB[1]) / (AB[0]**2 + AB[1]**2)
+    return (A[0] + t*AB[0], A[1] + t*AB[1])
+
+
+def fig_20_1_problem_343_tangent_circles() -> str:
+    """Two congruent circles O and P tangent to each other; AP tangent to circle O."""
+    W, H = 220, 130
+    r = 30
+    O = (60, 80); P = (140, 80)         # externally tangent
+    # A is above so AP is tangent to circle O at some point
+    # Choose A so that AP is tangent to circle O — A on the line tangent to O
+    # passing through P. Use the upper tangent.
+    d = ((P[0]-O[0])**2 + (P[1]-O[1])**2)**0.5
+    alpha = _m.asin(r / d)
+    ang = _m.atan2(O[1]-P[1], O[0]-P[0])
+    # Tangent point T on circle O from P
+    T = (O[0] + r*_m.cos(ang + alpha + _m.pi/2),
+         O[1] + r*_m.sin(ang + alpha + _m.pi/2))
+    # A on extension of PT beyond T (above)
+    A = (P[0] + (T[0]-P[0])*1.6, P[1] + (T[1]-P[1])*1.6)
+    body = [
+        circle(*O, r), circle(*P, r),
+        segment(*A, *P),
+        point(*A, "A", "above"),
+        point(*O, "O", "right", dot=True),
+        point(*P, "P", "right", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_2_problem_344_right_triangle_with_square() -> str:
+    """Right triangle ABC (right angle at B) with square built externally on AC."""
+    W, H = 220, 260
+    A = (40, 130); B = (40, 60); C = (110, 130)
+    # Square on AC, external (away from B). AC vector → perpendicular outward.
+    AC = (C[0]-A[0], C[1]-A[1])
+    L = (AC[0]**2 + AC[1]**2)**0.5
+    nx, ny = AC[1]/L, -AC[0]/L
+    # B is "above" AC; square pokes downward (other side)
+    # Test sign: is B on positive or negative side?
+    if (B[0]-A[0])*nx + (B[1]-A[1])*ny < 0:
+        nx, ny = -nx, -ny
+    nx, ny = -nx, -ny  # square on opposite side from B
+    s = L
+    Sa = (A[0] + nx*s, A[1] + ny*s)
+    Sc = (C[0] + nx*s, C[1] + ny*s)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        right_angle_mark(B[0], B[1], A, C, size=7),
+        segment(*A, *Sa), segment(*Sa, *Sc), segment(*Sc, *C),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "above"),
+        point(*C, "C", "above-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_3_problem_346_triangle_in_circle() -> str:
+    """Triangle ABC inscribed in circle, right angle at A, ∠ABC = 30°."""
+    W, H = 180, 180
+    cx, cy, r = 90, 90, 60
+    # BC is a diameter (since ∠BAC=90°)
+    B = (cx + r*_m.cos(_m.radians(190)), cy - r*_m.sin(_m.radians(190)))
+    C = (cx + r*_m.cos(_m.radians(  0)), cy - r*_m.sin(_m.radians(  0)))
+    # A on the circle such that ∠ABC = 30°
+    A_ = (cx + r*_m.cos(_m.radians(120)), cy - r*_m.sin(_m.radians(120)))
+    body = [
+        circle(cx, cy, r),
+        segment(*A_, *B), segment(*B, *C), segment(*A_, *C),
+        right_angle_mark(A_[0], A_[1], B, C, size=6),
+        point(*A_, "A", "above"),
+        point(*B, "B", "left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_4_problem_348_right_trapezoid() -> str:
+    """Right triangle ACD (right angle at D) with parallel cevian forming
+    trapezoid BCDE (B on AC, E on AD, BE ∥ CD)."""
+    W, H = 200, 160
+    A = (30, 130); D = (170, 130); C = (170, 30)
+    # B on AC, E on AD — BE parallel to CD (vertical)
+    t = 0.55
+    B_ = (A[0] + t*(C[0]-A[0]), A[1] + t*(C[1]-A[1]))
+    E = (B_[0], D[1])
+    body = [
+        segment(*A, *C), segment(*A, *D), segment(*D, *C),
+        segment(*B_, *E),
+        right_angle_mark(D[0], D[1], C, A, size=6),
+        right_angle_mark(E[0], E[1], B_, D, size=6),
+        point(*A, "A", "below-left"),
+        point(*B_, "B", "above"),
+        point(*C, "C", "above-right"),
+        point(*D, "D", "below-right"),
+        point(*E, "E", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_5_problem_350_rhombus_in_triangle() -> str:
+    """Triangle ABC with inscribed rhombus BDEF (B vertex, D on BC, E on AC, F on AB)."""
+    W, H = 180, 160
+    B_ = (30, 130); A = (75, 30); C = (170, 130)
+    # Rhombus BDEF with B as one vertex. F on BA, D on BC, E inside (opposite B).
+    # Pick rhombus side = 0.5 * shorter side from B
+    t = 0.55
+    F = (B_[0] + t*(A[0]-B_[0]), B_[1] + t*(A[1]-B_[1]))
+    D_ = (B_[0] + t*(C[0]-B_[0]), B_[1] + t*(C[1]-B_[1]))
+    # E so that BDEF is parallelogram: E = D + (F - B)
+    E = (D_[0] + F[0] - B_[0], D_[1] + F[1] - B_[1])
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*B_, *F), segment(*F, *E), segment(*E, *D_), segment(*D_, *B_),
+        point(*A, "A", "above"),
+        point(*F, "F", "above-left"),
+        point(*E, "E", "above-right"),
+        point(*B_, "B", "below-left"),
+        point(*D_, "D", "below"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_6_problem_352_isosceles_with_semicircle() -> str:
+    """Isosceles triangle with semicircle inscribed on base BC."""
+    W, H = 240, 130
+    A = (120, 25); B_ = (40, 110); C = (200, 110)
+    # Semicircle on BC, radius = inradius-of-isosceles relative to base
+    midBC = ((B_[0]+C[0])/2, (B_[1]+C[1])/2)
+    rad = 35
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        f'<path d="M {B_[0]+5} {B_[1]} A {rad} {rad} 0 0 1 {C[0]-5} {C[1]}" {STROKE}/>',
+        point(*A, "A", "above"),
+        point(*B_, "B", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_7_problem_355_chord_bisects_arc() -> str:
+    """Triangle ABC inscribed in circle O; segment BY bisects arc AC,
+    crossing AC at D."""
+    W, H = 180, 180
+    cx, cy, r = 90, 90, 60
+    A = (cx + r*_m.cos(_m.radians(70)),  cy - r*_m.sin(_m.radians(70)))
+    B_ = (cx + r*_m.cos(_m.radians(170)), cy - r*_m.sin(_m.radians(170)))
+    C = (cx + r*_m.cos(_m.radians(330)), cy - r*_m.sin(_m.radians(330)))
+    # Y is on circle on arc AC not containing B (mid of that arc)
+    Y = (cx + r*_m.cos(_m.radians(20)),  cy - r*_m.sin(_m.radians(20)))
+    # D = intersection of BY and AC
+    D_ = _isect(B_, Y, A, C)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*B_, *Y),
+        point(*A, "A", "above"),
+        point(*B_, "B", "left"),
+        point(*D_, "D", "below", dot=False),
+        point(*Y, "Y", "right"),
+        point(*C, "C", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_8_problem_357_parallel_tangents() -> str:
+    """Circle of radius r with parallel tangents TP (top) and RQ (bottom);
+    transverse tangent PSQ touches at S."""
+    W, H = 220, 160
+    cx, cy, r = 110, 80, 35
+    # Top tangent at T (top of circle), runs horizontally
+    T = (cx, cy - r); R = (cx, cy + r)
+    # PSQ tangent: from P (upper-left) to Q (lower-right), tangent at S
+    # Choose S at angle 200° on circle (lower-left)
+    S = (cx + r*_m.cos(_m.radians(200)), cy - r*_m.sin(_m.radians(200)))
+    # P is on top tangent line (y = cy - r), Q is on bottom tangent line (y = cy + r)
+    # Tangent line at S has direction perpendicular to OS
+    dx, dy = _m.cos(_m.radians(200+90)), -_m.sin(_m.radians(200+90))
+    def at_y(y0):
+        if abs(dy) < 1e-9: return None
+        t = (y0 - S[1]) / dy
+        return (S[0] + t*dx, y0)
+    P = at_y(cy - r)
+    Q = at_y(cy + r)
+    body = [
+        circle(cx, cy, r),
+        segment(20, T[1], 200, T[1]),  # top tangent
+        segment(20, R[1], 200, R[1]),  # bottom tangent
+        segment(*P, *Q),
+        point(*T, "T", "above-right", dot=True),
+        point(*P, "P", "above-left"),
+        point(*S, "S", "left", dot=True),
+        point(*R, "R", "below-right", dot=True),
+        point(*Q, "Q", "below-left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_9_problem_359_rectangle_with_E() -> str:
+    """Rectangle ABCD (A top-left, B top-right, C bottom-right, D bottom-left)
+    with point E on side AB (top edge); segments DE and BE drawn."""
+    W, H = 200, 130
+    A = (35, 25); B_ = (160, 25); C = (160, 105); D_ = (35, 105)
+    # E on AB closer to A (so DE = DC condition could match)
+    E = (90, 25)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*C, *D_), segment(*D_, *A),
+        segment(*D_, *E), segment(*B_, *E),
+        right_angle_mark(D_[0], D_[1], A, C, size=6),
+        right_angle_mark(B_[0], B_[1], A, C, size=6),
+        point(*A, "A", "above-left"),
+        point(*E, "E", "above"),
+        point(*B_, "B", "above-right"),
+        point(*D_, "D", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_10_problem_361_right_triangle_DE() -> str:
+    """Right triangle ABC (right angle at C) with D on AC, E on AB, DE ∥ CB."""
+    W, H = 200, 140
+    A = (30, 110); C = (170, 110); B_ = (170, 30)
+    # E on AB at 30%, D on AC such that DE ∥ CB (which is vertical here)
+    t = 0.3
+    E = (A[0] + t*(B_[0]-A[0]), A[1] + t*(B_[1]-A[1]))
+    D_ = (E[0], C[1])
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*D_, *E),
+        right_angle_mark(C[0], C[1], A, B_, size=6),
+        right_angle_mark(D_[0], D_[1], A, E, size=6),
+        point(*A, "A", "below-left"),
+        point(*B_, "B", "above"),
+        point(*E, "E", "above"),
+        point(*C, "C", "below-right"),
+        point(*D_, "D", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_11_problem_363_paper_fold() -> str:
+    """Rectangular paper (8 inches wide); the lower-right corner is folded
+    along crease ℓ so that it meets point C on the opposite (left) edge,
+    with BC = 5. The folded triangular flap is shown by its crease and
+    its hidden image."""
+    W, H = 200, 170
+    rect_x, rect_y, rect_w, rect_h = 40, 30, 120, 110
+    # Rectangle outline
+    body = [f'<rect x="{rect_x}" y="{rect_y}" width="{rect_w}" height="{rect_h}" {STROKE}/>']
+    # B is the bottom-right corner being folded
+    B_ = (rect_x + rect_w, rect_y + rect_h)
+    # C is on the left edge at distance 5 below the top
+    C = (rect_x, rect_y + 50)
+    # Crease ℓ runs from a point on the top edge to a point on the bottom edge
+    crease_top = (rect_x + 95, rect_y)
+    crease_bot = (rect_x + 80, rect_y + rect_h)
+    body += [
+        segment(*crease_top, *crease_bot),    # crease ℓ
+        segment(*crease_top, *C),             # folded edge from top → C (image of right side)
+        segment(*crease_bot, *C),             # folded edge from bottom → C
+        text((crease_top[0]+crease_bot[0])/2 + 8, (crease_top[1]+crease_bot[1])/2,
+             "ℓ", italic=True, size=12, anchor="start"),
+        point(*B_, "B", "below-right"),
+        point(*C, "C", "left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_12_problem_365_square_with_P() -> str:
+    """Square (side 6) with vertex labels E top-left, D top-right, B bottom-right,
+    A bottom-left; C on top side; interior point P."""
+    W, H = 180, 160
+    # Per the figure: E top-left, D top-right, B bottom-right, A bottom-left
+    E = (35, 30); D_ = (155, 30); B_ = (155, 130); A = (35, 130)
+    C = (95, 30)        # C on top side ED
+    P = (95, 80)        # P interior, where PA, PB, PC are equal
+    body = [
+        segment(*E, *D_), segment(*D_, *B_), segment(*B_, *A), segment(*A, *E),
+        segment(*P, *A), segment(*P, *B_), segment(*P, *C),
+        point(*E, "E", "above-left"),
+        point(*C, "C", "above"),
+        point(*D_, "D", "above-right"),
+        point(*P, "P", "right"),
+        point(*A, "A", "below-left"),
+        point(*B_, "B", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_13_problem_367_square_equilateral() -> str:
+    """Square ABCD with equilateral triangle DCE inside (E interior), plus F
+    on AB with FE ∥ AD."""
+    W, H = 180, 160
+    A = (40, 30); B_ = (140, 30); C = (140, 130); D_ = (40, 130)
+    # Equilateral DCE with apex E inside the square
+    side = C[0] - D_[0]
+    Ex = (D_[0]+C[0])/2
+    Ey = D_[1] - side * (3 ** 0.5) / 2
+    E = (Ex, Ey)
+    # F on AB with FE vertical
+    F = (Ex, A[1])
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*C, *D_), segment(*D_, *A),
+        segment(*D_, *E), segment(*C, *E), segment(*F, *E),
+        point(*A, "A", "above-left"),
+        point(*F, "F", "above"),
+        point(*B_, "B", "above-right"),
+        point(*E, "E", "below-right"),
+        point(*D_, "D", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_14_problem_369_triangle_DE() -> str:
+    """Triangle ABC with cevian AG ⊥ BC; D on AB, E on AC, DE ∥ BC; F=DE ∩ AG."""
+    W, H = 220, 180
+    A = (110, 25); B_ = (35, 150); C = (190, 150)
+    G = ((B_[0]+C[0])/2, B_[1])           # foot of perpendicular at midpoint of BC (visual)
+    # D on AB, E on AC with DE parallel to BC
+    t = 0.45
+    D_ = (A[0] + t*(B_[0]-A[0]), A[1] + t*(B_[1]-A[1]))
+    E = (A[0] + t*(C[0]-A[0]), A[1] + t*(C[1]-A[1]))
+    F = (G[0], D_[1])                      # AG vertical so F has G's x and DE's y
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*A, *G),                   # altitude AG
+        segment(*D_, *E),                   # cevian DE
+        right_angle_mark(G[0], G[1], A, C, size=6),
+        point(*A, "A", "above"),
+        point(*D_, "D", "left"),
+        point(*F, "F", "above"),
+        point(*E, "E", "right"),
+        point(*B_, "B", "below-left"),
+        point(*G, "G", "below"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_15_problem_371_inscribed_perp_bisectors() -> str:
+    """Triangle ABC inscribed in a circle; F, D, E are points on arcs (perpendicular
+    bisectors of sides AB, BC, AC respectively); hexagon AECDBF."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 75
+    # Place A at top, B lower-left, C lower-right
+    A = (cx + r*_m.cos(_m.radians(85)),  cy - r*_m.sin(_m.radians(85)))
+    B_ = (cx + r*_m.cos(_m.radians(210)), cy - r*_m.sin(_m.radians(210)))
+    C = (cx + r*_m.cos(_m.radians(-30)), cy - r*_m.sin(_m.radians(-30)))
+    # Perpendicular bisector of AB hits arc opposite at midpoint of arc BA-not-containing-C
+    F = (cx + r*_m.cos(_m.radians(147)),  cy - r*_m.sin(_m.radians(147)))
+    D_ = (cx + r*_m.cos(_m.radians(270)), cy - r*_m.sin(_m.radians(270)))
+    E = (cx + r*_m.cos(_m.radians( 27)), cy - r*_m.sin(_m.radians( 27)))
+    body = [
+        circle(cx, cy, r),
+        # Triangle ABC
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        # Hexagon AECDBF
+        segment(*A, *E), segment(*E, *C), segment(*C, *D_),
+        segment(*D_, *B_), segment(*B_, *F), segment(*F, *A),
+        point(*A, "A", "above"),
+        point(*F, "F", "left"),
+        point(*B_, "B", "below-left"),
+        point(*D_, "D", "below"),
+        point(*C, "C", "right"),
+        point(*E, "E", "above-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_16_problem_373_circumscribed_circle() -> str:
+    """Quadrilateral ABCD circumscribed about a circle; tangent points R, S, T, U
+    on AB, BC, CD, DA; right angle at D; arc RST = 210°."""
+    W, H = 200, 180
+    cx, cy, rad = 100, 95, 35
+    # D bottom-right with right angle
+    D_ = (155, 145); A = (45, 145); B_ = (45, 30); C = (155, 30)
+    # Tangent points (from each side perpendicular to the radius)
+    U = (45, cy)        # on DA
+    R = (cx, 30)         # on AB? Let me adjust labels
+    # Reread: AB BC DC AD tangent. Points R on AB, S on BC, T on CD, U on DA.
+    # Looks like a square-ish quadrilateral with the inscribed circle
+    R_ = (cx, 30)        # on AB (top)
+    S_ = (155, cy)        # on BC (right)
+    T_ = (cx, 145)        # on CD (bottom)
+    U_ = (45, cy)        # on DA (left)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*C, *D_), segment(*D_, *A),
+        circle(cx, cy, rad),
+        right_angle_mark(D_[0], D_[1], C, A, size=6),
+        point(*D_, "D", "above-left"),
+        point(*A, "A", "above-right"),
+        point(*B_, "B", "below-right"),
+        point(*C, "C", "below-left"),
+        point(*R_, "R", "above", dot=True),
+        point(*S_, "S", "left", dot=True),
+        point(*T_, "T", "below", dot=True),
+        point(*U_, "U", "right", dot=True),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_17_problem_375_inscribed_quarter_circle() -> str:
+    """Big circle of diameter 12; small circle inscribed in a quarter of the big
+    circle (tangent to two radii and the arc)."""
+    W, H = 200, 200
+    cx, cy, R = 100, 100, 80
+    body = [circle(cx, cy, R)]
+    # Two perpendicular diameters defining a quadrant (upper-right)
+    body += [segment(cx - R, cy, cx + R, cy),
+             segment(cx, cy - R, cx, cy + R)]
+    # Inscribed circle tangent to both radii at distance d from center along
+    # the bisector of the quadrant (45° line). Radius r satisfies r = d*sin(45°)
+    # but tangent to the arc means d + r = R; also r = d/√2 from being tangent
+    # to both radii... gives r = R(√2 - 1)/(√2)
+    r = R * (2**0.5 - 1) / 2**0.5
+    d = R - r
+    px = cx + d * _m.cos(_m.radians(45))
+    py = cy - d * _m.sin(_m.radians(45))
+    body.append(circle(px, py, r))
+    body.append(point(cx, cy, "O", "below-left"))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_18_problem_378_intersecting_chords() -> str:
+    """Circle with chords AB and CD intersecting at E; X on AB."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 75
+    A = (cx + r*_m.cos(_m.radians(60)),  cy - r*_m.sin(_m.radians(60)))
+    B_ = (cx + r*_m.cos(_m.radians(220)), cy - r*_m.sin(_m.radians(220)))
+    C = (cx + r*_m.cos(_m.radians(-50)), cy - r*_m.sin(_m.radians(-50)))
+    D_ = (cx + r*_m.cos(_m.radians(150)), cy - r*_m.sin(_m.radians(150)))
+    E = _isect(A, B_, C, D_)
+    # X on AB beyond E (toward B)
+    X = (E[0] + 0.4*(B_[0]-E[0]), E[1] + 0.4*(B_[1]-E[1]))
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B_), segment(*C, *D_),
+        point(*D_, "D", "above-left"),
+        point(*A, "A", "above-right"),
+        point(*X, "X", "left"),
+        point(*E, "E", "right", dot=False),
+        point(*B_, "B", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_19_problem_380_inscribed_corner_circle() -> str:
+    """Equilateral triangle ABC with incircle O, plus smaller circle P in vertex A."""
+    W, H = 200, 200
+    A = (100, 25); B_ = (35, 160); C = (165, 160)
+    # Inradius for equilateral = side/(2*sqrt(3))
+    side = C[0] - B_[0]
+    inradius = side / (2 * 3**0.5)
+    O = ((A[0]+B_[0]+C[0])/3, (A[1]+B_[1]+C[1])/3)
+    # Smaller circle P tangent to AB and AC and to circle O — sits in vertex A
+    # Distance from A to its center = (incircle radius)/sin(30°) - r ...
+    # Visual approx: small circle of radius incircle/2 at apex
+    pr = inradius * 0.45
+    P_y = A[1] + (inradius * 1.4)
+    P = (A[0], P_y)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        circle(*O, inradius),
+        circle(*P, pr),
+        point(*A, "A", "above"),
+        point(*P, "P", "below", dot=False),
+        point(*O, "O", "below", dot=False),
+        point(*B_, "B", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_20_problem_381_inscribed_hexagon() -> str:
+    """Hexagon inscribed in a circle (irregular — two short sides, four long)."""
+    W, H = 180, 180
+    cx, cy, r = 90, 90, 70
+    # 6 vertices on circle. Two short sides, four long sides — fake by varying angles
+    angles = [80, 100, 165, 220, 275, 350]
+    pts = [(cx + r*_m.cos(_m.radians(a)),
+            cy - r*_m.sin(_m.radians(a))) for a in angles]
+    body = [circle(cx, cy, r)]
+    for i in range(6):
+        body.append(segment(*pts[i], *pts[(i+1)%6]))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_21_problem_382_perp_diameters() -> str:
+    """Circle O with perpendicular diameters AB and CD; chord AM crossing CD at P."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 70
+    A = (cx - r, cy); B_ = (cx + r, cy)
+    C = (cx, cy - r); D_ = (cx, cy + r)
+    # M on circle (upper-right)
+    M = (cx + r*_m.cos(_m.radians(50)), cy - r*_m.sin(_m.radians(50)))
+    P = _isect(A, M, C, D_)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B_), segment(*C, *D_),
+        segment(*A, *M),
+        right_angle_mark(cx, cy, B_, C, size=6),
+        point(*A, "A", "left"),
+        point(*B_, "B", "right"),
+        point(*C, "C", "above"),
+        point(*M, "M", "above-right"),
+        point(*P, "P", "left", dot=False),
+        point(*D_, "D", "below"),
+        point(cx, cy, "O", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_22_problem_384_three_parallels_two_transversals() -> str:
+    """Three parallel lines ℓ, m, n cut by two transversals; the parallel
+    segments cut off between the transversals (f, g, h) and the segments
+    along each transversal (x/c/a and y/d/b) labeled."""
+    W, H = 280, 180
+    y1, y2, y3 = 30, 90, 150
+    # Two transversals slanting inward (V shape); intersection below n
+    T1_top = (60, y1);  T1_bot = (140, y3)
+    T2_top = (220, y1); T2_bot = (140, y3)
+    # Compute intersections of transversals with each parallel line
+    def x_at(y, p1, p2):
+        return p1[0] + (y - p1[1]) * (p2[0] - p1[0]) / (p2[1] - p1[1])
+    L1y1 = (x_at(y1, T1_top, T1_bot), y1)
+    L1y2 = (x_at(y2, T1_top, T1_bot), y2)
+    L1y3 = (x_at(y3, T1_top, T1_bot), y3)
+    L2y1 = (x_at(y1, T2_top, T2_bot), y1)
+    L2y2 = (x_at(y2, T2_top, T2_bot), y2)
+    L2y3 = (x_at(y3, T2_top, T2_bot), y3)
+    body = [
+        segment(20, y1, 260, y1), segment(20, y2, 260, y2), segment(20, y3, 260, y3),
+        text(265, y1+4, "ℓ", italic=True, size=11, anchor="start"),
+        text(265, y2+4, "m", italic=True, size=11, anchor="start"),
+        text(265, y3+4, "n", italic=True, size=11, anchor="start"),
+        segment(*T1_top, *T1_bot),
+        segment(*T2_top, *T2_bot),
+        # Segment labels along left transversal (between the parallel lines)
+        text((L1y1[0]+L1y2[0])/2 - 6, (L1y1[1]+L1y2[1])/2 + 4, "x", italic=True, size=10),
+        text((L1y2[0]+L1y3[0])/2 - 6, (L1y2[1]+L1y3[1])/2 + 4, "c", italic=True, size=10),
+        # Right transversal
+        text((L2y1[0]+L2y2[0])/2 + 6, (L2y1[1]+L2y2[1])/2 + 4, "y", italic=True, size=10),
+        text((L2y2[0]+L2y3[0])/2 + 6, (L2y2[1]+L2y3[1])/2 + 4, "d", italic=True, size=10),
+        # Parallel segments between the transversals on each line (f, g, h)
+        text((L1y1[0]+L2y1[0])/2, y1 - 5, "f", italic=True, size=11),
+        text((L1y2[0]+L2y2[0])/2, y2 - 5, "g", italic=True, size=11),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_23_problem_387_two_inscribed_semicircles() -> str:
+    """Large semicircle on horizontal diameter with two smaller semicircles
+    centered at P (radius 6) and Q (radius 4) tangent to each other and
+    internally tangent to the large; line LM tangent to both small."""
+    W, H = 280, 150
+    yl = 130
+    # Use arbitrary scale: large semicircle from x=20 to x=260
+    Lx, Rx = 20, 260
+    R_big = (Rx - Lx) / 2
+    cx_big = (Lx + Rx) / 2
+    # Small radii
+    rP, rQ = R_big * 0.55, R_big * 0.40
+    # P and Q centers on the diameter
+    P_ = (Lx + rP, yl)
+    Q_ = (Rx - rQ, yl)
+    # L on big semicircle near top-left (where line touches)
+    # Compute external common tangent to P and Q (above them)
+    # For visual approximation, pick L at upper-left of large arc, M at upper-right
+    L = (cx_big - R_big * 0.85, yl - R_big * 0.50)
+    M = (cx_big + R_big * 0.85, yl - R_big * 0.45)
+    body = [
+        # Diameter
+        segment(Lx, yl, Rx, yl),
+        # Big semicircle above
+        f'<path d="M {Lx} {yl} A {R_big} {R_big} 0 0 1 {Rx} {yl}" {STROKE}/>',
+        # Small P semicircle
+        f'<path d="M {P_[0]-rP} {yl} A {rP} {rP} 0 0 1 {P_[0]+rP} {yl}" {STROKE}/>',
+        # Small Q semicircle
+        f'<path d="M {Q_[0]-rQ} {yl} A {rQ} {rQ} 0 0 1 {Q_[0]+rQ} {yl}" {STROKE}/>',
+        segment(*L, *M),
+        point(*L, "L", "above-left"),
+        point(*M, "M", "above-right"),
+        point(*P_, "P", "below"),
+        point(*Q_, "Q", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_24_problem_388_ladder_alley() -> str:
+    """Ladder of length a in alley of width w; touches left wall at Q (height k,
+    45° to ground) and right wall at R (height h, 75° to ground)."""
+    W, H = 200, 200
+    # Two vertical walls
+    leftX, rightX = 50, 150
+    groundY = 175
+    body = [
+        segment(leftX, 15, leftX, groundY),
+        segment(rightX, 15, rightX, groundY),
+        segment(leftX - 6, groundY, rightX + 6, groundY),
+    ]
+    # Foot P on the ground between walls. Distance from left wall = w cos α (?).
+    # For 45°: ladder length a, height k from left wall. Foot is at horizontal
+    # distance k from the left wall.
+    P = (95, groundY)
+    Q = (leftX, P[1] - 60)         # left wall, height k (45°)
+    R_ = (rightX, P[1] - 130)      # right wall, height h (75°)
+    body += [
+        segment(*P, *Q),            # 45° ladder position
+        segment(*P, *R_),           # 75° ladder position
+        text((P[0]+Q[0])/2 - 4, (P[1]+Q[1])/2 + 10, "a", italic=True, size=11),
+        text((P[0]+R_[0])/2 + 4, (P[1]+R_[1])/2, "a", italic=True, size=11),
+        text(leftX - 12, (Q[1]+groundY)/2, "k", italic=True, size=10, anchor="end"),
+        text(rightX + 8, (R_[1]+groundY)/2, "h", italic=True, size=10, anchor="start"),
+        text((leftX+rightX)/2 + 25, groundY + 16, "w", italic=True, size=10),
+        point(*Q, "Q", "left", dot=True),
+        point(*R_, "R", "right", dot=True),
+        point(*P, "P", "above", dot=True),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_25_problem_389_tangent_circles() -> str:
+    """Two externally tangent circles centered at C (large) and B (small);
+    D on outer edge of C; A right of B; EF common external tangent."""
+    W, H = 280, 160
+    Cc = (90, 80); Cr = 45
+    Bc = (170, 80); Br = 25
+    # D on left edge of circle C
+    D_ = (Cc[0] - Cr, Cc[1])
+    # A right of circle B at distance making things work; pick A at (240, 80)
+    A = (240, 80)
+    # E on circle C (top tangent point), F on circle B (top tangent point)
+    # — common external tangent
+    E = (Cc[0], Cc[1] - Cr)
+    F = (Bc[0], Bc[1] - Br)
+    body = [
+        circle(*Cc, Cr), circle(*Bc, Br),
+        segment(*D_, *A),
+        segment(*E, *F),
+        point(*Cc, "C", "below"),
+        point(*Bc, "B", "above"),
+        point(*D_, "D", "left"),
+        point(*E, "E", "above", dot=True),
+        point(*F, "F", "above", dot=True),
+        point(*A, "A", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_26_problem_391_square_perp_bisector() -> str:
+    """Square ABCD; E on DC; perp bisector of AE meets AD at P, AE at M, BC at Q."""
+    W, H = 200, 200
+    A = (40, 160); B_ = (160, 160); C = (160, 40); D_ = (40, 40)
+    # E on DC, 5 inches from D out of 12 → t = 5/12
+    t = 5/12
+    E = (D_[0] + t*(C[0]-D_[0]), D_[1])
+    # Midpoint of AE
+    M = ((A[0]+E[0])/2, (A[1]+E[1])/2)
+    # Perp bisector direction: perpendicular to AE
+    AE = (E[0]-A[0], E[1]-A[1])
+    perp = (-AE[1], AE[0])
+    # Endpoints far along the bisector to extend across the square
+    far1 = (M[0] + perp[0]*5, M[1] + perp[1]*5)
+    far2 = (M[0] - perp[0]*5, M[1] - perp[1]*5)
+    P_ = _isect(far1, far2, A, D_)
+    Q_ = _isect(far1, far2, B_, C)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*C, *D_), segment(*D_, *A),
+        segment(*A, *E),
+        segment(*P_, *Q_),
+        right_angle_mark(M[0], M[1], P_, A, size=6),
+        point(*A, "A", "below-left"),
+        point(*B_, "B", "below-right"),
+        point(*C, "C", "above-right"),
+        point(*D_, "D", "above-left"),
+        point(*E, "E", "above"),
+        point(*M, "M", "right", dot=False),
+        point(*P_, "P", "left", dot=False),
+        point(*Q_, "Q", "right", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_27_problem_393_two_incircles() -> str:
+    """Triangle ABC with cevian AD, plus incircles of ADB and ADC tangent at G."""
+    W, H = 220, 180
+    A = (110, 25); B_ = (30, 150); C = (190, 150)
+    D_ = (110, 150)
+    # Approximate incircles for the two sub-triangles
+    # Small radius circles tangent to AD at some point G
+    ral = 18; rar = 22
+    Gleft = (A[0]-1, 95)
+    Gright = (A[0]+1, 95)
+    Pleft = (Gleft[0]-ral, 105)
+    Pright = (Gright[0]+rar, 100)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*A, *D_),
+        circle(*Pleft, ral),
+        circle(*Pright, rar),
+        # E and F: tangent points of left and right incircles on BC
+        point(D_[0]-22, D_[1], "E", "above", dot=True),
+        point(D_[0],    D_[1], "D", "below", dot=True),
+        point(D_[0]+25, D_[1], "F", "above", dot=True),
+        point(*A, "A", "above"),
+        point(A[0]-1, 95, "G", "right", dot=True),
+        point(*B_, "B", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_28_problem_394_medians_extended() -> str:
+    """Triangle ABC with medians AE, BF, CD; FH parallel and equal to AE; FE
+    extended meets BH at G."""
+    W, H = 240, 200
+    A = (35, 150); B_ = (165, 150); C = (105, 30)
+    D_ = ((A[0]+B_[0])/2, (A[1]+B_[1])/2)
+    E = ((B_[0]+C[0])/2, (B_[1]+C[1])/2)
+    F = ((A[0]+C[0])/2, (A[1]+C[1])/2)
+    # H so that FH = AE and FH parallel to AE (same vector translation)
+    AEv = (E[0]-A[0], E[1]-A[1])
+    H_ = (F[0]+AEv[0], F[1]+AEv[1])
+    # G = intersection of FE-extended with BH
+    G = _isect(F, E, B_, H_)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*A, *E), segment(*B_, *F), segment(*C, *D_),
+        segment(*F, *H_),
+        segment(*B_, *H_),
+        point(*A, "A", "below-left"),
+        point(*B_, "B", "below-right"),
+        point(*C, "C", "above-left"),
+        point(*D_, "D", "below"),
+        point(*E, "E", "right"),
+        point(*F, "F", "left"),
+        point(*G, "G", "below", dot=False),
+        point(*H_, "H", "above-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_29_problem_395_rotated_square() -> str:
+    """Unit square and its rotation by α (cos α = 4/5) about a shared vertex,
+    with overlap region bounded by sides of both squares."""
+    W, H = 200, 200
+    cx, cy = 70, 150
+    s = 90
+    # Original square (axis-aligned), one vertex at (cx, cy)
+    O0 = [(cx, cy), (cx+s, cy), (cx+s, cy-s), (cx, cy-s)]
+    # Rotated by α (cos α = 4/5 → α ≈ 36.87°). Rotate around (cx, cy).
+    a = _m.acos(4/5)
+    def rot(p):
+        x, y = p[0]-cx, p[1]-cy
+        return (cx + x*_m.cos(a) - y*_m.sin(a),
+                cy + x*_m.sin(a) + y*_m.cos(a))
+    R0 = [rot(p) for p in O0]
+    body = []
+    for sq in (O0, R0):
+        for i in range(4):
+            body.append(segment(*sq[i], *sq[(i+1)%4]))
+    body.append(text(cx + 28, cy - 12, "α", italic=True, size=11))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_30_problem_396_isosceles_trapezoid_midpoints() -> str:
+    """Isosceles trapezoid ABCD (AB ∥ CD); diagonals meet at O with ∠AOB = 60°;
+    M, N, P midpoints of AO, DO, BC respectively (forms equilateral MNP)."""
+    W, H = 240, 200
+    A = (80, 60); B_ = (160, 60); D_ = (40, 160); C = (200, 160)
+    O = _isect(A, C, B_, D_)
+    M = ((A[0]+O[0])/2, (A[1]+O[1])/2)
+    N_ = ((D_[0]+O[0])/2, (D_[1]+O[1])/2)
+    P_ = ((B_[0]+C[0])/2, (B_[1]+C[1])/2)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*C, *D_), segment(*D_, *A),
+        segment(*A, *C), segment(*B_, *D_),
+        segment(*M, *N_), segment(*N_, *P_), segment(*M, *P_),
+        point(*A, "A", "above-left"),
+        point(*B_, "B", "above-right"),
+        point(*M, "M", "above-left"),
+        point(*O, "O", "above-right"),
+        point(*P_, "P", "right"),
+        point(*N_, "N", "below-left"),
+        point(*D_, "D", "below-left"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_31_problem_398_altitude_bisector() -> str:
+    """Right triangle ABC (right angle at B) with altitude BD to AC and bisector
+    AF of ∠BAC; bisector meets BD at P and BC at F."""
+    W, H = 220, 160
+    A = (45, 130); B_ = (45, 30); C = (185, 130)
+    D_ = _foot(B_, A, C)
+    # F on BC such that AF bisects ∠BAC
+    # Use angle bisector splitting ratio: BF/FC = AB/AC
+    AB = ((B_[0]-A[0])**2 + (B_[1]-A[1])**2)**0.5
+    AC = ((C[0]-A[0])**2 + (C[1]-A[1])**2)**0.5
+    fl = AB / (AB + AC)
+    F = (B_[0] + fl*(C[0]-B_[0]), B_[1] + fl*(C[1]-B_[1]))
+    P_ = _isect(A, F, B_, D_)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*B_, *D_),
+        segment(*A, *F),
+        right_angle_mark(B_[0], B_[1], A, C, size=6),
+        point(*A, "A", "below"),
+        point(*B_, "B", "above-left"),
+        point(*D_, "D", "above-right"),
+        point(*P_, "P", "right", dot=False),
+        point(*F, "F", "above"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_32_problem_400_three_points_on_sides() -> str:
+    """Triangle ABC with D on AB, E on BC, F on CA; segment DF drawn separating
+    quadrilateral DBEF from triangle ADF."""
+    W, H = 200, 180
+    A = (30, 150); B_ = (170, 150); C = (110, 30)
+    # D on AB at 2/5, E on BC at midpoint, F on CA at midpoint
+    t_D = 2 / 5
+    D_ = (A[0] + t_D*(B_[0]-A[0]), A[1] + t_D*(B_[1]-A[1]))
+    E = ((B_[0]+C[0])/2, (B_[1]+C[1])/2)
+    F = ((C[0]+A[0])/2, (C[1]+A[1])/2)
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*D_, *F),
+        segment(*F, *E),
+        point(*C, "C", "above"),
+        point(*F, "F", "left"),
+        point(*E, "E", "right"),
+        point(*A, "A", "below-left"),
+        point(*D_, "D", "below"),
+        point(*B_, "B", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_20_33_problem_401_midpoint_bisector() -> str:
+    """Triangle ABC with M midpoint of BC; AN bisects ∠BAC; BN ⊥ AN."""
+    W, H = 200, 180
+    A = (105, 25); B_ = (35, 150); C = (175, 150)
+    M = ((B_[0]+C[0])/2, (B_[1]+C[1])/2)
+    # N on bisector of ∠BAC such that BN ⊥ AN.
+    # Compute bisector direction at A
+    AB = (B_[0]-A[0], B_[1]-A[1])
+    AC = (C[0]-A[0], C[1]-A[1])
+    nAB = (AB[0]**2 + AB[1]**2)**0.5
+    nAC = (AC[0]**2 + AC[1]**2)**0.5
+    bisd = (AB[0]/nAB + AC[0]/nAC, AB[1]/nAB + AC[1]/nAC)
+    # Walk along bisector from A; find N where BN ⊥ AN.
+    # AN direction = bisd. N = A + t*bisd. BN = N - B. BN ⊥ AN iff bisd · (N-B) = 0.
+    # bisd · (A + t*bisd - B) = 0  ⇒  t = bisd·(B-A) / |bisd|²
+    nb = (bisd[0]**2 + bisd[1]**2)
+    t_n = ((B_[0]-A[0])*bisd[0] + (B_[1]-A[1])*bisd[1]) / nb
+    N_ = (A[0] + t_n*bisd[0], A[1] + t_n*bisd[1])
+    body = [
+        segment(*A, *B_), segment(*B_, *C), segment(*A, *C),
+        segment(*A, *N_),
+        segment(*B_, *N_),
+        segment(*M, *N_),
+        right_angle_mark(N_[0], N_[1], A, B_, size=6),
+        point(*A, "A", "above"),
+        point(*N_, "N", "right", dot=False),
+        point(*A, "A", "above"),
+        point(*B_, "B", "below-left"),
+        point(*M, "M", "below"),
+        point(*C, "C", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+# ─────────────────────────────────────────────
 # Chapter 29 — Parting Shots (problem-specific figures)
 # ─────────────────────────────────────────────
 
@@ -4004,6 +4902,39 @@ FIGURES = {
     "fig-29-1-problem-578-three-hexagons":       fig_29_1_problem_578_three_hexagons,
     "fig-29-2-problem-584-rectangle-with-point": fig_29_2_problem_584_rectangle_with_point,
     "fig-29-3-problem-586-triangle-cevians":     fig_29_3_problem_586_triangle_cevians,
+    "fig-20-1-problem-343-tangent-circles":             fig_20_1_problem_343_tangent_circles,
+    "fig-20-2-problem-344-right-triangle-with-square":  fig_20_2_problem_344_right_triangle_with_square,
+    "fig-20-3-problem-346-triangle-in-circle":          fig_20_3_problem_346_triangle_in_circle,
+    "fig-20-4-problem-348-right-trapezoid":             fig_20_4_problem_348_right_trapezoid,
+    "fig-20-5-problem-350-rhombus-in-triangle":         fig_20_5_problem_350_rhombus_in_triangle,
+    "fig-20-6-problem-352-isosceles-with-semicircle":   fig_20_6_problem_352_isosceles_with_semicircle,
+    "fig-20-7-problem-355-chord-bisects-arc":           fig_20_7_problem_355_chord_bisects_arc,
+    "fig-20-8-problem-357-parallel-tangents":           fig_20_8_problem_357_parallel_tangents,
+    "fig-20-9-problem-359-rectangle-with-E":            fig_20_9_problem_359_rectangle_with_E,
+    "fig-20-10-problem-361-right-triangle-DE":          fig_20_10_problem_361_right_triangle_DE,
+    "fig-20-11-problem-363-paper-fold":                 fig_20_11_problem_363_paper_fold,
+    "fig-20-12-problem-365-square-with-P":              fig_20_12_problem_365_square_with_P,
+    "fig-20-13-problem-367-square-equilateral":         fig_20_13_problem_367_square_equilateral,
+    "fig-20-14-problem-369-triangle-DE":                fig_20_14_problem_369_triangle_DE,
+    "fig-20-15-problem-371-inscribed-perp-bisectors":   fig_20_15_problem_371_inscribed_perp_bisectors,
+    "fig-20-16-problem-373-circumscribed-circle":       fig_20_16_problem_373_circumscribed_circle,
+    "fig-20-17-problem-375-inscribed-quarter-circle":   fig_20_17_problem_375_inscribed_quarter_circle,
+    "fig-20-18-problem-378-intersecting-chords":        fig_20_18_problem_378_intersecting_chords,
+    "fig-20-19-problem-380-inscribed-corner-circle":    fig_20_19_problem_380_inscribed_corner_circle,
+    "fig-20-20-problem-381-inscribed-hexagon":          fig_20_20_problem_381_inscribed_hexagon,
+    "fig-20-21-problem-382-perp-diameters":             fig_20_21_problem_382_perp_diameters,
+    "fig-20-22-problem-384-three-parallels-two-transversals": fig_20_22_problem_384_three_parallels_two_transversals,
+    "fig-20-23-problem-387-two-inscribed-semicircles":  fig_20_23_problem_387_two_inscribed_semicircles,
+    "fig-20-24-problem-388-ladder-alley":               fig_20_24_problem_388_ladder_alley,
+    "fig-20-25-problem-389-tangent-circles":            fig_20_25_problem_389_tangent_circles,
+    "fig-20-26-problem-391-square-perp-bisector":       fig_20_26_problem_391_square_perp_bisector,
+    "fig-20-27-problem-393-two-incircles":              fig_20_27_problem_393_two_incircles,
+    "fig-20-28-problem-394-medians-extended":           fig_20_28_problem_394_medians_extended,
+    "fig-20-29-problem-395-rotated-square":             fig_20_29_problem_395_rotated_square,
+    "fig-20-30-problem-396-isosceles-trapezoid-midpoints": fig_20_30_problem_396_isosceles_trapezoid_midpoints,
+    "fig-20-31-problem-398-altitude-bisector":          fig_20_31_problem_398_altitude_bisector,
+    "fig-20-32-problem-400-three-points-on-sides":      fig_20_32_problem_400_three_points_on_sides,
+    "fig-20-33-problem-401-midpoint-bisector":          fig_20_33_problem_401_midpoint_bisector,
 }
 
 

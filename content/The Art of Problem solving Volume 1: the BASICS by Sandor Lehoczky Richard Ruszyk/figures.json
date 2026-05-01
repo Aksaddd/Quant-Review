@@ -1824,6 +1824,435 @@
       ]
     },
     {
+      "id": "fig-20-1-problem-343-tangent-circles",
+      "chapter": 20,
+      "page": 195,
+      "bookPage": 181,
+      "caption": "Two congruent circles O and P externally tangent; segment AP from external A is tangent to circle O.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-2-problem-344-right-triangle-with-square",
+      "chapter": 20,
+      "page": 195,
+      "bookPage": 181,
+      "caption": "Right triangle ABC with right angle at B; a square is built externally on side AC.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-3-problem-346-triangle-in-circle",
+      "chapter": 20,
+      "page": 195,
+      "bookPage": 181,
+      "caption": "Triangle ABC inscribed in a circle of radius 4 with right angle at A and \u2220ABC = 30\u00b0.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-4-problem-348-right-trapezoid",
+      "chapter": 20,
+      "page": 195,
+      "bookPage": 181,
+      "caption": "Right triangle ACD (right angle at D) with B on AC and E on AD; BE \u2225 CD forms trapezoid BCDE.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-5-problem-350-rhombus-in-triangle",
+      "chapter": 20,
+      "page": 195,
+      "bookPage": 181,
+      "caption": "Triangle ABC with rhombus BDEF inscribed: B is a triangle vertex, D on BC, E on AC, F on AB.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-6-problem-352-isosceles-with-semicircle",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Isosceles triangle ABC with semicircle inscribed on base BC; the semicircle is tangent to both legs.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-7-problem-355-chord-bisects-arc",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Triangle ABC inscribed in circle O; chord BY bisects arc AC, crossing AC at D.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-8-problem-357-parallel-tangents",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Two parallel tangents TP and RQ to a circle of radius r; transverse tangent PSQ touches at S.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-9-problem-359-rectangle-with-E",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Rectangle ABCD with E on side AB; segments DE and BE drawn (DE = DC).",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-10-problem-361-right-triangle-DE",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Right triangle ABC (right angle at C) with D on AC and E on AB such that DE \u2225 CB.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-11-problem-363-paper-fold",
+      "chapter": 20,
+      "page": 196,
+      "bookPage": 182,
+      "caption": "Rectangle 8 inches wide; the bottom-right corner is folded along a crease \u2113 so it meets point C on the opposite long edge.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-12-problem-365-square-with-P",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Square (side 6 inches) with vertices E top-left, D top-right, B bottom-right, A bottom-left; C on top side; interior point P with PA = PB = PC and PC \u22a5 ED.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-13-problem-367-square-equilateral",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Square ABCD with equilateral triangle DCE inside (E interior); F on AB with FE \u2225 AD.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-14-problem-369-triangle-DE",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Triangle ABC with altitude AG to BC; D on AB, E on AC, DE \u2225 BC; F = DE \u2229 AG.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-15-problem-371-inscribed-perp-bisectors",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Triangle ABC inscribed in a circle of radius r; F, D, E on arcs (perpendicular bisectors of AB, BC, AC) form hexagon AECDBF.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-16-problem-373-circumscribed-circle",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Quadrilateral ABCD circumscribed about a circle; tangent points R, S, T, U on AB, BC, CD, DA; right angle at D; arc RST measures 210\u00b0.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-17-problem-375-inscribed-quarter-circle",
+      "chapter": 20,
+      "page": 197,
+      "bookPage": 183,
+      "caption": "Big circle of diameter 12; smaller circle inscribed in a quadrant of the big circle, tangent to the two radii and the arc.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-18-problem-378-intersecting-chords",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Circle with chords AB and CD intersecting at interior point E; X is a labeled point on chord AB.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-19-problem-380-inscribed-corner-circle",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Equilateral triangle ABC with incircle O; smaller circle P at vertex A tangent to both adjacent sides and externally tangent to circle O.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-20-problem-381-inscribed-hexagon",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Hexagon inscribed in a circle of radius r \u2014 two short sides of length 7 and four long sides of length 20.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-21-problem-382-perp-diameters",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Circle O with perpendicular diameters AB and CD; chord AM crosses CD at interior point P.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-22-problem-384-three-parallels-two-transversals",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Three parallel lines \u2113, m, n cut by two transversals; segment lengths x, c, a along one transversal and y, d, b along the other; parallel cut-offs f, g, h on the lines.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-23-problem-387-two-inscribed-semicircles",
+      "chapter": 20,
+      "page": 198,
+      "bookPage": 184,
+      "caption": "Large semicircle on a horizontal diameter with two smaller semicircles centered at P (radius 6) and Q (radius 4) tangent to each other and to the large semicircle; line LM is the common external tangent.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-24-problem-388-ladder-alley",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Ladder of length a in an alley between two vertical walls; first leans against one wall at Q (height k, 45\u00b0) then the other at R (height h, 75\u00b0).",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-25-problem-389-tangent-circles",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Two externally tangent circles centered at C (large) and B (small); D on the left edge of circle C; A right of circle B; common external tangent EF.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-26-problem-391-square-perp-bisector",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Square ABCD (side 12) with E on DC (DE = 5); perpendicular bisector of AE meets AD at P, AE at midpoint M, and BC at Q.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-27-problem-393-two-incircles",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Triangle ABC with cevian AD splitting it into \u25b3ADB and \u25b3ADC; each subtriangle has its incircle, both tangent to AD at the same point G; tangent points E, D, F on BC.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-28-problem-394-medians-extended",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Triangle ABC with medians AE, BF, CD; segment FH parallel and equal to AE (H outside the triangle); FE extended meets BH at G.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-29-problem-395-rotated-square",
+      "chapter": 20,
+      "page": 199,
+      "bookPage": 185,
+      "caption": "Unit square and its rotated image about a shared vertex by angle \u03b1 (cos \u03b1 = 4/5); overlap region bounded by sides of both squares.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-30-problem-396-isosceles-trapezoid-midpoints",
+      "chapter": 20,
+      "page": 200,
+      "bookPage": 186,
+      "caption": "Isosceles trapezoid ABCD with AB \u2225 CD and AD = BC; diagonals meet at O with \u2220AOB = 60\u00b0; M, N, P midpoints of AO, DO, BC respectively (triangle MNP is equilateral).",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-31-problem-398-altitude-bisector",
+      "chapter": 20,
+      "page": 200,
+      "bookPage": 186,
+      "caption": "Right triangle ABC with right angle at B; altitude BD from B to hypotenuse AC; angle bisector AF of \u2220BAC meets BC at F and intersects altitude BD at P.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-32-problem-400-three-points-on-sides",
+      "chapter": 20,
+      "page": 200,
+      "bookPage": 186,
+      "caption": "Triangle ABC (area 10) with D on AB (AD = 2, DB = 3), E on BC, F on CA; segment DF separates quadrilateral DBEF from \u25b3ADF.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fig-20-33-problem-401-midpoint-bisector",
+      "chapter": 20,
+      "page": 200,
+      "bookPage": 186,
+      "caption": "Triangle ABC with M midpoint of BC; AN bisects \u2220BAC; BN \u22a5 AN. Segment MN drawn from midpoint to N.",
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
       "id": "fig-29-1-problem-578-three-hexagons",
       "chapter": 29,
       "page": 279,

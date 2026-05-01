@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" width="220" height="180">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<line x1="110" y1="25" x2="30" y2="150" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="150" x2="190" y2="150" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110" y1="25" x2="190" y2="150" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110" y1="25" x2="110" y2="150" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="91" cy="105" r="18" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="133" cy="100" r="22" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="88" cy="150" r="2.5" fill="#1d1d1f"/>
+<text x="88" y="142" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">E</text>
+<circle cx="110" cy="150" r="2.5" fill="#1d1d1f"/>
+<text x="110" y="166" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">D</text>
+<circle cx="135" cy="150" r="2.5" fill="#1d1d1f"/>
+<text x="135" y="142" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">F</text>
+<circle cx="110" cy="25" r="2.5" fill="#1d1d1f"/>
+<text x="110" y="17" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">A</text>
+<circle cx="109" cy="95" r="2.5" fill="#1d1d1f"/>
+<text x="121" y="99" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">G</text>
+<circle cx="30" cy="150" r="2.5" fill="#1d1d1f"/>
+<text x="20" y="168" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">B</text>
+<circle cx="190" cy="150" r="2.5" fill="#1d1d1f"/>
+<text x="200" y="168" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+</svg>
