@@ -25,6 +25,12 @@ notes: |
 
 ---
 
+> Each problem below references a figure printed in the original textbook.
+> The matching source-page scan is inlined just before the problems it
+> illustrates — click any thumbnail to view it full-size.
+
+![Page 181 — figures for problems 343–351](/api/aops-vol1/page/195)
+
 **343.** Congruent circles $O$ and $P$ are tangent, and $AP$ is tangent to circle $O$ as shown. If $AP = 15$, what is the radius of circle $P$? *(MATHCOUNTS 1989)*
 
 <!-- FIGURE_TODO problem=343 -->
@@ -75,6 +81,8 @@ notes: |
 **351.** Let $ABCD$ be an isosceles trapezoid such that $AB \parallel CD$, $AB = 8$, $CD = 4$, and $AC \perp BD$. Find the area of $ABCD$. *(M&IQ 1992)*
 
 ---
+
+![Page 182 — figures for problems 352–364](/api/aops-vol1/page/196)
 
 **352.** Find the area of a semicircle inscribed in $\triangle ABC$ as in the diagram, where $AB = AC = 25$ and $BC = 40$. *(Mandelbrot #1)*
 
@@ -149,6 +157,8 @@ $$\frac{1}{x^2} = \frac{1}{a^2} + \frac{1}{b^2}.$$
 *(AHSME 1956)*
 
 ---
+
+![Page 183 — figures for problems 365–377](/api/aops-vol1/page/197)
 
 **365.** A square with side $6$ inches is shown. If $P$ is a point such that the segments $PA$, $PB$, and $PC$ are equal in length, and segment $PC$ is perpendicular to segment $ED$, what is the area in square inches of triangle $APB$? *(MATHCOUNTS 1991)*
 
@@ -225,6 +235,8 @@ $$\frac{1}{x^2} = \frac{1}{a^2} + \frac{1}{b^2}.$$
 
 ---
 
+![Page 184 — figures for problems 378–387](/api/aops-vol1/page/198)
+
 **378.** In the diagram, chords $AB$ and $CD$ intersect at point $E$ within the circle. If $CE = 12$, $AE = 8$, $AB = 14$, and $AD = 10$, find $AX$. *(MAΘ 1990)*
 
 <!-- FIGURE_TODO problem=378 -->
@@ -288,6 +300,8 @@ $$\frac{1}{x^2} = \frac{1}{a^2} + \frac{1}{b^2}.$$
 
 ---
 
+![Page 185 — figures for problems 388–394](/api/aops-vol1/page/199)
+
 **388.** In a narrow alley of width $w$ a ladder of length $a$ is placed with its foot at a point $P$ between the walls. Resting against one wall at $Q$, a distance $k$ above the ground, the ladder makes a $45°$ angle with the ground. Resting against the other wall at $R$, a distance $h$ above the ground, the ladder makes a $75°$ angle with the ground. Find $w$ in terms of $h$ and $k$. *(AHSME 1982)*
 
 <!-- FIGURE_TODO problem=388 -->
@@ -338,6 +352,8 @@ $$\frac{1}{x^2} = \frac{1}{a^2} + \frac{1}{b^2}.$$
 *Figure 394: $\triangle ABC$ with medians $\overline{AE}$, $\overline{BF}$, $\overline{CD}$; segment $\overline{FH}$ drawn parallel and equal to $\overline{AE}$ ($H$ outside the triangle); $\overline{FE}$ extended meets $\overline{BH}$ at $G$.*
 
 ---
+
+![Page 186 — figures for problems 395–401](/api/aops-vol1/page/200)
 
 **395.** A square with side length one is rotated about one vertex by an angle $\alpha$, where $0° < \alpha < 90°$. If $\cos \alpha = 4/5$, find the area common to both the original square and its rotated image. *(Mandelbrot #2)*
 
