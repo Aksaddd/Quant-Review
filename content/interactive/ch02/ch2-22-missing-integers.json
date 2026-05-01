@@ -1,0 +1,111 @@
+{
+  "id": "ch2-22-missing-integers",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.5",
+  "title": "Missing Integers",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "478-493"
+  },
+  "mechanism": {
+    "primary": "series-summation",
+    "structure": "two-equations-from-sum-and-sum-of-squares",
+    "insight": "two-unknowns-need-two-independent-summations",
+    "variantAxes": ["range_size", "n_missing"]
+  },
+  "setup": {
+    "narrative": "You are given a list of 98 distinct integers, all drawn from the set {1, 2, 3, ..., 100}. Exactly two integers in the original {1, ..., 100} are missing from your list.",
+    "rules": [
+      "All 98 given integers are distinct.",
+      "All 98 are in {1, ..., 100}.",
+      "Exactly two integers are missing.",
+      "You must find a procedure that runs in O(n) time using O(1) extra memory."
+    ],
+    "question": "What are the two missing integers?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that one summation gives one equation -- not enough for two unknowns.",
+    "Use sum-of-squares as the second independent summation to break the symmetry.",
+    "Solve the resulting system of two quadratic equations in two unknowns."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing?",
+      "options": [
+        { "id": "a", "text": "Use series summation: sum of all 100 minus the actual sum gives x + y.",   "correct": true },
+        { "id": "b", "text": "Sort the list and look for gaps -- O(n log n).",                              "correct": false },
+        { "id": "c", "text": "Hash table -- O(n) but uses O(n) memory.",                                    "correct": false }
+      ],
+      "explanation": "The expected sum of {1..100} is known by formula: 100*101/2 = 5050. Subtract the actual sum of the 98 given integers; the difference is x + y. This gives ONE equation. We need a second to separate x and y.",
+      "learnMoreTechnique": "series-summation"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "First equation",
+      "prompt": "Sum of integers in {1, ..., 100}?",
+      "answerType": "numeric",
+      "answer": 5050,
+      "explanation": "100*101/2 = 5050. Subtracting the actual sum of the 98 given integers gives x + y."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why one equation isn't enough",
+      "prompt": "Suppose x + y = 50. Can you uniquely identify x and y from this alone?",
+      "options": [
+        { "id": "a", "text": "No -- (x, y) could be (1, 49), (2, 48), ..., (24, 26). 24 candidates.",  "correct": true },
+        { "id": "b", "text": "Yes -- there's only one way to write 50 as x + y.",                         "correct": false }
+      ],
+      "explanation": "x + y = 50 has many integer solutions in [1, 100]. We need a second independent equation. The natural choice: sum of squares. (Other choices would work too -- product, or sum of cubes -- but sum of squares has the cleanest closed form.)"
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Second equation",
+      "prompt": "Sum of squares 1^2 + 2^2 + ... + 100^2?",
+      "answerType": "numeric",
+      "answer": 338350,
+      "explanation": "N(N+1)(2N+1)/6 with N=100: 100*101*201/6 = 338350. Subtracting the actual sum-of-squares of the 98 integers gives x^2 + y^2."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Solve the system",
+      "prompt": "Given x + y = S and x^2 + y^2 = Q, how do you solve for x and y?",
+      "options": [
+        { "id": "a", "text": "Use the identity (x+y)^2 = x^2 + 2xy + y^2 to get xy = (S^2 - Q) / 2. Then x and y are roots of the quadratic t^2 - S*t + xy = 0.", "correct": true },
+        { "id": "b", "text": "Subtract the two equations and divide.",                                                                                            "correct": false },
+        { "id": "c", "text": "Iterate over all (x, y) pairs.",                                                                                                    "correct": false }
+      ],
+      "explanation": "From S = x + y and Q = x^2 + y^2: derive xy = (S^2 - Q) / 2. Then x and y are the two roots of t^2 - S*t + (S^2 - Q)/2 = 0 -- solvable by the quadratic formula. Total time: O(n) (one pass to compute the two summations) and O(1) extra memory."
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "Generalize",
+      "prompt": "How many independent summations do you need to recover K missing integers?",
+      "template": "K unknowns require __[a]__ independent summations: typically sum, sum-of-squares, sum-of-cubes, ..., up to the K-th power.",
+      "blanks": [
+        { "id": "a", "answers": ["K", "k"], "caseInsensitive": true }
+      ],
+      "explanation": "For K missing integers, use power sums S_1, S_2, ..., S_K. These give K equations in K unknowns and uniquely determine the multiset of missing values (via Newton's identities to convert power sums to elementary symmetric polynomials). Beyond K=3, the algebra gets unwieldy -- in practice for K large, hashing or sorting is preferable."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What goes wrong if the integers can REPEAT in the input list?",
+        "How would you find ONE missing integer using only sum (no sum-of-squares)?",
+        "Why does the technique have O(1) memory? What state are you actually maintaining?"
+      ]
+    }
+  ]
+}

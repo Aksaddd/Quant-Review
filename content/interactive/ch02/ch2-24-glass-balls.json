@@ -1,0 +1,105 @@
+{
+  "id": "ch2-24-glass-balls",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.5",
+  "title": "Glass Balls",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "513-530"
+  },
+  "mechanism": {
+    "primary": "series-summation",
+    "structure": "telescoping-decreasing-step-size",
+    "insight": "first-balls-drop-points-are-spaced-by-decreasing-amounts",
+    "variantAxes": ["n_floors", "n_balls"]
+  },
+  "setup": {
+    "narrative": "You have a 100-story building and 2 identical glass balls. There is some critical floor X (between 1 and 100) such that any ball dropped from floor X or higher BREAKS, and any ball dropped from a floor below X SURVIVES.",
+    "rules": [
+      "You can drop a ball from any floor.",
+      "If a ball survives, you can pick it up and reuse it.",
+      "If a ball breaks, that ball is gone.",
+      "You only have 2 balls total.",
+      "Worst case: minimize the maximum number of drops needed to find X with certainty."
+    ],
+    "question": "What is the minimum number of drops in the worst case?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that the first ball is your COARSE probe; the second is the LINEAR fallback.",
+    "Use a decreasing-step strategy: each successive first-ball drop covers fewer floors.",
+    "Bound the worst case via N + (N-1) + ... + 1 = N(N+1)/2 floors covered, and solve for the smallest N."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive strategies are suboptimal",
+      "prompt": "Suppose you drop the first ball from every 10th floor (10, 20, 30, ...). Once it breaks, you check each floor sequentially with the second ball. What's the worst case?",
+      "options": [
+        { "id": "a", "text": "10 + 9 = 19 drops in the worst case (first ball: up to 10 drops to find the break interval; second ball: up to 9 drops within the interval).", "correct": true },
+        { "id": "b", "text": "20 drops always.",                                                                                                                              "correct": false },
+        { "id": "c", "text": "100 drops in the worst case.",                                                                                                                  "correct": false }
+      ],
+      "explanation": "Equal-spacing 10/10/10/.../10 has worst case ~19. Can we do better? Yes -- if the first ball drops are spaced UNEQUALLY (decreasing), the worst case shrinks."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you find the optimal spacing?",
+      "options": [
+        { "id": "a", "text": "Series summation: if the worst case is N drops total, the first ball can be dropped from N successively-decreasing-step floors. Sum N + (N-1) + ... + 1 = N(N+1)/2 must cover all 100 floors.", "correct": true },
+        { "id": "b", "text": "Probability over the unknown floor X.",                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "Backward induction from floor 100.",                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "If the first ball is dropped from floor N, then floor N + (N-1), then floor N + (N-1) + (N-2), and so on, then EACH successive jump is one smaller. This means: after K drops without breaking, the first ball has covered N + (N-1) + ... + (N-K+1) floors. After all N drops, we've covered N(N+1)/2 floors. That's our budget.",
+      "learnMoreTechnique": "series-summation"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why decreasing steps?",
+      "prompt": "Why should the first ball's step size DECREASE after each drop that survives?",
+      "options": [
+        { "id": "a", "text": "Because each drop you've already used is a drop you can't spend on the linear scan after the first ball breaks. You want to keep the total budget (first-ball drops + second-ball linear scan) constant.",  "correct": true },
+        { "id": "b", "text": "Because higher floors are riskier for the ball.",                                                                                                                                                          "correct": false },
+        { "id": "c", "text": "Because gravity changes with altitude.",                                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Total worst-case = (drops used so far on ball 1) + (linear scan within the interval after ball 1 breaks). To make this constant across all break-intervals, each successive interval (between first-ball drops) must be one floor shorter than the previous."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Solve N(N+1)/2 >= 100",
+      "prompt": "What is the smallest integer N such that N(N+1)/2 >= 100?",
+      "answerType": "numeric",
+      "answer": 14,
+      "explanation": "N=13: 13*14/2 = 91 (insufficient). N=14: 14*15/2 = 105 (sufficient). So N = 14."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What is the minimum number of drops in the worst case?",
+      "options": [
+        { "id": "a", "text": "14 drops -- with first ball dropped from floors 14, 27, 39, 50, ..., the worst-case total is 14.", "correct": true },
+        { "id": "b", "text": "10 drops",  "correct": false },
+        { "id": "c", "text": "19 drops",  "correct": false }
+      ],
+      "explanation": "14 drops minimum. First ball drops at floors 14, 14+13=27, 27+12=39, 39+11=50, 50+10=60, 60+9=69, 69+8=77, 77+7=84, 84+6=90, 90+5=95, 95+4=99 -- covers up to floor 105 (more than 100). At any break, the linear scan within the interval takes at most (step-size - 1) more drops, summing to 14 total in the worst case."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: for B floors and 2 balls, the answer is the smallest N with N(N+1)/2 >= B. Verify on B = 50.",
+        "What changes if you have 3 balls? (Hint: the answer involves a cube-like sum.)",
+        "Why does the dual formula -- 2 balls, find N from N(N+1)/2 -- mirror so many other puzzles? What's the underlying combinatorial structure?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "id": "ch2-23-counterfeit-coins-i",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.5",
+  "title": "Counterfeit Coins I",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "497-509"
+  },
+  "mechanism": {
+    "primary": "series-summation",
+    "structure": "encode-bag-id-via-coin-count",
+    "insight": "take-j-coins-from-bag-j-so-deviation-equals-j",
+    "variantAxes": ["n_bags", "weight_offset"]
+  },
+  "setup": {
+    "narrative": "There are 10 bags, each containing 100 coins. Nine of the bags contain GENUINE coins weighing exactly 10 grams each. ONE bag contains COUNTERFEIT coins weighing either 9 grams OR 11 grams each (you don't know which way).",
+    "rules": [
+      "You have a digital scale that gives a precise weight reading (not just balance comparison).",
+      "You may use the scale only ONCE.",
+      "You can place any number of coins from any bags on the scale.",
+      "You must identify which bag is counterfeit AND determine whether it's heavier or lighter."
+    ],
+    "question": "What single weighing identifies the counterfeit bag?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use a series-summation insight to encode bag identity into a single readable number.",
+    "Recognize that proportional sampling (j coins from bag j) makes the deviation distinguishable for each bag.",
+    "Read both the bag identity AND the direction of the offset from one weighing."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive approaches fail",
+      "prompt": "Suppose you weigh ONE coin from each bag (10 coins, 1 per bag). What does the total weight tell you?",
+      "options": [
+        { "id": "a", "text": "The deviation from 100 is +/- 1 -- you know there's a counterfeit but you can't tell WHICH bag.", "correct": true },
+        { "id": "b", "text": "It identifies the counterfeit bag uniquely.",                                                       "correct": false },
+        { "id": "c", "text": "Nothing -- you'd need to weigh each coin separately.",                                              "correct": false }
+      ],
+      "explanation": "Equal sampling means every bag contributes the same way. The deviation tells you THERE IS a counterfeit (and which direction) but not which bag. You need UNEQUAL sampling that encodes bag identity."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing?",
+      "options": [
+        { "id": "a", "text": "Series summation: take a different NUMBER of coins from each bag, so the deviation reveals the bag's index.", "correct": true },
+        { "id": "b", "text": "Probability over which bag is counterfeit.",                                                                       "correct": false },
+        { "id": "c", "text": "Backward induction.",                                                                                              "correct": false }
+      ],
+      "explanation": "Encode each bag's identity into the count of coins taken: 1 from bag 1, 2 from bag 2, ..., 10 from bag 10. The total of 1+2+...+10 = 55 coins. The deviation from the expected weight directly identifies the counterfeit bag.",
+      "learnMoreTechnique": "series-summation"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Expected weight",
+      "prompt": "If all 55 coins (1 from bag 1, 2 from bag 2, ..., 10 from bag 10) were genuine 10-gram coins, what would the scale read?",
+      "answerType": "numeric",
+      "answer": 550,
+      "explanation": "55 coins * 10 grams = 550 grams. (Note 55 = 1+2+...+10 by series-summation: 10*11/2 = 55.)"
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Read the deviation",
+      "prompt": "Suppose the scale reads 553 grams. What do you conclude?",
+      "options": [
+        { "id": "a", "text": "Bag 3 is counterfeit, and its coins are HEAVIER (11 g each). Each of 3 counterfeits adds 1 gram, so total +3.", "correct": true },
+        { "id": "b", "text": "Bag 3 is counterfeit, and its coins are LIGHTER (9 g each).",                                                       "correct": false },
+        { "id": "c", "text": "It's ambiguous between bag 3-heavier and bag 7-lighter.",                                                            "correct": false }
+      ],
+      "explanation": "Deviation = 553 - 550 = +3 grams. Sign positive => counterfeit is HEAVIER. Magnitude = 3 => 3 counterfeits contributed, meaning bag j with j = 3. So bag 3 is counterfeit and heavy."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Does this strategy work for both directions (counterfeit heavier OR lighter) in a single weighing?",
+      "options": [
+        { "id": "a", "text": "Yes -- the SIGN of the deviation gives the direction; the MAGNITUDE gives the bag index. Range: -10 to +10 (excluding 0).", "correct": true },
+        { "id": "b", "text": "Only if you know the direction in advance.",                                                                                  "correct": false },
+        { "id": "c", "text": "Only for the heavier case -- lighter would make some weights negative.",                                                       "correct": false }
+      ],
+      "explanation": "20 distinct non-zero deviations are possible: -1 to -10 (lighter, bags 1-10) and +1 to +10 (heavier, bags 1-10). Each maps to a unique (bag, direction) pair."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if there were 100 bags? How many coins total would you weigh?",
+        "What if TWO bags contained counterfeits with different deviations? Could you still identify both in one weighing?",
+        "Generalize: how does this idea relate to error-correcting codes?"
+      ]
+    }
+  ]
+}

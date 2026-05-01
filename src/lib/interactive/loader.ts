@@ -27,12 +27,17 @@ import ch2QuantSalary    from '../../../content/interactive/ch02/ch2-17-quant-sa
 import ch2CoinPiles      from '../../../content/interactive/ch02/ch2-18-coin-piles.json';
 import ch2MislabeledBags from '../../../content/interactive/ch02/ch2-19-mislabeled-bags.json';
 import ch2WiseMen        from '../../../content/interactive/ch02/ch2-20-wise-men.json';
+import ch2ClockPieces    from '../../../content/interactive/ch02/ch2-21-clock-pieces.json';
+import ch2MissingInts    from '../../../content/interactive/ch02/ch2-22-missing-integers.json';
+import ch2CounterfeitI   from '../../../content/interactive/ch02/ch2-23-counterfeit-coins-i.json';
+import ch2GlassBalls     from '../../../content/interactive/ch02/ch2-24-glass-balls.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
 import techInvariant     from '../../../content/interactive/techniques/invariant-arguments.json';
 import techOOTB          from '../../../content/interactive/techniques/thinking-out-of-the-box.json';
 import techSymmetry      from '../../../content/interactive/techniques/symmetry-arguments.json';
+import techSeries        from '../../../content/interactive/techniques/series-summation.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -56,12 +61,17 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch2-18-coin-piles':        ch2CoinPiles      as unknown as ProblemWalkthrough,
   'ch2-19-mislabeled-bags':   ch2MislabeledBags as unknown as ProblemWalkthrough,
   'ch2-20-wise-men':          ch2WiseMen        as unknown as ProblemWalkthrough,
+  'ch2-21-clock-pieces':      ch2ClockPieces    as unknown as ProblemWalkthrough,
+  'ch2-22-missing-integers':  ch2MissingInts    as unknown as ProblemWalkthrough,
+  'ch2-23-counterfeit-coins-i': ch2CounterfeitI as unknown as ProblemWalkthrough,
+  'ch2-24-glass-balls':       ch2GlassBalls     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
   'invariant-arguments':      techInvariant     as unknown as Technique,
   'thinking-out-of-the-box':  techOOTB          as unknown as Technique,
   'symmetry-arguments':       techSymmetry      as unknown as Technique,
+  'series-summation':         techSeries        as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

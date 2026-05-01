@@ -1,0 +1,59 @@
+{
+  "id": "series-summation",
+  "kind": "technique",
+  "name": "Series Summation",
+  "tagline": "Closed-form sums (1+2+...+N, sum of squares, sum of cubes) turn O(N) iteration into O(1) algebra. Use them to detect missing values, encode information into counts, or analyze worst-case strategies.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.5",
+    "title": "Series Summation",
+    "exemplarProblemId": "ch2-22-missing-integers"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Series summation is the toolkit of closed-form sums applied as a problem-solving technique. The three most-used identities are: 1 + 2 + ... + N = N(N+1)/2, the sum of squares 1^2 + ... + N^2 = N(N+1)(2N+1)/6, and the sum of cubes 1^3 + ... + N^3 = [N(N+1)/2]^2."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The technique is more than memorizing formulas. It includes detecting missing/duplicate values via the difference between expected and actual sums, encoding integer indices into proportional quantities (e.g., 'take j coins from bag j' to read bag identity from total weight), and bounding worst-case strategies via telescoping sums."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When a problem has a count or sum that's almost-but-not-quite a known total, the gap usually identifies the missing or counterfeit element. When you need to encode K choices in one observation, ask: 'can I weight the K things so they sum to distinct values?'"
+    }
+  ],
+  "whenToUse": [
+    "Find missing or duplicate values in a known range using sum/sum-of-squares.",
+    "Encode multiple choices (bag id, item id) into a single observation by using proportional counts.",
+    "Worst-case analysis of strategies where consecutive steps make decreasing-sized commitments.",
+    "Partition problems where the target subset sum is determined by total / k.",
+    "Anywhere you see a sum 1 + 2 + ... + N hiding inside the structure of the problem."
+  ],
+  "recipe": [
+    "Identify the underlying summation: is it 1+2+...+N, sum-of-squares, or telescoping?",
+    "Compute what the answer WOULD be if everything were canonical (no missing items, no counterfeits, no breaks).",
+    "Compare to the actual observation. The discrepancy encodes the answer.",
+    "If multiple unknowns: use additional independent sums (sum-of-squares, sum-of-cubes) to get more equations.",
+    "For optimization: set up the constraint as 'sum >= N' and solve for the smallest integer that satisfies it."
+  ],
+  "commonPitfalls": [
+    "Off-by-one errors -- check the range carefully (1 to N or 0 to N-1?).",
+    "Using sum alone when you need sum-and-sum-of-squares to disambiguate two unknowns.",
+    "Forgetting that the formulas hold for INTEGER ranges -- continuous analogues differ by edge corrections.",
+    "Solving for the optimal N without verifying the worst-case strategy actually achieves it (existence vs. realization).",
+    "Confusing 'sum is invariant' (an invariant argument) with 'sum encodes the answer' (a series argument)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-21-clock-pieces",       "title": "Clock Pieces",       "chapter": 2, "section": "2.5" },
+    { "problemId": "ch2-22-missing-integers",   "title": "Missing Integers",   "chapter": 2, "section": "2.5" },
+    { "problemId": "ch2-23-counterfeit-coins-i", "title": "Counterfeit Coins I","chapter": 2, "section": "2.5" },
+    { "problemId": "ch2-24-glass-balls",        "title": "Glass Balls",        "chapter": 2, "section": "2.5" }
+  ],
+  "relatedTechniques": ["invariant-arguments", "logic-reasoning"]
+}

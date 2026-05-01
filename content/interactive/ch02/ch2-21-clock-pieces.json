@@ -1,0 +1,97 @@
+{
+  "id": "ch2-21-clock-pieces",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.5",
+  "title": "Clock Pieces",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "460-474"
+  },
+  "mechanism": {
+    "primary": "series-summation",
+    "structure": "equal-sum-partition-with-cyclic-adjacency",
+    "insight": "12-and-1-are-adjacent-on-the-clock-face",
+    "variantAxes": ["clock_size", "n_pieces"]
+  },
+  "setup": {
+    "narrative": "A clock face numbered 1 through 12 has been broken into THREE pieces. The sums of the numbers on each piece are equal.",
+    "rules": [
+      "The numbers 1 through 12 are partitioned into three groups (no overlap, none missing).",
+      "Each group's sum is equal to the others.",
+      "Pieces need not be contiguous -- 'piece' here means subset, not arc."
+    ],
+    "question": "What numbers appear on each piece?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Compute the per-piece sum from the total via series summation.",
+    "Recognize that the clock's cyclic structure makes 12 and 1 adjacent.",
+    "Find a partition that respects both the sum constraint and the contiguity constraint."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "ladder-step",
+      "label": "Total sum",
+      "prompt": "What is the sum 1 + 2 + 3 + ... + 12?",
+      "answerType": "numeric",
+      "answer": 78,
+      "explanation": "Use N(N+1)/2 with N = 12: 12*13/2 = 78."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right technique?",
+      "options": [
+        { "id": "a", "text": "Series summation: total / 3 gives the per-piece sum, then find a contiguous-arc partition.", "correct": true },
+        { "id": "b", "text": "Probability: each piece is roughly the same size.",                                              "correct": false },
+        { "id": "c", "text": "Backward induction over the clock numbers.",                                                    "correct": false }
+      ],
+      "explanation": "The total is forced by the formula 12*13/2. Dividing by 3 gives per-piece sum = 26. Now find three contiguous arcs each summing to 26 -- using the fact that 12 and 1 are adjacent on the clock.",
+      "learnMoreTechnique": "series-summation"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Per-piece sum",
+      "prompt": "If 78 is split equally across 3 pieces, what is the sum on each piece?",
+      "answerType": "numeric",
+      "answer": 26,
+      "explanation": "78 / 3 = 26. Each piece must total 26."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Pick the valid partition",
+      "prompt": "Which partition splits {1, 2, ..., 12} into three subsets each summing to 26?",
+      "options": [
+        { "id": "a", "text": "{12, 1, 2, 11}, {3, 4, 9, 10}, {5, 6, 7, 8}",   "correct": true },
+        { "id": "b", "text": "{1, 2, 3, 4, 5, 11}, {6, 7, 12}, {8, 9, 10}",    "correct": false },
+        { "id": "c", "text": "{1, 12}, {2, 11}, {3, 10}",                      "correct": false }
+      ],
+      "explanation": "Option (a) is correct. Quick check: 12+1+2+11 = 26; 3+4+9+10 = 26; 5+6+7+8 = 26. Option (b)'s third group is 8+9+10 = 27, not 26. Option (c) only covers 6 of the 12 numbers."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Verify the sums",
+      "prompt": "Sum of {12, 1, 2, 11} =",
+      "answerType": "numeric",
+      "answer": 26,
+      "explanation": "12 + 1 + 2 + 11 = 26. The other two pieces also sum to 26: 3+4+9+10 = 26 and 5+6+7+8 = 26."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could you split the clock numbers into FOUR equal-sum subsets? What would each subset sum to?",
+        "What's the smallest N such that 1 + 2 + ... + N is divisible by 3?",
+        "If pieces had to be contiguous arcs of the clock face, could you still find a 26-26-26 partition? Try it."
+      ]
+    }
+  ]
+}
