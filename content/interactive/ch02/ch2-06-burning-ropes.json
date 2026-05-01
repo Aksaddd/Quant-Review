@@ -1,0 +1,142 @@
+{
+  "id": "ch2-06-burning-ropes",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Burning Ropes",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "168-180"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "parallel-events-with-asymmetric-burn",
+    "insight": "lighting-both-ends-doubles-the-effective-rate",
+    "variantAxes": ["target_minutes", "n_ropes"]
+  },
+  "setup": {
+    "narrative": "You have two ropes. Each rope takes exactly 1 hour to burn end-to-end, but the density is uneven -- different sections burn at different speeds. You cannot use length to measure time.",
+    "rules": [
+      "Each rope burns from end to end in 60 minutes (no more, no less).",
+      "Burn rate within a rope is non-uniform -- you can't assume the midpoint is reached at 30 minutes.",
+      "You may light any end of either rope at any time.",
+      "You have a lighter; igniting takes no time."
+    ],
+    "question": "How can you measure exactly 45 minutes?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that burn TIME is constant even when burn RATE varies along the rope.",
+    "Use parallel ignition to manufacture intermediate durations.",
+    "Compose a 30-minute interval and a 15-minute interval to hit 45."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "If you light only ONE end of a rope, how long until it burns out?",
+      "options": [
+        { "id": "a", "text": "Exactly 60 minutes -- regardless of where the dense or thin sections are.", "correct": true },
+        { "id": "b", "text": "Variable, depending on which end you light.",                                "correct": false },
+        { "id": "c", "text": "Exactly 30 minutes (the average).",                                            "correct": false }
+      ],
+      "explanation": "End-to-end burn is always 60 minutes. The unevenness only means you can't say WHERE the flame is at any given moment -- but you can say WHEN it finishes."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach here?",
+      "options": [
+        { "id": "a", "text": "Find the midpoint of the rope visually and burn each half.",                            "correct": false },
+        { "id": "b", "text": "Logic reasoning -- compose simultaneous burns to manufacture new durations.",          "correct": true },
+        { "id": "c", "text": "Probability over the unknown density distribution.",                                   "correct": false },
+        { "id": "d", "text": "Stretch the rope and use length.",                                                      "correct": false }
+      ],
+      "explanation": "You can't read the rope -- but you CAN stack ignitions cleverly. The trick is to find a configuration that exhausts in exactly 45 minutes by composing 60-minute and parallel-burn durations.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Insight: lighting both ends",
+      "prompt": "If you light BOTH ends of a 60-minute rope simultaneously, when does it finish burning?",
+      "options": [
+        { "id": "a", "text": "60 minutes -- the rope still has 60 minutes of material.",                       "correct": false },
+        { "id": "b", "text": "30 minutes -- the two flames meet somewhere, and the total burn TIME halves.",   "correct": true },
+        { "id": "c", "text": "Variable -- depends on where the flames meet.",                                    "correct": false }
+      ],
+      "explanation": "This is the key. Even with uneven density, the two flames TOGETHER consume the rope in half the time, because at any instant they're collectively burning at twice the average rate. The flames meet somewhere -- you don't know where -- but you know exactly WHEN: 30 minutes."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Algorithm step 1",
+      "prompt": "At t = 0, you light BOTH ends of rope 1 AND ONE end of rope 2. At what time t does rope 1 finish?",
+      "answerType": "numeric",
+      "answer": 30,
+      "explanation": "Rope 1 (lit at both ends) finishes in 30 minutes. Meanwhile, rope 2 has been burning from one end -- so at t=30 it has 60 - 30 = 30 minutes of burn TIME remaining."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Algorithm step 2",
+      "prompt": "At t = 30 minutes, rope 1 just finished and rope 2 has 30 minutes of burn time left. You now light the OTHER end of rope 2. How many MORE minutes until rope 2 finishes?",
+      "answerType": "numeric",
+      "answer": 15,
+      "explanation": "Rope 2 had 30 minutes of burn time left from its single-end fire. Lighting the second end halves the remaining time -- to 15 minutes. Rope 2 finishes at t = 30 + 15 = 45 minutes total. That's the signal."
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "Pattern",
+      "prompt": "Fill in the recipe.",
+      "template": "Light both ends of rope 1 + one end of rope 2 at t=__[a]__. When rope 1 finishes at t=__[b]__, light the other end of rope 2. Rope 2 finishes at t=__[c]__.",
+      "blanks": [
+        { "id": "a", "answers": ["0"], "caseInsensitive": true },
+        { "id": "b", "answers": ["30"], "caseInsensitive": true },
+        { "id": "c", "answers": ["45"], "caseInsensitive": true }
+      ],
+      "explanation": "Two ropes, three ignitions, one mid-burn relight. The 45-minute mark is when rope 2 burns out."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could you measure 15 minutes with the same two ropes? How?",
+        "Could you measure 22.5 minutes? Why or why not?",
+        "What's the general principle: which durations T (with 0 < T < 60) can you produce using a single 60-minute uneven-burn rope?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-06-v1-fifteen-minutes",
+      "parentId": "ch2-06-burning-ropes",
+      "kind": "drill",
+      "axes": { "target_minutes": 15 },
+      "title": "Burning Ropes -- 15 Minutes",
+      "setup": {
+        "narrative": "Same two ropes (each burns 1 hour, uneven density).",
+        "question": "How do you measure exactly 15 minutes?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the technique",
+          "prompt": "Which of these procedures measures 15 minutes?",
+          "options": [
+            { "id": "a", "text": "At t=0 light both ends of rope 1 AND one end of rope 2. When rope 1 finishes (t=30), light the other end of rope 2. Rope 2 finishes at t=45 -- but the INTERVAL from the relight to rope 2 finishing is 15 minutes.", "correct": true },
+            { "id": "b", "text": "Light just one rope at one end, wait until it burns 25%.",                                                                                                                                                            "correct": false },
+            { "id": "c", "text": "It's not possible with only two ropes.",                                                                                                                                                                                "correct": false }
+          ],
+          "explanation": "The 15-minute interval lives between t=30 (rope 1 done, rope 2 relit) and t=45 (rope 2 done). The setup is identical to the 45-minute version -- you just measure a different sub-interval."
+        }
+      ]
+    }
+  ]
+}

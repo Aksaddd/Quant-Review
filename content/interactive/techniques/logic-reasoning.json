@@ -1,0 +1,63 @@
+{
+  "id": "logic-reasoning",
+  "kind": "technique",
+  "name": "Logic Reasoning",
+  "tagline": "Use pure deductive logic to extract every drop of information from a problem -- including the meta-information in 'I don't know' statements.",
+  "category": "logic",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.2",
+    "title": "Logic Reasoning",
+    "exemplarProblemId": "ch2-04-birthday-problem"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Logic reasoning problems don't reward specialized math. They reward the ability to track every piece of information the problem hands you and exhaustively narrow the space of possibilities until only one remains. The math used is almost always elementary -- the difficulty is in the bookkeeping."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The most powerful and most missed move in this category is treating ignorance as data. When a speaker says 'I don't know,' they are telling you something about what could and couldn't be inferred from what they were told. That is itself information about the underlying possibility space."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Treat the problem as a state space and each statement as a filter. Apply filters one at a time. The answer is whatever survives all the filters."
+    },
+    {
+      "id": "b4",
+      "type": "paragraph",
+      "text": "Sub-skills bundled under 'logic reasoning' include: information extraction (what does each statement actually tell you?), process of elimination (which possibilities does each constraint kill?), invariants (what stays the same across all moves?), and optimal sequencing (when order matters)."
+    }
+  ],
+  "whenToUse": [
+    "Problems where information is in plain English, not equations",
+    "Puzzles involving 'I know' / 'I don't know' statements (meta-information)",
+    "Problems with a finite small set of possibilities (~< 50)",
+    "Optimization problems where the constraint structure is unusual but the math is elementary",
+    "Anywhere your first instinct is 'is there a clever trick here?'"
+  ],
+  "recipe": [
+    "Enumerate the full set of possibilities, even if it feels mechanical -- don't try to deduce blind.",
+    "Identify what each piece of information eliminates. Statements about ignorance ('I don't know') often eliminate more than statements about knowledge.",
+    "Apply constraints one at a time, in the order they appear. Track what survives after each step.",
+    "When stuck, look for invariants -- quantities that stay the same regardless of choices made (e.g. parity, total count, sum).",
+    "If the problem is a min/max optimization, ask whether some specific event MUST happen at a specific point (often the slowest action, or the last action)."
+  ],
+  "commonPitfalls": [
+    "Skipping the explicit enumeration step. Brain-teasers reward exhaustive listing.",
+    "Forgetting that 'I don't know' is itself information about what could and couldn't be inferred from what the speaker was told.",
+    "Reading the speaker's identity wrong -- who knows what at each statement matters.",
+    "Premature optimization. Try the obvious approach first; the trick usually emerges from spotting why it isn't enough.",
+    "Confusing 'no path exists' with 'I haven't found one' -- always try a few configurations before claiming impossibility."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-03-river-crossing",   "title": "River Crossing",   "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-04-birthday-problem", "title": "Birthday Problem", "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-06-burning-ropes",    "title": "Burning Ropes",    "chapter": 2, "section": "2.2" }
+  ],
+  "relatedTechniques": ["backward-induction", "proof-by-contradiction"]
+}

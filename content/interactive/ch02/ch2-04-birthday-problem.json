@@ -1,0 +1,137 @@
+{
+  "id": "ch2-04-birthday-problem",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "Birthday Problem",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "116-147"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "meta-information-elimination",
+    "insight": "ignorance-statements-eliminate-possibilities",
+    "variantAxes": ["date_set"]
+  },
+  "setup": {
+    "narrative": "Your boss A's birthday is one of these 10 dates: Mar 4, Mar 5, Mar 8, Jun 4, Jun 7, Sep 1, Sep 5, Dec 1, Dec 2, Dec 8.",
+    "rules": [
+      "You are told only the MONTH of A's birthday.",
+      "Your colleague C is told only the DAY.",
+      "You then say: 'I don't know A's birthday; C doesn't know it either.'",
+      "C replies: 'I didn't know A's birthday before, but now I know it.'",
+      "You say: 'Now I know it too.'"
+    ],
+    "question": "What is A's birthday?"
+  },
+  "skipToCommitStageId": "s7",
+  "learningObjectives": [
+    "Recognise that ignorance statements ('I don't know') carry information about the possibility space.",
+    "Apply each statement as a filter and track what survives.",
+    "Distinguish 'I know' from 'someone else can't know'."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-multi",
+      "label": "Comprehension",
+      "prompt": "Which two days appear in the list exactly once? (These are the days that, if C were told them, would let C know the birthday immediately.)",
+      "options": [
+        { "id": "d1", "text": "Day 1",  "correct": false },
+        { "id": "d2", "text": "Day 2",  "correct": true },
+        { "id": "d4", "text": "Day 4",  "correct": false },
+        { "id": "d5", "text": "Day 5",  "correct": false },
+        { "id": "d7", "text": "Day 7",  "correct": true },
+        { "id": "d8", "text": "Day 8",  "correct": false }
+      ],
+      "explanation": "Listing days: 1 (Sep 1, Dec 1), 2 (Dec 2), 4 (Mar 4, Jun 4), 5 (Mar 5, Sep 5), 7 (Jun 7), 8 (Mar 8, Dec 8). Days 2 and 7 each appear only once."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right framing for this problem?",
+      "options": [
+        { "id": "a", "text": "Probability -- compute likelihoods over months",                                              "correct": false },
+        { "id": "b", "text": "Logic reasoning -- treat each statement as a filter on the 10 possible dates",               "correct": true },
+        { "id": "c", "text": "Backward induction over future statements",                                                    "correct": false },
+        { "id": "d", "text": "There's not enough information; you need extra data",                                          "correct": false }
+      ],
+      "explanation": "Each statement -- including the ignorance statements -- eliminates a subset of the 10 dates. Apply them one at a time. The last surviving date is the answer.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Apply Statement 1",
+      "prompt": "You said: 'I don't know A's birthday; AND C doesn't know it either.' You only know the month -- so the second clause means: the month you were told contains NO unique-day. Which months are eliminated?",
+      "options": [
+        { "id": "a", "text": "March and September (the months with day 5)",                                  "correct": false },
+        { "id": "b", "text": "June and December (because June contains day 7, and December contains day 2)", "correct": true },
+        { "id": "c", "text": "Only December",                                                                 "correct": false },
+        { "id": "d", "text": "None -- nothing can be eliminated yet",                                         "correct": false }
+      ],
+      "explanation": "If your month were June or December, you couldn't be SURE that C doesn't know. (C might have been told day 7 or day 2 -- in which case C would know.) Your certainty that C is in the dark means your month contains no unique day. June (has 7) and December (has 2) are out. Surviving months: March, September. Surviving dates: Mar 4, Mar 5, Mar 8, Sep 1, Sep 5."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply Statement 2",
+      "prompt": "C now says: 'I know it.' From the 5 surviving dates {Mar 4, Mar 5, Mar 8, Sep 1, Sep 5}, which days are still ambiguous to C (so C wouldn't know)?",
+      "options": [
+        { "id": "a", "text": "Day 5 (Mar 5 and Sep 5 both survived)",                "correct": true },
+        { "id": "b", "text": "Day 4 (Mar 4 still has March as another option)",       "correct": false },
+        { "id": "c", "text": "All days are still ambiguous",                            "correct": false }
+      ],
+      "explanation": "Day 5 appears twice in the surviving set (Mar 5 and Sep 5). If C had been told day 5, C would still not know. C says 'I know it' -- so the day is NOT 5. Mar 5 and Sep 5 are eliminated. Surviving: Mar 4, Mar 8, Sep 1."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Apply Statement 3",
+      "prompt": "You now say: 'Now I know it too.' From {Mar 4, Mar 8, Sep 1}, which month would let YOU narrow down to exactly one date?",
+      "options": [
+        { "id": "march", "text": "March (Mar 4 and Mar 8 still both survive -- you wouldn't know)", "correct": false },
+        { "id": "sept",  "text": "September (only Sep 1 survives)",                                  "correct": true }
+      ],
+      "explanation": "If your month were March, you'd still see TWO surviving dates (Mar 4 and Mar 8) and couldn't claim to know. Your saying 'now I know' means your month must be one with exactly one surviving date -- September, with only Sep 1 left."
+    },
+    {
+      "id": "s6",
+      "type": "cloze",
+      "label": "Pattern",
+      "prompt": "Fill in the meta-pattern that powered this whole solution.",
+      "template": "An 'I don't know' statement eliminates possibilities where the speaker WOULD have __[a]__. An 'I know now' statement eliminates possibilities where the speaker would still be __[b]__.",
+      "blanks": [
+        { "id": "a", "answers": ["known"], "caseInsensitive": true },
+        { "id": "b", "answers": ["uncertain", "ambiguous"], "caseInsensitive": true }
+      ],
+      "explanation": "This is the meta-information principle. Every utterance about knowledge -- positive or negative -- is itself data about the underlying possibility space. Cheryl's-Birthday-style puzzles all use this."
+    },
+    {
+      "id": "s7",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What is A's birthday?",
+      "options": [
+        { "id": "mar4",  "text": "March 4",     "correct": false },
+        { "id": "mar8",  "text": "March 8",     "correct": false },
+        { "id": "sep1",  "text": "September 1", "correct": true },
+        { "id": "dec2",  "text": "December 2",  "correct": false }
+      ],
+      "explanation": "September 1. Each of the three statements pruned the possibility set: 10 dates -> 5 -> 3 -> 1."
+    },
+    {
+      "id": "s8",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "In one sentence, what was the load-bearing insight that made the first elimination possible?",
+        "Could the puzzle still be solved if the speakers' order were swapped (C goes first)?",
+        "What's the smallest set of dates that would still admit a unique solution under this exact dialogue?"
+      ]
+    }
+  ]
+}

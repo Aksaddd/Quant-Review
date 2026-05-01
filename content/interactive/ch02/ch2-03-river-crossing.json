@@ -1,0 +1,167 @@
+{
+  "id": "ch2-03-river-crossing",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.2",
+  "title": "River Crossing",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "91-112"
+  },
+  "mechanism": {
+    "primary": "logic-reasoning",
+    "structure": "minimum-time-shuttle",
+    "insight": "the-two-slowest-must-cross-together",
+    "variantAxes": ["n_people", "speeds", "bridge_capacity"]
+  },
+  "setup": {
+    "narrative": "Four people (A, B, C, D) need to cross a river at night.",
+    "rules": [
+      "There is a single bridge that holds at most 2 people at a time.",
+      "There is only one torch -- it must accompany every crossing.",
+      "Each pair walks at the speed of the slower person.",
+      "Walking times: A = 10 min, B = 5 min, C = 2 min, D = 1 min."
+    ],
+    "question": "What is the minimum total time to get all four people across?"
+  },
+  "skipToCommitStageId": "s6",
+  "learningObjectives": [
+    "Recognize when a 'shuttle the fastest courier' approach is suboptimal.",
+    "Identify the bottleneck (the two slowest people) and design around it.",
+    "Verify candidate sequences by computing cumulative time."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "If A (10 min) and B (5 min) cross together, how long does that crossing take?",
+      "options": [
+        { "id": "a", "text": "5 min (the faster one's time)",  "correct": false },
+        { "id": "b", "text": "10 min (the slower one's time)", "correct": true },
+        { "id": "c", "text": "15 min (the sum)",                "correct": false },
+        { "id": "d", "text": "7.5 min (the average)",           "correct": false }
+      ],
+      "explanation": "A pair walks at the speed of the slower person -- so A and B together take 10 minutes, not 5."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right way to attack this problem?",
+      "options": [
+        { "id": "a", "text": "Backward induction",                                    "correct": false },
+        { "id": "b", "text": "Logic reasoning -- enumerate plans, find the bottleneck", "correct": true },
+        { "id": "c", "text": "Probability / expected value",                          "correct": false },
+        { "id": "d", "text": "Linear programming",                                    "correct": false }
+      ],
+      "explanation": "There's no probability or recursion. The constraint structure is unusual but the math is elementary -- it's a logic-reasoning optimization. The trick is to find the bottleneck and design the schedule around it.",
+      "learnMoreTechnique": "logic-reasoning"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Naive attempt: D shuttles everyone",
+      "prompt": "Suppose D (the fastest) crosses with each of the others one at a time, returning alone in between. How many minutes does this strategy take total?",
+      "answerType": "numeric",
+      "answer": 19,
+      "explanation": "D+A across (10), D back (1), D+B across (5), D back (1), D+C across (2). Total = 10 + 1 + 5 + 1 + 2 = 19. This 'fastest courier' approach feels natural but is NOT optimal."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Spot the bottleneck",
+      "prompt": "The naive plan above pays the 10-minute cost AND the 5-minute cost on separate crossings. What's the key insight that lets you do better?",
+      "options": [
+        { "id": "a", "text": "A and B should never cross together -- they're too slow.",                                                   "correct": false },
+        { "id": "b", "text": "A and B should cross together exactly once. When they do, the 5-minute cost is hidden inside the 10-minute trip.", "correct": true },
+        { "id": "c", "text": "Have D make 5 round trips instead of 4.",                                                                    "correct": false },
+        { "id": "d", "text": "Skip the torch -- it's a red herring.",                                                                       "correct": false }
+      ],
+      "explanation": "If A and B cross together, the trip costs max(10, 5) = 10 -- you pay the 10 once and 'absorb' the 5 for free. The remaining cost is just D's shuttle work to set up and recover the torch. This is the move that breaks 19."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Pick the optimal sequence",
+      "prompt": "Which 5-step sequence achieves the minimum time?",
+      "options": [
+        { "id": "a", "text": "C+D cross (2), D back (1), A+B cross (10), C back (2), C+D cross (2). Total = 17.",  "correct": true },
+        { "id": "b", "text": "D+A cross (10), D back (1), D+B cross (5), D back (1), D+C cross (2). Total = 19.",  "correct": false },
+        { "id": "c", "text": "A+B cross (10), B back (5), C+D cross (2), C back (2), A+C cross (10). Total = 29.", "correct": false },
+        { "id": "d", "text": "C+D cross (2), C back (2), A+B cross (10), D back (1), C+D cross (2). Total = 17.",  "correct": false }
+      ],
+      "explanation": "Option (a) is the optimal sequence. Option (d) has the same total but isn't valid -- after C+D cross, D is on the far side, so 'C back' is fine but then 'D back' later means D must already be on the near side again, which it isn't. The cheapest setup is to send the two fastest first, return one of them, send the two slowest together, then send the other fast one back to ferry the last fast one."
+    },
+    {
+      "id": "s6",
+      "type": "numeric-grid",
+      "label": "Commit final answer",
+      "prompt": "Fill in the cumulative time after each step of the optimal plan.",
+      "rows": [
+        { "id": "t1", "label": "After step 1 (C+D cross)",     "answer": 2  },
+        { "id": "t2", "label": "After step 2 (D returns)",     "answer": 3  },
+        { "id": "t3", "label": "After step 3 (A+B cross)",     "answer": 13 },
+        { "id": "t4", "label": "After step 4 (C returns)",     "answer": 15 },
+        { "id": "t5", "label": "After step 5 (C+D cross)",     "answer": 17 }
+      ],
+      "constraint": { "type": "none" },
+      "explanation": "Final answer: 17 minutes. The trick is making the slowest two share a single trip while the fastest two do all the torch-shuttling."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "In one sentence, what general lesson does this problem teach about optimization with bottlenecks?",
+        "If A took 100 minutes instead of 10 (B, C, D unchanged), would the optimal strategy change? Why or why not?",
+        "How would you generalize this to 5 people with arbitrary times?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-03-v1-five-people",
+      "parentId": "ch2-03-river-crossing",
+      "kind": "stretch",
+      "axes": { "n_people": 5, "speeds": [1, 2, 5, 10, 25] },
+      "title": "River Crossing -- 5 People",
+      "setup": {
+        "narrative": "Same rules as the parent. Now there are 5 people with crossing times: 1, 2, 5, 10, 25 minutes. You'll need 7 trips total (4 forward, 3 return) to deliver all 5.",
+        "question": "What is the minimum total time?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the bottleneck principle",
+          "prompt": "Following the bottleneck principle (have the two slowest -- 10 and 25 -- cross together once, with the two fastest -- 1 and 2 -- doing all the shuttle work), which sequence gives the minimum?",
+          "options": [
+            { "id": "a", "text": "1+2 cross (2), 1 back (1), 10+25 cross (25), 2 back (2), 1+5 cross (5), 1 back (1), 1+2 cross (2). Total = 38.",  "correct": true },
+            { "id": "b", "text": "Ferry each slow person individually with person 1: 1+25 (25), 1 back (1), 1+10 (10), 1 back (1), 1+5 (5), 1 back (1), 1+2 (2). Total = 45.",  "correct": false },
+            { "id": "c", "text": "1+25 cross (25), 25 back (25), then everyone shuttles. Total > 50.", "correct": false }
+          ],
+          "explanation": "Option (a) wins at 38 minutes. The pattern from the 4-person case generalises: pair the two slowest into a single trip (absorbing the smaller cost into the larger), and have the fastest two shoulder all the torch-shuttling. Option (b) -- 'fastest courier shuttles everyone' -- pays the bottleneck cost on every slow person individually."
+        },
+        {
+          "id": "v1-s2",
+          "type": "numeric-grid",
+          "label": "Commit",
+          "prompt": "Fill in the cumulative time after each of the 7 steps.",
+          "rows": [
+            { "id": "t1", "label": "Step 1: 1+2 cross",   "answer": 2  },
+            { "id": "t2", "label": "Step 2: 1 returns",   "answer": 3  },
+            { "id": "t3", "label": "Step 3: 10+25 cross", "answer": 28 },
+            { "id": "t4", "label": "Step 4: 2 returns",   "answer": 30 },
+            { "id": "t5", "label": "Step 5: 1+5 cross",   "answer": 35 },
+            { "id": "t6", "label": "Step 6: 1 returns",   "answer": 36 },
+            { "id": "t7", "label": "Step 7: 1+2 cross",   "answer": 38 }
+          ],
+          "constraint": { "type": "none" },
+          "explanation": "Final answer: 38 minutes. Note step 4: person 2 must return because both 1 and 2 ended up on the far side after step 1. Person 2 returning costs 2 minutes -- still cheaper than not pairing 10 and 25."
+        }
+      ]
+    }
+  ]
+}

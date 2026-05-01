@@ -6,16 +6,24 @@ import type {
   InteractiveDoc, ProblemWalkthrough, ReadingSection, Technique,
 } from '@/types/interactive';
 
-import ch1P1        from '../../../content/interactive/ch01/ch1-p1-broad-knowledge.json';
-import ch2Pirates   from '../../../content/interactive/ch02/ch2-01-screwy-pirates.json';
-import ch2TigerSheep from '../../../content/interactive/ch02/ch2-02-tiger-and-sheep.json';
-import techBackInd  from '../../../content/interactive/techniques/backward-induction.json';
+import ch1P1            from '../../../content/interactive/ch01/ch1-p1-broad-knowledge.json';
+import ch2Pirates       from '../../../content/interactive/ch02/ch2-01-screwy-pirates.json';
+import ch2TigerSheep    from '../../../content/interactive/ch02/ch2-02-tiger-and-sheep.json';
+import ch2RiverCrossing from '../../../content/interactive/ch02/ch2-03-river-crossing.json';
+import ch2Birthday      from '../../../content/interactive/ch02/ch2-04-birthday-problem.json';
+import ch2BurningRopes  from '../../../content/interactive/ch02/ch2-06-burning-ropes.json';
+import techBackInd      from '../../../content/interactive/techniques/backward-induction.json';
+import techLogicReason  from '../../../content/interactive/techniques/logic-reasoning.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
-  'ch1-p1-broad-knowledge':  ch1P1         as unknown as ReadingSection,
-  'ch2-01-screwy-pirates':   ch2Pirates    as unknown as ProblemWalkthrough,
-  'ch2-02-tiger-and-sheep':  ch2TigerSheep as unknown as ProblemWalkthrough,
-  'backward-induction':      techBackInd   as unknown as Technique,
+  'ch1-p1-broad-knowledge':  ch1P1            as unknown as ReadingSection,
+  'ch2-01-screwy-pirates':   ch2Pirates       as unknown as ProblemWalkthrough,
+  'ch2-02-tiger-and-sheep':  ch2TigerSheep    as unknown as ProblemWalkthrough,
+  'ch2-03-river-crossing':   ch2RiverCrossing as unknown as ProblemWalkthrough,
+  'ch2-04-birthday-problem': ch2Birthday      as unknown as ProblemWalkthrough,
+  'ch2-06-burning-ropes':    ch2BurningRopes  as unknown as ProblemWalkthrough,
+  'backward-induction':      techBackInd      as unknown as Technique,
+  'logic-reasoning':         techLogicReason  as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

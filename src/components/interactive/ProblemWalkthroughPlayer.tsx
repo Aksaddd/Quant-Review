@@ -8,8 +8,10 @@ import type { ProblemWalkthrough, Stage, StageAnswer } from '@/types/interactive
 import { useInteractiveSessionStore } from '@/stores/useInteractiveSessionStore';
 
 import MCSingleStage from './stages/MCSingleStage';
+import MCMultiStage from './stages/MCMultiStage';
 import LadderStepStage from './stages/LadderStepStage';
 import NumericGridStage from './stages/NumericGridStage';
+import ClozeStage from './stages/ClozeStage';
 import UnsupportedStage from './stages/UnsupportedStage';
 
 interface Props {
@@ -188,6 +190,22 @@ function StageRenderer({ stage, index, total, initial, onAnswer, onAdvance, isLa
         <MCSingleStage
           stage={stage} index={index} total={total} isLast={isLast}
           initial={initial?.kind === 'mc-single' ? initial : undefined}
+          onAnswer={onAnswer} onAdvance={onAdvance}
+        />
+      );
+    case 'mc-multi':
+      return (
+        <MCMultiStage
+          stage={stage} index={index} total={total} isLast={isLast}
+          initial={initial?.kind === 'mc-multi' ? initial : undefined}
+          onAnswer={onAnswer} onAdvance={onAdvance}
+        />
+      );
+    case 'cloze':
+      return (
+        <ClozeStage
+          stage={stage} index={index} total={total} isLast={isLast}
+          initial={initial?.kind === 'cloze' ? initial : undefined}
           onAnswer={onAnswer} onAdvance={onAdvance}
         />
       );
