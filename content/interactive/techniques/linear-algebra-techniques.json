@@ -1,0 +1,60 @@
+{
+  "id": "linear-algebra-techniques",
+  "kind": "technique",
+  "name": "Linear Algebra Techniques",
+  "tagline": "Five tools that recur across quant finance: vector inner products and angles (correlation), eigendecomposition, normal equations for least-squares, the PSD condition for correlation matrices, and Cholesky factorization for correlated samples.",
+  "category": "linear-algebra",
+  "introducedIn": {
+    "chapter": 3,
+    "section": "3.6",
+    "title": "Linear Algebra",
+    "exemplarProblemId": "ch3-20-correlation-vectors"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Linear algebra in quant finance lives in five recurring patterns. (1) Vector geometry: correlation between two random variables equals the cosine of the angle between them as unit vectors. (2) Eigendecomposition: A = X * D * X^(-1) decomposes a matrix into its modes. The 2x2 case has three quick paths -- direct definition, characteristic equation, or trace + determinant. (3) Normal equations: minimizing ||Y - X*beta||^2 yields (X^T X) * beta = X^T Y, the foundation of OLS. (4) PSD condition: a correlation matrix must have nonnegative eigenvalues, equivalently nonnegative determinants of all leading principal minors. (5) Cholesky: any PD matrix factors as Sigma = R^T R, which lets you produce correlated normals from independent ones."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "These five plug into each other. Cholesky is how Monte Carlo simulators sample multivariate normals. PSD bounds answer 'what correlations are even possible?' Eigendecomposition diagonalizes covariance matrices for PCA. Normal equations underpin every regression. Vector geometry gives quick intuition for correlations as angles."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Random variables are vectors. Correlations are cosines. Covariance matrices are PSD geometric objects. Solving Ax = b is a routine; the interesting question is when A is well-conditioned. Eigendecomposition tells you what A really does -- it stretches by lambda along each eigenvector."
+    }
+  ],
+  "whenToUse": [
+    "Computing correlations and bounds on joint correlation matrices.",
+    "Solving overdetermined systems via least squares (any regression).",
+    "Diagonalizing covariance / correlation matrices for PCA or factor models.",
+    "Sampling correlated multivariate normals via Cholesky.",
+    "Anywhere a linear system Ax = b appears, especially when A is symmetric or PSD."
+  ],
+  "recipe": [
+    "Vectors: rho_xy = (x dot y) / (||x|| * ||y||) = cos(theta).",
+    "2x2 eigenvalues: solve det(A - lambda*I) = 0, OR use lambda_1 + lambda_2 = trace(A) and lambda_1 * lambda_2 = det(A).",
+    "Least squares: form (X^T X) * beta = X^T Y, solve via QR (numerically stable) or direct inversion (faster but less stable).",
+    "PSD check: every leading principal minor has nonneg determinant. For 3x3, expand det along the first row.",
+    "Cholesky: write Sigma = R^T R with R upper triangular, then sample as X = mu + R^T Z where Z is iid standard normal."
+  ],
+  "commonPitfalls": [
+    "Forgetting that the cos-theta interpretation only works for ZERO-MEAN, UNIT-VARIANCE random variables -- otherwise you're computing covariance, not correlation.",
+    "Direct matrix inversion (X^T X)^(-1) is numerically unstable when X has near-collinear columns; QR is preferred.",
+    "PSD requires NONNEGATIVE eigenvalues; PD requires STRICTLY POSITIVE. Correlation matrices are PSD by construction; covariance matrices of nondegenerate random variables are PD.",
+    "Cholesky is unique when Sigma is PD. For PSD-not-PD (rank deficient), Cholesky needs pivoting or you should use a different decomposition.",
+    "Conflating 'eigenvalue' with 'singular value' -- these match for symmetric PSD matrices but differ in general."
+  ],
+  "appearsIn": [
+    { "problemId": "ch3-20-correlation-vectors",   "title": "Correlation via Vectors",          "chapter": 3, "section": "3.6" },
+    { "problemId": "ch3-21-linear-least-squares",  "title": "Linear Least Squares Regression",   "chapter": 3, "section": "3.6" },
+    { "problemId": "ch3-22-eigenvalues-2x2",       "title": "Eigenvalues of a 2x2 Matrix",       "chapter": 3, "section": "3.6" },
+    { "problemId": "ch3-23-correlation-psd",       "title": "Correlation Bounds via PSD",         "chapter": 3, "section": "3.6" },
+    { "problemId": "ch3-24-correlated-normals",    "title": "Generating Correlated Normals",      "chapter": 3, "section": "3.6" }
+  ],
+  "relatedTechniques": ["integration-techniques", "lagrange-multipliers"]
+}

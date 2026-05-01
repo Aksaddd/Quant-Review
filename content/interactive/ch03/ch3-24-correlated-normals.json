@@ -1,0 +1,106 @@
+{
+  "id": "ch3-24-correlated-normals",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.6",
+  "title": "Generating Correlated Normals",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "1186-1205"
+  },
+  "mechanism": {
+    "primary": "linear-algebra-techniques",
+    "structure": "cholesky-factorization-applied-to-2x2-correlation-matrix",
+    "insight": "x2-equals-rho-z1-plus-sqrt-1-minus-rho-squared-z2-makes-corr-x1-x2-equal-rho",
+    "variantAxes": ["target_correlation"]
+  },
+  "setup": {
+    "narrative": "You have a standard normal random number generator that produces independent N(0, 1) samples. You want to generate two N(0, 1) random variables x_1 and x_2 with correlation rho.",
+    "rules": [
+      "z_1 and z_2 are independent N(0, 1).",
+      "The output (x_1, x_2) should be a pair of N(0, 1) random variables with Cov(x_1, x_2) = rho.",
+      "rho is in the interval [-1, 1]."
+    ],
+    "question": "How do you construct (x_1, x_2) from (z_1, z_2)?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Express x_2 as a linear combination of z_1 and z_2 with unknown coefficients.",
+    "Solve for the coefficients by matching Variance(x_2) = 1 and Cov(x_1, x_2) = rho.",
+    "Recognize this construction as Cholesky factorization of the 2x2 correlation matrix."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you build correlated normals from independent ones?",
+      "options": [
+        { "id": "a", "text": "Cholesky: factor the correlation matrix [[1, rho], [rho, 1]] = R^T R, then x = R^T z gives the desired correlation.", "correct": true },
+        { "id": "b", "text": "Just multiply z_1 and z_2.",                                                                                                  "correct": false },
+        { "id": "c", "text": "It's not possible.",                                                                                                          "correct": false }
+      ],
+      "explanation": "Cholesky factorization is the standard tool. Any PD covariance matrix factors as R^T R with R upper triangular. Multiplying iid standard normals by R^T produces samples with the target covariance.",
+      "learnMoreTechnique": "linear-algebra-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Set up the construction",
+      "prompt": "Let x_1 = z_1. We need x_2 to satisfy Var(x_2) = 1 and Cov(x_1, x_2) = rho. Set x_2 = a*z_1 + b*z_2 for unknown a, b. What does Var(x_2) = 1 require?",
+      "options": [
+        { "id": "a", "text": "a^2 * Var(z_1) + b^2 * Var(z_2) = a^2 + b^2 = 1", "correct": true },
+        { "id": "b", "text": "a + b = 1",                                          "correct": false },
+        { "id": "c", "text": "ab = 1",                                              "correct": false }
+      ],
+      "explanation": "Variance of a linear combination of independent rvs adds variance components. Var(a*z_1 + b*z_2) = a^2*1 + b^2*1 = a^2 + b^2."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compute the covariance constraint",
+      "prompt": "Cov(x_1, x_2) = Cov(z_1, a*z_1 + b*z_2) = a*Var(z_1) + b*Cov(z_1, z_2) = a + 0 = a. We want this = rho. So a = ?",
+      "options": [
+        { "id": "a", "text": "a = rho",  "correct": true },
+        { "id": "b", "text": "a = 1",     "correct": false },
+        { "id": "c", "text": "a = 1/rho",  "correct": false }
+      ],
+      "explanation": "z_1 and z_2 independent means Cov(z_1, z_2) = 0. So Cov(x_1, x_2) reduces to a*Var(z_1) = a. Setting equal to rho gives a = rho."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Solve for b",
+      "prompt": "Now use a^2 + b^2 = 1 with a = rho. What is b?",
+      "options": [
+        { "id": "a", "text": "b = sqrt(1 - rho^2)",  "correct": true },
+        { "id": "b", "text": "b = 1 - rho",           "correct": false },
+        { "id": "c", "text": "b = rho",                "correct": false }
+      ],
+      "explanation": "a^2 + b^2 = 1 with a = rho gives b^2 = 1 - rho^2, so b = sqrt(1 - rho^2). (Take positive root by convention.) Note: 1 - rho^2 >= 0 iff |rho| <= 1, which is required for a valid correlation."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What's the construction?",
+      "options": [
+        { "id": "a", "text": "x_1 = z_1.  x_2 = rho * z_1 + sqrt(1 - rho^2) * z_2.",   "correct": true },
+        { "id": "b", "text": "x_1 = z_1 + z_2.  x_2 = z_1 - z_2.",                       "correct": false },
+        { "id": "c", "text": "x_1 = rho.  x_2 = sqrt(1 - rho^2).",                        "correct": false }
+      ],
+      "explanation": "x_1 = z_1, x_2 = rho * z_1 + sqrt(1 - rho^2) * z_2. Verify all three properties: Var(x_1) = 1; Var(x_2) = rho^2 + (1 - rho^2) = 1; Cov(x_1, x_2) = rho. The matrix R = [[1, 0], [rho, sqrt(1 - rho^2)]] is the Cholesky factor of the correlation matrix [[1, rho], [rho, 1]]."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize to 3 correlated normals via Cholesky of a 3x3 correlation matrix.",
+        "Why do we get x_2 = rho*z_1 + sqrt(1-rho^2)*z_2 specifically? What's the connection to projection?",
+        "What if we wanted (x_1, x_2) ~ N(mu, Sigma) with general mean mu and covariance Sigma?"
+      ]
+    }
+  ]
+}

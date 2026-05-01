@@ -1,0 +1,103 @@
+{
+  "id": "ch3-20-correlation-vectors",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.6",
+  "title": "Correlation via Vectors",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "953-974"
+  },
+  "mechanism": {
+    "primary": "linear-algebra-techniques",
+    "structure": "treat-correlated-variables-as-unit-vectors-with-angle-equal-to-acos-rho",
+    "insight": "the-y-z-correlation-is-bounded-by-cos-of-twice-the-angle-x-makes-with-each",
+    "variantAxes": ["rho_xy", "rho_xz"]
+  },
+  "setup": {
+    "narrative": "Three random variables x, y, z. The correlation between x and y is 0.8; the correlation between x and z is also 0.8.",
+    "rules": [
+      "Correlations rho_xy = rho_xz = 0.8.",
+      "x, y, z can be treated as unit vectors with the angle between them equal to arccos(correlation).",
+      "rho_xy = cos(theta_xy)."
+    ],
+    "question": "What are the maximum and minimum possible values of rho_yz?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that correlations between random variables are cosines of angles between unit vectors.",
+    "Determine the configuration that minimizes the angle between y and z given fixed angles to x.",
+    "Apply the double-angle formula cos(2*theta) = 2*cos^2(theta) - 1."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you bound rho_yz given rho_xy = rho_xz = 0.8?",
+      "options": [
+        { "id": "a", "text": "Vector geometry: treat x, y, z as unit vectors. y and z each make angle theta = arccos(0.8) with x. Vary their relative position to bound the y-z angle.", "correct": true },
+        { "id": "b", "text": "Probability: compute the joint distribution of (x, y, z).",                                                                                                "correct": false },
+        { "id": "c", "text": "rho_yz must equal 0.8 too.",                                                                                                                          "correct": false }
+      ],
+      "explanation": "The vector picture is the cleanest tool. Both y and z lie on a cone around x with half-angle arccos(0.8). The angle between y and z varies depending on where they sit on the cone.",
+      "learnMoreTechnique": "linear-algebra-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Maximum rho_yz",
+      "prompt": "When are y and z most aligned?",
+      "options": [
+        { "id": "a", "text": "When y and z point in the same direction (angle 0). Then rho_yz = cos(0) = 1.", "correct": true },
+        { "id": "b", "text": "When y is perpendicular to z. rho_yz = 0.",                                       "correct": false },
+        { "id": "c", "text": "Maximum is 0.8.",                                                                  "correct": false }
+      ],
+      "explanation": "Both y and z can sit at the same point on the cone around x, making them identical. Then their angle is 0 and correlation is 1."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Minimum rho_yz: configuration",
+      "prompt": "When are y and z most ANTI-aligned, given they each make angle theta with x?",
+      "options": [
+        { "id": "a", "text": "When y and z are on opposite sides of x. The angle between them is then 2*theta.", "correct": true },
+        { "id": "b", "text": "When y points opposite to z (angle pi). rho_yz = -1.",                              "correct": false },
+        { "id": "c", "text": "When they are perpendicular.",                                                       "correct": false }
+      ],
+      "explanation": "If y is at angle theta on one side of x and z is at angle theta on the other side, the angle between y and z is 2*theta. They can't go further apart while still each making angle theta with x."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Compute cos(2*theta)",
+      "prompt": "Using the double-angle formula cos(2*theta) = 2*cos^2(theta) - 1 with cos(theta) = 0.8, compute cos(2*theta).",
+      "answerType": "numeric",
+      "answer": 0.28,
+      "explanation": "cos(2*theta) = 2*(0.8)^2 - 1 = 2*(0.64) - 1 = 1.28 - 1 = 0.28."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What are the maximum and minimum values of rho_yz?",
+      "options": [
+        { "id": "a", "text": "Max = 1, Min = 0.28.",   "correct": true },
+        { "id": "b", "text": "Max = 0.8, Min = -0.8.",  "correct": false },
+        { "id": "c", "text": "Max = 1, Min = -1.",       "correct": false }
+      ],
+      "explanation": "rho_yz ranges from cos(2*theta) = 0.28 (when y and z are on opposite sides of x) to cos(0) = 1 (when y and z coincide). Surprising: the minimum is positive (0.28), NOT zero or negative -- because y and z are constrained to be reasonably close to x."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if rho_xy = rho_xz = 0.5? What's the range for rho_yz?",
+        "Can rho_yz be NEGATIVE? Find a value of rho_xy = rho_xz that makes the minimum rho_yz negative.",
+        "Generalize: with rho_xy = a and rho_xz = b, what's the range of rho_yz?"
+      ]
+    }
+  ]
+}

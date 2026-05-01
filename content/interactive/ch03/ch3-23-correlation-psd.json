@@ -1,0 +1,94 @@
+{
+  "id": "ch3-23-correlation-psd",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.6",
+  "title": "Correlation Bounds via PSD",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "1131-1162"
+  },
+  "mechanism": {
+    "primary": "linear-algebra-techniques",
+    "structure": "correlation-matrix-must-be-PSD-so-determinant-nonneg",
+    "insight": "the-3x3-correlation-matrix-determinant-factors-as-1-minus-rho-times-rho-minus-0.28",
+    "variantAxes": ["fixed_correlations"]
+  },
+  "setup": {
+    "narrative": "Same setup as the vector-approach problem: rho_xy = rho_xz = 0.8. Now derive the bounds for rho_yz using an algebraic approach via positive-semidefiniteness.",
+    "rules": [
+      "The correlation matrix P of (x, y, z) must be POSITIVE SEMI-DEFINITE (PSD).",
+      "A 3x3 symmetric matrix is PSD iff every leading principal minor has nonnegative determinant.",
+      "Equivalently for this case: det(P) >= 0 (and the 2x2 leading minors are clearly nonneg)."
+    ],
+    "question": "Find the range of valid rho_yz."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Construct the 3x3 correlation matrix.",
+    "Compute its determinant by cofactor expansion.",
+    "Solve the resulting quadratic inequality."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the correlation matrix",
+      "prompt": "Write the 3x3 correlation matrix P with rho_xy = rho_xz = 0.8 and unknown rho_yz = p.",
+      "options": [
+        { "id": "a", "text": "P = [[1, 0.8, 0.8], [0.8, 1, p], [0.8, p, 1]]",  "correct": true },
+        { "id": "b", "text": "P = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]",            "correct": false },
+        { "id": "c", "text": "P = [[0.8, p], [p, 0.8]]",                          "correct": false }
+      ],
+      "explanation": "Diagonal entries are all 1 (variance of standardized variables). Off-diagonal: P[1,2] = rho_xy = 0.8, P[1,3] = rho_xz = 0.8, P[2,3] = rho_yz = p. Symmetric.",
+      "learnMoreTechnique": "linear-algebra-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute det(P)",
+      "prompt": "Expand det(P) by cofactor along the first row.",
+      "options": [
+        { "id": "a", "text": "det(P) = 1*(1 - p^2) - 0.8*(0.8 - 0.8*p) + 0.8*(0.8*p - 0.8) = -p^2 + 1.28*p - 0.28", "correct": true },
+        { "id": "b", "text": "det(P) = 1",                                                                              "correct": false },
+        { "id": "c", "text": "det(P) = p^2 - 1",                                                                         "correct": false }
+      ],
+      "explanation": "Expansion: 1 * det([[1, p], [p, 1]]) - 0.8 * det([[0.8, p], [0.8, 1]]) + 0.8 * det([[0.8, 1], [0.8, p]]) = (1 - p^2) - 0.8*(0.8 - 0.8p) + 0.8*(0.8p - 0.8) = (1 - p^2) - 0.64 + 0.64p + 0.64p - 0.64 = -p^2 + 1.28p - 0.28."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve det(P) >= 0",
+      "prompt": "Solve -p^2 + 1.28*p - 0.28 >= 0 (equivalently p^2 - 1.28*p + 0.28 <= 0).",
+      "options": [
+        { "id": "a", "text": "Factor: (p - 1)(p - 0.28) <= 0, so 0.28 <= p <= 1.", "correct": true },
+        { "id": "b", "text": "p >= 0",                                                "correct": false },
+        { "id": "c", "text": "Always positive, no constraint.",                       "correct": false }
+      ],
+      "explanation": "p^2 - 1.28p + 0.28 = (p - 1)(p - 0.28). Roots are 0.28 and 1. The quadratic is <= 0 between the roots: 0.28 <= p <= 1."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What's the range of valid rho_yz?",
+      "options": [
+        { "id": "a", "text": "0.28 <= rho_yz <= 1.  Same as the vector-geometry approach.",  "correct": true },
+        { "id": "b", "text": "-1 <= rho_yz <= 1 (no further constraint).",                       "correct": false },
+        { "id": "c", "text": "rho_yz must equal 0.8.",                                            "correct": false }
+      ],
+      "explanation": "Same answer as the geometric approach: max = 1, min = 0.28. The PSD/algebraic method generalizes more easily to higher dimensions; the geometric method is more intuitive in 3 dimensions."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify that 0.28 = cos(2 * arccos(0.8)). The two methods give the same value via different paths.",
+        "Generalize: for rho_xy = rho_xz = a, find the bound on rho_yz.",
+        "What if the matrix were 4x4? How would you bound a single off-diagonal entry?"
+      ]
+    }
+  ]
+}

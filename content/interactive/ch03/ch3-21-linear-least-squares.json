@@ -1,0 +1,109 @@
+{
+  "id": "ch3-21-linear-least-squares",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.6",
+  "title": "Linear Least Squares Regression",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "991-1028"
+  },
+  "mechanism": {
+    "primary": "linear-algebra-techniques",
+    "structure": "minimize-residual-norm-via-normal-equations",
+    "insight": "setting-derivative-to-zero-gives-the-normal-equation-XtX-beta-equals-XtY",
+    "variantAxes": ["regressor_count", "noise_assumptions"]
+  },
+  "setup": {
+    "narrative": "You have n observations Y = (y_1, ..., y_n) and a matrix X of regressor values (n rows, p columns including the intercept). You want to find coefficients beta = (beta_0, ..., beta_{p-1}) minimizing the squared residuals.",
+    "rules": [
+      "Model: Y = X*beta + epsilon, where epsilon is the error vector.",
+      "Goal: minimize ||Y - X*beta||^2 = (Y - X*beta)^T (Y - X*beta) over beta.",
+      "Assume X^T X is invertible (no perfect multicollinearity)."
+    ],
+    "question": "Derive the closed-form solution for beta. Outline an algorithm for computing it."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Differentiate the squared-residual objective with respect to beta.",
+    "Set the gradient to zero to obtain the normal equations.",
+    "Recognize that QR decomposition provides numerically stable inversion."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the objective",
+      "prompt": "Write f(beta) = ||Y - X*beta||^2 in matrix form.",
+      "options": [
+        { "id": "a", "text": "f(beta) = (Y - X*beta)^T (Y - X*beta)", "correct": true },
+        { "id": "b", "text": "f(beta) = Y^T Y",                          "correct": false },
+        { "id": "c", "text": "f(beta) = beta^T beta",                     "correct": false }
+      ],
+      "explanation": "||v||^2 = v^T v. Plugging v = Y - X*beta gives the squared-residual form.",
+      "learnMoreTechnique": "linear-algebra-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Differentiate and set to zero",
+      "prompt": "Compute df/dbeta and set it equal to zero.",
+      "options": [
+        { "id": "a", "text": "df/dbeta = -2 * X^T * (Y - X*beta) = 0  =>  X^T X beta = X^T Y. (The 'normal equations'.)", "correct": true },
+        { "id": "b", "text": "df/dbeta = beta",                                                                              "correct": false },
+        { "id": "c", "text": "df/dbeta = 0 always.",                                                                          "correct": false }
+      ],
+      "explanation": "Standard matrix calculus: d/dbeta of (Y - X*beta)^T (Y - X*beta) is -2 X^T (Y - X*beta). Set to zero: X^T (Y - X*beta) = 0, expand: X^T Y - X^T X beta = 0, rearrange: X^T X beta = X^T Y."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve for beta",
+      "prompt": "From X^T X beta = X^T Y, solve for beta. What's the closed form?",
+      "options": [
+        { "id": "a", "text": "beta = (X^T X)^(-1) X^T Y, assuming X^T X is invertible.",  "correct": true },
+        { "id": "b", "text": "beta = X * Y",                                                 "correct": false },
+        { "id": "c", "text": "beta = Y / X",                                                  "correct": false }
+      ],
+      "explanation": "Multiply both sides by (X^T X)^(-1). The result is the famous OLS estimator. (X^T X)^(-1) X^T is also called the Moore-Penrose pseudo-inverse of X."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Algorithm: direct vs QR",
+      "prompt": "Why is QR decomposition preferred over directly computing (X^T X)^(-1)?",
+      "options": [
+        { "id": "a", "text": "Direct inversion AMPLIFIES numerical error when X has nearly collinear columns. QR avoids forming X^T X explicitly, preserving precision.", "correct": true },
+        { "id": "b", "text": "Direct inversion gives the wrong answer.",                                                                                                  "correct": false },
+        { "id": "c", "text": "QR is always faster.",                                                                                                                     "correct": false }
+      ],
+      "explanation": "X^T X has condition number squared compared to X. So if X has condition number 10^5, X^T X has condition number 10^10 -- catastrophic for floating-point arithmetic. QR works directly with X (decompose X = QR with Q orthogonal, R upper triangular), avoids the squaring, and gives a more accurate beta."
+    },
+    {
+      "id": "s5",
+      "type": "mc-multi",
+      "label": "OLS assumptions (Gauss-Markov)",
+      "prompt": "When is OLS the BEST LINEAR UNBIASED ESTIMATOR (BLUE)? Select all required assumptions.",
+      "options": [
+        { "id": "lin",     "text": "Linearity: Y = X*beta + epsilon",                                              "correct": true },
+        { "id": "zero",    "text": "Zero-mean errors: E[epsilon_i] = 0",                                            "correct": true },
+        { "id": "homo",    "text": "Homoskedasticity: Var(epsilon_i) = sigma^2 (constant)",                          "correct": true },
+        { "id": "noauto",  "text": "No autocorrelation: E[epsilon_i * epsilon_j] = 0 for i != j",                    "correct": true },
+        { "id": "exog",    "text": "Exogeneity: errors are independent of regressors",                                "correct": true },
+        { "id": "normal",  "text": "Errors are normally distributed",                                                 "correct": false }
+      ],
+      "explanation": "Gauss-Markov theorem requires linearity, zero-mean, homoskedasticity, no autocorrelation, and exogeneity (plus no perfect multicollinearity). Normality is NOT required for OLS to be BLUE -- it's only needed for inferential procedures (confidence intervals, t-tests)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What does X^T X measure? (Hint: it's a Gram matrix -- inner products of regressor columns.)",
+        "If a regressor is multiplied by a constant c, how does beta change?",
+        "Why does adding more regressors always improve the in-sample fit but may HURT out-of-sample performance?"
+      ]
+    }
+  ]
+}

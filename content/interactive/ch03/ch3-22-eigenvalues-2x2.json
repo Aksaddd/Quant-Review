@@ -1,0 +1,100 @@
+{
+  "id": "ch3-22-eigenvalues-2x2",
+  "kind": "problem-walkthrough",
+  "chapter": 3,
+  "section": "3.6",
+  "title": "Eigenvalues of a 2x2 Matrix",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-03-calculus-linear-algebra.md",
+    "lines": "1077-1109"
+  },
+  "mechanism": {
+    "primary": "linear-algebra-techniques",
+    "structure": "characteristic-equation-or-trace-determinant",
+    "insight": "for-2x2-matrices-trace-and-det-uniquely-pin-down-the-two-eigenvalues",
+    "variantAxes": ["matrix"]
+  },
+  "setup": {
+    "narrative": "Find the eigenvalues and eigenvectors of A = [[2, 1], [1, 2]].",
+    "rules": [
+      "An eigenvalue lambda satisfies A*x = lambda*x for some nonzero vector x.",
+      "Equivalently, solve det(A - lambda*I) = 0 -- the characteristic equation.",
+      "For 2x2 matrices, you can also use trace(A) = lambda_1 + lambda_2 and det(A) = lambda_1 * lambda_2."
+    ],
+    "question": "What are the eigenvalues and eigenvectors of A?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Set up the characteristic equation det(A - lambda*I) = 0.",
+    "Use trace and determinant as a faster shortcut for 2x2 matrices.",
+    "Find the eigenvector corresponding to each eigenvalue by solving (A - lambda*I)x = 0."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your method",
+      "prompt": "What's the fastest way to find eigenvalues of a 2x2 matrix?",
+      "options": [
+        { "id": "a", "text": "Use trace(A) = lambda_1 + lambda_2 and det(A) = lambda_1 * lambda_2 -- two equations in two unknowns.", "correct": true },
+        { "id": "b", "text": "Compute A^100 and read off the dominant eigenvalue.",                                                     "correct": false },
+        { "id": "c", "text": "Eigenvalues only exist for diagonal matrices.",                                                          "correct": false }
+      ],
+      "explanation": "For 2x2, the trace + determinant approach is the fastest mental computation. Equivalent to the characteristic equation but skips the algebra.",
+      "learnMoreTechnique": "linear-algebra-techniques"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute trace(A)",
+      "prompt": "trace(A) = sum of diagonal entries = ?",
+      "answerType": "numeric",
+      "answer": 4,
+      "explanation": "trace(A) = 2 + 2 = 4. So lambda_1 + lambda_2 = 4."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute det(A)",
+      "prompt": "det(A) for [[2, 1], [1, 2]] = ad - bc = ?",
+      "answerType": "numeric",
+      "answer": 3,
+      "explanation": "det(A) = 2*2 - 1*1 = 4 - 1 = 3. So lambda_1 * lambda_2 = 3."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Solve the system",
+      "prompt": "lambda_1 + lambda_2 = 4 and lambda_1 * lambda_2 = 3. What are the eigenvalues?",
+      "options": [
+        { "id": "a", "text": "lambda_1 = 1 and lambda_2 = 3.  (Or vice versa.)", "correct": true },
+        { "id": "b", "text": "lambda_1 = 2 and lambda_2 = 2.",                    "correct": false },
+        { "id": "c", "text": "lambda_1 = 4 and lambda_2 = 0.",                    "correct": false }
+      ],
+      "explanation": "Two numbers summing to 4 and multiplying to 3 are 1 and 3. (Solve the quadratic t^2 - 4t + 3 = 0: roots 1 and 3.)"
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Find the eigenvectors",
+      "prompt": "For lambda = 3: solve (A - 3I)x = 0. (A - 3I) = [[-1, 1], [1, -1]]. What are the (normalized) eigenvectors?",
+      "options": [
+        { "id": "a", "text": "lambda = 3: x = (1/sqrt(2), 1/sqrt(2))^T.  lambda = 1: x = (1/sqrt(2), -1/sqrt(2))^T.", "correct": true },
+        { "id": "b", "text": "Both eigenvalues share the same eigenvector.",                                              "correct": false },
+        { "id": "c", "text": "Eigenvectors don't exist for symmetric matrices.",                                          "correct": false }
+      ],
+      "explanation": "For lambda = 3, (A - 3I)x = 0 means -x_1 + x_2 = 0, i.e., x_1 = x_2. Normalized: (1/sqrt(2), 1/sqrt(2)). For lambda = 1, x_1 + x_2 = 0, so x_1 = -x_2. Normalized: (1/sqrt(2), -1/sqrt(2)). The two eigenvectors are orthogonal (since A is symmetric)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute A^10 using the diagonalization A = X * D * X^(-1).",
+        "What is the relationship between the eigenvectors when A is symmetric?",
+        "Find the eigenvalues of [[a, b], [c, d]] in closed form using trace + det."
+      ]
+    }
+  ]
+}

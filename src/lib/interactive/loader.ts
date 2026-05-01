@@ -63,6 +63,11 @@ import ch3ChangeVarOde   from '../../../content/interactive/ch03/ch3-16-change-o
 import ch3FirstOrderLin  from '../../../content/interactive/ch03/ch3-17-first-order-linear-ode.json';
 import ch3ComplexRootsOde from '../../../content/interactive/ch03/ch3-18-complex-roots-ode.json';
 import ch3NonhomogOdes   from '../../../content/interactive/ch03/ch3-19-nonhomogeneous-odes.json';
+import ch3CorrVectors    from '../../../content/interactive/ch03/ch3-20-correlation-vectors.json';
+import ch3LinearLS       from '../../../content/interactive/ch03/ch3-21-linear-least-squares.json';
+import ch3Eigen2x2       from '../../../content/interactive/ch03/ch3-22-eigenvalues-2x2.json';
+import ch3CorrPSD        from '../../../content/interactive/ch03/ch3-23-correlation-psd.json';
+import ch3CorrNormals    from '../../../content/interactive/ch03/ch3-24-correlated-normals.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -80,6 +85,7 @@ import techTaylor        from '../../../content/interactive/techniques/taylor-se
 import techNewton        from '../../../content/interactive/techniques/newton-method.json';
 import techLagrange      from '../../../content/interactive/techniques/lagrange-multipliers.json';
 import techODE           from '../../../content/interactive/techniques/ordinary-differential-equations.json';
+import techLinAlg        from '../../../content/interactive/techniques/linear-algebra-techniques.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -139,6 +145,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch3-17-first-order-linear-ode': ch3FirstOrderLin as unknown as ProblemWalkthrough,
   'ch3-18-complex-roots-ode': ch3ComplexRootsOde as unknown as ProblemWalkthrough,
   'ch3-19-nonhomogeneous-odes': ch3NonhomogOdes  as unknown as ProblemWalkthrough,
+  'ch3-20-correlation-vectors': ch3CorrVectors  as unknown as ProblemWalkthrough,
+  'ch3-21-linear-least-squares': ch3LinearLS    as unknown as ProblemWalkthrough,
+  'ch3-22-eigenvalues-2x2':   ch3Eigen2x2       as unknown as ProblemWalkthrough,
+  'ch3-23-correlation-psd':   ch3CorrPSD        as unknown as ProblemWalkthrough,
+  'ch3-24-correlated-normals': ch3CorrNormals   as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -156,6 +167,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'newton-method':            techNewton        as unknown as Technique,
   'lagrange-multipliers':     techLagrange      as unknown as Technique,
   'ordinary-differential-equations': techODE    as unknown as Technique,
+  'linear-algebra-techniques': techLinAlg       as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {
