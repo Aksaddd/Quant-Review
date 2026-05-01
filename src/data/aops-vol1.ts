@@ -1,4 +1,4 @@
-import figuresJson from '../../content/The Art of Problem solving Volume 1: the BASICS by Sandor Lehoczky Richard Ruszyk/figures.json';
+import figuresJson from '../../content/aops-vol1/figures.json';
 
 export interface AopsFigure {
   id: string;

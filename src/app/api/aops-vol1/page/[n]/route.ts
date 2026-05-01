@@ -2,11 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { NextResponse } from 'next/server';
 
-const CONTENT_DIR = path.join(
-  process.cwd(),
-  'content',
-  'The Art of Problem solving Volume 1: the BASICS by Sandor Lehoczky Richard Ruszyk',
-);
+const CONTENT_DIR = path.join(process.cwd(), 'content', 'aops-vol1');
 
 export async function GET(
   _req: Request,

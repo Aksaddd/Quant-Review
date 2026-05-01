@@ -12,11 +12,7 @@ import {
   type AopsChapter,
 } from '@/data/aops-vol1';
 
-const CONTENT_DIR = path.join(
-  process.cwd(),
-  'content',
-  'The Art of Problem solving Volume 1: the BASICS by Sandor Lehoczky Richard Ruszyk',
-);
+const CONTENT_DIR = path.join(process.cwd(), 'content', 'aops-vol1');
 
 /**
  * Normalize chapter markdown for rendering and inline figure crops.

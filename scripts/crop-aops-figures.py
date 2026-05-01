@@ -19,7 +19,7 @@ except ImportError:
     sys.exit("error: Pillow not installed. run: pip3 install Pillow")
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CONTENT_DIR = REPO_ROOT / "content" / "The Art of Problem solving Volume 1: the BASICS by Sandor Lehoczky Richard Ruszyk"
+CONTENT_DIR = REPO_ROOT / "content" / "aops-vol1"
 OUTPUT_DIR = REPO_ROOT / "public" / "aops-figures"
 
 def main() -> int:
