@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, BookOpen, Layers, Settings,
   ChevronDown, ChevronRight, CheckCircle2,
+  Sparkles, Compass,
 } from 'lucide-react';
 import { useState } from 'react';
 import { clsx } from 'clsx';
@@ -16,8 +17,10 @@ import { cpHandbookParts } from '@/data/competitive-programmers-handbook';
 import { aopsVol1Chapters, AOPS_VOL1_TOTAL_CHAPTERS } from '@/data/aops-vol1';
 
 const TOP_NAV = [
-  { href: '/dashboard',  label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/flashcards', label: 'Flashcards', icon: Layers },
+  { href: '/dashboard',   label: 'Dashboard',   icon: LayoutDashboard },
+  { href: '/flashcards',  label: 'Flashcards',  icon: Layers },
+  { href: '/interactive', label: 'Interactive', icon: Sparkles },
+  { href: '/techniques',  label: 'Techniques',  icon: Compass },
 ];
 
 function masteryLevel(pct: number): 0 | 1 | 2 | 3 {
