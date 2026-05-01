@@ -1,0 +1,57 @@
+{
+  "id": "probability-foundations",
+  "kind": "technique",
+  "name": "Probability Foundations",
+  "tagline": "Three workhorses for elementary probability: symmetry between equally-likely events, partitioning into mutually exclusive cases, and reducing to the relevant random sub-event.",
+  "category": "probability",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.1",
+    "title": "Definitions and Notation",
+    "exemplarProblemId": "ch4-01-coin-toss-game"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Many quant probability problems are not solved by computing a numerator and denominator. They are solved by SYMMETRY: noting that two events are equally likely by problem structure, then deducing P(event) without ever counting outcomes. This is the move behind the Coin Toss Game, the Card Comparison, the Drunk Passenger, and many other classics."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Two close cousins of symmetry are partitioning (split a complicated event into mutually exclusive cases that EACH are easier to compute) and reduction (focus only on the random sub-event whose outcome determines the whole answer)."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Before computing probabilities, ask: 'is there a symmetry I can exploit?' If you can pair up outcomes so that one is the mirror image of another, those outcomes have equal probability and you may not need to compute either of them individually."
+    }
+  ],
+  "whenToUse": [
+    "Problems with equally-likely scenarios where direct counting is awkward.",
+    "Problems with a hidden 'parity' or 'order' structure that creates symmetric pairs of outcomes.",
+    "Problems where the answer 1/2 looks suspicious -- often there's a symmetry that confirms it.",
+    "Reducing a complex problem (passengers boarding randomly) to a simpler one (which of two seats fills first?).",
+    "Mutually-exclusive case decomposition for inclusion-exclusion or law-of-total-probability."
+  ],
+  "recipe": [
+    "Look for symmetric pairs: events A and B related by an exchange that the problem treats neutrally.",
+    "If you find a symmetry, conclude P(A) = P(B). For complementary symmetric pairs, this often pins down P(A) = 1/2.",
+    "If symmetry doesn't apply, partition the sample space into mutually exclusive cases and compute each.",
+    "For 'what's the probability X eventually happens' problems, sometimes you can restrict attention to the sub-event whose outcome determines X (Drunk Passenger: only seats 1 and 100 matter)."
+  ],
+  "commonPitfalls": [
+    "Inventing symmetries that don't actually exist -- always check that the swap leaves the problem invariant.",
+    "Using symmetry to claim a probability is 1/2 when the symmetry is actually broken (e.g., one outcome has a tiebreaker rule).",
+    "Forgetting that mutually exclusive cases must be EXHAUSTIVE -- otherwise you've under-counted.",
+    "Trying to solve a problem by direct counting when symmetry would shortcut it -- and getting bogged down in algebra."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-01-coin-toss-game",     "title": "Coin Toss Game (n+1 vs n)", "chapter": 4, "section": "4.1" },
+    { "problemId": "ch4-02-card-comparison",    "title": "Card Comparison",          "chapter": 4, "section": "4.1" },
+    { "problemId": "ch4-03-drunk-passenger",    "title": "Drunk Passenger",          "chapter": 4, "section": "4.1" },
+    { "problemId": "ch4-04-n-points-on-circle", "title": "N Points on a Circle",     "chapter": 4, "section": "4.1" }
+  ],
+  "relatedTechniques": ["symmetry-arguments", "logic-reasoning", "invariant-arguments"]
+}

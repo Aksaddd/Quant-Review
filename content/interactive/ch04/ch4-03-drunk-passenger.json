@@ -1,0 +1,106 @@
+{
+  "id": "ch4-03-drunk-passenger",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.1",
+  "title": "Drunk Passenger",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "86-95"
+  },
+  "mechanism": {
+    "primary": "probability-foundations",
+    "structure": "reduce-to-the-decisive-sub-event-only-seats-1-and-100-matter",
+    "insight": "by-symmetry-seat-1-and-seat-100-are-equally-likely-to-be-filled-first",
+    "variantAxes": ["n_passengers", "drunk_position"]
+  },
+  "setup": {
+    "narrative": "100 passengers board a plane in order. Each has an assigned seat (1 through 100). Passenger #1 is drunk and sits in a UNIFORMLY RANDOM seat (any of the 100). Each subsequent passenger (#2, #3, ..., #100) sits in their own seat IF available, otherwise picks a uniformly random remaining seat.",
+    "rules": [
+      "Boarding order is fixed: 1, then 2, then 3, ..., then 100.",
+      "Passenger 1 ignores their assignment.",
+      "Passengers 2 through 100 follow this rule: take own seat if free; otherwise pick uniformly at random from remaining seats."
+    ],
+    "question": "What is the probability that passenger 100 ends up in their own assigned seat (#100)?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Notice that the only seats that determine passenger 100's outcome are #1 and #100.",
+    "Use symmetry to argue that #1 and #100 are equally likely to be 'filled first'.",
+    "Conclude P = 1/2 without summing over the boarding tree."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive analysis is hard",
+      "prompt": "Why doesn't direct simulation / enumeration give a clean answer?",
+      "options": [
+        { "id": "a", "text": "The recursion tree branches at every 'displaced' passenger -- combinatorially explosive.", "correct": true },
+        { "id": "b", "text": "The probability is undefined.",                                                            "correct": false },
+        { "id": "c", "text": "Direct simulation is the only way.",                                                       "correct": false }
+      ],
+      "explanation": "Each time a displaced passenger picks randomly, they create a new recursive sub-problem. Enumerating all the cases is exponentially expensive. We need a smarter argument."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the trick?",
+      "options": [
+        { "id": "a", "text": "Reduce to the only seats that determine passenger 100's outcome: seats #1 and #100. Once one of them is taken, the rest is determined.", "correct": true },
+        { "id": "b", "text": "Compute conditional probability over each passenger's seat choice.",                                                                       "correct": false },
+        { "id": "c", "text": "It's an unsolved problem.",                                                                                                                "correct": false }
+      ],
+      "explanation": "The clever observation: passenger 100's seat is determined entirely by which of seats #1 and #100 gets taken first. Every other seat is a 'distraction' that doesn't change the outcome.",
+      "learnMoreTechnique": "probability-foundations"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why only seats #1 and #100 matter",
+      "prompt": "Trace what happens to passenger k (for 2 <= k <= 99) when they board. Why doesn't their action affect passenger 100's outcome (until #1 or #100 is taken)?",
+      "options": [
+        { "id": "a", "text": "If passenger k finds their own seat free, they take it -- no displacement. If displaced, they pick a random seat. Eventually some passenger is forced to choose between seats #1 and #100. That choice fixes #100's fate.", "correct": true },
+        { "id": "b", "text": "Each passenger always sits in their own seat.",                                                                                                                                                                                "correct": false },
+        { "id": "c", "text": "Passenger 100 always has multiple options.",                                                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Until either seat #1 or seat #100 is occupied, the situation is essentially equivalent. Once seat #1 is taken (by a displaced passenger), all subsequent passengers find their own seats free -- and #100 sits in #100. Once seat #100 is taken (by a displaced passenger), passenger 100 cannot get their seat."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply symmetry",
+      "prompt": "From the perspective of any passenger forced to choose randomly, seats #1 and #100 are interchangeable -- the problem doesn't distinguish them. So P(seat #1 is filled first) = P(seat #100 is filled first) = ?",
+      "options": [
+        { "id": "a", "text": "1/2 each (by symmetry).", "correct": true },
+        { "id": "b", "text": "1/100 each.",              "correct": false },
+        { "id": "c", "text": "Depends on the boarding order.", "correct": false }
+      ],
+      "explanation": "Symmetry: seats #1 and #100 are exchangeable from the random chooser's perspective. Whichever gets filled first determines passenger 100's outcome -- 1/2 each."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is P(passenger 100 gets seat #100)?",
+      "options": [
+        { "id": "a", "text": "1/2.",      "correct": true },
+        { "id": "b", "text": "1/100.",     "correct": false },
+        { "id": "c", "text": "99/100.",    "correct": false }
+      ],
+      "explanation": "1/2. The result is INDEPENDENT of the number of passengers (as long as it's >= 2) -- a striking result. The probability comes entirely from the symmetry between seats #1 and #100."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is the probability passenger 50 gets their seat? (Hint: same logic but with seats #1 and #50.)",
+        "What is the EXPECTED number of passengers who do NOT get their assigned seat?",
+        "What goes wrong if passenger 1 boards LAST instead of FIRST?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "ch4-01-coin-toss-game",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.1",
+  "title": "Coin Toss Game (n+1 vs n)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "44-60"
+  },
+  "mechanism": {
+    "primary": "probability-foundations",
+    "structure": "remove-one-of-As-coins-then-use-symmetry-of-the-remaining-game",
+    "insight": "after-equalizing-the-counts-the-extra-coin-only-matters-when-the-remainder-tied",
+    "variantAxes": ["coin_count_diff"]
+  },
+  "setup": {
+    "narrative": "Gambler A has (n+1) fair coins. Gambler B has n fair coins. Both flip ALL of their coins. We compare the number of heads each got.",
+    "rules": [
+      "All coins are fair (heads with probability 1/2, independent).",
+      "A 'wins' if A has STRICTLY more heads than B.",
+      "If A and B tie, A does not win."
+    ],
+    "question": "What is the probability that A has strictly more heads than B?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Reduce A's (n+1)-coin total to A's n-coin total plus one extra coin.",
+    "Use symmetry on the n-coin sub-game to show P(A's n > B's n) = P(A's n < B's n).",
+    "Combine the symmetric probabilities with the extra coin's 1/2 to get 1/2."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute P(A wins) without summing over every binomial outcome?",
+      "options": [
+        { "id": "a", "text": "Symmetry: temporarily set aside one of A's coins. Compare A's remaining n vs B's n -- by symmetry the probabilities of tie / A-more / A-less match those of B's hand.", "correct": true },
+        { "id": "b", "text": "Sum P(A has k heads) * P(B has < k heads) over k.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "It's an unsolved problem.",                                                                                                                                            "correct": false }
+      ],
+      "explanation": "Symmetry beats brute force. The (n+1) vs n setup is asymmetric -- but if you peel off the extra coin, the underlying n-vs-n game IS symmetric.",
+      "learnMoreTechnique": "probability-foundations"
+    },
+    {
+      "id": "s2",
+      "type": "mc-multi",
+      "label": "Identify the three sub-events",
+      "prompt": "Set aside one of A's coins. The remaining game (A's n coins vs B's n coins) has three mutually exclusive outcomes. Pick all three.",
+      "options": [
+        { "id": "amore", "text": "E1: A's n has MORE heads than B's n",  "correct": true },
+        { "id": "tie",   "text": "E2: A's n TIES B's n",                  "correct": true },
+        { "id": "aless", "text": "E3: A's n has FEWER heads than B's n",  "correct": true },
+        { "id": "extra", "text": "E4: the extra coin lands tails",         "correct": false }
+      ],
+      "explanation": "Three exhaustive cases for the n-vs-n sub-game. The extra coin is a separate (independent) event."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Use symmetry on the n-vs-n game",
+      "prompt": "By symmetry of the n-vs-n sub-game (both players have n coins), what's the relationship between P(E1) and P(E3)?",
+      "options": [
+        { "id": "a", "text": "P(E1) = P(E3) = x.  Let P(E2) = y.  Then 2x + y = 1.", "correct": true },
+        { "id": "b", "text": "P(E1) > P(E3) since A has the extra coin.",            "correct": false },
+        { "id": "c", "text": "P(E1) = P(E2) = P(E3) = 1/3.",                         "correct": false }
+      ],
+      "explanation": "A's n coins and B's n coins are statistically identical, so 'A more' and 'A fewer' are equally likely. They sum with the tie to 1."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Add back A's extra coin",
+      "prompt": "Now restore A's extra coin (heads with prob 1/2). When does the extra coin matter?",
+      "options": [
+        { "id": "a", "text": "In E1: A already wins regardless of the extra coin.  In E3: A loses regardless.  In E2: A wins iff the extra coin is heads (prob 1/2).  Total: P(A wins) = x + (1/2)*y.", "correct": true },
+        { "id": "b", "text": "The extra coin always tilts toward A.",                                                                                                                                  "correct": false },
+        { "id": "c", "text": "The extra coin doesn't matter.",                                                                                                                                          "correct": false }
+      ],
+      "explanation": "The extra coin breaks the tie in A's favor 50% of the time. In E1 and E3 the extra coin can't change the outcome. So total P(A wins) = P(E1) + (1/2)*P(E2) = x + y/2."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "From 2x + y = 1 and P(A wins) = x + y/2, evaluate P(A wins).",
+      "options": [
+        { "id": "a", "text": "P(A wins) = x + y/2 = x + (1 - 2x)/2 = x + 1/2 - x = 1/2.", "correct": true },
+        { "id": "b", "text": "Depends on n.",                                                "correct": false },
+        { "id": "c", "text": "Greater than 1/2 because A has more coins.",                   "correct": false }
+      ],
+      "explanation": "Substituting y = 1 - 2x: P(A wins) = x + (1 - 2x)/2 = x + 1/2 - x = 1/2. Independent of n. The extra coin exactly compensates for the tie-breaking asymmetry."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if A had n+2 coins instead of n+1? Compute P(A wins).",
+        "Verify the answer for n = 0 (A has 1 coin, B has 0): P(A wins) = P(A flips heads) = 1/2 ✓.",
+        "Why is the answer EXACTLY 1/2 and not slightly different?"
+      ]
+    }
+  ]
+}

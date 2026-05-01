@@ -68,6 +68,10 @@ import ch3LinearLS       from '../../../content/interactive/ch03/ch3-21-linear-l
 import ch3Eigen2x2       from '../../../content/interactive/ch03/ch3-22-eigenvalues-2x2.json';
 import ch3CorrPSD        from '../../../content/interactive/ch03/ch3-23-correlation-psd.json';
 import ch3CorrNormals    from '../../../content/interactive/ch03/ch3-24-correlated-normals.json';
+import ch4CoinToss       from '../../../content/interactive/ch04/ch4-01-coin-toss-game.json';
+import ch4CardCompare    from '../../../content/interactive/ch04/ch4-02-card-comparison.json';
+import ch4DrunkPass      from '../../../content/interactive/ch04/ch4-03-drunk-passenger.json';
+import ch4NPointsCircle  from '../../../content/interactive/ch04/ch4-04-n-points-on-circle.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -86,6 +90,7 @@ import techNewton        from '../../../content/interactive/techniques/newton-me
 import techLagrange      from '../../../content/interactive/techniques/lagrange-multipliers.json';
 import techODE           from '../../../content/interactive/techniques/ordinary-differential-equations.json';
 import techLinAlg        from '../../../content/interactive/techniques/linear-algebra-techniques.json';
+import techProbFound     from '../../../content/interactive/techniques/probability-foundations.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -150,6 +155,10 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch3-22-eigenvalues-2x2':   ch3Eigen2x2       as unknown as ProblemWalkthrough,
   'ch3-23-correlation-psd':   ch3CorrPSD        as unknown as ProblemWalkthrough,
   'ch3-24-correlated-normals': ch3CorrNormals   as unknown as ProblemWalkthrough,
+  'ch4-01-coin-toss-game':    ch4CoinToss       as unknown as ProblemWalkthrough,
+  'ch4-02-card-comparison':   ch4CardCompare    as unknown as ProblemWalkthrough,
+  'ch4-03-drunk-passenger':   ch4DrunkPass      as unknown as ProblemWalkthrough,
+  'ch4-04-n-points-on-circle': ch4NPointsCircle as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -168,6 +177,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'lagrange-multipliers':     techLagrange      as unknown as Technique,
   'ordinary-differential-equations': techODE    as unknown as Technique,
   'linear-algebra-techniques': techLinAlg       as unknown as Technique,
+  'probability-foundations':  techProbFound     as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

@@ -1,0 +1,107 @@
+{
+  "id": "ch4-04-n-points-on-circle",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.1",
+  "title": "N Points on a Circle",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "99-112"
+  },
+  "mechanism": {
+    "primary": "probability-foundations",
+    "structure": "decompose-into-N-mutually-exclusive-events-each-with-probability-1-over-2-to-the-N-1",
+    "insight": "for-each-point-i-the-event-all-other-points-lie-clockwise-within-a-semicircle-from-i-is-1-over-2-to-the-n-1",
+    "variantAxes": ["arc_fraction", "n_points"]
+  },
+  "setup": {
+    "narrative": "N points are dropped uniformly at random on a circle.",
+    "rules": [
+      "Each point is independent and uniform on the circle.",
+      "We want the probability that ALL N points lie within SOME semicircle (some half of the circle)."
+    ],
+    "question": "What is the probability that all N points lie within some semicircle?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Define event E_i = 'all N-1 OTHER points lie in the clockwise semicircle starting at point i'.",
+    "Compute P(E_i) = (1/2)^(N-1) by independence.",
+    "Argue the events E_1, ..., E_N are mutually exclusive AND exhaustive of the desired event."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Define the event for each point",
+      "prompt": "Label the points 1 through N (in any order, say clockwise). Define event E_i = 'all OTHER N-1 points lie in the SEMI-CIRCLE going CLOCKWISE FROM point i'. What is P(E_i)?",
+      "options": [
+        { "id": "a", "text": "(1/2)^(N-1).  Each of the other N-1 points independently falls in the chosen semicircle with probability 1/2.", "correct": true },
+        { "id": "b", "text": "1/N",                                                                                                              "correct": false },
+        { "id": "c", "text": "1/2^N",                                                                                                              "correct": false }
+      ],
+      "explanation": "Conditional on point i's position, the other N-1 points are independent and uniform. Each lies in any specific semicircle with probability 1/2. All N-1 falling in the clockwise semicircle from i: (1/2)^(N-1)."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you combine the N events E_1, ..., E_N to get P(some semicircle covers all N points)?",
+      "options": [
+        { "id": "a", "text": "Show E_1, ..., E_N are MUTUALLY EXCLUSIVE and EXHAUSTIVE of the desired event. Then P(union) = sum of P(E_i) = N * (1/2)^(N-1).", "correct": true },
+        { "id": "b", "text": "Use inclusion-exclusion -- E_i overlap heavily.",                                                                                  "correct": false },
+        { "id": "c", "text": "P = 1 - (1 - 1/2)^N",                                                                                                              "correct": false }
+      ],
+      "explanation": "If we can show the E_i are pairwise disjoint AND their union is the event of interest, the probability is just the sum.",
+      "learnMoreTechnique": "probability-foundations"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why the E_i are mutually exclusive",
+      "prompt": "Suppose all N points lie in a semicircle. Why can ONLY ONE of the E_i events be true?",
+      "options": [
+        { "id": "a", "text": "If all N points fit in a semicircle, exactly ONE point i has the property that the (clockwise) semicircle starting AT i contains all the others -- the LAST point in the cluster, going clockwise.", "correct": true },
+        { "id": "b", "text": "Multiple E_i can be true simultaneously.",                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "None of the E_i can be true.",                                                                                                                                                                "correct": false }
+      ],
+      "explanation": "Among N points fitting in some semicircle, exactly ONE is the 'starting point' (the most counter-clockwise one in the cluster). For other choices of starting point, at least one of the points falls in the OTHER semicircle. So exactly one E_i fires."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Combine",
+      "prompt": "P(some semicircle covers all N points) = P(union of E_1...E_N) = sum of P(E_i) = ?",
+      "options": [
+        { "id": "a", "text": "N * (1/2)^(N-1)", "correct": true },
+        { "id": "b", "text": "1 - (1/2)^N",      "correct": false },
+        { "id": "c", "text": "(1/2)^N",           "correct": false }
+      ],
+      "explanation": "Sum of N equal disjoint probabilities of (1/2)^(N-1). Total: N * (1/2)^(N-1) = N / 2^(N-1)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-multi",
+      "label": "Verify on small N",
+      "prompt": "Sanity check: which of these match N * (1/2)^(N-1)?",
+      "options": [
+        { "id": "n1", "text": "N=1: 1 * 1 = 1 (any single point is trivially in a semicircle).",  "correct": true },
+        { "id": "n2", "text": "N=2: 2 * (1/2) = 1 (any two points always fit in some semicircle).", "correct": true },
+        { "id": "n3", "text": "N=3: 3 * (1/4) = 3/4.",                                                "correct": true },
+        { "id": "n4", "text": "N=4: 4 * (1/8) = 1/2.",                                                "correct": true },
+        { "id": "n5", "text": "Large N: probability approaches 1.",                                   "correct": false }
+      ],
+      "explanation": "All four formulas check out. Notably for N=2, the probability is 1 (two points always fit in some semicircle). For large N, the probability decays exponentially toward 0 -- as expected."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: replace 'semicircle' with an arc of fraction x of the circumference (0 < x < 1/2). What's the probability all N points fit in some such arc?",
+        "Why does the answer FAIL when x > 1/2? (Hint: the E_i are no longer mutually exclusive.)",
+        "Compare to the 1D analogue: N uniform points on [0, 1] -- what's the probability all fit in some interval of length 1/2?"
+      ]
+    }
+  ]
+}
