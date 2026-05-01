@@ -3283,6 +3283,77 @@ def fig_17_6_power_proof_inside() -> str:
 
 
 # ─────────────────────────────────────────────
+# Chapter 29 — Parting Shots (problem-specific figures)
+# ─────────────────────────────────────────────
+
+def fig_29_1_problem_578_three_hexagons() -> str:
+    """Three congruent regular hexagons in a row, each pair sharing one
+    full side; outline has 13 vertices."""
+    W, H = 220, 100
+    s = 22                                 # side length (= circumradius)
+    cy = 50
+    # Centers spaced by s*sqrt(3) horizontally so hexagons share a side
+    dx = s * (3 ** 0.5)
+    centers = [(40 + i*dx, cy) for i in range(3)]
+    body = []
+    for cx, cy_ in centers:
+        # Pointy-top hexagon vertices
+        pts = [(cx + s*_m.cos(_m.radians(90 + 60*k)),
+                cy_ - s*_m.sin(_m.radians(90 + 60*k))) for k in range(6)]
+        for i in range(6):
+            p1 = pts[i]; p2 = pts[(i+1) % 6]
+            body.append(segment(*p1, *p2))
+    return svg(W, H, "\n".join(body))
+
+
+def fig_29_2_problem_584_rectangle_with_point() -> str:
+    """Rectangle ABCD (B top-left, C top-right, D bottom-right, A bottom-left)
+    with interior point P near the right side; segments PA, PB, PC drawn."""
+    W, H = 240, 160
+    B_ = (30, 30); C_ = (210, 30); D_ = (210, 130); A_ = (30, 130)
+    # P inside, closer to the right edge
+    P = (165, 92)
+    body = [
+        segment(*B_, *C_), segment(*C_, *D_), segment(*D_, *A_), segment(*A_, *B_),
+        segment(*P, *A_), segment(*P, *B_), segment(*P, *C_),
+        point(*B_, "B", "above-left"),
+        point(*C_, "C", "above-right"),
+        point(*D_, "D", "below-right"),
+        point(*A_, "A", "below-left"),
+        point(*P, "P", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_29_3_problem_586_triangle_cevians() -> str:
+    """Triangle with apex C at top, A and B on the base; two cevians DE and
+    FG parallel to AB partition the triangle into three equal-area regions."""
+    W, H = 220, 180
+    C_ = (110, 20); A_ = (30, 160); B_ = (200, 160)
+    # For three equal areas, the upper line cuts at y where the upper triangle
+    # has 1/3 area → similar-triangle scale factor 1/√3 from apex
+    # Middle region (trapezoid DEGF): area between scale 1/√3 and √(2/3) from apex
+    s1 = 1 / 3 ** 0.5         # apex-to-DE
+    s2 = (2 / 3) ** 0.5       # apex-to-FG
+    def along(P, t):
+        return (C_[0] + t*(P[0]-C_[0]), C_[1] + t*(P[1]-C_[1]))
+    D_ = along(A_, s1); E_ = along(B_, s1)
+    F_ = along(A_, s2); G_ = along(B_, s2)
+    body = [
+        segment(*A_, *B_), segment(*A_, *C_), segment(*B_, *C_),
+        segment(*D_, *E_), segment(*F_, *G_),
+        point(*C_, "C", "above"),
+        point(*D_, "D", "left"),
+        point(*E_, "E", "right"),
+        point(*F_, "F", "left"),
+        point(*G_, "G", "right"),
+        point(*A_, "A", "below"),
+        point(*B_, "B", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+# ─────────────────────────────────────────────
 # Chapter 19 — Shifts, Turns, Flips, Stretches, and Squeezes
 # ─────────────────────────────────────────────
 
@@ -3930,6 +4001,9 @@ FIGURES = {
     "fig-19-4-reflection-point":                 fig_19_4_reflection_point,
     "fig-19-5-distortion":                       fig_19_5_distortion,
     "fig-19-6-dilation":                         fig_19_6_dilation,
+    "fig-29-1-problem-578-three-hexagons":       fig_29_1_problem_578_three_hexagons,
+    "fig-29-2-problem-584-rectangle-with-point": fig_29_2_problem_584_rectangle_with_point,
+    "fig-29-3-problem-586-triangle-cevians":     fig_29_3_problem_586_triangle_cevians,
 }
 
 

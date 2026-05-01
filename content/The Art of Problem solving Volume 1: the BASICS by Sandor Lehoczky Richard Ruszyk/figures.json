@@ -1822,6 +1822,45 @@
         240,
         200
       ]
+    },
+    {
+      "id": "fig-29-1-problem-578-three-hexagons",
+      "chapter": 29,
+      "page": 279,
+      "bookPage": 265,
+      "caption": "Three congruent regular hexagons in a row, each sharing a full side with its neighbor; the outline has 13 vertices.",
+      "bbox": [
+        600,
+        600,
+        150,
+        70
+      ]
+    },
+    {
+      "id": "fig-29-2-problem-584-rectangle-with-point",
+      "chapter": 29,
+      "page": 280,
+      "bookPage": 266,
+      "caption": "Rectangle ABCD with B top-left, C top-right, D bottom-right, A bottom-left; interior point P with segments to A, B, C drawn.",
+      "bbox": [
+        555,
+        235,
+        200,
+        100
+      ]
+    },
+    {
+      "id": "fig-29-3-problem-586-triangle-cevians",
+      "chapter": 29,
+      "page": 280,
+      "bookPage": 266,
+      "caption": "Triangle CAB with two cevians DE and FG parallel to AB, partitioning the triangle into three equal-area regions.",
+      "bbox": [
+        575,
+        380,
+        165,
+        110
+      ]
     }
   ]
 }

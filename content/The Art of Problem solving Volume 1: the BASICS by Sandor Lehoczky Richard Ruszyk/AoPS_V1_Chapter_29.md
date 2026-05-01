@@ -257,8 +257,7 @@ $$N < \left(\sqrt{33 + \sqrt{128}} + \sqrt{2} - 8\right)^{-1}.$$
 
 **578.** A configuration is made of congruent regular hexagons, where each hexagon shares a side with another hexagon. What is the largest integer $k$, such that the figure cannot have $k$ vertices? For example, this figure has $13$ vertices. *(Mandelbrot #1)*
 
-<!-- FIGURE_TODO chapter=29 problem=578 -->
-*Figure 578: a connected configuration of three congruent regular hexagons in a row, each adjacent pair sharing exactly one full side; the resulting outline has $13$ vertices.*
+*[Figure: Three congruent regular hexagons in a row, each sharing a full side with its neighbor; the outline has 13 vertices]*
 
 ---
 
@@ -289,8 +288,7 @@ $$\begin{aligned}
 
 **584.** In rectangle $ABCD$, $AB = 10$ and $BC = 15$. A point $P$ inside the rectangle is such that $PB = 12$ and $PC = 9$. What is the length of $PA$? *(ARML 1981)*
 
-<!-- FIGURE_TODO chapter=29 problem=584 -->
-*Figure 584: rectangle $ABCD$ with $A$ bottom-left, $B$ top-left, $C$ top-right, $D$ bottom-right; interior point $P$ near the right side, with segments drawn from $P$ to $B$, $C$, and $A$.*
+*[Figure: Rectangle ABCD with B top-left, C top-right, D bottom-right, A bottom-left; interior point P with segments to A, B, C drawn]*
 
 ---
 
@@ -300,8 +298,7 @@ $$\begin{aligned}
 
 **586.** The two lines $DE$ and $FG$ are both parallel to $AB$, and the $3$ regions $CDE$, $DEGF$, and $FGBA$ have equal areas. Find $CD/FA$. *(ARML 1982)*
 
-<!-- FIGURE_TODO chapter=29 problem=586 -->
-*Figure 586: triangle with apex $C$ at top, $A$ at bottom-left, $B$ at bottom-right; two cevians (lines parallel to $\overline{AB}$) cut the triangle horizontally — upper line $\overline{DE}$ has $D$ on $\overline{CA}$ and $E$ on $\overline{CB}$, lower line $\overline{FG}$ has $F$ on $\overline{CA}$ (below $D$) and $G$ on $\overline{CB}$ (below $E$). The three resulting regions $\triangle CDE$, trapezoid $DEGF$, and trapezoid $FGBA$ have equal area.*
+*[Figure: Triangle CAB with apex C at top, two cevians DE and FG parallel to AB partitioning the triangle into three equal-area regions]*
 
 ---
 
