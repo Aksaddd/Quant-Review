@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="110" cy="100" r="70" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="91.88266684282354" y1="32.385192159765225" x2="128.11733315717646" y2="32.385192159765225" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="128.11733315717646" y1="32.385192159765225" x2="177.6148078402348" y2="118.11733315717645" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="177.6148078402348" y1="118.11733315717645" x2="110" y2="100" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110" y1="100" x2="91.88266684282354" y2="32.385192159765225" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="42.385192159765225" y1="81.88266684282353" x2="110" y2="100" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="110" y1="100" x2="128.11733315717643" y2="167.6148078402348" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="128.11733315717643" y1="167.6148078402348" x2="91.88266684282355" y2="167.6148078402348" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="91.88266684282355" y1="167.6148078402348" x2="42.385192159765225" y2="81.88266684282353" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="91.88266684282354" cy="32.385192159765225" r="2.5" fill="#1d1d1f"/>
+<text x="81.88266684282354" y="24.385192159765225" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">A</text>
+<circle cx="128.11733315717646" cy="32.385192159765225" r="2.5" fill="#1d1d1f"/>
+<text x="138.11733315717646" y="24.385192159765225" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">B</text>
+<circle cx="42.385192159765225" cy="81.88266684282353" r="2.5" fill="#1d1d1f"/>
+<text x="30.385192159765225" y="85.88266684282353" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">F</text>
+<circle cx="177.6148078402348" cy="118.11733315717645" r="2.5" fill="#1d1d1f"/>
+<text x="189.6148078402348" y="122.11733315717645" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">C</text>
+<text x="110" y="116" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">G</text>
+<circle cx="91.88266684282355" cy="167.6148078402348" r="2.5" fill="#1d1d1f"/>
+<text x="81.88266684282355" y="185.6148078402348" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">E</text>
+<circle cx="128.11733315717643" cy="167.6148078402348" r="2.5" fill="#1d1d1f"/>
+<text x="138.11733315717643" y="185.6148078402348" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">D</text>
+</svg>

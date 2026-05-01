@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 180" width="290" height="180">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"/>
+  </marker>
+</defs>
+<circle cx="175" cy="90" r="38" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="90" x2="225.81" y2="36.82579196640537" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="30" y1="90" x2="225.81" y2="143.17420803359462" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<line x1="225.81" y1="36.82579196640537" x2="225.81" y2="143.17420803359462" stroke="#1d1d1f" stroke-width="1.4" fill="none"/>
+<circle cx="30" cy="90" r="2.5" fill="#1d1d1f"/>
+<text x="18" y="94" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="end">P</text>
+<circle cx="225.81" cy="36.82579196640537" r="2.5" fill="#1d1d1f"/>
+<text x="225.81" y="28.82579196640537" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">A</text>
+<circle cx="225.81" cy="143.17420803359462" r="2.5" fill="#1d1d1f"/>
+<text x="225.81" y="159.17420803359462" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="middle">B</text>
+<circle cx="165.04137931034484" cy="53.32813239062439" r="2.5" fill="#1d1d1f"/>
+<text x="175.04137931034484" y="45.32813239062439" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">R</text>
+<circle cx="165.04137931034484" cy="126.67186760937561" r="2.5" fill="#1d1d1f"/>
+<text x="175.04137931034484" y="144.67186760937562" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">T</text>
+<circle cx="225.81" cy="90.0" r="2.5" fill="#1d1d1f"/>
+<text x="237.81" y="94.0" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">S</text>
+<text x="187" y="94" font-family="Times, Georgia, serif" font-style="italic" font-size="14" text-anchor="start">O</text>
+</svg>

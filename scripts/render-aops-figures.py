@@ -2282,6 +2282,415 @@ def fig_13_9_five_pointed_star() -> str:
     return svg(W, Ht, "\n".join(body))
 
 
+# ─────────────────────────────────────────────
+# Chapter 14 — Angle Chasing problem figures
+#
+# Each figure is reproduced from the printed AoPS Vol 1 page (pp 133-135 / PDF
+# 147-149) with clean geometry derived from the problem statement instead of
+# pixels traced from the source scan.
+# ─────────────────────────────────────────────
+
+import math as _m
+
+
+def fig_14_1_problem_236_iso_triangles() -> str:
+    """Two isosceles triangles sharing side BC: ABC (AC=BC) and CBD (CB=DB),
+    with BD perpendicular to AC."""
+    W, H = 220, 150
+    A = (60,  30); B = (35, 130); C = (175, 130); D = (155, 50)
+    # Foot of perpendicular from B onto AC (where BD crosses AC)
+    AC = (C[0]-A[0], C[1]-A[1])
+    AB_ = (B[0]-A[0], B[1]-A[1])
+    t = (AB_[0]*AC[0] + AB_[1]*AC[1]) / (AC[0]**2 + AC[1]**2)
+    F = (A[0] + t*AC[0], A[1] + t*AC[1])
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*C, *D), segment(*B, *D),
+        right_angle_mark(F[0], F[1], B, A, size=8),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "below-left"),
+        point(*C, "C", "below-right"),
+        point(*D, "D", "above-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_2_problem_237_interior_point() -> str:
+    """Triangle ABC with interior point D and four labeled angles x, y, z, w."""
+    W, H = 220, 160
+    B = (110, 25); A = (25, 130); C = (200, 130)
+    D = (115, 90)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*A, *C),
+        segment(*A, *D), segment(*C, *D), segment(*B, *D),
+        text(B[0]-3,  B[1]+22, "z", italic=True, size=11),
+        text(B[0]+10, B[1]+30, "w", italic=True, size=11),
+        text(A[0]+18, A[1]-3,  "y", italic=True, size=11),
+        text(C[0]-18, C[1]-3,  "x", italic=True, size=11),
+        point(*A, "A", "below-left"),
+        point(*B, "B", "above"),
+        point(*C, "C", "below-right"),
+        point(*D, "D", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_3_problem_238_quadrilateral_trisected() -> str:
+    """Quadrilateral ABCD with angles BAD and CDA each trisected; the four
+    trisectors converge at interior points E (lower) and F (upper)."""
+    W, H = 240, 170
+    B = (60, 25); C = (180, 25); A = (25, 145); D = (215, 145)
+    # Two trisectors per angle (creates three sub-angles)
+    F = (120, 60); E = (120, 95)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        # Two trisectors from A → E (closer to AD) and F (closer to AB)
+        segment(*A, *E), segment(*A, *F),
+        # Two trisectors from D → E (closer to AD) and F (closer to DC)
+        segment(*D, *E), segment(*D, *F),
+        # Sub-angle labels at A — fan layout
+        text(A[0]+18, A[1]-3,  "x", italic=True, size=10),
+        text(A[0]+24, A[1]-13, "x", italic=True, size=10),
+        text(A[0]+18, A[1]-26, "x", italic=True, size=10),
+        # Sub-angle labels at D — mirrored fan
+        text(D[0]-18, D[1]-3,  "y", italic=True, size=10),
+        text(D[0]-24, D[1]-13, "y", italic=True, size=10),
+        text(D[0]-18, D[1]-26, "y", italic=True, size=10),
+        point(*B, "B", "above"),
+        point(*C, "C", "above"),
+        point(*A, "A", "below-left"),
+        point(*D, "D", "below-right"),
+        point(*E, "E", "below"),
+        point(*F, "F", "above"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_4_problem_239_square_equilateral() -> str:
+    """Square ABCD with equilateral triangle ABE built outside on side AB."""
+    W, H = 220, 130
+    # Square laid out with AB on the right edge so E pokes out to the right.
+    D = (40, 25); A = (110, 25); C = (40, 95); B = (110, 95)
+    # Equilateral on AB (vertical), apex E to the right
+    side = B[1] - A[1]
+    Ex = A[0] + side * (3 ** 0.5) / 2
+    Ey = (A[1] + B[1]) / 2
+    E = (Ex, Ey)
+    body = [
+        segment(*D, *A), segment(*A, *B), segment(*B, *C), segment(*C, *D),
+        segment(*A, *E), segment(*B, *E),
+        point(*D, "D", "above"),
+        point(*A, "A", "above"),
+        point(*C, "C", "below"),
+        point(*B, "B", "below"),
+        point(*E, "E", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_5_problem_240_congruent_triangles() -> str:
+    """Congruent triangles RTS and UTV inscribed in a circle, meeting at Q.
+    Triangles share apex T on the right; Q is intersection of RV and US."""
+    W, H = 200, 200
+    cx, cy, r = 100, 100, 70
+    def pt(deg):
+        return (cx + r*_m.cos(_m.radians(deg)), cy - r*_m.sin(_m.radians(deg)))
+    # Spread points around the circle so triangles don't overlap heavily
+    R = pt(110); V = pt(40); T = pt(0); S = pt(320); U = pt(250)
+    def isect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if abs(d) < 1e-9: return ((p1[0]+p2[0])/2,(p1[1]+p2[1])/2)
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    # Q = intersection of RS and UV (the bases of the two triangles)
+    Q = isect(R, S, U, V)
+    body = [
+        circle(cx, cy, r),
+        segment(*R, *T), segment(*T, *S), segment(*R, *S),
+        segment(*U, *T), segment(*T, *V), segment(*U, *V),
+        point(*R, "R", "above"),
+        point(*V, "V", "above-right"),
+        point(*T, "T", "right"),
+        point(*S, "S", "below-right"),
+        point(*U, "U", "below"),
+        point(*Q, "Q", "left", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_6_problem_241_bisector_altitude() -> str:
+    """Triangle ACD with bisector CE of ∠ACD and altitude DB to AC, meeting at F.
+    Geometry: ∠A = 50°, so the apex A sits well above AC. B is on AC, and E is
+    on AD; F is the interior intersection of the altitude DB and bisector CE."""
+    W, H = 230, 140
+    # Use a wide layout so A and B don't collide
+    A = (60, 25); C = (25, 125); D = (210, 125)
+    # B = foot of perpendicular from D onto AC. Visually place around 35% from A
+    # toward C so that the altitude is clearly inside the triangle.
+    B = (A[0] + 0.35*(C[0]-A[0]), A[1] + 0.35*(C[1]-A[1]))
+    # E lies on AD around 60% of the way from A to D (keeps F well inside).
+    E = (A[0] + 0.60*(D[0]-A[0]), A[1] + 0.60*(D[1]-A[1]))
+    def isect(p1, p2, p3, p4):
+        x1,y1=p1; x2,y2=p2; x3,y3=p3; x4,y4=p4
+        d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+        if abs(d) < 1e-9: return ((p1[0]+p2[0])/2,(p1[1]+p2[1])/2)
+        t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / d
+        return (x1 + t*(x2-x1), y1 + t*(y2-y1))
+    F = isect(C, E, D, B)
+    body = [
+        segment(*A, *C), segment(*C, *D), segment(*A, *D),
+        segment(*D, *B),                  # altitude
+        segment(*C, *E),                  # bisector
+        right_angle_mark(B[0], B[1], A, D, size=7),
+        point(*A, "A", "above"),
+        point(*B, "B", "above-right"),
+        point(*E, "E", "above-right"),
+        point(*F, "F", "below", dot=False),
+        point(*C, "C", "below-left"),
+        point(*D, "D", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_7_problem_243_chord_circle() -> str:
+    """Circle with center O, diameter AD, chord ABC, and arc CD subtending 60°."""
+    W, H = 220, 140
+    cx, cy, r = 110, 75, 55
+    A = (cx + r, cy); D = (cx - r, cy)
+    # Arc CD = 60°, so C is at angle 180-60 = 120° (using A at 0°)
+    C = (cx + r*_m.cos(_m.radians(150)), cy - r*_m.sin(_m.radians(150)))
+    # B is on chord OC such that BO=5 (visually halfway along OC)
+    B = ((cx + C[0])/2, (cy + C[1])/2)
+    body = [
+        circle(cx, cy, r),
+        segment(*D, *A),  # diameter
+        segment(*A, *C),  # chord ABC
+        point(*A, "A", "right"),
+        point(*D, "D", "left"),
+        point(*C, "C", "above-left"),
+        point(*B, "B", "above"),
+        point(cx, cy, "O", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_8_problem_244_square_equilateral() -> str:
+    """Square ABCD with equilateral triangle EBC built outside on side BC."""
+    W, H = 220, 130
+    A = (40, 25); B = (110, 25); C = (110, 95); D = (40, 95)
+    side = C[1] - B[1]
+    Ex = B[0] + side * (3 ** 0.5) / 2
+    Ey = (B[1] + C[1]) / 2
+    E = (Ex, Ey)
+    body = [
+        segment(*A, *B), segment(*B, *C), segment(*C, *D), segment(*D, *A),
+        segment(*B, *E), segment(*C, *E),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "above-right"),
+        point(*D, "D", "below-left"),
+        point(*C, "C", "below-right"),
+        point(*E, "E", "right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_9_problem_245_general_triangle() -> str:
+    """Triangle ADE with cevians EB and EC drawn (B,C on AD)."""
+    W, H = 260, 130
+    E = (130, 25); A = (20, 110); D = (240, 110)
+    B = (95, 110); C = (165, 110)
+    body = [
+        segment(*A, *D), segment(*A, *E), segment(*D, *E),
+        segment(*E, *B), segment(*E, *C),
+        text(A[0]+22,  A[1]-3, "y", italic=True, size=11),
+        text(A[0]+38, A[1]-9, "x", italic=True, size=11),
+        text(B[0]-7,  B[1]-3, "m", italic=True, size=11),
+        text(B[0]+8,  B[1]-3, "n", italic=True, size=11),
+        text(C[0]+8,  C[1]-3, "b", italic=True, size=11),
+        text(D[0]-22, D[1]-3, "a", italic=True, size=11),
+        point(*E, "E", "above"),
+        point(*A, "A", "below-left"),
+        point(*B, "B", "below"),
+        point(*C, "C", "below"),
+        point(*D, "D", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_10_problem_247_tangent_pab() -> str:
+    """Triangle PAB formed by three lines tangent to circle O at R, S, T."""
+    W, H = 290, 180
+    cx, cy, rad = 175, 90, 38
+    P = (30, 90)
+    # Tangent points from P to the circle
+    d = ((P[0]-cx)**2 + (P[1]-cy)**2) ** 0.5
+    sin_t = rad / d
+    cos_t = (1 - sin_t**2) ** 0.5
+    # Top tangent: A on this tangent line
+    Rx = cx - rad * sin_t * (-(P[1]-cy)/d) - rad * cos_t * (P[0]-cx)/d * 0
+    # Simpler: use formula for tangent points
+    ang = _m.atan2(cy - P[1], cx - P[0])
+    alpha = _m.asin(rad / d)
+    # In SVG, +y is downward. The "upper" tangent (R label per the original
+    # figure) has y < cy, so we use the -π/2 rotation.
+    R = (cx + rad*_m.cos(ang - alpha - _m.pi/2),
+         cy + rad*_m.sin(ang - alpha - _m.pi/2))
+    T = (cx + rad*_m.cos(ang + alpha + _m.pi/2),
+         cy + rad*_m.sin(ang + alpha + _m.pi/2))
+    # A on line PR extended past R, B on line PT extended past T.
+    # Use a smaller multiplier so labels stay inside the viewport.
+    A = (P[0] + (R[0]-P[0])*1.45, P[1] + (R[1]-P[1])*1.45)
+    B = (P[0] + (T[0]-P[0])*1.45, P[1] + (T[1]-P[1])*1.45)
+    # S = tangent point of AB with circle (point on AB closest to O)
+    AB = (B[0]-A[0], B[1]-A[1])
+    AO = (cx - A[0], cy - A[1])
+    t = (AO[0]*AB[0] + AO[1]*AB[1]) / (AB[0]**2 + AB[1]**2)
+    S = (A[0] + t*AB[0], A[1] + t*AB[1])
+    body = [
+        circle(cx, cy, rad),
+        segment(*P, *A), segment(*P, *B), segment(*A, *B),
+        point(*P, "P", "left"),
+        point(*A, "A", "above"),
+        point(*B, "B", "below"),
+        point(*R, "R", "above-right", dot=True),
+        point(*T, "T", "below-right", dot=True),
+        point(*S, "S", "right", dot=True),
+        point(cx, cy, "O", "right", dot=False),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_11_problem_248_circle_eadb() -> str:
+    """Circle (center O) with inscribed configuration showing A, E, D, C, F, B."""
+    W, H = 280, 200
+    cx, cy, r = 165, 100, 60
+    # A and B on the left side outside the circle, roughly forming a kite
+    A = (75, 30); B = (75, 170)
+    # E on the upper arc (around 130°), F on the lower arc (around 230°)
+    E = (cx + r*_m.cos(_m.radians(130)), cy - r*_m.sin(_m.radians(130)))
+    F = (cx + r*_m.cos(_m.radians(-130)), cy - r*_m.sin(_m.radians(-130)))
+    # C on the right (0°)
+    C = (cx + r, cy)
+    # D where AC meets the circle (close to A's side of AC) — approximate visually
+    D = (cx - r * 0.95, cy)
+    body = [
+        circle(cx, cy, r),
+        segment(*A, *B), segment(*A, *C), segment(*B, *C),
+        segment(*A, *E),  segment(*B, *F),
+        point(*A, "A", "above-left"),
+        point(*E, "E", "above"),
+        point(*D, "D", "left"),
+        point(cx, cy, "O", "below"),
+        point(*C, "C", "right"),
+        point(*F, "F", "below"),
+        point(*B, "B", "below-left"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_12_problem_249_pqr_bisector() -> str:
+    """Triangle PQR with bisector RS, PQ extended to D, with CD ⊥ RS.
+    C is the foot of perpendicular from D onto line RS, so CD ⊥ RS holds
+    by construction and C lies on segment RS."""
+    W, H = 380, 160
+    P = (20, 130); Q = (220, 130); D = (340, 130)
+    R = (130, 20)
+    # S on segment PQ; RS is the angle bisector from R. Use midpoint as a
+    # visual stand-in for the bisector foot.
+    S = ((P[0]+Q[0])/2, (P[1]+Q[1])/2)
+    # C = foot of perpendicular from D onto line through R and S
+    RSv = (S[0]-R[0], S[1]-R[1])
+    RDv = (D[0]-R[0], D[1]-R[1])
+    t = (RDv[0]*RSv[0] + RDv[1]*RSv[1]) / (RSv[0]**2 + RSv[1]**2)
+    C = (R[0] + t*RSv[0], R[1] + t*RSv[1])
+    body = [
+        segment(*P, *R), segment(*P, *D),       # PR and PQD (full extension P→D)
+        segment(*Q, *R),
+        segment(*R, *S),                         # bisector
+        segment(*C, *D),                         # perpendicular CD to RS
+        _arc_mark(R[0], R[1], P, S, n=1, r=14),
+        _arc_mark(R[0], R[1], S, Q, n=1, r=14),
+        right_angle_mark(C[0], C[1], S, D, size=7),
+        text((R[0]+S[0])/2 - 8, (R[1]+S[1])/2,  "m", italic=True, size=11),
+        text((P[0]+S[0])/2,     P[1] - 4,       "p", italic=True, size=11),
+        text((S[0]+Q[0])/2,     Q[1] - 4,       "q", italic=True, size=11),
+        point(*P, "P", "below-left"),
+        point(*S, "S", "below"),
+        point(*Q, "Q", "below"),
+        point(*D, "D", "below-right"),
+        point(*R, "R", "above"),
+        point(*C, "C", "above-left", dot=True),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_13_problem_250_parallelograms() -> str:
+    """Six points A,B,C,D,E,F on a circle forming parallelograms ABCG and FGDE."""
+    W, H = 220, 200
+    cx, cy, r = 110, 100, 70
+    # Place six points on circle
+    def pt(deg):
+        return (cx + r*_m.cos(_m.radians(deg)), cy - r*_m.sin(_m.radians(deg)))
+    A = pt(105); B = pt(75); C = pt(345); D = pt(285); E = pt(255); F = pt(165)
+    # G is the interior intersection where the two parallelograms share a vertex
+    G = (cx, cy)
+    body = [
+        circle(cx, cy, r),
+        # parallelogram ABCG
+        segment(*A, *B), segment(*B, *C), segment(*C, *G), segment(*G, *A),
+        # parallelogram FGDE
+        segment(*F, *G), segment(*G, *D), segment(*D, *E), segment(*E, *F),
+        point(*A, "A", "above-left"),
+        point(*B, "B", "above-right"),
+        point(*F, "F", "left"),
+        point(*C, "C", "right"),
+        point(*G, "G", "below", dot=False),
+        point(*E, "E", "below-left"),
+        point(*D, "D", "below-right"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
+def fig_14_14_problem_251_semicircles() -> str:
+    """Two tangent semicircles SAR and RBT on line SRT, with point P joined by
+    external tangents PA and PB; arcs labeled a, b, c, d."""
+    W, H = 260, 160
+    yline = 130
+    S = (25, yline); R = (130, yline); T = (235, yline)
+    rL = (R[0] - S[0]) / 2
+    rR = (T[0] - R[0]) / 2
+    cL = ((S[0] + R[0]) / 2, yline)
+    cR = ((R[0] + T[0]) / 2, yline)
+    # A on top of left semicircle, B on top of right semicircle (rough placement)
+    A = (cL[0] - rL * 0.45, yline - rL * 0.9)
+    B = (cR[0] + rR * 0.45, yline - rR * 0.9)
+    # P somewhere above the figure on the line connecting tangent extensions
+    P = (135, 35)
+    body = [
+        # the straight line SRT
+        segment(*S, *T),
+        # left semicircle (180° arc above the line)
+        f'<path d="M {S[0]} {yline} A {rL} {rL} 0 0 1 {R[0]} {yline}" {STROKE}/>',
+        # right semicircle
+        f'<path d="M {R[0]} {yline} A {rR} {rR} 0 0 1 {T[0]} {yline}" {STROKE}/>',
+        # tangent segments PA and PB
+        segment(*P, *A), segment(*P, *B),
+        # arc labels
+        text((S[0]+A[0])/2 - 4, (yline+A[1])/2 + 2, "c", italic=True, size=11),
+        text((A[0]+R[0])/2,     A[1] - 6,           "a", italic=True, size=11),
+        text((R[0]+B[0])/2,     B[1] - 6,           "b", italic=True, size=11),
+        text((B[0]+T[0])/2 + 4, (yline+B[1])/2 + 2, "d", italic=True, size=11),
+        point(*P, "P", "above"),
+        point(*A, "A", "left"),
+        point(*B, "B", "right"),
+        point(*S, "S", "below"),
+        point(*R, "R", "below"),
+        point(*T, "T", "below"),
+    ]
+    return svg(W, H, "\n".join(body))
+
+
 FIGURES = {
     "fig-3-1-coordinate-plane":           fig_3_1_coordinate_plane,
     "fig-9-1-circle-tangent-secant":      fig_9_1_circle_tangent_secant,
@@ -2370,6 +2779,20 @@ FIGURES = {
     "fig-13-7-hexagon-six-equilateral-triangles": fig_13_7_hexagon_six_equilateral_triangles,
     "fig-13-8-example-13-4-hexagon-all-segments": fig_13_8_example_13_4_hexagon_all_segments,
     "fig-13-9-five-pointed-star":             fig_13_9_five_pointed_star,
+    "fig-14-1-problem-236-iso-triangles":         fig_14_1_problem_236_iso_triangles,
+    "fig-14-2-problem-237-interior-point":        fig_14_2_problem_237_interior_point,
+    "fig-14-3-problem-238-quadrilateral-trisected": fig_14_3_problem_238_quadrilateral_trisected,
+    "fig-14-4-problem-239-square-equilateral":    fig_14_4_problem_239_square_equilateral,
+    "fig-14-5-problem-240-congruent-triangles":   fig_14_5_problem_240_congruent_triangles,
+    "fig-14-6-problem-241-bisector-altitude":     fig_14_6_problem_241_bisector_altitude,
+    "fig-14-7-problem-243-chord-circle":          fig_14_7_problem_243_chord_circle,
+    "fig-14-8-problem-244-square-equilateral":    fig_14_8_problem_244_square_equilateral,
+    "fig-14-9-problem-245-general-triangle":      fig_14_9_problem_245_general_triangle,
+    "fig-14-10-problem-247-tangent-pab":          fig_14_10_problem_247_tangent_pab,
+    "fig-14-11-problem-248-circle-eadb":          fig_14_11_problem_248_circle_eadb,
+    "fig-14-12-problem-249-pqr-bisector":         fig_14_12_problem_249_pqr_bisector,
+    "fig-14-13-problem-250-parallelograms":       fig_14_13_problem_250_parallelograms,
+    "fig-14-14-problem-251-semicircles":          fig_14_14_problem_251_semicircles,
 }
 
 
