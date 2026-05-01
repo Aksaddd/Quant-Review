@@ -1,0 +1,100 @@
+{
+  "id": "ch2-28-ants-on-square",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.6",
+  "title": "Ants on a Square",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "585-595"
+  },
+  "mechanism": {
+    "primary": "pigeon-hole-principle",
+    "structure": "grid-cells-as-holes-with-geometric-coverage",
+    "insight": "small-circle-can-cover-a-grid-cell-via-diagonal-radius",
+    "variantAxes": ["n_ants", "circle_radius", "grid_size"]
+  },
+  "setup": {
+    "narrative": "There are 51 ants on a unit square (sides of length 1).",
+    "rules": [
+      "The ants are at fixed positions inside or on the boundary of the unit square.",
+      "You may place a circle of radius 1/7 anywhere on the square.",
+      "Ants on the circle's boundary count as inside it."
+    ],
+    "question": "Can you always find a position for the circle that covers at least 3 ants?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Divide the unit square into a 5x5 grid of cells with side 1/5.",
+    "Apply the generalized Pigeon Hole Principle: 51 ants in 25 cells forces 3+ in some cell.",
+    "Verify that a circle of radius 1/7 can cover any 1/5 x 1/5 cell (diagonal sqrt(2)/5 < 2/7)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Generalized Pigeon Hole: divide the unit square into cells, count ants per cell, ensure one cell has 3+.", "correct": true },
+        { "id": "b", "text": "Probability over random ant positions.",                                                                       "correct": false },
+        { "id": "c", "text": "Brute force: check every possible circle position.",                                                            "correct": false }
+      ],
+      "explanation": "The Generalized Pigeon Hole says: with 51 pigeons and 25 holes, at least ceil(51/25) = 3 pigeons share a hole. We just need to choose holes (cells) small enough that a radius-1/7 circle can cover one.",
+      "learnMoreTechnique": "pigeon-hole-principle"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute the cell count",
+      "prompt": "Divide the unit square into a 5x5 grid of small squares (side 1/5 each). How many cells total?",
+      "answerType": "numeric",
+      "answer": 25,
+      "explanation": "5 * 5 = 25 cells. Each cell has area (1/5)^2 = 1/25."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Apply the generalized PHP",
+      "prompt": "51 ants distributed among 25 cells. By the generalized Pigeon Hole Principle, at least ceil(51/25) ants share some cell. What is ceil(51/25)?",
+      "answerType": "numeric",
+      "answer": 3,
+      "explanation": "51/25 = 2.04, so ceil(51/25) = 3. At least one cell contains at least 3 ants. Now we need to cover that cell with the radius-1/7 circle."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Geometric coverage check",
+      "prompt": "Can a circle of radius 1/7 cover an entire 1/5 x 1/5 square?",
+      "options": [
+        { "id": "a", "text": "Yes -- the diagonal of the cell is sqrt(2)/5 ~ 0.283, and twice the radius (the diameter) is 2/7 ~ 0.286. So 2/7 > sqrt(2)/5, meaning the diameter exceeds the diagonal -- the circle (centered at the cell's centre) covers it.", "correct": true },
+        { "id": "b", "text": "No -- the circle has area 1/49 ~ 0.020 but the cell has area 1/25 = 0.040, so the circle is too small.",                                                                                                                                   "correct": false },
+        { "id": "c", "text": "Only if the cell is centered at the unit square's centre.",                                                                                                                                                                              "correct": false }
+      ],
+      "explanation": "The relevant comparison is the cell's DIAGONAL vs. the circle's DIAMETER. The cell's diagonal is sqrt((1/5)^2 + (1/5)^2) = sqrt(2)/5 ~ 0.2828. The circle's diameter is 2 * (1/7) = 2/7 ~ 0.2857. Since 2/7 > sqrt(2)/5, the circle (centered at the cell's centre) covers the cell entirely. The area comparison in (b) is irrelevant -- the circle's area exceeds the cell's, but that's coincidence."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Can you always position a circle of radius 1/7 to cover at least 3 ants?",
+      "options": [
+        { "id": "a", "text": "Yes -- find the cell with 3+ ants (Pigeon Hole guarantees one exists), centre the circle at that cell's centre, and the circle covers all 3.", "correct": true },
+        { "id": "b", "text": "Only if the ants are uniformly distributed.",                                                                                                     "correct": false },
+        { "id": "c", "text": "No -- it depends on the configuration.",                                                                                                          "correct": false }
+      ],
+      "explanation": "Yes -- the construction is constructive: identify any cell with >= 3 ants (PHP guarantees existence), centre the radius-1/7 circle at that cell's centre. The circle's diameter exceeds the cell's diagonal, so it covers the entire cell -- and thus all 3+ ants in it."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the smallest number of ants that would still guarantee a 3-ant circle?",
+        "Could you guarantee a 4-ant circle? What's the threshold?",
+        "What if the circle's radius were 1/6 instead of 1/7? Would the same grid still work?"
+      ]
+    }
+  ]
+}

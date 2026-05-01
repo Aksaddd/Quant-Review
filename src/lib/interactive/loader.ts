@@ -31,6 +31,11 @@ import ch2ClockPieces    from '../../../content/interactive/ch02/ch2-21-clock-pi
 import ch2MissingInts    from '../../../content/interactive/ch02/ch2-22-missing-integers.json';
 import ch2CounterfeitI   from '../../../content/interactive/ch02/ch2-23-counterfeit-coins-i.json';
 import ch2GlassBalls     from '../../../content/interactive/ch02/ch2-24-glass-balls.json';
+import ch2MatchingSocks  from '../../../content/interactive/ch02/ch2-25-matching-socks.json';
+import ch2Handshakes     from '../../../content/interactive/ch02/ch2-26-handshakes.json';
+import ch2HaveWeMet      from '../../../content/interactive/ch02/ch2-27-have-we-met.json';
+import ch2AntsOnSquare   from '../../../content/interactive/ch02/ch2-28-ants-on-square.json';
+import ch2CounterfeitII  from '../../../content/interactive/ch02/ch2-29-counterfeit-coins-ii.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -38,6 +43,7 @@ import techInvariant     from '../../../content/interactive/techniques/invariant
 import techOOTB          from '../../../content/interactive/techniques/thinking-out-of-the-box.json';
 import techSymmetry      from '../../../content/interactive/techniques/symmetry-arguments.json';
 import techSeries        from '../../../content/interactive/techniques/series-summation.json';
+import techPigeonHole    from '../../../content/interactive/techniques/pigeon-hole-principle.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -65,6 +71,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch2-22-missing-integers':  ch2MissingInts    as unknown as ProblemWalkthrough,
   'ch2-23-counterfeit-coins-i': ch2CounterfeitI as unknown as ProblemWalkthrough,
   'ch2-24-glass-balls':       ch2GlassBalls     as unknown as ProblemWalkthrough,
+  'ch2-25-matching-socks':    ch2MatchingSocks  as unknown as ProblemWalkthrough,
+  'ch2-26-handshakes':        ch2Handshakes     as unknown as ProblemWalkthrough,
+  'ch2-27-have-we-met':       ch2HaveWeMet      as unknown as ProblemWalkthrough,
+  'ch2-28-ants-on-square':    ch2AntsOnSquare   as unknown as ProblemWalkthrough,
+  'ch2-29-counterfeit-coins-ii': ch2CounterfeitII as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -72,6 +83,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'thinking-out-of-the-box':  techOOTB          as unknown as Technique,
   'symmetry-arguments':       techSymmetry      as unknown as Technique,
   'series-summation':         techSeries        as unknown as Technique,
+  'pigeon-hole-principle':    techPigeonHole    as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

@@ -1,0 +1,103 @@
+{
+  "id": "ch2-29-counterfeit-coins-ii",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.6",
+  "title": "Counterfeit Coins II",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "599-609"
+  },
+  "mechanism": {
+    "primary": "pigeon-hole-principle",
+    "structure": "powers-of-3-encode-ternary-state-per-bag",
+    "insight": "use-base-3-weights-so-3-to-the-N-combinations-have-distinct-sums",
+    "variantAxes": ["n_bags", "weight_states"]
+  },
+  "setup": {
+    "narrative": "There are 5 bags of 100 coins each. Each coin in a bag weighs 9 g, 10 g, OR 11 g. All coins within a bag weigh the same, but different bags can have different weights.",
+    "rules": [
+      "Each bag is one of 3 types: light (9 g), normal (10 g), or heavy (11 g).",
+      "There are 5 bags, so the configuration is a 5-tuple of types -- 3^5 = 243 possible configurations.",
+      "You have a digital scale (precise weight reading)."
+    ],
+    "question": "Can you determine the type of each bag using the digital scale only ONCE? If so, how?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that 3^5 = 243 configurations need 243 distinct outputs.",
+    "Use POWERS of 3 (1, 3, 9, 27, 81) as coin counts to give each configuration a unique total weight.",
+    "Decode the deviation in base 3 to recover each bag's type."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why the linear approach fails",
+      "prompt": "From Counterfeit Coins I you know taking 1, 2, 3, 4, 5 coins (total 15) handles 5 bags when only ONE is counterfeit and offsets are +/-1. What goes wrong if every bag can independently be light/normal/heavy?",
+      "options": [
+        { "id": "a", "text": "Linear weights {1,2,3,4,5} produce many COLLIDING sums when multiple bags are off. e.g., bag 1 light + bag 2 heavy gives same sum as both normal.", "correct": true },
+        { "id": "b", "text": "Nothing -- the linear approach still works.",                                                                                                       "correct": false },
+        { "id": "c", "text": "You'd need a balance scale instead.",                                                                                                                "correct": false }
+      ],
+      "explanation": "Linear weights work for ONE off-bag because the deviation magnitude pins the bag down. With multiple independent off-bags, deviations add up and many configurations produce the same total -- collisions. We need WEIGHTS that prevent collisions across all 3^5 = 243 configurations."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right encoding?",
+      "options": [
+        { "id": "a", "text": "Use POWERS of 3: take 1, 3, 9, 27, 81 coins from bags 1-5. Each bag's contribution is independent in base 3, so all 3^5 = 243 configurations produce distinct totals.", "correct": true },
+        { "id": "b", "text": "Use linear weights but call the scale 5 times.",                                                                                                                         "correct": false },
+        { "id": "c", "text": "Probability over which bag is counterfeit.",                                                                                                                              "correct": false }
+      ],
+      "explanation": "This is base-3 (place-value) encoding. Each bag j contributes (offset_j) * 3^(j-1) to the deviation, where offset_j is in {-1, 0, +1}. By place-value uniqueness, every (offset_1, ..., offset_5) tuple gives a distinct deviation. 3^5 = 243 distinct outputs.",
+      "learnMoreTechnique": "pigeon-hole-principle"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Total weight if all genuine",
+      "prompt": "If you take 1+3+9+27+81 = 121 coins, and all are genuine 10g coins, what does the scale read (in grams)?",
+      "answerType": "numeric",
+      "answer": 1210,
+      "explanation": "121 coins * 10 g = 1210 grams. The deviation from 1210 encodes the configuration."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Decode a sample reading",
+      "prompt": "Suppose the scale reads 1213 grams. Deviation = +3. Decode the configuration.",
+      "options": [
+        { "id": "a", "text": "Bag 2 is HEAVY (+1 * 3 = +3); all other bags NORMAL.",                                                                                "correct": true },
+        { "id": "b", "text": "Bag 1 is HEAVY (+1 * 1) AND Bag 2 is NORMAL (+0) AND Bag 3 is HEAVY... wait that gives +1, not +3.",                                    "correct": false },
+        { "id": "c", "text": "It's ambiguous between several configurations.",                                                                                       "correct": false }
+      ],
+      "explanation": "Deviation +3 in base 3 with digits in {-1, 0, +1}: only one decomposition -- bag 2's contribution 3 * (+1) = 3, all others 0. So bag 2 is heavy, all others normal."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Does the strategy identify all 5 bags' types in ONE weighing?",
+      "options": [
+        { "id": "a", "text": "Yes -- 3^5 = 243 configurations map bijectively to 243 distinct deviations in [-121, +121].", "correct": true },
+        { "id": "b", "text": "No -- you need multiple weighings to disambiguate.",                                          "correct": false },
+        { "id": "c", "text": "Only if at most 1 bag is counterfeit.",                                                        "correct": false }
+      ],
+      "explanation": "ONE weighing. The deviation, expressed in base 3 (with digit set {-1, 0, +1}), has digits that directly identify each bag's type."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How many coins would you need for 10 bags (instead of 5)?",
+        "What if each bag could be one of 5 types instead of 3? What base would you use?",
+        "How does this connect to the technique used in Counterfeit Coins I (linear weights)? What changed?"
+      ]
+    }
+  ]
+}

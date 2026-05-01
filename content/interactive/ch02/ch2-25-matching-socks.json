@@ -1,0 +1,91 @@
+{
+  "id": "ch2-25-matching-socks",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.6",
+  "title": "Matching Socks",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "542-550"
+  },
+  "mechanism": {
+    "primary": "pigeon-hole-principle",
+    "structure": "n-plus-1-into-n-holes",
+    "insight": "n-colors-equals-n-pigeon-holes-so-n-plus-1-socks-forces-a-pair",
+    "variantAxes": ["n_colors", "color_distribution"]
+  },
+  "setup": {
+    "narrative": "A drawer contains 2 RED socks, 20 YELLOW socks, and 31 BLUE socks. You are reaching in blindfolded.",
+    "rules": [
+      "You cannot see the socks.",
+      "You pull out one sock at a time.",
+      "You want to GUARANTEE a matching pair (two socks of the same colour)."
+    ],
+    "question": "What is the minimum number of socks you must pull to guarantee a matching pair?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Identify the colors as pigeon holes and the socks as pigeons.",
+    "Apply the basic Pigeon Hole Principle: N+1 pigeons in N holes guarantees one shared.",
+    "Notice that the EXACT counts of socks don't matter -- only the number of distinct colors does."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify the holes",
+      "prompt": "What are the 'pigeon holes' here?",
+      "options": [
+        { "id": "a", "text": "The 3 colors (RED, YELLOW, BLUE).",  "correct": true },
+        { "id": "b", "text": "The 53 socks total.",                  "correct": false },
+        { "id": "c", "text": "The drawer (one hole).",               "correct": false }
+      ],
+      "explanation": "The holes are the categories that pigeons can land in. Two socks are a 'matching pair' iff they share a category (color). So the relevant holes are the 3 colors."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right principle?",
+      "options": [
+        { "id": "a", "text": "Pigeon Hole Principle: N+1 pigeons into N holes guarantees one hole has 2.", "correct": true },
+        { "id": "b", "text": "Probability: compute expected number of pulls until pair.",                    "correct": false },
+        { "id": "c", "text": "You'd need a complex case analysis.",                                            "correct": false }
+      ],
+      "explanation": "We're looking for a worst-case GUARANTEE. Pigeon Hole gives the cleanest answer: 3 holes (colors), so 4 pigeons (socks) force two into one hole.",
+      "learnMoreTechnique": "pigeon-hole-principle"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Count the holes, count the pigeons",
+      "prompt": "How many socks must you draw to guarantee 2 of the same color?",
+      "answerType": "numeric",
+      "answer": 4,
+      "explanation": "3 colors = 3 holes. 4 socks = 4 pigeons. By pigeon hole, at least 2 pigeons (socks) share a hole (color). 3 socks alone could be one of each color -- the worst case."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Sanity check",
+      "prompt": "If you had 100 RED, 100 YELLOW, and 100 BLUE socks (instead of 2/20/31), would the answer change?",
+      "options": [
+        { "id": "a", "text": "No -- still 4 socks. The exact counts don't matter; only the number of colors does.", "correct": true },
+        { "id": "b", "text": "Yes -- you'd need more socks because the pool is bigger.",                              "correct": false },
+        { "id": "c", "text": "Yes -- you'd need fewer because each color is more represented.",                       "correct": false }
+      ],
+      "explanation": "Pigeon Hole only cares about the NUMBER of holes, not their relative sizes. As long as each color has at least 1 sock available, the answer is (colors + 1) = 4."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if you wanted to guarantee 3 socks of the same color?",
+        "Generalize: N colors, want a pair -- minimum draws?",
+        "What if the drawer had only 1 RED sock and many YELLOW/BLUE? Does the answer change?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "pigeon-hole-principle",
+  "kind": "technique",
+  "name": "Pigeon Hole Principle",
+  "tagline": "When you have more pigeons than holes, at least one hole must contain two pigeons. The work is in choosing the right pigeons and the right holes.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.6",
+    "title": "The Pigeon Hole Principle",
+    "exemplarProblemId": "ch2-25-matching-socks"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "The basic Pigeon Hole Principle: if you have N+1 pigeons and only N holes, at least one hole contains two pigeons. The generalized form: if you have mN+1 pigeons and N holes, at least one hole contains m+1 pigeons. The technique is trivial as a statement -- the difficulty is recognizing what the 'pigeons' and 'holes' should be in a given problem."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The most useful applications cast non-obvious quantities as the pigeons and holes. In the Handshakes problem, the pigeons are people and the holes are POSSIBLE HANDSHAKE COUNTS. In Ants on a Square, the pigeons are ants and the holes are sub-squares. In Have We Met Before? (Ramsey's theorem at R(3,3)=6), the pigeons are PEOPLE FROM A FIXED PERSON'S VIEWPOINT and the holes are 'met' vs 'didn't meet'."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Always ask: 'What are my pigeons? What are my holes?' If both are countable and pigeons > holes, the principle does the rest. Sometimes the trick is finding a clever encoding that makes the count match up."
+    }
+  ],
+  "whenToUse": [
+    "Existence proofs: 'Show that there must be two X's that share property Y.'",
+    "Worst-case bounds: 'How many X's must I draw to guarantee Y?'",
+    "Geometric problems: dividing a region into cells and counting points per cell.",
+    "Graph-theoretic problems: degree sequences, vertex coloring, connectivity arguments.",
+    "Information-theoretic encoding: ensuring distinct outputs via distinct inputs."
+  ],
+  "recipe": [
+    "Identify the pigeons and the holes -- be creative about what counts as which.",
+    "Count the pigeons. Count the holes. If pigeons > holes, the principle fires.",
+    "For the generalized form: if pigeons >= mN + 1, you get m+1 sharing one hole.",
+    "Verify the conclusion answers the question. Sometimes the principle gives you a sharing event, but you need to extract a stronger property from it via case analysis (as in Have We Met Before?)."
+  ],
+  "commonPitfalls": [
+    "Counting pigeons or holes wrong -- e.g., assuming 26 handshake counts (0..25) when only 25 are possible (you can't have both a 0-count and a 25-count person).",
+    "Picking holes that are too coarse (every pigeon trivially shares -- doesn't help) or too fine (no pigeons share -- principle doesn't fire).",
+    "Forgetting that the principle gives EXISTENCE, not CONSTRUCTION. It tells you SOMETHING happens; sometimes you need extra work to find it.",
+    "Trying to apply it when the answer requires INDIVIDUAL pigeons to be in specific holes -- pigeon hole only forces aggregate counts."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-25-matching-socks",      "title": "Matching Socks",      "chapter": 2, "section": "2.6" },
+    { "problemId": "ch2-26-handshakes",          "title": "Handshakes",          "chapter": 2, "section": "2.6" },
+    { "problemId": "ch2-27-have-we-met",         "title": "Have We Met Before?", "chapter": 2, "section": "2.6" },
+    { "problemId": "ch2-28-ants-on-square",      "title": "Ants on a Square",    "chapter": 2, "section": "2.6" },
+    { "problemId": "ch2-29-counterfeit-coins-ii", "title": "Counterfeit Coins II", "chapter": 2, "section": "2.6" }
+  ],
+  "relatedTechniques": ["series-summation", "invariant-arguments"]
+}

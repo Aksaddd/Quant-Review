@@ -1,0 +1,106 @@
+{
+  "id": "ch2-27-have-we-met",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.6",
+  "title": "Have We Met Before?",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "566-581"
+  },
+  "mechanism": {
+    "primary": "pigeon-hole-principle",
+    "structure": "fix-one-vertex-then-pigeon-hole-on-edge-types",
+    "insight": "5-others-into-2-buckets-forces-a-3-clique-or-3-independent-set",
+    "variantAxes": ["n_people", "clique_size"]
+  },
+  "setup": {
+    "narrative": "At a party of 6 people, every pair has either MET each other before, or has NOT met each other before.",
+    "rules": [
+      "Each pair of people is either 'acquainted' (met before) or 'strangers' (never met).",
+      "There are exactly 6 people.",
+      "We want to find a TRIPLE -- three people who are PAIRWISE acquainted, OR three people who are PAIRWISE strangers."
+    ],
+    "question": "Prove that among any 6 people at a party, there exist either 3 mutual acquaintances or 3 mutual strangers."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Fix one person and partition the other 5 by their relationship to that person.",
+    "Apply pigeon hole: 5 others into 2 buckets means at least 3 share a bucket.",
+    "Case-analyze inside the 3+ bucket to extract a mutual triple."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "The set-up move",
+      "prompt": "Pick one person, call her Alice. Among the OTHER 5 people, each is either an ACQUAINTANCE of Alice or a STRANGER. By Pigeon Hole, at least how many fall into one of these two categories?",
+      "options": [
+        { "id": "a", "text": "At least 3 -- because 5 in 2 buckets forces ceil(5/2) = 3 in one bucket.", "correct": true },
+        { "id": "b", "text": "At least 2.",                                                                "correct": false },
+        { "id": "c", "text": "Exactly 2 or 3 in each.",                                                    "correct": false }
+      ],
+      "explanation": "5 pigeons (people other than Alice), 2 holes (acquaintance/stranger). Generalized pigeon hole: ceil(5/2) = 3, so at least one hole has 3 people."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the strategy?",
+      "options": [
+        { "id": "a", "text": "Pigeon Hole + case analysis: fix Alice, find 3+ in one bucket, then case-analyze the relationships AMONG those 3.", "correct": true },
+        { "id": "b", "text": "Probability over random graphs of size 6.",                                                                            "correct": false },
+        { "id": "c", "text": "Backward induction over the 6 people.",                                                                                "correct": false }
+      ],
+      "explanation": "Pigeon Hole gives us the structural constraint (3 share a relationship to Alice). Case analysis on the relationships among those 3 finishes the proof.",
+      "learnMoreTechnique": "pigeon-hole-principle"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Case 1: 3 acquaintances of Alice",
+      "prompt": "Suppose 3 of the others (call them B, C, D) are all acquainted with Alice. Now consider the relationships among B, C, D themselves. What conclusion can we extract?",
+      "options": [
+        { "id": "a", "text": "If ANY pair among B,C,D are acquainted, then Alice + that pair = 3 mutual acquaintances. Otherwise B,C,D are PAIRWISE strangers = 3 mutual strangers.",  "correct": true },
+        { "id": "b", "text": "B, C, D must be mutual strangers.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "We can't conclude anything without more information.",                                                                                                     "correct": false }
+      ],
+      "explanation": "Two sub-cases: either at least one pair (B-C, B-D, or C-D) is acquainted -- combine with Alice to get a mutual triple of acquaintances. Or NO pair is acquainted -- then B, C, D themselves are 3 mutual strangers."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Case 2: 3 strangers of Alice",
+      "prompt": "Suppose instead 3 of the others (B, C, D) are all STRANGERS to Alice. Now consider relationships among B, C, D. What conclusion?",
+      "options": [
+        { "id": "a", "text": "If ANY pair among B,C,D are strangers, then Alice + that pair = 3 mutual strangers. Otherwise B,C,D are PAIRWISE acquaintances = 3 mutual acquaintances.", "correct": true },
+        { "id": "b", "text": "Same as Case 1 -- the conclusion is identical.",                                                                                                            "correct": false },
+        { "id": "c", "text": "B, C, D must be mutual acquaintances.",                                                                                                                     "correct": false }
+      ],
+      "explanation": "Mirror image of Case 1. Either some pair is strangers -- triple with Alice -- or all pairs are acquainted, giving B,C,D as 3 mutual acquaintances."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Is the proof complete?",
+      "options": [
+        { "id": "a", "text": "Yes -- both cases conclude with either 3 mutual acquaintances or 3 mutual strangers.", "correct": true },
+        { "id": "b", "text": "No -- we need to handle Alice having exactly 3 of each.",                                "correct": false },
+        { "id": "c", "text": "No -- we need 7 people, not 6.",                                                          "correct": false }
+      ],
+      "explanation": "Both cases (3 acquaintances of Alice / 3 strangers of Alice) lead to the conclusion. Pigeon Hole guarantees at least one case applies. This is the smallest case of Ramsey's theorem: R(3,3) = 6."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could the conclusion fail with only 5 people instead of 6? Construct or imagine a counterexample.",
+        "What is R(3,4)? R(4,4)? (These are the next Ramsey numbers -- they grow surprisingly fast.)",
+        "Why is the bound 6 tight? Find a 5-person example where neither 3 mutual acquaintances nor 3 mutual strangers exist."
+      ]
+    }
+  ]
+}
