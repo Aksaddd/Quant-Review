@@ -104,7 +104,9 @@ export default function LadderStepStage({
       isCorrect={isCorrect}
       footer={fullyAnswered && (
         <div className="space-y-3">
-          {stage.explanation && <ExplanationReveal text={stage.explanation} />}
+          {stage.explanation && (
+            <ExplanationReveal text={stage.explanation} learnMoreTechnique={stage.learnMoreTechnique} />
+          )}
           <div className="flex justify-end">
             <button
               type="button" onClick={onAdvance}

@@ -1,0 +1,57 @@
+{
+  "id": "backward-induction",
+  "kind": "technique",
+  "name": "Backward Induction",
+  "tagline": "Solve sequential games by working backward from the smallest sub-case where the answer is obvious.",
+  "category": "game-theory",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.1",
+    "title": "Problem Simplification",
+    "exemplarProblemId": "ch2-01-screwy-pirates"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Backward induction is the workhorse technique for solving sequential games where each player's optimal action depends on what they expect future players to do. Instead of trying to compute the equilibrium of the full game directly, you collapse the problem to its smallest sub-case -- where the right move is obvious -- and then walk forward one decision at a time, treating each future state as already solved."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The technique works because rational players reason exactly the same way you do: each one already knows what would happen in the next round, and that knowledge determines what they accept now. So if you've solved n-1, you've effectively solved n."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Imagine the game ended one step earlier. Who has the power then? Whoever they are, the current proposer must offer them just enough to flip their vote -- usually the cheapest available coalition."
+    }
+  ],
+  "whenToUse": [
+    "Sequential decisions where players move in a known order",
+    "Games with a finite horizon (the game must end)",
+    "Settings where each player can fully anticipate future moves (perfect information)",
+    "Bargaining problems with deadlines or vote thresholds",
+    "Any problem that asks 'what's the equilibrium?' with elimination rules"
+  ],
+  "recipe": [
+    "Identify the smallest non-trivial sub-game -- usually n=1 or n=2 players. The answer there should be immediate.",
+    "Solve that base case fully: who gets what, who votes how, who survives.",
+    "Step up to n+1. Ask: 'If my plan fails, the n-case fires. So what does each player gain or lose by my plan succeeding?'",
+    "Identify the cheapest coalition the proposer can buy -- offer the minimum bribe to whichever players would do worst in the fallback.",
+    "Continue until you reach the original problem. Pattern-spot along the way: parity, monotonicity, or closed-form rules often emerge."
+  ],
+  "commonPitfalls": [
+    "Forgetting the proposer counts in their own vote tally.",
+    "Confusing the tie-breaking rule -- 'at least 50%' passes ties; 'strict majority' does not.",
+    "Assuming the pattern from one threshold (e.g. 50%) carries over to another (e.g. 2/3). It usually does not.",
+    "Stopping the induction too early -- always walk at least 2 rungs above the base case to confirm the pattern.",
+    "Ignoring secondary preferences -- when gold is tied, pirates may prefer to throw someone overboard."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-01-screwy-pirates", "title": "Screwy Pirates",   "chapter": 2, "section": "2.1" },
+    { "problemId": "ch2-02-tiger-and-sheep", "title": "Tiger and Sheep", "chapter": 2, "section": "2.1" }
+  ],
+  "relatedTechniques": ["math-induction", "dynamic-programming"]
+}

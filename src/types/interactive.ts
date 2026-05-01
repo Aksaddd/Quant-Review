@@ -55,6 +55,8 @@ interface StageBase {
   prompt: string;
   targetBlocks?: string[];
   explanation?: string;
+  /** Optional: link this stage's reveal to a technique deep-dive at /techniques/[id]. */
+  learnMoreTechnique?: string;
 }
 
 export interface MCSingleStage extends StageBase {
@@ -181,7 +183,35 @@ export interface ProblemWalkthrough {
   variants?: Variant[];
 }
 
-export type InteractiveDoc = ReadingSection | ProblemWalkthrough;
+export interface TechniqueAppearance {
+  problemId: string;
+  title: string;
+  chapter: number;
+  section?: string;
+}
+
+export interface Technique {
+  id: string;
+  kind: 'technique';
+  name: string;
+  tagline: string;
+  category: string;             // e.g. "game-theory" | "combinatorics" | "calculus"
+  introducedIn?: {
+    chapter: number;
+    section: string;
+    title: string;
+    exemplarProblemId?: string;
+  };
+  blocks: Block[];              // the deep-dive prose, reusing the reading-section block format
+  whenToUse?: string[];         // bullets shown as a "When to reach for this" callout
+  recipe?: string[];            // numbered steps for applying the technique
+  commonPitfalls?: string[];    // bullets shown as a "Watch out" callout
+  appearsIn: TechniqueAppearance[];
+  relatedTechniques?: string[]; // ids of other techniques
+  stages?: Stage[];             // optional comprehension stages on the deep-dive page
+}
+
+export type InteractiveDoc = ReadingSection | ProblemWalkthrough | Technique;
 
 // ── Per-stage answer payloads stored by the session store ────────
 

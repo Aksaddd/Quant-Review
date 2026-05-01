@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { listInteractiveDocs } from '@/lib/interactive/loader';
+import { listInteractiveContent } from '@/lib/interactive/loader';
 
 export default function InteractiveIndex() {
-  const docs = listInteractiveDocs();
+  const docs = listInteractiveContent();
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-semibold mb-1 text-zinc-900 dark:text-zinc-100">

@@ -56,7 +56,8 @@
         { "id": "c", "text": "Bayes' theorem", "correct": false },
         { "id": "d", "text": "Generating functions", "correct": false }
       ],
-      "explanation": "Section 2.1 is 'Problem Simplification.' Each pirate's decision depends on what would happen one step later -- that's backward induction."
+      "explanation": "Section 2.1 is 'Problem Simplification.' Each pirate's decision depends on what would happen one step later -- that's backward induction.",
+      "learnMoreTechnique": "backward-induction"
     },
     {
       "id": "s3",

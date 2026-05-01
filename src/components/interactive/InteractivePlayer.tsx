@@ -1,10 +1,10 @@
 'use client';
 
-import type { InteractiveDoc } from '@/types/interactive';
+import type { ProblemWalkthrough, ReadingSection } from '@/types/interactive';
 import ProblemWalkthroughPlayer from './ProblemWalkthroughPlayer';
 
 interface Props {
-  doc: InteractiveDoc;
+  doc: ProblemWalkthrough | ReadingSection;
 }
 
 export default function InteractivePlayer({ doc }: Props) {

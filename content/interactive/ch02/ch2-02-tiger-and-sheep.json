@@ -1,0 +1,206 @@
+{
+  "id": "ch2-02-tiger-and-sheep",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.1",
+  "title": "Tiger and Sheep",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "63-83"
+  },
+  "mechanism": {
+    "primary": "backward-induction",
+    "structure": "self-elimination-with-role-swap",
+    "insight": "parity-flips-the-outcome",
+    "variantAxes": ["n_tigers", "swap_rule", "preference_order"]
+  },
+  "setup": {
+    "narrative": "100 tigers and 1 sheep are on a magic island with only grass to eat.",
+    "rules": [
+      "Tigers can eat grass, but they prefer to eat the sheep.",
+      "Only one tiger can eat the sheep at a time.",
+      "A tiger that eats the sheep BECOMES a sheep itself.",
+      "All tigers are perfectly rational. Their first priority is staying alive."
+    ],
+    "question": "Will the sheep be eaten?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Apply backward induction to a self-elimination game.",
+    "Recognize when parity (odd vs. even count) determines the outcome.",
+    "Distinguish 'who can act' from 'who will act' under rationality."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "If a tiger eats the sheep, what happens to that tiger?",
+      "options": [
+        { "id": "a", "text": "Nothing -- it's still a tiger.",                              "correct": false },
+        { "id": "b", "text": "It becomes a sheep, which the other tigers may then eat.",     "correct": true },
+        { "id": "c", "text": "It dies immediately.",                                          "correct": false }
+      ],
+      "explanation": "The role-swap is the key rule. Eating the sheep is not a free meal -- it makes you the next target."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "Which technique will most directly resolve this problem?",
+      "options": [
+        { "id": "a", "text": "Symmetry argument",                                "correct": false },
+        { "id": "b", "text": "Backward induction from small n",                  "correct": true },
+        { "id": "c", "text": "Pigeon hole principle",                            "correct": false },
+        { "id": "d", "text": "Generating functions",                             "correct": false }
+      ],
+      "explanation": "Each tiger's decision depends on what would happen in the resulting (n-1, sheep) world after the role-swap. That's a sequential reasoning problem -- backward induction.",
+      "learnMoreTechnique": "backward-induction"
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Ladder: n = 1 tiger",
+      "prompt": "With 1 tiger and 1 sheep, will the tiger eat the sheep?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "yes", "text": "Yes -- no other tigers, so no danger after the swap.", "correct": true },
+        { "id": "no",  "text": "No -- the tiger refuses to risk becoming a sheep.",    "correct": false }
+      ],
+      "explanation": "After eating, the tiger becomes a sheep -- but there are no other tigers, so it lives. Free meal. The tiger eats."
+    },
+    {
+      "id": "s4-n2",
+      "type": "ladder-step",
+      "label": "Ladder: n = 2 tigers",
+      "prompt": "With 2 tigers and 1 sheep, does the sheep get eaten?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "yes", "text": "Yes",                                                              "correct": false },
+        { "id": "no",  "text": "No -- whichever tiger eats the sheep becomes a sheep, and the remaining tiger (in the n=1 world) will then eat it.", "correct": true }
+      ],
+      "explanation": "If a tiger eats the sheep, we land in the n=1 case -- where the surviving tiger eats. So eating means dying. No tiger will go first. The sheep is safe."
+    },
+    {
+      "id": "s4-n3",
+      "type": "ladder-step",
+      "label": "Ladder: n = 3 tigers",
+      "prompt": "With 3 tigers and 1 sheep, does the sheep get eaten?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "yes", "text": "Yes -- the eater lands in the n=2 world, where (from the previous step) the sheep is safe. So eating is survivable.", "correct": true },
+        { "id": "no",  "text": "No -- the eater dies.",                                                                                                "correct": false }
+      ],
+      "explanation": "If a tiger eats, the world becomes 2 tigers + 1 sheep -- and from n=2 we know that sheep is safe. So the eater survives as a sheep. Some tiger WILL eat. The sheep is NOT safe."
+    },
+    {
+      "id": "s4-n4",
+      "type": "ladder-step",
+      "label": "Ladder: n = 4 tigers",
+      "prompt": "With 4 tigers and 1 sheep, does the sheep get eaten?",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "yes", "text": "Yes",                                                                                "correct": false },
+        { "id": "no",  "text": "No -- the eater would land in the n=3 world, where the sheep gets eaten -- meaning the eater dies. No tiger will go.", "correct": true }
+      ],
+      "explanation": "Eating now means becoming a sheep in a 3-tiger world, where the sheep gets eaten -- so eating means dying. No tiger eats. The sheep survives."
+    },
+    {
+      "id": "s5",
+      "type": "cloze",
+      "label": "Pattern",
+      "prompt": "Fill in the rule.",
+      "template": "When the number of tigers is __[a]__, the sheep gets eaten. When the number of tigers is __[b]__, the sheep is safe.",
+      "blanks": [
+        { "id": "a", "answers": ["odd"], "caseInsensitive": true },
+        { "id": "b", "answers": ["even"], "caseInsensitive": true }
+      ],
+      "explanation": "Each rung flips the outcome: eating is safe iff the resulting world is unsafe for the new sheep, which alternates. So the answer depends entirely on parity."
+    },
+    {
+      "id": "s6",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "With 100 tigers and 1 sheep, does the sheep get eaten?",
+      "options": [
+        { "id": "yes", "text": "Yes -- 100 tigers eat the sheep.",          "correct": false },
+        { "id": "no",  "text": "No -- 100 is even, so the sheep is safe.",  "correct": true }
+      ],
+      "explanation": "100 is even. The sheep is NOT eaten. Any tiger that ate would land in a 99-tiger world (odd), where the sheep gets eaten -- meaning the eater dies. So no tiger eats."
+    },
+    {
+      "id": "s7",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "In one sentence, what was the key insight that decided the answer?",
+        "How is this problem mechanically the same as Screwy Pirates? How does it differ?",
+        "If the rule were changed so that two tigers must eat together (and both become sheep), would the parity argument still work?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-02-v1-fifty-tigers",
+      "parentId": "ch2-02-tiger-and-sheep",
+      "kind": "drill",
+      "axes": { "n_tigers": 50 },
+      "title": "Tiger and Sheep -- 50 Tigers",
+      "setup": {
+        "narrative": "Same rules. 50 tigers and 1 sheep.",
+        "question": "Does the sheep get eaten?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the parity rule",
+          "prompt": "Does the sheep get eaten when there are 50 tigers?",
+          "options": [
+            { "id": "yes", "text": "Yes",                                                "correct": false },
+            { "id": "no",  "text": "No -- 50 is even, so the sheep is safe.",            "correct": true }
+          ],
+          "explanation": "Even tiger count means eating is suicide for the eater, so no tiger eats."
+        }
+      ]
+    },
+    {
+      "id": "ch2-02-v2-three-sheep",
+      "parentId": "ch2-02-tiger-and-sheep",
+      "kind": "stretch",
+      "axes": { "n_tigers": 100, "n_sheep_initial": 3 },
+      "title": "Tiger and Sheep -- 3 Sheep",
+      "setup": {
+        "narrative": "Same crew of 100 tigers, but now there are 3 sheep on the island. All other rules unchanged: a tiger that eats a sheep becomes a sheep itself.",
+        "question": "Will any sheep get eaten?"
+      },
+      "stages": [
+        {
+          "id": "v2-s1",
+          "type": "mc-single",
+          "label": "Population accounting",
+          "prompt": "Starting from (100 tigers, 3 sheep), one tiger eats one sheep. What is the resulting population?",
+          "options": [
+            { "id": "a", "text": "(99 tigers, 3 sheep) -- the eater becomes a sheep, replacing the one it ate (in the count).", "correct": true },
+            { "id": "b", "text": "(99 tigers, 2 sheep)",                                                                         "correct": false },
+            { "id": "c", "text": "(100 tigers, 2 sheep)",                                                                        "correct": false }
+          ],
+          "explanation": "Tigers: 100 minus the eater = 99. Sheep: 3 minus the eaten one (= 2) plus the eater that became a sheep (= 3). So (99 tigers, 3 sheep)."
+        },
+        {
+          "id": "v2-s2",
+          "type": "mc-single",
+          "label": "Will any tiger actually eat?",
+          "prompt": "A tiger will eat only if surviving as one of the sheep in the resulting world is safe. So the question becomes: in (99 tigers, 3 sheep), is the sheep population safe?",
+          "options": [
+            { "id": "a", "text": "Yes -- in (99 tigers, 3 sheep) some tiger will eat (99 is odd), so the eater dies. The first tiger refuses.", "correct": false },
+            { "id": "b", "text": "No -- in (99 tigers, 3 sheep) no tiger will eat, so the eater survives. Some tiger DOES eat.",                "correct": false },
+            { "id": "c", "text": "Trick question: the recursion still depends only on tiger parity. With 100 tigers (even), no tiger eats, so no sheep are touched.", "correct": true }
+          ],
+          "explanation": "Adding more sheep doesn't change the recurrence on the eater's survival -- it only depends on whether the SUBSEQUENT world has an even or odd tiger count. So the parity rule from the original problem still applies: with T = 100 (even), no sheep gets eaten."
+        }
+      ]
+    }
+  ]
+}
