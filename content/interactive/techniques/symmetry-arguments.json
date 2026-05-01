@@ -1,0 +1,55 @@
+{
+  "id": "symmetry-arguments",
+  "kind": "technique",
+  "name": "Symmetry Arguments",
+  "tagline": "Exploit symmetry two ways: USE a hidden symmetry to skip case analysis, or BREAK an apparent symmetry to make a problem solvable.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.4",
+    "title": "Application of Symmetry",
+    "exemplarProblemId": "ch2-18-coin-piles"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Symmetry arguments come in two flavours. The first is using symmetry: when a problem has a structural symmetry, the answer often falls out by mapping one side to the other (e.g., constructing a bijection). The second is breaking symmetry: an apparently symmetric problem may have no solution UNLESS you introduce asymmetry by designating roles, picking a reference point, or fixing an orientation."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The Coin Piles problem (flip 20 coins to equalize heads) uses symmetry: the flipped subset and the unflipped rest become mirror images of each other in head-count. The Wise Men problem requires symmetry-breaking: 50 wise men can never coordinate counting unless one of them is designated as the spokesman."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Always ask: 'Is there an exchange or relabeling that leaves the problem unchanged?' If yes, use it. If the problem demands an answer but is too symmetric to break the tie, ask: 'What asymmetric structure can I introduce that the problem permits?'"
+    }
+  ],
+  "whenToUse": [
+    "Counting problems where two configurations look swappable.",
+    "Existence proofs where you can pair items up in a symmetric way.",
+    "Combinatorial games or puzzles with a 'why would side A do better than side B?' structure.",
+    "Coordination problems where ALL agents are identical -- often the only solution is to assign roles."
+  ],
+  "recipe": [
+    "Identify the symmetry: which transformation (swap, relabel, reflect, rotate) leaves the problem invariant?",
+    "If using symmetry: construct an explicit bijection between objects and their symmetric counterparts. The answer is often half of the total count, or follows from the count of fixed points.",
+    "If the problem feels deadlocked because everyone is the same, look for ways to break symmetry that the problem permits (designate a spokesman, fix the smallest index, choose an arbitrary axis).",
+    "Verify that the answer doesn't depend on which choice you made when breaking symmetry."
+  ],
+  "commonPitfalls": [
+    "Assuming symmetry is exact when it's only approximate -- e.g., the two halves of a problem may look symmetric but differ in a detail that matters.",
+    "Failing to spot a hidden symmetry because it's encoded in an unusual way (e.g., 'all bags are mislabeled' is a cyclic-permutation symmetry).",
+    "Trying to use symmetry to find an answer when the problem actually requires breaking it.",
+    "Breaking symmetry in a way that biases the answer (the choice should be arbitrary; if it matters, you broke the wrong symmetry)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-18-coin-piles",      "title": "Coin Piles",      "chapter": 2, "section": "2.4" },
+    { "problemId": "ch2-19-mislabeled-bags", "title": "Mislabeled Bags", "chapter": 2, "section": "2.4" },
+    { "problemId": "ch2-20-wise-men",        "title": "Wise Men",        "chapter": 2, "section": "2.4" }
+  ],
+  "relatedTechniques": ["invariant-arguments", "thinking-out-of-the-box"]
+}

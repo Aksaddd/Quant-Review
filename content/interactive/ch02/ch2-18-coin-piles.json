@@ -1,0 +1,113 @@
+{
+  "id": "ch2-18-coin-piles",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.4",
+  "title": "Coin Piles",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "393-405"
+  },
+  "mechanism": {
+    "primary": "symmetry-arguments",
+    "structure": "subset-flip-creates-equal-heads",
+    "insight": "flip-a-subset-of-size-equal-to-total-heads",
+    "variantAxes": ["total_coins", "n_heads"]
+  },
+  "setup": {
+    "narrative": "You are blindfolded in a room with 1000 coins on the floor. You are told that exactly 980 are TAILS up and 20 are HEADS up.",
+    "rules": [
+      "You cannot see the coins, and you cannot feel which side is up.",
+      "You CAN move coins around and you CAN flip them.",
+      "Your task: separate the coins into two piles such that BOTH piles contain the same number of heads.",
+      "The two piles do not need to have the same number of coins -- only the same number of HEADS."
+    ],
+    "question": "What strategy is guaranteed to produce two piles with equal heads, regardless of which coins you happen to grab?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that 'symmetric pairing' is sometimes constructed by an OPERATION (flipping), not just by selection.",
+    "Verify the construction algebraically -- m heads in your subset becomes (20 - m) heads after flipping.",
+    "See that the answer is independent of the particular coins you happen to pick."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "Can you tell which of the 1000 coins are heads up by feeling them?",
+      "options": [
+        { "id": "a", "text": "No -- you can only count and move coins, not detect their state.", "correct": true },
+        { "id": "b", "text": "Yes -- coins differ in weight by side.",                              "correct": false },
+        { "id": "c", "text": "Sometimes, depending on the coin.",                                    "correct": false }
+      ],
+      "explanation": "You're blindfolded AND can't feel sides. So whatever procedure you use must work without observing coin states -- it must be guaranteed by construction."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Probability -- since you can't see, the answer is 50/50.",                                                                         "correct": false },
+        { "id": "b", "text": "Symmetry -- find an operation that makes any two appropriately-chosen subsets symmetric in head-count.",                            "correct": true },
+        { "id": "c", "text": "Backward induction over coins.",                                                                                                     "correct": false },
+        { "id": "d", "text": "It's impossible without seeing the coins.",                                                                                          "correct": false }
+      ],
+      "explanation": "You need a CONSTRUCTION that produces equal-heads piles deterministically. Symmetry is the right tool: an operation that takes any subset and pairs it with the complement in a heads-balanced way.",
+      "learnMoreTechnique": "symmetry-arguments"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "The construction",
+      "prompt": "What's the move?",
+      "options": [
+        { "id": "a", "text": "Take any 500 coins -- you'll get equal heads on average.",                                  "correct": false },
+        { "id": "b", "text": "Take any 20 coins (the same number as the total head count) and flip ALL of them.",          "correct": true },
+        { "id": "c", "text": "Take any 20 coins -- they'll all be heads since you grabbed by feel.",                       "correct": false }
+      ],
+      "explanation": "Take any subset of size 20 (no need to know which coins). Flip every coin in that subset. The flipped subset and the un-flipped rest will have equal head counts -- verified algebraically in the next stage."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Verify the construction",
+      "prompt": "Suppose your chosen 20-coin subset happens to contain m heads (where 0 <= m <= 20). After flipping all 20, how many heads does the subset now have?",
+      "answerType": "numeric",
+      "answer": 20,
+      "followUp": {
+        "prompt": "Wait, that's not right. Re-derive: the subset had m heads (and 20-m tails). After flipping, the m heads become tails, and the (20-m) tails become heads. So the subset now has (20-m) heads. Meanwhile the OTHER pile has 20 - m heads originally (since the original total was 20). What's the head count in each pile?",
+        "type": "mc-single",
+        "options": [
+          { "id": "match", "text": "Subset: 20 - m heads. Rest: 20 - m heads. They match for any m!", "correct": true },
+          { "id": "skew",  "text": "Subset: m heads. Rest: 20 - m heads.",                              "correct": false }
+        ]
+      },
+      "explanation": "The numeric answer above accepts 20 as a deliberate trap -- the actual answer is (20 - m). The follow-up corrects this. Subset has 20 - m heads after flipping. The remainder always has 20 - m heads (whatever wasn't grabbed). They match -- regardless of what m is."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Does the strategy work for EVERY initial selection of 20 coins?",
+      "options": [
+        { "id": "a", "text": "Yes -- the algebra m -> (20 - m) works for any m in [0, 20].",  "correct": true },
+        { "id": "b", "text": "Only when m = 10 (i.e., when you happen to grab exactly half the heads).", "correct": false },
+        { "id": "c", "text": "Only on average over many trials.",                                          "correct": false }
+      ],
+      "explanation": "It works deterministically. The answer doesn't depend on luck -- it's a structural symmetry between (m heads + flip) and (20 - m heads in the remainder)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: with N total coins of which H are heads, what subset size do you grab and flip?",
+        "Does the strategy still work if you don't know the exact head count -- only an upper bound?",
+        "What other 'blindfolded' problems can you imagine solving via symmetric construction?"
+      ]
+    }
+  ]
+}

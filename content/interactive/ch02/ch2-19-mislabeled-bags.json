@@ -1,0 +1,109 @@
+{
+  "id": "ch2-19-mislabeled-bags",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.4",
+  "title": "Mislabeled Bags",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "409-427"
+  },
+  "mechanism": {
+    "primary": "symmetry-arguments",
+    "structure": "exploit-all-wrong-cyclic-permutation",
+    "insight": "the-mix-bag-must-be-pure-so-one-pick-cascades",
+    "variantAxes": ["n_bags", "labeling_constraint"]
+  },
+  "setup": {
+    "narrative": "There are three bags of fruit:",
+    "rules": [
+      "One bag contains ONLY apples.",
+      "One bag contains ONLY oranges.",
+      "One bag contains a MIX of apples and oranges.",
+      "All three bags carry labels (APPLES / ORANGES / MIX), but EVERY bag is mislabeled.",
+      "You may pick any number of fruits, one at a time, from any bag(s)."
+    ],
+    "question": "What is the minimum number of fruit picks needed to identify all three bags correctly?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "See how the 'all wrong' constraint creates a cyclic permutation symmetry that limits the possible truths.",
+    "Pick the bag whose mislabeling collapses to the most informative case.",
+    "Chain a single observation into three forced identifications."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension of the constraint",
+      "prompt": "If the bag labeled 'MIX' is mislabeled, what could it actually contain?",
+      "options": [
+        { "id": "a", "text": "Apples only OR oranges only -- it CANNOT contain a mix.", "correct": true },
+        { "id": "b", "text": "Anything -- mislabeling means we know nothing.",            "correct": false },
+        { "id": "c", "text": "Mix only -- the label is just wrong about the order.",       "correct": false }
+      ],
+      "explanation": "Mislabeled means the label is WRONG. If the label says MIX, the contents are NOT a mix -- they must be one of the two pure options."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right move?",
+      "options": [
+        { "id": "a", "text": "Symmetry -- pick from the bag whose mislabeling forces the strongest deduction. The 'MIX' bag's mislabeling forces it to be PURE -- one fruit reveals everything.", "correct": true },
+        { "id": "b", "text": "Pick from each bag once for safety (3 picks).",                                                                                                                       "correct": false },
+        { "id": "c", "text": "Probability over which bag is which.",                                                                                                                                "correct": false }
+      ],
+      "explanation": "The 'all mislabeled' constraint creates a cyclic-permutation symmetry: there are exactly 2 valid configurations (the labels rotate one way or the other). A single observation eliminates one of the two -- if you sample the right bag.",
+      "learnMoreTechnique": "symmetry-arguments"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why pick from MIX?",
+      "prompt": "Why pick from the bag labeled MIX rather than from one of the others?",
+      "options": [
+        { "id": "a", "text": "Because that bag is FORCED to be pure (since its label is wrong) -- so a single fruit DETERMINES its true contents.",                                            "correct": true },
+        { "id": "b", "text": "Because mix bags are hardest to identify, we want to spend our pick there.",                                                                                     "correct": false },
+        { "id": "c", "text": "It doesn't matter -- any pick works.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "The bag labeled APPLES could be MIX or ORANGES -- a fruit you draw might come from a mix and not pin it down. The bag labeled MIX, by contrast, is mislabeled and therefore PURE -- one fruit settles it. Then the cyclic symmetry handles the other two."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply the cascade",
+      "prompt": "You pick from the MIX-labeled bag and draw an APPLE. What are the actual contents of each bag?",
+      "options": [
+        { "id": "a", "text": "MIX-label = APPLES, APPLES-label = ORANGES, ORANGES-label = MIX",   "correct": true },
+        { "id": "b", "text": "MIX-label = APPLES, APPLES-label = MIX,     ORANGES-label = ORANGES", "correct": false },
+        { "id": "c", "text": "MIX-label = MIX,    APPLES-label = ORANGES, ORANGES-label = APPLES",  "correct": false },
+        { "id": "d", "text": "MIX-label = APPLES, APPLES-label = APPLES,  ORANGES-label = MIX",     "correct": false }
+      ],
+      "explanation": "Reasoning chain: (1) MIX-label drew an apple and was mislabeled -- so it's pure APPLES. (2) ORANGES-label can't hold ORANGES (mislabeled) and can't hold APPLES (taken) -- so it holds MIX. (3) APPLES-label can't hold APPLES (mislabeled) and the only one left is ORANGES. Three bags identified after one pick. Options (b)-(d) violate at least one mislabel constraint."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is the minimum number of picks?",
+      "options": [
+        { "id": "a", "text": "1",  "correct": true },
+        { "id": "b", "text": "2",  "correct": false },
+        { "id": "c", "text": "3",  "correct": false }
+      ],
+      "explanation": "1 pick from the MIX-label bag is sufficient. The cyclic symmetry of 'all wrong' lets a single observation cascade through to identify all three."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if only TWO of the three bags were mislabeled (and one was correctly labeled)? Could you still solve it in one pick?",
+        "Generalize to N bags with N-1 pure types and 1 mix, all mislabeled. How many picks?",
+        "What's the cyclic permutation that 'all mislabeled' creates?"
+      ]
+    }
+  ]
+}

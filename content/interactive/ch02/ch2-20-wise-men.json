@@ -1,0 +1,111 @@
+{
+  "id": "ch2-20-wise-men",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.4",
+  "title": "Wise Men (Sultan's Glass)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "431-444"
+  },
+  "mechanism": {
+    "primary": "symmetry-arguments",
+    "structure": "break-symmetry-via-designated-spokesman",
+    "insight": "one-counter-plus-49-one-shot-signalers",
+    "variantAxes": ["n_men", "glass_states", "starting_state"]
+  },
+  "setup": {
+    "narrative": "A sultan imprisons 50 wise men. There is one glass in a room. The glass starts BOTTOM-DOWN (right-side-up). Each minute, the sultan picks one wise man at random and brings them into the room. The chosen man may either flip the glass (changing its orientation) or do nothing. He is then returned to his cell.",
+    "rules": [
+      "Calls are random and may repeat -- a single wise man can be called many times before others are called once.",
+      "The wise men can plan their strategy together BEFORE the imprisonment begins, but cannot communicate during it.",
+      "The wise men cannot see anything except what's in the room when they're called.",
+      "If at ANY point a wise man correctly declares 'every wise man has been called at least once,' all 50 go free.",
+      "If a wise man declares this WRONGLY, all 50 die."
+    ],
+    "question": "Design a strategy that guarantees freedom in finite expected time."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that 50 identical wise men cannot coordinate by symmetric play -- the role assignment must break symmetry.",
+    "Design a counting protocol where one designated person aggregates one-shot signals from the others.",
+    "Verify the protocol's correctness: the spokesman's count uniquely identifies the moment all 49 others have been called."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive plays fail",
+      "prompt": "Why doesn't the strategy 'each wise man flips the glass on every visit' work?",
+      "options": [
+        { "id": "a", "text": "It works fine -- the glass state encodes information.",                                                                              "correct": false },
+        { "id": "b", "text": "Identical wise men flipping identically gives no way to count distinct visitors -- the glass just toggles back and forth meaninglessly.", "correct": true },
+        { "id": "c", "text": "The sultan would notice and intervene.",                                                                                              "correct": false }
+      ],
+      "explanation": "Symmetric play (everyone does the same thing) provides no signal that distinguishes 'one man visited twice' from 'two distinct men each visited once.' The strategy must break the symmetry by giving one wise man a distinct role."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right approach?",
+      "options": [
+        { "id": "a", "text": "Symmetry-breaking: appoint ONE wise man as the spokesman/counter; the other 49 send one-shot signals.",  "correct": true },
+        { "id": "b", "text": "Probability over call sequences -- compute the expected wait time.",                                       "correct": false },
+        { "id": "c", "text": "Backward induction over the call history.",                                                                "correct": false }
+      ],
+      "explanation": "Identical agents can't coordinate by counting visits. The pre-imprisonment planning lets them break symmetry: one is appointed spokesman, the other 49 act in lockstep but each fires only ONCE. The spokesman counts those one-shot signals.",
+      "learnMoreTechnique": "symmetry-arguments"
+    },
+    {
+      "id": "s3",
+      "type": "mc-multi",
+      "label": "Design the role behaviours",
+      "prompt": "Specify each role's behaviour. Select all rules that should be in the strategy.",
+      "options": [
+        { "id": "non1", "text": "Non-spokesman: the FIRST time you find the glass BOTTOM-DOWN, flip it UPSIDE-DOWN. (Each non-spokesman fires this signal at most once.)", "correct": true },
+        { "id": "non2", "text": "Non-spokesman: any subsequent visits, do nothing.",                                                                                       "correct": true },
+        { "id": "spk1", "text": "Spokesman: each time you find the glass UPSIDE-DOWN, flip it back to BOTTOM-DOWN and increment your count by 1.",                          "correct": true },
+        { "id": "spk2", "text": "Spokesman: when count reaches 49, declare 'all called'.",                                                                                  "correct": true },
+        { "id": "non3", "text": "Non-spokesman: flip the glass on every visit regardless of state.",                                                                         "correct": false },
+        { "id": "spk3", "text": "Spokesman: also flip on EVERY visit.",                                                                                                      "correct": false }
+      ],
+      "explanation": "The four correct rules together create a one-way signal channel. Each non-spokesman flips at most once, so each upside-down event is a UNIQUE signal from one of the 49. The spokesman counts these. When the count hits 49, all non-spokesmen have signaled -- meaning all 49 have been called -- meaning all 50 have been called (the spokesman has been called too, since they're doing the counting)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Why 49 not 50?",
+      "prompt": "Why does the spokesman declare freedom on count = 49, not 50?",
+      "options": [
+        { "id": "a", "text": "Because the spokesman never signals to themselves -- only the 49 OTHER wise men contribute upside-down flips. When count hits 49, all 49 others have been called -- and the spokesman has obviously been called too.", "correct": true },
+        { "id": "b", "text": "Because the spokesman is uncertain about themselves and discounts by 1.",                                                                                                                                          "correct": false },
+        { "id": "c", "text": "Because the glass starts bottom-down (one less event needed).",                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Only the 49 non-spokesmen contribute up-flips (one each). When the spokesman has performed 49 down-flips, all 49 of them have been called at least once. The spokesman has obviously also been called (they're the one declaring), so all 50 have been called."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Is the strategy correct?",
+      "options": [
+        { "id": "a", "text": "Yes. The count of 49 down-flips by the spokesman is necessary and sufficient evidence that all 50 have been called.",   "correct": true },
+        { "id": "b", "text": "No -- the spokesman might double-count if they're called twice in a row.",                                              "correct": false },
+        { "id": "c", "text": "No -- the strategy fails if the same non-spokesman is called many times before others are called.",                       "correct": false }
+      ],
+      "explanation": "The count is exact: each non-spokesman contributes at most one up-flip (their first visit while glass was bottom-down), and the spokesman counts each one EXACTLY once (because they flip back to bottom-down). Repeated calls don't create duplicate signals. The strategy is correct in finite expected time."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the GLASS necessary -- what does it provide that the wise men can't otherwise have?",
+        "What's the expected time until the spokesman can declare? (Hint: coupon collector.)",
+        "How would the strategy change if the glass started UPSIDE-DOWN instead of BOTTOM-DOWN?"
+      ]
+    }
+  ]
+}
