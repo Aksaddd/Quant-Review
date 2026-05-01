@@ -114,11 +114,17 @@ function loadChapterMarkdown(chapter: AopsChapter): string {
  * Source jpegs live in content/ and are served via /api/aops-vol1/page/[n].
  * Used as a fallback for figures that aren't yet rendered as inline diagrams —
  * readers can pop open the gallery to see the original geometry diagrams.
+ *
+ * `defaultOpen` is set when the chapter has no inlined figures so the gallery
+ * is the primary way to see geometry; in that case the summary text also
+ * shifts from "supplementary reference" to "primary figure source".
  */
 function SourcePages({
   chapter,
+  defaultOpen = false,
 }: {
   chapter: { pdfPages: [number, number]; bookPages: [number, number] };
+  defaultOpen?: boolean;
 }) {
   const [start, end] = chapter.pdfPages;
   const [bookStart] = chapter.bookPages;
@@ -128,11 +134,13 @@ function SourcePages({
   }
 
   return (
-    <details className="mt-12 group">
+    <details className="mt-12 group" open={defaultOpen}>
       <summary className="cursor-pointer list-none flex items-center gap-2 px-4 py-3 rounded-lg bg-[#f6faff] border border-[#d8e6ff] hover:bg-[#eef4fb] transition-colors">
         <Images size={14} className="text-[#1865f2]" />
         <span className="text-[13px] font-semibold text-[#1d1d1f]">
-          Source pages from the original textbook
+          {defaultOpen
+            ? 'Figures: original textbook page scans'
+            : 'Source pages from the original textbook'}
         </span>
         <span className="text-[12px] text-[#626975] tabular-nums">
           ({pages.length} pages, pp {chapter.bookPages[0]}–{chapter.bookPages[1]})
@@ -143,9 +151,9 @@ function SourcePages({
         />
       </summary>
       <p className="mt-3 px-1 text-[12px] text-[#626975] leading-relaxed">
-        Reference: full-page scans from the printed book. Individual figures
-        are already extracted and inlined with the prose above; use this
-        gallery to see surrounding context or to verify a transcription.
+        {defaultOpen
+          ? "This chapter's figures haven't been extracted as standalone diagrams yet — refer to the full-page scans below for any problem that mentions a figure."
+          : 'Reference: full-page scans from the printed book. Individual figures are already extracted and inlined with the prose above; use this gallery to see surrounding context or to verify a transcription.'}
       </p>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {pages.map((p) => (
@@ -225,9 +233,14 @@ export default async function AopsVol1ChapterPage({
         <MarkdownRenderer content={markdown} />
       </article>
 
-      {/* Source pages from the original textbook — collapsed by default,
-          lazy-loaded thumbnails, click any image to view full-size. */}
-      <SourcePages chapter={chapter} />
+      {/* Source pages from the original textbook. For chapters whose
+          figures haven't been extracted into standalone diagrams yet
+          (no entries in figures.json), expand the gallery by default so
+          the page scans are visible without an extra click. */}
+      <SourcePages
+        chapter={chapter}
+        defaultOpen={aopsFiguresOfChapter(chapter.number).length === 0}
+      />
 
       {/* Prev / Next */}
       <nav className="mt-12 pt-6 border-t border-[#e4e6ea] flex items-center justify-between">

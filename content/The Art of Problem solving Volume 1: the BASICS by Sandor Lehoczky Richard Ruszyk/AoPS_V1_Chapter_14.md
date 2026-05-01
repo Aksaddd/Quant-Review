@@ -19,9 +19,17 @@ The problems that follow will help you learn the art of "angle chasing." These a
 
 ## Problems to Solve for Chapter 14
 
+> Each problem below references a figure printed in the original textbook.
+> The matching source-page scan is inlined just before the problems it
+> illustrates — click any thumbnail to view it full-size.
+
+![Page 133 — figures for problems 236–237](/api/aops-vol1/page/147)
+
 **236.** $ABC$ is an isosceles triangle such that $AC = BC$. $CBD$ is an isosceles triangle such that $CB = DB$. $BD$ meets $AC$ at a right angle. If $\angle A = 57°$, what is $\angle D$? *(MATHCOUNTS 1986)*
 
 **237.** In $\triangle ABC$ shown, $D$ is some interior point, and $x$, $y$, $z$, $w$ are the measures of angles in degrees. Solve for $x$ in terms of $y$, $z$, and $w$. *(AHSME 1987)*
+
+![Page 134 — figures for problems 238–248](/api/aops-vol1/page/148)
 
 **238.** In quadrilateral $ABCD$, $\angle ABC = 110°$, $\angle BCD = 100°$, and angles $BAD$ and $CDA$ are trisected as shown. What is the degree measure of $\angle AFD$? *(MATHCOUNTS 1991)*
 
@@ -44,6 +52,8 @@ The problems that follow will help you learn the art of "angle chasing." These a
 **247.** Triangle $PAB$ is formed by $PR$, $PT$, and $AB$, all tangent to circle $O$. If $\angle APB = 40°$, find $\angle AOB$. *(AHSME 1956)*
 
 **248.** $O$ is the center of the circle, $\angle EAD = 40°$ and $\widehat{ED} = 40°$. Find $\angle DAB$. *(MAΘ 1987)*
+
+![Page 135 — figures for problems 249–251](/api/aops-vol1/page/149)
 
 **249.** Given triangle $PQR$ with $RS$ bisecting $\angle R$, $PQ$ extended to $D$, and $CD \perp RS$, show that $m = (p + q)/2$. *(AHSME 1954)*
 
