@@ -1,0 +1,57 @@
+{
+  "id": "thinking-out-of-the-box",
+  "kind": "technique",
+  "name": "Thinking Out of the Box",
+  "tagline": "Some problems become easy only after you reframe an implicit constraint. The trick is noticing the constraint isn't there.",
+  "category": "logic",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.3",
+    "title": "Thinking Out of the Box",
+    "exemplarProblemId": "ch2-13-door-to-offer"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Most brain teasers in this category share a structure: a problem that LOOKS underconstrained or impossible because you've silently imported an assumption that isn't actually in the problem statement. The puzzle resolves the moment you challenge that assumption."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Examples of imported assumptions: 'each side of a die can only display ONE digit' (Calendar Cubes -- but 6 and 9 can share a face); 'I can ask each guard only about themselves' (Door to Offer -- but you can ask about what the OTHER would say); 'a light bulb has only one observable state' (Light Switches -- it's also hot or cold)."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When stuck, list every assumption you're making. For each one, ask: 'is this in the problem, or did I add it?' The answer is often hiding in an assumption you can drop."
+    }
+  ],
+  "whenToUse": [
+    "The problem feels impossible by direct attack.",
+    "You're an exact count or single value short of being able to solve it.",
+    "The problem hints at having a clever / surprising answer (interview problems often do).",
+    "Standard techniques (counting, recursion, probability) don't seem to apply."
+  ],
+  "recipe": [
+    "Solve the problem under the obvious interpretation. Note where you get stuck.",
+    "List every assumption you've imported. Be paranoid -- include things that 'go without saying'.",
+    "For each assumption, ask: 'what if this weren't true? Is the rest of the problem still well-defined?'",
+    "If dropping an assumption opens a path, you've found the trick. Verify it satisfies everything explicitly stated."
+  ],
+  "commonPitfalls": [
+    "Dropping assumptions that ARE actually in the problem -- read the statement again carefully.",
+    "Settling for the first 'creative' idea instead of confirming it's the simplest one that works.",
+    "Confusing 'the solution exists' with 'I've found it'. After spotting the trick, walk through every detail.",
+    "Telling the interviewer the trick without proving it satisfies all stated constraints."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-12-calendar-cubes",  "title": "Calendar Cubes",  "chapter": 2, "section": "2.3" },
+    { "problemId": "ch2-13-door-to-offer",   "title": "Door to Offer",   "chapter": 2, "section": "2.3" },
+    { "problemId": "ch2-14-message-delivery","title": "Message Delivery","chapter": 2, "section": "2.3" },
+    { "problemId": "ch2-16-light-switches",  "title": "Light Switches",  "chapter": 2, "section": "2.3" },
+    { "problemId": "ch2-17-quant-salary",    "title": "Quant Salary",    "chapter": 2, "section": "2.3" }
+  ],
+  "relatedTechniques": ["logic-reasoning", "invariant-arguments"]
+}

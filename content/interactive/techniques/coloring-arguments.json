@@ -1,0 +1,53 @@
+{
+  "id": "coloring-arguments",
+  "kind": "technique",
+  "name": "Coloring Arguments",
+  "tagline": "Prove impossibility (or possibility) by 2-coloring the cells of a structure -- the count of each color is an invariant that any valid solution must respect.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.3",
+    "title": "Thinking Out of the Box",
+    "exemplarProblemId": "ch2-11-box-packing"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "A coloring argument assigns each cell of a board, box, or graph one of two (or three) colors and tracks how each move or piece affects the color counts. If a valid solution requires a color balance the structure can't supply, the solution is impossible -- regardless of how clever the attempt."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The classic example is the mutilated chessboard: remove two opposite corners (both the same color) and ask whether the remaining 62 cells can be tiled by 31 dominoes. Each domino covers exactly one black and one white. But the board now has 32 of one color and 30 of the other. So no -- impossible. Volume alone wouldn't tell you that."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Color the cells. Count the colors. Count what each piece must cover. Compare. Mismatch = impossible."
+    }
+  ],
+  "whenToUse": [
+    "A volume / area / count looks like it should fit, but you suspect it can't be packed.",
+    "A tiling, packing, or covering problem with rigid pieces.",
+    "Movement problems on a grid where pieces alternate cells (rook, bishop, knight tours).",
+    "Proving impossibility -- coloring is rarely useful when the answer is positive."
+  ],
+  "recipe": [
+    "Pick a coloring that respects the structure's natural symmetry (checkerboard, mod-3 stripes, or 2x2x2 sub-cubes for 3D problems).",
+    "For each piece (or move type), determine exactly how many cells of each color it covers. The piece must cover the same vector of color counts no matter where it's placed.",
+    "Compute the total color-count vector required for a complete solution, and the color-count vector available in the structure.",
+    "Compare. If the demanded count exceeds the available count for any color, the solution is impossible."
+  ],
+  "commonPitfalls": [
+    "Picking a coloring that's too coarse -- if every piece covers an equal number of each color, the argument tells you nothing.",
+    "Forgetting that the SAME piece may be placeable in multiple orientations, each with different color profiles.",
+    "Trying to use coloring to prove possibility -- it's a one-way technique. Failure of the coloring argument doesn't mean the solution exists.",
+    "Confusing 2-coloring with 3-coloring or with edge-coloring -- pick the right level of granularity for the structure."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-11-box-packing", "title": "Box Packing", "chapter": 2, "section": "2.3" }
+  ],
+  "relatedTechniques": ["invariant-arguments", "proof-by-contradiction"]
+}

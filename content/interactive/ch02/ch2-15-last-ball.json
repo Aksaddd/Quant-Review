@@ -1,0 +1,133 @@
+{
+  "id": "ch2-15-last-ball",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Last Ball",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "330-347"
+  },
+  "mechanism": {
+    "primary": "invariant-arguments",
+    "structure": "parity-of-red-ball-count",
+    "insight": "red-ball-count-parity-is-preserved-by-every-move",
+    "variantAxes": ["initial_blue", "initial_red"]
+  },
+  "setup": {
+    "narrative": "A bag contains 20 BLUE balls and 14 RED balls. Repeat the following procedure until only one ball remains.",
+    "rules": [
+      "On each step, remove TWO balls from the bag at random.",
+      "If both removed balls are the SAME color, return ONE BLUE ball to the bag.",
+      "If the removed balls are DIFFERENT colors, return ONE RED ball to the bag.",
+      "Each step decreases the total ball count by exactly one."
+    ],
+    "question": "What color is the last ball remaining?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that the red ball count's parity is preserved by all three move types.",
+    "Use the invariant to predict the final ball color regardless of move order.",
+    "Apply the same argument to a different starting count to see how the answer flips."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "What happens if you remove TWO RED balls?",
+      "options": [
+        { "id": "a", "text": "You return one BLUE ball; net change in red count = -2, blue count = +1.", "correct": true },
+        { "id": "b", "text": "You return one RED ball; net change in red count = -1.",                    "correct": false },
+        { "id": "c", "text": "You return two RED balls (no change).",                                       "correct": false }
+      ],
+      "explanation": "Two reds are SAME color, so the rule returns one BLUE ball. Net: red goes down by 2, blue goes up by 1. Total goes from N to N-1."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "The procedure is randomised, but the question asks for a deterministic answer. What does that suggest?",
+      "options": [
+        { "id": "a", "text": "Compute the probability over all possible move sequences.",                                  "correct": false },
+        { "id": "b", "text": "Look for an invariant -- some quantity that doesn't change regardless of which move occurs.", "correct": true },
+        { "id": "c", "text": "The question is ill-posed -- the answer must be probabilistic.",                              "correct": false }
+      ],
+      "explanation": "If the answer is deterministic despite random moves, there must be an invariant that pins it down. Find it.",
+      "learnMoreTechnique": "invariant-arguments"
+    },
+    {
+      "id": "s3",
+      "type": "mc-multi",
+      "label": "Track red ball count for each move",
+      "prompt": "How does the RED ball count R change for each move type? Select all that are TRUE.",
+      "options": [
+        { "id": "bb", "text": "Both BLUE: R unchanged (no red ball was touched).",                                "correct": true },
+        { "id": "rr", "text": "Both RED: R decreases by 2 (lost 2 reds, gained 1 blue).",                          "correct": true },
+        { "id": "br", "text": "Different colors: R unchanged (lost 1 red, gained 1 red back).",                    "correct": true },
+        { "id": "any", "text": "R sometimes increases by 1.",                                                       "correct": false }
+      ],
+      "explanation": "Both blue: R unchanged. Both red: R drops by 2. Different colors: removed 1 red and 1 blue, returned 1 red -- so R is unchanged. Across ALL three move types, R changes by 0 or -2 -- which means R's parity (odd vs. even) is preserved."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Apply the invariant",
+      "prompt": "Initial R = 14 (even). What is R when only one ball remains?",
+      "options": [
+        { "id": "a", "text": "R = 0 (no red balls left). The last ball is BLUE.",                       "correct": true },
+        { "id": "b", "text": "R = 1 (one red ball left). The last ball is RED.",                          "correct": false },
+        { "id": "c", "text": "R = 14 -- it never changed.",                                               "correct": false }
+      ],
+      "explanation": "R starts even (14) and stays even after every move. When only one ball remains, R is either 0 or 1. R must be even, so R = 0. The remaining ball is BLUE."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "What color is the last ball?",
+      "options": [
+        { "id": "blue", "text": "Blue", "correct": true },
+        { "id": "red",  "text": "Red",  "correct": false }
+      ],
+      "explanation": "Blue. The parity of R is invariant; R starts at 14 (even), so R ends at 0. The last ball must be blue."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could the last-ball color depend on the initial blue count? Why or why not?",
+        "What's the smallest invariant on R that captures the answer?",
+        "Could you design a similar problem where the answer depends on a mod-3 invariant instead of mod-2?"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ch2-15-v1-odd-reds",
+      "parentId": "ch2-15-last-ball",
+      "kind": "drill",
+      "axes": { "initial_blue": 20, "initial_red": 13 },
+      "title": "Last Ball -- 13 Red Balls",
+      "setup": {
+        "narrative": "Same rules. Now the initial bag has 20 BLUE and 13 RED.",
+        "question": "What color is the last ball?"
+      },
+      "stages": [
+        {
+          "id": "v1-s1",
+          "type": "mc-single",
+          "label": "Apply the parity invariant",
+          "prompt": "Initial R = 13 (ODD). What's the final ball color?",
+          "options": [
+            { "id": "blue", "text": "Blue (R ends at 0)",  "correct": false },
+            { "id": "red",  "text": "Red (R must stay odd, so R ends at 1)", "correct": true }
+          ],
+          "explanation": "R's parity is preserved. Starting odd means ending odd. With one ball left, R is 0 or 1; the only odd option is R = 1, so the last ball is RED."
+        }
+      ]
+    }
+  ]
+}

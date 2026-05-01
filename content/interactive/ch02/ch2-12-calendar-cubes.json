@@ -1,0 +1,109 @@
+{
+  "id": "ch2-12-calendar-cubes",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Calendar Cubes",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "277-294"
+  },
+  "mechanism": {
+    "primary": "thinking-out-of-the-box",
+    "structure": "constrained-encoding-with-shared-symbols",
+    "insight": "6-and-9-can-share-a-face-when-flipped",
+    "variantAxes": ["range_displayed", "n_dice"]
+  },
+  "setup": {
+    "narrative": "You want to design two custom 6-sided dice (6 faces each, 12 faces total) so that every morning you can arrange them to display the current day of the month: 01, 02, 03, ..., 31.",
+    "rules": [
+      "Each face shows exactly one digit (0-9).",
+      "Both dice must be used every day -- you can't hide one.",
+      "The two dice can be placed in either order (e.g., dice A on the left or dice B on the left).",
+      "You must be able to display 01 through 31 inclusive."
+    ],
+    "question": "Is it possible? If so, what digits go on each face?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Identify forced face assignments from doubled-digit days like 11 and 22.",
+    "Recognize when an 'impossible' digit count can be reduced by reusing one symbol for two values.",
+    "Verify a complete dice assignment by exhaustively checking all 31 days."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-multi",
+      "label": "Forced digits",
+      "prompt": "Which of the following digits MUST appear on BOTH dice?",
+      "options": [
+        { "id": "d0", "text": "0 (because of single-digit days 01-09)",                "correct": true },
+        { "id": "d1", "text": "1 (because of day 11)",                                   "correct": true },
+        { "id": "d2", "text": "2 (because of day 22)",                                   "correct": true },
+        { "id": "d3", "text": "3 (because of day 33 -- but there's no day 33)",          "correct": false },
+        { "id": "d5", "text": "5 (because of day 55 -- there's no day 55)",              "correct": false }
+      ],
+      "explanation": "Days 11 and 22 require a digit to appear simultaneously on both dice (you can't make 11 with only one '1'). Days 01-09 (single digit) require both dice to be able to show 0 -- one shows '0' and the other shows the digit. So 0, 1, 2 must be on both dice."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "After placing 0, 1, 2 on each die, you have 3 faces remaining on each die = 6 faces total, but you still need to display digits 3, 4, 5, 6, 7, 8, 9. That's 7 digits in 6 spots. What's the move?",
+      "options": [
+        { "id": "a", "text": "Give up -- it's impossible because 7 digits don't fit in 6 spots.",                          "correct": false },
+        { "id": "b", "text": "Think out of the box: question whether each face really represents only one digit.",         "correct": true },
+        { "id": "c", "text": "Stack two digits on the same face.",                                                          "correct": false },
+        { "id": "d", "text": "Probability over which digit to skip.",                                                       "correct": false }
+      ],
+      "explanation": "The implicit assumption is that each face shows ONE digit. But '6' and '9' look identical when flipped 180 degrees -- and they never both appear on the same date (no day has both 6 and 9). So one face can serve both. That recovers the 7th digit you 'didn't have room for'.",
+      "learnMoreTechnique": "thinking-out-of-the-box"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Apply the trick",
+      "prompt": "Using the 6-as-9 trick, distribute 3, 4, 5, 6, 7, 8 across the remaining 6 faces (one digit per face). Which assignment works?",
+      "options": [
+        { "id": "a", "text": "Die A: 0, 1, 2, 3, 4, 5  /  Die B: 0, 1, 2, 6, 7, 8 (with 6 also serving as 9 when flipped).", "correct": true },
+        { "id": "b", "text": "Die A: 0, 1, 2, 3, 7, 8  /  Die B: 0, 1, 2, 4, 5, 6.",                                            "correct": false },
+        { "id": "c", "text": "Die A: 0, 1, 2, 6, 7, 8  /  Die B: 0, 1, 2, 6, 7, 8 (both dice identical).",                       "correct": false }
+      ],
+      "explanation": "Option (a) works. Verify: every day from 01 to 31 can be displayed using one die for the tens-digit (0, 1, 2, 3) and the other for the units-digit, allowing for either die to take the 'tens' role. Day 19 uses Die A's '1' and Die B's '6' flipped to '9'. Day 30 uses Die A's '3' and Die B's '0'. (b) is wrong because '7' and '4' end up unreachable simultaneously."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Sanity-check a tricky day",
+      "prompt": "Using the assignment above, how do you display day 09?",
+      "options": [
+        { "id": "a", "text": "Die A shows 0, Die B shows 6 flipped to 9.", "correct": true },
+        { "id": "b", "text": "It's impossible -- 9 isn't on either die.",  "correct": false },
+        { "id": "c", "text": "Die A shows 0, Die B shows 9 directly.",      "correct": false }
+      ],
+      "explanation": "The 6 face on Die B serves double duty: oriented one way it's 6, flipped 180 degrees it's 9. So '09' = Die A '0' + Die B '6 flipped'. The rest of the calendar works similarly -- every day from 01 to 31 has a valid arrangement."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Is the design possible?",
+      "options": [
+        { "id": "a", "text": "Yes -- with the 6-as-9 trick.",                  "correct": true },
+        { "id": "b", "text": "No -- 7 digits don't fit in 6 remaining faces.",  "correct": false }
+      ],
+      "explanation": "Yes. The clever encoding (6 doubles as 9 when flipped) is the trick that makes 6 face slots cover 7 digits. The required assumption to drop was 'each face represents only one digit'."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could you design a single die for displaying days 1-9 if you could only use one die?",
+        "What other digit pairs could share a face? (Hint: 0 and... what?)",
+        "Could you design dice for displaying months 01-12 using a similar two-dice scheme?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "invariant-arguments",
+  "kind": "technique",
+  "name": "Invariant Arguments",
+  "tagline": "Find a quantity that doesn't change under any allowed move. The final state must have the same value as the initial state -- which usually pins down the answer.",
+  "category": "combinatorics",
+  "introducedIn": {
+    "chapter": 2,
+    "section": "2.3",
+    "title": "Thinking Out of the Box",
+    "exemplarProblemId": "ch2-15-last-ball"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Invariant arguments find a numerical or structural property that's preserved by every legal move. If the initial state has property P and every move preserves P, then the final state also has property P. Often the question is about the final state, and the invariant alone determines the answer."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The most common invariants are parities (whether a count is even or odd), modular residues (count mod 3, mod 4, ...), sums, and sign-weighted sums. The trick is finding the right one -- the invariant must be sensitive enough to constrain the answer but robust enough to actually be preserved."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Watch ONE quantity through the chaos. If it never changes, then knowing its initial value tells you its final value -- regardless of how many moves happened or how complex they were."
+    }
+  ],
+  "whenToUse": [
+    "Process problems where the final state is asked but the move sequence is complex or random.",
+    "Game problems where you need to predict the outcome regardless of play.",
+    "'Can we reach state Y from state X?' problems -- if no invariant separates X and Y, often yes; if one does, no.",
+    "Problems with an obvious 'looks fair' answer that you suspect is rigged."
+  ],
+  "recipe": [
+    "List the allowed moves and what each one changes.",
+    "For each candidate invariant (parity of some count, sum of some quantity, mod-3 residue), check if EVERY move preserves it.",
+    "If yes, evaluate it on the initial state. That value persists through all moves.",
+    "Translate the invariant's constraint into a fact about the final state."
+  ],
+  "commonPitfalls": [
+    "Picking a quantity that's preserved by SOME moves but not all -- it's not actually invariant.",
+    "Confusing 'I think this stays the same' with 'I've checked every move type'. Be exhaustive.",
+    "Looking for invariants in problems where the right tool is something else (e.g., information theory, game theory).",
+    "Stopping after finding ONE invariant -- sometimes the answer needs two invariants intersecting."
+  ],
+  "appearsIn": [
+    { "problemId": "ch2-05-card-game", "title": "Card Game",  "chapter": 2, "section": "2.2" },
+    { "problemId": "ch2-15-last-ball", "title": "Last Ball",  "chapter": 2, "section": "2.3" }
+  ],
+  "relatedTechniques": ["coloring-arguments", "proof-by-contradiction"]
+}

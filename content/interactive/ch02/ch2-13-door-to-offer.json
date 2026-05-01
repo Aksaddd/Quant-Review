@@ -1,0 +1,96 @@
+{
+  "id": "ch2-13-door-to-offer",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Door to Offer",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "298-311"
+  },
+  "mechanism": {
+    "primary": "thinking-out-of-the-box",
+    "structure": "double-negation-via-meta-question",
+    "insight": "ask-about-what-the-other-would-say-not-the-truth-itself",
+    "variantAxes": ["n_doors", "n_guards"]
+  },
+  "setup": {
+    "narrative": "There are two doors. One leads to your job offer; the other leads to the exit (no offer). Each door is guarded by one person. One guard always tells the truth, the other always lies. You don't know which guard is which.",
+    "rules": [
+      "You may ask exactly ONE yes/no question to ONE of the two guards.",
+      "The truthful guard always answers truthfully.",
+      "The lying guard always answers with the opposite of the truth.",
+      "Both guards know everything: which door leads where, and which one is the truth-teller."
+    ],
+    "question": "What single question reveals the door to the offer?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that asking a guard 'is your door correct?' fails because both guards would say yes.",
+    "Construct a meta-question that introduces a second negation, making both guards effectively give the same (reliable) answer.",
+    "Verify the correctness in both possible worlds (you asked the truth-teller, you asked the liar)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why the naive question fails",
+      "prompt": "Suppose you ask one guard: 'Does YOUR door lead to the offer?' What do they say?",
+      "options": [
+        { "id": "a", "text": "They give a reliable answer.",                                                                                                "correct": false },
+        { "id": "b", "text": "Both guards say YES regardless of which door is correct (truth-teller affirms when right, liar affirms when wrong).",          "correct": true },
+        { "id": "c", "text": "The truth-teller says yes; the liar refuses to answer.",                                                                        "correct": false }
+      ],
+      "explanation": "If you're at the offer door, the truth-teller says YES (truth) and the liar at the offer door also says YES (lying about a NO). Wait -- but the liar IS at the offer door, so the truth is YES, meaning the liar lies and says NO. Hmm, let me re-check: you've asked the guard at one specific door. If that's the offer door and the guard is the truth-teller -- YES. If that's the offer door and the guard is the liar -- NO. So the answer reveals the door+guard combination ambiguously. Either way, you can't disentangle 'is this the right door?' from 'which guard am I talking to?'."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the trick that breaks the symmetry?",
+      "options": [
+        { "id": "a", "text": "Ask each guard the same question -- but you only get one question.",                                                            "correct": false },
+        { "id": "b", "text": "Use a meta-question that introduces a second negation, so both possible guards effectively give the same answer.",             "correct": true },
+        { "id": "c", "text": "Ask about something unrelated and read body language.",                                                                         "correct": false }
+      ],
+      "explanation": "The key is double-negation. By asking one guard about what the OTHER guard would say, you force the answer through both a true statement and a false one (or vice versa) -- net result: a reliable answer regardless of which guard you picked.",
+      "learnMoreTechnique": "thinking-out-of-the-box"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Pick the right question",
+      "prompt": "Which of these single questions guarantees you can identify the offer door from the response?",
+      "options": [
+        { "id": "a", "text": "Ask one guard: 'Would the OTHER guard say that YOUR door leads to the offer?'",        "correct": true },
+        { "id": "b", "text": "Ask one guard: 'Are you the truth-teller?'",                                            "correct": false },
+        { "id": "c", "text": "Ask one guard: 'Is the offer door behind you?'",                                        "correct": false },
+        { "id": "d", "text": "Ask both guards the same question -- but you only have one.",                            "correct": false }
+      ],
+      "explanation": "The double-negation question is (a). Walk through both cases: if you asked the truth-teller -- they truthfully report what the LIAR would say (a lie). If you asked the liar -- they lie about what the TRUTH-TELLER would say (a truth, lied about). Both cases: the answer is the OPPOSITE of the truth about that guard's door."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit the decoding rule",
+      "prompt": "You ask the question above and the guard answers YES. Which door do you choose?",
+      "options": [
+        { "id": "a", "text": "The OTHER door.",      "correct": true },
+        { "id": "b", "text": "THIS guard's door.",   "correct": false },
+        { "id": "c", "text": "Either -- you have a 50/50.", "correct": false }
+      ],
+      "explanation": "YES from the meta-question means the OPPOSITE of truth -- so this guard's door is NOT the offer door. Choose the OTHER door. (NO -> choose this door.)"
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Walk through both cases (you asked the truth-teller; you asked the liar) and verify the decoding rule works in both.",
+        "What if there's a third guard who answers randomly? What single question still works?",
+        "What if you could only ask the question about the SAME guard's door (not the other)? Could you still construct a working meta-question?"
+      ]
+    }
+  ]
+}

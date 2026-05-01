@@ -1,0 +1,107 @@
+{
+  "id": "ch2-17-quant-salary",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Quant Salary",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "372-385"
+  },
+  "mechanism": {
+    "primary": "thinking-out-of-the-box",
+    "structure": "secure-aggregation-via-random-blinding",
+    "insight": "the-first-quant-blinds-the-running-total-with-a-secret",
+    "variantAxes": ["n_quants", "collusion_threshold"]
+  },
+  "setup": {
+    "narrative": "Eight quants want to know the AVERAGE of their salaries -- but no one is willing to disclose their individual salary, even to the other quants.",
+    "rules": [
+      "Each quant knows only their own salary.",
+      "Quants pass numbers to each other in a chain.",
+      "Each quant trusts the others not to actively cheat (no one will lie about adding their salary), but is unwilling to reveal their own salary directly.",
+      "There is no central trusted party."
+    ],
+    "question": "How can the 8 quants compute their average salary without revealing individual salaries?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Use a random secret to BLIND a running total so intermediate values reveal nothing.",
+    "Recognize that the secret can be removed by the same person who added it -- yielding the unbiased sum.",
+    "Generalize the pattern as a primitive of secure multi-party computation."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why the obvious approach fails",
+      "prompt": "Why can't quant 1 simply add up all 8 salaries by passing the running total around the chain?",
+      "options": [
+        { "id": "a", "text": "Quant 2 would see (quant 1's salary), revealing it directly.",                "correct": true },
+        { "id": "b", "text": "The running total exceeds quant 1's RAM.",                                     "correct": false },
+        { "id": "c", "text": "They'd lose count.",                                                            "correct": false }
+      ],
+      "explanation": "If quant 1 passes their salary directly to quant 2, quant 2 learns it. Naive chain-summing leaks salaries to neighbors. The trick is to mask each salary so no intermediate reveals one."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the trick?",
+      "options": [
+        { "id": "a", "text": "Quant 1 picks a LARGE random number R, adds their salary to it, and passes the result. Each subsequent quant adds their salary. The total returns to quant 1, who subtracts R.", "correct": true },
+        { "id": "b", "text": "Each quant submits salaries to a notary.",                                                                                                                                          "correct": false },
+        { "id": "c", "text": "Encrypt each salary with a public key.",                                                                                                                                            "correct": false }
+      ],
+      "explanation": "Random-blinding solves it. R is unknown to anyone except quant 1, so quant 2 sees only (R + salary_1) -- a number that could be anything. R cancels out only when quant 1 subtracts it at the end. This is the simplest primitive of secure multi-party computation.",
+      "learnMoreTechnique": "thinking-out-of-the-box"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why the blinding works",
+      "prompt": "From quant 2's perspective, after receiving (R + salary_1), what can they infer about salary_1?",
+      "options": [
+        { "id": "a", "text": "Nothing -- R is unknown and arbitrary, so (R + salary_1) is indistinguishable from any other value.",     "correct": true },
+        { "id": "b", "text": "An upper bound on salary_1.",                                                                                "correct": false },
+        { "id": "c", "text": "Salary_1 directly, by subtracting a known constant.",                                                        "correct": false }
+      ],
+      "explanation": "If R is uniformly random over a large range, (R + salary_1) is also uniformly random over that range. Quant 2 learns nothing about salary_1. This is the cryptographic property called 'information-theoretic hiding'."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "The cancellation step",
+      "prompt": "After the running total has gone around all 8 quants and returns to quant 1, the value is (R + sum_of_all_8_salaries). What does quant 1 do?",
+      "options": [
+        { "id": "a", "text": "Subtract R, then divide by 8 -- and announce the result.", "correct": true },
+        { "id": "b", "text": "Subtract their own salary.",                                  "correct": false },
+        { "id": "c", "text": "Pass it around again.",                                       "correct": false }
+      ],
+      "explanation": "Quant 1 knows R (the secret they added), so subtracting R yields the true sum. Dividing by 8 gives the average. Quant 1 announces only the average -- no one (not even quant 1) ever sees a specific person's salary."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Does this protocol leak any individual salary?",
+      "options": [
+        { "id": "a", "text": "No -- assuming no two quants collude, no one learns more than the average.",  "correct": true },
+        { "id": "b", "text": "Yes -- the last quant in the chain knows everyone else's salary.",            "correct": false },
+        { "id": "c", "text": "Yes -- quant 1 sees everyone else's salary by subtracting their own.",        "correct": false }
+      ],
+      "explanation": "Each quant sees only a blinded running total, which is uniformly random from their viewpoint. Quant 1 sees the total but not individual salaries. The protocol is secure if no two adjacent quants collude (which would let them subtract their two contributions and infer the gap)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What goes wrong if any TWO of the quants collude?",
+        "How would you extend this to compute MEDIAN salary instead of average? Is it possible without a trusted party?",
+        "This protocol is used in practice -- where? (Hint: data anonymization for fund position reporting.)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "ch2-14-message-delivery",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Message Delivery",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "315-326"
+  },
+  "mechanism": {
+    "primary": "thinking-out-of-the-box",
+    "structure": "ordered-application-of-symmetric-locks",
+    "insight": "locks-can-be-stacked-and-removed-in-any-order",
+    "variantAxes": ["n_parties", "lock_directionality"]
+  },
+  "setup": {
+    "narrative": "You need to send a confidential document to a colleague through an insecure messenger service.",
+    "rules": [
+      "The messenger will deliver any sealed box.",
+      "Anything UNLOCKED -- and any keys placed inside an unlocked box -- will be lost / stolen / read.",
+      "Each person owns a padlock. Each padlock has only ONE key, owned by its owner.",
+      "You and your colleague never meet in person.",
+      "You both have padlocks (yours and theirs respectively)."
+    ],
+    "question": "How do you securely deliver the document?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that you can never share a key safely -- only locks (forward-direction).",
+    "Use ordered application of two padlocks to bridge the trust gap.",
+    "Verify that the protocol terminates with the colleague able to open the box."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why naive approaches fail",
+      "prompt": "Why can't you just lock the box with your padlock and send it?",
+      "options": [
+        { "id": "a", "text": "Your colleague has no key to open it.",                                            "correct": true },
+        { "id": "b", "text": "The messenger would steal the lock.",                                              "correct": false },
+        { "id": "c", "text": "Padlocks aren't secure.",                                                          "correct": false }
+      ],
+      "explanation": "Your padlock's only key is in your hands. Sending the locked box to your colleague leaves them with a sealed box they can't open. The naive approach hits a dead end -- you need a way to involve THEIR lock too."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "What's the right move?",
+      "options": [
+        { "id": "a", "text": "Send the key separately -- accept the risk.",                                                                     "correct": false },
+        { "id": "b", "text": "Use the box as a 3-trip courier where each lock is added/removed by its owner only.",                              "correct": true },
+        { "id": "c", "text": "Encrypt the document, then lock the encrypted version.",                                                          "correct": false }
+      ],
+      "explanation": "The trick is that locks can be STACKED. The box can have your lock and your colleague's lock simultaneously, and each person removes only their own lock. This solves the trust problem without ever sharing a key.",
+      "learnMoreTechnique": "thinking-out-of-the-box"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Order the steps",
+      "prompt": "Which sequence of trips delivers the document securely?",
+      "options": [
+        { "id": "a", "text": "Step 1: You lock the box and send. Step 2: Colleague adds THEIR lock and sends back. Step 3: You remove YOUR lock and send. Step 4: Colleague removes THEIR lock and reads.", "correct": true },
+        { "id": "b", "text": "Step 1: You send the empty box. Step 2: Colleague adds their lock and sends back. Step 3: You add the doc and your lock and send.",                                              "correct": false },
+        { "id": "c", "text": "You send the box unlocked with the document inside.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "Option (a) is correct. Three trips are required (yours -> theirs -> yours -> theirs). At every moment in transit, the box has at least one lock on it. (b) leaves the document in transit unlocked at step 3 setup. (c) is exactly the failure mode the constraints prohibit."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "How many one-way deliveries does the protocol take?",
+      "options": [
+        { "id": "a", "text": "1",   "correct": false },
+        { "id": "b", "text": "2",   "correct": false },
+        { "id": "c", "text": "3",   "correct": true },
+        { "id": "d", "text": "4",   "correct": false }
+      ],
+      "explanation": "3 trips: you -> them (your lock on), them -> you (both locks on), you -> them (their lock only). Each transit is locked, and only the owner ever touches their own key."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What real-world cryptographic protocol does this problem mirror? (Hint: there's a famous one used to bootstrap secure channels.)",
+        "Could you do this with three parties (you, a colleague, a third recipient) using only their respective locks?",
+        "What happens if both people accidentally lock with the same key? Does the protocol still work?"
+      ]
+    }
+  ]
+}

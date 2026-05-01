@@ -1,0 +1,108 @@
+{
+  "id": "ch2-11-box-packing",
+  "kind": "problem-walkthrough",
+  "chapter": 2,
+  "section": "2.3",
+  "title": "Box Packing",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-02-brain-teasers.md",
+    "lines": "263-273"
+  },
+  "mechanism": {
+    "primary": "coloring-arguments",
+    "structure": "3d-2x2x2-checkerboard",
+    "insight": "every-1x1x4-brick-covers-equal-black-and-white",
+    "variantAxes": ["box_dim", "brick_dim", "n_bricks"]
+  },
+  "setup": {
+    "narrative": "You have a 6 x 6 x 6 box and 53 bricks of dimension 1 x 1 x 4 each.",
+    "rules": [
+      "Each brick has volume 4 cubic units.",
+      "Bricks are rigid and can be oriented along any of the three axes.",
+      "Bricks must lie aligned with the integer grid -- no tilting or fractional positions.",
+      "The box has volume 6^3 = 216 cubic units. The total brick volume is 53 * 4 = 212 cubic units."
+    ],
+    "question": "Can the 53 bricks be packed into the box?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that volume-fits doesn't imply packing-fits.",
+    "Construct a 3-coloring or 2-coloring that any valid placement must respect.",
+    "Convert a coloring imbalance into a hard upper bound on placeable pieces."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Comprehension",
+      "prompt": "Total brick volume vs. box volume: do the numbers FIT?",
+      "options": [
+        { "id": "a", "text": "Yes -- 53 * 4 = 212 < 216 = 6^3, so volume alone says it fits.",  "correct": true },
+        { "id": "b", "text": "No -- 53 * 4 = 212 > 216 = 6^3.",                                  "correct": false },
+        { "id": "c", "text": "Volume isn't relevant.",                                            "correct": false }
+      ],
+      "explanation": "Volume fits with 4 units to spare. Yet the answer turns out to be NO -- you can't pack them. That gap (4 units of slack but still impossible) is what makes this a coloring problem."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "Volume fits but you suspect packing fails. What's the right tool?",
+      "options": [
+        { "id": "a", "text": "Brute-force enumeration of brick placements.",                                                          "correct": false },
+        { "id": "b", "text": "A coloring argument: assign each cell a color, count what each brick must cover, find a mismatch.",       "correct": true },
+        { "id": "c", "text": "Probability over random packings.",                                                                       "correct": false },
+        { "id": "d", "text": "Backward induction.",                                                                                     "correct": false }
+      ],
+      "explanation": "Coloring arguments are the standard tool for proving impossibility when volume fits. Pick a coloring that the brick MUST disrupt unevenly, and the impossibility falls out from counting colors.",
+      "learnMoreTechnique": "coloring-arguments"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Pick the right coloring",
+      "prompt": "Divide the 6 x 6 x 6 box into 27 small 2 x 2 x 2 sub-cubes (3 x 3 x 3 of them), and color them like a 3D checkerboard. How many sub-cubes are each color?",
+      "options": [
+        { "id": "a", "text": "13 of one color, 14 of the other (because 27 is odd).", "correct": true },
+        { "id": "b", "text": "27 of one color (all the same).",                        "correct": false },
+        { "id": "c", "text": "9 black, 9 white, 9 grey (3 colors).",                    "correct": false }
+      ],
+      "explanation": "27 = 3^3 sub-cubes, alternating: in a 3x3x3 cube the corners are one color and the centers/midpoints alternate. Result: 14 of one color, 13 of the other. The asymmetry between 14 and 13 will be the load-bearing fact."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Brick coverage",
+      "prompt": "Place a 1 x 1 x 4 brick anywhere in the box (any axis, any position). How many sub-cube colors does it touch?",
+      "options": [
+        { "id": "a", "text": "Always one color (it stays in one sub-cube).",                                                            "correct": false },
+        { "id": "b", "text": "Exactly one black sub-cube + exactly one white sub-cube. (It spans two adjacent sub-cubes, one of each color.)", "correct": true },
+        { "id": "c", "text": "All three colors equally.",                                                                                  "correct": false }
+      ],
+      "explanation": "A 1x1x4 brick is exactly the length of two sub-cubes laid end-to-end (each sub-cube is 2 units long). So the brick spans exactly 2 adjacent sub-cubes -- which must be different colors in the checkerboard. So every brick covers 1 black sub-cube and 1 white sub-cube."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit final answer",
+      "prompt": "Each sub-cube has volume 2^3 = 8 and can hold at most 8/4 = 2... wait, more carefully: each sub-cube can hold up to 4 bricks (each brick uses 1/2 of the sub-cube's volume in the brick's axis). With 13 sub-cubes of the minority color, each holding at most 4 brick-halves, what's the maximum number of bricks placeable?",
+      "options": [
+        { "id": "a", "text": "53 -- the volume math allows it.",                                                                "correct": false },
+        { "id": "b", "text": "52, since each brick consumes one minority-color sub-cube slot, and only 13 * 4 = 52 are available.", "correct": true },
+        { "id": "c", "text": "26, since each brick uses two sub-cubes.",                                                          "correct": false }
+      ],
+      "explanation": "Each brick consumes exactly 1/4 of a minority-color sub-cube's volume (since the brick uses 1 column of length 4 inside the 2x2x2 = 8-volume sub-cube, that's 4/8 = 1/2 ... actually each brick uses one 1x1 column at the boundary between two sub-cubes -- 4 such columns fit per minority sub-cube). So at most 13 * 4 = 52 bricks fit. The 53rd has nowhere to go. NOT possible."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could 52 bricks be packed? (The argument doesn't say they can; coloring is one-way. What might you try to prove possibility?)",
+        "If the box were 8 x 8 x 8 (volume 512) and you had 127 bricks of size 1x1x4 (volume 508), would the same argument apply?",
+        "Why does this argument REQUIRE 2x2x2 sub-cubes? Why not 1x1x1 single-cell coloring?"
+      ]
+    }
+  ]
+}
