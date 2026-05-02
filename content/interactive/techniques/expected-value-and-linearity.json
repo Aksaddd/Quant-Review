@@ -1,0 +1,62 @@
+{
+  "id": "expected-value-and-linearity",
+  "kind": "technique",
+  "name": "Expected Value, Variance, and Covariance",
+  "tagline": "Linearity of expectation works regardless of dependence -- the most powerful single tool. Combine with indicator decomposition, the law of total expectation, and variance/covariance algebra for almost every quant moment problem.",
+  "category": "probability",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.5",
+    "title": "Expected Value, Variance, and Covariance",
+    "exemplarProblemId": "ch4-37-coupon-collection"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Linearity of expectation -- E[X_1 + ... + X_n] = E[X_1] + ... + E[X_n] -- holds regardless of whether the X_i are independent. This is the most powerful tool for expectation problems: decompose a complicated random quantity into a sum of simpler indicator variables, then sum their (often easy) expectations. Indicator decomposition (X = sum of I_i) handles coupon collection, expected number of inversions, expected fixed points of permutations, and dozens more."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Variance does NOT split linearly when terms are dependent: Var(sum) = sum of variances + 2 * sum of pairwise covariances. The covariance algebra Cov(sum a_i X_i, sum b_j Y_j) = sum sum a_i b_j Cov(X_i, Y_j) extends linearity to second moments. The law of total expectation E[X] = E[E[X | Y]] decomposes by conditioning."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When asked for E[X], ask: 'can I write X as a sum?' If yes, linearity collapses the problem. When asked for Var(X), ask the same -- but you need pairwise covariances. When asked for E[X | Y] or E[X], try the law of total expectation first."
+    }
+  ],
+  "whenToUse": [
+    "Expected count problems (linearity of indicators).",
+    "Coupon collection / waiting time for repeated phenomena.",
+    "Hedge ratio / portfolio variance minimization.",
+    "Conditional expectation problems with a natural sub-event structure (Law of Total Expectation).",
+    "Anywhere computing a probability is hard but computing an expectation is linear."
+  ],
+  "recipe": [
+    "If the random variable is a SUM (or can be rewritten as one), use linearity. E[X] = sum of E[X_i].",
+    "Indicator trick: X = number of events that occur = sum of I(event_k) where I is the indicator. E[I] = P(event).",
+    "For variance of a sum, add Var(X_i) + 2 * sum over i < j of Cov(X_i, X_j).",
+    "For optimal hedging: minimize Var(X - h*Y), differentiate w.r.t. h, get h* = Cov(X, Y) / Var(Y) = rho * sigma_X / sigma_Y.",
+    "For expected stopping value of a geometric process: solve E = first-step decomposition (often E = (1/k)*small + (k-1)/k * (something + E))."
+  ],
+  "commonPitfalls": [
+    "Adding variances of dependent random variables without the covariance terms.",
+    "Confusing E[g(X)] with g(E[X]) -- they're equal only for linear g.",
+    "Independence implies zero covariance, but zero covariance does NOT imply independence.",
+    "In coupon collection: forgetting that the harmonic sum H_n grows like ln(n), giving E[X] ~ N * ln(N).",
+    "Setting rho = 1 to find max P(A or B) without checking that rho = 1 is in the feasible range."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-33-connecting-noodles",  "title": "Connecting Noodles",         "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-34-optimal-hedge-ratio", "title": "Optimal Hedge Ratio",        "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-35-dice-game-restart",   "title": "Dice Game (4-5-6 restart)",  "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-36-card-first-ace",      "title": "Card Game -- First Ace",      "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-37-coupon-collection",   "title": "Coupon Collection",          "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-38-sum-uniforms",        "title": "Sum of Uniform Random Variables", "chapter": 4, "section": "4.5" },
+    { "problemId": "ch4-39-joint-default",       "title": "Joint Default Probability",   "chapter": 4, "section": "4.5" }
+  ],
+  "relatedTechniques": ["distributions-and-moments", "conditional-probability-and-bayes", "math-induction"]
+}

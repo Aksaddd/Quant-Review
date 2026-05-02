@@ -1,0 +1,91 @@
+{
+  "id": "ch4-33-connecting-noodles",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Connecting Noodles",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "852-869"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "linearity-of-expected-loops-via-recurrence-on-noodle-count",
+    "insight": "each-step-creates-a-loop-with-probability-1-over-2n-1-then-applies-recursive-noodle-count",
+    "variantAxes": ["n_noodles"]
+  },
+  "setup": {
+    "narrative": "You have 100 cooked noodles, giving 200 free ends. Blindfolded, you repeatedly pick TWO ENDS uniformly at random and tie them together. Continue until no free ends remain.",
+    "rules": [
+      "Each tie connects two random ends -- could be ends of the same noodle (creating a closed loop) or different noodles (merging them into one longer noodle).",
+      "Stop when all ends are tied.",
+      "We want E[number of closed loops formed]."
+    ],
+    "question": "What is the expected number of closed loops?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up a recurrence on E[f(n)] = expected loops with n noodles.",
+    "P(loop forms at this step | n noodles) = 1/(2n - 1) (one specific end completes a loop out of 2n - 1 candidates).",
+    "Sum the harmonic-like series 1 + 1/3 + 1/5 + ... + 1/(2n - 1)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the step probability",
+      "prompt": "Start with n noodles (2n free ends). Pick one end at random. The other end you tie it to is chosen from the 2n - 1 remaining ends. What is P(this tie creates a loop)?",
+      "options": [
+        { "id": "a", "text": "1/(2n - 1).  Of the 2n - 1 remaining ends, exactly ONE belongs to the same noodle as the first end -- tying them creates a loop.", "correct": true },
+        { "id": "b", "text": "1/2.",                                                                                                                              "correct": false },
+        { "id": "c", "text": "1/n.",                                                                                                                                "correct": false }
+      ],
+      "explanation": "Only one of the 2n - 1 candidates is the OTHER end of the same noodle. Probability = 1/(2n - 1).",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Set up the recurrence",
+      "prompt": "If the tie creates a loop, you've added 1 loop and reduced to n - 1 noodles (the looped noodle is gone). If not, you've merged two noodles into one, leaving n - 1 noodles (no new loop). What's the recurrence for E[f(n)]?",
+      "options": [
+        { "id": "a", "text": "E[f(n)] = E[f(n-1)] + 1/(2n-1).  Both branches end with n - 1 noodles, but only the first adds a loop.", "correct": true },
+        { "id": "b", "text": "E[f(n)] = E[f(n-1)] + 1.",                                                                                "correct": false },
+        { "id": "c", "text": "E[f(n)] = 2 * E[f(n-1)].",                                                                                "correct": false }
+      ],
+      "explanation": "Either way you proceed with n - 1 noodles. The expected new loops at this step is 1 * 1/(2n - 1) + 0 * (2n - 2)/(2n - 1) = 1/(2n - 1)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve the recurrence",
+      "prompt": "Iterate down to E[f(1)] = 1 (one noodle, two ends -- tying them always creates a loop). E[f(n)] = ?",
+      "options": [
+        { "id": "a", "text": "E[f(n)] = 1 + 1/3 + 1/5 + ... + 1/(2n - 1).", "correct": true },
+        { "id": "b", "text": "E[f(n)] = n.",                                  "correct": false },
+        { "id": "c", "text": "E[f(n)] = ln(n).",                              "correct": false }
+      ],
+      "explanation": "E[f(n)] = E[f(n-1)] + 1/(2n - 1). Unrolling: E[f(n)] = E[f(1)] + sum from k=2 to n of 1/(2k-1) = 1 + 1/3 + 1/5 + ... + 1/(2n-1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit for n = 100",
+      "prompt": "E[f(100)] = 1 + 1/3 + 1/5 + ... + 1/199. Compute to 4 decimals. (Hint: this sum approaches (1/2)*ln(2*100) + (gamma + ln 2)/2 ~ 3.28.)",
+      "answerType": "numeric",
+      "answer": 3.2843,
+      "explanation": "Sum of odd reciprocals 1 + 1/3 + ... + 1/199 ≈ 3.28. So expected ≈ 3 loops in the noodle problem -- surprising for 100 noodles."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compare to the harmonic series H_100 = 1 + 1/2 + ... + 1/100 ≈ 5.19. Why are 'odd reciprocals' a different sum?",
+        "Show that the sum is approximately (1/2)*ln(2n) for large n.",
+        "What's E[f(1)]? E[f(2)]? Verify by direct enumeration."
+      ]
+    }
+  ]
+}

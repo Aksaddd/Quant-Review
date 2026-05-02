@@ -1,0 +1,106 @@
+{
+  "id": "ch4-34-optimal-hedge-ratio",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Optimal Hedge Ratio",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "873-889"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "minimize-quadratic-variance-by-setting-derivative-to-zero",
+    "insight": "h-star-equals-rho-times-sigma-A-over-sigma-B-or-equivalently-Cov-A-B-over-Var-B",
+    "variantAxes": ["correlation"]
+  },
+  "setup": {
+    "narrative": "You hold one share of stock A with return r_A having variance sigma_A^2. You want to hedge by SHORTING h shares of stock B with return r_B (variance sigma_B^2, correlation rho with r_A).",
+    "rules": [
+      "Portfolio return: P = r_A - h * r_B.",
+      "Var(P) = sigma_A^2 - 2 * h * Cov(r_A, r_B) + h^2 * sigma_B^2 = sigma_A^2 - 2 * h * rho * sigma_A * sigma_B + h^2 * sigma_B^2.",
+      "Goal: choose h to minimize Var(P)."
+    ],
+    "question": "What is the optimal hedge ratio h*?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the variance of a linear combination using covariance algebra.",
+    "Differentiate Var(P) with respect to h and set to 0.",
+    "Verify the second-order condition (positive second derivative)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up Var(P)",
+      "prompt": "P = r_A - h * r_B. Compute Var(P) using the rule Var(X + cY) = Var(X) + c^2 * Var(Y) + 2c * Cov(X, Y).",
+      "options": [
+        { "id": "a", "text": "Var(P) = sigma_A^2 - 2 * h * rho * sigma_A * sigma_B + h^2 * sigma_B^2.", "correct": true },
+        { "id": "b", "text": "Var(P) = sigma_A^2 + h * sigma_B^2.",                                       "correct": false },
+        { "id": "c", "text": "Var(P) = (sigma_A - h * sigma_B)^2.",                                          "correct": false }
+      ],
+      "explanation": "Var(r_A - h * r_B) = Var(r_A) + h^2 * Var(r_B) - 2h * Cov(r_A, r_B). Sub Cov = rho * sigma_A * sigma_B.",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Differentiate and solve",
+      "prompt": "d/dh of Var(P) = -2 * rho * sigma_A * sigma_B + 2 * h * sigma_B^2. Setting to 0:",
+      "options": [
+        { "id": "a", "text": "h* = rho * sigma_A / sigma_B.", "correct": true },
+        { "id": "b", "text": "h* = sigma_A / sigma_B.",        "correct": false },
+        { "id": "c", "text": "h* = rho.",                       "correct": false }
+      ],
+      "explanation": "From -2 * rho * sigma_A * sigma_B + 2 * h * sigma_B^2 = 0, divide by 2 * sigma_B^2: h* = rho * sigma_A / sigma_B."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Verify it's a minimum",
+      "prompt": "Second derivative d^2/dh^2 of Var(P) = ?",
+      "options": [
+        { "id": "a", "text": "2 * sigma_B^2 > 0 (strictly positive).  Confirms h* is a MINIMUM.", "correct": true },
+        { "id": "b", "text": "0.",                                                                  "correct": false },
+        { "id": "c", "text": "Negative.",                                                            "correct": false }
+      ],
+      "explanation": "d^2/dh^2 (h^2 * sigma_B^2) = 2 * sigma_B^2 > 0. Second-order condition for a minimum holds."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What is h* expressed in terms of Cov(r_A, r_B) and Var(r_B)?",
+      "options": [
+        { "id": "a", "text": "h* = Cov(r_A, r_B) / Var(r_B) = rho * sigma_A / sigma_B.", "correct": true },
+        { "id": "b", "text": "h* = sigma_A / sigma_B.",                                     "correct": false },
+        { "id": "c", "text": "h* = Var(r_A) / Var(r_B).",                                    "correct": false }
+      ],
+      "explanation": "h* = rho * sigma_A / sigma_B = Cov(A, B) / Var(B). This is the SAME as the OLS regression coefficient of r_A on r_B -- the hedge ratio is the slope of the best linear predictor."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Residual variance",
+      "prompt": "Plug h* back into Var(P): what is the MINIMUM portfolio variance?",
+      "options": [
+        { "id": "a", "text": "Var(P*) = sigma_A^2 * (1 - rho^2).  When |rho| = 1 (perfect correlation), variance is fully hedged to 0.", "correct": true },
+        { "id": "b", "text": "Var(P*) = 0 always.",                                                                                          "correct": false },
+        { "id": "c", "text": "Var(P*) = sigma_A^2.",                                                                                          "correct": false }
+      ],
+      "explanation": "Substituting h* gives Var(P*) = sigma_A^2 - rho^2 * sigma_A^2 = sigma_A^2 * (1 - rho^2). This is the residual after the linear projection -- minimum achievable variance with a single hedge instrument."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the optimal hedge ratio if you could short TWO different stocks B and C? (Multiple regression.)",
+        "If rho = 0, what's h*? Why?",
+        "How does h* relate to the beta of stock A on the market when B is the market?"
+      ]
+    }
+  ]
+}

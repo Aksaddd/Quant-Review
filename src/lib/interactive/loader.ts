@@ -96,6 +96,20 @@ import ch4Aces           from '../../../content/interactive/ch04/ch4-25-aces.jso
 import ch4GamblerRuin    from '../../../content/interactive/ch04/ch4-26-gamblers-ruin.json';
 import ch4Basketball     from '../../../content/interactive/ch04/ch4-27-basketball-scores.json';
 import ch4CarsOnRoad     from '../../../content/interactive/ch04/ch4-28-cars-on-a-road.json';
+import ch4MeetingProb    from '../../../content/interactive/ch04/ch4-29-meeting-probability.json';
+import ch4TriangleProb   from '../../../content/interactive/ch04/ch4-30-triangle-probability.json';
+import ch4PoissonMemless from '../../../content/interactive/ch04/ch4-31-poisson-memorylessness.json';
+import ch4NormalMoments  from '../../../content/interactive/ch04/ch4-32-normal-moments.json';
+import ch4Noodles        from '../../../content/interactive/ch04/ch4-33-connecting-noodles.json';
+import ch4HedgeRatio     from '../../../content/interactive/ch04/ch4-34-optimal-hedge-ratio.json';
+import ch4DiceRestart    from '../../../content/interactive/ch04/ch4-35-dice-game-restart.json';
+import ch4FirstAce       from '../../../content/interactive/ch04/ch4-36-card-first-ace.json';
+import ch4Coupon         from '../../../content/interactive/ch04/ch4-37-coupon-collection.json';
+import ch4SumUniforms    from '../../../content/interactive/ch04/ch4-38-sum-uniforms.json';
+import ch4JointDefault   from '../../../content/interactive/ch04/ch4-39-joint-default.json';
+import ch4MaxMinUniform  from '../../../content/interactive/ch04/ch4-40-max-min-uniform.json';
+import ch4MaxMinCorr     from '../../../content/interactive/ch04/ch4-41-max-min-correlation.json';
+import ch4RandomAnts     from '../../../content/interactive/ch04/ch4-42-random-ants.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -117,6 +131,9 @@ import techLinAlg        from '../../../content/interactive/techniques/linear-al
 import techProbFound     from '../../../content/interactive/techniques/probability-foundations.json';
 import techCombiCount    from '../../../content/interactive/techniques/combinatorial-counting.json';
 import techCondProb      from '../../../content/interactive/techniques/conditional-probability-and-bayes.json';
+import techDistMoments   from '../../../content/interactive/techniques/distributions-and-moments.json';
+import techExpLinearity  from '../../../content/interactive/techniques/expected-value-and-linearity.json';
+import techOrderStats    from '../../../content/interactive/techniques/order-statistics.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -209,6 +226,20 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch4-26-gamblers-ruin':     ch4GamblerRuin    as unknown as ProblemWalkthrough,
   'ch4-27-basketball-scores': ch4Basketball     as unknown as ProblemWalkthrough,
   'ch4-28-cars-on-a-road':    ch4CarsOnRoad     as unknown as ProblemWalkthrough,
+  'ch4-29-meeting-probability': ch4MeetingProb  as unknown as ProblemWalkthrough,
+  'ch4-30-triangle-probability': ch4TriangleProb as unknown as ProblemWalkthrough,
+  'ch4-31-poisson-memorylessness': ch4PoissonMemless as unknown as ProblemWalkthrough,
+  'ch4-32-normal-moments':    ch4NormalMoments  as unknown as ProblemWalkthrough,
+  'ch4-33-connecting-noodles': ch4Noodles       as unknown as ProblemWalkthrough,
+  'ch4-34-optimal-hedge-ratio': ch4HedgeRatio   as unknown as ProblemWalkthrough,
+  'ch4-35-dice-game-restart': ch4DiceRestart    as unknown as ProblemWalkthrough,
+  'ch4-36-card-first-ace':    ch4FirstAce       as unknown as ProblemWalkthrough,
+  'ch4-37-coupon-collection': ch4Coupon         as unknown as ProblemWalkthrough,
+  'ch4-38-sum-uniforms':      ch4SumUniforms    as unknown as ProblemWalkthrough,
+  'ch4-39-joint-default':     ch4JointDefault   as unknown as ProblemWalkthrough,
+  'ch4-40-max-min-uniform':   ch4MaxMinUniform  as unknown as ProblemWalkthrough,
+  'ch4-41-max-min-correlation': ch4MaxMinCorr   as unknown as ProblemWalkthrough,
+  'ch4-42-random-ants':       ch4RandomAnts     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -230,6 +261,9 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'probability-foundations':  techProbFound     as unknown as Technique,
   'combinatorial-counting':   techCombiCount    as unknown as Technique,
   'conditional-probability-and-bayes': techCondProb as unknown as Technique,
+  'distributions-and-moments': techDistMoments as unknown as Technique,
+  'expected-value-and-linearity': techExpLinearity as unknown as Technique,
+  'order-statistics':         techOrderStats    as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

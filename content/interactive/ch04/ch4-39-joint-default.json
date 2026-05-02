@@ -1,0 +1,95 @@
+{
+  "id": "ch4-39-joint-default",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Joint Default Probability",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "976-1007"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "frechet-bounds-on-P-of-A-or-B-translate-to-bounds-on-correlation",
+    "insight": "find-the-feasible-range-of-P-A-or-B-first-then-back-solve-for-correlation",
+    "variantAxes": ["P_A", "P_B"]
+  },
+  "setup": {
+    "narrative": "Two corporate bonds: bond A defaults next year with probability 0.5; bond B with probability 0.3. The joint behavior (correlation between defaults) is unknown.",
+    "rules": [
+      "Let I_A and I_B be the default indicators (1 if defaults, 0 otherwise).",
+      "E[I_A] = 0.5, E[I_B] = 0.3.",
+      "Var(I_A) = 0.5 * 0.5 = 0.25.  Var(I_B) = 0.3 * 0.7 = 0.21.",
+      "We want: range of P(at least one defaults) AND the corresponding range of correlation rho_AB."
+    ],
+    "question": "What are the maximum and minimum of P(A or B), and what correlations achieve them?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use Frechet bounds on P(A or B): max(P(A), P(B)) <= P(A or B) <= min(P(A) + P(B), 1).",
+    "Convert P(A or B) bounds into correlation bounds via the formula P(A or B) = E[I_A] + E[I_B] - E[I_A * I_B].",
+    "Recognize that rho = +/-1 may NOT be achievable (so don't naively set rho to extremes)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Bounds on P(A or B)",
+      "prompt": "What are the max and min possible values of P(A or B)?",
+      "options": [
+        { "id": "a", "text": "Min: 0.5 (when A defaulting GUARANTEES B defaults too -- so A or B = A).  Max: 0.8 (when defaults are DISJOINT, so P = P(A) + P(B) since both can't simultaneously default).", "correct": true },
+        { "id": "b", "text": "Min: 0, Max: 1.",                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "Both equal to 0.5 + 0.3 = 0.8.",                                                                                                                                                "correct": false }
+      ],
+      "explanation": "Frechet bounds. Min: P(A or B) >= max(P(A), P(B)) = 0.5 (achieved when B subset of A). Max: P(A or B) <= min(P(A) + P(B), 1) = 0.8 (achieved when A and B disjoint).",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Express in terms of correlation",
+      "prompt": "P(A or B) = P(A) + P(B) - P(A AND B) = 0.8 - E[I_A * I_B] = 0.8 - (E[I_A]*E[I_B] + Cov(I_A, I_B)) = 0.8 - 0.15 - rho * sqrt(0.25 * 0.21).  Simplify.",
+      "options": [
+        { "id": "a", "text": "P(A or B) = 0.65 - rho * sqrt(0.0525) = 0.65 - rho * (sqrt(21)/20).",  "correct": true },
+        { "id": "b", "text": "P(A or B) = 0.8.",                                                       "correct": false },
+        { "id": "c", "text": "P(A or B) = rho.",                                                        "correct": false }
+      ],
+      "explanation": "0.8 - 0.15 = 0.65. Then subtract Cov = rho * sqrt(Var_A * Var_B) = rho * sqrt(0.25 * 0.21) = rho * 0.5 * sqrt(0.21)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve for the correlation bounds",
+      "prompt": "For max P(A or B) = 0.8: solve 0.8 = 0.65 - rho * 0.5 * sqrt(0.21). For min P = 0.5: 0.5 = 0.65 - rho * 0.5 * sqrt(0.21).",
+      "options": [
+        { "id": "a", "text": "rho_max P = -0.15 / (0.5 * sqrt(0.21)) = -sqrt(3/7) ≈ -0.655.  rho_min P = +sqrt(3/7) ≈ +0.655.", "correct": true },
+        { "id": "b", "text": "rho_max P = +1, rho_min P = -1.",                                                                   "correct": false },
+        { "id": "c", "text": "rho can be any value.",                                                                              "correct": false }
+      ],
+      "explanation": "From 0.8: 0.15 = rho * 0.5 * sqrt(0.21), but this gives a negative rho since the equation is 0.8 = 0.65 - rho * (...), meaning rho * (...) = -0.15. So rho = -0.15 / (0.5 * sqrt(0.21)). Compute: 0.15 / (0.5 * sqrt(0.21)) = 0.3 / sqrt(0.21) = 0.3 / 0.458 ≈ 0.655. So rho_max P = -0.655. Mirror: rho_min P = +0.655."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final ranges:",
+      "options": [
+        { "id": "a", "text": "P(A or B) ∈ [0.5, 0.8].  rho_AB ∈ [-sqrt(3/7), +sqrt(3/7)] ≈ [-0.655, +0.655].", "correct": true },
+        { "id": "b", "text": "P(A or B) ∈ [0, 1].  rho_AB ∈ [-1, +1].",                                            "correct": false },
+        { "id": "c", "text": "P(A or B) = 0.65.  rho = 0.",                                                          "correct": false }
+      ],
+      "explanation": "Critical lesson: rho cannot reach +1 or -1 here -- the marginals are too asymmetric. Don't NAIVELY set rho = +/-1 and read off P; you'd land outside the feasible range. Always compute the P range first, then back-solve for rho."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "If P(A) = P(B) = 0.5, what's the rho range? Should be [-1, +1] -- verify.",
+        "Why are the rho bounds tightened when P(A) and P(B) differ?",
+        "Compute the correlation when A and B are independent. Verify it's in the feasible range."
+      ]
+    }
+  ]
+}

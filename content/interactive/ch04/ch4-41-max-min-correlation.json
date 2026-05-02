@@ -1,0 +1,97 @@
+{
+  "id": "ch4-41-max-min-correlation",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.6",
+  "title": "Correlation of Max and Min",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "1055-1085"
+  },
+  "mechanism": {
+    "primary": "order-statistics",
+    "structure": "use-Y-times-Z-equals-X1-times-X2-then-compute-Cov-and-divide-by-Var",
+    "insight": "Cov-Y-Z-equals-1-over-36-and-Var-Y-equals-Var-Z-equals-1-over-18-giving-correlation-1-half",
+    "variantAxes": ["n_samples"]
+  },
+  "setup": {
+    "narrative": "X_1, X_2 are i.i.d. Uniform[0, 1]. Let Y = min(X_1, X_2) and Z = max(X_1, X_2).",
+    "rules": [
+      "From the previous problem: E[Y] = 1/3, E[Z] = 2/3.",
+      "Y and Z are NOT independent -- in fact Y <= Z always.",
+      "Want corr(Y, Z) and the conditional CDF P(Y > y | Z < z)."
+    ],
+    "question": "Find Cov(Y, Z), corr(Y, Z), and P(Y > y | Z < z)."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Use the identity Y * Z = min(X_1, X_2) * max(X_1, X_2) = X_1 * X_2 (a clean simplification).",
+    "Compute E[YZ] via E[X_1 X_2] = E[X_1] E[X_2] = 1/4.",
+    "Combine with Var(Y), Var(Z) to get correlation 1/2."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "ladder-step",
+      "label": "Compute Var(Y)",
+      "prompt": "From the order-statistics formula, f_Y(y) = 2 * (1 - y) for n = 2. E[Y^2] = integral 0 to 1 of y^2 * 2 * (1 - y) dy. Compute.",
+      "answerType": "numeric",
+      "answer": 0.166667,
+      "explanation": "E[Y^2] = 2 * integral (y^2 - y^3) dy = 2 * (1/3 - 1/4) = 2 * 1/12 = 1/6. Var(Y) = 1/6 - (1/3)^2 = 1/6 - 1/9 = 3/18 - 2/18 = 1/18."
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute Var(Z)",
+      "prompt": "f_Z(z) = 2z for n = 2. E[Z^2] = integral 0 to 1 of z^2 * 2z dz. Compute.",
+      "answerType": "numeric",
+      "answer": 0.5,
+      "explanation": "E[Z^2] = 2 * integral z^3 dz = 2 * 1/4 = 1/2. Var(Z) = 1/2 - (2/3)^2 = 1/2 - 4/9 = 9/18 - 8/18 = 1/18. (Same variance as Y by symmetry.)"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "The trick for E[YZ]",
+      "prompt": "How do you compute E[Y * Z]?",
+      "options": [
+        { "id": "a", "text": "Y * Z = min(X_1, X_2) * max(X_1, X_2) = X_1 * X_2  (regardless of which is min and which is max).  So E[YZ] = E[X_1 * X_2] = E[X_1] * E[X_2] = (1/2)(1/2) = 1/4.", "correct": true },
+        { "id": "b", "text": "E[YZ] = E[Y] * E[Z] = (1/3)(2/3) = 2/9.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "E[YZ] = 0 since Y and Z have different scales.",                                                                                                                "correct": false }
+      ],
+      "explanation": "Beautiful trick: regardless of which X is bigger, the product min * max equals the product of the two values. So E[YZ] = E[X_1 X_2]. Independence of X_1 and X_2 gives 1/4.",
+      "learnMoreTechnique": "order-statistics"
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Compute Cov and correlation",
+      "prompt": "Cov(Y, Z) = E[YZ] - E[Y]*E[Z] = 1/4 - (1/3)(2/3) = 1/4 - 2/9 = 9/36 - 8/36 = 1/36. corr(Y, Z) = Cov / sqrt(Var(Y) * Var(Z)) = ?",
+      "answerType": "numeric",
+      "answer": 0.5,
+      "explanation": "corr(Y, Z) = (1/36) / sqrt((1/18)(1/18)) = (1/36) / (1/18) = 18/36 = 1/2."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Conditional probability P(Y > y | Z < z)",
+      "prompt": "For 0 < y < z <= 1: P(Y > y AND Z < z) requires BOTH X_1 and X_2 in (y, z]. P = (z - y)^2. P(Z < z) = z^2. So P(Y > y | Z < z) = ?",
+      "options": [
+        { "id": "a", "text": "(z - y)^2 / z^2 (for 0 < y < z <= 1; otherwise 0).", "correct": true },
+        { "id": "b", "text": "1 - z + y.",                                            "correct": false },
+        { "id": "c", "text": "1.",                                                     "correct": false }
+      ],
+      "explanation": "Both X_1 and X_2 must be in (y, z]. Length of that interval: z - y. Probability for each: (z - y). Joint by independence: (z - y)^2. Divide by P(Z < z) = z^2."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the correlation EXACTLY 1/2? Is there a deeper reason?",
+        "Compute E[Z - Y] (the expected RANGE) for n = 2 uniforms.",
+        "How does corr(Y, Z) change with n? (For large n, the min and max become nearly independent.)"
+      ]
+    }
+  ]
+}

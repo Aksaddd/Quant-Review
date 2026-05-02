@@ -1,0 +1,58 @@
+{
+  "id": "order-statistics",
+  "kind": "technique",
+  "name": "Order Statistics",
+  "tagline": "Distributions of the max and min of n i.i.d. random variables. CDF of max = F^n; CDF of min = 1 - (1 - F)^n. Cleanest with the uniform distribution.",
+  "category": "probability",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.6",
+    "title": "Order Statistics",
+    "exemplarProblemId": "ch4-40-max-min-uniform"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "For n i.i.d. random variables X_1, ..., X_n with CDF F and PDF f, the MAX Z_n has CDF F_Z(x) = F(x)^n (all n must be <= x) and PDF f_Z(x) = n * f(x) * F(x)^(n-1). The MIN Y_n has CDF 1 - (1 - F(x))^n (one minus 'all > x') and PDF f_Y(x) = n * f(x) * (1 - F(x))^(n-1)."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "For Uniform[0, 1]: E[max of n] = n/(n+1), E[min of n] = 1/(n+1). The min and max of n uniforms have nontrivial covariance: Cov(min, max) = 1/(2(n+1)^2(n+2)) for general n; for n = 2 it equals 1/36, giving correlation 1/2. Order statistics show up in 'first arrival' problems, ant-on-string problems, and any problem about the extreme of multiple samples."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Max means 'all are <= x'. Min means 'all are > x'. Both transform to powers of F or 1-F, which differentiate cleanly. Once you have the CDF / PDF of the order statistic, expectation and variance follow standard integration."
+    }
+  ],
+  "whenToUse": [
+    "Maximum or minimum of n i.i.d. samples.",
+    "Time until the first / last of n independent events.",
+    "'Random ants on a string' and similar last-arrival problems.",
+    "Joint distribution of order statistics (e.g., min and max).",
+    "Expected range max - min."
+  ],
+  "recipe": [
+    "Find the parent CDF F and PDF f.",
+    "For the max: F_max(x) = F(x)^n; differentiate to get f_max.",
+    "For the min: F_min(x) = 1 - (1 - F(x))^n; differentiate.",
+    "Integrate x * f(x) over the support to get expectation.",
+    "For joint statistics (min and max simultaneously), use the joint CDF P(min > a AND max < b) = P(all in (a, b))^n = (F(b) - F(a))^n."
+  ],
+  "commonPitfalls": [
+    "Confusing 'max' and 'min' formulas (one is F^n, the other is 1 - (1-F)^n).",
+    "Forgetting the factor of n in the PDF (it comes from the chain rule).",
+    "Treating min and max as independent -- they have positive correlation.",
+    "Using the order-statistic formula on non-iid samples (need same distribution AND independence).",
+    "In ant-style problems: forgetting that 'collisions reverse direction' is equivalent to 'ants pass through' due to indistinguishability."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-40-max-min-uniform",      "title": "Expected Value of Max and Min", "chapter": 4, "section": "4.6" },
+    { "problemId": "ch4-41-max-min-correlation", "title": "Correlation of Max and Min",     "chapter": 4, "section": "4.6" },
+    { "problemId": "ch4-42-random-ants",         "title": "Random Ants",                    "chapter": 4, "section": "4.6" }
+  ],
+  "relatedTechniques": ["distributions-and-moments", "integration-techniques", "expected-value-and-linearity"]
+}

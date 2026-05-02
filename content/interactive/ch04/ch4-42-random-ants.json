@@ -1,0 +1,93 @@
+{
+  "id": "ch4-42-random-ants",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.6",
+  "title": "Random Ants",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "1089-1111"
+  },
+  "mechanism": {
+    "primary": "order-statistics",
+    "structure": "ant-collisions-equivalent-to-passing-through-then-max-of-fall-times",
+    "insight": "label-symmetry-makes-collisions-irrelevant-each-ant-falls-off-as-if-passing-through",
+    "variantAxes": ["n_ants", "string_length"]
+  },
+  "setup": {
+    "narrative": "500 ants are placed UNIFORMLY AT RANDOM on a 1-foot string. Each ant moves at 1 ft/min in a randomly chosen direction (left or right with prob 1/2 each). When two ants collide, BOTH reverse direction.",
+    "rules": [
+      "Ant positions are i.i.d. Uniform[0, 1].",
+      "Each ant's direction is i.i.d. uniform on {left, right}.",
+      "All ants move at speed 1.",
+      "Collisions: when two ants meet, both reverse instantly.",
+      "An ant 'falls off' when it reaches position 0 or 1."
+    ],
+    "question": "What is the EXPECTED time until all ants fall off the string?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that ant collisions can be equivalently modeled as ants PASSING THROUGH each other.",
+    "Identify the ant-fall problem as max of n i.i.d. random fall times.",
+    "Compute E[max of n Uniform[0, 1]] = n / (n + 1)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "The collision-pass-through trick",
+      "prompt": "Two ants collide and reverse. Argue why this is equivalent (in terms of POSITION trajectories) to them passing through each other.",
+      "options": [
+        { "id": "a", "text": "Ants are INDISTINGUISHABLE -- only positions matter, not identities. A 'collision and reverse' produces the same set of positions as 'two ants pass through each other and continue.' The labels swap, but who cares.", "correct": true },
+        { "id": "b", "text": "Collisions happen rarely.",                                                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "The ants are massless.",                                                                                                                                                                                              "correct": false }
+      ],
+      "explanation": "If ant A meets ant B and they reverse, the SET of positions is the same as if they had passed through (just labeled differently). Since we only care about WHEN positions become empty, labels don't matter -- treat ants as passing through.",
+      "learnMoreTechnique": "order-statistics"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Reduce to independent fall times",
+      "prompt": "If ants pass through each other, each ant just walks in its INITIAL direction until it falls off. What's the fall-off time for an ant starting at position x going left? Right?",
+      "options": [
+        { "id": "a", "text": "Going left: time = x.  Going right: time = 1 - x.  So fall-off time = x or (1 - x), each with prob 1/2.", "correct": true },
+        { "id": "b", "text": "Always 1/2.",                                                                                                "correct": false },
+        { "id": "c", "text": "Random and unpredictable.",                                                                                    "correct": false }
+      ],
+      "explanation": "An ant at position x going left reaches 0 at time x. Going right reaches 1 at time 1 - x. By the direction-randomization, it's a uniform mixture."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Reduce to the max of n samples",
+      "prompt": "The TIME until all ants are off equals the max of all individual fall-off times. What's the distribution of an individual ant's fall-off time T?",
+      "options": [
+        { "id": "a", "text": "T = direction * x + (1 - direction) * (1 - x) where x is uniform on [0, 1] and direction is uniform on {0, 1}.  Equivalently, T is itself UNIFORM on [0, 1]: T = x with prob 1/2 (left), T = 1 - x with prob 1/2 (right). Either way, T ~ Uniform[0, 1].", "correct": true },
+        { "id": "b", "text": "T is exponential.",                                                                                                                                                                                                                                          "correct": false },
+        { "id": "c", "text": "T is always exactly 1.",                                                                                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "x is uniform on [0, 1]. Going left: T = x is uniform[0, 1]. Going right: T = 1 - x is uniform[0, 1]. Mixture of uniforms is uniform. So T ~ Uniform[0, 1] for each ant, independently."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "All-fall-off time = max of 500 i.i.d. Uniform[0, 1]. From the previous problem, E[max of n] = n/(n+1). Plug in n = 500.",
+      "answerType": "numeric",
+      "answer": 0.998,
+      "explanation": "E[T] = 500/501 ≈ 0.998 minutes. Almost a full minute -- because the max of many uniforms is very close to 1."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the answer SO close to 1? What's the variance of max of 500 uniforms?",
+        "What if directions were biased (left with prob 0.7)? Would E[T] change?",
+        "Generalize to a string of length L. What's E[T]?"
+      ]
+    }
+  ]
+}

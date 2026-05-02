@@ -1,0 +1,107 @@
+{
+  "id": "ch4-40-max-min-uniform",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.6",
+  "title": "Expected Value of Max and Min",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "1033-1051"
+  },
+  "mechanism": {
+    "primary": "order-statistics",
+    "structure": "use-CDF-formulas-then-integrate-x-times-f-x",
+    "insight": "for-uniform-on-0-1-CDF-of-max-is-x-to-the-n-and-CDF-of-min-is-1-minus-1-minus-x-to-the-n",
+    "variantAxes": ["n_samples", "support"]
+  },
+  "setup": {
+    "narrative": "X_1, X_2, ..., X_n are i.i.d. Uniform[0, 1] random variables.",
+    "rules": [
+      "Each X_i has CDF F(x) = x and PDF f(x) = 1 on [0, 1].",
+      "Z_n = max(X_1, ..., X_n).",
+      "Y_n = min(X_1, ..., X_n)."
+    ],
+    "question": "Find the CDF, PDF, and expected value of both Z_n and Y_n."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Apply the order-statistic CDF formulas (F^n for max, 1 - (1-F)^n for min).",
+    "Differentiate to get PDFs.",
+    "Integrate x * f(x) to compute expectations."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "CDF of the max",
+      "prompt": "Z_n = max(X_1, ..., X_n) <= x iff ALL X_i <= x. P(all X_i <= x) = ?",
+      "options": [
+        { "id": "a", "text": "F(x)^n = x^n  (since each X_i has CDF F(x) = x).", "correct": true },
+        { "id": "b", "text": "n * F(x).",                                          "correct": false },
+        { "id": "c", "text": "1 - (1 - x)^n.",                                       "correct": false }
+      ],
+      "explanation": "All n samples must be <= x. By independence, this is the product of n identical CDFs: x^n.",
+      "learnMoreTechnique": "order-statistics"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "PDF and E[Z_n]",
+      "prompt": "f_Z(x) = d/dx[x^n] = n * x^(n-1).  E[Z_n] = integral from 0 to 1 of x * n * x^(n-1) dx = ?",
+      "options": [
+        { "id": "a", "text": "n / (n + 1)", "correct": true },
+        { "id": "b", "text": "1 / 2",        "correct": false },
+        { "id": "c", "text": "1 / n",        "correct": false }
+      ],
+      "explanation": "Integrand is n * x^n. Antiderivative: x^(n+1) / (n+1) * n = n * x^(n+1) / (n+1). Evaluated 0 to 1: n / (n+1)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "CDF of the min",
+      "prompt": "Y_n > x iff ALL X_i > x. So F_Y(x) = 1 - P(all X_i > x). What's F_Y?",
+      "options": [
+        { "id": "a", "text": "F_Y(x) = 1 - (1 - x)^n.  PDF: n * (1 - x)^(n-1).", "correct": true },
+        { "id": "b", "text": "F_Y(x) = x^n.",                                       "correct": false },
+        { "id": "c", "text": "F_Y(x) = (1 - x)^n.",                                  "correct": false }
+      ],
+      "explanation": "P(all > x) = (1 - x)^n. So F_Y(x) = 1 - (1 - x)^n. PDF by differentiation: f_Y(x) = n(1 - x)^(n-1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Compute E[Y_n]",
+      "prompt": "E[Y_n] = integral from 0 to 1 of x * n * (1 - x)^(n-1) dx. Substitute u = 1 - x and integrate. (Or recognize symmetry: by symmetry of the uniform distribution about 1/2, E[Y_n] = 1 - E[Z_n] = 1 - n/(n+1) = 1/(n+1).)",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "a", "text": "1 / (n + 1).",  "correct": true },
+        { "id": "b", "text": "1 / 2.",          "correct": false },
+        { "id": "c", "text": "0.",               "correct": false }
+      ],
+      "explanation": "By symmetry: if X uniform on [0, 1] then 1 - X is also uniform on [0, 1]. So min(X) and 1 - max(1 - X) match. E[min] = 1 - E[max] = 1 - n/(n+1) = 1/(n+1)."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final values for n = 10:",
+      "options": [
+        { "id": "a", "text": "E[Z_10] = 10/11 ≈ 0.909.  E[Y_10] = 1/11 ≈ 0.091.", "correct": true },
+        { "id": "b", "text": "Both equal 0.5.",                                       "correct": false },
+        { "id": "c", "text": "E[Z_10] = 10, E[Y_10] = 0.",                            "correct": false }
+      ],
+      "explanation": "n/(n+1) and 1/(n+1) for n=10. Sanity check: E[Z_n] + E[Y_n] = 1 (by symmetry) -- holds here. As n grows, Z_n -> 1 and Y_n -> 0 (extremes spread out)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute Var(Z_n) for the uniform[0, 1] case. (Use E[Z_n^2] = integral x^2 * n * x^(n-1) dx.)",
+        "Generalize to uniform on [a, b]: what are E[Z_n] and E[Y_n]?",
+        "What's E[Z_n] for n i.i.d. exponentials with rate lambda?"
+      ]
+    }
+  ]
+}

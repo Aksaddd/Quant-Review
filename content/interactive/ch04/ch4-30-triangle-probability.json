@@ -1,0 +1,94 @@
+{
+  "id": "ch4-30-triangle-probability",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.4",
+  "title": "Probability of Triangle",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "749-762"
+  },
+  "mechanism": {
+    "primary": "distributions-and-moments",
+    "structure": "geometric-probability-on-uniform-square-with-triangle-inequality",
+    "insight": "the-three-conditions-x-less-1-half-y-greater-1-half-y-less-x-plus-1-half-cut-out-a-triangle-of-area-1-eighth",
+    "variantAxes": ["stick_length"]
+  },
+  "setup": {
+    "narrative": "A stick of length 1 is broken at TWO uniformly random points x, y in [0, 1]. The two cuts produce three pieces.",
+    "rules": [
+      "x and y are independent and uniform on [0, 1].",
+      "WLOG order them: let x < y. Then the three segments have lengths x, y - x, 1 - y.",
+      "Three lengths form a triangle iff each is less than the sum of the other two -- equivalently, each less than 1/2."
+    ],
+    "question": "What is the probability the three pieces form a triangle?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply the triangle inequality: each side < sum of the others = 1 - that side, so each side < 1/2.",
+    "Translate this into three constraints in (x, y) space.",
+    "Compute the resulting triangular region's area as a fraction of the unit square."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Triangle inequality => each side < 1/2",
+      "prompt": "Three side lengths a, b, c (with a + b + c = 1) form a valid triangle iff each is less than the sum of the others -- equivalently, each is less than (a + b + c)/2 = 1/2. With a = x, b = y - x, c = 1 - y, what are the three constraints?",
+      "options": [
+        { "id": "a", "text": "x < 1/2,  y - x < 1/2 (i.e., y < x + 1/2),  1 - y < 1/2 (i.e., y > 1/2).", "correct": true },
+        { "id": "b", "text": "x + y < 1.",                                                                  "correct": false },
+        { "id": "c", "text": "x = y = 1/3.",                                                                 "correct": false }
+      ],
+      "explanation": "Each of x, y - x, 1 - y must be less than 1/2. Translate: x < 1/2; y > 1/2; y < x + 1/2.",
+      "learnMoreTechnique": "distributions-and-moments"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Geometry of the favorable region (x < y)",
+      "prompt": "In the (x, y) plane with 0 <= x < y <= 1, the constraints x < 1/2 AND y > 1/2 AND y < x + 1/2 cut out what region?",
+      "options": [
+        { "id": "a", "text": "A right triangle with vertices (0, 1/2), (1/2, 1/2), (1/2, 1).  Area = 1/2 * (1/2) * (1/2) = 1/8.", "correct": true },
+        { "id": "b", "text": "A rectangle of area 1/4.",                                                                            "correct": false },
+        { "id": "c", "text": "The entire half-square (x < y) of area 1/2.",                                                          "correct": false }
+      ],
+      "explanation": "The three constraints carve a small right triangle. Vertices: (0, 1/2), (1/2, 1/2), (1/2, 1). Right-triangle area = 1/2 * leg * leg = 1/2 * 1/2 * 1/2 = 1/8."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Account for symmetry",
+      "prompt": "We assumed x < y. By symmetry, the case y < x contributes another 1/8 to the favorable region. Total favorable area in the unit square?",
+      "options": [
+        { "id": "a", "text": "1/8 + 1/8 = 1/4.", "correct": true },
+        { "id": "b", "text": "1/8.",              "correct": false },
+        { "id": "c", "text": "1/2.",              "correct": false }
+      ],
+      "explanation": "Symmetry doubles the favorable region. Total area = 2 * 1/8 = 1/4 of the unit square."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "P(triangle) = ?",
+      "options": [
+        { "id": "a", "text": "1/4.",  "correct": true },
+        { "id": "b", "text": "1/2.",   "correct": false },
+        { "id": "c", "text": "1/3.",   "correct": false }
+      ],
+      "explanation": "1/4. Notice this is a small probability -- only one in four random breaks gives a valid triangle. Most breaks produce one piece >= 1/2, violating the triangle inequality."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if you break the stick in 3 places (4 pieces) and ask about the four longest forming a quadrilateral?",
+        "What if you break the stick at one point (giving 2 pieces) -- can two pieces ever form a triangle?",
+        "Generalize: if the stick has length L, does the answer change?"
+      ]
+    }
+  ]
+}

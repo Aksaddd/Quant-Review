@@ -1,0 +1,87 @@
+{
+  "id": "ch4-29-meeting-probability",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.4",
+  "title": "Meeting Probability",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "727-745"
+  },
+  "mechanism": {
+    "primary": "distributions-and-moments",
+    "structure": "geometric-probability-on-uniform-square",
+    "insight": "P-they-meet-equals-area-of-band-X-minus-Y-less-than-5-divided-by-60-times-60-square",
+    "variantAxes": ["wait_minutes", "interval_length"]
+  },
+  "setup": {
+    "narrative": "Two bankers each arrive at the office at a uniformly random time between 5:00 and 6:00 AM. Each stays for exactly 5 minutes after arriving, then leaves.",
+    "rules": [
+      "Both arrival times X, Y are independent and uniform on [0, 60] (minutes after 5:00).",
+      "They MEET iff their visit intervals overlap, i.e., |X - Y| < 5."
+    ],
+    "question": "What is the probability they meet?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize the joint (X, Y) distribution as uniform on the [0, 60] x [0, 60] square.",
+    "Identify the favorable region |X - Y| < 5 as a band around the diagonal.",
+    "Compute the area of the band (via complement: two corner triangles)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify the joint distribution",
+      "prompt": "X and Y are independent uniform on [0, 60]. What is the joint distribution of (X, Y)?",
+      "options": [
+        { "id": "a", "text": "Uniform on the 60 x 60 square -- joint pdf = 1/3600 on the square, 0 elsewhere.", "correct": true },
+        { "id": "b", "text": "Joint normal.",                                                                    "correct": false },
+        { "id": "c", "text": "Exponential.",                                                                      "correct": false }
+      ],
+      "explanation": "Independent uniforms give joint uniform on the product space. Total area = 60 * 60 = 3600.",
+      "learnMoreTechnique": "distributions-and-moments"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Identify the favorable region",
+      "prompt": "They meet iff |X - Y| < 5. This is the region between the lines Y = X - 5 and Y = X + 5 inside the square. The COMPLEMENT region (no meeting) consists of:",
+      "options": [
+        { "id": "a", "text": "Two right triangles in the corners (top-left and bottom-right), each with legs of length 60 - 5 = 55.", "correct": true },
+        { "id": "b", "text": "A single rectangle.",                                                                                     "correct": false },
+        { "id": "c", "text": "The whole square.",                                                                                        "correct": false }
+      ],
+      "explanation": "The band |X - Y| < 5 sits along the diagonal. The two regions outside it are right triangles in opposite corners. Each has legs of 55 (60 - 5)."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute area of no-meeting region",
+      "prompt": "Sum of two right triangles, each with legs 55. Total area = 2 * (1/2 * 55 * 55) = ?",
+      "answerType": "numeric",
+      "answer": 3025,
+      "explanation": "2 * (55^2 / 2) = 55^2 = 3025."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit P(meet)",
+      "prompt": "P(meet) = 1 - P(no meet) = 1 - 3025/3600 = ?",
+      "answerType": "numeric",
+      "answer": 0.1597,
+      "explanation": "P(meet) = 575/3600 = 23/144 ≈ 0.1597."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: each banker stays w minutes within a window of length T. P(meet)?",
+        "Verify: as w -> T, P(meet) -> 1. As w -> 0, P(meet) -> 0.",
+        "What if the bankers have DIFFERENT stay times w_1, w_2? Re-derive."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "ch4-31-poisson-memorylessness",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.4",
+  "title": "Poisson Process and Memorylessness",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "766-783"
+  },
+  "mechanism": {
+    "primary": "distributions-and-moments",
+    "structure": "exponential-waiting-times-with-memoryless-property",
+    "insight": "memorylessness-makes-the-future-wait-time-distribution-identical-regardless-of-elapsed-time",
+    "variantAxes": ["arrival_rate"]
+  },
+  "setup": {
+    "narrative": "Buses arrive at a stop following a Poisson process with rate lambda = 0.1 per minute (one bus on average every 10 minutes).",
+    "rules": [
+      "Poisson arrivals: number of buses in any interval of length t is Poisson(lambda*t).",
+      "Inter-arrival times are Exponential(lambda) -- mean 1/lambda = 10 minutes.",
+      "Exponential is MEMORYLESS: P(T > s + t | T > s) = P(T > t)."
+    ],
+    "question": "You arrive at the stop at a uniformly random time. (a) What is your expected wait until the next bus? (b) On average, how long ago did the LAST bus arrive?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply memorylessness: expected future wait = 1/lambda regardless of arrival time.",
+    "Recognize the inspection paradox: random sampling biases toward LONG intervals.",
+    "Conclude both 'time to next' and 'time since last' equal 10 min in expectation."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Inter-arrival distribution",
+      "prompt": "Buses arrive Poisson(lambda). What's the distribution of the time between two consecutive arrivals?",
+      "options": [
+        { "id": "a", "text": "Exponential(lambda) with mean 1/lambda.", "correct": true },
+        { "id": "b", "text": "Uniform on [0, 1/lambda].",                  "correct": false },
+        { "id": "c", "text": "Normal(1/lambda, lambda^(-2)).",              "correct": false }
+      ],
+      "explanation": "Poisson process inter-arrivals are exactly Exponential(lambda). E[T] = 1/lambda; Var(T) = 1/lambda^2.",
+      "learnMoreTechnique": "distributions-and-moments"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply memorylessness",
+      "prompt": "Memorylessness: P(T > s + t | T > s) = P(T > t). What does this mean for your expected wait time after arriving at a random moment?",
+      "options": [
+        { "id": "a", "text": "Expected remaining wait = 1/lambda = 10 minutes, regardless of how long since the last bus.", "correct": true },
+        { "id": "b", "text": "Expected wait approaches 0 as time passes.",                                                   "correct": false },
+        { "id": "c", "text": "Expected wait depends on the last arrival time.",                                                "correct": false }
+      ],
+      "explanation": "Memorylessness: an exponential clock resets each instant. Whether you arrived 1 second after the last bus or 30 minutes after, your expected wait for the next is the same: 10 minutes."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Time since the last bus",
+      "prompt": "By the same memorylessness argument applied BACKWARD in time, the expected time since the LAST bus is also 1/lambda = 10 minutes. Why does this seem paradoxical?",
+      "options": [
+        { "id": "a", "text": "It implies the AVERAGE inter-arrival interval as you experience it is 20 minutes -- longer than the true average of 10. This is the INSPECTION PARADOX: you're more likely to land in a long interval.", "correct": true },
+        { "id": "b", "text": "It's just wrong -- the answer is actually 5.",                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "There's no paradox.",                                                                                                                                                                                    "correct": false }
+      ],
+      "explanation": "Inspection paradox. Random arrival is uniform over TIME, not uniform over INTERVALS. Longer intervals 'cover more time' so you're more likely to fall in one. The interval you fall in has expected length 2/lambda, twice the unbiased mean."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final answers:",
+      "options": [
+        { "id": "a", "text": "Expected wait until next bus: 10 minutes.  Expected time since last bus: 10 minutes.", "correct": true },
+        { "id": "b", "text": "Both: 5 minutes.",                                                                       "correct": false },
+        { "id": "c", "text": "Wait: 0; since last: 10.",                                                                  "correct": false }
+      ],
+      "explanation": "Both 10 minutes by memorylessness. The interval you sampled into has expected length 20 -- the inspection paradox -- but each side averages 10."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the EXPECTED LENGTH OF THE INTERVAL you arrive in? Use E[X^2] / E[X] for general distributions.",
+        "If buses arrive on a deterministic schedule (every 10 minutes exactly), what's your expected wait time?",
+        "Why does ONLY the exponential have the memoryless property among continuous distributions?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "distributions-and-moments",
+  "kind": "technique",
+  "name": "Distributions and Moments",
+  "tagline": "Recognize the distribution behind a problem (uniform, normal, exponential, Poisson) and use the moment-generating function to extract moments without integrating.",
+  "category": "probability",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.4",
+    "title": "Discrete and Continuous Distributions",
+    "exemplarProblemId": "ch4-32-normal-moments"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Most quant probability problems reduce to recognizing one of a handful of canonical distributions: uniform (geometric problems on intervals), normal (sums and limits, Black-Scholes), exponential (waiting times for Poisson processes), Poisson (rare events with fixed rate), binomial (success counts), geometric (trials until first success). Picking the right one is half the battle."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The moment-generating function (MGF) M(t) = E[e^(tX)] encodes ALL moments. The k-th moment is the k-th derivative of M at t = 0. For the standard normal, M(t) = e^(t^2/2), so the MGF method gives E[X^k] for any k without integrating. For sums of independent random variables, MGFs MULTIPLY -- a powerful trick for finding the distribution of a sum."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "First, name the distribution. Second, look up (or derive) its MGF. Third, take derivatives at t = 0 for moments. Fourth, exploit memorylessness (exponential / geometric) when the problem has 'no memory of the past'."
+    }
+  ],
+  "whenToUse": [
+    "Geometric probability problems on intervals or regions (uniform).",
+    "Waiting-time problems for events with constant rate (exponential, Poisson).",
+    "Computing E[X^k] for normal random variables (MGF approach).",
+    "Convolutions / sums of independent random variables (multiply MGFs).",
+    "Anywhere you see 'memoryless' as a property of the process."
+  ],
+  "recipe": [
+    "Identify the distribution from the problem structure: uniform on a region, exponential between events, normal in the limit of sums, etc.",
+    "Compute the MGF or look up the standard MGFs.",
+    "For moments E[X^k]: differentiate M(t) k times and evaluate at t = 0.",
+    "For sums X_1 + X_2 + ... of independent random variables: M_sum(t) = product of M_i(t).",
+    "Use memorylessness (P(T > s + t | T > s) = P(T > t)) for exponential waiting-time problems."
+  ],
+  "commonPitfalls": [
+    "Confusing PDF with CDF -- PDF integrates to 1 over the support; CDF goes from 0 to 1.",
+    "Forgetting that E[X^k] requires differentiating MGF k times -- one fewer or one more changes the answer.",
+    "Mistaking a standard normal moment formula -- E[X^(2k)] = (2k-1)!! for X ~ N(0,1).",
+    "Applying the inspection paradox incorrectly: when you sample at a random time, you're MORE likely to land inside a long interval.",
+    "Treating 'two arrivals per minute' as 'guaranteed two arrivals' -- it's a rate, not a count."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-29-meeting-probability",   "title": "Meeting Probability",                "chapter": 4, "section": "4.4" },
+    { "problemId": "ch4-30-triangle-probability",  "title": "Probability of Triangle",             "chapter": 4, "section": "4.4" },
+    { "problemId": "ch4-31-poisson-memorylessness","title": "Poisson Process and Memorylessness",  "chapter": 4, "section": "4.4" },
+    { "problemId": "ch4-32-normal-moments",        "title": "Moments of the Normal Distribution",  "chapter": 4, "section": "4.4" }
+  ],
+  "relatedTechniques": ["probability-foundations", "integration-techniques", "limits-and-derivatives"]
+}

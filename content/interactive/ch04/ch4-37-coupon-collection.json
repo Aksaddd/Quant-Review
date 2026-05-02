@@ -1,0 +1,100 @@
+{
+  "id": "ch4-37-coupon-collection",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Coupon Collection",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "953-973"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "decompose-total-time-as-sum-of-geometric-waiting-times",
+    "insight": "the-i-th-new-coupon-takes-Geometric-N-over-N-i-plus-1-trials-and-they-sum-to-N-times-H-N",
+    "variantAxes": ["n_types", "n_coupons_collected"]
+  },
+  "setup": {
+    "narrative": "A box contains one of N distinct coupon types, uniformly at random. You buy boxes one at a time until you have at least one of each type.",
+    "rules": [
+      "Coupon types are i.i.d. uniform over {1, 2, ..., N}.",
+      "Part A: How many boxes on average?",
+      "Part B: After exactly n boxes (n possibly less than what's needed), what's the expected number of DISTINCT types collected?"
+    ],
+    "question": "Find E[X] for both questions."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Decompose total trips as a sum of geometric waiting times.",
+    "Use E[Geometric(p)] = 1/p to sum: N/N + N/(N-1) + ... + N/1 = N * H_N.",
+    "For Part B, use indicators I_i = 1 if type i appears at least once."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Part A: decompose into stages",
+      "prompt": "Let X_i = number of additional coupons needed to get the i-th NEW type, GIVEN i - 1 types are already collected. What's the distribution of X_i?",
+      "options": [
+        { "id": "a", "text": "Geometric with success probability (N - i + 1) / N.  E[X_i] = N / (N - i + 1).", "correct": true },
+        { "id": "b", "text": "Uniform on {1, ..., N}.",                                                            "correct": false },
+        { "id": "c", "text": "Constant 1.",                                                                          "correct": false }
+      ],
+      "explanation": "After collecting i - 1 types, each new coupon is 'new' with probability (N - i + 1)/N. Wait time to first success is Geometric. Expected wait: 1/p = N/(N - i + 1).",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Part A: sum the expected waits",
+      "prompt": "E[total] = E[X_1] + E[X_2] + ... + E[X_N] = sum from i=1 to N of N/(N - i + 1). Simplify.",
+      "options": [
+        { "id": "a", "text": "= N * (1/N + 1/(N-1) + ... + 1/1) = N * H_N (the N-th harmonic number).", "correct": true },
+        { "id": "b", "text": "= N^2.",                                                                     "correct": false },
+        { "id": "c", "text": "= N log N exactly.",                                                          "correct": false }
+      ],
+      "explanation": "Re-index: as i runs 1..N, (N - i + 1) runs N..1. So sum = N * (1/N + 1/(N-1) + ... + 1/1) = N * H_N. Asymptotically H_N ~ ln(N) + gamma."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Part A: compute for N = 10",
+      "prompt": "E[trips to collect all 10 types] = 10 * H_10 = 10 * (1 + 1/2 + 1/3 + ... + 1/10). Compute.",
+      "answerType": "numeric",
+      "answer": 29.29,
+      "explanation": "H_10 = 1 + 1/2 + 1/3 + ... + 1/10 ≈ 2.929. So 10 * H_10 ≈ 29.29. To collect 10 types you need ~29 boxes on average."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Part B: expected distinct types after n boxes",
+      "prompt": "Let Y = number of distinct types after n boxes. Decompose using indicators: Y = sum of I(type i appears at least once). E[Y] = sum of P(type i in at least one of n boxes) = ?",
+      "options": [
+        { "id": "a", "text": "E[Y] = N * (1 - (1 - 1/N)^n).", "correct": true },
+        { "id": "b", "text": "E[Y] = n.",                       "correct": false },
+        { "id": "c", "text": "E[Y] = N.",                       "correct": false }
+      ],
+      "explanation": "P(type i missed in one box) = (N - 1)/N. P(type i missed in n boxes) = ((N - 1)/N)^n. So P(type i appears) = 1 - ((N-1)/N)^n. Sum N indicators."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Part B: compute for N = 10, n = 20",
+      "prompt": "E[Y] for N = 10 types and n = 20 boxes = 10 * (1 - 0.9^20). Compute to 4 decimals.",
+      "answerType": "numeric",
+      "answer": 8.7842,
+      "explanation": "0.9^20 ≈ 0.1216. So 10 * (1 - 0.1216) = 10 * 0.8784 ≈ 8.78. After 20 boxes you typically have around 8-9 of the 10 types."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How many boxes on average for N = 365 (one of each day-of-year)?",
+        "Asymptotically, E[trips] ~ N * ln(N). What's the variance? (It's known to scale as N^2 * pi^2 / 6.)",
+        "Why does the SUM of geometric waits give the answer? What if we wanted a specific TYPE first?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "ch4-36-card-first-ace",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Card Game -- First Ace",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "908-924"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "indicator-decomposition-each-non-ace-has-1-over-5-chance-of-being-before-all-aces",
+    "insight": "the-4-aces-divide-the-deck-into-5-equal-slots-each-non-ace-uniformly-occupies-one",
+    "variantAxes": ["n_special_cards", "deck_size"]
+  },
+  "setup": {
+    "narrative": "A standard 52-card deck is shuffled uniformly at random. Cards are dealt one at a time face up. We observe how many cards we see UP TO AND INCLUDING the first ace.",
+    "rules": [
+      "There are 4 aces in the deck and 48 non-aces.",
+      "Let X = position of the first ace (i.e., 1 if the first card is an ace).",
+      "We want E[X]."
+    ],
+    "question": "What is the expected position of the first ace?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Decompose X = 1 + (number of non-aces before the first ace).",
+    "For each non-ace card, compute the probability it appears before all 4 aces (1/5 by symmetry).",
+    "Sum 48 indicators using linearity of expectation."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Decompose X",
+      "prompt": "X = position of the first ace. Decompose X using indicators.",
+      "options": [
+        { "id": "a", "text": "X = 1 + sum over the 48 non-ace cards of I(this non-ace appears before any ace).  E[X] = 1 + 48 * P(specific non-ace before all aces).", "correct": true },
+        { "id": "b", "text": "X = 4! / 52!.",                                                                                                                            "correct": false },
+        { "id": "c", "text": "X = sum of 4 binomials.",                                                                                                                   "correct": false }
+      ],
+      "explanation": "X equals 1 (the ace itself) plus however many non-aces sit before it. Each non-ace contributes 1 indicator -- linearity of expectation handles the rest.",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "P(specific non-ace before all aces)",
+      "prompt": "Consider one specific non-ace card and the 4 aces. By symmetry, where can this non-ace be relative to the 4 aces? What's P(it comes BEFORE all 4)?",
+      "options": [
+        { "id": "a", "text": "1/5.  The 4 aces partition the deck (relative to this non-ace) into 5 equally likely 'slots' (before all aces, between aces 1&2, ..., after all aces).", "correct": true },
+        { "id": "b", "text": "1/4.",                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "4/52.",                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Among the 5 random objects (4 aces + 1 specific non-ace), the non-ace is equally likely to be in any of the 5 positions. P(first) = 1/5."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Apply linearity",
+      "prompt": "E[X] = 1 + 48 * (1/5). Compute.",
+      "answerType": "numeric",
+      "answer": 10.6,
+      "explanation": "E[X] = 1 + 48/5 = 1 + 9.6 = 10.6. So on average the first ace appears at position 10.6 -- well before the typical 'middle' of the deck."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Generalize",
+      "prompt": "For m ordinary cards and n special cards, the expected position of the first special card is:",
+      "template": "E[X] = 1 + __[a]__ / (n + 1).",
+      "blanks": [
+        { "id": "a", "answers": ["m"], "caseInsensitive": true }
+      ],
+      "explanation": "E[X] = 1 + m/(n + 1). With m = 48 (non-aces) and n = 4 (aces): 1 + 48/5 = 10.6. The intuition: each ordinary card has 1/(n + 1) chance of being before all special cards."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the expected position of the SECOND ace? (Hint: condition on the first.)",
+        "What's E[position of last ace]?",
+        "What if you only had 1 ace (Joker)? Expected position?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "ch4-35-dice-game-restart",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.5",
+  "title": "Dice Game (4-5-6 restart)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "893-904"
+  },
+  "mechanism": {
+    "primary": "expected-value-and-linearity",
+    "structure": "law-of-total-expectation-with-self-referential-restart",
+    "insight": "set-up-E-X-equals-half-times-2-plus-half-times-5-plus-E-X-and-solve",
+    "variantAxes": ["restart_set"]
+  },
+  "setup": {
+    "narrative": "You roll a fair 6-sided die. You receive the face value as a payoff. If the face is 4, 5, or 6, you ALSO get to roll again (and add the new payoff). The game continues until you roll 1, 2, or 3.",
+    "rules": [
+      "Payoff per roll: face value (1 through 6).",
+      "Continue rolling iff the most recent roll was 4, 5, or 6.",
+      "Stop iff the most recent roll was 1, 2, or 3.",
+      "All payoffs from all rolls accumulate."
+    ],
+    "question": "What is the expected total payoff E[X]?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Apply the Law of Total Expectation, conditioning on the first roll's outcome.",
+    "Recognize the self-reference: a {4, 5, 6} roll restarts the game.",
+    "Solve the resulting linear equation for E[X]."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Condition on the first roll",
+      "prompt": "Let E = E[total payoff]. Condition on the first roll Y. What's E[X | Y in {1, 2, 3}] and E[X | Y in {4, 5, 6}]?",
+      "options": [
+        { "id": "a", "text": "E[X | Y in {1,2,3}] = 2 (avg of 1, 2, 3, then game over).  E[X | Y in {4,5,6}] = 5 + E (avg of 4, 5, 6 plus the restarted game has expected value E).", "correct": true },
+        { "id": "b", "text": "Both equal 3.5.",                                                                                                                                            "correct": false },
+        { "id": "c", "text": "E[X | Y in {4,5,6}] = 5 (no restart).",                                                                                                                       "correct": false }
+      ],
+      "explanation": "Stop case: payoff is just Y, average 2. Continue case: payoff is Y (avg 5) plus the future expected total -- which is again E by self-similarity.",
+      "learnMoreTechnique": "expected-value-and-linearity"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply Law of Total Expectation",
+      "prompt": "E = (1/2) * E[X | stop] + (1/2) * E[X | continue] = (1/2) * 2 + (1/2) * (5 + E). Solve for E.",
+      "options": [
+        { "id": "a", "text": "E - E/2 = 1 + 5/2 = 7/2.  So E/2 = 7/2, E = 7.", "correct": true },
+        { "id": "b", "text": "E = 3.5.",                                          "correct": false },
+        { "id": "c", "text": "E = 6.",                                            "correct": false }
+      ],
+      "explanation": "(1/2) * 2 + (1/2) * 5 + (1/2) * E = 1 + 5/2 + E/2. So E = 7/2 + E/2, giving E/2 = 7/2, E = 7."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "What is E[X]?",
+      "answerType": "numeric",
+      "answer": 7,
+      "explanation": "E[X] = 7. Sanity check: a single roll has expected value 3.5; the restart rule roughly doubles the game length, so 7 is in the right ballpark."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute the expected number of rolls before stopping.",
+        "Generalize: if rolling >= k restarts (and < k stops), find E[X].",
+        "What if 'continue' on 4-6 doubles the next roll's payoff (rather than just adding)?"
+      ]
+    }
+  ]
+}
