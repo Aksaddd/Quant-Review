@@ -1,0 +1,84 @@
+{
+  "id": "ch7-13-poisonous-wine",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.2",
+  "title": "Poisonous Wine: 10 Mice, 1000 Bottles",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "523-545"
+  },
+  "mechanism": {
+    "primary": "binary-and-bit-tricks",
+    "structure": "label-bottles-with-binary-codewords-and-have-mouse-i-drink-from-bottles-with-bit-i-set",
+    "insight": "10-mice-encode-2-to-the-10-equals-1024-distinct-patterns-enough-for-1000-bottles",
+    "variantAxes": ["bottle_count", "mouse_count", "test_rounds"]
+  },
+  "setup": {
+    "narrative": "1000 bottles, exactly one is poisoned. Poison kills in 18 hours, no symptoms before death. You have 10 mice and 20 hours. Identify the poisoned bottle.",
+    "rules": [
+      "10 mice -> 2^10 = 1024 distinct dead/alive patterns -- enough for 1000 bottles.",
+      "Label each bottle with its 10-bit binary code.",
+      "Mouse i drinks from every bottle whose i-th bit is 1.",
+      "After 18 hours, read off the dead/alive pattern as a 10-bit number -- that's the poisoned bottle's index."
+    ],
+    "question": "Why does this work, and why is exactly 10 mice the minimum?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Apply binary encoding to a parallel testing problem.",
+    "Match information-theoretic lower bound: ceiling(log_2 1000) = 10.",
+    "Reason about extensions: what if you had 17 hours instead of 20? Or 2000 bottles?"
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why 10 mice?",
+      "prompt": "Each mouse provides one binary outcome (dead or alive). With k mice you get 2^k distinct outcome patterns. Minimum k to distinguish 1000 bottles?",
+      "options": [
+        { "id": "a", "text": "k = ceiling(log_2 1000) = 10 (since 2^9 = 512 < 1000 <= 2^10 = 1024).", "correct": true },
+        { "id": "b", "text": "k = 1000 (one mouse per bottle).",                                       "correct": false },
+        { "id": "c", "text": "k = log 1000 / log e ~ 6.9.",                                             "correct": false }
+      ],
+      "explanation": "Information-theoretic lower bound: distinguishing N outcomes requires log_2 N bits. With binary outcomes (dead/alive), we need at least ceil(log_2 N) tests. For N = 1000, that's 10.",
+      "learnMoreTechnique": "binary-and-bit-tricks"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Decoding the result",
+      "prompt": "Mice 6, 7, and 9 die (numbering from 1). What's the poisoned bottle number?",
+      "options": [
+        { "id": "a", "text": "Binary pattern with bits 6, 7, 9 set: 0101100000_2 = 2^8 + 2^6 + 2^5 = 256 + 64 + 32 = 352.  (Reading bit positions as 10..1.)", "correct": true },
+        { "id": "b", "text": "6 + 7 + 9 = 22.",                                                                                                                  "correct": false },
+        { "id": "c", "text": "6 * 7 * 9 = 378.",                                                                                                                  "correct": false }
+      ],
+      "explanation": "Mouse i corresponds to bit i. Dead mice indicate which bits are 1 in the bottle's binary label. The bit positions are conventionally numbered from 1 = LSB to 10 = MSB; either convention works as long as you're consistent. Using the source convention (bit 10 = MSB), bottle = 0101100000_2 = 352."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Information-bound reasoning:",
+      "template": "With k mice, distinguish at most __[a]__ outcomes.  For N = 1000 bottles, k = __[b]__ minimum.  For N = 2000 bottles, k = __[c]__.",
+      "blanks": [
+        { "id": "a", "answers": ["2^k", "2**k", "2 to the k"], "caseInsensitive": true },
+        { "id": "b", "answers": ["10", "ten"], "caseInsensitive": true },
+        { "id": "c", "answers": ["11", "eleven"], "caseInsensitive": true }
+      ],
+      "explanation": "k mice -> 2^k outcomes. N=1000 -> k=10. N=2000 -> k=11 (since 2^10 = 1024 < 2000 <= 2^11 = 2048)."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if you only had 17 hours (less than the 18 hour kill time)? (You couldn't test -- need to wait full 18.)",
+        "What if you have multiple test rounds (e.g., 38 hours)? (You can do TWO 18-hour rounds; with 5 mice and 2 rounds, encode 3^5 = 243 outcomes since each mouse has 3 states: died-round-1, died-round-2, alive.)",
+        "How many mice if 2 bottles are poisoned out of 1000? (The dead set is the OR of two binary labels -- harder to decode; need a non-adaptive group-testing design.)"
+      ]
+    }
+  ]
+}

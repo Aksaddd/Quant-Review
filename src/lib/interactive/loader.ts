@@ -161,6 +161,10 @@ import ch7MinMax         from '../../../content/interactive/ch07/ch7-06-find-min
 import ch7Search2D       from '../../../content/interactive/ch07/ch7-07-search-2d-grid.json';
 import ch7FibComplexity  from '../../../content/interactive/ch07/ch7-08-fibonacci-complexity.json';
 import ch7MaxSubarray    from '../../../content/interactive/ch07/ch7-09-max-subarray.json';
+import ch7PowerOf2       from '../../../content/interactive/ch07/ch7-10-power-of-2.json';
+import ch7MultBy7        from '../../../content/interactive/ch07/ch7-11-multiply-by-7.json';
+import ch7ProbSim        from '../../../content/interactive/ch07/ch7-12-probability-simulation.json';
+import ch7PoisonWine     from '../../../content/interactive/ch07/ch7-13-poisonous-wine.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -194,6 +198,7 @@ import techGreeksHedging from '../../../content/interactive/techniques/greeks-an
 import techExoticOpts    from '../../../content/interactive/techniques/exotic-options-and-strategies.json';
 import techPortfolioRisk from '../../../content/interactive/techniques/portfolio-and-risk.json';
 import techAlgoFund      from '../../../content/interactive/techniques/algorithm-design-fundamentals.json';
+import techBitTricks     from '../../../content/interactive/techniques/binary-and-bit-tricks.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -351,6 +356,10 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch7-07-search-2d-grid':    ch7Search2D       as unknown as ProblemWalkthrough,
   'ch7-08-fibonacci-complexity': ch7FibComplexity as unknown as ProblemWalkthrough,
   'ch7-09-max-subarray':      ch7MaxSubarray    as unknown as ProblemWalkthrough,
+  'ch7-10-power-of-2':        ch7PowerOf2       as unknown as ProblemWalkthrough,
+  'ch7-11-multiply-by-7':     ch7MultBy7        as unknown as ProblemWalkthrough,
+  'ch7-12-probability-simulation': ch7ProbSim   as unknown as ProblemWalkthrough,
+  'ch7-13-poisonous-wine':    ch7PoisonWine     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -384,6 +393,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'exotic-options-and-strategies': techExoticOpts as unknown as Technique,
   'portfolio-and-risk':       techPortfolioRisk as unknown as Technique,
   'algorithm-design-fundamentals': techAlgoFund as unknown as Technique,
+  'binary-and-bit-tricks':    techBitTricks     as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

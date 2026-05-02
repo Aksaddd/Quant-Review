@@ -1,0 +1,70 @@
+{
+  "id": "ch7-11-multiply-by-7",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.2",
+  "title": "Multiplication by 7 via Shift/Subtract",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "478-496"
+  },
+  "mechanism": {
+    "primary": "binary-and-bit-tricks",
+    "structure": "rewrite-7-as-8-minus-1-and-use-left-shift-for-the-times-8",
+    "insight": "any-constant-c-near-2-to-the-k-can-be-encoded-via-one-shift-plus-a-handful-of-add-or-subtract",
+    "variantAxes": ["constant_value", "overflow"]
+  },
+  "setup": {
+    "narrative": "Multiply an integer x by 7 without using the multiplication operator.",
+    "rules": [
+      "x << k = x * 2^k.",
+      "Choose 2^k near 7: 2^3 = 8.",
+      "x * 7 = x * (8 - 1) = (x << 3) - x."
+    ],
+    "question": "Implement and analyze the trick. What's the overflow consideration?"
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Decompose a constant as 2^k +/- small terms.",
+    "Use left-shift for fast multiplication by powers of 2.",
+    "Recognize overflow risk on 32-bit ints when x is near INT_MAX / 8."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Decomposition",
+      "prompt": "Which decomposition gives a clean shift+add/subtract expression for x * 7?",
+      "options": [
+        { "id": "a", "text": "x * 7 = (x << 3) - x.  One shift, one subtraction.",          "correct": true },
+        { "id": "b", "text": "x * 7 = (x << 2) + (x << 1) + x = 4x + 2x + x = 7x. Three shifts, three additions -- works but wasteful.", "correct": false },
+        { "id": "c", "text": "x * 7 = x / (1/7).",                                              "correct": false }
+      ],
+      "explanation": "Both (x << 3) - x and (x << 2) + (x << 1) + x are correct, but the first uses fewer operations. Compilers will pick optimal sequences automatically when 7 is a known constant.",
+      "learnMoreTechnique": "binary-and-bit-tricks"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Commit -- overflow",
+      "prompt": "Identify the overflow risk in (x << 3) - x.",
+      "options": [
+        { "id": "a", "text": "(x << 3) overflows for |x| > INT_MAX/8 even though the final 7x might fit. Use a wider type or check before shifting.", "correct": true },
+        { "id": "b", "text": "Subtraction always overflows.",                                                                                          "correct": false },
+        { "id": "c", "text": "There is no overflow risk.",                                                                                              "correct": false }
+      ],
+      "explanation": "Intermediate (x << 3) can overflow before the subtraction. For example, x = 300_000_000 fits in int but x << 3 = 2.4e9 doesn't. Promote x to int64 (or use unsigned) when this matters."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Express x * 9 with shifts and adds. (x * 9 = (x << 3) + x.)",
+        "How does the compiler choose between this and IMUL? (For known constants, compilers do strength reduction; for variables, IMUL is faster on modern CPUs.)",
+        "Apply to floating point: are there shift tricks? (No, IEEE 754 multiplication is one instruction; bit tricks help only for special powers of 2 via exponent manipulation.)"
+      ]
+    }
+  ]
+}

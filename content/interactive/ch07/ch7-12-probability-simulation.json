@@ -1,0 +1,81 @@
+{
+  "id": "ch7-12-probability-simulation",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.2",
+  "title": "Simulate Probability p from a Fair Coin",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "500-519"
+  },
+  "mechanism": {
+    "primary": "binary-and-bit-tricks",
+    "structure": "compare-fair-coin-tosses-against-the-binary-expansion-of-p-bit-by-bit",
+    "insight": "the-i-th-toss-decides-only-when-the-i-th-bit-of-p-equals-the-toss-otherwise-it-classifies-as-WIN-or-LOSE",
+    "variantAxes": ["probability_value"]
+  },
+  "setup": {
+    "narrative": "You have a fair coin (P(heads) = P(tails) = 1/2). Design a procedure that wins with probability exactly p in (0, 1).",
+    "rules": [
+      "Write p in binary: p = 0.p_1 p_2 p_3 ... where p_i in {0, 1}.",
+      "Toss coin; let s_i in {0, 1} be the toss (0 = tails, 1 = heads).",
+      "If s_i < p_i (s = 0, p = 1): WIN, stop.",
+      "If s_i > p_i (s = 1, p = 0): LOSE, stop.",
+      "If s_i = p_i: continue to next toss."
+    ],
+    "question": "Why does this give P(WIN) = p exactly?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Express p in its binary expansion.",
+    "Argue uniformity bit-by-bit.",
+    "Compute the expected number of tosses (geometric, mean 2)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why this works",
+      "prompt": "Consider a single bit position i. Conditional on getting to step i (i.e., s_1=p_1, ..., s_{i-1}=p_{i-1}), what is P(WIN at step i)?",
+      "options": [
+        { "id": "a", "text": "P(WIN | reach step i) = 1/2 if p_i = 1 (need s_i = 0 = tails), 0 if p_i = 0.  Combined: contribution to overall P(WIN) is p_i * 2^(-i).", "correct": true },
+        { "id": "b", "text": "P(WIN | reach step i) = p (independent of i).",                                                                                                  "correct": false },
+        { "id": "c", "text": "P(WIN | reach step i) = 1.",                                                                                                                       "correct": false }
+      ],
+      "explanation": "If p_i = 1: s_i must be 0 to win at step i (probability 1/2). If p_i = 0: s_i must be 1 to LOSE at step i; we never WIN at step i when p_i = 0. Reaching step i has probability 2^(-(i-1)) (no conflict in prior bits).",
+      "learnMoreTechnique": "binary-and-bit-tricks"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Sum over bits",
+      "prompt": "Total P(WIN) = sum over i of (prob reach step i) * (prob WIN at step i | reach step i). Reach step i with prob 2^(-(i-1)). What's the closed form?",
+      "options": [
+        { "id": "a", "text": "P(WIN) = sum_i 2^(-(i-1)) * (p_i * 1/2) = sum_i p_i * 2^(-i) = p (the binary expansion of p).", "correct": true },
+        { "id": "b", "text": "P(WIN) = 1/2.",                                                                                    "correct": false },
+        { "id": "c", "text": "P(WIN) = 1 - p.",                                                                                  "correct": false }
+      ],
+      "explanation": "P(WIN at step i) = 2^(-(i-1)) * p_i * (1/2) = p_i * 2^(-i). Summing over i: P(WIN) = sum p_i * 2^(-i) = p (binary expansion definition). Exact, no approximation."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Commit -- p = 1/4",
+      "prompt": "p = 1/4 = 0.01 in binary. The procedure: toss 1 must be tails (s_1 = 0 = p_1); then toss 2 must be tails (s_2 = 0) but we WIN ONLY if p_2 > s_2, which means p_2 = 1, s_2 = 0. So WIN = (00). What's P(WIN)?",
+      "answerType": "numeric",
+      "answer": 0.25,
+      "explanation": "Sequences: (00) -> WIN; (01) -> LOSE at step 2 (s_2 > p_2 = 1, no wait p_2 = 1, s_2 = 1 means s_2 = p_2 = 1, so we continue but there's no bit 3 so... actually the example in the source says 00 wins, 01/10/11 lose. Let me reconsider: p = 0.01_2 means p_1 = 0, p_2 = 1. Toss s_1 = 0 (matches p_1) -> continue. Toss s_2 = 0 (< p_2 = 1) -> WIN. Toss s_2 = 1 (= p_2) -> continue but we'd need p_3 = 0, p_4 = 0 ... infinite tail; effectively never WINS. Toss s_1 = 1 (> p_1 = 0) -> LOSE. Net P(WIN) = (1/2) * (1/2) = 1/4."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the expected number of tosses? (Each toss continues with prob 1/2, so the expected length is geometric: ~ 2.)",
+        "How does this differ from rejection sampling? (Rejection sampling can have unbounded variance for certain p; this is exact and tight.)",
+        "Generalize: simulate a fair die from a fair coin. (Need ~ log_2 6 ~ 2.58 expected tosses minimum; rejection sampling pushes to higher numbers.)"
+      ]
+    }
+  ]
+}

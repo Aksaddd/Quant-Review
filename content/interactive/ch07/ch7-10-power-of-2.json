@@ -1,0 +1,70 @@
+{
+  "id": "ch7-10-power-of-2",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.2",
+  "title": "Test if Integer is a Power of 2",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "455-474"
+  },
+  "mechanism": {
+    "primary": "binary-and-bit-tricks",
+    "structure": "x-AND-x-minus-one-clears-lowest-set-bit-result-zero-iff-only-one-bit-was-set",
+    "insight": "powers-of-2-have-exactly-one-bit-set-and-2-to-n-minus-1-has-the-lower-n-bits-set",
+    "variantAxes": ["sign", "alternative_methods"]
+  },
+  "setup": {
+    "narrative": "Determine whether a positive integer x is a power of 2 (i.e., x = 2^n for some n >= 0).",
+    "rules": [
+      "2^n in binary: a single 1 followed by n zeros (e.g., 8 = 1000).",
+      "2^n - 1 in binary: n ones (e.g., 7 = 0111).",
+      "AND them: 2^n & (2^n - 1) = 0. For non-powers-of-2, at least one bit overlaps."
+    ],
+    "question": "Why does (x > 0) && ((x & (x - 1)) == 0) test for power of 2?"
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Use the bit pattern of 2^n and 2^n - 1.",
+    "Identify edge cases: x = 0 should NOT pass.",
+    "Argue O(1) time."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Bit pattern argument",
+      "prompt": "Why is x & (x - 1) == 0 EXACTLY when x has 0 or 1 bits set?",
+      "options": [
+        { "id": "a", "text": "Subtracting 1 flips the lowest set bit and all bits below it. ANDing with x then clears that bit. The result is 0 iff x had only that one bit set.", "correct": true },
+        { "id": "b", "text": "Subtracting 1 always halves x.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "Bitwise AND is just modular arithmetic.",                                                                                                              "correct": false }
+      ],
+      "explanation": "Take x = b_k...b_1 0 1 0...0 (lowest set bit at position p). Then x - 1 = b_k...b_1 0 0 1...1 (flips position p and below). x & (x-1) = b_k...b_1 0 0 0...0 (clears position p). Result is 0 iff x originally had only the bit at position p.",
+      "learnMoreTechnique": "binary-and-bit-tricks"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Commit -- edge case x = 0",
+      "prompt": "Why is the (x > 0) check necessary in (x > 0) && (x & (x - 1)) == 0?",
+      "options": [
+        { "id": "a", "text": "Without it, x = 0 passes the second test (0 & -1 = 0) but 0 is NOT a power of 2.", "correct": true },
+        { "id": "b", "text": "It speeds up the check.",                                                            "correct": false },
+        { "id": "c", "text": "It's unnecessary.",                                                                   "correct": false }
+      ],
+      "explanation": "0 - 1 = -1 (all 1s in two's complement). 0 & (-1) = 0. So 0 falsely passes the bit test. The (x > 0) gate excludes both 0 and negative numbers."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Apply the same identity to count the number of SET bits (population count) in O(popcount) time using x &= x - 1.",
+        "In hardware: many CPUs have POPCNT and BSF (bit scan forward) instructions for these. Are bit-tricks still useful? (Yes for portable code and where compiler intrinsics are absent.)",
+        "Test if x is a power of 4 specifically. (Power of 2 AND only odd-position bits set: (x & (x-1)) == 0 && (x & 0x55555555) != 0.)"
+      ]
+    }
+  ]
+}
