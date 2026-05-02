@@ -1,0 +1,94 @@
+{
+  "id": "ch6-03-american-vs-european",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "American vs. European",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "124-168"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "three-arguments-time-value-dominant-strategy-jensens-inequality-show-no-early-exercise-of-american-call-on-non-dividend-stock",
+    "insight": "the-american-call-equals-the-european-call-when-the-stock-pays-no-dividends-but-the-american-put-can-have-strictly-greater-value",
+    "variantAxes": ["call_or_put", "dividends_present"]
+  },
+  "setup": {
+    "narrative": "American options can be exercised at ANY time before maturity. European options can only be exercised AT maturity. We compare them on a non-dividend-paying stock.",
+    "rules": [
+      "C >= c (American call >= European call) and P >= p, by definition.",
+      "We claim: C = c (no early exercise of American call on non-dividend stock).",
+      "We also claim: P > p sometimes (early exercise of American put can be optimal)."
+    ],
+    "question": "Why never exercise an American call on a non-dividend-paying stock early? Why is American put potentially strictly more valuable than European put?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use put-call parity to decompose the call: c = (S - K) + (K - K * exp(-rT)) + p, all positive components.",
+    "Construct the dominant-strategy alternative to early exercise.",
+    "Recognize that the same arguments DON'T extend to American puts due to convexity at S = 0."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Decompose the European call",
+      "prompt": "Use put-call parity c + K * exp(-rT) = p + S to express c. Rearrange to highlight intrinsic vs. time value.",
+      "options": [
+        { "id": "a", "text": "c = (S - K) + (K - K * exp(-rT)) + p.  Three positive components: (intrinsic) + (time value of strike) + (put value).", "correct": true },
+        { "id": "b", "text": "c = S - K.",                                                                                                                "correct": false },
+        { "id": "c", "text": "c = max(S - K, 0).",                                                                                                          "correct": false }
+      ],
+      "explanation": "Solving the parity for c: c = p + S - K * exp(-rT) = (S - K) + (K - K * exp(-rT)) + p. The three components are all >= 0 individually.",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Why no early exercise of an American call",
+      "prompt": "If you exercise the American call early at time t, you get S - K (the intrinsic value). What does the decomposition show?",
+      "options": [
+        { "id": "a", "text": "The European call already contains intrinsic value PLUS positive time value of the strike PLUS positive put value. So c >= S - K. American call >= European call >= S - K. Selling the option dominates exercising.", "correct": true },
+        { "id": "b", "text": "Early exercise is always optimal.",                                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "Early exercise is irrelevant.",                                                                                                                                                                                            "correct": false }
+      ],
+      "explanation": "c >= S - K (intrinsic). And American C >= c. So C >= S - K (intrinsic). Equivalently: SELLING the call yields C, which is >= what you'd get by exercising. So no early exercise."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Dominant strategy alternative",
+      "prompt": "Instead of exercising at time t (getting S - K), what alternative gives strictly MORE?",
+      "options": [
+        { "id": "a", "text": "Keep the call alive, short the stock at S, and lend K dollars at rate r.  At t: same cash S - K.  At T: the alternative has K * exp(rT) - S_T plus the call's value (call payoff replaces the short loss). Net: positive.", "correct": true },
+        { "id": "b", "text": "There's no better alternative.",                                                                                                                                                                                                  "correct": false },
+        { "id": "c", "text": "Exercise and immediately rebuy.",                                                                                                                                                                                                "correct": false }
+      ],
+      "explanation": "By keeping the call (instead of exercising), shorting the stock, and lending K, you preserve the option's UPSIDE while locking in the same intrinsic cash. Tomorrow you have positive cash flow regardless of where S_T lands."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Why doesn't this extend to American puts?",
+      "prompt": "The same Jensen-style argument: call payoff max(S - K, 0) is convex with C(0) = 0, so E[C(S_T)] >= C(E[S_T]) >= C(S). This relies on C(0) = 0. For PUTS, the payoff max(K - S, 0) has P(0) = K, NOT 0. What goes wrong?",
+      "options": [
+        { "id": "a", "text": "The Jensen argument fails because P(lambda * S) >= lambda * P(S) (NOT <=). This means E[discounted P(S_T)] is NOT necessarily >= P(S) -- early exercise can be optimal for deep ITM American puts.", "correct": true },
+        { "id": "b", "text": "Same conclusion: never exercise American puts.",                                                                                                                                                  "correct": false },
+        { "id": "c", "text": "Puts can never be exercised.",                                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Convex P with P(0) = K > 0 fails the homogeneity property that drives the call result. Deep in-the-money puts: exercising NOW gives K - S (cash, earns interest). Waiting may LOSE interest if S stays low. Early exercise can be strictly optimal."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What changes if the stock pays dividends? (American call on dividend-paying stock CAN be optimally exercised just before a dividend.)",
+        "Show by example: when is an American put strictly more valuable than a European put?",
+        "Why does the 'dominant strategy' argument fail for puts? Walk through the cash flows."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "ch6-07-inverse-stock-price",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "Inverse Stock Price Contract",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "350-368"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "ito-on-1-over-S-yields-GBM-with-modified-drift-then-discount",
+    "insight": "1-over-S-is-also-GBM-with-drift-minus-r-plus-sigma-squared-and-volatility-minus-sigma",
+    "variantAxes": ["function_form"]
+  },
+  "setup": {
+    "narrative": "Under the risk-neutral measure, dS = r * S * dt + sigma * S * dW. We want to price a contract that pays 1 / S_T at maturity T.",
+    "rules": [
+      "Apply Itô's lemma to V(S) = 1 / S.",
+      "Use d^2 V / dS^2 = 2 / S^3 in the Itô correction.",
+      "Discount the expected payoff at rate r."
+    ],
+    "question": "Find the price of the contract paying 1 / S_T."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply Itô's lemma to the function 1/S where S follows GBM.",
+    "Recognize that 1/S itself is a GBM (with modified drift).",
+    "Use the lognormal expectation formula to discount and arrive at the price."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Apply Itô to V = 1/S",
+      "prompt": "f(S) = 1/S has f'(S) = -1/S^2 and f''(S) = 2/S^3. Apply Itô with dS = r*S*dt + sigma*S*dW.",
+      "options": [
+        { "id": "a", "text": "dV = (-r/S + sigma^2 / S) * dt - sigma/S * dW = (-r + sigma^2) * V * dt - sigma * V * dW.", "correct": true },
+        { "id": "b", "text": "dV = -r * V * dt - sigma * V * dW.",                                                          "correct": false },
+        { "id": "c", "text": "dV = 0.",                                                                                       "correct": false }
+      ],
+      "explanation": "Itô: dV = f'(S)*dS + (1/2)*f''(S)*sigma^2*S^2*dt = (-1/S^2)*(r*S*dt + sigma*S*dW) + (1/2)*(2/S^3)*sigma^2*S^2*dt = (-r/S + sigma^2/S)*dt - (sigma/S)*dW. Substituting V = 1/S gives dV = (-r + sigma^2) * V * dt - sigma * V * dW.",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Identify V's distribution",
+      "prompt": "V follows GBM with drift -r + sigma^2 and volatility sigma (with a sign flip on the dW). What does this give for E[V_T]?",
+      "options": [
+        { "id": "a", "text": "Apply Itô again to ln(V): d(ln V) = (-r + (1/2) * sigma^2) * dt - sigma * dW. So ln(V_T) ~ N(ln(V_0) + (-r + sigma^2/2)*T, sigma^2 * T). Therefore E[V_T] = V_0 * exp((-r + sigma^2)*T) = (1/S) * exp((-r + sigma^2)*T).", "correct": true },
+        { "id": "b", "text": "E[V_T] = 1/S.",                                                                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "E[V_T] = exp(r*T)/S.",                                                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "For GBM dV = mu*V*dt + sigma_V*V*dW: E[V_T] = V_0 * exp(mu * T). Here mu = -r + sigma^2 (the dt coefficient). So E[V_T] = (1/S) * exp((sigma^2 - r) * T)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Discount to today",
+      "prompt": "Risk-neutral price = exp(-rT) * E[V_T]. Compute.",
+      "options": [
+        { "id": "a", "text": "Price = exp(-rT) * (1/S) * exp((sigma^2 - r) * T) = (1/S) * exp(-rT + sigma^2 * T - rT) = (1/S) * exp((sigma^2 - 2r) * T).", "correct": true },
+        { "id": "b", "text": "Price = 1/S.",                                                                                                                  "correct": false },
+        { "id": "c", "text": "Price = exp(-2rT) / S.",                                                                                                          "correct": false }
+      ],
+      "explanation": "Multiplying exp(-rT) into E[V_T] = (1/S) * exp((sigma^2 - r) * T): Price = (1/S) * exp((sigma^2 - 2r) * T)."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final price of the 1/S_T contract:",
+      "options": [
+        { "id": "a", "text": "(1/S) * exp((sigma^2 - 2r) * T).  When sigma^2 > 2r, this exceeds 1/S. When sigma^2 < 2r, less.", "correct": true },
+        { "id": "b", "text": "1/S exactly.",                                                                                       "correct": false },
+        { "id": "c", "text": "S * exp(-rT).",                                                                                       "correct": false }
+      ],
+      "explanation": "(1/S) * exp((sigma^2 - 2r) * T). Sanity check: when sigma = 0 (deterministic) and r = 0, price = 1/S, which is correct. With volatility, Jensen's inequality (1/S is convex) makes E[1/S_T] > 1/E[S_T], pushing the price up."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify by Jensen: 1/x is convex, so E[1/S_T] > 1/E[S_T] = 1/(S * exp(rT)). Combine with discounting.",
+        "Find the price of S_T^2 (square of the stock).",
+        "What's the price of log(S_T)?"
+      ]
+    }
+  ]
+}

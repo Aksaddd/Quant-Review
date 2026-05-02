@@ -1,0 +1,95 @@
+{
+  "id": "ch6-05-bsm-pde",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "Black-Scholes-Merton PDE",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "194-227"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "delta-hedge-eliminates-the-dW-term-leaving-a-risk-free-portfolio-that-must-earn-r",
+    "insight": "the-PDE-emerges-from-applying-Ito-to-V-and-equating-to-r-Pi-after-delta-hedging",
+    "variantAxes": ["dividend_yield", "rate_assumption"]
+  },
+  "setup": {
+    "narrative": "The stock follows geometric Brownian motion under the real-world measure: dS = mu * S * dt + sigma * S * dW. We want to price an option V(S, t).",
+    "rules": [
+      "V(S, t) is the option price, a function of stock and time.",
+      "We construct a delta-hedged portfolio: Pi = V - Delta * S where Delta = dV/dS.",
+      "If Pi is risk-free (no dW term), it must earn the risk-free rate r.",
+      "Itô on V: dV = (dV/dt + mu * S * dV/dS + (1/2) * sigma^2 * S^2 * d^2V/dS^2) * dt + sigma * S * dV/dS * dW."
+    ],
+    "question": "Derive the BSM PDE."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply Itô's lemma to V(S, t).",
+    "Construct the delta-hedged portfolio Pi = V - (dV/dS) * S.",
+    "Equate dPi to r * Pi * dt and read off the BSM PDE."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Apply Itô to V",
+      "prompt": "With dS = mu * S * dt + sigma * S * dW, Itô on V(S, t) gives dV = (drift) dt + (diffusion) dW. What's the diffusion coefficient?",
+      "options": [
+        { "id": "a", "text": "sigma * S * dV/dS.  (The dW term scales with the stock's diffusion sigma * S times the option's sensitivity dV/dS.)", "correct": true },
+        { "id": "b", "text": "sigma * dV/dt.",                                                                                                          "correct": false },
+        { "id": "c", "text": "0.",                                                                                                                       "correct": false }
+      ],
+      "explanation": "Itô's lemma: dV = (dV/dt + mu*S*dV/dS + (1/2)*sigma^2*S^2*d^2V/dS^2) * dt + sigma * S * dV/dS * dW. The dW coefficient inherits sigma*S from dS scaled by dV/dS.",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Construct the delta-hedged portfolio",
+      "prompt": "Define Pi = V - Delta * S where Delta = dV/dS. dPi = dV - Delta * dS. What's the dW term in dPi?",
+      "options": [
+        { "id": "a", "text": "dW coefficient = sigma * S * dV/dS - Delta * sigma * S = sigma * S * (dV/dS - Delta) = 0.  Pi is RISK-FREE.", "correct": true },
+        { "id": "b", "text": "dW coefficient = sigma * S.",                                                                                    "correct": false },
+        { "id": "c", "text": "dW coefficient is random.",                                                                                       "correct": false }
+      ],
+      "explanation": "Choosing Delta = dV/dS exactly cancels the dW exposure. The delta-hedged portfolio has zero diffusion -- locally risk-free."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Equate to r * Pi * dt",
+      "prompt": "Since Pi is risk-free over [t, t + dt], no-arbitrage forces dPi = r * Pi * dt. The drift part of dPi is (dV/dt + (1/2) * sigma^2 * S^2 * d^2V/dS^2) * dt (the mu*S*dV/dS terms cancel between V and Delta*S). Setting equal to r * Pi:",
+      "options": [
+        { "id": "a", "text": "dV/dt + (1/2) * sigma^2 * S^2 * d^2V/dS^2 = r * (V - S * dV/dS), which rearranges to:  dV/dt + r * S * dV/dS + (1/2) * sigma^2 * S^2 * d^2V/dS^2 = r * V.", "correct": true },
+        { "id": "b", "text": "dV/dt = mu * V.",                                                                                                                                                "correct": false },
+        { "id": "c", "text": "dV/dS = 0.",                                                                                                                                                      "correct": false }
+      ],
+      "explanation": "After cancellation: drift of Pi = dV/dt + (1/2)*sigma^2*S^2*d^2V/dS^2. Set equal to r * Pi = r * (V - S * dV/dS). Move r*S*dV/dS to the left and you get the BSM PDE."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final BSM PDE:",
+      "options": [
+        { "id": "a", "text": "dV/dt + r * S * dV/dS + (1/2) * sigma^2 * S^2 * d^2V/dS^2 = r * V.", "correct": true },
+        { "id": "b", "text": "dV/dt + mu * S * dV/dS = 0.",                                          "correct": false },
+        { "id": "c", "text": "dV/dt = sigma^2 * V.",                                                  "correct": false }
+      ],
+      "explanation": "The Black-Scholes-Merton PDE. Crucially, the REAL-WORLD drift mu disappears -- only the risk-free rate r appears. This is risk-neutral pricing in disguise: the delta hedge eliminates 'risk premium' and prices the option as if everything earned r."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Connect to Feynman-Kac: V(t, S) = exp(-r * tau) * E[payoff | S_t = S] under risk-neutral measure with dS = r * S * dt + sigma * S * dW.",
+        "What boundary condition gives the call price? (V(S, T) = max(S - K, 0).)",
+        "How does the PDE change with continuous dividend yield y? (Replace r with r - y in the dV/dS term.)"
+      ]
+    }
+  ]
+}

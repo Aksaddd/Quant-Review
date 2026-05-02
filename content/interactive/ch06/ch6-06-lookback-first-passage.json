@@ -1,0 +1,103 @@
+{
+  "id": "ch6-06-lookback-first-passage",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "First-Passage Option",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "323-344"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "exponential-martingale-applied-to-log-S-which-is-driftless-under-risk-neutral-measure-with-r-equals-zero",
+    "insight": "P-of-S-ever-hits-H-equals-1-over-H-by-the-martingale-S-itself-with-optional-stopping",
+    "variantAxes": ["barrier_level", "interest_rate"]
+  },
+  "setup": {
+    "narrative": "Zero interest rate, current stock price S = 1, no dividends. An option pays $1 the FIRST TIME the stock hits level H (where H > 1). What is this option worth today?",
+    "rules": [
+      "r = 0, dS = sigma * S * dW under risk-neutral measure (no drift).",
+      "Payoff $1 at the first time tau such that S(tau) = H.",
+      "We want the price at t = 0."
+    ],
+    "question": "Price the option."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize S itself is a martingale (driftless GBM with r = 0).",
+    "Apply optional stopping: E[S(tau)] = S(0).",
+    "Use that S either reaches H or drifts to 0 to derive the price = 1/H."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify the martingale",
+      "prompt": "Under risk-neutral measure with r = 0, dS = sigma * S * dW. Is S a martingale?",
+      "options": [
+        { "id": "a", "text": "Yes -- the drift coefficient is 0, so S is a martingale.", "correct": true },
+        { "id": "b", "text": "No, S is geometric Brownian motion, not a martingale.",     "correct": false },
+        { "id": "c", "text": "Only the log of S is a martingale.",                          "correct": false }
+      ],
+      "explanation": "A process is a martingale iff its drift is 0. Here dS = 0*S*dt + sigma*S*dW, so drift = 0 and S itself is a martingale.",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply optional stopping",
+      "prompt": "Let tau = first time S hits H, with the convention that if S never hits H, S drifts to 0 (which is absorbing for GBM). Apply E[S(tau)] = S(0) = 1.",
+      "options": [
+        { "id": "a", "text": "P * H + (1 - P) * 0 = 1.  Solve: P = 1/H, where P = P(S ever reaches H).", "correct": true },
+        { "id": "b", "text": "P = 1 always.",                                                              "correct": false },
+        { "id": "c", "text": "P = 1/sigma.",                                                                "correct": false }
+      ],
+      "explanation": "GBM with no drift: S either hits H (with probability P) or drifts asymptotically to 0 (with prob 1 - P). E[S(tau)] = P*H + (1-P)*0 = P*H. Setting equal to S(0) = 1: P = 1/H."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Translate to option price",
+      "prompt": "The option pays $1 when (and if) S hits H. With r = 0 (no discounting), the price is the risk-neutral probability of payout. So price = ?",
+      "options": [
+        { "id": "a", "text": "Price = P = 1/H.", "correct": true },
+        { "id": "b", "text": "Price = H.",        "correct": false },
+        { "id": "c", "text": "Price = 1.",         "correct": false }
+      ],
+      "explanation": "Risk-neutral price = E[discounted payoff] = E[$1 * I(S hits H)] = P(S ever hits H) = 1/H. (Discount factor is 1 since r = 0.)"
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "For H = 2, the option price is?",
+      "answerType": "numeric",
+      "answer": 0.5,
+      "explanation": "1/H = 1/2 = $0.50. Doubling H halves the price -- intuitive, since H farther away is harder to reach."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "No-arbitrage replication",
+      "prompt": "Confirm by replication: how many shares must you buy NOW to ensure $1 at the hitting time?",
+      "options": [
+        { "id": "a", "text": "Buy 1/H shares at $1 each. Total cost: $1/H. When S = H, you have (1/H) * H = $1. So the option's value <= $1/H.", "correct": true },
+        { "id": "b", "text": "Buy H shares.",                                                                                                       "correct": false },
+        { "id": "c", "text": "Cannot be replicated.",                                                                                                 "correct": false }
+      ],
+      "explanation": "Replication: buy 1/H shares now (cost = 1/H). Hold until S = H, sell for (1/H) * H = $1. This caps the option price at 1/H. Combined with the lower bound from optional stopping: price = 1/H exactly."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the price when r > 0? (Hint: discounting needs care -- the FIRST-PASSAGE TIME is random, so you can't just discount by exp(-r*T).)",
+        "What's the analogous formula for hitting a level H < 1 (downside barrier)? (The same: 1/H, but H < 1 makes 1/H > 1.)",
+        "Connect to the Black-Scholes formula for digital options."
+      ]
+    }
+  ]
+}

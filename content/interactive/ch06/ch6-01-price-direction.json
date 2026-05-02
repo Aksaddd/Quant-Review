@@ -1,0 +1,99 @@
+{
+  "id": "ch6-01-price-direction",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "Price Direction of Options",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "60-79"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "comparative-statics-of-call-and-put-prices-with-respect-to-each-input",
+    "insight": "calls-rise-with-S-r-sigma-puts-rise-with-K-sigma-D-and-time-effect-on-european-calls-is-ambiguous-with-dividends",
+    "variantAxes": ["option_type", "input_variable"]
+  },
+  "setup": {
+    "narrative": "How do European and American option prices change when each input variable changes (with all others held fixed)?",
+    "rules": [
+      "Call payoff: max(S - K, 0). Put payoff: max(K - S, 0).",
+      "European: only exercisable at T. American: exercisable any time before T.",
+      "Inputs: S (stock), K (strike), tau = T - t (time to maturity), sigma (volatility), r (rate), D (dividends)."
+    ],
+    "question": "Match each input variable's increase to the direction of change in each option price."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Reason about call vs put price direction as each input moves.",
+    "Recognize that volatility ALWAYS raises both call and put prices (more dispersion = more upside for limited-downside payoffs).",
+    "See that time-to-maturity has an AMBIGUOUS effect on European calls in the presence of dividends."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-multi",
+      "label": "Stock price S goes UP",
+      "prompt": "Which option types' prices INCREASE when the stock price S rises?",
+      "options": [
+        { "id": "ec",    "text": "European call",   "correct": true },
+        { "id": "ac",    "text": "American call",   "correct": true },
+        { "id": "ep",    "text": "European put",    "correct": false },
+        { "id": "ap",    "text": "American put",    "correct": false }
+      ],
+      "explanation": "Calls profit when S rises (intrinsic value max(S - K, 0) increases). Puts profit when S falls (max(K - S, 0) increases when S decreases).",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-multi",
+      "label": "Volatility sigma goes UP",
+      "prompt": "Which option types INCREASE when volatility rises?",
+      "options": [
+        { "id": "ec",    "text": "European call",   "correct": true },
+        { "id": "ac",    "text": "American call",   "correct": true },
+        { "id": "ep",    "text": "European put",    "correct": true },
+        { "id": "ap",    "text": "American put",    "correct": true }
+      ],
+      "explanation": "ALL options rise with volatility. Both calls and puts have unlimited upside but limited downside (option premium can't go below 0). More dispersion in S_T -> more chance of large payoffs."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Time to maturity for European calls",
+      "prompt": "When tau (time to maturity) INCREASES, what happens to a European CALL price (with possible dividends D)?",
+      "options": [
+        { "id": "a", "text": "AMBIGUOUS. Longer tau usually raises the price (more time for upside). But if a large dividend is paid in between, the longer-dated call might be cheaper than the shorter-dated one.", "correct": true },
+        { "id": "b", "text": "Always rises (longer tau = more value).", "correct": false },
+        { "id": "c", "text": "Always falls.",                            "correct": false }
+      ],
+      "explanation": "European calls with dividends can be NON-MONOTONIC in tau. American options are monotone-increasing (you can always replicate the shorter contract by exercising early)."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit the table",
+      "prompt": "Fill in: when each variable INCREASES, EUROPEAN CALL goes ___",
+      "template": "Stock price S goes up: __[a]__ (up/down).  Strike K goes up: __[b]__ (up/down).  Volatility sigma goes up: __[c]__ (up/down).  Risk-free rate r goes up: __[d]__ (up/down).  Dividends D go up: __[e]__ (up/down).",
+      "blanks": [
+        { "id": "a", "answers": ["up", "increases"], "caseInsensitive": true },
+        { "id": "b", "answers": ["down", "decreases"], "caseInsensitive": true },
+        { "id": "c", "answers": ["up", "increases"], "caseInsensitive": true },
+        { "id": "d", "answers": ["up", "increases"], "caseInsensitive": true },
+        { "id": "e", "answers": ["down", "decreases"], "caseInsensitive": true }
+      ],
+      "explanation": "European call: S up -> up; K up -> down; sigma up -> up; r up -> up (PV of K shrinks); D up -> down (effective stock falls). For European put, all these reverse EXCEPT volatility (still up)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does r UP increase the call price? (PV of K shrinks; equivalent to discounting strike less.)",
+        "Why does the time-to-maturity effect on European calls become MONOTONIC if there are no dividends?",
+        "Compute: a 1-month call worth $5 vs. a 2-month call worth $4 -- can this ever be arbitrage-free? (Yes, if a large dividend is between the two expiries.)"
+      ]
+    }
+  ]
+}

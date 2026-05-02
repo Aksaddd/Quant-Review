@@ -1,0 +1,62 @@
+{
+  "id": "option-pricing-fundamentals",
+  "kind": "technique",
+  "name": "Option Pricing Fundamentals",
+  "tagline": "Five tools every quant needs: payoff direction analysis, put-call parity, the Black-Scholes-Merton PDE, the BS closed-form formula, and risk-neutral pricing via expectation.",
+  "category": "finance",
+  "introducedIn": {
+    "chapter": 6,
+    "section": "6.1",
+    "title": "Option Pricing",
+    "exemplarProblemId": "ch6-02-put-call-parity"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "The fundamental theorem of option pricing: in a complete arbitrage-free market, every derivative has a unique price equal to its DISCOUNTED RISK-NEUTRAL EXPECTED PAYOFF. For a European option with payoff f(S_T), V(t, S) = e^(-r(T-t)) * E[f(S_T) | S_t = S] under the risk-neutral measure where dS = r * S * dt + sigma * S * dW. Three equivalent expressions of this: (1) the BSM PDE, (2) the closed-form Black-Scholes formula, (3) Monte Carlo simulation."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Put-call parity c + K * exp(-rT) = p + S (no dividends) is THE no-arbitrage relationship. Both sides have payoff max(S_T, K) at maturity. Use it to derive bounds, identify arbitrage, and convert between calls and puts. American calls on non-dividend stocks are NEVER exercised early (3 arguments: time value, dominant strategy, Jensen's inequality)."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Every option price = E[discounted payoff under risk-neutral measure]. Risk-neutral measure means stocks drift at the risk-free rate r, not the real-world drift mu. The hedge is what changes the measure -- a delta-hedge eliminates the dW term, leaving pure r-rate growth."
+    }
+  ],
+  "whenToUse": [
+    "Pricing European options (calls, puts, digitals) with the BS formula or risk-neutral expectation.",
+    "Detecting arbitrage between option prices via put-call parity or convexity bounds.",
+    "Reasoning about American options (early exercise vs. selling).",
+    "Pricing exotic options by reducing to martingale arguments.",
+    "Anywhere a derivative payoff at maturity needs a present value."
+  ],
+  "recipe": [
+    "Identify the payoff at maturity (e.g., max(S_T - K, 0) for a European call).",
+    "Switch to the risk-neutral measure: dS = r*S*dt + sigma*S*dW.",
+    "Compute V(t, S) = exp(-r*tau) * E[payoff | S_t = S], either via the BS formula, the PDE, or simulation.",
+    "Verify via put-call parity if both call and put prices are quoted.",
+    "For Americans on non-dividend stocks: the call equals the European; the put may need PDE / numerical methods."
+  ],
+  "commonPitfalls": [
+    "Forgetting the dividend yield y in dS = (r - y) * S * dt + sigma * S * dW. Set y = 0 for non-dividend stocks; y = r for futures (Black's formula).",
+    "Confusing N(d_2) (risk-neutral probability of finishing in the money) with N(d_1) (delta).",
+    "Applying put-call parity to American options as an EQUALITY (it's only an inequality).",
+    "Treating the risk-neutral drift r as the REAL-WORLD drift -- they're different.",
+    "Using the BSM PDE without recognizing it requires geometric Brownian motion as the underlying assumption."
+  ],
+  "appearsIn": [
+    { "problemId": "ch6-01-price-direction",        "title": "Price Direction of Options",         "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-02-put-call-parity",        "title": "Put-Call Parity",                     "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-03-american-vs-european",   "title": "American vs. European",                "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-04-put-price-arbitrage",    "title": "Put Price Arbitrage",                  "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-05-bsm-pde",                "title": "Black-Scholes-Merton PDE",             "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-06-lookback-first-passage", "title": "First-Passage Option",                 "chapter": 6, "section": "6.1" },
+    { "problemId": "ch6-07-inverse-stock-price",    "title": "Inverse Stock Price Contract",          "chapter": 6, "section": "6.1" }
+  ],
+  "relatedTechniques": ["brownian-motion-and-ito", "ordinary-differential-equations", "expected-value-and-linearity"]
+}

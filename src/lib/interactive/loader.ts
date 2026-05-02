@@ -128,6 +128,13 @@ import ch5BMHitDrift     from '../../../content/interactive/ch05/ch5-15-bm-hit-w
 import ch5BMReachNeg     from '../../../content/interactive/ch05/ch5-16-bm-reach-neg-with-drift.json';
 import ch5ItoSqrtTBt     from '../../../content/interactive/ch05/ch5-17-ito-sqrt-t-bt.json';
 import ch5ItoWCubed      from '../../../content/interactive/ch05/ch5-18-ito-w-cubed.json';
+import ch6PriceDir       from '../../../content/interactive/ch06/ch6-01-price-direction.json';
+import ch6PutCallParity  from '../../../content/interactive/ch06/ch6-02-put-call-parity.json';
+import ch6AmVsEu         from '../../../content/interactive/ch06/ch6-03-american-vs-european.json';
+import ch6PutArbitrage   from '../../../content/interactive/ch06/ch6-04-put-price-arbitrage.json';
+import ch6BSMPDE         from '../../../content/interactive/ch06/ch6-05-bsm-pde.json';
+import ch6Lookback       from '../../../content/interactive/ch06/ch6-06-lookback-first-passage.json';
+import ch6InverseS       from '../../../content/interactive/ch06/ch6-07-inverse-stock-price.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -156,6 +163,7 @@ import techMarkovChains  from '../../../content/interactive/techniques/markov-ch
 import techMartingale    from '../../../content/interactive/techniques/martingale-and-random-walk.json';
 import techDP            from '../../../content/interactive/techniques/dynamic-programming.json';
 import techBM            from '../../../content/interactive/techniques/brownian-motion-and-ito.json';
+import techOptionsFund   from '../../../content/interactive/techniques/option-pricing-fundamentals.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -280,6 +288,13 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch5-16-bm-reach-neg-with-drift': ch5BMReachNeg as unknown as ProblemWalkthrough,
   'ch5-17-ito-sqrt-t-bt':     ch5ItoSqrtTBt     as unknown as ProblemWalkthrough,
   'ch5-18-ito-w-cubed':       ch5ItoWCubed      as unknown as ProblemWalkthrough,
+  'ch6-01-price-direction':   ch6PriceDir       as unknown as ProblemWalkthrough,
+  'ch6-02-put-call-parity':   ch6PutCallParity  as unknown as ProblemWalkthrough,
+  'ch6-03-american-vs-european': ch6AmVsEu      as unknown as ProblemWalkthrough,
+  'ch6-04-put-price-arbitrage': ch6PutArbitrage as unknown as ProblemWalkthrough,
+  'ch6-05-bsm-pde':           ch6BSMPDE         as unknown as ProblemWalkthrough,
+  'ch6-06-lookback-first-passage': ch6Lookback  as unknown as ProblemWalkthrough,
+  'ch6-07-inverse-stock-price': ch6InverseS     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -308,6 +323,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'martingale-and-random-walk': techMartingale  as unknown as Technique,
   'dynamic-programming':      techDP            as unknown as Technique,
   'brownian-motion-and-ito':  techBM            as unknown as Technique,
+  'option-pricing-fundamentals': techOptionsFund as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

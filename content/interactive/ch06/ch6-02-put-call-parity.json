@@ -1,0 +1,95 @@
+{
+  "id": "ch6-02-put-call-parity",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.1",
+  "title": "Put-Call Parity",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "83-121"
+  },
+  "mechanism": {
+    "primary": "option-pricing-fundamentals",
+    "structure": "construct-two-portfolios-with-identical-payoff-max-S-K-and-equate-by-no-arbitrage",
+    "insight": "long-call-plus-bond-K-equals-long-put-plus-stock-because-both-payoff-max-of-S-K",
+    "variantAxes": ["dividends", "currency"]
+  },
+  "setup": {
+    "narrative": "Consider European call price c, European put price p (same strike K, same maturity T) on a non-dividend-paying stock with current price S. Risk-free rate r.",
+    "rules": [
+      "Both options are European (only exercisable at T).",
+      "No dividends.",
+      "No arbitrage."
+    ],
+    "question": "State and prove put-call parity."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Construct two portfolios A and B that have identical payoffs at maturity.",
+    "Apply no-arbitrage to conclude they have the same value at any t < T.",
+    "Recognize the parity formula: c + K * exp(-rT) = p + S."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Construct the two portfolios",
+      "prompt": "Consider Portfolio A = long call + zero-coupon bond paying K at T. Portfolio B = long put + 1 share of stock. Compute the payoff of each at maturity (when S_T is observed).",
+      "options": [
+        { "id": "a", "text": "A: max(S_T - K, 0) + K = max(S_T, K).  B: max(K - S_T, 0) + S_T = max(S_T, K).  IDENTICAL.", "correct": true },
+        { "id": "b", "text": "A: S_T.  B: K.  Different.",                                                                  "correct": false },
+        { "id": "c", "text": "A: 0.  B: 0.  Both zero.",                                                                     "correct": false }
+      ],
+      "explanation": "The call profits when S_T > K; bonus K from the bond gives total max(S_T - K, 0) + K = max(S_T, K). The put profits when S_T < K; plus owning the stock gives max(K - S_T, 0) + S_T = max(S_T, K). IDENTICAL.",
+      "learnMoreTechnique": "option-pricing-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply no-arbitrage",
+      "prompt": "Two portfolios with identical payoffs at every state at time T must have...",
+      "options": [
+        { "id": "a", "text": "...the same value at every t < T (otherwise arbitrage: short the expensive one, long the cheap one).", "correct": true },
+        { "id": "b", "text": "...different values to compensate for risk.",                                                              "correct": false },
+        { "id": "c", "text": "...the same expected return but different prices.",                                                         "correct": false }
+      ],
+      "explanation": "By no-arbitrage, two portfolios with the SAME terminal payoffs must have the SAME current price. Otherwise you could short the expensive one and long the cheap one for a risk-free profit."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Write the parity",
+      "prompt": "PV of Portfolio A = c + K * exp(-rT). PV of Portfolio B = p + S. Setting equal:",
+      "answerType": "mc-single",
+      "options": [
+        { "id": "a", "text": "c + K * exp(-rT) = p + S.", "correct": true },
+        { "id": "b", "text": "c = p + S - K.",              "correct": false },
+        { "id": "c", "text": "c + p = K * exp(-rT).",         "correct": false }
+      ],
+      "explanation": "The bond's PV today (price to receive K at T): K * exp(-rT). Stock and call/put prices are spot prices. The parity equation: c + K * exp(-rT) = p + S."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit and use the parity",
+      "prompt": "Rearrange to express c - p in terms of stock and bond. What's the financial interpretation?",
+      "options": [
+        { "id": "a", "text": "c - p = S - K * exp(-rT). The combination 'long call + short put' replicates a forward contract with delivery price K. So c > p iff S > K * exp(-rT) (i.e., K is below the forward price).", "correct": true },
+        { "id": "b", "text": "c - p = S * K.",                                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "c - p = 0 always.",                                                                                                                                                                            "correct": false }
+      ],
+      "explanation": "The 'risk reversal' c - p replicates a synthetic forward. When K equals the forward price S * exp(rT), call equals put (at-the-money in forward terms). When K < forward, call > put."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: with continuous dividend yield y, the parity becomes c + K * exp(-rT) = p + S * exp(-yT). Verify the stock-side adjustment.",
+        "For AMERICAN options, why is the parity an INEQUALITY rather than an equation? (Hint: American options can be exercised early, breaking the payoff replication.)",
+        "Use the parity to compute call price given put price."
+      ]
+    }
+  ]
+}
