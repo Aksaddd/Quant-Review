@@ -1,0 +1,92 @@
+{
+  "id": "ch6-22-inverse-floater",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.4",
+  "title": "Duration of an Inverse Floater",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "808-836"
+  },
+  "mechanism": {
+    "primary": "portfolio-and-risk",
+    "structure": "decompose-inverse-floater-into-fixed-and-floating-replicating-portfolio-and-sum-dollar-durations",
+    "insight": "long-4-fixed-minus-short-3-floating-replicates-coupon-30%-minus-3r-with-small-floater-duration-the-fixed-piece-dominates",
+    "variantAxes": ["coupon_formula", "yield_curve"]
+  },
+  "setup": {
+    "narrative": "5-year inverse floater, face value $100, coupon = (30% - 3r) per year, semiannual payments, flat yield curve y = 7.5%.",
+    "rules": [
+      "Replicate cash flows: long 4 fixed-rate bonds (7.5% coupon, $100 face) - short 3 floating-rate bonds ($100 face).",
+      "Floating bond price ~ par at reset; small dollar duration ~ 0.5 * 103.75 / (1 + y/2)^2 ~ $48.19.",
+      "Fixed bond dollar duration $D_fixed ~ $410.64 (from sum of weighted PV cash flows).",
+      "Dollar durations are ADDITIVE."
+    ],
+    "question": "Find the duration D of the inverse floater."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Decompose an exotic bond into vanilla pieces by replicating cash flows.",
+    "Use the additivity of dollar duration across a portfolio.",
+    "Understand why floating-rate bonds have very small duration (only the time to next reset)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Replicating portfolio",
+      "prompt": "Coupon = (30% - 3r) % * face = (30 - 3r). What position replicates this?",
+      "options": [
+        { "id": "a", "text": "Long 4 fixed-rate bonds (7.5% coupon = $7.5/yr each = $30) + short 3 floating-rate bonds (coupon = $r per dollar face, so $3r per $100 face).", "correct": true },
+        { "id": "b", "text": "Long 1 fixed bond.",                                                                                                                                 "correct": false },
+        { "id": "c", "text": "Long 3 floaters.",                                                                                                                                    "correct": false }
+      ],
+      "explanation": "Long 4 fixed bonds provides 4 * $7.5 = $30 fixed coupons. Short 3 floaters subtracts $3r per $100 of face. Net coupon = $30 - $3r, exactly the inverse-floater coupon for $100 face value.",
+      "learnMoreTechnique": "portfolio-and-risk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Floating-rate dollar duration",
+      "prompt": "Why is the floating bond's dollar duration so small (only ~$48)?",
+      "options": [
+        { "id": "a", "text": "Floater resets to PAR at each coupon date, so its value is only sensitive to rates over the SHORT period to the next reset (~6 months).", "correct": true },
+        { "id": "b", "text": "Floaters have no exposure to rates at all -- duration is exactly 0.",                                                                       "correct": false },
+        { "id": "c", "text": "Floaters have huge dollar duration similar to long-maturity fixed bonds.",                                                                  "correct": false }
+      ],
+      "explanation": "A floating bond pays the floating rate r each period and resets to par at each reset date. Between resets, only the short interval (here 0.5 yr) carries duration. Hence small dollar duration, ~0.5 * (next coupon + face) / (1 + y/2)^2."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Sum dollar durations",
+      "prompt": "$D_inverse = 4 * $D_fixed - 3 * $D_floating = 4 * 410.64 - 3 * 48.19 = 1642.56 - 144.57 = $1497.99. Now find the (modified) duration D = $D / P.",
+      "options": [
+        { "id": "a", "text": "D = 1498 / 100 ~ 14.98 years.", "correct": true },
+        { "id": "b", "text": "D = 5 (the maturity).",          "correct": false },
+        { "id": "c", "text": "D = 1.",                          "correct": false }
+      ],
+      "explanation": "Inverse floater price = 4 * 100 - 3 * 100 = $100 (par). Duration = $1498 / $100 ~ 15. The duration is MUCH bigger than maturity (5 yr) because the inverse floater is LEVERAGED on rates -- 4x long fixed minus 3x short floating amplifies rate sensitivity."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "Round D to 2 decimal places.",
+      "answerType": "numeric",
+      "answer": 14.98,
+      "explanation": "D ~ 14.98. Mental check: a vanilla 5-yr bond has D ~ 4-5 yr. An inverse floater is much more rate-sensitive because falling rates increase BOTH the fixed-bond price AND the inverse-floater coupon. Lessons: (i) decompose exotic bonds into vanilla pieces, (ii) dollar duration is the additive quantity."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the convexity of the inverse floater? (Sum convexities: 4 * C_fixed - 3 * C_floating, then divide by P.)",
+        "Why is an inverse floater popular in low-rate environments? (Investors seek yield enhancement when rates are low.)",
+        "What happens if r > 10%? (Coupon = 30 - 3r < 0 -- bond pays NEGATIVE coupons, which is usually contractually floored at 0.)"
+      ]
+    }
+  ]
+}

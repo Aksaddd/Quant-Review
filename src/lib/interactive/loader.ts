@@ -147,6 +147,11 @@ import ch6BullSpread     from '../../../content/interactive/ch06/ch6-16-bull-spr
 import ch6Straddle       from '../../../content/interactive/ch06/ch6-17-straddle.json';
 import ch6Binary         from '../../../content/interactive/ch06/ch6-18-binary-option.json';
 import ch6Exchange       from '../../../content/interactive/ch06/ch6-19-exchange-option.json';
+import ch6PortfolioOpt   from '../../../content/interactive/ch06/ch6-20-portfolio-optimization.json';
+import ch6VaR            from '../../../content/interactive/ch06/ch6-21-value-at-risk.json';
+import ch6InverseFloater from '../../../content/interactive/ch06/ch6-22-inverse-floater.json';
+import ch6FwdVsFut       from '../../../content/interactive/ch06/ch6-23-forwards-vs-futures.json';
+import ch6RateModels     from '../../../content/interactive/ch06/ch6-24-rate-models.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -178,6 +183,7 @@ import techBM            from '../../../content/interactive/techniques/brownian-
 import techOptionsFund   from '../../../content/interactive/techniques/option-pricing-fundamentals.json';
 import techGreeksHedging from '../../../content/interactive/techniques/greeks-and-hedging.json';
 import techExoticOpts    from '../../../content/interactive/techniques/exotic-options-and-strategies.json';
+import techPortfolioRisk from '../../../content/interactive/techniques/portfolio-and-risk.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -321,6 +327,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch6-17-straddle':          ch6Straddle       as unknown as ProblemWalkthrough,
   'ch6-18-binary-option':     ch6Binary         as unknown as ProblemWalkthrough,
   'ch6-19-exchange-option':   ch6Exchange       as unknown as ProblemWalkthrough,
+  'ch6-20-portfolio-optimization': ch6PortfolioOpt as unknown as ProblemWalkthrough,
+  'ch6-21-value-at-risk':     ch6VaR            as unknown as ProblemWalkthrough,
+  'ch6-22-inverse-floater':   ch6InverseFloater as unknown as ProblemWalkthrough,
+  'ch6-23-forwards-vs-futures': ch6FwdVsFut     as unknown as ProblemWalkthrough,
+  'ch6-24-rate-models':       ch6RateModels     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -352,6 +363,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'option-pricing-fundamentals': techOptionsFund as unknown as Technique,
   'greeks-and-hedging':       techGreeksHedging as unknown as Technique,
   'exotic-options-and-strategies': techExoticOpts as unknown as Technique,
+  'portfolio-and-risk':       techPortfolioRisk as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

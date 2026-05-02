@@ -1,0 +1,84 @@
+{
+  "id": "ch6-21-value-at-risk",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.4",
+  "title": "VaR and Its Drawbacks",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "769-787"
+  },
+  "mechanism": {
+    "primary": "portfolio-and-risk",
+    "structure": "VaR-is-a-percentile-and-fails-to-be-subadditive",
+    "insight": "VaR-of-A-plus-B-can-exceed-VaR-A-plus-VaR-B-when-tails-of-A-and-B-are-not-overlapping",
+    "variantAxes": ["confidence_level", "tail_distribution"]
+  },
+  "setup": {
+    "narrative": "VaR_alpha = the alpha-percentile loss: P(loss > VaR_alpha) = 1 - alpha. We test it on TWO independent CDS positions, each with default prob 3%, $1M loss given default.",
+    "rules": [
+      "VaR_alpha = 0 if Prob(any loss) < 1 - alpha.",
+      "Single CDS: P(default) = 3% < 5% (= 1 - 0.95). So VaR_95 = 0.",
+      "Two independent CDSs: P(>=1 default) = 1 - (0.97)^2 ~ 5.91%. So VaR_95 > 0."
+    ],
+    "question": "Why is VaR not subadditive? Compute VaR for the joint vs sum-of-individual."
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Define VaR as a percentile of the loss distribution.",
+    "Demonstrate the sub-additivity violation with the two-CDS example.",
+    "Recognize CVaR (expected shortfall) as the coherent alternative."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Single CDS VaR",
+      "prompt": "Short CDS on bond A: P(default) = 3%, loss = $1M | default, 0 otherwise. What is VaR_95?",
+      "options": [
+        { "id": "a", "text": "VaR_95 = 0.  (Loss is 0 with probability 97% > 95%, so the 95th percentile loss is 0.)", "correct": true },
+        { "id": "b", "text": "VaR_95 = $1M.",                                                                            "correct": false },
+        { "id": "c", "text": "VaR_95 = $30,000 (expected loss).",                                                        "correct": false }
+      ],
+      "explanation": "VaR_alpha is the smallest L such that P(loss > L) <= 1 - alpha. With P(loss = 0) = 0.97 and P(loss = $1M) = 0.03, the 95th percentile of the loss distribution is 0. So VaR_95(A) = 0 -- even though we have real credit risk!",
+      "learnMoreTechnique": "portfolio-and-risk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Joint VaR",
+      "prompt": "Now add an INDEPENDENT short CDS on bond B with the same parameters. P(at least one default) = 1 - (0.97)^2 = 0.0591 ~ 5.91% > 5%. What is VaR_95(A + B)?",
+      "options": [
+        { "id": "a", "text": "VaR_95(A + B) = $1M.  (P(loss >= $1M) = 5.91% > 5%, so the 95th percentile crosses into the loss region.)", "correct": true },
+        { "id": "b", "text": "VaR_95(A + B) = 0.",                                                                                          "correct": false },
+        { "id": "c", "text": "VaR_95(A + B) = $2M.",                                                                                        "correct": false }
+      ],
+      "explanation": "P(loss = 0) = 0.97^2 = 0.9409, P(loss = $1M) = 2 * 0.03 * 0.97 = 0.0582, P(loss = $2M) = 0.03^2 = 0.0009. Cumulative: P(loss <= 0) = 0.9409 < 0.95, so the 95th percentile is in the next bucket -> VaR = $1M."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Sub-additivity check:",
+      "template": "VaR_95(A) + VaR_95(B) = 0 + 0 = __[a]__.  VaR_95(A + B) = __[b]__.  Sub-additivity (VaR(A+B) <= VaR(A) + VaR(B)) is __[c]__ (satisfied / violated).  CVaR / Expected Shortfall is the __[d]__ (coherent / incoherent) alternative.",
+      "blanks": [
+        { "id": "a", "answers": ["0", "zero", "$0"], "caseInsensitive": true },
+        { "id": "b", "answers": ["$1M", "1M", "1000000", "$1,000,000"], "caseInsensitive": true },
+        { "id": "c", "answers": ["violated"], "caseInsensitive": true },
+        { "id": "d", "answers": ["coherent"], "caseInsensitive": true }
+      ],
+      "explanation": "Sub-additivity is violated: VaR(A+B) = $1M > 0 + 0 = VaR(A) + VaR(B). This contradicts the diversification intuition. CVaR (average loss given loss > VaR) IS coherent (sub-additive, monotone, translation-invariant, positively homogeneous)."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How would VaR_99 behave for the SINGLE CDS? (P(loss = 1M) = 3% > 1%, so VaR_99 = $1M.)",
+        "Compute CVaR_95 for the joint position. (CVaR = E[loss | loss > VaR_95]. With VaR = $1M and tail prob 5.91%, tail expected loss > $1M.)",
+        "Why does Basel III mandate Expected Shortfall over VaR? (Because ES is coherent, captures tail risk, and aggregation works correctly.)"
+      ]
+    }
+  ]
+}

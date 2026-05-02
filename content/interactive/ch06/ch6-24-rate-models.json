@@ -1,0 +1,97 @@
+{
+  "id": "ch6-24-rate-models",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.4",
+  "title": "Short-Rate Models Compared",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "866-911"
+  },
+  "mechanism": {
+    "primary": "portfolio-and-risk",
+    "structure": "compare-vasicek-cir-ho-lee-hull-white-on-mean-reversion-non-negativity-and-yield-curve-fit",
+    "insight": "vasicek-allows-negative-rates-cir-keeps-positive-via-sqrt-r-diffusion-hull-white-fits-yield-curve-via-time-dependent-mean",
+    "variantAxes": ["model_choice", "calibration_target"]
+  },
+  "setup": {
+    "narrative": "Four short-rate models: Vasicek, CIR (equilibrium); Ho-Lee, Hull-White (no-arbitrage). Compare on three axes: mean-reversion, non-negativity, and yield-curve fit.",
+    "rules": [
+      "Vasicek: dR = a(b - R) dt + sigma dW (constant vol).",
+      "CIR: dR = a(b - R) dt + sigma * sqrt(R) dW (vol scales with sqrt(R)).",
+      "Ho-Lee: dR = theta(t) dt + sigma dW (no mean-reversion, time-dep drift).",
+      "Hull-White: dR = a(b(t) - R) dt + sigma dW (Vasicek with time-dep mean)."
+    ],
+    "question": "Match each model to its key feature."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Compare equilibrium vs no-arbitrage models.",
+    "Identify non-negativity properties (Vasicek violates, CIR preserves).",
+    "Identify which models allow exact yield-curve fit (Ho-Lee, Hull-White)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Vasicek's flaw",
+      "prompt": "Vasicek: dR = a(b - R) dt + sigma dW. Why can rates go NEGATIVE under Vasicek?",
+      "options": [
+        { "id": "a", "text": "The diffusion sigma * dW is INDEPENDENT of R, so even when R is small, the noise can push it below 0.", "correct": true },
+        { "id": "b", "text": "Vasicek doesn't have mean reversion.",                                                                "correct": false },
+        { "id": "c", "text": "Vasicek's drift is positive, so R always increases.",                                                  "correct": false }
+      ],
+      "explanation": "Constant vol means the diffusion doesn't shrink as R approaches 0. R follows a Gaussian distribution conditional on R(0), so P(R(t) < 0) > 0 for any t > 0. In low-rate environments this is empirically realistic but theoretically inconsistent for most economic models.",
+      "learnMoreTechnique": "portfolio-and-risk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "CIR's fix",
+      "prompt": "CIR: dR = a(b - R) dt + sigma * sqrt(R) dW. How does this fix Vasicek's negativity issue?",
+      "options": [
+        { "id": "a", "text": "Diffusion sigma * sqrt(R) -> 0 as R -> 0, so the drift dominates near zero. With 2ab >= sigma^2 (Feller condition), R stays strictly positive.", "correct": true },
+        { "id": "b", "text": "The drift becomes negative.",                                                                                                                     "correct": false },
+        { "id": "c", "text": "CIR uses log(R) instead of R.",                                                                                                                   "correct": false }
+      ],
+      "explanation": "When R is small, sqrt(R) is also small, so the noise vanishes faster than the upward drift a(b - R) (which is large when R << b). Under the Feller condition 2ab >= sigma^2, R is strictly positive almost surely."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Yield-curve fit",
+      "prompt": "Which models EXACTLY fit today's observed yield curve via construction?",
+      "options": [
+        { "id": "a", "text": "Ho-Lee (theta(t)) and Hull-White (b(t)).  The time-dependent functions are calibrated to match every point on today's curve.", "correct": true },
+        { "id": "b", "text": "Vasicek and CIR.",                                                                                                                "correct": false },
+        { "id": "c", "text": "All four models fit the curve exactly.",                                                                                           "correct": false }
+      ],
+      "explanation": "Vasicek and CIR are EQUILIBRIUM models with constant parameters -- they cannot exactly match an arbitrary observed curve. Ho-Lee uses theta(t); Hull-White uses b(t); these time-dependent components absorb the curve information. Hence 'no-arbitrage' models."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Match models to features:",
+      "template": "Vasicek allows __[a]__ rates. CIR uses sqrt(__[b]__) diffusion. Ho-Lee has no __[c]__ (mean-reversion / drift). Hull-White is Vasicek with time-dependent __[d]__ (volatility / mean).",
+      "blanks": [
+        { "id": "a", "answers": ["negative"], "caseInsensitive": true },
+        { "id": "b", "answers": ["R", "r"], "caseInsensitive": true },
+        { "id": "c", "answers": ["mean-reversion", "mean reversion"], "caseInsensitive": true },
+        { "id": "d", "answers": ["mean"], "caseInsensitive": true }
+      ],
+      "explanation": "Quick reference: Vasicek (allows negative R), CIR (preserves R > 0 via sqrt diffusion), Ho-Lee (no mean reversion, fits curve via theta(t)), Hull-White (mean reversion + time-dep mean b(t), fits curve)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why might a practitioner PREFER Vasicek's flaw (allowing negative rates) post-2014? (Eurozone, Japan have observed negative policy rates -- so Vasicek may match reality better than CIR there.)",
+        "What about volatility models for rates? Heston-style stochastic vol on rates (e.g., extended CIR or LIBOR market model with stoch vol) -- richer dynamics for caps/floors.",
+        "What's the LIBOR Market Model (BGM) and how does it differ? (Models discrete forward rates directly; arbitrage-free across the whole curve, ideal for caps and swaptions.)"
+      ]
+    }
+  ]
+}

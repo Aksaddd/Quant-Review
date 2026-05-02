@@ -1,0 +1,75 @@
+{
+  "id": "portfolio-and-risk",
+  "kind": "technique",
+  "name": "Portfolio Theory, Risk Measures, and Fixed Income",
+  "tagline": "Mean-variance optimization (Markowitz), VaR / CVaR for tail risk, Duration & Convexity for bond sensitivity, and short-rate models (Vasicek / CIR / Hull-White) for interest-rate dynamics.",
+  "category": "finance",
+  "introducedIn": {
+    "chapter": 6,
+    "section": "6.4",
+    "title": "Other Finance Questions",
+    "exemplarProblemId": "ch6-20-portfolio-optimization"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Markowitz mean-variance: minimize Var(r_p) = sigma_A^2 * w_A^2 + sigma_B^2 * w_B^2 + 2 * rho * sigma_A * sigma_B * w_A * w_B subject to w_A + w_B = 1. Differentiate, set to 0, solve: w_A* = (sigma_B^2 - rho * sigma_A * sigma_B) / (sigma_A^2 - 2*rho*sigma_A*sigma_B + sigma_B^2). The minimum-variance weights depend on volatilities AND correlation."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "VaR is the alpha-percentile loss: P(loss > VaR) = 1 - alpha. Two failure modes: (i) tail-blindness -- VaR ignores the SHAPE beyond the percentile (e.g., a CDS with 3% default prob has VaR_95 = 0 even though it has real risk); (ii) NOT subadditive -- VaR(A + B) can exceed VaR(A) + VaR(B), violating the diversification intuition. Conditional VaR (CVaR / Expected Shortfall) IS subadditive and is the modern coherent alternative."
+    },
+    {
+      "id": "b3",
+      "type": "paragraph",
+      "text": "Duration D = -(1/P) * dP/dy measures bond price sensitivity to yield. Convexity C = (1/P) * d^2P/dy^2 captures the curvature. Taylor: dP/P ~ -D * dy + (1/2) * C * (dy)^2. Dollar duration $D = P * D is ADDITIVE across portfolios -- so to find the duration of a structured bond, decompose into floating + fixed pieces, sum dollar durations, then divide by the total price."
+    },
+    {
+      "id": "b4",
+      "type": "paragraph",
+      "text": "Forward vs futures: same theoretical price F = S * exp((r + u - y) * T) under deterministic rates. With stochastic rates, sign of corr(F, r) decides: if positive, futures > forward (mark-to-market timing advantage)."
+    },
+    {
+      "id": "b5",
+      "type": "paragraph",
+      "text": "Short-rate models: Vasicek dR = a(b - R)dt + sigma dW (mean-reverting, but allows R < 0). CIR dR = a(b - R)dt + sigma * sqrt(R) dW (stays non-negative when 2ab >= sigma^2). Ho-Lee dr = theta(t)dt + sigma dz (simplest no-arbitrage, calibrates to today's curve). Hull-White: Vasicek with time-dependent b(t) for exact fit to the current term structure."
+    },
+    {
+      "id": "b6",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Portfolio: minimize variance subject to budget. Risk: percentile (VaR) is convenient but blind to tails -- use CVaR. Bonds: duration is the slope, convexity is the curvature; dollar-duration is additive. Rates: pick a model based on (i) negativity tolerance, (ii) yield-curve fit requirement."
+    }
+  ],
+  "whenToUse": [
+    "Optimal portfolio weights when given vols, expected returns, and correlations.",
+    "Risk reporting / regulatory capital (Basel) -- VaR and ES are mandated metrics.",
+    "Pricing and hedging interest-rate-sensitive instruments (swaps, bonds, swaptions).",
+    "Decomposing structured products (inverse floaters, callable bonds) into atomic instruments.",
+    "Choosing a forward vs futures contract based on rate-correlation effects."
+  ],
+  "recipe": [
+    "Mean-variance: write Var(r_p) as a function of w_A, differentiate, solve for the minimum.",
+    "VaR: identify the alpha-quantile of the loss distribution; check for sub-additivity violations.",
+    "Duration: compute D = -(1/P) * dP/dy on each cash flow, then weight by present value.",
+    "Inverse floater: decompose as long N fixed + short M floating; sum dollar durations.",
+    "Choose rate model: Vasicek for analytical tractability, CIR for non-negativity, Hull-White for exact yield-curve fit."
+  ],
+  "commonPitfalls": [
+    "Forgetting that mean-variance assumes Gaussian returns -- breaks down for fat-tailed assets.",
+    "Treating VaR as sub-additive -- it isn't; aggregating VaR across desks UNDERSTATES risk.",
+    "Mixing up modified duration and Macaulay duration (modified = Macaulay / (1 + y/k)).",
+    "Forgetting that the floating-rate bond's price resets to par at coupon dates, so its duration is small (just the time to next reset).",
+    "Applying Vasicek when negative rates are economically infeasible -- use CIR or shifted models."
+  ],
+  "appearsIn": [
+    { "problemId": "ch6-20-portfolio-optimization", "title": "Portfolio Optimization (2-asset)", "chapter": 6, "section": "6.4" },
+    { "problemId": "ch6-21-value-at-risk",         "title": "VaR and its drawbacks",            "chapter": 6, "section": "6.4" },
+    { "problemId": "ch6-22-inverse-floater",        "title": "Duration of an Inverse Floater",   "chapter": 6, "section": "6.4" },
+    { "problemId": "ch6-23-forwards-vs-futures",    "title": "Forwards vs Futures",              "chapter": 6, "section": "6.4" },
+    { "problemId": "ch6-24-rate-models",            "title": "Short-Rate Models Compared",        "chapter": 6, "section": "6.4" }
+  ],
+  "relatedTechniques": ["distributions-and-moments", "linear-algebra-techniques", "brownian-motion-and-ito"]
+}

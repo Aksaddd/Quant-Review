@@ -1,0 +1,82 @@
+{
+  "id": "ch6-23-forwards-vs-futures",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.4",
+  "title": "Forwards vs Futures",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "841-862"
+  },
+  "mechanism": {
+    "primary": "portfolio-and-risk",
+    "structure": "mark-to-market-cash-flow-timing-creates-a-rate-correlation-effect",
+    "insight": "positive-corr-between-futures-price-and-rates-makes-futures-more-valuable-than-forward",
+    "variantAxes": ["correlation_sign", "rate_volatility"]
+  },
+  "setup": {
+    "narrative": "A forward and a futures contract on the same underlying share the same theoretical price F = S * exp((r + u - y) * T) under DETERMINISTIC interest rates. Now allow rates to be stochastic.",
+    "rules": [
+      "Forward: settles only at maturity (single cash flow).",
+      "Futures: marked-to-market DAILY -- profits/losses realized along the way.",
+      "Daily P&L can be reinvested (or financed) at the prevailing short rate."
+    ],
+    "question": "If the asset price is positively correlated with interest rates, which contract has higher price?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Distinguish forward and futures cash-flow timing.",
+    "Explain the mark-to-market timing argument.",
+    "Predict the sign of the forward-futures spread under positive / negative rate correlation."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Cash-flow comparison",
+      "prompt": "What's the FUNDAMENTAL difference in cash-flow structure between a forward and a futures?",
+      "options": [
+        { "id": "a", "text": "Forward: one cash flow at maturity. Futures: daily mark-to-market means many small cash flows along the way.", "correct": true },
+        { "id": "b", "text": "Both settle only at maturity.",                                                                                  "correct": false },
+        { "id": "c", "text": "Forwards have margin requirements; futures don't.",                                                              "correct": false }
+      ],
+      "explanation": "Forwards: zero cash flow until maturity. Futures: daily settlement of P&L through margin accounts. Actual cash exchanges along the way matter when rates are stochastic.",
+      "learnMoreTechnique": "portfolio-and-risk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Correlation argument",
+      "prompt": "If F and r are POSITIVELY correlated (F up <-> r up): when does the futures-holder receive cash, and at what rate is it reinvested?",
+      "options": [
+        { "id": "a", "text": "When F rises (gain): r is high, so the gain is reinvested at HIGH rates. When F falls (loss): r is low, so the loss is financed at LOW rates. Asymmetry favors the futures.", "correct": true },
+        { "id": "b", "text": "Cash flows happen randomly, no pattern with rates.",                                                                                                                              "correct": false },
+        { "id": "c", "text": "Positive correlation hurts the futures.",                                                                                                                                          "correct": false }
+      ],
+      "explanation": "The mark-to-market mechanism gives the futures holder a TIMING advantage when corr(F, r) > 0: gains compound at high rates, losses are funded cheaply. The forward contract has no such timing benefit since it settles only once."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "If corr(F, r) > 0: which contract has higher price (futures price minus forward price > 0 or < 0)?",
+      "options": [
+        { "id": "a", "text": "Futures > Forward. Positive correlation makes futures more valuable.",  "correct": true },
+        { "id": "b", "text": "Futures < Forward.",                                                     "correct": false },
+        { "id": "c", "text": "Always equal.",                                                          "correct": false }
+      ],
+      "explanation": "Futures price > Forward price under positive corr(F, r). With negative correlation, the inequality flips: futures < forward. With deterministic rates (correlation undefined), futures = forward."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Apply this to BOND futures specifically. (Bond price corr with rates is NEGATIVE, so bond futures < bond forwards in theory.)",
+        "Why is the spread negligible for short-dated futures? (Less time for the timing advantage to compound; small.)",
+        "Other differences: counterparty risk (futures cleared, forwards bilateral), liquidity (futures often deeper), customization (forwards flexible)."
+      ]
+    }
+  ]
+}

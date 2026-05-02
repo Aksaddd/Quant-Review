@@ -1,0 +1,79 @@
+{
+  "id": "ch6-20-portfolio-optimization",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.4",
+  "title": "Two-Asset Mean-Variance Optimization",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "742-766"
+  },
+  "mechanism": {
+    "primary": "portfolio-and-risk",
+    "structure": "minimize-portfolio-variance-by-differentiating-with-respect-to-weight",
+    "insight": "the-minimum-variance-weight-uses-vols-and-correlation-not-expected-returns",
+    "variantAxes": ["vols", "correlation"]
+  },
+  "setup": {
+    "narrative": "Two stocks A and B both have expected return 12%. Std devs: sigma_A = 20%, sigma_B = 30%. Correlation rho = 0.5. Allocate to minimize portfolio variance.",
+    "rules": [
+      "Var(r_p) = sigma_A^2 * w_A^2 + sigma_B^2 * (1 - w_A)^2 + 2 * rho * sigma_A * sigma_B * w_A * (1 - w_A).",
+      "Differentiate w.r.t. w_A and set to 0.",
+      "Equal expected returns means we just minimize variance (no return-risk tradeoff)."
+    ],
+    "question": "What is w_A that minimizes Var(r_p)?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Set up the variance of a 2-asset portfolio.",
+    "Take the derivative and solve for the minimum-variance weight.",
+    "Plug numbers and verify the resulting variance is below either single-asset variance."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Variance formula",
+      "prompt": "Express Var(r_p) in terms of w_A only.",
+      "options": [
+        { "id": "a", "text": "Var = sigma_A^2 * w_A^2 + sigma_B^2 * (1 - w_A)^2 + 2 * rho * sigma_A * sigma_B * w_A * (1 - w_A).", "correct": true },
+        { "id": "b", "text": "Var = sigma_A * w_A + sigma_B * (1 - w_A).",                                                       "correct": false },
+        { "id": "c", "text": "Var = sigma_A^2 + sigma_B^2.",                                                                     "correct": false }
+      ],
+      "explanation": "Standard 2-asset portfolio variance: w_A^2 sigma_A^2 + w_B^2 sigma_B^2 + 2 w_A w_B rho sigma_A sigma_B with w_B = 1 - w_A.",
+      "learnMoreTechnique": "portfolio-and-risk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Derivative and root",
+      "prompt": "Differentiate w.r.t. w_A: dVar/dw_A = 2 sigma_A^2 w_A - 2 sigma_B^2 (1 - w_A) + 2 rho sigma_A sigma_B (1 - 2 w_A) = 0. Solve for w_A.",
+      "options": [
+        { "id": "a", "text": "w_A* = (sigma_B^2 - rho sigma_A sigma_B) / (sigma_A^2 - 2 rho sigma_A sigma_B + sigma_B^2).", "correct": true },
+        { "id": "b", "text": "w_A* = sigma_B / (sigma_A + sigma_B).",                                                       "correct": false },
+        { "id": "c", "text": "w_A* = 1/2.",                                                                                  "correct": false }
+      ],
+      "explanation": "Collect terms: w_A * (sigma_A^2 + sigma_B^2 - 2 rho sigma_A sigma_B) = sigma_B^2 - rho sigma_A sigma_B. Divide for the formula. Note: if rho = 0, this reduces to w_A* = sigma_B^2 / (sigma_A^2 + sigma_B^2)."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "Plug in: sigma_A = 0.2, sigma_B = 0.3, rho = 0.5. Numerator: 0.09 - 0.5*0.2*0.3 = 0.09 - 0.03 = 0.06. Denominator: 0.04 - 2*0.5*0.2*0.3 + 0.09 = 0.04 - 0.06 + 0.09 = 0.07. w_A* = ?",
+      "answerType": "numeric",
+      "answer": 0.857,
+      "explanation": "w_A* = 0.06 / 0.07 = 6/7 ~ 0.857. Allocate ~85.7% to A and ~14.3% to B. Even though both stocks have the same expected return, the lower-vol stock A gets the bigger weight."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the minimum variance? (Plug back: sigma_p^2 = (1 - rho^2) sigma_A^2 sigma_B^2 / (sigma_A^2 - 2 rho sigma_A sigma_B + sigma_B^2). Compute for these inputs.)",
+        "What if rho = 1? (Then optimal w_A drives variance to 0 for sigma_A != sigma_B with shorting allowed.)",
+        "What if expected returns differ? (Then you maximize Sharpe ratio: balance return-risk tradeoff via the tangency portfolio.)"
+      ]
+    }
+  ]
+}
