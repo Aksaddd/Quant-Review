@@ -1,0 +1,84 @@
+{
+  "id": "ch6-14-stoch-vs-const-vol",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Constant vs. Stochastic Volatility",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "586-606"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "Jensen-on-call-as-function-of-vol-via-Volga-sign",
+    "insight": "stochastic-vol-pricier-when-Volga-positive-cheaper-when-Volga-negative",
+    "variantAxes": ["moneyness", "vol_distribution"]
+  },
+  "setup": {
+    "narrative": "Two markets: Market A has constant vol sigma = 30%. Market B has random vol with E[sigma] = 30% but a non-degenerate distribution. Compare the price of a European call in the two markets.",
+    "rules": [
+      "Call price c is a function of sigma (with all other inputs fixed).",
+      "By Jensen: E[c(sigma)] >= c(E[sigma]) iff c is convex in sigma (Volga >= 0).",
+      "Volga = d^2 c / d sigma^2 = S * exp(-yT) * sqrt(T) * N'(d_1) * (d_1 * d_2 / sigma).",
+      "Sign of Volga depends on the sign of d_1 * d_2."
+    ],
+    "question": "Is the European call always more expensive under stochastic vol?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Apply Jensen's inequality to a function of a random parameter.",
+    "Use Volga to determine convexity in vol.",
+    "Identify the near-ATM regime where d_1 * d_2 < 0."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Apply Jensen",
+      "prompt": "Compare E[c(sigma)] (stochastic vol) to c(E[sigma]) (constant vol). What does Jensen's inequality say?",
+      "options": [
+        { "id": "a", "text": "If c is convex in sigma (Volga > 0): E[c(sigma)] > c(E[sigma]) -- stochastic vol pricier. If c is concave (Volga < 0): the opposite.", "correct": true },
+        { "id": "b", "text": "Stochastic vol is always pricier (call is monotone in vol).",                                                                                  "correct": false },
+        { "id": "c", "text": "They are always equal -- only the mean of sigma matters.",                                                                                "correct": false }
+      ],
+      "explanation": "Vega (dc/dsigma) is positive but that doesn't determine the comparison. What matters is the SECOND derivative -- Volga -- which captures convexity. Jensen tells us that for a convex function, the mean is larger than the function of the mean.",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Sign of d_1 * d_2",
+      "prompt": "Volga = S * exp(-yT) * sqrt(T) * N'(d_1) * (d_1 * d_2 / sigma). Since S, sqrt(T), N'(d_1), sigma are all positive, the sign of Volga matches the sign of d_1 * d_2. When is d_1 * d_2 NEGATIVE?",
+      "options": [
+        { "id": "a", "text": "Near ATM: typically d_1 > 0 and d_2 < 0 (since d_2 = d_1 - sigma*sqrt(T)). Then d_1 * d_2 < 0 and the call is CONCAVE in sigma.", "correct": true },
+        { "id": "b", "text": "Deep ITM: d_1 and d_2 are both very large positive, so d_1 * d_2 < 0.",                                                              "correct": false },
+        { "id": "c", "text": "Deep OTM: d_1 and d_2 both very negative, so d_1 * d_2 < 0.",                                                                      "correct": false }
+      ],
+      "explanation": "Deep ITM: d_1 > 0 and d_2 > 0, so d_1*d_2 > 0 (convex). Deep OTM: d_1 < 0 and d_2 < 0, so d_1*d_2 > 0 (still convex, since negative times negative). Only NEAR ATM can d_1 and d_2 straddle zero, giving d_1*d_2 < 0 (concave)."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Fill in:",
+      "template": "Volga > 0 (deep ITM or deep OTM): stochastic vol option is __[a]__ (more/less) expensive. Volga < 0 (near ATM, certain configurations): stochastic vol option is __[b]__ (more/less) expensive. The Volga formula contains the factor d_1 * __[c]__.",
+      "blanks": [
+        { "id": "a", "answers": ["more"], "caseInsensitive": true },
+        { "id": "b", "answers": ["less"], "caseInsensitive": true },
+        { "id": "c", "answers": ["d_2", "d2"], "caseInsensitive": true }
+      ],
+      "explanation": "Most options have positive Volga -> stochastic vol pricier. The notable exception is the narrow band near ATM where d_1 and d_2 have opposite signs."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the volatility smile (implied vol higher for OTM/ITM than ATM) emerge naturally from this analysis? (Markets price in stochastic vol; OTM options are pushed up more in price than ATM, so to fit them with constant-vol BSM you need higher implied vols at the wings.)",
+        "How do volatility products (variance swaps, vol swaps) sidestep the convexity issue? (They pay realized variance directly, no nonlinear function of sigma.)",
+        "Use the formula to compute Volga for an ATM option with d_1 = sigma*sqrt(T)/2 and d_2 = -sigma*sqrt(T)/2."
+      ]
+    }
+  ]
+}

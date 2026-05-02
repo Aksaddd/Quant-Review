@@ -1,0 +1,96 @@
+{
+  "id": "ch6-19-exchange-option",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.3",
+  "title": "Exchange Option (Margrabe)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "705-737"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "change-of-numeraire-reduces-two-asset-option-to-single-asset-call",
+    "insight": "set-S1-as-numeraire-the-ratio-f-equals-S2-over-S1-is-a-call-with-strike-1-and-vol-sqrt-of-correlated-vol-sum",
+    "variantAxes": ["correlation", "volatility_inputs"]
+  },
+  "setup": {
+    "narrative": "Exchange option pays max(S_T2 - S_T1, 0) at maturity -- the right to swap one share of S_1 for one share of S_2. Both stocks follow GBM with vols sigma_1, sigma_2 and correlation rho.",
+    "rules": [
+      "Use S_1 as the numeraire: define f = S_2 / S_1.",
+      "Apply Itô / quotient rule: f follows GBM with volatility sigma_f = sqrt(sigma_1^2 - 2*rho*sigma_1*sigma_2 + sigma_2^2).",
+      "In the S_1-numeraire measure, the option becomes a call on f with strike 1 and zero rate.",
+      "Convert back to local currency by multiplying by S_1."
+    ],
+    "question": "Derive the Margrabe formula for the exchange option."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply change-of-numeraire to simplify a multi-asset payoff.",
+    "Compute the volatility of S_2 / S_1 from the individual vols and correlation.",
+    "Recognize Margrabe's formula as a vanilla call in the new measure."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Volatility of S_2 / S_1",
+      "prompt": "If d S_1 / S_1 = mu_1 dt + sigma_1 dW_1 and d S_2 / S_2 = mu_2 dt + sigma_2 dW_2 with corr(dW_1, dW_2) = rho, what's the volatility of f = S_2 / S_1?",
+      "options": [
+        { "id": "a", "text": "sigma_f = sqrt(sigma_1^2 - 2*rho*sigma_1*sigma_2 + sigma_2^2).",      "correct": true },
+        { "id": "b", "text": "sigma_f = sigma_1 + sigma_2.",                                          "correct": false },
+        { "id": "c", "text": "sigma_f = sqrt(sigma_1^2 + sigma_2^2) (no correlation term).",          "correct": false }
+      ],
+      "explanation": "Apply Itô to log(S_2/S_1) = log S_2 - log S_1. Each log is GBM with vol sigma_i. The variance of the difference: sigma_2^2 - 2*rho*sigma_1*sigma_2 + sigma_1^2. Take square root for sigma_f.",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Reduce to single-asset call",
+      "prompt": "Under the S_1-numeraire measure, S_1 grows at the riskless rate (r = 0 in this measure). The payoff max(S_T2 - S_T1, 0) / S_T1 = max(f_T - 1, 0). What's the effective option?",
+      "options": [
+        { "id": "a", "text": "A vanilla call on f with strike 1, vol sigma_f, rate 0, dividend 0, maturity T.", "correct": true },
+        { "id": "b", "text": "A binary call on f.",                                                              "correct": false },
+        { "id": "c", "text": "A straddle on f.",                                                                 "correct": false }
+      ],
+      "explanation": "max(f_T - 1, 0) is exactly a vanilla call payoff with strike 1. In the new numeraire, the discount rate is 0 (the numeraire IS the discounting). So price (in S_1 units) = f * N(d_1) - N(d_2) with d_1 = [ln(f) + 0.5 * sigma_f^2 * T] / (sigma_f sqrt(T))."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Convert to local currency",
+      "prompt": "Price in S_1 units = (S_2/S_1) * N(d_1) - N(d_2). To get the price in dollars, multiply by S_1:",
+      "options": [
+        { "id": "a", "text": "C = S_2 * N(d_1) - S_1 * N(d_2).  No interest rate appears -- it cancels in the change of numeraire.", "correct": true },
+        { "id": "b", "text": "C = exp(-rT) * (S_2 - S_1).",                                                                            "correct": false },
+        { "id": "c", "text": "C = S_1 * N(d_1) - S_2 * N(d_2).",                                                                       "correct": false }
+      ],
+      "explanation": "Margrabe's formula: C = S_2 * N(d_1) - S_1 * N(d_2), with d_1 = [ln(S_2/S_1) + 0.5 sigma_f^2 T]/(sigma_f sqrt(T)) and d_2 = d_1 - sigma_f sqrt(T). The risk-free rate r drops out because BOTH assets compound at it under Q."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Margrabe formula:",
+      "template": "C = S_2 * N(__[a]__) - S_1 * N(__[b]__).  sigma_f = sqrt(sigma_1^2 - 2*rho*sigma_1*sigma_2 + __[c]__).",
+      "blanks": [
+        { "id": "a", "answers": ["d_1", "d1"], "caseInsensitive": true },
+        { "id": "b", "answers": ["d_2", "d2"], "caseInsensitive": true },
+        { "id": "c", "answers": ["sigma_2^2", "sigma2^2", "sigma_2 squared", "sigma_2*sigma_2"], "caseInsensitive": true }
+      ],
+      "explanation": "Margrabe's exchange option: a vanilla-like formula with S_1 playing the role of the strike and sigma_f the combined vol. Notice rho enters with a NEGATIVE sign -- higher correlation means S_2/S_1 is less volatile, so the option is cheaper."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What happens to the price as rho -> 1 (perfect correlation)? (sigma_f -> |sigma_1 - sigma_2|. If sigma_1 = sigma_2, sigma_f -> 0 and the option is essentially worthless when in-the-money status is fixed.)",
+        "What if S_1 is cash (sigma_1 = 0)? (Recovers the standard Black-Scholes call on S_2 with strike S_1.)",
+        "How would you generalize to a basket option? (Change-of-numeraire is harder; usually need Monte Carlo or a moment-matching approximation.)"
+      ]
+    }
+  ]
+}

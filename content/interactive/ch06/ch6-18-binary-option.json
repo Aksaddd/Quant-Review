@@ -1,0 +1,84 @@
+{
+  "id": "ch6-18-binary-option",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.3",
+  "title": "Binary (Cash-or-Nothing) Option",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "678-702"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "discounted-risk-neutral-probability-of-S-finishing-above-strike",
+    "insight": "binary-call-price-equals-exp-rT-times-N-of-d2-the-RN-probability-S_T-greater-than-K",
+    "variantAxes": ["payoff_type", "hedge_method"]
+  },
+  "setup": {
+    "narrative": "A cash-or-nothing binary call pays $1 at maturity if S_T > K, else $0. Find its price under BSM.",
+    "rules": [
+      "Risk-neutral pricing: c_B = exp(-rT) * E^Q[1{S_T > K}] = exp(-rT) * Q(S_T > K).",
+      "Under GBM with risk-neutral drift r and vol sigma: Q(S_T > K) = N(d_2).",
+      "d_2 = [ln(S/K) + (r - sigma^2/2) * T] / (sigma * sqrt(T))."
+    ],
+    "question": "Price the binary call and discuss hedging."
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Recognize that the discounted RN probability gives the binary price.",
+    "Identify N(d_2) as the RN probability that S_T > K.",
+    "Discuss hedging difficulty near expiry when S ~ K (delta becomes singular)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Risk-neutral pricing",
+      "prompt": "Binary call payoff at T: 1 if S_T > K, 0 else. The risk-neutral price is...?",
+      "options": [
+        { "id": "a", "text": "c_B = exp(-rT) * Q(S_T > K) = exp(-rT) * N(d_2).", "correct": true },
+        { "id": "b", "text": "c_B = exp(-rT) * N(d_1).",                          "correct": false },
+        { "id": "c", "text": "c_B = N(d_2) - K * N(d_1).",                         "correct": false }
+      ],
+      "explanation": "Under Q, S_T = S * exp((r - sigma^2/2)T + sigma * sqrt(T) * Z). The probability S_T > K reduces to a Gaussian tail: Q(S_T > K) = N(d_2). Discounted, the price is exp(-rT) * N(d_2).",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Hedging near expiry",
+      "prompt": "Delta of the binary call is dc_B/dS = exp(-rT) * N'(d_2) / (S * sigma * sqrt(T)). What happens as T -> 0 and S ~ K?",
+      "options": [
+        { "id": "a", "text": "Delta blows up (denominator -> 0, numerator bounded).  Hedging requires VERY frequent rebalancing -- practically impossible due to transaction costs.", "correct": true },
+        { "id": "b", "text": "Delta -> 0 -- easy to hedge.",                                                                                                                          "correct": false },
+        { "id": "c", "text": "Delta is constant in T -- no hedging concerns.",                                                                                                         "correct": false }
+      ],
+      "explanation": "Just like vanilla Gamma blows up ATM near expiry, the binary's delta itself blows up because the payoff becomes a step function. Replicating with a tight bull spread is one workaround: long 1/(2*epsilon) calls at K - epsilon, short 1/(2*epsilon) at K + epsilon, which approximates the digital as epsilon -> 0."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Fill in:",
+      "template": "Cash-or-nothing call price: c_B = exp(__[a]__) * N(__[b]__).  Hedging is hardest when S is __[c]__ K and T is __[d]__ (near 0 / large).",
+      "blanks": [
+        { "id": "a", "answers": ["-rT", "-r*T", "-rT)", "-r T"], "caseInsensitive": true },
+        { "id": "b", "answers": ["d_2", "d2"], "caseInsensitive": true },
+        { "id": "c", "answers": ["near", "close to", "around"], "caseInsensitive": true },
+        { "id": "d", "answers": ["near 0", "small", "close to 0", "near zero"], "caseInsensitive": true }
+      ],
+      "explanation": "c_B = exp(-rT) * N(d_2). Hardest to hedge: ATM, near expiry. Solution: tight bull spread approximation."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compare a vanilla call's delta vs the binary's delta. (Vanilla: N(d_1). Binary: N'(d_2) / (S sigma sqrt(T)) -- essentially the vanilla's GAMMA times exp(-rT) / N'(d_1) ratio.)",
+        "Why is N(d_2) the RN prob and N(d_1) is NOT? (N(d_1) comes from a stock-numeraire measure, not the RN measure.)",
+        "Construct an asset-or-nothing call (pays S_T if S_T > K, else 0) -- price is S * N(d_1)."
+      ]
+    }
+  ]
+}

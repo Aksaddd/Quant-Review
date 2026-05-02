@@ -1,0 +1,82 @@
+{
+  "id": "ch6-16-bull-spread",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.3",
+  "title": "Bull Call Spread Bounds",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "633-654"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "build-cash-flow-table-and-bound-by-discounted-max-payoff",
+    "insight": "max-payoff-of-K2-minus-K1-is-the-natural-upper-bound",
+    "variantAxes": ["strikes", "spread_type"]
+  },
+  "setup": {
+    "narrative": "Bull call spread = long call with strike K_1 + short call with strike K_2 (K_1 < K_2). At maturity T, the payoff is min(max(S_T - K_1, 0), K_2 - K_1).",
+    "rules": [
+      "The structure is bullish: profits when S_T moves up, but the upside is CAPPED at K_2 - K_1.",
+      "Below K_1: payoff = 0. Between K_1 and K_2: payoff = S_T - K_1. Above K_2: payoff = K_2 - K_1 (capped).",
+      "Price = c_1 - c_2 where c_i = price of call with strike K_i."
+    ],
+    "question": "What are the price bounds for the bull-call-spread cost (c_1 - c_2)?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Construct a payoff cash-flow table for a structured product.",
+    "Bound a derivative price using its max possible payoff (and zero lower bound).",
+    "Recognize that bull spreads cap upside in exchange for a smaller premium."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Payoff at maturity",
+      "prompt": "What is the payoff of the bull spread when S_T > K_2?",
+      "options": [
+        { "id": "a", "text": "Long call pays S_T - K_1; short call pays -(S_T - K_2). Net = K_2 - K_1 (capped).",      "correct": true },
+        { "id": "b", "text": "S_T - K_1 (long call pays full intrinsic, short call worthless).",                       "correct": false },
+        { "id": "c", "text": "K_1 - K_2 (negative).",                                                                    "correct": false }
+      ],
+      "explanation": "Above K_2 both calls are ITM. Long c_1 pays S_T - K_1, short c_2 owes S_T - K_2. Net: (S_T - K_1) - (S_T - K_2) = K_2 - K_1. The upside is FIXED at this amount no matter how high S_T goes.",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Upper bound on price",
+      "prompt": "Since the maximum payoff is K_2 - K_1 (achieved with certainty for S_T > K_2), and 0 otherwise: what's the no-arbitrage upper bound on c_1 - c_2?",
+      "options": [
+        { "id": "a", "text": "c_1 - c_2 <= exp(-rT) * (K_2 - K_1).  Discounted max payoff.", "correct": true },
+        { "id": "b", "text": "c_1 - c_2 <= K_2 - K_1.",                                       "correct": false },
+        { "id": "c", "text": "c_1 - c_2 <= S_0.",                                              "correct": false }
+      ],
+      "explanation": "If the spread cost more than the discounted max payoff, you'd short the spread, invest the proceeds at the risk-free rate, and pocket arbitrage. So the price is bounded above by exp(-rT) * (K_2 - K_1)."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Fill the bounds:",
+      "template": "0 <= c_1 - c_2 <= exp(__[a]__) * (K_2 - K_1).  The lower bound is __[b]__ since the payoff is non-negative.",
+      "blanks": [
+        { "id": "a", "answers": ["-rT", "-r*T", "-r T"], "caseInsensitive": true },
+        { "id": "b", "answers": ["0", "zero"], "caseInsensitive": true }
+      ],
+      "explanation": "Bull spread is long volatility on the strike range [K_1, K_2]. Cost is bounded between 0 (free) and discounted max payoff exp(-rT)*(K_2 - K_1). The price is closer to the upper bound when most risk-neutral mass sits above K_2."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the OTHER upper bound mentioned (involving (K_2 - K_1)/K_2 * S_T)? (The spread payoff is at most (K_2-K_1)/K_2 * S_T, so price <= (K_2-K_1)/K_2 * S_0.)",
+        "Construct a butterfly spread (long c(K-h) - 2*c(K) + c(K+h)) and note its bounds.",
+        "Why might a trader use a bull spread instead of a single call? (Lower premium, capped exposure -- trade upside for cheaper entry.)"
+      ]
+    }
+  ]
+}

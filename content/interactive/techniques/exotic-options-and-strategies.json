@@ -1,0 +1,61 @@
+{
+  "id": "exotic-options-and-strategies",
+  "kind": "technique",
+  "name": "Exotic Options and Strategies",
+  "tagline": "Combine vanilla options into spreads (bull, straddle) for directional or volatility bets; price exotics (binary, exchange) via change-of-numeraire or replication. Breeden-Litzenberger recovers the risk-neutral density from option prices.",
+  "category": "finance",
+  "introducedIn": {
+    "chapter": 6,
+    "section": "6.3",
+    "title": "Option Portfolios and Exotic Options",
+    "exemplarProblemId": "ch6-19-exchange-option"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Vanilla options can be combined into structured payoffs. Bull-call spread (long low-K call, short high-K call): bounded upside, capped at K_2 - K_1. Straddle (long call + long put at same K): bets on large moves either direction. Binary (cash-or-nothing) call: pays $1 if S_T > K. Exchange option: pays max(S_2 - S_1, 0) -- replaceable by a single-asset call via change-of-numeraire (Margrabe formula)."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The Breeden-Litzenberger formula recovers the risk-neutral density: f(K) = exp(rT) * d^2c/dK^2 from European call prices c(K) at all strikes. This connects observable option prices to the (unobservable) implied risk-neutral distribution -- foundational for model calibration and inferring market views on tail risk."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Most exotic options can be priced by a clever trick: decompose into vanillas (Breeden-Litzenberger), change numeraire (exchange options), or apply martingale arguments (lookbacks, barriers). The first instinct should be 'what's the simplest replicating portfolio?'."
+    }
+  ],
+  "whenToUse": [
+    "Pricing structured products (bull/bear spreads, butterflies, condors).",
+    "Volatility trading via straddles, strangles, and variance/volatility swaps.",
+    "Pricing single-asset binary / digital options.",
+    "Pricing multi-asset options (exchange, basket, spread) via change-of-numeraire.",
+    "Inferring the implied risk-neutral density from market option prices."
+  ],
+  "recipe": [
+    "For spreads: write the cash-flow table at maturity for each S_T region; bound the price by max payoff and lower-bound by 0.",
+    "For exotics with single-asset payoff f(S_T): use risk-neutral expectation c = exp(-rT) * E[f(S_T)] under GBM.",
+    "For two-asset exchange options: change numeraire to S_1, reduce to a single-asset call on f = S_2/S_1 with strike 1, vol sigma_f = sqrt(sigma_1^2 - 2*rho*sigma_1*sigma_2 + sigma_2^2).",
+    "For Breeden-Litzenberger: f_ST(K) = exp(rT) * d^2c/dK^2.",
+    "For convexity-in-vol questions (stochastic vs constant): compute the Volga (d^2c/dsigma^2) and apply Jensen."
+  ],
+  "commonPitfalls": [
+    "Forgetting that bull-spread upside is CAPPED -- so the price is bounded above by exp(-rT)*(K_2 - K_1).",
+    "Treating a straddle as a pure volatility bet when, away from K, it has directional exposure.",
+    "Ignoring the difficulty of hedging digital options near expiry (delta becomes singular near K).",
+    "In exchange options: omitting the cross-correlation term in sigma_f (it's NOT just sigma_1 + sigma_2).",
+    "Applying Breeden-Litzenberger to a discrete strike grid -- it's exact only in the continuous limit."
+  ],
+  "appearsIn": [
+    { "problemId": "ch6-14-stoch-vs-const-vol",  "title": "Constant vs. Stochastic Vol",        "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-15-recover-rn-density",  "title": "Recover Risk-Neutral Density",       "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-16-bull-spread",          "title": "Bull Spread",                         "chapter": 6, "section": "6.3" },
+    { "problemId": "ch6-17-straddle",             "title": "Straddle",                            "chapter": 6, "section": "6.3" },
+    { "problemId": "ch6-18-binary-option",        "title": "Binary Option",                       "chapter": 6, "section": "6.3" },
+    { "problemId": "ch6-19-exchange-option",      "title": "Exchange Option",                     "chapter": 6, "section": "6.3" }
+  ],
+  "relatedTechniques": ["option-pricing-fundamentals", "greeks-and-hedging", "brownian-motion-and-ito"]
+}

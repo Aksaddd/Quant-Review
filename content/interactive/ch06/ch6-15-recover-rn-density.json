@@ -1,0 +1,82 @@
+{
+  "id": "ch6-15-recover-rn-density",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Recover Risk-Neutral Density (Breeden-Litzenberger)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "608-628"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "differentiate-call-formula-twice-in-K-to-extract-density",
+    "insight": "second-derivative-of-c-with-respect-to-K-times-exp-rT-equals-the-risk-neutral-density-at-K",
+    "variantAxes": ["payoff", "method"]
+  },
+  "setup": {
+    "narrative": "European call price: c(K) = exp(-rT) * E[(S_T - K)^+] = exp(-rT) * integral over s from K to infinity of (s - K) * f(s) ds, where f is the risk-neutral density of S_T. Suppose c(K) is observable for ALL strikes K.",
+    "rules": [
+      "Differentiate c(K) once with respect to K: dc/dK = -exp(-rT) * (1 - F(K)) where F is the CDF.",
+      "Differentiate again: d^2 c / dK^2 = exp(-rT) * f(K).",
+      "Use Leibniz's rule for differentiating an integral with K-dependent bounds and integrand."
+    ],
+    "question": "Given the full strike profile c(K), how do we recover f(K)?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Differentiate an integral with K-dependent limits and integrand (Leibniz).",
+    "Recognize the second derivative of c with respect to K isolates f(K).",
+    "Appreciate the practical implication: option prices encode the implied risk-neutral distribution."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "First derivative",
+      "prompt": "c(K) = exp(-rT) * integral_K^infinity of (s - K) * f(s) ds. Compute dc/dK using Leibniz's rule.",
+      "options": [
+        { "id": "a", "text": "dc/dK = exp(-rT) * [-(K - K) * f(K) - integral_K^infinity f(s) ds] = -exp(-rT) * (1 - F(K)) where F is the CDF.", "correct": true },
+        { "id": "b", "text": "dc/dK = exp(-rT) * f(K).",                                                                                                  "correct": false },
+        { "id": "c", "text": "dc/dK = 0.",                                                                                                                  "correct": false }
+      ],
+      "explanation": "Leibniz: differentiate an integral with bounds and integrand depending on K. Lower bound term: -(s-K)|_{s=K} * f(K) = 0. Integrand term: integral of d/dK[(s-K) f(s)] ds = -integral_K^infinity f(s) ds = -(1 - F(K)). Multiply by exp(-rT): dc/dK = -exp(-rT) * (1 - F(K)).",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Second derivative",
+      "prompt": "dc/dK = -exp(-rT) * (1 - F(K)). Differentiate once more in K.",
+      "options": [
+        { "id": "a", "text": "d^2 c / dK^2 = -exp(-rT) * (-f(K)) = exp(-rT) * f(K).  So f(K) = exp(rT) * d^2 c / dK^2.", "correct": true },
+        { "id": "b", "text": "d^2 c / dK^2 = -exp(-rT) * f(K).",                                                          "correct": false },
+        { "id": "c", "text": "d^2 c / dK^2 = 0 (linear in K).",                                                            "correct": false }
+      ],
+      "explanation": "d/dK[1 - F(K)] = -f(K). So d^2 c / dK^2 = -exp(-rT) * (-f(K)) = exp(-rT) * f(K). Rearranging: f(K) = exp(rT) * d^2 c / dK^2. This is the Breeden-Litzenberger formula."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Fill in the Breeden-Litzenberger formula:",
+      "template": "f_ST(K) = exp(__[a]__T) * d^2 c / dK^2.  This recovers the __[b]__-neutral density from European call prices observed at all strikes.",
+      "blanks": [
+        { "id": "a", "answers": ["r", "+r"], "caseInsensitive": true },
+        { "id": "b", "answers": ["risk"], "caseInsensitive": true }
+      ],
+      "explanation": "f_ST(K) = exp(rT) * d^2c/dK^2. The risk-neutral density at level K is encoded in the convexity of the call-strike curve. This is foundational for model calibration and inferring market views on tail risk."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does this work for the RISK-NEUTRAL density rather than the real-world one? (Because c is computed under Q, the risk-neutral measure.)",
+        "How would you implement this in practice when only finitely many strikes are quoted? (Smooth interpolation or a parametric vol surface, then differentiate twice.)",
+        "What does Breeden-Litzenberger tell you about a butterfly spread (long c(K-h) - 2*c(K) + c(K+h))? (Approximately h^2 * c''(K) ≈ h^2 * exp(-rT) * f(K), so a tight butterfly is like buying a small strip of probability mass at K.)"
+      ]
+    }
+  ]
+}

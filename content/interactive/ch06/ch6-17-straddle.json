@@ -1,0 +1,82 @@
+{
+  "id": "ch6-17-straddle",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.3",
+  "title": "Straddle as a Volatility Bet",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "656-676"
+  },
+  "mechanism": {
+    "primary": "exotic-options-and-strategies",
+    "structure": "long-call-plus-long-put-same-strike-and-maturity",
+    "insight": "payoff-equals-absolute-deviation-from-strike-rewarding-large-moves-in-either-direction",
+    "variantAxes": ["motivation", "purity_of_vol_bet"]
+  },
+  "setup": {
+    "narrative": "A straddle = long call + long put at the SAME strike K and SAME maturity T on the SAME underlying. You pay c + p upfront.",
+    "rules": [
+      "Payoff at maturity = max(S_T - K, 0) + max(K - S_T, 0) = |S_T - K|.",
+      "Profits if S_T moves far from K in EITHER direction.",
+      "Loses the premium if S_T ~ K at expiry."
+    ],
+    "question": "When would you buy a straddle?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Recognize the absolute-value payoff of a straddle.",
+    "Identify the key trader motivation: realized vol > implied vol.",
+    "Understand why a straddle is NOT a pure vol bet (away from K, it accumulates directional exposure)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Payoff",
+      "prompt": "Long call + long put, same K, same T. Payoff at expiry?",
+      "options": [
+        { "id": "a", "text": "max(S_T - K, 0) + max(K - S_T, 0) = |S_T - K|.  V-shape centered at K.", "correct": true },
+        { "id": "b", "text": "S_T - K (always).",                                                       "correct": false },
+        { "id": "c", "text": "0 if S_T near K, K otherwise.",                                            "correct": false }
+      ],
+      "explanation": "Exactly one of the two options finishes ITM (or both are zero at S_T = K). The combined payoff is the absolute deviation from strike.",
+      "learnMoreTechnique": "exotic-options-and-strategies"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "When to buy",
+      "prompt": "Why would you buy a straddle?",
+      "options": [
+        { "id": "a", "text": "You expect a LARGE move in S but are AGNOSTIC about direction (e.g., earnings, FDA decision). Or: you believe realized vol will exceed implied vol.", "correct": true },
+        { "id": "b", "text": "You expect S_T to be close to K (so your delta exposure stays neutral).",                                                                              "correct": false },
+        { "id": "c", "text": "You only profit if S_T < K.",                                                                                                                        "correct": false }
+      ],
+      "explanation": "Straddles are used (i) for direction-agnostic event bets, (ii) as a (impure) volatility trade. ATM straddle price ~ 0.4 * sigma * S * sqrt(T), so it's roughly proportional to implied vol -- you buy if you think realized vol will exceed it."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit -- limitation",
+      "prompt": "What's the main LIMITATION of a straddle as a pure volatility bet?",
+      "options": [
+        { "id": "a", "text": "Once S moves far from K, the straddle's delta is no longer near 0 -- you accumulate directional exposure. For pure vol bets, use variance / volatility swaps.", "correct": true },
+        { "id": "b", "text": "Straddles can only be sold, not bought.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "There is no limitation -- a straddle is a pure vol bet.",                                                                                                       "correct": false }
+      ],
+      "explanation": "AT inception, an ATM straddle has delta ~ 0 (call delta = 0.5, put delta = -0.5). But as S drifts away, the call's delta rises and the put's falls in absolute terms, so net delta becomes nonzero. Variance swaps (paying realized variance) sidestep this entirely."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the breakeven? (Price moves of magnitude >= c + p in either direction.)",
+        "What is a STRANGLE and how does it differ from a straddle? (Strangle = long OTM call + long OTM put at different strikes; cheaper but needs a bigger move to profit.)",
+        "How does a variance swap pay off? (N * (sigma_realized^2 - K_var), pure vol exposure with no directional component.)"
+      ]
+    }
+  ]
+}
