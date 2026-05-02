@@ -110,6 +110,10 @@ import ch4JointDefault   from '../../../content/interactive/ch04/ch4-39-joint-de
 import ch4MaxMinUniform  from '../../../content/interactive/ch04/ch4-40-max-min-uniform.json';
 import ch4MaxMinCorr     from '../../../content/interactive/ch04/ch4-41-max-min-correlation.json';
 import ch4RandomAnts     from '../../../content/interactive/ch04/ch4-42-random-ants.json';
+import ch5GamblersRuinMC from '../../../content/interactive/ch05/ch5-01-gamblers-ruin-mc.json';
+import ch5Dice12vs77     from '../../../content/interactive/ch05/ch5-02-dice-12-vs-77.json';
+import ch5CoinTriplets   from '../../../content/interactive/ch05/ch5-03-coin-triplets.json';
+import ch5ColorBalls     from '../../../content/interactive/ch05/ch5-04-color-balls.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -134,6 +138,7 @@ import techCondProb      from '../../../content/interactive/techniques/condition
 import techDistMoments   from '../../../content/interactive/techniques/distributions-and-moments.json';
 import techExpLinearity  from '../../../content/interactive/techniques/expected-value-and-linearity.json';
 import techOrderStats    from '../../../content/interactive/techniques/order-statistics.json';
+import techMarkovChains  from '../../../content/interactive/techniques/markov-chains.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -240,6 +245,10 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch4-40-max-min-uniform':   ch4MaxMinUniform  as unknown as ProblemWalkthrough,
   'ch4-41-max-min-correlation': ch4MaxMinCorr   as unknown as ProblemWalkthrough,
   'ch4-42-random-ants':       ch4RandomAnts     as unknown as ProblemWalkthrough,
+  'ch5-01-gamblers-ruin-mc':  ch5GamblersRuinMC as unknown as ProblemWalkthrough,
+  'ch5-02-dice-12-vs-77':     ch5Dice12vs77     as unknown as ProblemWalkthrough,
+  'ch5-03-coin-triplets':     ch5CoinTriplets   as unknown as ProblemWalkthrough,
+  'ch5-04-color-balls':       ch5ColorBalls     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -264,6 +273,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'distributions-and-moments': techDistMoments as unknown as Technique,
   'expected-value-and-linearity': techExpLinearity as unknown as Technique,
   'order-statistics':         techOrderStats    as unknown as Technique,
+  'markov-chains':            techMarkovChains  as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

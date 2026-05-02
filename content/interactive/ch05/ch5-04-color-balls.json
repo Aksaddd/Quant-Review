@@ -1,0 +1,91 @@
+{
+  "id": "ch5-04-color-balls",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.1",
+  "title": "Color Balls",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "240-262"
+  },
+  "mechanism": {
+    "primary": "markov-chains",
+    "structure": "conditional-MC-given-the-final-color-then-solve-for-expected-time",
+    "insight": "by-symmetry-the-conditional-expected-time-is-the-same-as-the-unconditional-and-equals-n-minus-1-squared",
+    "variantAxes": ["n_colors"]
+  },
+  "setup": {
+    "narrative": "A box contains n balls of n different colors. Each step: pick an ORDERED PAIR of balls uniformly at random, repaint the FIRST one to match the SECOND, return both.",
+    "rules": [
+      "Continue until all n balls are the same color.",
+      "By symmetry, the final color is uniform over the n original colors.",
+      "Let N_n be the number of steps until all-same-color."
+    ],
+    "question": "Find E[N_n] -- the expected number of steps."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use symmetry: condition on the final color (say color 1) without changing E[N_n].",
+    "Set up a conditional Markov chain on i = #color-1 balls.",
+    "Solve to find Z_1 = E[N_n | F_1] = (n - 1)^2."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Use the symmetry shortcut",
+      "prompt": "Why is E[N_n] = E[N_n | final color is 1]?",
+      "options": [
+        { "id": "a", "text": "By symmetry, every initial color has equal chance of being the final color (1/n each). So E[N_n] = sum over c of E[N_n | F_c] * (1/n), and all conditional expectations are equal -- it doesn't matter which color we condition on.", "correct": true },
+        { "id": "b", "text": "Because the chain doesn't depend on color labels.",                                                                                                                                                                                          "correct": false },
+        { "id": "c", "text": "It's a coincidence.",                                                                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Color symmetry: relabeling colors doesn't change the dynamics. So E[N_n | F_c] is the SAME for every c, and equal to the unconditional E[N_n].",
+      "learnMoreTechnique": "markov-chains"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Set up the conditional Markov chain",
+      "prompt": "Let state i = number of color-1 balls. Conditional on F_1, what are the transition probabilities?",
+      "options": [
+        { "id": "a", "text": "P(i -> i+1 | F_1) = (n-i)*(i+1)/(n*(n-1))  [pick non-color-1 first, color-1 second].  P(i -> i-1 | F_1) = (i-1)*(n-i)/(n*(n-1))  [Bayes adjustment].", "correct": true },
+        { "id": "b", "text": "Same as unconditional probabilities.",                                                                                                                  "correct": false },
+        { "id": "c", "text": "1/n for any transition.",                                                                                                                                "correct": false }
+      ],
+      "explanation": "The conditional probabilities are biased upward (toward i = n) because we're conditioning on eventually reaching that absorbing state. The Bayes adjustment changes (i-1)*i to (i-1)*(n-i) for the i -> i-1 transition."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve the system",
+      "prompt": "Set up Z_i = E[N_n | F_1, current state = i] with boundary Z_n = 0. The system can be shown to give:",
+      "options": [
+        { "id": "a", "text": "Z_1 = E[N_n] = (n-1)^2.", "correct": true },
+        { "id": "b", "text": "Z_1 = n!.",                "correct": false },
+        { "id": "c", "text": "Z_1 = n.",                  "correct": false }
+      ],
+      "explanation": "Telescoping the recurrence yields Z_1 = (n-1)^2. For n=2: 1. For n=3: 4. For n=10: 81. Quadratic growth in n."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit for n = 10",
+      "prompt": "E[N_10] = (10 - 1)^2 = ?",
+      "answerType": "numeric",
+      "answer": 81,
+      "explanation": "(n - 1)^2 = 81 for n = 10. Quadratic growth -- doubling the number of colors quadruples the expected time."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify n = 2: starting with 1 ball each color, one step always merges them (E = 1 = (2-1)^2). ✓",
+        "Why does the answer NOT depend on which color you condition on? (Symmetry, but verify.)",
+        "Compare to coupon collection (N * H_N ~ N ln N) -- which grows faster with N?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "markov-chains",
+  "kind": "technique",
+  "name": "Markov Chains",
+  "tagline": "Set up the state space, write transition probabilities, then solve absorption-probability or expected-time equations. The state-space view collapses sequential problems into linear algebra.",
+  "category": "stochastic-processes",
+  "introducedIn": {
+    "chapter": 5,
+    "section": "5.1",
+    "title": "Markov Chain",
+    "exemplarProblemId": "ch5-01-gamblers-ruin-mc"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "A Markov chain is a sequence of random states where the next state depends ONLY on the current state -- not the history. This 'memorylessness' makes long-run behavior tractable: absorption probabilities a_i = P(reach absorbing set from state i) and expected times t_i = E[steps to absorption from i] satisfy linear systems you can solve by substitution."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The two workhorse equations: (1) Absorption: a_i = sum over j of p_ij * a_j, with a_j = 1 for absorbing target states and 0 elsewhere. (2) Expected time: t_i = 1 + sum over transient j of p_ij * t_j. For pattern-matching problems (e.g., expected tosses to get HHH), the state is the prefix matched so far. Conway's leading number provides a shortcut for expected wait times of binary patterns."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "When facing a sequential probability problem, ask: 'what's the smallest piece of state I need to predict the next outcome?' That set of states IS the Markov chain. Then write absorption / expected-time equations and solve."
+    }
+  ],
+  "whenToUse": [
+    "Sequential games or processes with absorbing end states (gambler's ruin, ruin in coin patterns).",
+    "Pattern-matching problems (waiting time for HHH, HTH, etc.).",
+    "Random walks on finite state spaces.",
+    "Any problem of the form 'given current state, what's the probability of reaching state X?'.",
+    "Simulation problems where the next outcome depends only on a finite-state summary."
+  ],
+  "recipe": [
+    "Identify the minimal state space that captures everything needed to predict the future.",
+    "List transition probabilities p_ij from each transient state.",
+    "For absorption probabilities: write a_i = sum p_ij * a_j with boundary a_target = 1, a_other_absorbing = 0.",
+    "For expected time: write t_i = 1 + sum p_ij * t_j over transient j.",
+    "Solve the resulting linear system (small systems often have clean closed forms via substitution)."
+  ],
+  "commonPitfalls": [
+    "Including TOO MUCH state -- only what's needed to predict the next step.",
+    "Forgetting that the Markov property requires INDEPENDENCE of history given current state. Confounders break this.",
+    "Off-by-one in the expected-time equation -- the +1 captures the cost of the current transition.",
+    "For pattern-matching: failing to handle 'partial match collapse' (e.g., after HH, T sends you back to S, not to H).",
+    "Confusing 'absorbing' (transition to itself with prob 1) with 'recurrent' (returns infinitely often)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch5-01-gamblers-ruin-mc",  "title": "Gambler's Ruin (Markov Chain Approach)", "chapter": 5, "section": "5.1" },
+    { "problemId": "ch5-02-dice-12-vs-77",     "title": "Dice Question (12 vs. 7-7)",              "chapter": 5, "section": "5.1" },
+    { "problemId": "ch5-03-coin-triplets",     "title": "Coin Triplets (Penney's Game)",            "chapter": 5, "section": "5.1" },
+    { "problemId": "ch5-04-color-balls",       "title": "Color Balls",                              "chapter": 5, "section": "5.1" }
+  ],
+  "relatedTechniques": ["conditional-probability-and-bayes", "expected-value-and-linearity", "ordinary-differential-equations"]
+}

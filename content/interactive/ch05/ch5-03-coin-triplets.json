@@ -1,0 +1,105 @@
+{
+  "id": "ch5-03-coin-triplets",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.1",
+  "title": "Coin Triplets (Penney's Game)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "160-237"
+  },
+  "mechanism": {
+    "primary": "markov-chains",
+    "structure": "absorbing-MC-with-states-tracking-prefix-match",
+    "insight": "different-patterns-have-different-expected-waits-and-the-relation-is-non-transitive",
+    "variantAxes": ["pattern_length", "alphabet"]
+  },
+  "setup": {
+    "narrative": "Toss a fair coin until a target three-letter pattern appears. The chain has states corresponding to the longest suffix of the toss sequence that's a prefix of the target pattern.",
+    "rules": [
+      "Patterns considered: HHH and THH.",
+      "Part A: expected number of tosses to first see each pattern.",
+      "Part B: probability HHH appears before THH.",
+      "Part C: how should you choose your pattern in a head-to-head game (Penney's Game)?"
+    ],
+    "question": "Find E[wait for HHH], E[wait for THH], P(HHH before THH), and Penney's optimal counter-strategy."
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Build the Markov chain on prefix-match states (S, H, HH, HHH for HHH).",
+    "Set up and solve the expected-time equations.",
+    "Recognize the asymmetry: expected wait for HHH (14) is much longer than for THH (8).",
+    "Understand why Penney's Game is non-transitive."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up E[wait for HHH]",
+      "prompt": "States: S (no progress), H (last 1 was H), HH (last 2 were HH), HHH (absorbing). Expected-time equations?",
+      "options": [
+        { "id": "a", "text": "mu_S = 1 + (1/2)*mu_S + (1/2)*mu_H. mu_H = 1 + (1/2)*mu_S + (1/2)*mu_HH. mu_HH = 1 + (1/2)*mu_S + 0.", "correct": true },
+        { "id": "b", "text": "mu_HHH = 8.",                                                                                                "correct": false },
+        { "id": "c", "text": "mu_S = 1/8.",                                                                                                  "correct": false }
+      ],
+      "explanation": "Each state takes 1 step to transition. From S: H sends to H, T stays at S. From H: H -> HH, T -> S. From HH: H -> HHH (absorb!), T -> S.",
+      "learnMoreTechnique": "markov-chains"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Solve for E[HHH wait]",
+      "prompt": "From mu_HH = 1 + mu_S/2; mu_H = 1 + (mu_S + mu_HH)/2; mu_S = 1 + (mu_S + mu_H)/2. Solve.",
+      "answerType": "numeric",
+      "answer": 14,
+      "explanation": "Substituting: mu_HH = 1 + mu_S/2. mu_H = 1 + (mu_S + 1 + mu_S/2)/2 = 1 + (3 mu_S/2 + 1)/2 = 1 + 3 mu_S/4 + 1/2 = 3/2 + 3 mu_S/4. mu_S = 1 + (mu_S + 3/2 + 3 mu_S/4)/2. Algebra yields mu_S = 14."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compare: E[wait for THH]",
+      "prompt": "For THH (similar setup), the expected wait is...",
+      "options": [
+        { "id": "a", "text": "8 tosses.  (THH benefits from no 'collapse on T' issue: a T from any state at most resets you to T, not to S.)", "correct": true },
+        { "id": "b", "text": "14 tosses (same as HHH).", "correct": false },
+        { "id": "c", "text": "16 tosses.",                "correct": false }
+      ],
+      "explanation": "Solving the analogous system for THH gives mu_S = 8. Conway's leading-number method confirms: HHH overlaps with itself at lengths 1, 2, 3 -> 2^1 + 2^2 + 2^3 = 14. THH overlaps only at length 3 -> 2^3 = 8."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Part B: P(HHH before THH)",
+      "prompt": "Why is P(HHH before THH) so small?",
+      "options": [
+        { "id": "a", "text": "Once any T appears, the future contains the suffix '..HH' which completes THH BEFORE HHH (since HHH requires 3 H's after the T, but THH already has the T before the H's). So HHH wins ONLY if the first three tosses are HHH directly. P = (1/2)^3 = 1/8.", "correct": true },
+        { "id": "b", "text": "P = 1/2.",                                                                                                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "P = 7/8.",                                                                                                                                                                                                                                                        "correct": false }
+      ],
+      "explanation": "Once T appears, any subsequent HH completes THH. To get HHH first, you'd need three Hs BEFORE any T appears. P(first 3 tosses all H) = 1/8."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Part C: Penney's Game (non-transitivity)",
+      "prompt": "If Player 1 announces HHH, Player 2's best counter is THH (winning prob 7/8). What's the surprising property of this game?",
+      "options": [
+        { "id": "a", "text": "Non-transitivity: A beats B and B beats C does NOT imply A beats C. So given Player 1's pick, Player 2 can ALWAYS choose a pattern that wins with probability >= 2/3. Always go SECOND.", "correct": true },
+        { "id": "b", "text": "Player 1 always wins.",                                                                                                                                                                  "correct": false },
+        { "id": "c", "text": "It's symmetric -- both players have equal chances.",                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Penney's table: every length-3 pattern has a counter that beats it with probability >= 2/3. The optimal strategy: take the LAST TWO characters of opponent's pattern and prepend the OPPOSITE of opponent's second character."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Use Conway's method: for any pattern P, E[wait for P] = sum over k of 2^k where the prefix of length k matches a suffix of length k of P.",
+        "Prove non-transitivity by exhibiting a cycle of length-4 patterns.",
+        "What's E[wait for HHTTHH]? (Conway: prefix overlaps -> 64 + 4 + 2 = 70.)"
+      ]
+    }
+  ]
+}

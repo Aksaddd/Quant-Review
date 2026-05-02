@@ -1,0 +1,90 @@
+{
+  "id": "ch5-02-dice-12-vs-77",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.1",
+  "title": "Dice Question (12 vs. 7-7)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "115-156"
+  },
+  "mechanism": {
+    "primary": "markov-chains",
+    "structure": "absorbing-MC-with-states-S-after-7-and-the-two-absorbing-outcomes",
+    "insight": "track-only-whether-the-PREVIOUS-roll-was-a-7-the-rest-of-the-history-doesnt-matter",
+    "variantAxes": ["target_pattern_A", "target_pattern_B"]
+  },
+  "setup": {
+    "narrative": "Two players bet on which event happens FIRST when two dice are rolled repeatedly: Player A wins if a SUM OF 12 appears; Player B wins if TWO CONSECUTIVE 7s appear.",
+    "rules": [
+      "Each roll is independent. P(sum = 12) = 1/36 (only 6+6). P(sum = 7) = 6/36 = 1/6 (six combinations). P(other) = 29/36.",
+      "Game ends as soon as either event triggers."
+    ],
+    "question": "What is P(A wins)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the Markov chain with two transient states: S (start, previous roll was not 7) and 7 (previous roll was a 7).",
+    "Write absorption-probability equations for P(reach 12 before 7-7).",
+    "Solve the linear system to get 7/13."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Identify the state space",
+      "prompt": "What's the minimal state we need to track between rolls?",
+      "options": [
+        { "id": "a", "text": "Whether the PREVIOUS roll was a 7 (since 7-7 requires consecutive 7s).  States: S (no 7 just happened), '7' (just rolled a 7), '12' (absorbing -- A wins), '7-7' (absorbing -- B wins).", "correct": true },
+        { "id": "b", "text": "All past rolls.",                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "Just the current roll.",                                                                                                                                                                  "correct": false }
+      ],
+      "explanation": "Two transient states (S, '7') and two absorbing states (12, 7-7). 'Whether the previous was a 7' is enough because 7-7 just needs the next roll to also be 7.",
+      "learnMoreTechnique": "markov-chains"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Write the absorption equations",
+      "prompt": "Let a_S = P(A wins from state S) and a_7 = P(A wins from state 7). Set up the equations.",
+      "options": [
+        { "id": "a", "text": "a_S = (1/36)*1 + (6/36)*a_7 + (29/36)*a_S.  a_7 = (1/36)*1 + (6/36)*0 + (29/36)*a_S.", "correct": true },
+        { "id": "b", "text": "a_S = a_7 = 1/2.",                                                                       "correct": false },
+        { "id": "c", "text": "a_S = 1/36.",                                                                              "correct": false }
+      ],
+      "explanation": "From S: roll 12 (absorb to A's win), roll 7 (transition to '7' state), roll other (stay at S). From '7': roll 12 (A wins), roll another 7 (B wins via 7-7 absorption), roll other (back to S)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve the system",
+      "prompt": "Substitute a_7 from the second equation into the first and solve for a_S.",
+      "options": [
+        { "id": "a", "text": "a_S * (7/36) = 1/36 + (6/36) * (1/36 + (29/36)*a_S).  Solve: a_S = 7/13.", "correct": true },
+        { "id": "b", "text": "a_S = 1/2.",                                                                  "correct": false },
+        { "id": "c", "text": "a_S = 1/36.",                                                                  "correct": false }
+      ],
+      "explanation": "From eq 1: a_S - (29/36)*a_S = 1/36 + (6/36)*a_7, so (7/36)*a_S = 1/36 + (6/36)*a_7. Substitute a_7 = 1/36 + (29/36)*a_S. Algebra gives a_S = 42/78 = 7/13."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "P(A wins) =",
+      "answerType": "numeric",
+      "answer": 0.5385,
+      "explanation": "P(A wins) = 7/13 ≈ 0.538. A is slightly favored despite the lower per-roll probability of 12 vs. 7 -- because B needs TWO consecutive 7s, which is much rarer than A's single 12."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: A bets on event X (prob p per roll), B bets on TWO consecutive Y (prob q per roll). Find a closed form for P(A wins).",
+        "What's E[number of rolls until the game ends]?",
+        "Verify by Method 1 (conditional probability without explicit Markov chain) -- gives the same answer."
+      ]
+    }
+  ]
+}
