@@ -1,0 +1,103 @@
+{
+  "id": "ch4-18-birthday-line",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Birthday Line",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "408-434"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "P-position-n-wins-equals-product-of-no-collisions-times-collision-with-yours",
+    "insight": "two-conditions-P-n-greater-P-n-minus-1-and-P-n-greater-P-n-plus-1-pin-down-n-equals-20",
+    "variantAxes": ["n_days"]
+  },
+  "setup": {
+    "narrative": "A manager gives a free ticket to the FIRST person in line whose birthday matches someone who already bought a ticket ahead of them. You can choose your position in line.",
+    "rules": [
+      "All birthdays are uniformly random over 365 days, independent across people.",
+      "If you are in position n, you win if and only if: the first n-1 people all have DISTINCT birthdays, AND your birthday matches one of theirs.",
+      "Earlier positions might 'snipe' the prize before you get a chance."
+    ],
+    "question": "What position n should you choose to maximize your probability of winning?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Compute P(n) = P(first n-1 distinct) * P(your birthday matches one of theirs).",
+    "Find the optimal n by checking when P(n) > P(n-1) AND P(n) > P(n+1).",
+    "Solve the two resulting quadratic inequalities."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up P(n)",
+      "prompt": "If you're at position n, you win iff (the first n-1 are distinct) AND (your birthday matches one of those n-1). What is P(n)?",
+      "options": [
+        { "id": "a", "text": "P(n) = [365 * 364 * ... * (365-n+2) / 365^(n-1)] * (n-1)/365.", "correct": true },
+        { "id": "b", "text": "P(n) = (n-1)/365.",                                              "correct": false },
+        { "id": "c", "text": "P(n) = 1/365 for all n.",                                          "correct": false }
+      ],
+      "explanation": "First factor: P(first n-1 all distinct birthdays). Second factor: P(your birthday matches one of n-1 specific dates) = (n-1)/365.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Find P(n) > P(n-1) condition",
+      "prompt": "When does increasing your position from n-1 to n improve P? Setting up P(n)/P(n-1) > 1 and simplifying gives a quadratic in n. What is it?",
+      "options": [
+        { "id": "a", "text": "(367 - n)(n - 1) > 365(n - 2),  which simplifies to n^2 - 3n - 363 < 0,  so n <= 20.", "correct": true },
+        { "id": "b", "text": "n > 365.",                                                                              "correct": false },
+        { "id": "c", "text": "Always n > 1.",                                                                            "correct": false }
+      ],
+      "explanation": "P(n)/P(n-1) compares (365-n+2)/365 * (n-1)/(n-2) > 1. Cross-multiply and simplify: (367-n)(n-1) > 365(n-2). Expand and rearrange to get n^2 - 3n - 363 < 0 (note the sign flip). Roots ≈ 20.6, so n <= 20."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Find P(n) > P(n+1) condition",
+      "prompt": "When does P(n) > P(n+1) (so increasing further hurts)?",
+      "options": [
+        { "id": "a", "text": "(366 - n) * n < 365 * (n - 1),  which gives n^2 - n - 365 > 0,  so n >= 20.", "correct": true },
+        { "id": "b", "text": "n > 100.",                                                                    "correct": false },
+        { "id": "c", "text": "Always n < 1.",                                                                "correct": false }
+      ],
+      "explanation": "P(n+1)/P(n) similarly: (366-n)/365 * n/(n-1) < 1. Simplify to n^2 - n - 365 > 0 (roots ≈ 19.6 and -18.6), giving n >= 20."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Combine the two conditions",
+      "prompt": "Both conditions (n <= 20 AND n >= 20) hold simultaneously only at one value of n. What is it?",
+      "answerType": "numeric",
+      "answer": 20,
+      "explanation": "Only n = 20 satisfies both inequalities simultaneously. P(n) is unimodal in n; the peak is at n = 20."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What position should you choose?",
+      "options": [
+        { "id": "a", "text": "20th in line.",  "correct": true },
+        { "id": "b", "text": "1st in line.",    "correct": false },
+        { "id": "c", "text": "365th in line.",   "correct": false }
+      ],
+      "explanation": "20th in line. The trade-off: too early, you have nothing to match against; too late, the first match has already been triggered by someone before you."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute P(20) numerically. How big is the winning probability?",
+        "What if there are 366 days in a year? Does the optimal position shift?",
+        "What's the optimal position for general 'days in year' D? (Hint: it's around sqrt(D).)"
+      ]
+    }
+  ]
+}

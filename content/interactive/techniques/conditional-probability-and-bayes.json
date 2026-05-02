@@ -1,0 +1,63 @@
+{
+  "id": "conditional-probability-and-bayes",
+  "kind": "technique",
+  "name": "Conditional Probability and Bayes' Formula",
+  "tagline": "Update beliefs by conditioning. P(A|B) = P(A∩B)/P(B) is the workhorse; Bayes flips P(B|A) into P(A|B). The hardest skill is reading the conditioning event correctly.",
+  "category": "probability",
+  "introducedIn": {
+    "chapter": 4,
+    "section": "4.3",
+    "title": "Conditional Probability and Bayes' Formula",
+    "exemplarProblemId": "ch4-15-unfair-coin"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Conditional probability is the foundation of probabilistic reasoning under partial information. The key formula P(A|B) = P(A intersect B) / P(B) lets you update beliefs given new evidence. The Multiplication Rule decomposes joint events into chains of conditional probabilities. The Law of Total Probability sums conditional probabilities over a partition. Bayes' formula reverses the conditioning."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "The HARD part is rarely the algebra. It's reading the conditioning event correctly. 'I have at least one boy' (Boys & Girls Part A) and 'this specific child is a boy' (Part B) ARE DIFFERENT conditions and yield different answers (1/3 vs 1/2). Most paradoxes (Monty Hall, Sleeping Beauty, etc.) come from misidentifying the conditioning event."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Always write down: (1) the sample space, (2) the event you're conditioning ON, (3) the event you're computing the probability OF. Resist intuition until those three are explicit. Bayes' formula is just arithmetic once they're settled."
+    }
+  ],
+  "whenToUse": [
+    "Updating probabilities given new evidence (Bayes).",
+    "Computing 'probability of A given that B happened'.",
+    "Multi-step probability problems where each step depends on the previous.",
+    "Sequential games where one player's move conditions the others.",
+    "Anywhere you see 'given that ...' or 'after observing ...'."
+  ],
+  "recipe": [
+    "Define the sample space and the events involved.",
+    "Identify the conditioning event B explicitly. Don't confuse 'at least one X' with 'this specific item is X'.",
+    "Use P(A|B) = P(A intersect B) / P(B), or directly use Bayes' formula if you have P(B|A) and want P(A|B).",
+    "For multi-step processes, use the Multiplication Rule: P(E_1 E_2 ... E_n) = product of P(E_k | E_1 ... E_{k-1}).",
+    "Always sanity-check: does the answer match a small-case enumeration?"
+  ],
+  "commonPitfalls": [
+    "Confusing P(A|B) with P(B|A) -- the canonical Bayes mistake (a.k.a. base rate fallacy).",
+    "Misidentifying the conditioning event (e.g., Boys and Girls Part B's 'specific child is a boy' is NOT the same as Part A's 'at least one boy').",
+    "Forgetting that 'random' can mean different things -- 'pick a random envelope' vs 'pick a random pair' vs 'pick a random ordering'.",
+    "In Monty Hall: failing to use the fact that Monty's reveal is INFORMATIVE -- it depends on where the car is.",
+    "Computing P(A and B) when the problem actually asks for P(A | B)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch4-13-boys-and-girls",      "title": "Boys and Girls",                     "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-14-all-girl-world",      "title": "All-Girl World",                     "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-15-unfair-coin",         "title": "Unfair Coin (Bayes)",                 "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-16-fair-from-unfair-coin", "title": "Fair Probability from Unfair Coin", "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-17-dart-game",            "title": "Dart Game",                           "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-18-birthday-line",       "title": "Birthday Line",                       "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-19-dice-order",          "title": "Dice Order",                          "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-20-monty-hall",          "title": "Monty Hall Problem",                  "chapter": 4, "section": "4.3" }
+  ],
+  "relatedTechniques": ["probability-foundations", "logic-reasoning", "combinatorial-counting"]
+}

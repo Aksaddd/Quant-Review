@@ -1,0 +1,91 @@
+{
+  "id": "ch4-15-unfair-coin",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Unfair Coin (Bayes)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "356-374"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "bayes-theorem-with-prior-1-over-1000-and-likelihood-ratio-1024-vs-1",
+    "insight": "10-heads-strongly-suggests-the-rare-coin-but-the-weak-prior-keeps-the-posterior-near-1-half",
+    "variantAxes": ["prior_probability", "n_heads_observed"]
+  },
+  "setup": {
+    "narrative": "Among 1000 coins, exactly ONE has heads on both sides; the other 999 are fair. You pick one coin uniformly at random and flip it 10 times. All 10 tosses come up heads.",
+    "rules": [
+      "Coins are picked uniformly at random.",
+      "Tosses are independent (given the coin chosen).",
+      "Fair coin: P(heads) = 1/2 per toss. Two-headed coin: P(heads) = 1 per toss."
+    ],
+    "question": "Given the 10 heads observation, what is the probability you picked the two-headed coin?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up Bayes' formula with prior P(unfair) = 1/1000.",
+    "Compute the likelihood ratio P(10 heads | unfair) / P(10 heads | fair).",
+    "Combine to get the posterior probability."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up Bayes",
+      "prompt": "Let A = 'picked the unfair coin', B = '10 heads in 10 tosses'. Bayes: P(A|B) = P(B|A) P(A) / P(B). What are P(A), P(B|A), P(B|not A)?",
+      "options": [
+        { "id": "a", "text": "P(A) = 1/1000.  P(B|A) = 1 (unfair coin always heads).  P(B|not A) = (1/2)^10 = 1/1024.", "correct": true },
+        { "id": "b", "text": "P(A) = 1/2.  P(B|A) = 1/1024.",                                                            "correct": false },
+        { "id": "c", "text": "P(A) = 0.5.  P(B|A) = 1.",                                                                  "correct": false }
+      ],
+      "explanation": "Prior: 1 unfair out of 1000. Likelihoods: unfair always shows heads, fair shows heads with probability (1/2)^10.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute P(B) via total probability",
+      "prompt": "P(B) = P(B|A) P(A) + P(B|not A) P(not A) = 1 * (1/1000) + (1/1024) * (999/1000). Simplify.",
+      "options": [
+        { "id": "a", "text": "P(B) = 1/1000 + 999/(1000 * 1024) = (1024 + 999) / (1000 * 1024) = 2023/1024000.", "correct": true },
+        { "id": "b", "text": "P(B) = (1/2)^10 = 1/1024.",                                                          "correct": false },
+        { "id": "c", "text": "P(B) = 1.",                                                                            "correct": false }
+      ],
+      "explanation": "Common denominator 1000 * 1024. Numerator: 1024 + 999 = 2023. P(B) = 2023/(1000 * 1024)."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Compute P(A | B)",
+      "prompt": "P(A|B) = P(B|A) P(A) / P(B) = (1/1000) / (2023/(1000 * 1024)) = 1024 / 2023. Compute to 4 decimals.",
+      "answerType": "numeric",
+      "answer": 0.5062,
+      "explanation": "1024 / 2023 ≈ 0.5062. Despite the prior being only 1/1000 (very rare coin), 10 consecutive heads shifts the posterior to just over 1/2."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Given 10 consecutive heads, what is P(unfair coin)?",
+      "options": [
+        { "id": "a", "text": "About 1024/2023 ≈ 50.6%.",  "correct": true },
+        { "id": "b", "text": "Still about 1/1000 (the prior dominates).",  "correct": false },
+        { "id": "c", "text": "100% (the unfair coin is the only one that always gives heads).",  "correct": false }
+      ],
+      "explanation": "About 50.6%. The likelihood ratio of 1024 (1024 times more likely under the unfair-coin hypothesis) almost exactly cancels the prior odds of 1:999 -- yielding posterior odds near 1:1."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How many heads in a row would shift the posterior to 95%?",
+        "What if there were 1 unfair coin among 10000? Recompute.",
+        "Express the answer as posterior ODDS rather than probability. (Posterior odds = prior odds * likelihood ratio.)"
+      ]
+    }
+  ]
+}

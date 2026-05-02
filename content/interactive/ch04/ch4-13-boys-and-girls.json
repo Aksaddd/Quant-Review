@@ -1,0 +1,91 @@
+{
+  "id": "ch4-13-boys-and-girls",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Boys and Girls",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "326-344"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "two-superficially-similar-problems-condition-on-different-events",
+    "insight": "at-least-one-boy-eliminates-only-gg-but-this-specific-child-is-a-boy-eliminates-half-of-the-pairs",
+    "variantAxes": ["family_size"]
+  },
+  "setup": {
+    "narrative": "Two related questions about a family with two children. Assume each child is independently a boy or girl with probability 1/2.",
+    "rules": [
+      "Sample space for two children (in birth order): {(B, B), (B, G), (G, B), (G, G)}, each equally likely.",
+      "Part A: Ms. Jackson is invited to a dinner for working mothers WITH AT LEAST ONE SON.",
+      "Part B: You see Ms. Parker walking with ONE OF her two children, who happens to be a boy."
+    ],
+    "question": "In each part: what is the probability both children are boys?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that the conditioning event is DIFFERENT in Parts A and B.",
+    "Compute P(both boys | at least one boy) = 1/3 by enumerating the conditional sample space.",
+    "Compute P(both boys | this specific child is a boy) = 1/2 by independence."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Part A: identify the conditioning event",
+      "prompt": "What is the event we're conditioning on in Part A?",
+      "options": [
+        { "id": "a", "text": "'At least one of the two children is a boy.'  This eliminates only the (G, G) outcome.", "correct": true },
+        { "id": "b", "text": "'A specific child (say the older) is a boy.'  Eliminates (G, G) and (G, B).",        "correct": false },
+        { "id": "c", "text": "'Both children are boys.'",                                                              "correct": false }
+      ],
+      "explanation": "The dinner invites mothers with at least one son. The information is about the family unit, not any specific child. Only (G, G) is incompatible. Three outcomes remain equally likely: (B, B), (B, G), (G, B).",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Part A: compute P(both boys | at least one boy)",
+      "prompt": "Of the 3 surviving outcomes (B,B), (B,G), (G,B), how many are 'both boys'?  Compute the conditional probability.",
+      "answerType": "numeric",
+      "answer": 0.333333,
+      "explanation": "Only (B, B) is 'both boys'. P = 1/3 ≈ 0.333."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Part B: identify the conditioning event",
+      "prompt": "Now you see Ms. Parker with ONE of her two children, and that child is a boy. What's the conditioning event?",
+      "options": [
+        { "id": "a", "text": "'A specific child (the one walking with her) is a boy.' This is INDEPENDENT of the other child's gender.", "correct": true },
+        { "id": "b", "text": "Same as Part A: 'at least one boy.'",                                                                       "correct": false },
+        { "id": "c", "text": "'Both children are boys.'",                                                                                  "correct": false }
+      ],
+      "explanation": "You're not learning about the family in aggregate -- you're seeing one specific child. The OTHER child is unobserved and remains 50/50 boy/girl by independence."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit both answers",
+      "prompt": "What are P(both boys) for Part A and Part B?",
+      "options": [
+        { "id": "a", "text": "Part A: 1/3.  Part B: 1/2.", "correct": true },
+        { "id": "b", "text": "Part A: 1/2.  Part B: 1/2.", "correct": false },
+        { "id": "c", "text": "Part A: 1/3.  Part B: 1/3.", "correct": false }
+      ],
+      "explanation": "Different conditioning events, different answers. Part A: 1/3 (eliminate only (G,G); 1 of 3 survivors is BB). Part B: 1/2 (the OTHER child is independent and equally likely to be either)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Suppose Ms. Parker says 'my older child is a boy.' Is this Part A or Part B in disguise?",
+        "Why does the precise wording 'at least one' vs 'one specific' matter so much? Construct a scenario where you might MISTAKENLY apply the wrong condition.",
+        "Generalize Part A to a family of THREE children: P(all three boys | at least one boy)?"
+      ]
+    }
+  ]
+}

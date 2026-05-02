@@ -1,0 +1,94 @@
+{
+  "id": "ch4-14-all-girl-world",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "All-Girl World",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "348-352"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "stopping-rule-does-not-bias-the-coin",
+    "insight": "each-individual-childs-gender-is-still-1-half-1-half-regardless-of-when-the-family-stops",
+    "variantAxes": ["stopping_rule", "boy_probability"]
+  },
+  "setup": {
+    "narrative": "In a society, each couple has children until they get a girl, then stops. So all families have 0 or more boys followed by a single girl.",
+    "rules": [
+      "Each child is independently a girl (1/2) or boy (1/2).",
+      "Family size is random and depends on the number of boys before the first girl.",
+      "Many people INTUIT that this rule will lead to far more girls than boys."
+    ],
+    "question": "What fraction of children in this society are girls?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that the stopping rule depends only on each child's gender, not on conditional information that biases the coin.",
+    "Reason that each individual child still has P(girl) = 1/2.",
+    "Conclude the population fraction of girls is exactly 1/2."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "The intuition trap",
+      "prompt": "Many people intuit that this stopping rule biases the population toward GIRLS, since every family ends with a girl and most have few boys. Is this intuition correct?",
+      "options": [
+        { "id": "a", "text": "No -- the stopping rule selects FAMILIES of certain sizes, but each individual child's gender is independent and still 1/2.", "correct": true },
+        { "id": "b", "text": "Yes, the population becomes mostly girls.",                                                                                       "correct": false },
+        { "id": "c", "text": "Depends on the average family size.",                                                                                              "correct": false }
+      ],
+      "explanation": "Confusing 'every family has exactly one girl' with 'half of children are girls'. They're consistent: a family with 3 boys and 1 girl contributes 1 girl out of 4 children -- which is below 1/2 -- but families also have 0 boys + 1 girl (1/1 = 1.0). On AVERAGE across all children, the proportions match 1/2.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Per-child argument",
+      "prompt": "Consider any single child born in this society. What is P(this child is a girl)?",
+      "options": [
+        { "id": "a", "text": "1/2. Each individual gender is determined independently before the parents know whether to stop.", "correct": true },
+        { "id": "b", "text": "More than 1/2 because girls trigger stopping.",                                                       "correct": false },
+        { "id": "c", "text": "Less than 1/2 because there's family pressure for boys.",                                              "correct": false }
+      ],
+      "explanation": "Biology assigns gender independently with probability 1/2. The stopping rule decides WHETHER additional children are conceived but doesn't influence the gender of any specific child. So P(girl) = 1/2 for every child."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Aggregate over the population",
+      "prompt": "If every child has P(girl) = 1/2 independently, what fraction of all children are girls (in expectation, in a large population)?",
+      "options": [
+        { "id": "a", "text": "1/2 -- by linearity of expectation, the EXPECTED proportion of girls equals each individual child's P(girl).", "correct": true },
+        { "id": "b", "text": "More than 1/2.",                                                                                                  "correct": false },
+        { "id": "c", "text": "Less than 1/2.",                                                                                                  "correct": false }
+      ],
+      "explanation": "E[# girls / total children] over a large sample converges to E[indicator(girl)] = 1/2 by the law of large numbers. The stopping rule changes WHICH families exist, but each existing child is 1/2 girl."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What's the long-run fraction of girls?",
+      "options": [
+        { "id": "a", "text": "1/2 (50%).",            "correct": true },
+        { "id": "b", "text": "Approximately 60-70%.",  "correct": false },
+        { "id": "c", "text": "Just over 50%.",          "correct": false }
+      ],
+      "explanation": "1/2. The stopping rule cannot 'cheat' biology. This is a famous illustration: rules that select WHEN to stop don't bias any individual outcome -- only how many outcomes are sampled. Any rule independent of FUTURE outcomes preserves the underlying probability."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the EXPECTED size of a family in this society?",
+        "What if instead the rule were 'have children until you get TWO girls in a row'? Does the answer change?",
+        "Famous trader question: a fair coin is flipped until 5 heads in a row appear. The number of tails seen is reported. Does this number have a normal distribution? (No -- because of selection.)"
+      ]
+    }
+  ]
+}

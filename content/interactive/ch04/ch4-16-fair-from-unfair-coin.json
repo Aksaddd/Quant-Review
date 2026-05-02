@@ -1,0 +1,94 @@
+{
+  "id": "ch4-16-fair-from-unfair-coin",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Fair Probability from an Unfair Coin",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "379-388"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "von-neumann-trick-pair-tosses-and-condition-on-different-outcomes",
+    "insight": "P-HT-equals-P-TH-equals-p-times-1-minus-p-regardless-of-bias",
+    "variantAxes": ["bias_p"]
+  },
+  "setup": {
+    "narrative": "You have a coin biased toward heads with unknown probability p (where 0 < p < 1, and you don't know p). You want to simulate a FAIR coin flip (probability exactly 1/2 of each outcome) using only this biased coin.",
+    "rules": [
+      "Each toss of the biased coin has P(H) = p, P(T) = 1 - p, independently.",
+      "p is unknown.",
+      "You may flip the coin as many times as you want."
+    ],
+    "question": "How can you generate a fair (50/50) outcome from this biased coin?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize that pairs of tosses (HT vs TH) are equally likely regardless of bias.",
+    "Discard HH and TT outcomes (re-toss).",
+    "Map HT to 'win' and TH to 'lose' for fair odds."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How can you make a 50/50 outcome from a biased coin without knowing p?",
+      "options": [
+        { "id": "a", "text": "Flip the coin TWICE. Map HT -> 'heads', TH -> 'tails'. Discard HH and TT and re-toss the pair.", "correct": true },
+        { "id": "b", "text": "Flip once and call it heads if you see heads -- biased.",                                          "correct": false },
+        { "id": "c", "text": "Estimate p from many flips and adjust.",                                                          "correct": false }
+      ],
+      "explanation": "Von Neumann's trick. The key insight: P(HT) = P(TH) = p(1-p) regardless of p. So conditioning on 'pair is HT or TH', each is equally likely.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute the four outcome probabilities",
+      "prompt": "Two independent tosses give what probabilities for each pair (HH, HT, TH, TT)?",
+      "options": [
+        { "id": "a", "text": "P(HH) = p^2,  P(HT) = p(1-p),  P(TH) = (1-p)p,  P(TT) = (1-p)^2.  Note P(HT) = P(TH).", "correct": true },
+        { "id": "b", "text": "All four equal to 1/4.",                                                                  "correct": false },
+        { "id": "c", "text": "P(HH) = p, P(TT) = 1-p.",                                                                  "correct": false }
+      ],
+      "explanation": "By independence: each pair's probability is the product of its individual outcome probabilities. Crucially, P(HT) and P(TH) both equal p(1-p)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Why discard HH and TT?",
+      "prompt": "If we condition on the pair being HT or TH (discarding HH and TT), what is P(HT | HT or TH)?",
+      "options": [
+        { "id": "a", "text": "P(HT | HT or TH) = p(1-p) / (2 p (1-p)) = 1/2.  Bias cancels out.", "correct": true },
+        { "id": "b", "text": "Depends on p.",                                                       "correct": false },
+        { "id": "c", "text": "P = p.",                                                               "correct": false }
+      ],
+      "explanation": "Conditional probability: divide by P(HT or TH) = 2p(1-p). The p(1-p) factors cancel, giving exactly 1/2 -- INDEPENDENT of p."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final algorithm to generate a fair coin from a p-biased coin:",
+      "options": [
+        { "id": "a", "text": "Flip twice. HT -> 'heads' (50%). TH -> 'tails' (50%). HH or TT -> re-flip the pair. Each accepted outcome is exactly 1/2.", "correct": true },
+        { "id": "b", "text": "Flip once and report.",                                                                                                       "correct": false },
+        { "id": "c", "text": "Flip 100 times and average.",                                                                                                  "correct": false }
+      ],
+      "explanation": "Von Neumann's procedure. Each accepted pair gives a fair outcome regardless of p. The expected number of pairs needed is 1/(2p(1-p)), which can be slow for very biased coins (p near 0 or 1) but is always finite."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What is the EXPECTED number of biased-coin flips per fair output?",
+        "Could you do better (fewer flips on average) with a more elaborate scheme?",
+        "What goes wrong if p = 0 or p = 1?"
+      ]
+    }
+  ]
+}

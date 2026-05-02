@@ -1,0 +1,91 @@
+{
+  "id": "ch4-17-dart-game",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Dart Game",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "392-404"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "P-throw-n-plus-1-not-best-of-all-n-plus-1-throws",
+    "insight": "the-question-is-equivalent-to-throw-n-plus-1-not-being-the-best-of-n-plus-1-uniformly-random-throws",
+    "variantAxes": ["n_throws"]
+  },
+  "setup": {
+    "narrative": "Jason throws darts at a target. Each throw lands at a random distance from the center, with all distance distributions identical and independent across throws.",
+    "rules": [
+      "All throws are i.i.d. random distances.",
+      "Each subsequent throw (after the first) is FARTHER from the center than the FIRST throw.",
+      "Jason throws ONE more dart."
+    ],
+    "question": "What is the probability the new dart is also farther from the center than the first throw?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Reframe the problem in terms of rankings of n+1 i.i.d. throws.",
+    "Recognize that 'the (n+1)-th throw is not the best' is equivalent to the desired event.",
+    "Use uniform-rank symmetry to compute P = n/(n+1)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Reframe in terms of rankings",
+      "prompt": "Let throws be ranked 1 (best, closest to center) through n+1 (worst). What's the equivalent question in terms of rankings?",
+      "options": [
+        { "id": "a", "text": "Given that throws 2..n are all worse than throw 1 (so throw 1 is rank 1 of the first n), what is P(throw n+1 is also worse than throw 1)?", "correct": true },
+        { "id": "b", "text": "What is P(throw n+1 is rank 1)?",                                                                                                      "correct": false },
+        { "id": "c", "text": "What is P(all throws have the same distance)?",                                                                                          "correct": false }
+      ],
+      "explanation": "'Throw 1 is best of the first n' means throw 1 has rank 1 of the first n. We want throw n+1 to be worse than throw 1 -- equivalently, throw 1 is still the rank-1 throw among ALL n+1.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Use rank symmetry",
+      "prompt": "Conditional on the orderings of the first n throws (i.e., conditional on throw 1 being the best of the first n), where does the (n+1)-th throw rank among ALL n+1 throws?",
+      "options": [
+        { "id": "a", "text": "By symmetry across i.i.d. samples, the (n+1)-th throw is equally likely to be in any of the n+1 rank positions among all n+1 throws.", "correct": true },
+        { "id": "b", "text": "It's always the worst.",                                                                                                                  "correct": false },
+        { "id": "c", "text": "It's always between throws 2 and n.",                                                                                                       "correct": false }
+      ],
+      "explanation": "Symmetry: i.i.d. samples are exchangeable. Each of the n+1 throws is equally likely to be the OVERALL best (rank 1). Conditional on the first n's ordering doesn't break this symmetry."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compute the probability",
+      "prompt": "P(throw n+1 is worse than throw 1) = P(throw n+1 is NOT rank 1 of all n+1). What's that?",
+      "options": [
+        { "id": "a", "text": "P = 1 - 1/(n+1) = n/(n+1).", "correct": true },
+        { "id": "b", "text": "P = 1/n.",                    "correct": false },
+        { "id": "c", "text": "P = 1/2.",                     "correct": false }
+      ],
+      "explanation": "P(throw n+1 is rank 1) = 1/(n+1) by symmetry. Complement: P(not rank 1) = 1 - 1/(n+1) = n/(n+1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit for the original n=2 case",
+      "prompt": "For the original problem, n = 2 (two prior throws have already been thrown). P(third throw is also farther than the first) = n/(n+1) = ?",
+      "answerType": "numeric",
+      "answer": 0.6666667,
+      "explanation": "P = 2/3 ≈ 0.6667. The intuition: throws 2 and 3 are 'tied' from the perspective of ranking, both being i.i.d. with throw 1. Given throw 2 was worse than throw 1, throw 3 has probability 2/3 of also being worse."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify the n=2 case by enumerating all 6 orderings of throws 1, 2, 3.",
+        "What's the probability the (n+1)-th throw is the BEST of all n+1?",
+        "Why does the answer not depend on the distribution of the throws (only that they're i.i.d.)?"
+      ]
+    }
+  ]
+}
