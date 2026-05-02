@@ -1,0 +1,82 @@
+{
+  "id": "ch7-05-random-permutation",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Knuth Shuffle and Reservoir Sampling",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "240-281"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "inductive-invariant-each-prior-item-has-equal-probability-of-being-kept-or-positioned",
+    "insight": "Knuth-shuffle-uses-step-i-uniform-pick-from-i-to-n-Reservoir-keeps-current-with-prob-n-over-n-plus-one-and-replaces-with-prob-one-over-n-plus-one",
+    "variantAxes": ["task", "memory_constraint"]
+  },
+  "setup": {
+    "narrative": "Two related problems. (A) Generate a uniform random permutation of n items. (B) Sample one element uniformly from a stream of unknown length.",
+    "rules": [
+      "Knuth shuffle: for i = 1 to n: swap A[i] with A[Random(i, n)]. Theta(n) time, Theta(1) extra memory.",
+      "Reservoir (k=1): keep current pick with prob n/(n+1) when reading the (n+1)-th element; replace with prob 1/(n+1).",
+      "Both rely on an inductive invariant -- after step i, every item processed so far has equal probability of being where it is."
+    ],
+    "question": "Why are these algorithms uniform?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Prove Knuth shuffle by induction on i.",
+    "Prove reservoir sampling uniformity by induction on the stream length.",
+    "Recognize the wrong shuffle (uniform pick from full range each step) and why it's biased."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Knuth shuffle correctness",
+      "prompt": "Why does 'for i=1 to n: swap A[i] with A[Random(i, n)]' produce a uniform permutation?",
+      "options": [
+        { "id": "a", "text": "At step i, the chosen element is uniformly random among the n-i+1 elements still 'unfixed'. By induction, all (n-i+1)! orderings of the suffix are equally likely. So every full permutation has prob 1/n!.", "correct": true },
+        { "id": "b", "text": "Because the algorithm calls Random() exactly n times.",                                                                                                                                                  "correct": false },
+        { "id": "c", "text": "Because we shuffle the array twice.",                                                                                                                                                                "correct": false }
+      ],
+      "explanation": "Inductive invariant: after step i, the prefix A[1..i] is a uniform random subset of i elements from the original n. Step i+1 picks uniformly from the n-i elements still in the suffix, extending the prefix uniformly.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Wrong shuffle",
+      "prompt": "What's WRONG with 'for i=1 to n: swap A[i] with A[Random(1, n)]' (always sampling from the FULL range)?",
+      "options": [
+        { "id": "a", "text": "There are n^n random sequences but only n! permutations. n^n is not divisible by n! for n >= 3, so the distribution is biased.",  "correct": true },
+        { "id": "b", "text": "It's still uniform -- both versions work.",                                                                                       "correct": false },
+        { "id": "c", "text": "It runs in O(n^2) time.",                                                                                                          "correct": false }
+      ],
+      "explanation": "n=3: 3^3 = 27 outcomes but 3! = 6 permutations. 27 / 6 = 4.5 -- not an integer, so the resulting distribution cannot be uniform. The Knuth fix (sample from i..n) gives exactly n! outcomes."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit -- reservoir induction",
+      "prompt": "Reservoir sampling with k=1. After reading n elements, each has prob 1/n of being kept. Now element n+1 arrives. What's the rule and why?",
+      "options": [
+        { "id": "a", "text": "Replace current with prob 1/(n+1). Then each prior element has prob (1/n) * (n/(n+1)) = 1/(n+1) of being kept; the new one is kept with prob 1/(n+1). Uniform.", "correct": true },
+        { "id": "b", "text": "Always replace with the new element.",                                                                                                                          "correct": false },
+        { "id": "c", "text": "Never replace once a pick is made.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "Replace-prob 1/(n+1) is the only rule that preserves uniformity. Memory: Theta(1). Algorithm: idx = 1; for n = 2..end: with prob 1/n, idx = n. The current pick after the stream ends is uniform over the stream."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize reservoir sampling to k > 1 (e.g., select k uniformly random items from a stream).",
+        "What's the variance of the rank of the kept item under reservoir sampling? (Compute it.)",
+        "Why is sort-by-random-key Theta(n log n) but Knuth Theta(n)? (Knuth makes one pass; sort needs log n comparisons per element.)"
+      ]
+    }
+  ]
+}

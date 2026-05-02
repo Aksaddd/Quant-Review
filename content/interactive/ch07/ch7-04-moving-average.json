@@ -1,0 +1,71 @@
+{
+  "id": "ch7-04-moving-average",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Sliding-Window Moving Average",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "142-158"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "maintain-running-sum-by-adding-entering-element-and-subtracting-leaving-element",
+    "insight": "each-element-is-added-once-and-subtracted-once-giving-O-of-m-instead-of-naive-O-of-m-times-w",
+    "variantAxes": ["window_size", "step"]
+  },
+  "setup": {
+    "narrative": "Array A of length m, window size w. Compute B[i] = (A[i-w+1] + ... + A[i]) / w for i >= w.",
+    "rules": [
+      "Naive: recompute the sum from scratch at each window. Theta(m * w).",
+      "Sliding sum: at each step, S = S - A[i-w] + A[i]. Theta(m).",
+      "Each element enters and leaves the window exactly once."
+    ],
+    "question": "What is the optimal time complexity?"
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Recognize the sliding-window pattern: O(1) amortized update.",
+    "Avoid recomputing what was already computed.",
+    "Generalize to other window aggregates (max via deque, variance via running sums of squares)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Sliding update rule",
+      "prompt": "Initial S = A[1] + ... + A[w]. To advance the window from index i-1 to i, what's the update?",
+      "options": [
+        { "id": "a", "text": "S = S - A[i-w] + A[i].",          "correct": true },
+        { "id": "b", "text": "S = S + A[i] (just add the new).", "correct": false },
+        { "id": "c", "text": "S = S - A[i] (just remove the old).", "correct": false }
+      ],
+      "explanation": "Subtract the element that LEAVES the window (A[i-w]) and add the element that ENTERS (A[i]). One add and one subtract per step.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Compare costs:",
+      "template": "Naive moving average: __[a]__ time.  Sliding window: __[b]__ time.  Sliding works because each element is added/subtracted exactly __[c]__ time(s).",
+      "blanks": [
+        { "id": "a", "answers": ["O(m*w)", "O(mw)", "Theta(mw)", "Theta(m*w)"], "caseInsensitive": true },
+        { "id": "b", "answers": ["O(m)", "Theta(m)"], "caseInsensitive": true },
+        { "id": "c", "answers": ["1", "one", "once"], "caseInsensitive": true }
+      ],
+      "explanation": "Naive: m windows * w terms each = Theta(mw). Sliding: each element joins and leaves the window exactly once -> Theta(m). Order-of-magnitude speedup for large w."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How would you compute a rolling MAX in O(m)? (Use a monotonic deque -- elements pop from the back when a new larger element arrives.)",
+        "How does this relate to compounded financial returns? (Same prefix-sum pattern works on log returns.)",
+        "Why is floating-point sliding-sum unstable for very long arrays? (Cumulative round-off error; use Kahan summation or block resets.)"
+      ]
+    }
+  ]
+}

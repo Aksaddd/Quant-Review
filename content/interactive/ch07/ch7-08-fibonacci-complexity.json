@@ -1,0 +1,83 @@
+{
+  "id": "ch7-08-fibonacci-complexity",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Recursive Fibonacci Complexity",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "342-395"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "recursive-fib-takes-O-of-phi-to-the-n-because-of-the-binet-recurrence-the-fix-is-DP-or-matrix-exponentiation",
+    "insight": "T-of-n-plus-1-over-T-of-n-tends-to-the-golden-ratio-phi-about-1-618-so-doubling-n-by-1-multiplies-time-by-phi",
+    "variantAxes": ["algorithm_choice"]
+  },
+  "setup": {
+    "narrative": "Recursive Fibonacci int Fib(int n) { if (n<=0) return 0; if (n==1) return 1; return Fib(n-1) + Fib(n-2); }. If Fib(n) takes 100 seconds, how long does Fib(n+1) take?",
+    "rules": [
+      "Running time satisfies T(n) = T(n-1) + T(n-2) + 1 (same recurrence as F_n).",
+      "Closed form: F_n = (phi^n - psi^n) / sqrt(5) with phi = (1 + sqrt(5))/2 ~ 1.618.",
+      "For large n: T(n) ~ phi^n.",
+      "Iterative DP: O(n). Matrix exponentiation [[1,1],[1,0]]^n: O(log n)."
+    ],
+    "question": "Compute T(n+1)/T(n) and identify two algorithms that beat the recursive blow-up."
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Show that T(n) ~ phi^n for the recursive version.",
+    "Identify O(n) DP and O(log n) matrix exponentiation as fixes.",
+    "Connect to the broader principle: memoize overlapping subproblems."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Time ratio",
+      "prompt": "T(n) ~ phi^n with phi ~ 1.618. If Fib(n) takes 100s, how long does Fib(n+1) take?",
+      "options": [
+        { "id": "a", "text": "100 * phi ~ 162 seconds.",                  "correct": true },
+        { "id": "b", "text": "200 seconds (doubles since one more layer).", "correct": false },
+        { "id": "c", "text": "Same: 100s.",                                  "correct": false }
+      ],
+      "explanation": "T(n+1)/T(n) -> phi as n grows. So Fib(n+1) takes ~ 1.618 * 100 ~ 162 seconds.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Fix to O(n)",
+      "prompt": "How do you reduce to O(n) without changing the answer?",
+      "options": [
+        { "id": "a", "text": "Iterative DP: keep two variables a = F_{i-1}, b = F_i, and update (a, b) -> (b, a + b). Theta(n) time, Theta(1) space.", "correct": true },
+        { "id": "b", "text": "Memoize and look up; same exponential time.",                                                                              "correct": false },
+        { "id": "c", "text": "Use Binet's formula -- but floating-point precision fails for large n.",                                                    "correct": false }
+      ],
+      "explanation": "Iterative computation of F_0, F_1, ..., F_n with a sliding pair of variables. Theta(n) operations. Memoization also gives Theta(n) but with extra space. Binet works in theory but loses precision for n > ~70."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit -- O(log n) trick",
+      "prompt": "How do you get O(log n)?",
+      "options": [
+        { "id": "a", "text": "Matrix exponentiation: [[1,1],[1,0]]^n = [[F_{n+1}, F_n], [F_n, F_{n-1}]]. Compute the matrix power by repeated squaring -- O(log n) multiplications of 2x2 matrices.", "correct": true },
+        { "id": "b", "text": "Binary search.",                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "Quicksort the array.",                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Repeated squaring: M^n = (M^(n/2))^2 (with adjustment for odd n). T(n) = T(n/2) + Theta(1) -> Theta(log n). For arbitrary-precision integers, the bit-level cost is O(log n * M(n)) where M is multiplication cost."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is the naive recursion so bad? (It recomputes Fib(k) for the same k an exponential number of times.)",
+        "What's the broader principle? (Dynamic programming: memoize overlapping subproblems to avoid recomputation.)",
+        "Apply to other recursions: how would you compute the n-th term of a linear recurrence in O(log n)? (Same matrix exp trick.)"
+      ]
+    }
+  ]
+}

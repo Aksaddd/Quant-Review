@@ -1,0 +1,84 @@
+{
+  "id": "ch7-01-master-theorem-sorting",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Master Theorem and Sorting",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "52-237"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "compare-f-of-n-to-n-to-the-log-b-of-a-and-pick-the-larger",
+    "insight": "merge-sort-and-binary-search-fall-into-case-2-of-master-theorem-quicksort-average-uses-symmetry-argument",
+    "variantAxes": ["recurrence_form", "sort_type"]
+  },
+  "setup": {
+    "narrative": "Recurrence T(n) = a * T(n/b) + f(n). Master Theorem says: compare f(n) to n^(log_b a). If f is asymptotically smaller (case 1), T = Theta(n^(log_b a)). If equal up to a polylog factor (case 2), T = Theta(n^(log_b a) * log^(k+1) n). If f is asymptotically larger and a regularity condition holds (case 3), T = Theta(f(n)).",
+    "rules": [
+      "Merge sort: T(n) = 2 T(n/2) + n. a=b=2, log_b a = 1, f(n) = n = Theta(n^1). Case 2 with k=0 gives Theta(n log n).",
+      "Binary search: T(n) = T(n/2) + 1. a=1, b=2, log_b a = 0, f(n) = 1 = Theta(n^0). Case 2 with k=0 gives Theta(log n).",
+      "Quicksort worst case: bad pivot gives T(n) = T(n-1) + n -> Theta(n^2)."
+    ],
+    "question": "What does the Master Theorem give for merge sort and binary search? What's the worst case for quicksort?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Identify a, b, f(n) in a divide-and-conquer recurrence.",
+    "Apply Master Theorem cases 1, 2, 3.",
+    "Distinguish quicksort's average vs worst case."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Merge sort recurrence",
+      "prompt": "Merge sort recurrence: T(n) = 2 T(n/2) + n. Identify (a, b) and apply the Master Theorem.",
+      "options": [
+        { "id": "a", "text": "a=2, b=2. log_b a = 1. f(n) = n = Theta(n^1). Case 2 with k=0 -> T(n) = Theta(n log n).", "correct": true },
+        { "id": "b", "text": "a=1, b=2. T(n) = Theta(log n).",                                                              "correct": false },
+        { "id": "c", "text": "T(n) = Theta(n^2).",                                                                            "correct": false }
+      ],
+      "explanation": "Two recursive calls of size n/2 plus a Theta(n) merge step. log_b a = log_2 2 = 1; f(n) = Theta(n^1) -> Case 2 yields T(n) = Theta(n log n).",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Quicksort average vs worst",
+      "prompt": "Quicksort: average comparisons = sum_{p<q} 2/(q-p+1) = Theta(n log n). What gives the WORST case Theta(n^2)?",
+      "options": [
+        { "id": "a", "text": "Already-sorted input with first-element pivot: each partition splits into sizes 0 and n-1 -> T(n) = T(n-1) + n -> Theta(n^2).", "correct": true },
+        { "id": "b", "text": "Random input.",                                                                                                                  "correct": false },
+        { "id": "c", "text": "Quicksort is always Theta(n log n) -- there's no Theta(n^2) case.",                                                              "correct": false }
+      ],
+      "explanation": "Bad pivot choice (first element on sorted input) gives unbalanced partitions. T(n) = T(n-1) + Theta(n) -> Theta(n^2). Randomized pivot or median-of-three avoids this in practice."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Match each algorithm to its complexity:",
+      "template": "Insertion sort worst-case: __[a]__.  Merge sort worst-case: __[b]__.  Quicksort average: __[c]__.  Binary search: __[d]__.",
+      "blanks": [
+        { "id": "a", "answers": ["Theta(n^2)", "n^2", "O(n^2)"], "caseInsensitive": true },
+        { "id": "b", "answers": ["Theta(n log n)", "n log n", "O(n log n)"], "caseInsensitive": true },
+        { "id": "c", "answers": ["Theta(n log n)", "n log n", "O(n log n)"], "caseInsensitive": true },
+        { "id": "d", "answers": ["Theta(log n)", "log n", "O(log n)"], "caseInsensitive": true }
+      ],
+      "explanation": "Insertion: n^2. Merge: n log n. Quick (avg): n log n; Quick (worst): n^2. Binary search: log n. Sweep these from memory before any algorithm interview."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is quicksort often FASTER than merge sort in practice despite identical asymptotic average complexity? (Smaller constants, better cache locality, in-place.)",
+        "When IS insertion sort the right choice? (Small arrays / nearly sorted data; STL sort uses it as a base case.)",
+        "Compute T(n) = 4 T(n/2) + n^2 via Master Theorem. (a=4, b=2, log_b a = 2, f(n)=Theta(n^2) -> Case 2 -> Theta(n^2 log n).)"
+      ]
+    }
+  ]
+}

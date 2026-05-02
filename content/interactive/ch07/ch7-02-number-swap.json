@@ -1,0 +1,70 @@
+{
+  "id": "ch7-02-number-swap",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Swap Two Integers In Place",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "69-91"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "use-arithmetic-or-XOR-to-encode-both-values-in-one-variable",
+    "insight": "x-XOR-x-equals-zero-and-x-XOR-zero-equals-x-let-three-XOR-operations-swap-values",
+    "variantAxes": ["operation_choice"]
+  },
+  "setup": {
+    "narrative": "Swap two integers i and j without using a third storage variable.",
+    "rules": [
+      "Arithmetic: i = i + j; j = i - j (= old i); i = i - j (= old j). Risk: integer overflow.",
+      "XOR: i = i ^ j; j = j ^ i (= old i); i = i ^ j (= old j). Uses x ^ x = 0 and x ^ 0 = x.",
+      "Both achieve the swap in O(1) without extra storage."
+    ],
+    "question": "Show how to swap with XOR and identify the failure modes."
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Apply XOR identities x ^ x = 0 and x ^ 0 = x.",
+    "Recognize integer-overflow risk in the arithmetic version.",
+    "Note that XOR swap fails when i and j refer to the same memory location."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "XOR swap trace",
+      "prompt": "Start with i = a, j = b. After i = i ^ j: i = a ^ b, j = b. After j = j ^ i: j = b ^ (a ^ b) = ?",
+      "options": [
+        { "id": "a", "text": "j = a (since b ^ b = 0 and 0 ^ a = a).",  "correct": true },
+        { "id": "b", "text": "j = b (no change).",                       "correct": false },
+        { "id": "c", "text": "j = 0.",                                   "correct": false }
+      ],
+      "explanation": "j = b ^ a ^ b = a ^ (b ^ b) = a ^ 0 = a. So j now holds the original value of i. Final step: i = i ^ j = (a ^ b) ^ a = b. Both swapped.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Commit -- failure mode",
+      "prompt": "When does the XOR swap FAIL?",
+      "options": [
+        { "id": "a", "text": "When i and j are aliases (same memory location): i ^ j = 0 zeroes out the location, then everything stays 0. Always check for self-aliasing first.", "correct": true },
+        { "id": "b", "text": "When i and j are negative.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "When i = j numerically (different locations are fine).",                                                                                            "correct": false }
+      ],
+      "explanation": "If i and j are different variables but happen to hold the same value, the XOR swap works fine (a ^ a = 0 then 0 ^ a = a). The danger is only when they alias the SAME memory: i ^ j = 0 destroys the value entirely. The arithmetic version has the same failure mode."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why might compilers prefer std::swap (often using a temp register) over the XOR trick? (Modern CPUs have plenty of registers; std::swap is clearer and avoids the aliasing edge case.)",
+        "Apply XOR-swap to two pointers -- does it work? (Yes, on platforms where pointer XOR is meaningful, but C standard says pointer arithmetic is undefined for non-array pointers.)",
+        "What's the equivalent for floating-point values? (No XOR-swap works; floats have a sign bit and IEEE encoding subtleties. Just use a temporary.)"
+      ]
+    }
+  ]
+}

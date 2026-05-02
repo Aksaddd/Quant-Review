@@ -1,0 +1,70 @@
+{
+  "id": "ch7-03-horners-algorithm",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Horner's Algorithm",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "123-138"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "rewrite-polynomial-in-nested-form-to-share-multiplications",
+    "insight": "evaluating-degree-n-polynomial-takes-only-n-multiplications-and-n-additions",
+    "variantAxes": ["polynomial_degree"]
+  },
+  "setup": {
+    "narrative": "Evaluate y = A_0 + A_1 x + A_2 x^2 + ... + A_n x^n efficiently.",
+    "rules": [
+      "Naive: each term A_k x^k computed independently uses k multiplications. Total ~ n^2/2 multiplications.",
+      "Horner: rewrite as y = A_0 + x (A_1 + x (A_2 + ... + x (A_{n-1} + x A_n))). Compute inside-out.",
+      "Loop: B = A_n; for k = n-1 down to 0: B = B * x + A_k. Final B is y."
+    ],
+    "question": "What's the complexity of Horner's algorithm and why is it optimal?"
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Convert a polynomial into nested form.",
+    "Count the operations exactly: n multiplications and n additions.",
+    "Recognize Horner is the unique optimal pattern by Pan's lower bound."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Operation count",
+      "prompt": "Horner: B = A_n, then loop n times. How many multiplications and additions total?",
+      "options": [
+        { "id": "a", "text": "n multiplications and n additions, both linear in n.",                              "correct": true },
+        { "id": "b", "text": "n^2 multiplications and n additions.",                                                 "correct": false },
+        { "id": "c", "text": "log n multiplications.",                                                                 "correct": false }
+      ],
+      "explanation": "Each iteration does one multiplication (B * x) and one addition (+ A_k). With n iterations, total = n multiplications + n additions = Theta(n).",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "cloze",
+      "label": "Commit -- worked example",
+      "prompt": "Evaluate p(x) = 2 + 3x + 4x^2 at x = 5 via Horner. Nested form: 2 + 5*(3 + 5*4). Trace the computation.",
+      "template": "Inner: 3 + 5*4 = __[a]__.  Outer: 2 + 5 * inner = __[b]__.",
+      "blanks": [
+        { "id": "a", "answers": ["23"], "caseInsensitive": true },
+        { "id": "b", "answers": ["117"], "caseInsensitive": true }
+      ],
+      "explanation": "Nested form makes evaluation fast: 4*5=20, +3=23 (inner), 23*5=115, +2=117. Verify: 2 + 15 + 100 = 117. Two multiplications + two additions for degree 2."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How does Horner connect to dividing polynomial p(x) by (x - a)? (Horner with x = a yields the remainder p(a) and the quotient as a side product.)",
+        "Why is Horner numerically stable? (Avoids large intermediate powers of x; the nested form keeps magnitudes balanced.)",
+        "When is naive evaluation acceptable? (Very small n, or if you precompute the powers of x once for many polynomials.)"
+      ]
+    }
+  ]
+}

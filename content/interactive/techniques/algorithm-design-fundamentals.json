@@ -1,0 +1,74 @@
+{
+  "id": "algorithm-design-fundamentals",
+  "kind": "technique",
+  "name": "Algorithm Design Fundamentals",
+  "tagline": "Complexity (O, Omega, Theta), Master Theorem for divide-and-conquer, sorting (insertion, merge, quick), search (binary, exponential, 2D-grid), and dynamic programming (Fibonacci, Kadane). Picking the right algorithmic pattern is half the battle.",
+  "category": "algorithms",
+  "introducedIn": {
+    "chapter": 7,
+    "section": "7.1",
+    "title": "Algorithms",
+    "exemplarProblemId": "ch7-09-max-subarray"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Asymptotic notation: f = O(g) means f <= c*g eventually (upper bound); f = Omega(g) means f >= c*g (lower bound); f = Theta(g) means both. The Master Theorem solves T(n) = a*T(n/b) + f(n) by comparing f(n) to n^(log_b a): the larger one wins. Examples: merge sort (a=b=2, f(n)=n) gives Theta(n log n); binary search (a=1, b=2, f=1) gives Theta(log n)."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Sorting: insertion (Theta(n^2) worst, fast on small/nearly-sorted); merge (Theta(n log n), stable, O(n) extra space); quick (Theta(n log n) average, Theta(n^2) worst with bad pivot, in-place). Quick is usually fastest in practice due to cache efficiency. Search: binary (Theta(log n) for sorted), exponential search + binary search (Theta(log n) for unknown-length sorted arrays), top-right corner pointer (Theta(n) for n x n sorted 2D grid)."
+    },
+    {
+      "id": "b3",
+      "type": "paragraph",
+      "text": "Dynamic programming kills exponential blow-up by memoizing overlapping subproblems. Naive recursive Fibonacci is O(phi^n) ~ O(1.618^n); iterative DP is O(n); matrix exponentiation is O(log n). For the maximum-subarray problem, Kadane's idea of tracking T_min as a running prefix-sum minimum reduces the naive O(n^2) sweep to O(n)."
+    },
+    {
+      "id": "b4",
+      "type": "paragraph",
+      "text": "Randomized algorithms: Knuth shuffle gives a uniformly random permutation in Theta(n) (vs Theta(n log n) for sort-by-random-key). Reservoir sampling lets you uniformly sample from a stream of unknown length using O(1) memory. Both rely on a clean inductive invariant: after processing item i, every prior item has equal probability of being kept."
+    },
+    {
+      "id": "b5",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Algorithm questions reward pattern recognition: 'sorted input' -> binary search; 'rolling window' -> sliding sum; 'overlapping subproblems' -> DP; 'unknown length' -> doubling / reservoir sampling; 'count comparisons' -> pairing trick. Always state the recurrence first, then apply Master Theorem; always state the loop invariant first, then prove correctness."
+    }
+  ],
+  "whenToUse": [
+    "Estimating runtime / space for a candidate algorithm before coding it.",
+    "Choosing among sort variants based on input characteristics.",
+    "Designing a data-stream algorithm with bounded memory.",
+    "Reducing exponential recursion to polynomial via memoization or matrix forms.",
+    "Bit-level tricks for hot loops (bit-counting, isPowerOf2)."
+  ],
+  "recipe": [
+    "Write the recurrence T(n) = a*T(n/b) + f(n); apply Master Theorem.",
+    "For sliding-window sums, maintain a running total: subtract the leaving element, add the entering one.",
+    "For sorted-array search, use binary search; if length unknown, double-then-binary-search (Theta(log n)).",
+    "For shuffle, use Knuth: for i=0..n-1, swap A[i] with A[Random(i, n-1)].",
+    "For max contiguous subarray, sweep prefix sums and track T_min."
+  ],
+  "commonPitfalls": [
+    "Confusing average-case with worst-case; quicksort is Theta(n log n) on average but Theta(n^2) on a sorted input with first-element pivot.",
+    "Off-by-one in binary search bounds (lo, hi inclusive vs exclusive).",
+    "Generating a 'random shuffle' via Random(0, n-1) at each step -- this gives n^n outcomes, not n!, so distribution is biased.",
+    "Using sort-by-random-key when keys can collide -- then ties create non-uniform permutations.",
+    "Allocating a fresh O(n) array each merge step in merge sort (write merge in-place into a single buffer instead)."
+  ],
+  "appearsIn": [
+    { "problemId": "ch7-01-master-theorem-sorting", "title": "Master Theorem and Sorting Algorithms", "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-02-number-swap",            "title": "Swap Two Integers in Place",            "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-03-horners-algorithm",      "title": "Horner's Algorithm for Polynomial Evaluation", "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-04-moving-average",         "title": "Sliding-Window Moving Average",          "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-05-random-permutation",     "title": "Knuth Shuffle and Reservoir Sampling",   "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-06-find-min-max",           "title": "Find Min and Max with 3n/2 Comparisons", "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-07-search-2d-grid",         "title": "Search in a Sorted 2D Grid",             "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-08-fibonacci-complexity",   "title": "Recursive Fibonacci Complexity",         "chapter": 7, "section": "7.1" },
+    { "problemId": "ch7-09-max-subarray",           "title": "Maximum Contiguous Subarray (Kadane)",   "chapter": 7, "section": "7.1" }
+  ],
+  "relatedTechniques": ["dynamic-programming", "math-induction", "linear-algebra-techniques"]
+}

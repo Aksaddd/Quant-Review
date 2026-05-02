@@ -1,0 +1,71 @@
+{
+  "id": "ch7-06-find-min-max",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Find Min and Max with 3n/2 Comparisons",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "286-301"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "pair-elements-first-to-amortize-comparisons-against-min-and-max-tracks",
+    "insight": "one-pair-comparison-eliminates-half-the-elements-from-being-the-max-or-the-min",
+    "variantAxes": ["array_size_parity"]
+  },
+  "setup": {
+    "narrative": "Find both the minimum and maximum of n numbers using as few comparisons as possible.",
+    "rules": [
+      "Naive: scan once for min (n-1 cmp), scan again for max (n-1 cmp). Total ~ 2n.",
+      "Pairing trick: process two elements at a time. Compare them (1 cmp), put smaller in MIN-candidates, larger in MAX-candidates.",
+      "Then min-of-MIN takes n/2 - 1 comparisons; max-of-MAX takes n/2 - 1.",
+      "Total: n/2 + 2*(n/2 - 1) = 3n/2 - 2."
+    ],
+    "question": "Show why the pairing approach uses ~ 3n/2 comparisons."
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Avoid naive 2n comparisons by amortizing.",
+    "Recognize the pairing pattern -- generic for tournament problems.",
+    "Match the lower bound of 3n/2 - 2 (provable by adversary argument)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Counting comparisons",
+      "prompt": "n even. Pair up: n/2 comparisons (one per pair). Then find min over the n/2 'smaller' elements and max over the n/2 'larger' elements. How many comparisons in those two reductions?",
+      "options": [
+        { "id": "a", "text": "Each is a min/max over n/2 elements: n/2 - 1 comparisons each. Sum: n/2 + 2*(n/2 - 1) = 3n/2 - 2.", "correct": true },
+        { "id": "b", "text": "n - 1 each, so total 2n.",                                                                            "correct": false },
+        { "id": "c", "text": "n/2 each, so total 3n/2.",                                                                              "correct": false }
+      ],
+      "explanation": "Min over k elements needs k-1 pairwise comparisons (linear scan). With k = n/2: n/2 - 1 each. Plus the n/2 pair comparisons: total = 3n/2 - 2 < 2n.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Commit -- odd n",
+      "prompt": "n odd: leave one element out, pair the other n-1. Total comparisons?",
+      "options": [
+        { "id": "a", "text": "(n-1)/2 pair comparisons + ((n-1)/2 - 1) for min + ((n-1)/2 - 1) for max + 2 to compare the leftover element against current min and max. Total = 3(n-1)/2.", "correct": true },
+        { "id": "b", "text": "Same as even case: 3n/2 - 2.",                                                                                                                                  "correct": false },
+        { "id": "c", "text": "n - 1.",                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Odd case is roughly the same: ~3n/2 comparisons. Either way, both forms beat the naive 2n bound. The 3n/2 - 2 bound is also TIGHT -- adversary argument shows you can't do better."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Prove the matching LOWER bound of 3n/2 - 2 via the adversary method.",
+        "Generalize to find the second-largest in n + log_2 n - 2 comparisons (tournament method).",
+        "Why does this beat naive n-1 + n-1 = 2n? (Pairing 'reuses' one comparison to learn information about both extremes.)"
+      ]
+    }
+  ]
+}

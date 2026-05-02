@@ -1,0 +1,72 @@
+{
+  "id": "ch7-07-search-2d-grid",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.1",
+  "title": "Search in a Sorted 2D Grid",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "322-338"
+  },
+  "mechanism": {
+    "primary": "algorithm-design-fundamentals",
+    "structure": "start-at-top-right-corner-and-eliminate-a-row-or-column-each-step",
+    "insight": "the-top-right-element-is-the-row-max-and-column-min-so-comparing-with-target-prunes-an-entire-row-or-column",
+    "variantAxes": ["grid_orientation", "starting_corner"]
+  },
+  "setup": {
+    "narrative": "n x n grid where each row is sorted left-to-right and each column is sorted top-to-bottom. Find target x.",
+    "rules": [
+      "Start at top-right corner (i=1, j=n).",
+      "If A[i][j] == x: found.",
+      "If A[i][j] < x: x can't be in row i (all to the left are <= A[i][j]); move down (i++).",
+      "If A[i][j] > x: x can't be in column j (all below are >= A[i][j]); move left (j--).",
+      "Stop when out of bounds."
+    ],
+    "question": "What is the time complexity?"
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Choose the right starting corner (top-right or bottom-left).",
+    "Argue that each step eliminates a row or a column.",
+    "Justify the O(n) (more precisely, O(rows + cols)) bound."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Why top-right works",
+      "prompt": "Why must we start at the TOP-RIGHT (or BOTTOM-LEFT) corner, not the top-left?",
+      "options": [
+        { "id": "a", "text": "Top-right element is the row-max AND column-min. Comparing with x tells us in which direction to prune. Top-LEFT is row-min and column-min -- the comparison doesn't disambiguate.", "correct": true },
+        { "id": "b", "text": "Top-left also works -- it's the same by symmetry.",                                                                                                                                "correct": false },
+        { "id": "c", "text": "Only the center element disambiguates.",                                                                                                                                            "correct": false }
+      ],
+      "explanation": "At the top-right corner: if A[1][n] < x, x can't be in row 1; if A[1][n] > x, x can't be in column n. Each comparison kills an entire row OR column. Top-left would say 'x might be ANYWHERE if A[1][1] < x', useless.",
+      "learnMoreTechnique": "algorithm-design-fundamentals"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Commit -- complexity",
+      "prompt": "How many steps in the worst case?",
+      "options": [
+        { "id": "a", "text": "At most 2n: each step eliminates at least one row or column, and there are only n of each. So O(n).", "correct": true },
+        { "id": "b", "text": "O(log n) -- it's like binary search.",                                                                  "correct": false },
+        { "id": "c", "text": "O(n^2) -- could visit every cell.",                                                                      "correct": false }
+      ],
+      "explanation": "We start at (1, n) and end at (n+1, 0) in the worst case. Each step changes i by +1 or j by -1. Total steps <= 2n -1. NOT log n -- a naive intuition fails because the grid is only PARTIALLY sorted (rows and cols, not the whole thing)."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Could you do better than O(n) with a smarter strategy? (Yes -- via two-stage diagonal binary search you can get O(n log(n/m)) for an n x m grid, but it's intricate.)",
+        "What if rows are sorted but columns are not? (You'd binary-search each row -- O(n log n).)",
+        "Apply this to financial heat-maps: e.g., a price matrix where rows = strikes (sorted), columns = maturities (sorted). The top-right pointer is a fast way to locate a target implied vol."
+      ]
+    }
+  ]
+}

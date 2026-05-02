@@ -152,6 +152,15 @@ import ch6VaR            from '../../../content/interactive/ch06/ch6-21-value-at
 import ch6InverseFloater from '../../../content/interactive/ch06/ch6-22-inverse-floater.json';
 import ch6FwdVsFut       from '../../../content/interactive/ch06/ch6-23-forwards-vs-futures.json';
 import ch6RateModels     from '../../../content/interactive/ch06/ch6-24-rate-models.json';
+import ch7MasterTheorem  from '../../../content/interactive/ch07/ch7-01-master-theorem-sorting.json';
+import ch7NumberSwap     from '../../../content/interactive/ch07/ch7-02-number-swap.json';
+import ch7Horner         from '../../../content/interactive/ch07/ch7-03-horners-algorithm.json';
+import ch7MovingAvg      from '../../../content/interactive/ch07/ch7-04-moving-average.json';
+import ch7RandPerm       from '../../../content/interactive/ch07/ch7-05-random-permutation.json';
+import ch7MinMax         from '../../../content/interactive/ch07/ch7-06-find-min-max.json';
+import ch7Search2D       from '../../../content/interactive/ch07/ch7-07-search-2d-grid.json';
+import ch7FibComplexity  from '../../../content/interactive/ch07/ch7-08-fibonacci-complexity.json';
+import ch7MaxSubarray    from '../../../content/interactive/ch07/ch7-09-max-subarray.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -184,6 +193,7 @@ import techOptionsFund   from '../../../content/interactive/techniques/option-pr
 import techGreeksHedging from '../../../content/interactive/techniques/greeks-and-hedging.json';
 import techExoticOpts    from '../../../content/interactive/techniques/exotic-options-and-strategies.json';
 import techPortfolioRisk from '../../../content/interactive/techniques/portfolio-and-risk.json';
+import techAlgoFund      from '../../../content/interactive/techniques/algorithm-design-fundamentals.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -332,6 +342,15 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch6-22-inverse-floater':   ch6InverseFloater as unknown as ProblemWalkthrough,
   'ch6-23-forwards-vs-futures': ch6FwdVsFut     as unknown as ProblemWalkthrough,
   'ch6-24-rate-models':       ch6RateModels     as unknown as ProblemWalkthrough,
+  'ch7-01-master-theorem-sorting': ch7MasterTheorem as unknown as ProblemWalkthrough,
+  'ch7-02-number-swap':       ch7NumberSwap     as unknown as ProblemWalkthrough,
+  'ch7-03-horners-algorithm': ch7Horner         as unknown as ProblemWalkthrough,
+  'ch7-04-moving-average':    ch7MovingAvg      as unknown as ProblemWalkthrough,
+  'ch7-05-random-permutation': ch7RandPerm      as unknown as ProblemWalkthrough,
+  'ch7-06-find-min-max':      ch7MinMax         as unknown as ProblemWalkthrough,
+  'ch7-07-search-2d-grid':    ch7Search2D       as unknown as ProblemWalkthrough,
+  'ch7-08-fibonacci-complexity': ch7FibComplexity as unknown as ProblemWalkthrough,
+  'ch7-09-max-subarray':      ch7MaxSubarray    as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -364,6 +383,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'greeks-and-hedging':       techGreeksHedging as unknown as Technique,
   'exotic-options-and-strategies': techExoticOpts as unknown as Technique,
   'portfolio-and-risk':       techPortfolioRisk as unknown as Technique,
+  'algorithm-design-fundamentals': techAlgoFund as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {
