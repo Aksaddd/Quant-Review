@@ -1,0 +1,105 @@
+{
+  "id": "ch4-24-russian-roulette",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Russian Roulette",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "547-586"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "four-variants-with-different-spinning-and-bullet-rules",
+    "insight": "compare-spin-versus-no-spin-by-computing-conditional-probabilities-given-the-state",
+    "variantAxes": ["bullet_count", "respin_rule", "consecutive_bullets"]
+  },
+  "setup": {
+    "narrative": "A six-chamber revolver is loaded with bullets in some configuration. You and an opponent take turns pulling the trigger.",
+    "rules": [
+      "There are 4 different scenarios -- each addressed in a separate stage.",
+      "Optimal strategy depends on whether the barrel is respun, how many bullets, and whether they're consecutive."
+    ],
+    "question": "In each scenario, what's the optimal action?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Recognize that 'spinning the barrel' resets information; 'no spin' preserves conditional information.",
+    "Compare P(die) with vs without spin to choose the right action.",
+    "For Part 4: condition on the opponent surviving to update which chambers remain."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Part 1: 1 bullet, no respinning, you go first",
+      "prompt": "1 bullet in a 6-chamber revolver, barrel spun ONCE at the start. Two players alternate trigger pulls (you first). What's P(you lose)?",
+      "options": [
+        { "id": "a", "text": "P = 3/6 = 1/2.  The bullet is equally likely to be in any of 6 chambers; you fire chambers 1, 3, 5 (odd positions). Three of six positions are yours -- 50/50.", "correct": true },
+        { "id": "b", "text": "P = 1/6 (only first chamber).",                                                                                                                            "correct": false },
+        { "id": "c", "text": "P = 6/6 = 1 (you definitely lose).",                                                                                                                        "correct": false }
+      ],
+      "explanation": "Without re-spinning, chambers 1, 3, 5 are yours and 2, 4, 6 are the opponent's. Bullet placement is uniform, so each player's odds are exactly 3/6 = 1/2.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Part 2: 1 bullet, RESPUN before each pull, you go first",
+      "prompt": "Same revolver, but now the barrel is RE-SPUN before each pull. Each shot is independent: P(fire = bullet) = 1/6 each turn. What's P(you lose)?",
+      "options": [
+        { "id": "a", "text": "Set up p = (1/6)*1 + (5/6)*(1 - p), giving 11p/6 = 1, so p = 6/11.  Choose to be SECOND to flip the disadvantage.", "correct": true },
+        { "id": "b", "text": "Same as Part 1: 1/2.",                                                                                                "correct": false },
+        { "id": "c", "text": "P = 1/6 (only the first pull matters).",                                                                              "correct": false }
+      ],
+      "explanation": "First player loses with prob 1/6 immediately. Otherwise (prob 5/6), they survive and the opponent now becomes the 'first', so first player loses with prob (1 - p). Solve: p = 1/6 + (5/6)(1 - p), giving p = 6/11. Going SECOND gives 5/11 -- favored."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Part 3: 2 bullets, you can choose to spin or not",
+      "prompt": "Now there are 2 bullets (random positions) in the 6-chamber revolver. The barrel was spun, an empty chamber fired. Now it's your turn -- spin or not?",
+      "options": [
+        { "id": "a", "text": "Compare: P(die | spin) = 2/6 = 1/3.  P(die | no spin) = 2/5 (only 5 chambers left, 2 still loaded).  Since 1/3 < 2/5, SPIN.", "correct": true },
+        { "id": "b", "text": "Don't spin -- preserves information.",                                                                                       "correct": false },
+        { "id": "c", "text": "Doesn't matter.",                                                                                                              "correct": false }
+      ],
+      "explanation": "Two bullets uniformly placed. After one empty fires (no spin), 5 chambers remain with 2 bullets, P(next is bullet) = 2/5 = 0.4. Re-spinning resets to P = 2/6 = 0.333. Spinning is safer."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Part 4: 2 CONSECUTIVE bullets, opponent survived",
+      "prompt": "Same 2 bullets but now in CONSECUTIVE chambers (say 5 and 6). Barrel was spun; opponent's chamber fired empty. Should YOU spin or not?",
+      "options": [
+        { "id": "a", "text": "Conditional on opponent surviving: their chamber was 1, 2, 3, or 4 (each prob 1/4).  Your next chamber: k=1->2, k=2->3, k=3->4 (all empty), k=4->5 (bullet).  P(survive | no spin) = 3/4.  P(survive | spin) = 4/6 = 2/3.  Since 3/4 > 2/3, DO NOT spin.", "correct": true },
+        { "id": "b", "text": "Spin -- always safer to randomize.", "correct": false },
+        { "id": "c", "text": "Doesn't matter.",                     "correct": false }
+      ],
+      "explanation": "Knowing the bullets are CONSECUTIVE and the opponent survived narrows where they are. The next chamber after their empty is bullet only in 1 of 4 cases (they had chamber 4 -> next is 5 = bullet). Survival 3/4 > 2/3 (the spin alternative). Don't spin."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Commit: meta-lesson",
+      "prompt": "What's the meta-lesson across these four parts?",
+      "options": [
+        { "id": "a", "text": "Spin when you have UNFAVORABLE conditional information; don't spin when you have FAVORABLE conditional information. Compare conditional vs unconditional probabilities.", "correct": true },
+        { "id": "b", "text": "Always spin.",                                                                                                                                                          "correct": false },
+        { "id": "c", "text": "Never spin.",                                                                                                                                                            "correct": false }
+      ],
+      "explanation": "The decision rule is: P(die | no spin, given everything you know) vs P(die | spin) = bullets/6. Pick whichever is smaller. Spinning RESETS information; sometimes you want to keep favorable information (Part 4), sometimes you want to escape unfavorable information (Part 3)."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize Part 2: with k bullets in 6 chambers, respun, what's P(you lose) as the first player?",
+        "For Part 4, what if the bullets were in DISJOINT (non-consecutive) chambers? Recompute.",
+        "Why does going SECOND in Part 2 give a strict advantage but the players are SYMMETRIC in Part 1?"
+      ]
+    }
+  ]
+}

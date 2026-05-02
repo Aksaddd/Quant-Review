@@ -57,7 +57,15 @@
     { "problemId": "ch4-17-dart-game",            "title": "Dart Game",                           "chapter": 4, "section": "4.3" },
     { "problemId": "ch4-18-birthday-line",       "title": "Birthday Line",                       "chapter": 4, "section": "4.3" },
     { "problemId": "ch4-19-dice-order",          "title": "Dice Order",                          "chapter": 4, "section": "4.3" },
-    { "problemId": "ch4-20-monty-hall",          "title": "Monty Hall Problem",                  "chapter": 4, "section": "4.3" }
+    { "problemId": "ch4-20-monty-hall",          "title": "Monty Hall Problem",                  "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-21-amoeba-population",   "title": "Amoeba Population",                   "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-22-candies-in-a-jar",    "title": "Candies in a Jar",                    "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-23-coin-toss-ht",        "title": "Coin Toss Game (HT)",                 "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-24-russian-roulette",    "title": "Russian Roulette",                    "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-25-aces",                "title": "Aces",                                "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-26-gamblers-ruin",       "title": "Gambler's Ruin",                      "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-27-basketball-scores",   "title": "Basketball Scores",                   "chapter": 4, "section": "4.3" },
+    { "problemId": "ch4-28-cars-on-a-road",      "title": "Cars on a Road",                      "chapter": 4, "section": "4.3" }
   ],
   "relatedTechniques": ["probability-foundations", "logic-reasoning", "combinatorial-counting"]
 }

@@ -1,0 +1,94 @@
+{
+  "id": "ch4-26-gamblers-ruin",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Gambler's Ruin",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "611-630"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "first-step-recurrence-on-absorption-probability",
+    "insight": "P-i-equals-p-times-P-i-plus-1-plus-q-times-P-i-minus-1-with-boundary-P-0-equals-0-and-P-N-equals-1",
+    "variantAxes": ["edge_probability_p"]
+  },
+  "setup": {
+    "narrative": "A gambler starts with $i. Each game, they bet $1: win with probability p, lose with probability q = 1 - p. They stop when they reach $0 (ruin) or $N (target).",
+    "rules": [
+      "Each bet is independent.",
+      "P(win) = p, P(lose) = q = 1 - p.",
+      "Game ends when wealth reaches 0 or N."
+    ],
+    "question": "What is P_i = P(gambler reaches N starting from $i)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the recurrence P_i = p * P_{i+1} + q * P_{i-1}.",
+    "Apply boundary conditions P_0 = 0, P_N = 1.",
+    "Solve the recurrence to get the closed form (case p != 1/2 vs p = 1/2)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the recurrence",
+      "prompt": "Let P_i = P(reach N | start at i). Condition on the next bet's outcome.",
+      "options": [
+        { "id": "a", "text": "P_i = p * P_{i+1} + q * P_{i-1}, with P_0 = 0 and P_N = 1.", "correct": true },
+        { "id": "b", "text": "P_i = p^i.",                                                  "correct": false },
+        { "id": "c", "text": "P_i = i/N regardless of p.",                                   "correct": false }
+      ],
+      "explanation": "First-step analysis: condition on win (prob p, move to i+1) or lose (prob q, move to i-1). Boundaries: P_0 = 0 (ruined, can't recover), P_N = 1 (target reached).",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Convert to a difference equation",
+      "prompt": "Let d_i = P_i - P_{i-1}. From P_i = p P_{i+1} + q P_{i-1}, derive a recurrence for d_i.",
+      "options": [
+        { "id": "a", "text": "d_{i+1} = (q/p) * d_i.  Setting r = q/p, the differences form a geometric sequence with ratio r.", "correct": true },
+        { "id": "b", "text": "d_{i+1} = d_i + 1.",                                                                                  "correct": false },
+        { "id": "c", "text": "d_{i+1} = -d_i.",                                                                                      "correct": false }
+      ],
+      "explanation": "Rearrange: p P_{i+1} - P_i = -q P_{i-1}, so p (P_{i+1} - P_i) = q (P_i - P_{i-1}) - 0 (need to redo). Actually: P_i - P_{i-1} = p (P_{i+1} - P_i) when set up via 'rate of change'. Cleanly: from p P_{i+1} - P_i + q P_{i-1} = 0, with p + q = 1, get p (P_{i+1} - P_i) = q (P_i - P_{i-1}), so d_{i+1} = (q/p) d_i."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Solve the geometric sum",
+      "prompt": "Sum d_1 + d_2 + ... + d_N = P_N - P_0 = 1. With d_i = d_1 * r^(i-1) where r = q/p:",
+      "options": [
+        { "id": "a", "text": "Case p != 1/2 (r != 1): P_i = (1 - r^i) / (1 - r^N).  Case p = 1/2 (r = 1): P_i = i/N.", "correct": true },
+        { "id": "b", "text": "P_i = i/N always.",                                                                       "correct": false },
+        { "id": "c", "text": "P_i = p^i.",                                                                                "correct": false }
+      ],
+      "explanation": "Geometric sum: when r != 1, sum d_1 * r^(i-1) for i=1..N = d_1 * (1 - r^N)/(1 - r) = 1, so d_1 = (1 - r)/(1 - r^N). Then P_i = sum d_j for j=1..i = d_1 * (1 - r^i)/(1 - r) = (1 - r^i)/(1 - r^N). When r = 1 (fair game), all d_i are equal -- so P_i = i/N."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final formula:",
+      "options": [
+        { "id": "a", "text": "If p = 1/2: P_i = i/N.  If p != 1/2: P_i = (1 - (q/p)^i) / (1 - (q/p)^N).",  "correct": true },
+        { "id": "b", "text": "Always P_i = p^i.",                                                            "correct": false },
+        { "id": "c", "text": "Always P_i = i/N.",                                                             "correct": false }
+      ],
+      "explanation": "Two cases. Fair game: linear in i. Unfair game: geometric in i. For the unfair case with p < 1/2 (gambler loses more often than wins), P_i decays exponentially -- ruin is overwhelmingly likely if N >> i."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "If p = 0.49 (slight house edge), starting at $50 with target $100, what's P(reach 100)? Verify it's near 0.",
+        "What's P(ruin) if N -> infinity (no upper bound, just stop at 0)?",
+        "Does the EXPECTED ending wealth matter? Hint: consider the limit p -> 1/2."
+      ]
+    }
+  ]
+}

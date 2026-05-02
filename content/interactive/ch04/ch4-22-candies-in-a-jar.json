@@ -1,0 +1,103 @@
+{
+  "id": "ch4-22-candies-in-a-jar",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Candies in a Jar",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "491-513"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "split-into-two-mutually-exclusive-orderings-of-the-last-of-each-color",
+    "insight": "P-of-last-color-is-X-equals-color-count-over-total-and-conditional-on-the-last-being-color-X-the-remaining-colors-have-the-same-shape",
+    "variantAxes": ["color_counts"]
+  },
+  "setup": {
+    "narrative": "A jar contains 10 RED, 20 BLUE, and 30 GREEN candies. Candies are removed one at a time uniformly at random.",
+    "rules": [
+      "All 60 candies will eventually be removed.",
+      "Let T_R, T_B, T_G be the positions (1 through 60) of the LAST candy of each color.",
+      "We want P(T_R < T_B AND T_R < T_G) -- the event that ALL reds are gone before the last blue AND before the last green."
+    ],
+    "question": "What is the probability that when all reds are removed, at least one blue and one green remain?"
+  },
+  "skipToCommitStageId": "s5",
+  "learningObjectives": [
+    "Decompose into two mutually exclusive cases: T_R < T_B < T_G or T_R < T_G < T_B.",
+    "For each case, compute via 'P(last is color X) * P(last among the rest is color Y)'.",
+    "Sum the disjoint probabilities."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Decompose into orderings",
+      "prompt": "We want P(T_R is the smallest of the three). Equivalently, T_R < T_B AND T_R < T_G. There are two mutually exclusive ways for this to happen: ?",
+      "options": [
+        { "id": "a", "text": "Case 1: T_R < T_B < T_G  (last candy overall is green).  Case 2: T_R < T_G < T_B  (last candy overall is blue).", "correct": true },
+        { "id": "b", "text": "Only one case: T_R < T_B < T_G.",                                                                                  "correct": false },
+        { "id": "c", "text": "Three cases.",                                                                                                       "correct": false }
+      ],
+      "explanation": "T_R must be smallest. The remaining two (T_B, T_G) can be in either order, giving two cases. Sum the disjoint probabilities.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "P(last candy is GREEN)",
+      "prompt": "What's P(the very last candy drawn is green)?",
+      "options": [
+        { "id": "a", "text": "30/60 = 1/2.  (By symmetry: each candy is equally likely to be drawn last.)", "correct": true },
+        { "id": "b", "text": "1/3 (one of three colors).",                                                    "correct": false },
+        { "id": "c", "text": "1/30.",                                                                          "correct": false }
+      ],
+      "explanation": "By symmetry, each of the 60 candies is equally likely to be in position 60. Of those, 30 are green. So P = 30/60 = 1/2."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Case 1: P(T_R < T_B < T_G)",
+      "prompt": "Case 1: green is the last color. Now CONDITION on green being last. We need: among the 30 red+blue candies, the last to appear must be BLUE. P(last red+blue is blue)?",
+      "options": [
+        { "id": "a", "text": "20/30  (20 of 30 remaining red+blue are blue, by the same symmetry).  So P(Case 1) = (30/60) * (20/30) = 20/60 = 1/3.", "correct": true },
+        { "id": "b", "text": "10/30 (probability the last is red).",                                                                                   "correct": false },
+        { "id": "c", "text": "1/2.",                                                                                                                    "correct": false }
+      ],
+      "explanation": "The 30 red+blue candies' relative order is independent of green's positioning. Among them, P(last is blue) = 20/30 by symmetry. So P(Case 1) = (1/2) * (2/3) = 1/3."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Case 2: P(T_R < T_G < T_B)",
+      "prompt": "Case 2: blue is last. P(last candy is blue) = 20/60 = 1/3. Among 40 red+green, P(last is green) = ?",
+      "options": [
+        { "id": "a", "text": "30/40 = 3/4.  So P(Case 2) = (20/60) * (30/40) = (1/3) * (3/4) = 1/4.", "correct": true },
+        { "id": "b", "text": "10/40 (probability last is red).",                                       "correct": false },
+        { "id": "c", "text": "1/3.",                                                                    "correct": false }
+      ],
+      "explanation": "P(last is blue) = 20/60 = 1/3. Then P(last red+green is green) = 30/40 = 3/4. Product: 1/4."
+    },
+    {
+      "id": "s5",
+      "type": "ladder-step",
+      "label": "Commit total probability",
+      "prompt": "P(T_R < T_B AND T_R < T_G) = P(Case 1) + P(Case 2) = 1/3 + 1/4 = ?",
+      "answerType": "numeric",
+      "answer": 0.5833333,
+      "explanation": "1/3 + 1/4 = 4/12 + 3/12 = 7/12 ≈ 0.5833. So with probability 7/12, all reds are removed before either blue or green is exhausted."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify by an alternative method: P(R is removed first as a color) = ? Why does this differ from 7/12?",
+        "Generalize: with R red, B blue, G green, what's P(red color is exhausted first)?",
+        "If you wanted to know P(red AND blue both exhausted before green is finished), how would the calculation change?"
+      ]
+    }
+  ]
+}

@@ -88,6 +88,14 @@ import ch4DartGame       from '../../../content/interactive/ch04/ch4-17-dart-gam
 import ch4BirthdayLine   from '../../../content/interactive/ch04/ch4-18-birthday-line.json';
 import ch4DiceOrder      from '../../../content/interactive/ch04/ch4-19-dice-order.json';
 import ch4MontyHall      from '../../../content/interactive/ch04/ch4-20-monty-hall.json';
+import ch4Amoeba         from '../../../content/interactive/ch04/ch4-21-amoeba-population.json';
+import ch4Candies        from '../../../content/interactive/ch04/ch4-22-candies-in-a-jar.json';
+import ch4CoinTossHT     from '../../../content/interactive/ch04/ch4-23-coin-toss-ht.json';
+import ch4Roulette       from '../../../content/interactive/ch04/ch4-24-russian-roulette.json';
+import ch4Aces           from '../../../content/interactive/ch04/ch4-25-aces.json';
+import ch4GamblerRuin    from '../../../content/interactive/ch04/ch4-26-gamblers-ruin.json';
+import ch4Basketball     from '../../../content/interactive/ch04/ch4-27-basketball-scores.json';
+import ch4CarsOnRoad     from '../../../content/interactive/ch04/ch4-28-cars-on-a-road.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -193,6 +201,14 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch4-18-birthday-line':     ch4BirthdayLine   as unknown as ProblemWalkthrough,
   'ch4-19-dice-order':        ch4DiceOrder      as unknown as ProblemWalkthrough,
   'ch4-20-monty-hall':        ch4MontyHall      as unknown as ProblemWalkthrough,
+  'ch4-21-amoeba-population': ch4Amoeba         as unknown as ProblemWalkthrough,
+  'ch4-22-candies-in-a-jar':  ch4Candies        as unknown as ProblemWalkthrough,
+  'ch4-23-coin-toss-ht':      ch4CoinTossHT     as unknown as ProblemWalkthrough,
+  'ch4-24-russian-roulette':  ch4Roulette       as unknown as ProblemWalkthrough,
+  'ch4-25-aces':              ch4Aces           as unknown as ProblemWalkthrough,
+  'ch4-26-gamblers-ruin':     ch4GamblerRuin    as unknown as ProblemWalkthrough,
+  'ch4-27-basketball-scores': ch4Basketball     as unknown as ProblemWalkthrough,
+  'ch4-28-cars-on-a-road':    ch4CarsOnRoad     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,

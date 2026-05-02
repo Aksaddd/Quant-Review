@@ -1,0 +1,90 @@
+{
+  "id": "ch4-25-aces",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Aces",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "590-606"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "multiplication-rule-conditional-on-each-ace-being-in-a-distinct-pile",
+    "insight": "compute-P-each-subsequent-ace-lands-in-a-fresh-pile-given-the-previous-ones-do",
+    "variantAxes": ["n_players"]
+  },
+  "setup": {
+    "narrative": "A standard 52-card deck is dealt evenly to 4 players, 13 cards each.",
+    "rules": [
+      "All 52!/(13!^4) deals are equally likely.",
+      "There are exactly 4 aces in the deck."
+    ],
+    "question": "What is the probability that EACH of the 4 players receives exactly one ace?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Use the multiplication rule on conditional events.",
+    "Compute P(each new ace lands in a fresh pile | the previous ones did).",
+    "Recognize the running fraction of remaining 'fresh pile' slots."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute P(each player gets exactly one ace)?",
+      "options": [
+        { "id": "a", "text": "Multiplication rule: P(ace 1 in some pile)*P(ace 2 in different pile|ace 1 placed)*P(ace 3 in 3rd pile|aces 1,2 placed)*P(ace 4 in 4th pile|aces 1,2,3 placed).", "correct": true },
+        { "id": "b", "text": "Direct combinatorial count of all cases.",                                                                                                                       "correct": false },
+        { "id": "c", "text": "P = (1/4)^4.",                                                                                                                                                    "correct": false }
+      ],
+      "explanation": "Treat the aces sequentially. Each ace has 51, 50, 49 remaining card slots after the prior aces are placed. We need each new ace to land in a DIFFERENT pile from the previous ones.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute the four conditional probabilities",
+      "prompt": "Place the aces one by one. P(ace_1 in some pile) = 1 (trivially). P(ace_2 in a different pile | ace_1 placed) = ?",
+      "options": [
+        { "id": "a", "text": "39/51.  After ace_1 takes one of 13 slots in some pile, 51 cards remain; 39 of them belong to the OTHER three piles.", "correct": true },
+        { "id": "b", "text": "1/4.",                                                                                                                    "correct": false },
+        { "id": "c", "text": "13/51.",                                                                                                                    "correct": false }
+      ],
+      "explanation": "Of the 51 unseen card-slots after ace_1 is placed, 12 are in ace_1's pile and 39 are in the other three piles (3 * 13 = 39)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Continue the chain",
+      "prompt": "P(ace_3 in a different pile from aces 1, 2 | aces 1, 2 placed in 2 distinct piles)?  And P(ace_4 in the last unused pile | aces 1, 2, 3 in distinct piles)?",
+      "options": [
+        { "id": "a", "text": "26/50 (ace_3) and 13/49 (ace_4).  After 2 aces in 2 piles, 50 slots remain with 26 in the OTHER 2 piles. After 3 aces in 3 piles, 49 slots remain with 13 in the LAST pile.", "correct": true },
+        { "id": "b", "text": "1/2 and 1/4.",                                                                                                                                                                    "correct": false },
+        { "id": "c", "text": "Same as 39/51 each time.",                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "After 2 aces placed: 13 + 13 = 26 slots in the OTHER 2 piles, out of 50 remaining cards. After 3 aces placed: 13 slots in the LAST pile, out of 49 remaining cards."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Multiply",
+      "prompt": "P = 1 * (39/51) * (26/50) * (13/49). Compute to 4 decimals.",
+      "answerType": "numeric",
+      "answer": 0.1055,
+      "explanation": "39 * 26 * 13 / (51 * 50 * 49) = 13182 / 124950 ≈ 0.1055. About 10.55% of deals split the 4 aces evenly."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify by direct combinatorial counting: C(13,1)^4 * (52!/(13!)^4) / total_deals.",
+        "What's P(one player gets all 4 aces)?",
+        "What if the deck has 5 aces and we deal 5 piles of 10 each?"
+      ]
+    }
+  ]
+}

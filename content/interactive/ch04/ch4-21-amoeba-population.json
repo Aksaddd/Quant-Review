@@ -1,0 +1,92 @@
+{
+  "id": "ch4-21-amoeba-population",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Amoeba Population",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "470-487"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "extinction-as-a-fixed-point-of-a-cubic-generating-function",
+    "insight": "P-of-extinction-equals-the-smallest-positive-root-of-the-conditional-recurrence",
+    "variantAxes": ["offspring_distribution"]
+  },
+  "setup": {
+    "narrative": "An amoeba colony starts with one amoeba. Each minute, each amoeba (independently) does one of four things: dies, stays unchanged, splits into 2, or splits into 3 -- each with probability 1/4. All offspring behave the same way independently in the next minute.",
+    "rules": [
+      "Single starting amoeba.",
+      "Each amoeba's action each minute: die, stay, split-2, split-3, each prob 1/4.",
+      "All amoebas act independently.",
+      "Offspring inherit the same behavior."
+    ],
+    "question": "What is the probability the population eventually dies out (reaches 0)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize this as a Galton-Watson branching process.",
+    "Set up the extinction equation P = sum over outcomes of (P)^k * P(k offspring).",
+    "Solve the resulting cubic and pick the root in (0, 1)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the extinction equation",
+      "prompt": "Let P = P(eventual extinction starting from 1 amoeba). Condition on the first minute's action. What's the equation?",
+      "options": [
+        { "id": "a", "text": "P = (1/4)*1 + (1/4)*P + (1/4)*P^2 + (1/4)*P^3.  (After dying, extinction is certain. After staying, future extinction probability is still P. After splitting into k, EACH lineage must independently die out -- probability P^k.)", "correct": true },
+        { "id": "b", "text": "P = 1/4.",                                                                                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "P = 1.",                                                                                                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "Branching process. Each independent lineage must die separately, so 'all of k lineages die' has probability P^k. The four cases (k=0, 1, 2, 3) each have probability 1/4 weighting.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Simplify the equation",
+      "prompt": "Multiply both sides of P = (1/4)(1 + P + P^2 + P^3) by 4 and rearrange.",
+      "options": [
+        { "id": "a", "text": "P^3 + P^2 - 3P + 1 = 0.", "correct": true },
+        { "id": "b", "text": "P^3 = P.",                 "correct": false },
+        { "id": "c", "text": "P = 1/4.",                  "correct": false }
+      ],
+      "explanation": "4P = 1 + P + P^2 + P^3, so 0 = 1 + P + P^2 + P^3 - 4P = P^3 + P^2 - 3P + 1."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Factor and find roots",
+      "prompt": "P = 1 is always a root of any extinction equation (eternal extinction is consistent). Divide P^3 + P^2 - 3P + 1 by (P - 1) to find the other roots.",
+      "options": [
+        { "id": "a", "text": "(P - 1)(P^2 + 2P - 1) = 0.  Quadratic roots: P = -1 +/- sqrt(2).  Only P = sqrt(2) - 1 ≈ 0.414 is in (0, 1).", "correct": true },
+        { "id": "b", "text": "Only root is P = 1.",                                                                                            "correct": false },
+        { "id": "c", "text": "Roots are 0, 1, -1.",                                                                                             "correct": false }
+      ],
+      "explanation": "Polynomial division: (P^3 + P^2 - 3P + 1) / (P - 1) = P^2 + 2P - 1. Quadratic formula: P = (-2 +/- sqrt(8))/2 = -1 +/- sqrt(2). Only -1 + sqrt(2) is in (0, 1) -- the other is negative."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "P(extinction) = sqrt(2) - 1. Compute to 4 decimals.",
+      "answerType": "numeric",
+      "answer": 0.4142,
+      "explanation": "sqrt(2) - 1 ≈ 0.4142. Why is the smaller root the answer (and not P = 1)? In branching processes, the extinction probability is the SMALLEST nonnegative root of the equation. P = 1 is a fixed point but unstable -- the population genuinely has a 1 - 0.414 = 58.6% chance of growing forever."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute the EXPECTED number of offspring per amoeba per minute. Is it greater than 1? (This is the 'criticality' threshold.)",
+        "What does the extinction equation look like if each amoeba splits into 2 with probability 1/2 and dies with probability 1/2?",
+        "Why does P = 1 always satisfy the equation but isn't always the answer?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "ch4-27-basketball-scores",
+  "kind": "problem-walkthrough",
+  "chapter": 4,
+  "section": "4.3",
+  "title": "Basketball Scores",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-04-probability-theory.md",
+    "lines": "634-653"
+  },
+  "mechanism": {
+    "primary": "conditional-probability-and-bayes",
+    "structure": "induction-on-uniformity-of-conditional-distribution",
+    "insight": "P-n-k-equals-1-over-n-minus-1-for-all-k-in-1-to-n-minus-1-by-induction",
+    "variantAxes": ["initial_pattern"]
+  },
+  "setup": {
+    "narrative": "A player makes free throws. Throw 1: she SCORES. Throw 2: she MISSES. For each subsequent throw k >= 3, P(score on throw k) = (current score)/(k - 1).",
+    "rules": [
+      "After throw 2: score = 1 (out of 2 throws, with 1 score and 1 miss).",
+      "From throw 3 onward, the success probability for each new throw equals the current score divided by (k - 1) -- a self-reinforcing rule.",
+      "After 100 throws, the score is some number between 1 and 99."
+    ],
+    "question": "What is P(exactly 50 baskets after 100 throws)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Conjecture and verify by induction: after n throws, the score k is UNIFORMLY DISTRIBUTED on {1, 2, ..., n-1}.",
+    "Use the inductive step P(n+1, k) = P(miss | (n, k)) * P(n, k) + P(score | (n, k-1)) * P(n, k-1).",
+    "Conclude P(score = 50 after 100 throws) = 1/99."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Choose your technique",
+      "prompt": "How do you compute P(score = 50 after 100 throws) given the recursive scoring rule?",
+      "options": [
+        { "id": "a", "text": "Conjecture P(n, k) = 1/(n - 1) for all k in {1, ..., n-1} (uniform distribution). Verify by induction.", "correct": true },
+        { "id": "b", "text": "Compute the binomial probability with p = 1/2.",                                                            "correct": false },
+        { "id": "c", "text": "It's an unsolved problem.",                                                                                  "correct": false }
+      ],
+      "explanation": "The recursive rule has a hidden symmetry: it makes ALL final scores in {1, ..., n-1} equally likely. Induction proves this elegantly.",
+      "learnMoreTechnique": "conditional-probability-and-bayes"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Base case",
+      "prompt": "Verify the base case: after n=3 throws, what is P(3, 1) and P(3, 2)?",
+      "options": [
+        { "id": "a", "text": "P(3, 1) = 1/2 (miss on throw 3, prob 1 - 1/2).  P(3, 2) = 1/2 (score on throw 3, prob 1/2).  So P(3, k) = 1/(3-1) = 1/2 for k = 1, 2.", "correct": true },
+        { "id": "b", "text": "P(3, 1) = 1/3, P(3, 2) = 2/3.",                                                                                                          "correct": false },
+        { "id": "c", "text": "P(3, 1) = 0.",                                                                                                                            "correct": false }
+      ],
+      "explanation": "After 2 throws (1 score, 1 miss), throw 3 has P(score) = 1/2. So scores 1 and 2 each occur with probability 1/2. Matches P(3, k) = 1/(3-1) = 1/2."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Inductive step",
+      "prompt": "Assume P(n, k) = 1/(n-1) for all k = 1, ..., n-1. Compute P(n+1, k) using the law of total probability.",
+      "options": [
+        { "id": "a", "text": "P(n+1, k) = P(miss|(n,k))*P(n,k) + P(score|(n,k-1))*P(n,k-1) = (1 - k/n)*(1/(n-1)) + ((k-1)/n)*(1/(n-1)) = (1 - 1/n)/(n-1) = 1/n.", "correct": true },
+        { "id": "b", "text": "P(n+1, k) = 1/(n-1).",                                                                                                                  "correct": false },
+        { "id": "c", "text": "Cannot be computed.",                                                                                                                     "correct": false }
+      ],
+      "explanation": "Two ways to reach (n+1, k): from (n, k) by missing (prob 1 - k/n), or from (n, k-1) by scoring (prob (k-1)/n). Substitute the inductive hypothesis (each = 1/(n-1)). The k's cancel! Result: 1/n. Holds for all k = 1, ..., n. Induction complete."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "By induction, P(n, k) = 1/(n - 1) for all n >= 2 and k in {1, ..., n-1}. So P(100, 50) = ?",
+      "answerType": "numeric",
+      "answer": 0.0101,
+      "explanation": "P(100, 50) = 1/99 ≈ 0.0101. Notice: this is the SAME as P(100, 1), P(100, 2), ..., P(100, 99). The score is UNIFORMLY distributed on {1, ..., 99}."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why does the SELF-REINFORCING rule (success probability = current score / shots) lead to a UNIFORM distribution? It feels paradoxical.",
+        "Is there a connection to Polya urn schemes?",
+        "Compute P(score = 1 after 100 throws). Same answer? Why?"
+      ]
+    }
+  ]
+}
