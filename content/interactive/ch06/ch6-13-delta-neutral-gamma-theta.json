@@ -1,0 +1,94 @@
+{
+  "id": "ch6-13-delta-neutral-gamma-theta",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Delta-Neutral: Gamma vs. Theta",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "539-552"
+  },
+  "mechanism": {
+    "primary": "greeks-and-hedging",
+    "structure": "delta-neutral-portfolio-with-positive-gamma-loses-to-theta-decay-balancing-on-the-BSM-PDE",
+    "insight": "the-BSM-PDE-Theta-plus-half-sigma-squared-S-squared-Gamma-equals-r-V-equates-gamma-profit-with-theta-decay",
+    "variantAxes": ["realized_vs_implied_vol"]
+  },
+  "setup": {
+    "narrative": "You are LONG a European call AND short Delta = N(d_1) shares of the underlying. The portfolio is delta-neutral. The stock then moves immediately (up OR down).",
+    "rules": [
+      "Delta-neutral: first-order P&L from any small dS is zero.",
+      "GAMMA = d^2 V / dS^2 > 0 for a long call -- the portfolio benefits from any move (positive convexity).",
+      "Is this a free lunch (arbitrage)?"
+    ],
+    "question": "Is the position an arbitrage? What balances the gamma benefit?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Compute the second-order P&L for a delta-neutral portfolio: ~ (1/2) * Gamma * (dS)^2.",
+    "Recognize that the portfolio LOSES VALUE OVER TIME (negative theta) if the stock doesn't move.",
+    "Understand the BSM PDE Theta + (1/2) * sigma^2 * S^2 * Gamma = r * V as the gamma-theta balance."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Second-order P&L",
+      "prompt": "Long call + short Delta shares. P&L from small dS = ?",
+      "options": [
+        { "id": "a", "text": "P&L ≈ Delta * dS - Delta * dS + (1/2) * Gamma * (dS)^2 = (1/2) * Gamma * (dS)^2 > 0 for any dS != 0.", "correct": true },
+        { "id": "b", "text": "P&L = Delta * dS.",                                                                                       "correct": false },
+        { "id": "c", "text": "P&L = 0 always.",                                                                                          "correct": false }
+      ],
+      "explanation": "First-order terms cancel by delta-hedging. Second order: option gains (1/2)*Gamma*(dS)^2; stock has no second-order term. Net: (1/2)*Gamma*(dS)^2 > 0 -- the position WINS on any move (up or down).",
+      "learnMoreTechnique": "greeks-and-hedging"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Why isn't this arbitrage?",
+      "prompt": "If gamma always pays off, why isn't this a free lunch?",
+      "options": [
+        { "id": "a", "text": "Theta is NEGATIVE: the position LOSES money as time passes if the stock doesn't move.  Theta decay offsets gamma profits exactly when realized vol equals implied vol.", "correct": true },
+        { "id": "b", "text": "It IS an arbitrage.",                                                                                                                                                "correct": false },
+        { "id": "c", "text": "Transaction costs prevent it.",                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Theta decay (Theta = dV/dt) is the cost of holding a long-option position. Each day that S doesn't move, you lose -Theta * dt > 0 (positive money out). The benefit comes only IF the stock moves enough to compensate."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "BSM PDE balance",
+      "prompt": "Recall the BSM PDE for V: dV/dt + r*S*dV/dS + (1/2)*sigma^2*S^2*d^2V/dS^2 = r*V. For a delta-neutral portfolio Pi = V - Delta*S, we have dPi/dS = 0. The BSM PDE specializes to:",
+      "options": [
+        { "id": "a", "text": "Theta + (1/2)*sigma^2*S^2*Gamma = r*V.  Gamma profit (per unit time) equals Theta decay (per unit time) PLUS interest on V -- exactly balanced under BSM.", "correct": true },
+        { "id": "b", "text": "Theta = 0.",                                                                                                                                              "correct": false },
+        { "id": "c", "text": "Gamma = r.",                                                                                                                                              "correct": false }
+      ],
+      "explanation": "Under risk-neutral pricing, Gamma profit (1/2)*sigma^2*S^2*Gamma is the EXPECTED gain from S moves, exactly canceling -Theta + r*V. So a delta-neutral hedger breaks even in expectation under BSM."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit and trader interpretation",
+      "prompt": "What's the practical implication for a delta-hedged long-option trader?",
+      "options": [
+        { "id": "a", "text": "P&L is positive iff REALIZED volatility > IMPLIED (used to set Theta).  This is the 'long gamma, short theta' play -- profitable when realized > implied vol, loss otherwise.", "correct": true },
+        { "id": "b", "text": "Always profitable.",                                                                                                                                                          "correct": false },
+        { "id": "c", "text": "Always loses money.",                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "Long gamma = bet on big moves; short theta = pay rent each day. Net P&L = realized variance - implied variance (per unit gamma). Delta-hedged option positions are essentially BETS ON VOLATILITY, not direction."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify the BSM relation Theta + (1/2)*sigma^2*S^2*Gamma = r*V on a specific example (e.g., ATM call with sigma=0.2, T=1, r=0).",
+        "If you SHORT the call and long Delta shares, you have NEGATIVE gamma. What's the bet?",
+        "Connect to variance swaps -- formal contracts on (realized vol)^2 - (implied vol)^2."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "greeks-and-hedging",
+  "kind": "technique",
+  "name": "The Greeks and Hedging",
+  "tagline": "Five Greeks measure five risks: Delta (price), Gamma (curvature), Theta (time), Vega (vol), Rho (rate). Delta-hedging neutralizes the dominant risk; gamma and vega govern second-order effects.",
+  "category": "finance",
+  "introducedIn": {
+    "chapter": 6,
+    "section": "6.2",
+    "title": "The Greeks",
+    "exemplarProblemId": "ch6-13-delta-neutral-gamma-theta"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "The Greeks are partial derivatives of an option price with respect to its inputs. Delta = dV/dS measures sensitivity to the stock; Gamma = d^2V/dS^2 measures convexity (rate of delta change); Theta = dV/dt is time decay; Vega = dV/dsigma is volatility sensitivity; Rho = dV/dr is rate sensitivity. For European calls: Delta = exp(-yT) * N(d_1); Gamma = exp(-yT) * N'(d_1) / (S * sigma * sqrt(T)); Theta and Vega have closed forms involving N'(d_1)."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Delta-hedging neutralizes the first-order risk: hold Delta shares short for each long call (or vice versa). Beyond delta, the BSM PDE Theta + (1/2)*sigma^2*S^2*Gamma = r*V says that gamma and theta TRADE OFF for delta-hedged positions: positive gamma (convexity benefit) is offset by negative theta (time decay). The 'gamma scalper' bets on realized vol exceeding implied; the 'theta seller' bets the other way."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Delta is the slope; Gamma is the curvature. Delta-hedging captures slope; you're then exposed to gamma (positive = convex profit if S moves either way) and theta (negative = pay time decay). The PDE forces these into balance under risk-neutral pricing."
+    }
+  ],
+  "whenToUse": [
+    "Setting up a delta-hedge for a long or short option position.",
+    "Pricing approximation for ATM options: c ~ 0.4 * sigma * S * sqrt(T).",
+    "Reasoning about second-order risks (gamma scalping, vega exposure).",
+    "Understanding why deep-ITM American puts can have positive theta and merit early exercise.",
+    "Recovering implied volatility from market prices (vega is the slope of c with respect to sigma)."
+  ],
+  "recipe": [
+    "Write the option price V(S, t; sigma, r) and identify the Greek as a partial derivative.",
+    "For Delta of a call: N(d_1) (multiplied by exp(-yT) with dividends).",
+    "For Gamma: same N'(d_1) / (S * sigma * sqrt(T)).",
+    "For Vega: S * sqrt(T) * N'(d_1).",
+    "To delta-hedge: short Delta shares (for a long call); rebalance as S moves."
+  ],
+  "commonPitfalls": [
+    "Treating N(d_1) and N(d_2) as constants when differentiating -- they're functions of S.",
+    "Forgetting the identity S * N'(d_1) = K * exp(-rT) * N'(d_2), which makes Delta = N(d_1) clean.",
+    "Confusing Delta hedging (first-order) with full replication (which also requires dynamic re-hedging).",
+    "Assuming Theta is always negative -- deep-ITM European puts can have positive Theta.",
+    "Setting up the hedge based on REAL-WORLD probabilities rather than risk-neutral probabilities."
+  ],
+  "appearsIn": [
+    { "problemId": "ch6-08-call-delta",                "title": "Deriving Call Delta",            "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-09-atm-delta",                  "title": "ATM Delta near maturity",        "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-10-delta-hedge-rebalance",      "title": "Delta Hedge Rebalancing",         "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-11-atm-call-approximation",     "title": "ATM Call Approximation",          "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-12-gamma-at-maturity",          "title": "Gamma near maturity",             "chapter": 6, "section": "6.2" },
+    { "problemId": "ch6-13-delta-neutral-gamma-theta",  "title": "Delta-Neutral: Gamma vs. Theta", "chapter": 6, "section": "6.2" }
+  ],
+  "relatedTechniques": ["option-pricing-fundamentals", "brownian-motion-and-ito", "limits-and-derivatives"]
+}

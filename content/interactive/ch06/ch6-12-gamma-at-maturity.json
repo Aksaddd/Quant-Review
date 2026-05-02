@@ -1,0 +1,96 @@
+{
+  "id": "ch6-12-gamma-at-maturity",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Gamma near maturity",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "496-504"
+  },
+  "mechanism": {
+    "primary": "greeks-and-hedging",
+    "structure": "ATM-gamma-blows-up-as-T-shrinks-while-far-from-strike-gamma-shrinks",
+    "insight": "near-the-strike-Gamma-tends-to-infinity-as-T-shrinks-because-delta-becomes-a-step-function",
+    "variantAxes": ["moneyness", "maturity"]
+  },
+  "setup": {
+    "narrative": "Consider a European call's Gamma = N'(d_1) / (S * sigma * sqrt(T)) (no dividends). What happens to Gamma as the option approaches maturity?",
+    "rules": [
+      "Gamma = exp(-yT) * N'(d_1) / (S * sigma * sqrt(T)).",
+      "N'(d_1) = (1 / sqrt(2*pi)) * exp(-d_1^2 / 2).",
+      "For ATM: d_1 -> 0 as T -> 0, so N'(d_1) -> 1 / sqrt(2*pi).",
+      "Denominator S * sigma * sqrt(T) -> 0 as T -> 0."
+    ],
+    "question": "How does Gamma behave for ATM and away-from-strike options as T -> 0?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply the Gamma formula for ATM and far-from-strike cases.",
+    "Recognize the singularity at-the-money as T -> 0.",
+    "Connect to the difficulty of hedging close-to-expiry ATM options."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Gamma at-the-money near maturity",
+      "prompt": "ATM (S = K) with T -> 0. Numerator N'(d_1) -> N'(0) = 1/sqrt(2*pi). Denominator S * sigma * sqrt(T) -> 0. So Gamma -> ?",
+      "options": [
+        { "id": "a", "text": "Gamma -> infinity.  Delta becomes a step function from 0 to 1 across S = K, so its slope (Gamma) blows up.", "correct": true },
+        { "id": "b", "text": "Gamma -> 0.",                                                                                                    "correct": false },
+        { "id": "c", "text": "Gamma -> 1.",                                                                                                    "correct": false }
+      ],
+      "explanation": "As T -> 0 ATM, N'(d_1) is bounded (around 0.4) but the denominator vanishes. So Gamma diverges. Geometrically: at expiry, Delta = 0 below K and Delta = 1 above K -- a jump, infinite slope.",
+      "learnMoreTechnique": "greeks-and-hedging"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Gamma far from strike",
+      "prompt": "Deep ITM or deep OTM (S far from K). |d_1| is large, so N'(d_1) ~ exp(-d_1^2/2) is exponentially small. As T -> 0, denominator -> 0 but numerator decays even faster. Gamma -> ?",
+      "options": [
+        { "id": "a", "text": "Gamma -> 0.  Far from strike, the option is essentially linear (delta is 0 or 1 with little curvature).", "correct": true },
+        { "id": "b", "text": "Gamma -> infinity.",                                                                                              "correct": false },
+        { "id": "c", "text": "Gamma stays constant.",                                                                                            "correct": false }
+      ],
+      "explanation": "Far from strike, both d_1 -> +/- infinity (from r/sigma * sqrt(T) bounded but ln(S/K) factor large). N'(d_1) decays as exp(-d_1^2/2) which dominates. So Gamma -> 0. Delta becomes constant (0 or 1)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Practical implication",
+      "prompt": "Why does this matter for hedging?",
+      "options": [
+        { "id": "a", "text": "Hedging ATM options near expiry requires extremely frequent rebalancing (high gamma = sharp delta changes). In practice this is impossible, leading to large hedging error / replication slippage.", "correct": true },
+        { "id": "b", "text": "Hedging is easier near expiry.",                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "Gamma doesn't affect hedging.",                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "Practitioner's lesson: SHORT-DATED ATM OPTIONS ARE THE HARDEST TO HEDGE. Every small move in S triggers large delta changes. In practice, gamma blows up faster than transaction costs allow, making perfect replication impossible. Some traders avoid trading these positions altogether."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Match Gamma behavior as T -> 0 in three regions:",
+      "template": "ATM (S near K): Gamma -> __[a]__.  Deep ITM/OTM (S far from K): Gamma -> __[b]__.  At very long maturity, ATM Gamma is __[c]__ (small/large).",
+      "blanks": [
+        { "id": "a", "answers": ["infinity", "inf", "infinite"], "caseInsensitive": true },
+        { "id": "b", "answers": ["0", "zero"], "caseInsensitive": true },
+        { "id": "c", "answers": ["small"], "caseInsensitive": true }
+      ],
+      "explanation": "ATM near expiry: infinity. Far from strike near expiry: 0. Long-dated ATM: small (the curvature smears across many price levels)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the integral of Gamma over all S (for a fixed T)? (It's 1, the integral of the density of the lognormal at K.)",
+        "How does VEGA behave as T -> 0? (Vega -> 0 -- no time left for vol to matter.)",
+        "Connect to barrier options: hedging close to a barrier is also challenging due to high gamma."
+      ]
+    }
+  ]
+}

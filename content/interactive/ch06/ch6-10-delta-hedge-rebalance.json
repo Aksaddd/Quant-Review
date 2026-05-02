@@ -1,0 +1,95 @@
+{
+  "id": "ch6-10-delta-hedge-rebalance",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Delta Hedge Rebalancing",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "448-460"
+  },
+  "mechanism": {
+    "primary": "greeks-and-hedging",
+    "structure": "short-Delta-shares-and-rebalance-as-S-moves-because-delta-increases-in-S",
+    "insight": "delta-rises-with-S-so-an-up-move-requires-shorting-MORE-stock-to-stay-hedged",
+    "variantAxes": ["price_move_direction"]
+  },
+  "setup": {
+    "narrative": "You are LONG one European call on GM. You want to delta-hedge. GM stock price suddenly rises. How do you rebalance?",
+    "rules": [
+      "Long call has Delta = N(d_1) (in (0, 1) for non-dividend stocks).",
+      "Initial hedge: short Delta shares for each long call.",
+      "Delta is an INCREASING function of S.",
+      "After hedging, the portfolio is delta-neutral but still has gamma exposure."
+    ],
+    "question": "What's the initial hedge? How do you rebalance after S rises?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the initial delta hedge (short Delta shares per long call).",
+    "Recognize that Delta increases with S (since N(d_1) is increasing in S).",
+    "Conclude that an up-move requires shorting MORE stock (rebalancing)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Initial hedge",
+      "prompt": "You're long one call. Delta = N(d_1) > 0. How do you neutralize the first-order risk?",
+      "options": [
+        { "id": "a", "text": "Short Delta shares of stock for each long call.  This makes the portfolio's first-order risk zero.", "correct": true },
+        { "id": "b", "text": "Buy Delta shares.",                                                                                  "correct": false },
+        { "id": "c", "text": "Hold cash equal to the option premium.",                                                              "correct": false }
+      ],
+      "explanation": "A long call gains Delta * dS for a small move dS. Shorting Delta shares cancels this. The portfolio (long 1 call, short Delta shares) is delta-neutral.",
+      "learnMoreTechnique": "greeks-and-hedging"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "How does Delta change when S rises?",
+      "prompt": "S goes up. d_1 increases (since d_1 has a +ln(S) term). N is increasing, so N(d_1) increases. What does this mean for your hedge?",
+      "options": [
+        { "id": "a", "text": "Delta rises.  Your existing short position is now INSUFFICIENT (you need to short MORE stock to stay delta-neutral).", "correct": true },
+        { "id": "b", "text": "Delta falls -- buy back some shares.",                                                                                      "correct": false },
+        { "id": "c", "text": "Delta is constant.",                                                                                                          "correct": false }
+      ],
+      "explanation": "Delta = N(d_1) is increasing in S (Gamma > 0). After S rises, Delta is bigger. Your old short of Delta_old shares no longer matches Delta_new. To rehedge: short additional (Delta_new - Delta_old) shares."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "What about cash?",
+      "prompt": "When you short MORE stock, you receive proceeds. What do you do with them?",
+      "options": [
+        { "id": "a", "text": "Lend the proceeds at the risk-free rate (or hold in money market). The full self-financing portfolio is: long call, short Delta shares, cash invested at r.", "correct": true },
+        { "id": "b", "text": "Spend it.",                                                                                                                                                    "correct": false },
+        { "id": "c", "text": "Buy more options.",                                                                                                                                              "correct": false }
+      ],
+      "explanation": "Replication is self-financing: stock proceeds go into the money-market account. The call price equals (long call - short Delta shares - cash) -- the cash component is K * exp(-rT) * N(d_2) at any moment."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Summary of rebalancing rule:",
+      "options": [
+        { "id": "a", "text": "When S rises -> short MORE stock (Delta increased).  When S falls -> buy back stock (Delta decreased).  This is 'buy high, sell low' on the underlying -- the cost of dynamically replicating gamma exposure.", "correct": true },
+        { "id": "b", "text": "Don't rebalance -- the initial hedge is permanent.",                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "Buy stock when S rises.",                                                                                                                                                                                          "correct": false }
+      ],
+      "explanation": "Dynamic delta hedging means continuously trading to keep Delta = 0. Each move requires trading in the SAME direction as the move (short more on up moves, cover on down moves). This 'buy high, sell low' pattern is the cost of replicating positive gamma."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How does GAMMA control the rate of rebalancing? (More gamma = more frequent rebalancing.)",
+        "How is the realized P&L of a delta-hedged option position related to realized vs implied volatility? (Long option, short delta-hedge: P&L is positive when realized vol > implied; vice versa.)",
+        "What's the analogous hedging rule for a SHORT call?"
+      ]
+    }
+  ]
+}

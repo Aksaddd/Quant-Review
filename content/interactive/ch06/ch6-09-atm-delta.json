@@ -1,0 +1,82 @@
+{
+  "id": "ch6-09-atm-delta",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "ATM Delta near maturity",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "427-444"
+  },
+  "mechanism": {
+    "primary": "greeks-and-hedging",
+    "structure": "evaluate-d1-at-S-equals-K-and-take-T-to-zero-limit",
+    "insight": "ATM-call-delta-is-greater-than-half-and-tends-to-half-as-T-shrinks-to-zero",
+    "variantAxes": ["moneyness", "maturity"]
+  },
+  "setup": {
+    "narrative": "Consider an at-the-money European call (S = K) on a non-dividend-paying stock.",
+    "rules": [
+      "Delta = N(d_1) where d_1 = [ln(S/K) + (r + sigma^2/2)*T] / (sigma * sqrt(T)).",
+      "ATM means S = K, so ln(S/K) = 0.",
+      "Then d_1 = (r + sigma^2/2) * sqrt(T) / sigma = (r/sigma + sigma/2) * sqrt(T)."
+    ],
+    "question": "What is the ATM call's Delta? What happens as maturity approaches?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Evaluate d_1 at the ATM point (ln(S/K) = 0).",
+    "See that d_1 > 0 for r >= 0 and sigma > 0, so N(d_1) > 0.5.",
+    "Take the limit T -> 0 to get d_1 -> 0 and N(d_1) -> 0.5."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Sign of d_1 at ATM",
+      "prompt": "With S = K, d_1 = (r + sigma^2/2) * sqrt(T) / sigma. For r >= 0 and sigma > 0, what's the sign of d_1?",
+      "options": [
+        { "id": "a", "text": "d_1 > 0.  Therefore N(d_1) > N(0) = 0.5.  ATM call delta is ALWAYS above 0.5.", "correct": true },
+        { "id": "b", "text": "d_1 = 0 always.",                                                                "correct": false },
+        { "id": "c", "text": "d_1 < 0.",                                                                        "correct": false }
+      ],
+      "explanation": "(r + sigma^2/2) > 0 and sqrt(T) > 0 and sigma > 0. So d_1 > 0 strictly. N is strictly increasing, so N(d_1) > N(0) = 0.5.",
+      "learnMoreTechnique": "greeks-and-hedging"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Limit as T -> 0",
+      "prompt": "What happens to d_1 (and hence Delta) as T -> 0?",
+      "options": [
+        { "id": "a", "text": "d_1 -> 0 (since sqrt(T) -> 0). So N(d_1) -> N(0) = 0.5.  Delta -> 0.5 from above as the option approaches maturity.", "correct": true },
+        { "id": "b", "text": "Delta -> 1.",                                                                                                              "correct": false },
+        { "id": "c", "text": "Delta -> 0.",                                                                                                               "correct": false }
+      ],
+      "explanation": "The (r/sigma + sigma/2) term is bounded; sqrt(T) -> 0 dominates. So d_1 -> 0 and N(d_1) -> 0.5. Intuition: at the very last moment, ATM means a 50/50 finish in or out of the money."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Behavior summary:",
+      "options": [
+        { "id": "a", "text": "ATM call delta > 0.5 always; tends to 0.5 as maturity approaches.  Deep ITM (S >> K): Delta -> 1.  Deep OTM: Delta -> 0.", "correct": true },
+        { "id": "b", "text": "ATM call delta = 0.5 always.",                                                                                              "correct": false },
+        { "id": "c", "text": "ATM delta is undefined.",                                                                                                    "correct": false }
+      ],
+      "explanation": "The slight excess over 0.5 reflects the lognormal drift toward higher S under risk-neutral pricing. As T shrinks, this drift effect vanishes and Delta approaches the 'just barely ITM' boundary value 0.5."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What's the ATM PUT delta?  (Use put-call parity: Put Delta = Call Delta - 1.  At ATM with positive r: Put Delta > -0.5.)",
+        "How does ATM delta behave as VOLATILITY increases? (sigma up -> sigma/2 dominates; d_1 grows -> Delta closer to 1, but bounded.)",
+        "Why does the BLACK-SCHOLES atm-delta differ from the BLACK-MODEL forward-atm-delta of exactly 0.5?"
+      ]
+    }
+  ]
+}

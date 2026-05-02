@@ -1,0 +1,91 @@
+{
+  "id": "ch6-08-call-delta",
+  "kind": "problem-walkthrough",
+  "chapter": 6,
+  "section": "6.2",
+  "title": "Deriving Call Delta",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-06-finance.md",
+    "lines": "394-423"
+  },
+  "mechanism": {
+    "primary": "greeks-and-hedging",
+    "structure": "differentiate-c-equals-S-N-d1-minus-K-exp-rT-N-d2-using-the-key-identity",
+    "insight": "S-times-N-prime-d1-equals-K-times-exp-rT-times-N-prime-d2-makes-the-second-and-third-terms-cancel",
+    "variantAxes": ["dividend_yield"]
+  },
+  "setup": {
+    "narrative": "European call price (no dividends): c = S * N(d_1) - K * exp(-rT) * N(d_2). Delta = dc/dS.",
+    "rules": [
+      "d_1 = [ln(S/K) + (r + sigma^2/2)*T] / (sigma * sqrt(T)).",
+      "d_2 = d_1 - sigma * sqrt(T).",
+      "N(d_1) and N(d_2) ARE functions of S (via d_1 and d_2)."
+    ],
+    "question": "Compute Delta = dc/dS."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Differentiate c carefully treating N(d_1) and N(d_2) as functions of S.",
+    "Apply the chain rule to dN(d)/dS.",
+    "Use the identity S * N'(d_1) = K * exp(-rT) * N'(d_2) to cancel."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the derivative",
+      "prompt": "dc/dS = N(d_1) + S * dN(d_1)/dS - K * exp(-rT) * dN(d_2)/dS. (Both N(d_i) terms must be differentiated.)  Compute dN(d_i)/dS using the chain rule.",
+      "options": [
+        { "id": "a", "text": "dN(d_i)/dS = N'(d_i) * dd_i/dS = N'(d_i) / (S * sigma * sqrt(T)). (Both d_1 and d_2 have the same dd/dS since they differ by a constant.)", "correct": true },
+        { "id": "b", "text": "dN(d_i)/dS = 0.",                                                                                                                                "correct": false },
+        { "id": "c", "text": "dN(d_i)/dS = 1.",                                                                                                                                  "correct": false }
+      ],
+      "explanation": "d_1 = ln(S/K)/(sigma*sqrt(T)) + (r + sigma^2/2)*sqrt(T)/sigma. dd_1/dS = 1/(S * sigma * sqrt(T)). Same for d_2 (differs by constant -sigma*sqrt(T)). Chain rule: dN(d)/dS = N'(d) * dd/dS.",
+      "learnMoreTechnique": "greeks-and-hedging"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "The cancellation identity",
+      "prompt": "The key identity S * N'(d_1) = K * exp(-rT) * N'(d_2) holds (verifiable from d_1 - d_2 = sigma*sqrt(T) and the explicit form of N'). Use this in the derivative.",
+      "options": [
+        { "id": "a", "text": "S * dN(d_1)/dS - K * exp(-rT) * dN(d_2)/dS = [S*N'(d_1) - K*exp(-rT)*N'(d_2)] / (S*sigma*sqrt(T)) = 0 / (S*sigma*sqrt(T)) = 0.", "correct": true },
+        { "id": "b", "text": "These cannot be combined.",                                                                                                       "correct": false },
+        { "id": "c", "text": "They give Delta = 1.",                                                                                                            "correct": false }
+      ],
+      "explanation": "The two derivative terms have a common factor 1/(S*sigma*sqrt(T)). The identity S*N'(d_1) = K*exp(-rT)*N'(d_2) makes the numerator vanish."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Conclude Delta = N(d_1)",
+      "prompt": "After cancellation, what's left of dc/dS?",
+      "options": [
+        { "id": "a", "text": "Delta = N(d_1).  (The chain-rule terms cancel; only the explicit N(d_1) factor in c remains.)", "correct": true },
+        { "id": "b", "text": "Delta = N(d_2).",                                                                                  "correct": false },
+        { "id": "c", "text": "Delta = N(d_1) - N(d_2).",                                                                          "correct": false }
+      ],
+      "explanation": "After the cancellation, dc/dS = N(d_1). For a call, Delta = N(d_1) -- ALWAYS in (0, 1). With dividends, Delta = exp(-yT) * N(d_1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit numerical example",
+      "prompt": "S = 100, K = 100 (ATM), sigma = 0.2, r = 0, T = 1. Then d_1 = (0 + 0.02)/(0.2) = 0.1. Compute Delta = N(0.1) (use approx N(0.1) ~ 0.5398).",
+      "answerType": "numeric",
+      "answer": 0.54,
+      "explanation": "N(0.1) ≈ 0.5398. So Delta ≈ 0.54 -- slightly above 0.5 for ATM calls (because ITM-finishing probability exceeds 50% under risk-neutral measure when r > 0 or sigma > 0)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Derive Put Delta. (Hint: from put-call parity differentiate both sides w.r.t. S.)",
+        "Why is N(d_1) the 'risk-neutral probability the option finishes in-the-money under the STOCK measure'? Connect to the change-of-numeraire intuition.",
+        "What's the analogous formula for digital (cash-or-nothing) options?"
+      ]
+    }
+  ]
+}

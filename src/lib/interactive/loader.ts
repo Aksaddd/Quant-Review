@@ -135,6 +135,12 @@ import ch6PutArbitrage   from '../../../content/interactive/ch06/ch6-04-put-pric
 import ch6BSMPDE         from '../../../content/interactive/ch06/ch6-05-bsm-pde.json';
 import ch6Lookback       from '../../../content/interactive/ch06/ch6-06-lookback-first-passage.json';
 import ch6InverseS       from '../../../content/interactive/ch06/ch6-07-inverse-stock-price.json';
+import ch6CallDelta      from '../../../content/interactive/ch06/ch6-08-call-delta.json';
+import ch6ATMDelta       from '../../../content/interactive/ch06/ch6-09-atm-delta.json';
+import ch6DeltaHedge     from '../../../content/interactive/ch06/ch6-10-delta-hedge-rebalance.json';
+import ch6ATMApprox      from '../../../content/interactive/ch06/ch6-11-atm-call-approximation.json';
+import ch6GammaMaturity  from '../../../content/interactive/ch06/ch6-12-gamma-at-maturity.json';
+import ch6DeltaNeutralGT from '../../../content/interactive/ch06/ch6-13-delta-neutral-gamma-theta.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -164,6 +170,7 @@ import techMartingale    from '../../../content/interactive/techniques/martingal
 import techDP            from '../../../content/interactive/techniques/dynamic-programming.json';
 import techBM            from '../../../content/interactive/techniques/brownian-motion-and-ito.json';
 import techOptionsFund   from '../../../content/interactive/techniques/option-pricing-fundamentals.json';
+import techGreeksHedging from '../../../content/interactive/techniques/greeks-and-hedging.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -295,6 +302,12 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch6-05-bsm-pde':           ch6BSMPDE         as unknown as ProblemWalkthrough,
   'ch6-06-lookback-first-passage': ch6Lookback  as unknown as ProblemWalkthrough,
   'ch6-07-inverse-stock-price': ch6InverseS     as unknown as ProblemWalkthrough,
+  'ch6-08-call-delta':        ch6CallDelta      as unknown as ProblemWalkthrough,
+  'ch6-09-atm-delta':         ch6ATMDelta       as unknown as ProblemWalkthrough,
+  'ch6-10-delta-hedge-rebalance': ch6DeltaHedge as unknown as ProblemWalkthrough,
+  'ch6-11-atm-call-approximation': ch6ATMApprox as unknown as ProblemWalkthrough,
+  'ch6-12-gamma-at-maturity': ch6GammaMaturity  as unknown as ProblemWalkthrough,
+  'ch6-13-delta-neutral-gamma-theta': ch6DeltaNeutralGT as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -324,6 +337,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'dynamic-programming':      techDP            as unknown as Technique,
   'brownian-motion-and-ito':  techBM            as unknown as Technique,
   'option-pricing-fundamentals': techOptionsFund as unknown as Technique,
+  'greeks-and-hedging':       techGreeksHedging as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {
