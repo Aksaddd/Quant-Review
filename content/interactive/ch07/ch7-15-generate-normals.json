@@ -1,0 +1,82 @@
+{
+  "id": "ch7-15-generate-normals",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.3",
+  "title": "Generate Normal Variates from Uniforms",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "591-612"
+  },
+  "mechanism": {
+    "primary": "numerical-methods",
+    "structure": "transform-uniforms-into-normals-via-inverse-CDF-or-acceptance-rejection",
+    "insight": "no-closed-form-inverse-CDF-for-normal-but-Box-Muller-acceptance-rejection-or-Marsaglia-polar-all-work",
+    "variantAxes": ["method"]
+  },
+  "setup": {
+    "narrative": "Given U_1, U_2, ... ~ Uniform(0,1) iid, generate Z ~ N(0, 1) (and then scale to N(mu, sigma^2)).",
+    "rules": [
+      "Inverse-CDF: X = F^-1(U). Works for any distribution if F^-1 is computable.",
+      "Box-Muller: Z_1 = sqrt(-2 ln U_1) * cos(2 pi U_2); Z_2 = sqrt(-2 ln U_1) * sin(2 pi U_2). Two independent N(0,1) per pair.",
+      "Acceptance-rejection: propose from g(x), accept with prob f(x) / (M * g(x)) where M >= sup f/g."
+    ],
+    "question": "Compare three methods for generating standard normals."
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Recognize that the normal CDF has no closed-form inverse.",
+    "Derive Box-Muller via polar coordinates.",
+    "Identify the acceptance-rejection acceptance rate (1/M) and the proposal exponential's M ~ 1.32."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Box-Muller derivation",
+      "prompt": "Box-Muller relies on the polar form of two independent N(0,1) draws. If (Z_1, Z_2) are iid N(0,1), what's the joint density in polar (R, Theta)?",
+      "options": [
+        { "id": "a", "text": "R^2 ~ Exponential(1/2), Theta ~ Uniform(0, 2 pi), independent. So sample R = sqrt(-2 ln U_1), Theta = 2 pi U_2 and back-transform.", "correct": true },
+        { "id": "b", "text": "R is uniform on [0, 1].",                                                                                                              "correct": false },
+        { "id": "c", "text": "There is no polar form for normals.",                                                                                                   "correct": false }
+      ],
+      "explanation": "Joint pdf of two iid N(0,1): (1/(2pi)) exp(-(x^2+y^2)/2). In polar: R * (1/(2pi)) * exp(-R^2 / 2). Marginal R: f(r) = r exp(-r^2/2), CDF 1 - exp(-r^2/2), inverse is sqrt(-2 ln U). Theta is uniform.",
+      "learnMoreTechnique": "numerical-methods"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Acceptance-rejection",
+      "prompt": "Use exponential(1) as proposal g(x) = exp(-x) for x > 0 (and reflect for x < 0). For standard normal f(x) = (1 / sqrt(2 pi)) exp(-x^2/2), what's M = sup f/g?",
+      "options": [
+        { "id": "a", "text": "M = sqrt(2 e / pi) ~ 1.32 (achieved at x = 1).", "correct": true },
+        { "id": "b", "text": "M = 1 (no scaling needed).",                     "correct": false },
+        { "id": "c", "text": "M = pi.",                                          "correct": false }
+      ],
+      "explanation": "f(x)/g(x) = (1/sqrt(2 pi)) * exp(x - x^2/2). Maximize: take derivative, set to 0 -> x = 1. Value: (1/sqrt(2 pi)) * exp(1/2) = sqrt(2 e / pi) ~ 1.3155. Acceptance probability per attempt = 1/M ~ 0.76 -- so on average ~1.32 proposals per accepted draw."
+    },
+    {
+      "id": "s3",
+      "type": "cloze",
+      "label": "Commit -- scale to N(mu, sigma^2)",
+      "prompt": "Given Z ~ N(0,1), how do you produce X ~ N(mu, sigma^2)?",
+      "template": "X = __[a]__ + __[b]__ * Z.",
+      "blanks": [
+        { "id": "a", "answers": ["mu", "μ", "m"], "caseInsensitive": true },
+        { "id": "b", "answers": ["sigma", "σ", "sd", "s"], "caseInsensitive": true }
+      ],
+      "explanation": "X = mu + sigma * Z. E[X] = mu, Var(X) = sigma^2 * Var(Z) = sigma^2."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compare runtimes. (Box-Muller: 1 log + 1 sqrt + 2 trig per 2 draws. Acceptance-rejection: ~1.32 proposals per accepted, fewer transcendentals per draw.)",
+        "What's the Marsaglia polar method? (Variant of Box-Muller without trig: rejection-sample (U_1, U_2) in unit disk, then transform.)",
+        "How would you generate a multivariate normal with correlation matrix Sigma? (Cholesky factor L, then X = mu + L Z where Z is iid N(0,1).)"
+      ]
+    }
+  ]
+}

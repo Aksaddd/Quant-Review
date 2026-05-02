@@ -1,0 +1,99 @@
+{
+  "id": "ch7-16-variance-reduction",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.3",
+  "title": "Variance Reduction Techniques",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "615-661"
+  },
+  "mechanism": {
+    "primary": "numerical-methods",
+    "structure": "exploit-symmetry-correlations-or-tilted-distributions-to-reduce-MC-variance",
+    "insight": "the-MC-cost-is-proportional-to-variance-divided-by-tolerance-squared-so-cutting-variance-in-half-doubles-effective-paths",
+    "variantAxes": ["technique", "applicability"]
+  },
+  "setup": {
+    "narrative": "Standard MC has variance Var(estimator) = sigma^2 / M. We want to reduce sigma^2 (the per-path variance) without bias.",
+    "rules": [
+      "Antithetic: pair (eps, -eps) per path; works when payoff is monotone in noise (Var(Y(eps) + Y(-eps))/2 < Var(Y)/2 if cov < 0).",
+      "Control variate: subtract a correlated estimator with known mean. X* = Xhat + (Y - Yhat).",
+      "Importance sampling: sample from g(x) instead of f(x), reweight by f(x)/g(x). Critical for rare events (deep-OTM).",
+      "Moment matching: rescale samples to enforce sample mean = population mean."
+    ],
+    "question": "Match each technique to its principle and when it applies."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Identify when antithetic helps (monotonicity / negative correlation).",
+    "Apply control variates: estimate mean of correlated quantity, exploit known closed form.",
+    "Recognize importance sampling for tail events.",
+    "Use Quasi-Monte Carlo for low-dimensional smooth integrands."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Antithetic",
+      "prompt": "When does the antithetic estimator (Y(eps) + Y(-eps))/2 have LOWER variance than averaging two independent draws?",
+      "options": [
+        { "id": "a", "text": "When Cov(Y(eps), Y(-eps)) < 0. Then Var of the average is (Var(Y) + Cov)/2 < Var(Y)/2.", "correct": true },
+        { "id": "b", "text": "Always, regardless of correlation.",                                                       "correct": false },
+        { "id": "c", "text": "Only when Y is constant.",                                                                  "correct": false }
+      ],
+      "explanation": "Antithetic works when the payoff function is monotone in the noise (or negatively correlated under flipping). For a vanilla call payoff max(S_T - K, 0), Y is monotone increasing in eps, so Y(eps) and Y(-eps) are negatively correlated. Variance reduction can be 2x or more.",
+      "learnMoreTechnique": "numerical-methods"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Control variate",
+      "prompt": "Use a control variate Y with known mean E[Y] = mu_Y. The corrected estimator is X* = Xhat + beta * (mu_Y - Yhat). What's the optimal beta?",
+      "options": [
+        { "id": "a", "text": "beta* = Cov(X, Y) / Var(Y).  Variance reduction factor: 1 - rho_XY^2.", "correct": true },
+        { "id": "b", "text": "beta* = 1 always.",                                                       "correct": false },
+        { "id": "c", "text": "beta* = E[X] / E[Y].",                                                    "correct": false }
+      ],
+      "explanation": "Optimal beta minimizes Var(X*). Solving: beta* = Cov(X, Y) / Var(Y). The remaining variance is Var(X) (1 - rho^2). High correlation between target and control variate means big variance reduction. Example: control an Asian option with the geometric Asian, which has closed form."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Importance sampling",
+      "prompt": "Pricing a deep-OTM call where most paths have payoff 0. Why is importance sampling powerful here?",
+      "options": [
+        { "id": "a", "text": "Sample from a tilted distribution g (e.g., shift the Gaussian mean toward the strike). Most paths now produce nonzero payoffs. Reweight by f/g to keep the estimator unbiased. Variance can be orders of magnitude smaller.", "correct": true },
+        { "id": "b", "text": "It increases the number of paths.",                                                                                                                                                                                       "correct": false },
+        { "id": "c", "text": "It doesn't help for OTM options.",                                                                                                                                                                                    "correct": false }
+      ],
+      "explanation": "If only 1 in 1000 paths under f produces a nonzero payoff, you waste ~99.9% of the simulation. Tilt the distribution to put more mass where the payoff is positive, then reweight. Critical for credit risk, exotic structured products, and tail-event pricing."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Match technique to use case:",
+      "template": "Antithetic: payoff __[a]__ in noise.  Control variate: Y has __[b]__ mean and high __[c]__ with X.  Importance sampling: rare-event / __[d]__ payoff.  QMC: __[e]__-dimensional smooth integrals.",
+      "blanks": [
+        { "id": "a", "answers": ["monotone", "monotonic"], "caseInsensitive": true },
+        { "id": "b", "answers": ["known", "closed-form"], "caseInsensitive": true },
+        { "id": "c", "answers": ["correlation"], "caseInsensitive": true },
+        { "id": "d", "answers": ["OTM", "deep-OTM", "tail", "rare"], "caseInsensitive": true },
+        { "id": "e", "answers": ["low", "small"], "caseInsensitive": true }
+      ],
+      "explanation": "Antithetic: monotone payoffs. Control variate: needs a correlated quantity with known mean. Importance sampling: rare events / OTM. QMC: low-dim smooth integrals (high-dim still suffers curse of dim)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why doesn't antithetic always help? (Non-monotone payoffs like straddles can have positive correlation between Y(eps) and Y(-eps).)",
+        "Why is QMC's O(1/M) convergence not always achievable? (It depends on smoothness and effective dimension; for high-dim non-smooth integrands, QMC degrades to MC's O(1/sqrt(M)).)",
+        "Combine techniques: stratified sampling + antithetic + control variate. Common in production pricing engines."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "ch7-18-finite-difference",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.3",
+  "title": "Finite Difference: Explicit / Implicit / Crank-Nicolson",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "706-794"
+  },
+  "mechanism": {
+    "primary": "numerical-methods",
+    "structure": "discretize-PDE-on-grid-and-step-via-explicit-implicit-or-Crank-Nicolson-update",
+    "insight": "explicit-is-cheap-but-conditionally-stable-implicit-is-stable-but-needs-tridiagonal-solve-Crank-Nicolson-is-second-order-and-stable",
+    "variantAxes": ["scheme", "stability_constraint"]
+  },
+  "setup": {
+    "narrative": "Heat equation u_tau = (1/2) sigma^2 u_xx (BSM PDE under change of variables). Discretize: x_j = x_0 + j * Delta_x for j = 0..J; tau_n = n * Delta_tau. u_j^n approximates u(x_j, tau_n).",
+    "rules": [
+      "Explicit (forward time, central space): u_j^(n+1) = alpha * u_{j-1}^n + (1 - 2 alpha) * u_j^n + alpha * u_{j+1}^n where alpha = (sigma^2/2) * Delta_tau / Delta_x^2.",
+      "Stability for explicit: alpha <= 1/2, i.e., Delta_tau / Delta_x^2 <= 1 / sigma^2.",
+      "Implicit (backward time, central space): solve a tridiagonal system at each step. Unconditionally stable.",
+      "Crank-Nicolson: average of explicit and implicit. Stable + second-order accurate in BOTH time and space."
+    ],
+    "question": "Compare the three schemes on stability, accuracy, and per-step cost."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Write the explicit update formula and identify the stability condition.",
+    "Recognize implicit requires a tridiagonal solve per step.",
+    "Identify Crank-Nicolson as the practical workhorse: O((Delta_tau)^2, (Delta_x)^2) accuracy and unconditionally stable."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Explicit stability",
+      "prompt": "Explicit FD update: u_j^(n+1) = alpha * u_{j-1}^n + (1 - 2 alpha) * u_j^n + alpha * u_{j+1}^n. Stability requires?",
+      "options": [
+        { "id": "a", "text": "alpha = (sigma^2 / 2) * Delta_tau / Delta_x^2 <= 1/2 (so the middle coefficient (1 - 2 alpha) is non-negative).  Else: noise amplifies and the scheme blows up.", "correct": true },
+        { "id": "b", "text": "alpha = 1.",                                                                                                                                                      "correct": false },
+        { "id": "c", "text": "alpha can be any positive number.",                                                                                                                                "correct": false }
+      ],
+      "explanation": "Von Neumann stability: substitute u_j^n = g^n exp(i k j Delta_x) and require |g| <= 1 for all k. Yields the alpha <= 1/2 bound. If alpha > 1/2, high-frequency modes grow unboundedly.",
+      "learnMoreTechnique": "numerical-methods"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Implicit method",
+      "prompt": "Implicit FD: u_j^(n+1) related to u_j^n via central differences at TIME n+1. Each time step requires solving what?",
+      "options": [
+        { "id": "a", "text": "A tridiagonal linear system A * u^(n+1) = u^n where A is constant in n. O(J) per step using the Thomas algorithm.", "correct": true },
+        { "id": "b", "text": "A dense linear system. O(J^3) per step.",                                                                            "correct": false },
+        { "id": "c", "text": "Nothing -- implicit is also explicit.",                                                                              "correct": false }
+      ],
+      "explanation": "Backward time difference yields u_j^(n+1) - alpha (u_{j-1}^(n+1) - 2 u_j^(n+1) + u_{j+1}^(n+1)) = u_j^n. The matrix is tridiagonal -- Thomas algorithm solves in O(J). Unconditionally stable: any Delta_tau, Delta_x work."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Crank-Nicolson advantage",
+      "prompt": "Crank-Nicolson averages explicit and implicit RHS. Why is it preferred?",
+      "options": [
+        { "id": "a", "text": "Unconditionally stable AND second-order accurate in both Delta_tau and Delta_x. Better accuracy/cost than either alone.", "correct": true },
+        { "id": "b", "text": "It's simpler than explicit.",                                                                                                "correct": false },
+        { "id": "c", "text": "It's faster than explicit per step.",                                                                                         "correct": false }
+      ],
+      "explanation": "Explicit is O(Delta_tau, Delta_x^2). Implicit is the same. Crank-Nicolson is O((Delta_tau)^2, (Delta_x)^2) -- one extra order in time. Same per-step cost as implicit (tridiagonal solve). Modest oscillations near payoff kinks may require Rannacher smoothing."
+    },
+    {
+      "id": "s4",
+      "type": "cloze",
+      "label": "Commit -- compare schemes",
+      "prompt": "Fill the table:",
+      "template": "Explicit: __[a]__ stable. Implicit: __[b]__ stable. Crank-Nicolson: unconditionally stable + __[c]__-order accurate in time. Per-step cost for implicit / CN: O(__[d]__) tridiagonal solve.",
+      "blanks": [
+        { "id": "a", "answers": ["conditionally", "conditional"], "caseInsensitive": true },
+        { "id": "b", "answers": ["unconditionally", "unconditional"], "caseInsensitive": true },
+        { "id": "c", "answers": ["second", "2nd", "2"], "caseInsensitive": true },
+        { "id": "d", "answers": ["J", "n", "N"], "caseInsensitive": true }
+      ],
+      "explanation": "Memorize this table for rate-curve / option pricing interviews. Crank-Nicolson is the go-to in production for European-style options on a single underlying."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is too many SPACE steps WORSE than too many time steps for explicit FD? (alpha = Delta_tau / Delta_x^2: shrinking Delta_x squares the denominator, so alpha grows quadratically -- easier to violate stability.)",
+        "How would you handle American options with FD? (Apply max(continuation value, intrinsic value) at each grid node after each backward time step -- projected SOR or LCP solver.)",
+        "Compare to multinomial trees (binomial, trinomial). (Trees are explicit FD in disguise; same stability constraints.)"
+      ]
+    }
+  ]
+}

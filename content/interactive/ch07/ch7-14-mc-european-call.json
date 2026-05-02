@@ -1,0 +1,72 @@
+{
+  "id": "ch7-14-mc-european-call",
+  "kind": "problem-walkthrough",
+  "chapter": 7,
+  "section": "7.3",
+  "title": "MC Pricing of a European Call",
+  "difficulty": "easy",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-07-algorithms-numerical-methods.md",
+    "lines": "555-587"
+  },
+  "mechanism": {
+    "primary": "numerical-methods",
+    "structure": "simulate-many-terminal-prices-S_T-then-average-discounted-payoffs",
+    "insight": "for-european-options-only-S_T-matters-no-need-for-many-time-steps",
+    "variantAxes": ["payoff_type", "n_paths"]
+  },
+  "setup": {
+    "narrative": "Price a European call with strike K, maturity T, on a stock with risk-neutral dynamics dS = r S dt + sigma S dW.",
+    "rules": [
+      "Closed form: S_T = S_0 * exp((r - sigma^2 / 2) * T + sigma * sqrt(T) * Z) where Z ~ N(0,1).",
+      "Simulate M iid Z's, compute M values of S_T.",
+      "Estimate price: c_hat = exp(-rT) * (1/M) * sum_k max(S_T^(k) - K, 0).",
+      "Standard error: SE = (sigma_payoff / sqrt(M)) -- decays as 1/sqrt(M)."
+    ],
+    "question": "Implement MC pricing and analyze convergence."
+  },
+  "skipToCommitStageId": "s2",
+  "learningObjectives": [
+    "Discretize GBM with a single step for European options.",
+    "Estimate the price as a Monte Carlo average.",
+    "Analyze convergence as O(1/sqrt(M))."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Simulate S_T",
+      "prompt": "What's the EXACT one-step simulation of S_T under risk-neutral GBM (no need for fine time grid for European)?",
+      "options": [
+        { "id": "a", "text": "S_T = S_0 * exp((r - sigma^2 / 2) * T + sigma * sqrt(T) * Z), Z ~ N(0,1).", "correct": true },
+        { "id": "b", "text": "S_T = S_0 * (1 + r * T + sigma * sqrt(T) * Z) -- Euler.",                     "correct": false },
+        { "id": "c", "text": "S_T = S_0 * exp(r * T) (deterministic).",                                       "correct": false }
+      ],
+      "explanation": "GBM has the closed-form S_T = S_0 * exp((r - sigma^2/2) T + sigma sqrt(T) Z) -- exact, not a discretization. For path-dependent options, you'd need an N-step discretization.",
+      "learnMoreTechnique": "numerical-methods"
+    },
+    {
+      "id": "s2",
+      "type": "cloze",
+      "label": "Commit",
+      "prompt": "Convergence:",
+      "template": "Standard error decays as 1/sqrt(__[a]__). To halve the SE, multiply paths by __[b]__.  For European options, choose number of TIME steps N = __[c]__.",
+      "blanks": [
+        { "id": "a", "answers": ["M", "n", "N"], "caseInsensitive": true },
+        { "id": "b", "answers": ["4", "four"], "caseInsensitive": true },
+        { "id": "c", "answers": ["1", "one"], "caseInsensitive": true }
+      ],
+      "explanation": "Halving SE requires 4x paths (since SE ~ 1/sqrt(M)). For European options, only the terminal price matters, so one step suffices."
+    },
+    {
+      "id": "s3",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "How would you PRICE an Asian option (payoff depends on the average price)? (Need many time steps; can't use one-step closed form.)",
+        "What's the bias for an Asian option with N time steps? (Discretization bias O(1/N) for arithmetic Asian.)",
+        "Why is MC unattractive for AMERICAN options? (Early exercise requires backward induction; MC works forward in time.)"
+      ]
+    }
+  ]
+}

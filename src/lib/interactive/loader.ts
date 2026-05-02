@@ -165,6 +165,11 @@ import ch7PowerOf2       from '../../../content/interactive/ch07/ch7-10-power-of
 import ch7MultBy7        from '../../../content/interactive/ch07/ch7-11-multiply-by-7.json';
 import ch7ProbSim        from '../../../content/interactive/ch07/ch7-12-probability-simulation.json';
 import ch7PoisonWine     from '../../../content/interactive/ch07/ch7-13-poisonous-wine.json';
+import ch7MCEuropean     from '../../../content/interactive/ch07/ch7-14-mc-european-call.json';
+import ch7GenNormals     from '../../../content/interactive/ch07/ch7-15-generate-normals.json';
+import ch7VarReduction   from '../../../content/interactive/ch07/ch7-16-variance-reduction.json';
+import ch7EstimatePi     from '../../../content/interactive/ch07/ch7-17-estimate-pi.json';
+import ch7FiniteDiff     from '../../../content/interactive/ch07/ch7-18-finite-difference.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -199,6 +204,7 @@ import techExoticOpts    from '../../../content/interactive/techniques/exotic-op
 import techPortfolioRisk from '../../../content/interactive/techniques/portfolio-and-risk.json';
 import techAlgoFund      from '../../../content/interactive/techniques/algorithm-design-fundamentals.json';
 import techBitTricks     from '../../../content/interactive/techniques/binary-and-bit-tricks.json';
+import techNumericalMthd from '../../../content/interactive/techniques/numerical-methods.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -360,6 +366,11 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch7-11-multiply-by-7':     ch7MultBy7        as unknown as ProblemWalkthrough,
   'ch7-12-probability-simulation': ch7ProbSim   as unknown as ProblemWalkthrough,
   'ch7-13-poisonous-wine':    ch7PoisonWine     as unknown as ProblemWalkthrough,
+  'ch7-14-mc-european-call':  ch7MCEuropean     as unknown as ProblemWalkthrough,
+  'ch7-15-generate-normals':  ch7GenNormals     as unknown as ProblemWalkthrough,
+  'ch7-16-variance-reduction': ch7VarReduction  as unknown as ProblemWalkthrough,
+  'ch7-17-estimate-pi':       ch7EstimatePi     as unknown as ProblemWalkthrough,
+  'ch7-18-finite-difference': ch7FiniteDiff     as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -394,6 +405,7 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'portfolio-and-risk':       techPortfolioRisk as unknown as Technique,
   'algorithm-design-fundamentals': techAlgoFund as unknown as Technique,
   'binary-and-bit-tricks':    techBitTricks     as unknown as Technique,
+  'numerical-methods':        techNumericalMthd as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

@@ -1,0 +1,76 @@
+{
+  "id": "numerical-methods",
+  "kind": "technique",
+  "name": "Numerical Methods: Monte Carlo and Finite Difference",
+  "tagline": "When closed-form pricing fails: Monte Carlo simulates many GBM paths and averages discounted payoffs (variance ~ 1/sqrt(M)); Finite Difference solves the BSM PDE on a grid (Explicit / Implicit / Crank-Nicolson). Variance reduction (antithetics, control variates, importance sampling) is essential at scale.",
+  "category": "algorithms",
+  "introducedIn": {
+    "chapter": 7,
+    "section": "7.3",
+    "title": "Numerical Methods",
+    "exemplarProblemId": "ch7-14-mc-european-call"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Monte Carlo for derivatives: simulate M paths under the risk-neutral measure, evaluate the payoff on each path, average and discount. Convergence rate is O(1/sqrt(M)) (Central Limit Theorem). For path-dependent or high-dimensional problems, MC scales gracefully. Limitation: early-exercise (American) options need lattice or LSM-style methods."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Generating N(0,1) draws from Uniform: (i) Box-Muller transform U_1, U_2 -> sqrt(-2 ln U_1) * cos(2 pi U_2); (ii) inverse-CDF (no closed form for normal but accurate approximations exist); (iii) acceptance-rejection with an exponential proposal and acceptance constant M = sqrt(2e/pi) ~ 1.32. Then scale: mu + sigma * Z."
+    },
+    {
+      "id": "b3",
+      "type": "paragraph",
+      "text": "Variance-reduction toolkit: (1) Antithetic variates -- pair (epsilon, -epsilon) for each path; works when payoff is monotone-ish in the noise; (2) Control variates -- subtract a known-mean estimator that's correlated with our target; (3) Moment matching -- rescale samples to enforce sample mean and variance equal to population values; (4) Importance sampling -- sample from a tilted distribution that gives more mass to the payoff region (key for deep-OTM options); (5) Quasi-Monte Carlo (Sobol, Halton) -- deterministic low-discrepancy sequences with O(1/M) convergence."
+    },
+    {
+      "id": "b4",
+      "type": "paragraph",
+      "text": "Greeks via MC: bump-and-revalue. Use COMMON RANDOM NUMBERS for f(S+/-eps) -- correlated paths give a much smaller variance for the difference. Central differences for Delta and Gamma. Caveat: payoff discontinuities (e.g., binaries) make finite differences blow up at the discontinuity; use pathwise sensitivity or likelihood-ratio methods instead."
+    },
+    {
+      "id": "b5",
+      "type": "paragraph",
+      "text": "Finite difference: discretize BSM PDE u_t + (1/2) sigma^2 S^2 u_SS + r S u_S = r u on a grid. (i) Explicit (forward time, central space): cheap but conditionally stable, requires Delta_t / Delta_x^2 <= 1/2. (ii) Implicit (backward time, central space): unconditionally stable, requires solving a tridiagonal system per time step. (iii) Crank-Nicolson: average of explicit and implicit, second-order accurate in TIME and space, unconditionally stable, the practical workhorse."
+    },
+    {
+      "id": "b6",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "MC = sample paths, average payoffs, hope for sqrt(M) convergence. Variance reduction = exploit symmetry, correlations, or asymptotic equivalents to shave variance for free. Finite difference = grid the PDE, choose stability vs accuracy. Knowing when each is appropriate (American = lattice/FD; high-dimensional or path-dependent = MC) is half the interview."
+    }
+  ],
+  "whenToUse": [
+    "Pricing path-dependent or high-dimensional derivatives (Asian, basket, autocallables) -- MC.",
+    "Pricing early-exercise (American) options -- finite difference / binomial / LSM.",
+    "Computing Greeks at scale (bump-and-revalue with common random numbers).",
+    "Calibrating models when closed-form is unavailable.",
+    "Estimating high-dimensional integrals (e.g., posterior expectations in Bayesian inference)."
+  ],
+  "recipe": [
+    "MC pricing: simulate S_T = S_0 * exp((r - sigma^2/2)T + sigma sqrt(T) Z); price = exp(-rT) * mean of payoffs.",
+    "MC for path-dependent: discretize Delta t = T/N and march N steps per path.",
+    "Box-Muller: Z = sqrt(-2 ln U_1) cos(2 pi U_2) for two independent N(0,1) draws.",
+    "Antithetic variates: average payoff(epsilon) and payoff(-epsilon).",
+    "FD: build grid, write update equation, choose method based on stability needs.",
+    "Crank-Nicolson stability: solve tridiagonal system with Thomas algorithm in O(J)."
+  ],
+  "commonPitfalls": [
+    "Using too few paths and accepting noisy prices -- standard error scales as 1/sqrt(M).",
+    "Sampling without variance reduction when the payoff is rare (deep OTM) -- millions of paths needed.",
+    "Forgetting that explicit FD needs Delta_t / Delta_x^2 <= 1/2 -- blows up otherwise.",
+    "Using bumped Greeks for discontinuous payoffs; the bias dominates and the variance is huge.",
+    "Reusing the same RNG state across bumps WITHOUT realizing it -- common random numbers are an asset, not a bug, when used intentionally."
+  ],
+  "appearsIn": [
+    { "problemId": "ch7-14-mc-european-call",   "title": "MC Pricing of a European Call",     "chapter": 7, "section": "7.3" },
+    { "problemId": "ch7-15-generate-normals",   "title": "Generate Normal Variates from Uniforms", "chapter": 7, "section": "7.3" },
+    { "problemId": "ch7-16-variance-reduction", "title": "Variance Reduction Techniques",        "chapter": 7, "section": "7.3" },
+    { "problemId": "ch7-17-estimate-pi",         "title": "Estimating Pi via Monte Carlo",         "chapter": 7, "section": "7.3" },
+    { "problemId": "ch7-18-finite-difference",   "title": "Finite Difference: Explicit / Implicit / Crank-Nicolson", "chapter": 7, "section": "7.3" }
+  ],
+  "relatedTechniques": ["distributions-and-moments", "brownian-motion-and-ito", "option-pricing-fundamentals", "algorithm-design-fundamentals"]
+}
