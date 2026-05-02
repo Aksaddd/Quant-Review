@@ -1,0 +1,91 @@
+{
+  "id": "ch5-08-dp-dice-game",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.3",
+  "title": "DP Dice Game (Up to 3 Rolls)",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "434-454"
+  },
+  "mechanism": {
+    "primary": "dynamic-programming",
+    "structure": "backward-induction-with-threshold-stopping-rule-at-each-stage",
+    "insight": "stop-when-current-value-exceeds-the-expected-value-of-the-best-continuation",
+    "variantAxes": ["max_rolls", "die_sides"]
+  },
+  "setup": {
+    "narrative": "You roll a fair 6-sided die up to 3 times. After each of the first two rolls, you can KEEP the value (stop) or REROLL (forfeit current value). On the 3rd roll you must keep whatever you get.",
+    "rules": [
+      "Each roll is independent and uniform on {1, ..., 6}.",
+      "After roll 1: choose keep or reroll. After roll 2: choose keep or reroll. After roll 3: must keep.",
+      "The payoff is the value you keep."
+    ],
+    "question": "What is the optimal strategy and the expected value of the game?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Apply backward induction starting from stage 3 (forced).",
+    "At each stage, compute the threshold above which to stop.",
+    "Compute the game value as the expected payoff at stage 1."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "ladder-step",
+      "label": "Stage 3: forced",
+      "prompt": "On the 3rd (final) roll, you must keep the value. E[payoff at stage 3] = ?",
+      "answerType": "numeric",
+      "answer": 3.5,
+      "explanation": "Average of {1, 2, 3, 4, 5, 6} = 3.5. So J_3 = 3.5 regardless of state."
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Stage 2: keep or reroll?",
+      "prompt": "At stage 2 you see your current value v. Keep iff v > E[stage 3] = 3.5. Equivalently keep iff v >= 4. What's E[stage 2 payoff]?",
+      "options": [
+        { "id": "a", "text": "(1/6)*(4 + 5 + 6) + (3/6)*3.5 = 2.5 + 1.75 = 4.25.", "correct": true },
+        { "id": "b", "text": "3.5.",                                                    "correct": false },
+        { "id": "c", "text": "5.",                                                       "correct": false }
+      ],
+      "explanation": "If v in {4, 5, 6}: keep (3 cases out of 6, average 5). If v in {1, 2, 3}: reroll, expecting 3.5. Total: (3/6) * 5 + (3/6) * 3.5 = 2.5 + 1.75 = 4.25.",
+      "learnMoreTechnique": "dynamic-programming"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Stage 1: keep or reroll?",
+      "prompt": "At stage 1 you see value v. Keep iff v > E[stage 2] = 4.25, i.e. v >= 5. Compute E[stage 1 payoff].",
+      "options": [
+        { "id": "a", "text": "(1/6)*(5 + 6) + (4/6)*4.25 = 11/6 + 17/6 = 28/6 = 14/3 ≈ 4.67.", "correct": true },
+        { "id": "b", "text": "4.25.",                                                              "correct": false },
+        { "id": "c", "text": "5.5.",                                                                "correct": false }
+      ],
+      "explanation": "If v in {5, 6}: keep (avg 5.5, count 2). If v in {1, 2, 3, 4}: reroll for E[stage 2] = 4.25 (count 4). Total: (2/6) * 5.5 + (4/6) * 4.25 = 11/6 + 17/6 = 28/6 = 14/3."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Game value and optimal strategy?",
+      "options": [
+        { "id": "a", "text": "Game value = 14/3 ≈ $4.67.  Strategy: stop at roll 1 if >= 5; stop at roll 2 if >= 4; always accept roll 3.", "correct": true },
+        { "id": "b", "text": "Game value = 3.5; always accept the first roll.",                                                              "correct": false },
+        { "id": "c", "text": "Game value = 6; only accept 6.",                                                                                 "correct": false }
+      ],
+      "explanation": "14/3 ≈ $4.67. Threshold rises as rolls remain: 5 with 2 rolls left, 4 with 1 left, anything with 0 left. Backward induction from the terminal stage gives clean thresholds."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize to k rolls. What's the limit of the game value as k -> infinity?",
+        "What if the die had 10 sides? Would the threshold change?",
+        "What if there's a COST per roll (e.g., $0.10)? Does the optimal strategy still have a threshold form?"
+      ]
+    }
+  ]
+}

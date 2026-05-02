@@ -1,0 +1,58 @@
+{
+  "id": "martingale-and-random-walk",
+  "kind": "technique",
+  "name": "Martingale and Random Walk",
+  "tagline": "A martingale is a 'fair game' -- E[next | history] = current. The optional stopping theorem and Wald's equality let you extract probabilities and expected stopping times from clever martingale constructions.",
+  "category": "stochastic-processes",
+  "introducedIn": {
+    "chapter": 5,
+    "section": "5.2",
+    "title": "Martingale and Random Walk",
+    "exemplarProblemId": "ch5-05-drunk-man-on-bridge"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "A martingale {Z_n} satisfies E[Z_{n+1} | Z_1, ..., Z_n] = Z_n. Intuitively: a fair game where the expected future equals the present, no matter the history. The optional stopping theorem says E[Z_N] = E[Z_0] for 'nice' stopping times N -- which lets you compute absorption probabilities and expected times by writing both a martingale AND its expectation."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "For a symmetric random walk S_n = sum of +/-1 steps, both S_n and S_n^2 - n are martingales. Stopping when |S_n| hits {alpha, -beta} gives: P(hit alpha) = beta/(alpha + beta) (from E[S_N] = 0) and E[N] = alpha * beta (from E[S_N^2 - N] = 0). Wald's Equality: for IID X_i and stopping time N independent of future, E[sum X_i up to N] = E[X] * E[N]."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Faced with a stopping-time problem, ask: 'is there a martingale here?' Common ones: the walk itself (if symmetric), the squared walk minus time, an exponential function of the walk. Apply optional stopping (E[martingale at N] = initial value) and read off the answer."
+    }
+  ],
+  "whenToUse": [
+    "First-passage / hitting-time problems on a random walk.",
+    "Expected total when summing IID payoffs to a stopping time (Wald).",
+    "Ballot-style problems where you count valid paths (reflection principle).",
+    "Pattern-wait problems where the gambler-betting martingale gives clean expectations.",
+    "Anywhere the answer is 'how long until the walk leaves an interval' or 'which boundary does it hit first.'"
+  ],
+  "recipe": [
+    "Recognize the random walk underlying the problem (often disguised).",
+    "Identify a relevant martingale: S_n itself, S_n^2 - n, or exp(theta * S_n) / E[exp(theta * X)]^n.",
+    "Apply optional stopping: E[Z_N] = Z_0 where N is the stopping time.",
+    "Read off the answer (a probability, an expected time, or a generating-function coefficient).",
+    "For sum-of-IID problems with stopping time: Wald's E[S_N] = E[X] * E[N]."
+  ],
+  "commonPitfalls": [
+    "Applying optional stopping to a stopping time that's not 'nice' (unbounded with infinite expected value).",
+    "Assuming Wald's equality without checking that N is independent of the FUTURE Xs (it can depend on the past).",
+    "Confusing the martingale property (fair game) with the Markov property (memoryless transition).",
+    "Off-by-one in pattern-wait problems -- the gambler-bet martingale gives E[stopping time] - 1 in some formulations.",
+    "Forgetting that S_n^2 - n is the martingale, not S_n^2 alone."
+  ],
+  "appearsIn": [
+    { "problemId": "ch5-05-drunk-man-on-bridge", "title": "Drunk Man on Bridge",                "chapter": 5, "section": "5.2" },
+    { "problemId": "ch5-06-ballot-problem",      "title": "Ticket Line (Ballot Problem)",        "chapter": 5, "section": "5.2" },
+    { "problemId": "ch5-07-n-heads-in-a-row",    "title": "Expected Tosses for n Heads in a Row", "chapter": 5, "section": "5.2" }
+  ],
+  "relatedTechniques": ["markov-chains", "expected-value-and-linearity", "math-induction"]
+}

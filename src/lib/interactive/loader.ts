@@ -114,6 +114,20 @@ import ch5GamblersRuinMC from '../../../content/interactive/ch05/ch5-01-gamblers
 import ch5Dice12vs77     from '../../../content/interactive/ch05/ch5-02-dice-12-vs-77.json';
 import ch5CoinTriplets   from '../../../content/interactive/ch05/ch5-03-coin-triplets.json';
 import ch5ColorBalls     from '../../../content/interactive/ch05/ch5-04-color-balls.json';
+import ch5DrunkBridge    from '../../../content/interactive/ch05/ch5-05-drunk-man-on-bridge.json';
+import ch5Ballot         from '../../../content/interactive/ch05/ch5-06-ballot-problem.json';
+import ch5NHeadsRow      from '../../../content/interactive/ch05/ch5-07-n-heads-in-a-row.json';
+import ch5DPDice         from '../../../content/interactive/ch05/ch5-08-dp-dice-game.json';
+import ch5WorldSeries    from '../../../content/interactive/ch05/ch5-09-world-series-betting.json';
+import ch5DynDice        from '../../../content/interactive/ch05/ch5-10-dynamic-dice-game.json';
+import ch5DynCards       from '../../../content/interactive/ch05/ch5-11-dynamic-card-game.json';
+import ch5BMCorrSquare   from '../../../content/interactive/ch05/ch5-12-bm-corr-with-square.json';
+import ch5BMSignPattern  from '../../../content/interactive/ch05/ch5-13-bm-sign-pattern.json';
+import ch5BMHitPm1       from '../../../content/interactive/ch05/ch5-14-bm-hit-pm-1.json';
+import ch5BMHitDrift     from '../../../content/interactive/ch05/ch5-15-bm-hit-with-drift.json';
+import ch5BMReachNeg     from '../../../content/interactive/ch05/ch5-16-bm-reach-neg-with-drift.json';
+import ch5ItoSqrtTBt     from '../../../content/interactive/ch05/ch5-17-ito-sqrt-t-bt.json';
+import ch5ItoWCubed      from '../../../content/interactive/ch05/ch5-18-ito-w-cubed.json';
 import techBackInd       from '../../../content/interactive/techniques/backward-induction.json';
 import techLogicReason   from '../../../content/interactive/techniques/logic-reasoning.json';
 import techColoring      from '../../../content/interactive/techniques/coloring-arguments.json';
@@ -139,6 +153,9 @@ import techDistMoments   from '../../../content/interactive/techniques/distribut
 import techExpLinearity  from '../../../content/interactive/techniques/expected-value-and-linearity.json';
 import techOrderStats    from '../../../content/interactive/techniques/order-statistics.json';
 import techMarkovChains  from '../../../content/interactive/techniques/markov-chains.json';
+import techMartingale    from '../../../content/interactive/techniques/martingale-and-random-walk.json';
+import techDP            from '../../../content/interactive/techniques/dynamic-programming.json';
+import techBM            from '../../../content/interactive/techniques/brownian-motion-and-ito.json';
 
 const REGISTRY: Record<string, InteractiveDoc> = {
   'ch1-p1-broad-knowledge':   ch1P1             as unknown as ReadingSection,
@@ -249,6 +266,20 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'ch5-02-dice-12-vs-77':     ch5Dice12vs77     as unknown as ProblemWalkthrough,
   'ch5-03-coin-triplets':     ch5CoinTriplets   as unknown as ProblemWalkthrough,
   'ch5-04-color-balls':       ch5ColorBalls     as unknown as ProblemWalkthrough,
+  'ch5-05-drunk-man-on-bridge': ch5DrunkBridge   as unknown as ProblemWalkthrough,
+  'ch5-06-ballot-problem':    ch5Ballot         as unknown as ProblemWalkthrough,
+  'ch5-07-n-heads-in-a-row':  ch5NHeadsRow      as unknown as ProblemWalkthrough,
+  'ch5-08-dp-dice-game':      ch5DPDice         as unknown as ProblemWalkthrough,
+  'ch5-09-world-series-betting': ch5WorldSeries as unknown as ProblemWalkthrough,
+  'ch5-10-dynamic-dice-game': ch5DynDice        as unknown as ProblemWalkthrough,
+  'ch5-11-dynamic-card-game': ch5DynCards       as unknown as ProblemWalkthrough,
+  'ch5-12-bm-corr-with-square': ch5BMCorrSquare as unknown as ProblemWalkthrough,
+  'ch5-13-bm-sign-pattern':   ch5BMSignPattern  as unknown as ProblemWalkthrough,
+  'ch5-14-bm-hit-pm-1':       ch5BMHitPm1       as unknown as ProblemWalkthrough,
+  'ch5-15-bm-hit-with-drift': ch5BMHitDrift     as unknown as ProblemWalkthrough,
+  'ch5-16-bm-reach-neg-with-drift': ch5BMReachNeg as unknown as ProblemWalkthrough,
+  'ch5-17-ito-sqrt-t-bt':     ch5ItoSqrtTBt     as unknown as ProblemWalkthrough,
+  'ch5-18-ito-w-cubed':       ch5ItoWCubed      as unknown as ProblemWalkthrough,
   'backward-induction':       techBackInd       as unknown as Technique,
   'logic-reasoning':          techLogicReason   as unknown as Technique,
   'coloring-arguments':       techColoring      as unknown as Technique,
@@ -274,6 +305,9 @@ const REGISTRY: Record<string, InteractiveDoc> = {
   'expected-value-and-linearity': techExpLinearity as unknown as Technique,
   'order-statistics':         techOrderStats    as unknown as Technique,
   'markov-chains':            techMarkovChains  as unknown as Technique,
+  'martingale-and-random-walk': techMartingale  as unknown as Technique,
+  'dynamic-programming':      techDP            as unknown as Technique,
+  'brownian-motion-and-ito':  techBM            as unknown as Technique,
 };
 
 export function getInteractiveDoc(id: string): InteractiveDoc | null {

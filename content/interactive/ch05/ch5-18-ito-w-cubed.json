@@ -1,0 +1,83 @@
+{
+  "id": "ch5-18-ito-w-cubed",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "Is W(t)^3 a martingale?",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "718-731"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "ito-on-W-cubed-yields-3-W-dt-drift-which-is-non-zero",
+    "insight": "the-second-derivative-correction-creates-a-3W-drift-term-that-doesnt-vanish",
+    "variantAxes": ["polynomial_power"]
+  },
+  "setup": {
+    "narrative": "Consider Z(t) = W(t)^3 where W(t) is a standard Brownian motion (mu = 0, sigma = 1).",
+    "rules": [
+      "Apply Itô's lemma to f(W) = W^3.",
+      "df/dt = 0 (no explicit time dependence).",
+      "df/dW = 3 * W^2.",
+      "d^2 f / dW^2 = 6 * W."
+    ],
+    "question": "Is Z(t) = W(t)^3 a martingale?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Apply Itô to f(W) = W^3.",
+    "Compute the drift = df/dt + mu * df/dW + (1/2) * sigma^2 * d^2 f / dW^2 = 0 + 0 + (1/2) * 1 * 6 * W = 3W.",
+    "Conclude W^3 is NOT a martingale because the drift is 3W, not 0."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Apply Itô's lemma",
+      "prompt": "f(W) = W^3.  df/dW = 3W^2; d^2 f / dW^2 = 6W. With dW (mu=0, sigma=1) the Itô differential is:",
+      "options": [
+        { "id": "a", "text": "d(W^3) = 0 * dt + 3W^2 * dW + (1/2) * 6W * dt = 3W * dt + 3W^2 * dW.", "correct": true },
+        { "id": "b", "text": "d(W^3) = 3W^2 * dW (no dt term).",                                       "correct": false },
+        { "id": "c", "text": "d(W^3) = 3W^3 * dt.",                                                      "correct": false }
+      ],
+      "explanation": "Itô gives a (1/2) * sigma^2 * f'' correction. Here that's (1/2) * 1 * 6W = 3W. The dW coefficient is f'(W) = 3W^2.",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Check the drift",
+      "prompt": "Drift = 3W. Is this zero?",
+      "options": [
+        { "id": "a", "text": "No -- 3W is not zero (W is randomly nonzero almost surely). So W^3 is NOT a martingale.", "correct": true },
+        { "id": "b", "text": "Yes, on average.",                                                                            "correct": false },
+        { "id": "c", "text": "Drift is zero only at W = 0.",                                                                   "correct": false }
+      ],
+      "explanation": "Martingale property requires drift to be ZERO as a process, not just zero in expectation. 3W is non-zero almost surely. So W^3 is not a martingale."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit and contrast",
+      "prompt": "What about W^2 - t? Is THAT a martingale?",
+      "options": [
+        { "id": "a", "text": "Yes!  Itô on W^2: drift = (1/2) * 6 was wrong, let me redo. d(W^2) = 0 + 2W * dW + (1/2) * 2 * dt = 2W * dW + dt. Then d(W^2 - t) = 2W * dW (drift cancels). So W^2 - t IS a martingale.", "correct": true },
+        { "id": "b", "text": "No, neither is.",                                                                                                                                                                              "correct": false },
+        { "id": "c", "text": "Only W is a martingale.",                                                                                                                                                                       "correct": false }
+      ],
+      "explanation": "d(W^2) has drift +1 from Itô. Subtracting t gives drift +1 - 1 = 0. So W^2 - t is a martingale -- the famous 'square minus variance' result."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Construct a 'cube minus drift correction' martingale. (Hint: try W(t)^3 - 3 * t * W(t).)",
+        "More generally: for any polynomial f(W), there's a stochastic-calculus correction that turns it into a martingale.",
+        "Why does the (1/2) * sigma^2 * f''(W) correction exist? Connect to dW^2 = dt in Itô calculus."
+      ]
+    }
+  ]
+}

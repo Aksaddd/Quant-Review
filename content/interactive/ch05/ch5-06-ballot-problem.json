@@ -1,0 +1,91 @@
+{
+  "id": "ch5-06-ballot-problem",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.2",
+  "title": "Ticket Line (Ballot Problem)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "349-361"
+  },
+  "mechanism": {
+    "primary": "martingale-and-random-walk",
+    "structure": "reflection-principle-counts-paths-touching-y-equals-minus-1",
+    "insight": "valid-paths-equal-Catalan-number-Cn-equals-binomial-2n-n-divided-by-n-plus-1",
+    "variantAxes": ["n_people"]
+  },
+  "setup": {
+    "narrative": "2n people line up to buy a 5-dollar ticket. n people have a 5-dollar bill (no change needed); n people have a 10-dollar bill (need 5 dollars in change). The seller starts with no change.",
+    "rules": [
+      "If the seller doesn't have a 5-dollar bill when a 10-dollar customer arrives, the line BREAKS.",
+      "All 2n people are arranged in a uniformly random order.",
+      "Equivalently: think of +1 for each 5-dollar customer and -1 for each 10-dollar customer. The walk starts at 0 and ends at 0. Valid configurations have all partial sums >= 0."
+    ],
+    "question": "What is the probability all 2n people can be served (the line doesn't break)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Map the line to a +/-1 random walk: +1 for fives, -1 for tens.",
+    "Recognize 'no broken line' = 'all partial sums >= 0'.",
+    "Apply the reflection principle to count paths that DO touch -1, then subtract."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Map to a random walk",
+      "prompt": "Assign +1 for each 5-dollar customer and -1 for each 10-dollar customer. The walk starts at 0 and (after 2n steps) ends at 0. What is the equivalent of 'line doesn't break'?",
+      "options": [
+        { "id": "a", "text": "All partial sums are >= 0  (i.e., the walk never crosses below the x-axis).", "correct": true },
+        { "id": "b", "text": "The walk has length 2n.",                                                       "correct": false },
+        { "id": "c", "text": "The walk hits +n.",                                                              "correct": false }
+      ],
+      "explanation": "Partial sum at step k = (number of 5s seen) - (number of 10s seen) = (5s available for change). If this ever drops below 0, the seller can't make change.",
+      "learnMoreTechnique": "martingale-and-random-walk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Reflection principle",
+      "prompt": "Total paths from (0, 0) to (2n, 0) with n +1s and n -1s: C(2n, n). How many of these touch y = -1 at some point?",
+      "options": [
+        { "id": "a", "text": "By the reflection principle, this equals the number of paths from (0, -2) to (2n, 0), which is C(2n, n - 1).", "correct": true },
+        { "id": "b", "text": "C(2n, n) (all of them touch).",                                                                                     "correct": false },
+        { "id": "c", "text": "0 (none touch).",                                                                                                    "correct": false }
+      ],
+      "explanation": "Reflection: any path from (0, 0) to (2n, 0) that touches y = -1 has a unique 'reflected' counterpart from (0, -2) to (2n, 0). The reflected path makes n+1 down-steps and n-1 up-steps to reach height 0 from height -2 in 2n steps. Count: C(2n, n-1)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compute the probability",
+      "prompt": "Valid paths = C(2n, n) - C(2n, n-1) = C(2n, n) / (n + 1) (the n-th Catalan number). So P(line doesn't break) = ?",
+      "options": [
+        { "id": "a", "text": "[C(2n, n) / (n + 1)] / C(2n, n) = 1 / (n + 1).", "correct": true },
+        { "id": "b", "text": "1/2.",                                              "correct": false },
+        { "id": "c", "text": "n / (2n).",                                          "correct": false }
+      ],
+      "explanation": "The Catalan identity C(2n, n) - C(2n, n-1) = C(2n, n)/(n+1) is a famous algebra simplification. Dividing by total ordered arrangements C(2n, n) gives P = 1/(n+1)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit for n = 5",
+      "prompt": "P(line doesn't break) for n = 5 (10 people total) = ?",
+      "answerType": "numeric",
+      "answer": 0.1667,
+      "explanation": "1/(n + 1) = 1/6 ≈ 0.1667 for n = 5. Surprisingly low: even with EQUAL numbers of 5s and 10s, the line breaks 5/6 of the time (under random ordering)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize the BALLOT PROBLEM: candidate A receives a votes, candidate B receives b votes (a > b). What's P(A leads throughout the count)?",
+        "Why is 1/(n+1) the same as the Catalan-number ratio? Look up Catalan's combinatorial interpretation.",
+        "What's the EXPECTED minimum height of the walk if it goes (0, 0) -> (2n, 0)?"
+      ]
+    }
+  ]
+}

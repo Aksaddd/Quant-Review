@@ -1,0 +1,90 @@
+{
+  "id": "ch5-13-bm-sign-pattern",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "P(B_1 > 0 and B_2 < 0)",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "579-595"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "decompose-B-2-as-X-plus-Y-where-X-and-Y-are-independent-N-0-1",
+    "insight": "the-2D-plane-divides-into-8-equal-sectors-by-the-lines-x-equals-0-y-equals-0-y-equals-x-y-equals-minus-x",
+    "variantAxes": ["sign_pattern"]
+  },
+  "setup": {
+    "narrative": "B_t is a standard Brownian motion. Consider the event {B_1 > 0 AND B_2 < 0}.",
+    "rules": [
+      "B_1 ~ N(0, 1).",
+      "B_2 = B_1 + (B_2 - B_1) where B_2 - B_1 is independent of B_1, also ~ N(0, 1)."
+    ],
+    "question": "What is P(B_1 > 0 and B_2 < 0)?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Decompose B_2 = B_1 + (B_2 - B_1) into independent N(0, 1) parts X and Y.",
+    "Translate the joint condition into a 2D region.",
+    "Use symmetry to recognize 8 equally-likely sectors and pick the one matching the event."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Decompose B_2",
+      "prompt": "Let X = B_1 and Y = B_2 - B_1. Then X, Y are independent N(0, 1). Express B_2 in terms of X, Y.",
+      "options": [
+        { "id": "a", "text": "B_2 = X + Y. So {B_2 < 0} = {Y < -X}.", "correct": true },
+        { "id": "b", "text": "B_2 = X.",                                "correct": false },
+        { "id": "c", "text": "B_2 = Y.",                                "correct": false }
+      ],
+      "explanation": "B_2 = B_1 + (B_2 - B_1) = X + Y. The event {B_2 < 0} means X + Y < 0, equivalently Y < -X.",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Geometry of the favorable region",
+      "prompt": "We want P(X > 0 AND Y < -X). In the (X, Y) plane this is the region with X > 0 (right half) AND Y < -X (below the line Y = -X). What does this look like?",
+      "options": [
+        { "id": "a", "text": "The 'bottom-right' triangle bounded by the positive X-axis (above), the line Y = -X with negative slope (above), and infinity to the right and below.", "correct": true },
+        { "id": "b", "text": "All of quadrant 4 (X > 0, Y < 0).",                                                                                                                  "correct": false },
+        { "id": "c", "text": "The whole plane.",                                                                                                                                   "correct": false }
+      ],
+      "explanation": "X > 0 is the right half. Y < -X means below the line through the origin with slope -1. The intersection is a wedge in the lower-right region."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Use 8-fold symmetry",
+      "prompt": "The joint density of (X, Y) is rotationally symmetric around the origin (radial). The four lines x = 0, y = 0, y = x, y = -x divide the plane into 8 equal-probability sectors. Which sector(s) match X > 0 AND Y < -X?",
+      "options": [
+        { "id": "a", "text": "Exactly ONE of the 8 sectors. So P = 1/8.", "correct": true },
+        { "id": "b", "text": "Two sectors. P = 2/8 = 1/4.",                "correct": false },
+        { "id": "c", "text": "Half the plane. P = 1/2.",                    "correct": false }
+      ],
+      "explanation": "The 8 sectors are bounded by x = 0, y = 0, y = x, y = -x. The condition (X > 0, Y < -X) defines the sector below the line y = -x and to the right of x = 0 -- one of the 8."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "P(B_1 > 0 AND B_2 < 0) = ?",
+      "answerType": "numeric",
+      "answer": 0.125,
+      "explanation": "1/8. The sign-pattern probability arises directly from the 8-fold rotational symmetry of two independent N(0, 1)."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Compute P(B_1 < 0 AND B_2 > 0). Same answer by symmetry.",
+        "Compute P(B_1 and B_2 have same sign). Equals 1 - 2 * (1/8) - 2 * (1/8) = ... actually compute carefully.",
+        "Generalize: P(B_1 > 0 AND B_2 < 0 AND B_3 > 0)? Use the 4-D version of the geometric argument."
+      ]
+    }
+  ]
+}

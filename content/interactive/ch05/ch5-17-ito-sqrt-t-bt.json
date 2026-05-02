@@ -1,0 +1,82 @@
+{
+  "id": "ch5-17-ito-sqrt-t-bt",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "Is sqrt(t) * B_t a martingale?",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "696-714"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "compute-drift-via-ito-and-check-if-it-vanishes",
+    "insight": "the-time-derivative-Bt-over-2-sqrt-t-creates-a-non-zero-drift-so-not-a-martingale",
+    "variantAxes": ["function_form"]
+  },
+  "setup": {
+    "narrative": "Z(t) = sqrt(t) * B_t where B_t is standard Brownian motion.",
+    "rules": [
+      "Apply Itô's lemma to f(B, t) = sqrt(t) * B with dB = dW (so mu = 0, sigma = 1).",
+      "Itô: df = (df/dt + mu * df/dB + (1/2) * sigma^2 * d^2 f / dB^2) dt + sigma * df/dB dW.",
+      "A process is a martingale iff its drift coefficient is 0."
+    ],
+    "question": "Is Z(t) = sqrt(t) * B_t a martingale?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Compute partial derivatives of f(B, t) = sqrt(t) * B.",
+    "Apply Itô to get the drift term.",
+    "Conclude Z is NOT a martingale because the drift is not identically zero."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Compute partials",
+      "prompt": "f(B, t) = sqrt(t) * B. Find df/dt, df/dB, d^2 f / dB^2.",
+      "options": [
+        { "id": "a", "text": "df/dt = B / (2 * sqrt(t)).  df/dB = sqrt(t).  d^2 f / dB^2 = 0.", "correct": true },
+        { "id": "b", "text": "df/dt = 0.",                                                         "correct": false },
+        { "id": "c", "text": "df/dB = 1.",                                                          "correct": false }
+      ],
+      "explanation": "Treat B and t as independent variables. d/dt[sqrt(t) * B] = B / (2 sqrt(t)). d/dB[sqrt(t) * B] = sqrt(t). d^2/dB^2 = 0 (since derivative is constant in B).",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Compute the drift",
+      "prompt": "Itô's drift = df/dt + mu * df/dB + (1/2) * sigma^2 * d^2 f / dB^2 = B/(2 sqrt(t)) + 0 + 0 = B/(2 sqrt(t)). What does this say?",
+      "options": [
+        { "id": "a", "text": "Drift = B_t / (2 sqrt(t)) is NOT zero (since B_t != 0 with probability 1). So Z(t) is NOT a martingale.", "correct": true },
+        { "id": "b", "text": "Drift is zero -- Z is a martingale.",                                                                          "correct": false },
+        { "id": "c", "text": "Drift is constant -- Z is a martingale.",                                                                       "correct": false }
+      ],
+      "explanation": "For a martingale, the drift coefficient must be ZERO. Here it's B_t / (2 sqrt(t)) -- nonzero almost surely. So Z is not a martingale."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Sanity check: what's E[Z(t)]?",
+      "options": [
+        { "id": "a", "text": "E[Z(t)] = sqrt(t) * E[B_t] = sqrt(t) * 0 = 0.  But that doesn't make Z a martingale -- only zero drift does.", "correct": true },
+        { "id": "b", "text": "E[Z(t)] = t.",                                                                                                    "correct": false },
+        { "id": "c", "text": "E[Z(t)] is undefined.",                                                                                            "correct": false }
+      ],
+      "explanation": "E[Z(t)] = 0 for all t (since E[B_t] = 0). But Z is NOT a martingale -- a martingale requires E[Z(t+s) | F_t] = Z(t), not just E[Z(t)] = constant."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Why is W(t) a martingale but sqrt(t) * W(t) is not?",
+        "What's the variance of Z(t)? (E[Z(t)^2] = t * E[B_t^2] = t * t = t^2, so Z(t) ~ N(0, t^2).)",
+        "Construct a function of t and B_t that IS a martingale and is NOT just W(t) or W(t)^2 - t."
+      ]
+    }
+  ]
+}

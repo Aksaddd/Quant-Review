@@ -1,0 +1,91 @@
+{
+  "id": "ch5-10-dynamic-dice-game",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.3",
+  "title": "Dynamic Dice Game",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "492-509"
+  },
+  "mechanism": {
+    "primary": "dynamic-programming",
+    "structure": "stop-when-current-bankroll-exceeds-the-threshold",
+    "insight": "stop-iff-n-greater-than-equal-15-since-extra-roll-EV-is-n-over-6-plus-2.5",
+    "variantAxes": ["bust_face", "die_sides"]
+  },
+  "setup": {
+    "narrative": "Roll a fair 6-sided die repeatedly. After each roll: if the face is 1-5, you EARN that amount and may CONTINUE or STOP. If the face is 6, you LOSE EVERYTHING accumulated and the game ends.",
+    "rules": [
+      "Each roll is independent, uniform on {1, ..., 6}.",
+      "Faces 1-5 add their value to your accumulated bankroll n (rolling a 6 wipes you out).",
+      "After each non-6 roll you choose to stop (cash out at n) or continue."
+    ],
+    "question": "What's your optimal stopping rule, and the fair value of the game?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Compute the EV of one extra roll: (1/6) * (1 + 2 + 3 + 4 + 5) + (1/6) * 0 = 15/6 = 2.5 added to the bankroll, but with bust risk.",
+    "Find the threshold: keep rolling iff E[bankroll after extra roll] > current n.",
+    "Compute the recursive game value f(0)."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Compute one-roll continuation value",
+      "prompt": "If your current bankroll is n and you roll once more, what's E[bankroll AFTER the roll]?",
+      "options": [
+        { "id": "a", "text": "E = (1/6) * (n + 1) + (1/6) * (n + 2) + ... + (1/6) * (n + 5) + (1/6) * 0 = (5/6) * n + 15/6 = 5n/6 + 2.5.", "correct": true },
+        { "id": "b", "text": "E = n + 3.5.",                                                                                                  "correct": false },
+        { "id": "c", "text": "E = 5/6 * (n + 3).",                                                                                              "correct": false }
+      ],
+      "explanation": "5 favorable outcomes each adding 1, 2, ..., 5 (total 15), all averaged with prob 1/6. The 6th outcome (bust) zeroes you out. So E = (1/6) * (5n + 15) + 0 = 5n/6 + 2.5.",
+      "learnMoreTechnique": "dynamic-programming"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Find the stopping threshold",
+      "prompt": "Stop iff your bankroll n is at least the 'continuation value' (assuming no further rolls). Continuation E = 5n/6 + 2.5; stopping E = n. Continue iff 5n/6 + 2.5 > n, i.e., 2.5 > n/6, i.e., n < 15. So stop iff n >= ?",
+      "answerType": "numeric",
+      "answer": 15,
+      "explanation": "The threshold is 15. For n < 15, the EV of the next roll exceeds n. For n >= 15, you should bank the n you have. (This is a one-step-look-ahead approximation; the FULL DP value computes it correctly via backward induction.)"
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Compute f(0) by recursion",
+      "prompt": "f(n) = expected game value starting with bankroll n. f(n) = n for n >= 15. f(n) = (1/6) * sum from i=1 to 5 of f(n+i) for n < 15. Solve recursively. f(0) = ?",
+      "options": [
+        { "id": "a", "text": "f(0) ≈ $6.15. (Backward induction from f(15)=15, f(16)=16, ..., f(19)=19, then iterate down.)", "correct": true },
+        { "id": "b", "text": "f(0) = 2.5.",                                                                                       "correct": false },
+        { "id": "c", "text": "f(0) = 0 (always lose).",                                                                            "correct": false }
+      ],
+      "explanation": "Working backward from boundaries, the iteration f(n) = (1/6) * (f(n+1) + ... + f(n+5)) for n = 14, 13, ..., 0 yields f(0) ≈ 6.15. The bust risk means starting with nothing, you should still PLAY -- the game has positive value."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Fair price to play (risk-neutral)?",
+      "options": [
+        { "id": "a", "text": "About $6.15.", "correct": true },
+        { "id": "b", "text": "$2.50.",        "correct": false },
+        { "id": "c", "text": "$15.",          "correct": false }
+      ],
+      "explanation": "$6.15. Maximum possible payoff is $19 (rolling a 5 from state n = 14). The bust probability bites enough to reduce expected value, but the game still has clear positive value."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if rolling a 6 only loses the LAST roll's accumulated portion (not everything)?",
+        "What if you can play for at most 100 rolls? Does the threshold change?",
+        "Does this game have a 'risk-aversion' angle? (For a risk-averse player, the threshold to STOP would be lower.)"
+      ]
+    }
+  ]
+}

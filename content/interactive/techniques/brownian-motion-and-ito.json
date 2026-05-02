@@ -1,0 +1,62 @@
+{
+  "id": "brownian-motion-and-ito",
+  "kind": "technique",
+  "name": "Brownian Motion and Itô's Lemma",
+  "tagline": "Continuous-time random walk + the stochastic chain rule. Three martingales (W, W^2 - t, exp(lambda*W - lambda^2*t/2)) plus optional stopping crack most BM problems.",
+  "category": "stochastic-processes",
+  "introducedIn": {
+    "chapter": 5,
+    "section": "5.4",
+    "title": "Brownian Motion and Stochastic Calculus",
+    "exemplarProblemId": "ch5-14-bm-hit-pm-1"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "A standard Brownian motion W(t) is the continuous-time analog of a random walk: W(0) = 0, independent normal increments W(s+t) - W(s) ~ N(0, t). Three martingales come for free: W(t) itself, W(t)^2 - t (the 'square minus variance' martingale), and the exponential martingale exp(lambda * W(t) - lambda^2 * t / 2) for any lambda. The optional stopping theorem turns each of these into a tool for hitting-time and absorption probabilities."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "Itô's lemma is the stochastic chain rule. For a process dX = mu * dt + sigma * dW and a smooth f(X, t), df = (df/dt + mu * df/dx + (sigma^2 / 2) * d^2 f / dx^2) * dt + sigma * (df/dx) * dW. The crucial difference from ordinary calculus is the (sigma^2 / 2) * d^2 f / dx^2 term -- the QUADRATIC variation of W contributes a finite second-order correction. A process is a martingale iff its drift coefficient vanishes."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Think of Brownian motion as the limit of a symmetric random walk with infinitely small steps and infinitely fast time. Itô's lemma extends the chain rule to handle the 'volatility correction' you get because dW^2 = dt (in the Itô calculus sense). To check if a process is a martingale, compute its drift via Itô and look for zero."
+    }
+  ],
+  "whenToUse": [
+    "Continuous-time pricing problems (Black-Scholes setup).",
+    "Hitting-time questions for diffusion processes.",
+    "Computing E[f(W(T))] using martingales and optional stopping.",
+    "Verifying martingale property via Itô's lemma (drift = 0).",
+    "Anywhere a continuous random process appears."
+  ],
+  "recipe": [
+    "Identify the BM in the problem (perhaps disguised as 'continuous random walk').",
+    "Pick the right martingale: W (for 'where does it land' questions), W^2 - t (for 'expected hitting time'), or the exponential martingale (for first-passage problems with drift).",
+    "Apply optional stopping: E[Z(T)] = E[Z(0)] = Z(0) for a stopping time T.",
+    "Solve for the unknown probability or expected time.",
+    "For Itô-lemma problems: compute drift coefficient, check if zero."
+  ],
+  "commonPitfalls": [
+    "Forgetting the (1/2) * sigma^2 * d^2 f / dx^2 correction in Itô's formula.",
+    "Confusing W(t) (a single sample at time t) with W(t)^2 (which is NOT N(0, t^2) -- it's the SQUARE of N(0, t)).",
+    "Applying optional stopping when E[T] = infinity -- usually requires extra care.",
+    "Treating sqrt(t) * W(t) as a martingale (it's not -- the time-dependent factor breaks the martingale property).",
+    "Mixing up the drift formula with vs without sigma^2 -- only the diffusion case has the 1/2 correction."
+  ],
+  "appearsIn": [
+    { "problemId": "ch5-12-bm-corr-with-square", "title": "Correlation of BM and its square",      "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-13-bm-sign-pattern",     "title": "P(B_1 > 0 and B_2 < 0)",                 "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-14-bm-hit-pm-1",         "title": "Expected time for BM to reach +/-1",     "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-15-bm-hit-with-drift",   "title": "BM hitting boundaries with/without drift", "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-16-bm-reach-neg-with-drift", "title": "Probability of reaching -1 with positive drift", "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-17-ito-sqrt-t-bt",       "title": "Is sqrt(t)*B_t a martingale?",            "chapter": 5, "section": "5.4" },
+    { "problemId": "ch5-18-ito-w-cubed",         "title": "Is W(t)^3 a martingale?",                  "chapter": 5, "section": "5.4" }
+  ],
+  "relatedTechniques": ["martingale-and-random-walk", "ordinary-differential-equations", "limits-and-derivatives"]
+}

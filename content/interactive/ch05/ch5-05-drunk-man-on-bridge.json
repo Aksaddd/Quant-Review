@@ -1,0 +1,94 @@
+{
+  "id": "ch5-05-drunk-man-on-bridge",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.2",
+  "title": "Drunk Man on Bridge",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "316-332"
+  },
+  "mechanism": {
+    "primary": "martingale-and-random-walk",
+    "structure": "symmetric-random-walk-with-two-absorbing-barriers",
+    "insight": "P-hit-alpha-equals-beta-over-alpha-plus-beta-and-E-N-equals-alpha-times-beta",
+    "variantAxes": ["start_position", "bridge_length"]
+  },
+  "setup": {
+    "narrative": "A drunk man stands at position 17 on a 100-meter bridge. Each step he moves forward (+1) or backward (-1) with equal probability. He stops when he falls off either end (position 0 or 100).",
+    "rules": [
+      "Symmetric random walk: P(+1) = P(-1) = 1/2.",
+      "Re-center at the man's current position. Distance to far end: alpha = 83. Distance to near end: beta = 17.",
+      "Use martingale results for the symmetric walk: P(hit alpha) = beta / (alpha + beta), E[N] = alpha * beta."
+    ],
+    "question": "What is P(reaches the FAR end before the near end)? Expected number of steps?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Recognize the problem as a symmetric random walk with two absorbing barriers.",
+    "Apply the formula P(hit +alpha before -beta) = beta / (alpha + beta).",
+    "Apply E[N] = alpha * beta from the martingale S_n^2 - n."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Re-center the walk",
+      "prompt": "Set the man's CURRENT position as 0. The walk stops at +alpha (= 100 - 17 = 83) or -beta (= 0 - 17 = -17). What's P(walk hits +alpha first)?",
+      "options": [
+        { "id": "a", "text": "P(hit +alpha first) = beta / (alpha + beta) = 17 / 100 = 0.17.", "correct": true },
+        { "id": "b", "text": "1/2.",                                                              "correct": false },
+        { "id": "c", "text": "alpha / (alpha + beta) = 83/100.",                                  "correct": false }
+      ],
+      "explanation": "Standard symmetric-walk result. The probability of hitting the FAR boundary is the distance to the NEAR boundary divided by the total range. Here, beta = 17, total = 100.",
+      "learnMoreTechnique": "martingale-and-random-walk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Verify via martingale",
+      "prompt": "S_n is a martingale (E[S_{n+1} | S_n] = S_n). By optional stopping, E[S_N] = S_0 = 0. So 0 = p * alpha + (1 - p) * (-beta). Solve for p.",
+      "options": [
+        { "id": "a", "text": "0 = p * alpha - (1-p) * beta  =>  p = beta / (alpha + beta) = 17/100.", "correct": true },
+        { "id": "b", "text": "p = 1/2.",                                                                  "correct": false },
+        { "id": "c", "text": "p = alpha/beta.",                                                            "correct": false }
+      ],
+      "explanation": "Algebra: p * alpha = (1-p) * beta, so p * (alpha + beta) = beta, giving p = beta/(alpha + beta). Confirms the standard result."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Expected time via S_n^2 - n martingale",
+      "prompt": "S_n^2 - n is a martingale (since E[S_{n+1}^2] = S_n^2 + 1, so E[S_{n+1}^2 - (n+1)] = S_n^2 - n). At stopping, E[S_N^2 - N] = 0. So E[N] = E[S_N^2]. Compute E[S_N^2].",
+      "options": [
+        { "id": "a", "text": "E[N] = p * alpha^2 + (1-p) * beta^2 = (17/100)*83^2 + (83/100)*17^2 = (17*83/100) * (83 + 17) = 17 * 83 = 1411.", "correct": true },
+        { "id": "b", "text": "E[N] = alpha + beta = 100.",                                                                                          "correct": false },
+        { "id": "c", "text": "E[N] = alpha^2 = 83^2 = 6889.",                                                                                       "correct": false }
+      ],
+      "explanation": "E[S_N^2] = (17/100)*83^2 + (83/100)*17^2. Factor: 17*83/100 * (83 + 17) = 17*83. So E[N] = alpha * beta = 17 * 83 = 1411."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "Final answers:",
+      "options": [
+        { "id": "a", "text": "P(reaches far end) = 0.17.  E[N] = 1411 steps.", "correct": true },
+        { "id": "b", "text": "Both = 1/2.",                                       "correct": false },
+        { "id": "c", "text": "P = 1/2, E[N] = 100.",                              "correct": false }
+      ],
+      "explanation": "P = 17% (close starts make far-end unreachable). E[N] = 1411 steps. Random walks are SLOW: even though P(reach end in time) > 0, expected time grows like alpha * beta which is QUADRATIC in distance."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Verify: starting in the middle (alpha = beta = 50), P = 1/2 and E[N] = 50 * 50 = 2500. Makes sense?",
+        "If the walk is BIASED (p_step != 1/2), the formulas change. Look up the asymmetric case.",
+        "Why is E[N] proportional to alpha * beta and not alpha + beta?"
+      ]
+    }
+  ]
+}

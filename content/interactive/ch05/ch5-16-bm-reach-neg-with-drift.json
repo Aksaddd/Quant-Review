@@ -1,0 +1,79 @@
+{
+  "id": "ch5-16-bm-reach-neg-with-drift",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "Probability of reaching -1 with positive drift",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "666-676"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "infinite-upper-barrier-version-of-the-drift-formula",
+    "insight": "P-of-ever-reaching-minus-1-equals-exp-of-minus-2-m-when-drift-is-positive-m",
+    "variantAxes": ["target_level", "drift"]
+  },
+  "setup": {
+    "narrative": "X(t) starts at 0 and follows dX = dt + dW (positive drift m = 1).",
+    "rules": [
+      "The drift is +1 per unit time, so X 'wants' to go up.",
+      "We want P(X ever reaches -1) -- i.e., does the walk ever dip down enough to hit -1?",
+      "Use the result from the previous problem with the upper barrier sent to infinity."
+    ],
+    "question": "What is P(X ever reaches -1)?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Take the limit alpha -> infinity in the drift formula.",
+    "Recognize that P(reach -1) approaches exp(-2 * m * 1) = exp(-2) for m = 1.",
+    "Understand that positive drift gives positive (but small) probability of reaching the negative barrier."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Take the limit",
+      "prompt": "From the previous problem, p = P(hit alpha first | starting at 0, drift m, barriers at +alpha and -beta) = (exp(2m * beta) - 1) / (exp(2m * beta) - exp(-2m * alpha)). What's P(reach -beta) as alpha -> infinity?",
+      "options": [
+        { "id": "a", "text": "P(reach -beta) = 1 - p = (1 - exp(-2m * alpha)) / (exp(2m * beta) - exp(-2m * alpha)). As alpha -> infinity (positive m): P -> 1 / exp(2m * beta) = exp(-2m * beta).", "correct": true },
+        { "id": "b", "text": "P -> 1.",                                                                                                                                                            "correct": false },
+        { "id": "c", "text": "P -> 0.",                                                                                                                                                             "correct": false }
+      ],
+      "explanation": "Take alpha -> infinity in the formula. Numerator -> 1 (since exp(-2m * alpha) -> 0 for m > 0). Denominator -> exp(2m * beta). So P(reach -beta) = exp(-2m * beta).",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Plug in",
+      "prompt": "For m = 1, beta = 1: P(reach -1) = exp(-2 * 1 * 1) = exp(-2). Compute.",
+      "options": [
+        { "id": "a", "text": "exp(-2) ≈ 0.1353.", "correct": true },
+        { "id": "b", "text": "1/2.",                "correct": false },
+        { "id": "c", "text": "0.",                  "correct": false }
+      ],
+      "explanation": "exp(-2) ≈ 0.135. Even with positive drift, there's about a 13.5% chance of dipping down to -1 at some point in the infinite future."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "P(X ever reaches -1) = ?",
+      "answerType": "numeric",
+      "answer": 0.1353,
+      "explanation": "exp(-2) ≈ 0.135. The drift makes the walk EVENTUALLY go to +infinity almost surely, but along the way it has about a 13.5% chance of touching -1 first."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "What if drift were m = 0.5 instead of 1? P(reach -1) = exp(-2 * 0.5) = exp(-1) ≈ 0.37 -- weaker drift means easier to dip down.",
+        "What if drift were 0? Then P(reach -1) = 1 (recurrent), since BM hits every level eventually.",
+        "Connect to option pricing: this kind of barrier-hitting probability appears in barrier-option valuation."
+      ]
+    }
+  ]
+}

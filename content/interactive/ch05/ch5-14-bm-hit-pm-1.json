@@ -1,0 +1,80 @@
+{
+  "id": "ch5-14-bm-hit-pm-1",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "Expected time for BM to reach +/-1",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "601-607"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "use-Wt-squared-minus-t-martingale-with-optional-stopping",
+    "insight": "E-of-stopped-Wt-squared-minus-T-equals-zero-and-stopped-Wt-squared-equals-1",
+    "variantAxes": ["barrier_value"]
+  },
+  "setup": {
+    "narrative": "W(t) is a standard Brownian motion. Define T = first time W(t) hits +1 or -1.",
+    "rules": [
+      "W(t) starts at 0.",
+      "T is the FIRST PASSAGE TIME to {+1, -1}.",
+      "Y(t) = W(t)^2 - t is a martingale.",
+      "By symmetry, P(W(T) = +1) = P(W(T) = -1) = 1/2."
+    ],
+    "question": "What is E[T]?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Recognize Y(t) = W(t)^2 - t as a martingale.",
+    "Apply optional stopping: E[Y(T)] = Y(0) = 0.",
+    "Use W(T)^2 = 1 (since W(T) = +/- 1) to deduce E[T] = 1."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Pick the martingale",
+      "prompt": "Which BM-derived martingale gives access to E[T]?",
+      "options": [
+        { "id": "a", "text": "Y(t) = W(t)^2 - t.  Optional stopping: E[Y(T)] = Y(0) = 0.", "correct": true },
+        { "id": "b", "text": "W(t) itself -- stopping at +/-1.",                               "correct": false },
+        { "id": "c", "text": "exp(W(t)).",                                                       "correct": false }
+      ],
+      "explanation": "W(t) by itself only tells us about WHERE the walk lands (and by symmetry that's +1 or -1 each with prob 1/2). To get E[T], we need a martingale that LINKS time and position -- which is W(t)^2 - t.",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Apply optional stopping",
+      "prompt": "E[W(T)^2 - T] = 0.  W(T) = +/- 1, so W(T)^2 = 1 with probability 1.  So E[1 - T] = 0, giving E[T] = ?",
+      "options": [
+        { "id": "a", "text": "E[T] = 1.", "correct": true },
+        { "id": "b", "text": "E[T] = 0.", "correct": false },
+        { "id": "c", "text": "E[T] = 1/2.", "correct": false }
+      ],
+      "explanation": "E[W(T)^2] = 1 (since W(T)^2 is always 1). So 1 - E[T] = 0, giving E[T] = 1."
+    },
+    {
+      "id": "s3",
+      "type": "ladder-step",
+      "label": "Commit",
+      "prompt": "Expected time to first hit +1 or -1?",
+      "answerType": "numeric",
+      "answer": 1,
+      "explanation": "E[T] = 1 unit of time. Generalizes: hitting +/-x takes E[T] = x^2 expected time. So 'time scales as the square of distance' for Brownian motion -- the famous diffusion-scaling law."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Generalize: E[T] for hitting +alpha or -beta (asymmetric)? Use the same martingale.",
+        "What's the FULL DISTRIBUTION of T (not just the mean)? Hint: it's an inverse Gaussian.",
+        "Why does the discrete random walk 'time' (which scales linearly with distance for symmetric walks of unit step) match this t = x^2 scaling for BM?"
+      ]
+    }
+  ]
+}

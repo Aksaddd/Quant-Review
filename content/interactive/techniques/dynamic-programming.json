@@ -1,0 +1,59 @@
+{
+  "id": "dynamic-programming",
+  "kind": "technique",
+  "name": "Dynamic Programming",
+  "tagline": "Solve sequential decision problems by working BACKWARD from the final stage. The principle of optimality says the optimal tail policy is itself optimal -- so memoize from the end.",
+  "category": "stochastic-processes",
+  "introducedIn": {
+    "chapter": 5,
+    "section": "5.3",
+    "title": "Dynamic Programming",
+    "exemplarProblemId": "ch5-08-dp-dice-game"
+  },
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "paragraph",
+      "text": "Dynamic programming solves sequential optimization problems by exploiting the principle of optimality: an optimal policy is optimal at every state it reaches. The recipe is BACKWARD: J_N(x) = terminal value; J_k(x) = max over decisions u of E[g_k(x, u, w) + J_{k+1}(f(x, u, w))]. Solve from the final stage backward to stage 0."
+    },
+    {
+      "id": "b2",
+      "type": "paragraph",
+      "text": "DP shines on stopping problems (when to roll the die, when to draw a card) and replicating-portfolio problems (the World Series betting problem is structurally identical to pricing a binomial-tree option). The 'value of continuing' is computed against the 'value of stopping,' and the optimal action is whichever is larger."
+    },
+    {
+      "id": "b3",
+      "type": "callout",
+      "label": "Mental model",
+      "text": "Define J(x) = optimal value at state x. Write J recursively from the boundary backward. The optimal action at x is the argmax in the recursion. This is option-pricing in disguise: 'continuation value vs intrinsic value' is the same as 'expected DP value vs immediate payoff.'"
+    }
+  ],
+  "whenToUse": [
+    "Optimal stopping problems (when to sell, when to roll again).",
+    "Sequential betting / replication (binomial-tree option pricing).",
+    "Multi-stage games where each stage has finite decisions.",
+    "Problems with a natural state space and additive payoffs.",
+    "Anywhere 'continuation value vs immediate payoff' is the right framing."
+  ],
+  "recipe": [
+    "Identify the state space and the terminal stage with known values.",
+    "Write the recursion J_k(x) = max over u of E[immediate + J_{k+1}(next state)].",
+    "Solve backward from the terminal stage.",
+    "Read off the OPTIMAL DECISION at each state from the argmax in the recursion.",
+    "For continuous-state problems, often there's a clean THRESHOLD strategy (stop above some level, continue below)."
+  ],
+  "commonPitfalls": [
+    "Working FORWARD instead of backward -- DP requires the future to be solved before the present.",
+    "Forgetting that the value function is the OPTIMAL value, not the value under a fixed strategy.",
+    "Off-by-one errors in stage indexing.",
+    "Conflating the DP value (continuous) with the optimal action (discrete decision rule).",
+    "Failing to recognize a DP problem disguised as a probability problem."
+  ],
+  "appearsIn": [
+    { "problemId": "ch5-08-dp-dice-game",       "title": "DP Dice Game (Up to 3 Rolls)", "chapter": 5, "section": "5.3" },
+    { "problemId": "ch5-09-world-series-betting", "title": "World Series Betting",        "chapter": 5, "section": "5.3" },
+    { "problemId": "ch5-10-dynamic-dice-game",  "title": "Dynamic Dice Game",            "chapter": 5, "section": "5.3" },
+    { "problemId": "ch5-11-dynamic-card-game",  "title": "Dynamic Card Game",            "chapter": 5, "section": "5.3" }
+  ],
+  "relatedTechniques": ["backward-induction", "expected-value-and-linearity", "markov-chains"]
+}

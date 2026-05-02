@@ -1,0 +1,79 @@
+{
+  "id": "ch5-12-bm-corr-with-square",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "Correlation of BM and its square",
+  "difficulty": "medium",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "563-575"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "compute-Cov-via-third-moment-which-vanishes-by-symmetry",
+    "insight": "E-of-Bt-cubed-equals-zero-because-the-distribution-is-symmetric-so-Cov-equals-zero",
+    "variantAxes": ["function_pair"]
+  },
+  "setup": {
+    "narrative": "B_t is a standard Brownian motion at time t. So B_t ~ N(0, t).",
+    "rules": [
+      "E[B_t] = 0.",
+      "E[B_t^2] = t.",
+      "Want Corr(B_t, B_t^2)."
+    ],
+    "question": "What is Corr(B_t, B_t^2)?"
+  },
+  "skipToCommitStageId": "s3",
+  "learningObjectives": [
+    "Use Cov(X, X^2) = E[X^3] - E[X] * E[X^2].",
+    "Apply symmetry of the normal distribution: E[B_t^3] = 0.",
+    "Conclude zero correlation despite obvious nonlinear dependence."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Compute Cov(B_t, B_t^2)",
+      "prompt": "Cov(B_t, B_t^2) = E[B_t * B_t^2] - E[B_t] * E[B_t^2] = E[B_t^3] - 0 * t. By symmetry of N(0, t), what is E[B_t^3]?",
+      "options": [
+        { "id": "a", "text": "0 (odd moment of a symmetric distribution).", "correct": true },
+        { "id": "b", "text": "t.",                                            "correct": false },
+        { "id": "c", "text": "Negative.",                                      "correct": false }
+      ],
+      "explanation": "For X symmetric about 0, all ODD moments vanish: E[X] = 0, E[X^3] = 0, E[X^5] = 0, ....",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "ladder-step",
+      "label": "Compute Corr",
+      "prompt": "Corr = Cov / sqrt(Var(B_t) * Var(B_t^2)). Numerator = ?",
+      "answerType": "numeric",
+      "answer": 0,
+      "explanation": "Cov = 0 by symmetry. So Corr = 0 regardless of the variance terms in the denominator (provided they're nonzero, which they are)."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "What's the lesson?",
+      "options": [
+        { "id": "a", "text": "Corr(B_t, B_t^2) = 0, despite B_t^2 being a deterministic function of |B_t|. Zero correlation does NOT imply independence.", "correct": true },
+        { "id": "b", "text": "B_t and B_t^2 are independent.",                                                                                                "correct": false },
+        { "id": "c", "text": "Corr = 1 since B_t^2 is a function of B_t.",                                                                                       "correct": false }
+      ],
+      "explanation": "Corr captures only LINEAR dependence. The relationship B_t^2 = |B_t|^2 is purely nonlinear and symmetric, so it's invisible to correlation."
+    },
+    {
+      "id": "s4",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Are B_t and B_t^2 independent? (No -- knowing B_t determines B_t^2 exactly. Correlation only measures linear dependence.)",
+        "What's Corr(B_t, |B_t|)?",
+        "What's Corr(B_t, B_t^2 - t)? (Same answer: 0.)"
+      ]
+    }
+  ]
+}

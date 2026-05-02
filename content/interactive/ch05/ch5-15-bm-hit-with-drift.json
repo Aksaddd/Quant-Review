@@ -1,0 +1,90 @@
+{
+  "id": "ch5-15-bm-hit-with-drift",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.4",
+  "title": "BM hitting boundaries with/without drift",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "630-662"
+  },
+  "mechanism": {
+    "primary": "brownian-motion-and-ito",
+    "structure": "no-drift-uses-W-as-martingale-with-drift-uses-exponential-martingale",
+    "insight": "exp-of-minus-2-m-X-is-a-martingale-when-X-has-drift-m-with-unit-volatility",
+    "variantAxes": ["drift", "barriers"]
+  },
+  "setup": {
+    "narrative": "X(t) starts at 0. Two cases: (i) NO DRIFT: dX = dW (so X is just standard BM). (ii) WITH DRIFT m: dX = m dt + dW.",
+    "rules": [
+      "Upper barrier alpha = 3, lower barrier -beta = -5.",
+      "P(X hits 3 before -5) = ?"
+    ],
+    "question": "Find the hitting probability in both cases."
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "No drift: apply the W martingale with optional stopping to get p_alpha = beta / (alpha + beta).",
+    "With drift: use the exponential martingale Z(t) = exp(-2m * X(t)).",
+    "Solve the resulting boundary equation for p_alpha."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "No drift",
+      "prompt": "X is just W. By optional stopping on W (a martingale), E[X(T)] = X(0) = 0, where T is the first time X hits 3 or -5. So 3*p + (-5)*(1-p) = 0. Solve.",
+      "options": [
+        { "id": "a", "text": "p = 5/8 = 0.625.  P(hit 3 before -5) = 5/8.", "correct": true },
+        { "id": "b", "text": "p = 1/2.",                                       "correct": false },
+        { "id": "c", "text": "p = 3/8.",                                        "correct": false }
+      ],
+      "explanation": "The standard formula: P(hit alpha before -beta) = beta / (alpha + beta). For alpha = 3, beta = 5: 5/8.",
+      "learnMoreTechnique": "brownian-motion-and-ito"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "With drift: W is no longer a martingale, but a different one is",
+      "prompt": "With dX = m dt + dW, X has drift -- it's NOT a martingale. But Z(t) = exp(-2m * X(t)) IS a martingale. Why?",
+      "options": [
+        { "id": "a", "text": "Apply Itô to Z = exp(-2m * X). The drift coefficient cancels: -2m * m + (1/2) * (-2m)^2 * 1 = -2m^2 + 2m^2 = 0. So Z is driftless -- a martingale.", "correct": true },
+        { "id": "b", "text": "It's not a martingale.",                                                                                                                            "correct": false },
+        { "id": "c", "text": "Z = exp(2m * X) is the martingale, not exp(-2m * X).",                                                                                                "correct": false }
+      ],
+      "explanation": "Itô's lemma on f(X) = exp(-2m * X) with dX = m dt + dW: drift term = m * f' + (1/2) * f'' = m * (-2m * f) + (1/2) * (4m^2 * f) = -2m^2 * f + 2m^2 * f = 0. The cancellation is what makes Z a martingale."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Apply optional stopping to Z",
+      "prompt": "E[Z(T)] = Z(0) = exp(0) = 1.  Z(T) = exp(-2m * X(T)) takes values exp(-6m) (when X hits 3) or exp(10m) (when X hits -5).  So:",
+      "options": [
+        { "id": "a", "text": "p * exp(-6m) + (1 - p) * exp(10m) = 1.  Solve: p = (exp(10m) - 1) / (exp(10m) - exp(-6m)).", "correct": true },
+        { "id": "b", "text": "p = 5/8 (same as no-drift case).",                                                              "correct": false },
+        { "id": "c", "text": "p = exp(m).",                                                                                    "correct": false }
+      ],
+      "explanation": "Algebra: rearranging gives p = (exp(10m) - 1) / (exp(10m) - exp(-6m)). For m = 0, this reduces to 5/8 (l'Hopital). For m > 0, p > 5/8 (positive drift helps reach +alpha)."
+    },
+    {
+      "id": "s4",
+      "type": "ladder-step",
+      "label": "Commit numerical",
+      "prompt": "For m = 0.1: p = (exp(1) - 1) / (exp(1) - exp(-0.6)) = ?  Compute.",
+      "answerType": "numeric",
+      "answer": 0.789,
+      "explanation": "exp(1) ≈ 2.718; exp(-0.6) ≈ 0.549. p ≈ (1.718) / (2.169) ≈ 0.792. Positive drift (m = 0.1) raises P(hit 3 first) from 5/8 = 0.625 to about 0.79."
+    },
+    {
+      "id": "s5",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Limit m -> infinity: p -> 1. Why? Because positive drift dominates -- the walk drifts UP and almost surely hits 3 first.",
+        "What's the formula via the ODE method? (m * P'(x) + (1/2) * P''(x) = 0 with P(3) = 1, P(-5) = 0.)",
+        "What's E[T] in the drift case?"
+      ]
+    }
+  ]
+}

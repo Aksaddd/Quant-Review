@@ -1,0 +1,106 @@
+{
+  "id": "ch5-07-n-heads-in-a-row",
+  "kind": "problem-walkthrough",
+  "chapter": 5,
+  "section": "5.2",
+  "title": "Expected Tosses for n Heads in a Row",
+  "difficulty": "hard",
+  "source": {
+    "file": "content/A Practical Guide To Quantitative Finance Interviews Book by Xinfeng Zhou (chapters)/chapter-05-stochastic-processes.md",
+    "lines": "365-399"
+  },
+  "mechanism": {
+    "primary": "martingale-and-random-walk",
+    "structure": "gambler-betting-martingale-pays-out-2-to-the-n-plus-1-minus-2-at-stopping",
+    "insight": "use-martingale-of-gambler-bets-which-equates-stopping-time-with-fixed-payout",
+    "variantAxes": ["pattern_length", "specific_pattern"]
+  },
+  "setup": {
+    "narrative": "Toss a fair coin until n consecutive heads appear. We want E[number of tosses].",
+    "rules": [
+      "Each toss independent, fair.",
+      "Stop the moment the streak of n heads is achieved (n in a row, ending on the most recent toss).",
+      "Want a formula for E[wait]."
+    ],
+    "question": "What is E[number of tosses until n consecutive heads]?"
+  },
+  "skipToCommitStageId": "s4",
+  "learningObjectives": [
+    "Set up the recurrence E[f(n+1)] = E[f(n)] + 1 + (1/2) E[f(n+1)] from the n-state.",
+    "Solve to get E[f(n)] = 2^(n+1) - 2.",
+    "Apply Conway's leading-number method to general patterns."
+  ],
+  "stages": [
+    {
+      "id": "s1",
+      "type": "mc-single",
+      "label": "Set up the recurrence",
+      "prompt": "Let f(n) = E[wait for n consecutive heads]. After reaching state nH (n in a row), the next toss is H with prob 1/2 (success!) or T with prob 1/2 (fully reset to S). Recurrence?",
+      "options": [
+        { "id": "a", "text": "E[f(n+1)] = E[f(n)] + 1 + (1/2) * E[f(n+1)].  (Get to nH in f(n) tosses; one more toss either succeeds or restarts.)", "correct": true },
+        { "id": "b", "text": "E[f(n+1)] = 2 * E[f(n)].",                                                                                                  "correct": false },
+        { "id": "c", "text": "E[f(n+1)] = E[f(n)] + 1.",                                                                                                  "correct": false }
+      ],
+      "explanation": "From the nH state, one extra toss decides: H finishes (cost 1), T fully restarts (cost 1 + a fresh f(n+1)). Expected extra: 1 + (1/2) * f(n+1). Total: f(n+1) = f(n) + 1 + (1/2) * f(n+1).",
+      "learnMoreTechnique": "martingale-and-random-walk"
+    },
+    {
+      "id": "s2",
+      "type": "mc-single",
+      "label": "Solve the recurrence",
+      "prompt": "From E[f(n+1)] - (1/2) E[f(n+1)] = E[f(n)] + 1, we get E[f(n+1)]/2 = E[f(n)] + 1. With E[f(1)] = 2 (geometric wait), iterate.",
+      "options": [
+        { "id": "a", "text": "E[f(n)] = 2^(n+1) - 2.", "correct": true },
+        { "id": "b", "text": "E[f(n)] = 2n.",            "correct": false },
+        { "id": "c", "text": "E[f(n)] = n^2.",           "correct": false }
+      ],
+      "explanation": "Iterate: E[f(2)] = 2 * (E[f(1)] + 1) = 2 * 3 = 6. E[f(3)] = 2 * (6 + 1) = 14. Pattern: E[f(n)] = 2^(n+1) - 2. Verify: n=1: 4 - 2 = 2 ✓. n=2: 8 - 2 = 6 ✓. n=3: 16 - 2 = 14 ✓."
+    },
+    {
+      "id": "s3",
+      "type": "mc-single",
+      "label": "Conway's gambler-bet martingale",
+      "prompt": "The 'martingale' approach: imagine each gambler joining at toss k bets their bankroll on the next toss being H. They double their money on H, lose all on T. The total payout structure ALWAYS sums to a fixed value when the n-streak completes. What's the value?",
+      "options": [
+        { "id": "a", "text": "Sum 2 + 4 + ... + 2^n = 2^(n+1) - 2.  Each surviving gambler at the end has bet successfully on enough Hs to reach 2^k.", "correct": true },
+        { "id": "b", "text": "Sum is random.",                                                                                                                "correct": false },
+        { "id": "c", "text": "n.",                                                                                                                              "correct": false }
+      ],
+      "explanation": "When the n-streak completes, exactly n consecutive gamblers have surviving stakes. Their winnings: 2, 4, 8, ..., 2^n. Sum = 2^(n+1) - 2. Since (winnings - tosses) is a martingale starting at 0, E[tosses] = 2^(n+1) - 2."
+    },
+    {
+      "id": "s4",
+      "type": "mc-single",
+      "label": "Commit",
+      "prompt": "E[wait for n consecutive heads] for n = 5?",
+      "options": [
+        { "id": "a", "text": "2^6 - 2 = 62.", "correct": true },
+        { "id": "b", "text": "32.",            "correct": false },
+        { "id": "c", "text": "10.",            "correct": false }
+      ],
+      "explanation": "n = 5: 2^6 - 2 = 62. Each additional H roughly doubles the expected wait."
+    },
+    {
+      "id": "s5",
+      "type": "mc-single",
+      "label": "Conway's general method",
+      "prompt": "For the pattern HHTTHH, Conway's method sums 2^k for each prefix-suffix overlap. Overlaps: full pattern (length 6), 'HH' (length 2). What's E[wait]?",
+      "options": [
+        { "id": "a", "text": "2^6 + 2^2 + 2^1 (also matches 'H' as overlap) = 64 + 4 + 2 = 70.", "correct": true },
+        { "id": "b", "text": "Just 2^6 = 64.",                                                       "correct": false },
+        { "id": "c", "text": "70 + 1 = 71.",                                                          "correct": false }
+      ],
+      "explanation": "Conway's leading-number method: for each k where a length-k prefix of P equals a length-k suffix of P, add 2^k to E[wait]. For HHTTHH: full match (6), 'HH' = 'HH' (2), 'H' = 'H' (1). Sum: 70 tosses on average."
+    },
+    {
+      "id": "s6",
+      "type": "reflection",
+      "label": "Reflection",
+      "prompts": [
+        "Apply Conway to HHHHH (n=5): all length-1 to length-5 prefixes match suffixes -> 2^5 + 2^4 + 2^3 + 2^2 + 2 = 62 ✓. Same as 2^(n+1) - 2.",
+        "Apply Conway to HTHTH: only length-5 (full) and length-1 ('H' = 'H') match -> 32 + 2 = 34.",
+        "Why does the gambler-bet martingale produce the same answer as the recurrence?"
+      ]
+    }
+  ]
+}
